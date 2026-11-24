@@ -20,6 +20,22 @@ from typing import Any, Dict, Optional
 from websockets.exceptions import ConnectionClosed
 from websockets.legacy.server import serve as websocket_serve
 
+def _env_number(name: str, default: Any, cast: Any = int) -> Any:
+    """Read a number from the environment. A typo or a negative value in a deploy variable must not crash the relay at start-up (a crash loop takes the page down):
+    the default is used and one warning line says so (FLOOD-1 fool-proofing, 2026-11-25)."""
+    raw = os.getenv(name)
+    if raw is None or raw.strip() == "":
+        return cast(default)
+    try:
+        value = cast(raw.strip())
+        if value != value or value < 0:   # NaN or negative
+            raise ValueError(raw)
+        return value
+    except (ValueError, OverflowError):
+        logging.warning("relay: ignoring %s=%r (not a non-negative number); using %s", name, raw, default)
+        return cast(default)
+
+
 MAX_MESSAGE_BYTES = 16 * 1024
 MAX_MESSAGES_PER_SECOND = 10
 MAX_WRONG_CODES_PER_MINUTE = 5
@@ -30,15 +46,23 @@ MAX_TEAM_SIZE = 3
 # the defaults are conservative for a small server and are replaced by numbers measured with scripts/relay_load_probe.py. docs/THREAT_MODEL_20261117.md rows T1 and T3.
 # Measured 2026-11-17 (scripts/relay_load_probe.py, 100 rooms): 0.03 MB per idle room, 165 microseconds of CPU per message. The server (Contabo Tokyo: 4 cores, 7.9 GB, 5.2 GB available, load 2.6 to 3.1 because it hosts many apps)
 # is not limited by the relay's memory or CPU but by open files (Linux default 1024 per process, two sockets per room): raise the two limits together, 800 connections stay under it; raise `ulimit -n` to 4096 in the service before raising them.
-MAX_ROOMS = int(os.getenv("PK_RELAY_MAX_ROOMS", "200"))   # the free open test: 200 rooms (owner 2026-11-17); the relay itself would carry far more, raise it after watching the real load
-MAX_CONNECTIONS = int(os.getenv("PK_RELAY_MAX_CONNECTIONS", "520"))   # two seats per room plus a few spectators, under the default open-file limit of 1024
-MAX_CONNECTIONS_PER_ADDR = int(os.getenv("PK_RELAY_MAX_PER_ADDR", "8"))
-MAX_SPECTATORS_PER_ROOM = int(os.getenv("PK_RELAY_MAX_SPECTATORS", "12"))
-MAX_WRONG_CODES_PER_MINUTE_PER_ADDR = int(os.getenv("PK_RELAY_MAX_WRONG_PER_ADDR", "20"))
-ROOM_IDLE_SECONDS = float(os.getenv("PK_RELAY_ROOM_IDLE_SECONDS", "1800"))
-SEAT_GRACE_SECONDS = float(os.getenv("PK_RELAY_SEAT_GRACE_SECONDS", "60"))   # a disconnected seat is kept this long for its resume; after it the seat is removed, an empty room is deleted and the remaining seats are told (red-team R6A-3; the lazy check in resume used a hard-coded 60)
+MAX_ROOMS = max(1, _env_number("PK_RELAY_MAX_ROOMS", 200))   # the free open test: 200 rooms (owner 2026-11-17); the relay itself would carry far more, raise it after watching the real load
+MAX_CONNECTIONS = max(1, _env_number("PK_RELAY_MAX_CONNECTIONS", 520))   # two seats per room plus a few spectators, under the default open-file limit of 1024
+MAX_CONNECTIONS_PER_ADDR = max(1, _env_number("PK_RELAY_MAX_PER_ADDR", 8))
+MAX_SPECTATORS_PER_ROOM = _env_number("PK_RELAY_MAX_SPECTATORS", 12)
+MAX_WRONG_CODES_PER_MINUTE_PER_ADDR = _env_number("PK_RELAY_MAX_WRONG_PER_ADDR", 20)
+ROOM_IDLE_SECONDS = _env_number("PK_RELAY_ROOM_IDLE_SECONDS", 1800, float)
+SEAT_GRACE_SECONDS = _env_number("PK_RELAY_SEAT_GRACE_SECONDS", 60, float)   # a disconnected seat is kept this long for its resume; after it the seat is removed, an empty room is deleted and the remaining seats are told (red-team R6A-3; the lazy check in resume used a hard-coded 60)
 GATEWAY_TOKEN = os.getenv("PK_RELAY_GATEWAY_TOKEN", "")   # MCP-RISK-A: the hosted MCP gateway proves itself with this one-time random token and then names the real client address; empty = feature off
 TRUST_PROXY = os.getenv("PK_RELAY_TRUST_PROXY", "") == "1"   # behind the Cloudflare tunnel the peer address is the tunnel: take CF-Connecting-IP instead
+# FLOOD-1 (2026-11-25): reconnect storms. The per-address cap above counts OPEN connections only; these count attempts, so a client that connects and drops in a loop,
+# or sends wrong `resume` tokens in a loop, is blocked for a while (answered at once with `temporarily_blocked`, no state kept). Repeat offenders wait twice as long each time.
+MAX_CONNECTS_PER_MIN = _env_number("PK_RELAY_MAX_CONNECTS_PER_MIN", 40)
+MAX_BAD_RESUMES_PER_MIN = _env_number("PK_RELAY_MAX_BAD_RESUMES_PER_MIN", 10)
+BLOCK_SECONDS = _env_number("PK_RELAY_BLOCK_SECONDS", 300, float)
+MAX_BLOCK_SECONDS = 3600.0
+MAX_TRACKED_ADDRS = _env_number("PK_RELAY_MAX_TRACKED_ADDRS", 4096)
+UNTRACKED_ADDRS = {"", "unknown", "127.0.0.1", "::1"}   # no real client address (a loopback peer is nginx or a local test): never blocked, the open-connection cap still applies
 SIDE_OF_TEAM = {"red": "left", "white": "right"}
 WORLD_UNIT = re.compile(r"^(left|right)_([0-2])$")
 ROUND_HASH_FORMAT = re.compile(r"^[0-9a-f]{8}$")
@@ -178,6 +202,15 @@ class RelayServer:
         self.seat_grace_seconds = float(limits.get("seat_grace_seconds", SEAT_GRACE_SECONDS))
         self.trust_proxy = bool(limits.get("trust_proxy", TRUST_PROXY))
         self.gateway_token = str(limits.get("gateway_token", GATEWAY_TOKEN) or "")
+        self.max_connects_per_min = int(limits.get("max_connects_per_min", MAX_CONNECTS_PER_MIN))
+        self.max_bad_resumes_per_min = int(limits.get("max_bad_resumes_per_min", MAX_BAD_RESUMES_PER_MIN))
+        self.block_seconds = float(limits.get("block_seconds", BLOCK_SECONDS))
+        self.max_tracked_addrs = int(limits.get("max_tracked_addrs", MAX_TRACKED_ADDRS))
+        self.connect_times: Dict[str, list] = {}
+        self._error_logged: Dict[str, float] = {}
+        self.bad_resume_times: Dict[str, list] = {}
+        self.blocked_until: Dict[str, float] = {}
+        self.block_strikes: Dict[str, tuple] = {}   # addr -> (number of blocks, time of the last one)
         self.connections = 0
         self.connections_by_addr: Dict[str, int] = {}
         self.wrong_by_addr: Dict[str, list] = {}
@@ -241,6 +274,60 @@ class RelayServer:
                 if not entry.get("connected") and now - entry.get("disconnected_at", now) >= self.seat_grace_seconds:
                     await self._expire_seat(room, token)
 
+    def is_blocked(self, addr: str, now: Optional[float] = None) -> bool:
+        until = self.blocked_until.get(addr)
+        if until is None:
+            return False
+        if (time.monotonic() if now is None else now) >= until:
+            self.blocked_until.pop(addr, None)
+            return False
+        return True
+
+    def _trim_tracking(self) -> None:
+        """Keep the tracking tables bounded when many different addresses connect: the oldest entries go first."""
+        for table in (self.connect_times, self.bad_resume_times, self.blocked_until, self.block_strikes):
+            while len(table) > self.max_tracked_addrs:
+                table.pop(next(iter(table)))
+
+    def _block(self, addr: str, now: float) -> None:
+        count, last = self.block_strikes.get(addr, (0, now))
+        count = count + 1 if now - last < 3600.0 else 1
+        seconds = min(self.block_seconds * (2 ** (count - 1)), max(self.block_seconds, MAX_BLOCK_SECONDS))
+        self.blocked_until[addr] = now + seconds
+        self.block_strikes[addr] = (count, now)
+        self.connect_times.pop(addr, None)      # counting starts again after the block
+        self.bad_resume_times.pop(addr, None)
+        self._trim_tracking()
+        logging.warning("relay: address blocked for %.0f s (strike %d)", seconds, count)
+
+    def note_connect_attempt(self, addr: str, now: Optional[float] = None) -> bool:
+        """Record one connection attempt; False when this address is blocked or has just gone over the per-minute limit."""
+        if addr in UNTRACKED_ADDRS or self.max_connects_per_min <= 0:
+            return True
+        now = time.monotonic() if now is None else now
+        if self.is_blocked(addr, now):
+            return False
+        times = [value for value in self.connect_times.get(addr, []) if now - value < 60.0]
+        times.append(now)
+        self.connect_times[addr] = times
+        self._trim_tracking()
+        if len(times) > self.max_connects_per_min:
+            self._block(addr, now)
+            return False
+        return True
+
+    def note_bad_resume(self, addr: str, now: Optional[float] = None) -> None:
+        """Record one `resume` with a token that does not work; too many in a minute from one address blocks it like a reconnect storm."""
+        if addr in UNTRACKED_ADDRS or self.max_bad_resumes_per_min <= 0:
+            return
+        now = time.monotonic() if now is None else now
+        times = [value for value in self.bad_resume_times.get(addr, []) if now - value < 60.0]
+        times.append(now)
+        self.bad_resume_times[addr] = times
+        self._trim_tracking()
+        if len(times) > self.max_bad_resumes_per_min:
+            self._block(addr, now)
+
     def _addr(self, websocket: Any) -> str:
         """The client address used for the per-address limits: CF-Connecting-IP when the relay sits behind the trusted tunnel, else the peer address."""
         if self.gateway_token:
@@ -302,7 +389,10 @@ class RelayServer:
             pass
 
     async def _error(self, websocket: Any, code: str, message: Optional[str] = None) -> None:
-        LOG.warning("relay error code=%s", code)
+        now = time.monotonic()
+        if now - self._error_logged.get(code, -10.0) >= 1.0:   # FLOOD-1: under attack the same error would fill the log; one line per code per second is enough
+            self._error_logged[code] = now
+            LOG.warning("relay error code=%s", code)
         payload = {"type": "error", "code": code}
         if message is not None:
             payload["message"] = message
@@ -398,6 +488,10 @@ class RelayServer:
         timestamps: list = []
         wrong_code_times: list = []
         addr = self._addr(websocket)
+        if not self.note_connect_attempt(addr):
+            await self._error(websocket, "temporarily_blocked", "too many connection attempts from this address; wait a few minutes and try again")
+            await websocket.close(code=1013, reason="temporarily blocked")
+            return
         if self.connections >= self.max_connections or self.connections_by_addr.get(addr, 0) >= self.max_per_addr:
             await self._error(websocket, "server_busy")
             await websocket.close(code=1013, reason="server busy")
@@ -452,6 +546,7 @@ class RelayServer:
             last_seq = message.get("last_seq")
             if not isinstance(token, str) or not isinstance(last_seq, int) or isinstance(last_seq, bool) or last_seq < 0:
                 await self._error(websocket, "invalid_resume")
+                self.note_bad_resume(self._addr(websocket))
                 return None, None
             for candidate in self.rooms.values():
                 restored = candidate.sessions.get(token)
@@ -463,9 +558,11 @@ class RelayServer:
                 if time.monotonic() - restored.get("disconnected_at", time.monotonic()) > (self.seat_grace_seconds if self.seat_grace_seconds > 0 else SEAT_GRACE_SECONDS):
                     await self._expire_seat(candidate, token)
                     await self._error(websocket, "resume_expired")
+                    self.note_bad_resume(self._addr(websocket))
                     return None, None
                 if last_seq > candidate.next_seq - 1:
                     await self._error(websocket, "invalid_resume")
+                    self.note_bad_resume(self._addr(websocket))
                     return None, None
                 room, entry = candidate, restored
                 entry["connected"] = True
@@ -476,6 +573,7 @@ class RelayServer:
                 await self._broadcast_state(room)
                 return room, entry
             await self._error(websocket, "unknown_token")
+            self.note_bad_resume(self._addr(websocket))
             return None, None
         if message_type == "create_room":
             if room is not None:

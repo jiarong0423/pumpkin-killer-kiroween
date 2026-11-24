@@ -46,6 +46,21 @@ class CoolifyDeployTests(unittest.TestCase):
         (tmp / "requirements.txt").write_text("websockets>=15\n")
         self.assertTrue(any("websockets" in p for p in chk.validate(tmp)))
 
+    def test_missing_real_ip_and_limits_are_caught(self):
+        tmp = self.copy_tree()
+        path = tmp / "deploy" / "nginx.conf"
+        text = path.read_text()
+        for needle in ("real_ip_header", "limit_req_zone", "limit_conn_zone", "client_header_timeout"):
+            path.write_text("\n".join(l for l in text.splitlines() if needle not in l) + "\n")
+            problems = chk.validate(tmp)
+            self.assertTrue(any(needle.split("_")[0] in p or needle in p for p in problems), (needle, problems))
+
+    def test_trusting_every_address_for_real_ip_is_caught(self):
+        tmp = self.copy_tree()
+        path = tmp / "deploy" / "nginx.conf"
+        path.write_text(path.read_text().replace("set_real_ip_from 172.16.0.0/12;", "set_real_ip_from 0.0.0.0/0;"))
+        self.assertTrue(any("never trust every address" in p for p in chk.validate(tmp)))
+
 
 if __name__ == "__main__":
     unittest.main()

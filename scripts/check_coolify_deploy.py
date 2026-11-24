@@ -40,6 +40,22 @@ def validate(root: Path = ROOT) -> list[str]:
     if not ai or "$proxy_add_x_forwarded_for" in ai.group(1):
         problems.append("nginx.conf: /ai must set X-Forwarded-For to $remote_addr (the client can forge the appended header)")
 
+    # FLOOD-2 (2026-11-25): per-client limits need the real client address, and slow-client timeouts
+    if not re.search(r"real_ip_header\s+CF-Connecting-IP\s*;", nginx) or not re.search(r"set_real_ip_from\s+(172\.16\.0\.0/12|10\.0\.0\.0/8)", nginx):
+        problems.append("nginx.conf: take the client address from CF-Connecting-IP (real_ip_header) and trust it only from private ranges (set_real_ip_from), or every limit counts the tunnel")
+    if "set_real_ip_from 0.0.0.0/0" in nginx or re.search(r"set_real_ip_from\s+all", nginx):
+        problems.append("nginx.conf: set_real_ip_from must never trust every address")
+    for zone in ("pk_page", "pk_ws", "pk_mcp"):
+        if not re.search(r"limit_req_zone\s+\$binary_remote_addr\s+zone=%s:" % zone, nginx) or not re.search(r"limit_req\s+zone=%s\b" % zone, nginx):
+            problems.append("nginx.conf: limit_req_zone and limit_req for %s are missing (per-client request rate)" % zone)
+    if not re.search(r"limit_conn_zone\s+\$binary_remote_addr\s+zone=pk_conn:", nginx) or not re.search(r"limit_conn\s+pk_conn\s+\d+", nginx):
+        problems.append("nginx.conf: limit_conn_zone and limit_conn for pk_conn are missing (per-client open connections)")
+    if not re.search(r"limit_req_status\s+429\s*;", nginx) or not re.search(r"limit_conn_status\s+429\s*;", nginx):
+        problems.append("nginx.conf: answer over-limit requests with 429")
+    for directive in ("client_header_timeout", "client_body_timeout", "send_timeout", "reset_timedout_connection"):
+        if directive not in nginx:
+            problems.append("nginx.conf: %s is missing (slow-client protection)" % directive)
+
     if not re.search(r"gzip_types[^;]*text/javascript", nginx):
         problems.append("nginx.conf: gzip_types lacks text/javascript")
 
