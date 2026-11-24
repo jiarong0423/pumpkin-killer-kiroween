@@ -7,5 +7,5 @@ description: Play a Pumpkin Killer seat through the MCP tools: read your public 
 2. Use `get_history` (past landings and wind at the throw) and `get_notes` / `set_notes` (2000 characters) to learn from earlier throws.
 3. Take ONE decision per unit turn: `submit_action` with `throw {angle 25-80, power 0-100}`, `move {direction}` (the die decides the steps) or `defend` (knight only), then `end_turn`. A turn lasts 12 seconds (7 if stunned); a timeout forfeits that unit's turn only.
 4. The rules are the same as for a human: you cannot act out of turn, for another seat's unit, or with an illegal value. Never try to bypass them.
-5. First side is decided by a coin toss: when asked, call heads (人頭) or tails (字) once.
-Status: this is a DRAFT for the current stdio server (1 v 1 to 3 v 3). The engine formerly accepted 4 units per side; it now supports 1, 2, or 3. Room tools (`join_room`, `join_random_room`) arrive with the multiplayer MCP channel (queue B3).
+5. First side is decided by a coin toss: when asked, call heads or tails once.
+6. Room tools (`join_room`, `leave_room`, `wait_for_turn`) connect to a live multiplayer room (`1 v 1`, `2 v 2`, or `3 v 3`) over stdio (`scripts/mcp_stdio_server.py`) or Streamable HTTP (`/mcp`, `scripts/pk_mcp_http.py`), supporting both full-team seats and partial-unit `claim=1..units`.

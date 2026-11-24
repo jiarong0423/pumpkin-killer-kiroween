@@ -76,7 +76,7 @@ flowchart TB
 | Relay | `scripts/pk_relay.py` | Creates rooms with a random 6-character code, assigns seats, sends the same seed to every seat, forwards only allowlisted actions, checks size (16 KiB), rate (10 messages per second), seat and phase, keeps a numbered log for replay | built, tested |
 | MCP stdio bridge | `scripts/mcp_stdio_server.py` | 7 game tools and 3 room tools for one agent on the same machine | built, tested with scripted clients |
 | MCP over HTTP | `scripts/pk_mcp_http.py` | The same tools at `/mcp` for remote agents; Origin allowlist, locked to the local relay, per-client session cap | built, tested; **NOT deployed, NOT VERIFIED with Claude Code or Kiro** |
-| Computer seat | `scripts/hybrid_seat_headless.js`, `scripts/fill_room.py`, `scripts/run_slot_room.py`, `scripts/host_room.py` | A headless Chrome plays an empty seat through the normal page | works from a terminal; **NOT DONE as a lobby button** |
+| Computer seat | `scripts/hybrid_seat_headless.js`, `scripts/fill_room.py`, `scripts/run_slot_room.py`, `scripts/host_room.py`, lobby `#slot-fill-ai` | Host-browser AI fills open slots directly from the lobby (`#slot-fill-ai`, zero server cost); headless Chrome scripts also work from a terminal | built, tested (updated 2026-11-25) |
 | AI gateway | `scripts/pk_ai_gateway.py` | Optional text generation backend | built; copied into the image since 2026-11-24; whether it is switched on for the contest build is the owner's decision |
 | Deploy | `deploy/Dockerfile.coolify`, `deploy/entrypoint.sh`, `deploy/nginx.conf` | One container: nginx plus the Python processes | built; see section 9 |
 
@@ -158,7 +158,7 @@ flowchart LR
 - **Tools**: 7 game tools (`get_public_state`, `get_roster`, `get_history`, `submit_action`, `end_turn`, `set_notes`, `get_notes`) and 3 room tools (`join_room`, `leave_room`, `wait_for_turn`). There is deliberately no tool that creates a room: people open rooms, agents join them.
 - **Public view only**: an agent sees what a player sees. The seed, the pending actions and the opponent's aim are not in the view (`public_throw()` in `scripts/mcp_stdio_server.py`).
 - **Hosted limits**: the gateway reports the real client address to the relay only with a one-time random token (`PK_RELAY_GATEWAY_TOKEN`, made at container start and never written to a file), so the relay's per-address connection cap counts each remote client, not one proxy. Each client may hold 8 sessions (`PK_MCP_MAX_SESSIONS_PER_IP`); the ninth gets HTTP 429. Tests: `scripts/test_mcp_risk_ab.py`, `scripts/test_pk_mcp_http.py`, `scripts/test_mcp_room_tools.py`.
-- **A seat takes a whole team.** An agent cannot yet claim only some of the units of a team (design only: `(not published)` item T4).
+- **Full-team or partial-unit claim (updated 2026-11-25).** An MCP agent can join as a whole team or claim a subset of units on a shared team via `join_room(..., claim=1..units)` with 3-way `round_hash` parity (`scripts/test_mcp_claim.py`).
 - **NOT VERIFIED**: no run with a real MCP client (Claude Code, Kiro) is recorded, and `/mcp` is not deployed yet. The recorded Kiro IDE attempt failed because that session had no Pumpkin Killer tool (`docs/kiro_evidence/raw/ide_mcp_attempt_20261115.txt`). A multi-client end-to-end run is the open task in `(not published)`.
 
 ## 5. Filling empty seats (unit slot fill)
@@ -168,12 +168,13 @@ flowchart TB
   ROOM["3 v 3 room, two human seats ready"] --> HOLD["fill_room.py joins placeholder seats so the match waits"]
   HOLD --> DEC{"filler"}
   DEC -- "computer" --> CPU["hybrid_seat_headless.js plays the empty units through a headless Chrome"]
-  DEC -- "agent" --> REF["refused on purpose: one MCP seat takes a whole team"]
+  DEC -- "agent" --> AGT["join_room(..., claim=1..units) claims 1 or more open units on a team"]
   CPU --> REL["placeholders released, match starts"]
+  AGT --> REL
   HOLD -- "failure" --> KEEP["placeholders kept; they expire after the 60 s grace and the room starts without a fill, and the log says so"]
 ```
 
-State: works from a terminal (`python3 -B scripts/fill_room.py`, `scripts/run_slot_room.py` plays a whole match in headless Chrome with a phone). **The lobby has no button for it. NOT DONE.** Design choices are in `docs/ADR_unit_slot_fill_20261124.md`.
+State (updated 2026-11-25): works both directly in the lobby (**Fill open slots (AI)** via `#slot-fill-ai`, running in the host's browser at zero server cost; verified E2E in 1 v 1, 2 v 2, and 3 v 3) and from a terminal (`python3 -B scripts/fill_room.py`, `scripts/run_slot_room.py`). External MCP agents can also claim partial units via `join_room(..., claim=1..units)`. Design choices are in `docs/ADR_unit_slot_fill_20261124.md`.
 
 ## 6. Deployment
 
@@ -236,11 +237,11 @@ flowchart TB
 
 Rule that kept this honest: **a Kiro result is a report, not verification.** The main line re-runs the tests; `docs/kiro_verified.json` lists only tasks with a recorded verdict.
 
-## 8. Tests and evidence (2026-11-24)
+## 8. Tests and evidence (updated 2026-11-25)
 
 | Item | Result | How to re-run |
 |---|---|---|
-| Whole suite | 181 test files; 175 pass, 2 skipped (need local sockets, run by hand), 1 failed (a document-numbers check, fixed afterwards) | `zsh scripts/run_full_suite.sh`, log `(not published)` |
+| Whole suite | 184 `test_*` scripts (`97 JS + 1 MJS + 86 Python`) + `sim_team_headless.py`; `zsh scripts/run_full_suite.sh` passes with 0 failures (178 run in batch; 6 local-socket tests skipped there and verified separately alongside relay, MCP claim, MCP risk, and deploy checks) | `zsh scripts/run_full_suite.sh`, `redteam/evidence/recheck_full_suite_v3_20261125.txt`, `redteam/evidence/recheck_socket_v3_20261125.txt` |
 | Room late join | relay 4 tests, page 17 checks, real Chrome 1 test; each failed before the fix | `python3 -B scripts/test_relay_late_join.py`, `node scripts/test_room_status.js`, `node scripts/test_late_join_page.js` |
 | Phone landscape invite panel | 7 viewport sizes pass | `node scripts/test_invite_panel_fit.js` |
 | MCP risk A and B | 10 tests | `python3 -B scripts/test_mcp_risk_ab.py` |
