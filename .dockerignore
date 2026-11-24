@@ -1,0 +1,14 @@
+# Keep the Docker build context small; the image copies only the runtime files listed in deploy/Dockerfile.coolify.
+.git
+docs
+redteam
+colab
+build
+logs_local
+node_modules
+*.log
+kiro_route_*.log
+HANDOFF*.md
+STATE.md
+CLAUDE.md
+.claude

@@ -1,0 +1,28 @@
+# Apple Hag, now the Poison-Apple GHOST NUN (owner 2026-11-15; the owner's pictures are not stored here)
+
+Decision: the character changes from a witch to a cartoon ghost nun. The owner's reference picture shows a pale, cracked, yellow-eyed film nun; the original-work rule stays: take only the general ghost-nun archetype, never that film character's face, makeup, wimple shape or pose, and never attach the picture to a generator. Display name is provisional (poison-apple ghost nun); the code id stays `hag` so no wiring changes.
+
+Kept from the earlier design: HUNCHED, pumpkin basket of plain green apples, black smoke, UNDERHAND scooping lob (not a javelin throw), broken-down hand frames.
+Changed: no witch hat; a black veil over a white wimple, white collar band, black robe with thin purple trim and a rope belt. No cross or religious symbol anywhere.
+
+Face (every prompt): cartoon chibi, pale ghost-white skin (NOT pale white) with a few thin crack lines and deep wrinkles; two large round glowing yellow eyes with small dark pupils ringed by heavy dark eye bags (NOT black hollow sockets); a tiny nose; a flat grim thin dark mouth, open in a wail only when she throws.
+
+Roster check: the skeleton, the necromancer and the bride already have pale faces with black hollow eyes, and the wizard wears a purple pointed hat. What stays unique to the nun: the white wimple frame, the glowing yellow eyes, the pale cracked skin.
+
+## WEAPON CHANGE (owner 2026-11-15, later the same day)
+She throws small wooden CROSSES instead of apples (same underhand scooping lob, not a javelin throw). The basket holds crosses. A cross is the thrown weapon only: no church, no prayer, no real-religion scene. Ids: proj_cross, fx_cross_rain (the Basket Tip ultimate: crosses fall on the target area), fx_cross_rain_heal, ui_cross_curse (status icon; 'poison' becomes a curse in the UI text, the effect numbers stay). The earlier ban on a cross symbol is lifted. Owner also says the nun reference picture has no copyright; the main line cannot verify that and keeps to the general ghost-nun archetype, never that picture's face or makeup.
+
+## STYLE REFERENCE PICTURE (owner 2026-11-15, a chibi cartoon ghost nun; the picture is NOT stored here and is never attached to a generator)
+Owner: 'this version, cartoon ghost nun'. Its origin is unknown (it looks like an AI picture of a film nun), so we take only general traits and make our own: chibi proportions, slanted almond eyes with glowing yellow irises and dark liner, thin crack lines on the face, a sly grin with two small fangs, a small cross pendant, a thin silver cross embroidered on a black robe. Ours differs on purpose: HUNCHED, pale ghost-white skin (not bone white, the roster already has three pale faces), a pumpkin basket of crosses with black smoke, throwing a wooden cross underhand, no church background, no bats, no little ghosts, no stained glass, a rope belt, a thin purple trim.
+Face wording now used in every prompt: slanted almond eyes, narrow cat-like pupils, dark smudged liner, one eyebrow raised, tiny nose, sly crooked grin with two small fangs, thin crack lines.
+
+Colour (owner 2026-11-15: 'not blue-purple'): the reference picture's blue-violet glow and mist are NOT used. Light is the game's warm orange rim light only; no blue or violet aura, mist or background glow. The thin purple trim on the robe (earlier owner decision, so the black shape reads on the dark background) stays unless the owner says to drop it.
+
+Black floating smoke (owner 2026-11-15, 'change it to moving black floating'): around the nun there is BLACK smoke that floats and moves, in place of any blue-violet aura. Art: `fx_black_smoke` is now a 4-frame loop sprite sheet of one black smoke wisp floating upward and swaying. In the game the wisps are drawn by the page (several copies at different phases drifting up and swaying around her and the basket, like the necromancer's floating flame; main line, `index.html`). DECIDED by the owner (2026-11-15): BOTH. The nun hovers: no legs or feet are drawn, the long robe tapers into black smoke wisps and its hem sits on the same baseline the other units use; the page adds a slow vertical bob (a few pixels) and lifts her a few pixels above the ground line so she visibly hovers. The art keeps the hem on the baseline so the existing foot-fix and pose offsets in `index.html` stay simple.
+
+## Throw (owner 2026-11-15, latest): the hand grips the cross at the chest and throws it forward, chest-level push-throw. Overrides the underhand-lob line above. Details in (not published)
+
+## Look target (owner re-sent the cartoon nun picture, 2026-11-15) 
+The owner wants THIS look: a cartoon chibi ghost nun with a pale ghost-white cracked face (NO green anywhere on the skin), slanted almond eyes with BRIGHT GLOWING YELLOW irises and dark smudged liner, a sly grin with two small fangs, white wimple under a black veil, a thin cross pendant. The game's rule stays: strict side view facing LEFT, like every hero (the picture is front-facing, that part is not copied). Older wording about 'pale ghost-white skin' and 'two heads tall' is dropped ('two heads tall' probably caused the double-head picture).
+
+## Skin colour (owner 2026-11-15, latest): NO green face. 'I want a ghost face': pale ghost-white skin with a cool grey shade, thin crack lines, dark liner and dark circles around the eyes, bright glowing yellow eyes. This overrides every earlier green or sallow wording. (The roster already has pale faces; what keeps her different is the white wimple frame, yellow slit-pupil eyes, fang grin, crack lines and the floating black smoke.)

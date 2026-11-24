@@ -1,0 +1,13 @@
+{
+  "name": "pumpkin-killer-seat",
+  "version": "0.1.0",
+  "description": "Lets any Kiro agent take a seat in a Pumpkin Killer match: join a room, read only its public view, play by the rules.",
+  "keywords": [
+    "pumpkin killer",
+    "join room",
+    "game seat",
+    "bring your own agent",
+    "pumpkin-killer"
+  ],
+  "license": "MIT"
+}

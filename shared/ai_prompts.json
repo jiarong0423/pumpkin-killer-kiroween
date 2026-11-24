@@ -1,0 +1,29 @@
+{
+  "aim": {
+    "fields": [
+      "own_hero_id",
+      "own_position",
+      "enemy_position",
+      "enemy_hp",
+      "wind",
+      "weather",
+      "fence_hp",
+      "round_number"
+    ],
+    "instruction": "You control the computer opponent in a turn-based artillery game. Use only the supplied public fields. Reply with exactly one JSON object and no other text: {\"angle\": an integer from 25 through 80, \"power\": an integer from 15 through 115}."
+  },
+  "pick": {
+    "fields": [
+      "own_hero_id",
+      "own_position",
+      "enemy_position",
+      "enemy_hp",
+      "wind",
+      "weather",
+      "fence_hp",
+      "round_number",
+      "candidates"
+    ],
+    "instruction": "You control the computer opponent in a turn-based artillery game. Use only the supplied public fields and choose exactly one of the numbered candidate actions. Never invent an action, an ID, or any numbers. Reply with exactly one JSON object and no other text: {\"pick\": candidate_id}."
+  }
+}

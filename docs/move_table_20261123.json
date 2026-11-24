@@ -1,0 +1,269 @@
+{
+ "built": "2026-11-23",
+ "heroes": [
+  {
+   "hero": "bat",
+   "spec": {
+    "hp": 147,
+    "dmg": 29,
+    "weapon": "proj_shuriken",
+    "ultimate": "shuriken_rain",
+    "status_on_hit": [
+     "slow"
+    ]
+   },
+   "page": {
+    "hp": 147.0,
+    "dmg": 29.0,
+    "weapon": "proj_shuriken",
+    "ult_built": true
+   },
+   "engine": {
+    "ultimate_special_handled": true
+   },
+   "sounds": {
+    "throw": "throw_shuriken",
+    "flight": "flight_shuriken",
+    "hit": "shared impact",
+    "ultimate": "ult_bat",
+    "ultimate_hit": "ult_bat_hit"
+   },
+   "room": {
+    "ultimate": "allowed"
+   }
+  },
+  {
+   "hero": "bride",
+   "spec": {
+    "hp": 149,
+    "dmg": 40,
+    "weapon": "proj_soundwave",
+    "ultimate": "bat_swarm",
+    "status_on_hit": [
+     "poison"
+    ]
+   },
+   "page": {
+    "hp": 149.0,
+    "dmg": 40.0,
+    "weapon": "proj_soundwave",
+    "ult_built": true
+   },
+   "engine": {
+    "ultimate_special_handled": true
+   },
+   "sounds": {
+    "throw": "throw_soundwave",
+    "flight": "absent",
+    "hit": "shared impact",
+    "ultimate": "ult_bride",
+    "ultimate_hit": "ult_bride_hit"
+   },
+   "room": {
+    "ultimate": "allowed"
+   }
+  },
+  {
+   "hero": "hag",
+   "spec": {
+    "hp": 158,
+    "dmg": 24,
+    "weapon": "proj_cross",
+    "ultimate": "cross_dart",
+    "status_on_hit": []
+   },
+   "page": {
+    "hp": 158.0,
+    "dmg": 24.0,
+    "weapon": "proj_cross",
+    "ult_built": true
+   },
+   "engine": {
+    "ultimate_special_handled": true
+   },
+   "sounds": {
+    "throw": "throw_cross",
+    "flight": "absent",
+    "hit": "shared impact",
+    "ultimate": "ult_hag",
+    "ultimate_hit": "ult_hag_hit"
+   },
+   "room": {
+    "ultimate": "allowed"
+   }
+  },
+  {
+   "hero": "hunchback",
+   "spec": {
+    "hp": 157,
+    "dmg": 19,
+    "weapon": "proj_axe",
+    "ultimate": "boomerang",
+    "status_on_hit": [
+     "bleed",
+     "knockback"
+    ]
+   },
+   "page": {
+    "hp": 157.0,
+    "dmg": 19.0,
+    "weapon": "proj_axe",
+    "ult_built": true
+   },
+   "engine": {
+    "ultimate_special_handled": true
+   },
+   "sounds": {
+    "throw": "throw_axe",
+    "flight": "absent",
+    "hit": "shared impact",
+    "ultimate": "ult_hunchback",
+    "ultimate_hit": "ult_hunchback_hit"
+   },
+   "room": {
+    "ultimate": "allowed"
+   }
+  },
+  {
+   "hero": "knight",
+   "spec": {
+    "hp": 198,
+    "dmg": 21,
+    "weapon": "proj_shield",
+    "ultimate": "shield_wall",
+    "status_on_hit": []
+   },
+   "page": {
+    "hp": 198.0,
+    "dmg": 21.0,
+    "weapon": "proj_shield",
+    "ult_built": true
+   },
+   "engine": {
+    "ultimate_special_handled": true
+   },
+   "sounds": {
+    "throw": "throw_shield",
+    "flight": "flight_shield",
+    "hit": "shared impact",
+    "ultimate": "ult_knight",
+    "ultimate_hit": "absent"
+   },
+   "room": {
+    "ultimate": "refused"
+   }
+  },
+  {
+   "hero": "reaper",
+   "spec": {
+    "hp": 143,
+    "dmg": 22,
+    "weapon": "proj_flame",
+    "ultimate": "ghostfire_trio",
+    "status_on_hit": [
+     "burn"
+    ]
+   },
+   "page": {
+    "hp": 143.0,
+    "dmg": 22.0,
+    "weapon": "proj_flame",
+    "ult_built": true
+   },
+   "engine": {
+    "ultimate_special_handled": true
+   },
+   "sounds": {
+    "throw": "throw_flame",
+    "flight": "absent",
+    "hit": "impact_flame",
+    "ultimate": "ult_reaper",
+    "ultimate_hit": "ult_reaper_hit"
+   },
+   "room": {
+    "ultimate": "refused"
+   }
+  },
+  {
+   "hero": "skeleton",
+   "spec": {
+    "hp": 150,
+    "dmg": 24,
+    "weapon": "proj_spear",
+    "ultimate": "triple_javelin",
+    "status_on_hit": [
+     "bleed",
+     "weak"
+    ]
+   },
+   "page": {
+    "hp": 150.0,
+    "dmg": 24.0,
+    "weapon": "proj_spear",
+    "ult_built": true
+   },
+   "engine": {
+    "ultimate_special_handled": true
+   },
+   "sounds": {
+    "throw": "throw_spear",
+    "flight": "flight_spear",
+    "hit": "shared impact",
+    "ultimate": "ult_skeleton",
+    "ultimate_hit": "ult_skeleton_hit"
+   },
+   "room": {
+    "ultimate": "allowed"
+   }
+  },
+  {
+   "hero": "wizard",
+   "spec": {
+    "hp": 124,
+    "dmg": 36,
+    "weapon": "cannonball",
+    "ultimate": "pumpkin_blast",
+    "status_on_hit": [
+     "poison"
+    ]
+   },
+   "page": {
+    "hp": 124.0,
+    "dmg": 36.0,
+    "weapon": "cannonball",
+    "ult_built": true
+   },
+   "engine": {
+    "ultimate_special_handled": true
+   },
+   "sounds": {
+    "throw": "throw_cannon",
+    "flight": "flight_cannon",
+    "hit": "shared impact",
+    "ultimate": "ult_wizard",
+    "ultimate_hit": "ult_wizard_hit"
+   },
+   "room": {
+    "ultimate": "allowed"
+   }
+  }
+ ],
+ "page_room_refused": [
+  "knight",
+  "reaper"
+ ],
+ "bridge_room_refused": [
+  "knight",
+  "reaper"
+ ],
+ "audio_events": 56,
+ "audio_events_unwired": [],
+ "dynamic_prefixes": [
+  "avatar_",
+  "left_",
+  "right_",
+  "scene_",
+  "ult_"
+ ],
+ "allowlisted_audio_events": []
+}

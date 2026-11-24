@@ -1,0 +1,20 @@
+# Kiro task 35 - ultimates, area attacks and showpiece effects (design only)
+
+## Owner words (2026-11-09)
+Asked what "richer" means: "like the ultimate (大招)", "area attacks (範圍攻擊)", "or effects (特效)". This LIFTS the earlier rule "ultimates are not designed": you may now design them. Confirmed earlier and still true: the ultimate energy bar needs FOUR successful hits; each player counts their own hits; at most 2 ultimates per match; screen must stay clean and readable; Halloween magic like a wizard school; no extra spending; art is made on Colab (never by you, never faked by code); sounds are real CC0 recordings or code-made.
+Still OPEN for the owner (give a recommendation, do not assume): does a block or a miss count toward the bar; does the bar reset after use; what "player" means in 4 v 4.
+
+## Read first (read only)
+index.html (HERO_PROFILES, executeThrow, hit code, fxEmit presets in js/particles.js and the sprite presets, drawThrownPaths), docs/game_mode.md, (not published), docs/airdrop_design.md, docs/sound_mapping.md, docs/wind_design.md, and docs/roster_design.md if present (task 33), docs/richness_plan.md if present (task 34).
+
+## Do exactly this
+1. Write docs/ultimates_design.md:
+   a. ENERGY BAR: how it fills (4 successful hits; define "successful hit"), where it is shown (dock, small), the ready cue, how it is used (button or click menu entry), per-player counting, the max-2 rule, reset rule, and what the AI and sub-agent opponents see in the public state (field names only).
+   b. ONE ULTIMATE PER CLASS for the 4 current classes (skeleton javelin, pumpkin wizard cannon, cat-bat assassin shuriken, pumpkin knight shield) and a short sketch for each new class named in docs/roster_design.md if that file exists. For each: name (Traditional Chinese plus English), fantasy, exact effect with numbers (damage, radius or width in px, duration in turns, targets), how aiming works (reuse the pointer/charge controls), counter-play, what it cannot do (no kill from full HP, ignores neither the fence nor the sky shield unless stated), a 3-second cinematic sequence in beats (cut-in of the portrait, charge, release, impact, aftermath), the particle and sprite effects needed (existing presets by name, new ones as a list), the sound (existing events or new ones), and engine work (S/M/L).
+   c. AREA ATTACKS for normal play (not ultimates): 3 to 5 area shots (e.g. splash bomb with falloff, line sweep along the ground, rain of shuriken in a cone, shield shockwave, poison cloud that lingers 2 turns) with radius, falloff, friendly-fire rule, interaction with the fence, wind, the shield and tombstones.
+   d. EFFECT SHOWPIECES: a catalogue of 10 to 14 visual effects that make matches look rich (hit-stop, screen shake limits, slow-motion on KO, lightning, ground rune that spreads, floating damage numbers, combo counter, kill-cam zoom, moon glow, etc.): for each, trigger, duration, layers, budget (max particles, max sprites on screen), the readability rule that keeps the screen clean, and the Colab sprite it needs if any. Give a global effects budget and a "calm mode" switch for low-end devices.
+   e. BALANCE: how ultimates and area attacks are tuned so that no single ultimate wins a match alone (e.g. max damage per ultimate as a share of HP), and an automated check plan (fixed-seed bot matches, pass bands).
+   f. COMPARISON: how Hearthstone-style hero powers, Worms super weapons and GunBound special shots handle charge-up, readability and fairness; cite pages you read, mark snippet-only claims.
+2. Write docs/ultimates_asset_requests.md: Colab images for the ultimates and effects (name, size, one-sentence prompt, flat magenta background), highest impact first, at most 16, no repeats of existing art (effect sprites already exist: ghost-fire, rune circle, stardust, spirit mist, impact flash, poison bubbles).
+3. Do not touch index.html, assets/, js/, scripts/. Do not use git. Do not download or create images.
+4. Finish with a 6-line summary and say what you could not verify.

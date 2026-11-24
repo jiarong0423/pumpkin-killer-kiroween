@@ -1,0 +1,18 @@
+{
+ "jobs": [
+  {
+   "id": "coin_pumpkin_head",
+   "tier": "Q3",
+   "ref": "knight",
+   "prompt": "Draw ONE round gold-orange pumpkin coin, seen straight from the front: a thick embossed rim, and in the centre a smiling carved jack-o'-lantern face (triangle eyes, jagged grin) with a glowing warm inner light. Use the pumpkin colours and the carved-face style of the pumpkin head of the reference character.",
+   "style": "Dark-fantasy 2D cartoon game item, thick clean near-black outlines plus a thin warm orange outer glow, flat three-tone cel shading, same style as the reference character. Centred, alone, front view, perfectly flat round coin seen straight on, 10 percent empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no numbers, no watermark."
+  },
+  {
+   "id": "coin_pumpkin_tail",
+   "tier": "Q3",
+   "ref": "knight",
+   "prompt": "Draw ONE round gold-orange pumpkin coin, seen straight from the front, the same coin as the other side (same size, same thick embossed rim, same colours): in the centre an embossed pumpkin stem with a curling vine and one leaf, no face. Use the pumpkin colours of the pumpkin head of the reference character.",
+   "style": "Dark-fantasy 2D cartoon game item, thick clean near-black outlines plus a thin warm orange outer glow, flat three-tone cel shading, same style as the reference character. Centred, alone, front view, perfectly flat round coin seen straight on, 10 percent empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no numbers, no watermark."
+  }
+ ]
+}

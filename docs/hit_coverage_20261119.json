@@ -1,0 +1,51 @@
+{
+ "files": {
+  "plain_down.jsonl": {
+   "records": 141681,
+   "throws": 3967
+  },
+  "ult_down.jsonl": {
+   "records": 259480,
+   "throws": 4252
+  },
+  "full_natural.jsonl": {
+   "records": 73191
+  },
+  "full_down.jsonl": {
+   "records": 80940
+  },
+  "full_mid.jsonl": {
+   "records": 81832
+  }
+ },
+ "rank": {
+  "plain": {
+   "0": {
+    "touched": 1619,
+    "damaged": 1619
+   },
+   "1": {
+    "touched": 642,
+    "damaged": 642
+   },
+   "2": {
+    "touched": 231,
+    "damaged": 230
+   }
+  },
+  "ultimate": {
+   "0": {
+    "touched": 2833,
+    "damaged": 2832
+   },
+   "1": {
+    "touched": 1245,
+    "damaged": 1245
+   },
+   "2": {
+    "touched": 703,
+    "damaged": 702
+   }
+  }
+ }
+}

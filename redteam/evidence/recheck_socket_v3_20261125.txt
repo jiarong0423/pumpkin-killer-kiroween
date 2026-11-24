@@ -1,0 +1,13 @@
+rc=0 test_no_secrets_in_tree
+rc=0 test_mcp_stdio
+rc=0 test_mcp_claim
+rc=0 test_relay_late_join
+rc=0 test_relay_reconnect
+rc=0 test_relay_seat_grace
+rc=0 test_fill_room_selftest
+rc=0 test_phone_room_check
+rc=0 test_pk_relay
+rc=0 test_mcp_risk_ab
+rc=0 test_check_coolify_deploy
+rc=0 test_export_tree
+rc=0 test_privacy_gate

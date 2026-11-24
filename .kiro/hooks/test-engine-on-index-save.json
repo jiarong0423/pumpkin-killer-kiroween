@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Engine tests on index.html save",
+      "description": "When index.html is saved, run the Python rule engine tests so client edits that touch shared rules are checked against the engine.",
+      "trigger": "PostFileSave",
+      "matcher": "(^|/)index\\.html$",
+      "action": {
+        "type": "command",
+        "command": "python3 -B scripts/test_mcp_game.py"
+      },
+      "enabled": true
+    }
+  ]
+}

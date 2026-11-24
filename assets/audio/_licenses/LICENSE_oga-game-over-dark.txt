@@ -1,0 +1,9 @@
+Source: https://opengameart.org/content/game-over-dark-short-music-clips
+Work: Game Over (dark) short music clips
+Author: Robin Lamb
+Checked and downloaded: 2026-11-09
+License wording on the page that day: License(s): CC0
+Original file name: gameoverdark.ogg
+Saved in the game as: assets/audio/music/defeat_sting.ogg
+sha256: 3b4b924eb198873ff8ebf6e49daf95363794e56619e3dfc86d2d4b0136678a91
+Note: verified by Kiro task 22 (page opened) and re-checked by the reviewer (page text contains CC0). Not heard by the reviewer.

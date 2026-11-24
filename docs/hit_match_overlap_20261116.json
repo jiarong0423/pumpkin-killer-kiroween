@@ -1,0 +1,375 @@
+{
+ "paths": 24510,
+ "margin": 15,
+ "byWeapon": {
+  "skeleton": {
+   "paths": 159136,
+   "overlap": 36318,
+   "overlapNoHit": 499,
+   "hitNoOverlap": 4908,
+   "causes": {
+    "above": 233,
+    "below": 0,
+    "side": 266
+   },
+   "examples": [
+    {
+     "target": "reaper",
+     "sx": 240,
+     "ang": 25,
+     "pw": 93,
+     "wd": 4,
+     "tx": 1460,
+     "at": [
+      1392,
+      655
+     ],
+     "cause": "above"
+    },
+    {
+     "target": "reaper",
+     "sx": 240,
+     "ang": 25,
+     "pw": 94,
+     "wd": -4,
+     "tx": 1240,
+     "at": [
+      1188,
+      650
+     ],
+     "cause": "above"
+    },
+    {
+     "target": "reaper",
+     "sx": 240,
+     "ang": 25,
+     "pw": 94,
+     "wd": 2,
+     "tx": 1460,
+     "at": [
+      1381,
+      655
+     ],
+     "cause": "above"
+    }
+   ]
+  },
+  "wizard": {
+   "paths": 159136,
+   "overlap": 19999,
+   "overlapNoHit": 678,
+   "hitNoOverlap": 21406,
+   "causes": {
+    "above": 4,
+    "below": 123,
+    "side": 551
+   },
+   "examples": [
+    {
+     "target": "reaper",
+     "sx": 240,
+     "ang": 25,
+     "pw": 93,
+     "wd": 4,
+     "tx": 1460,
+     "at": [
+      1460,
+      672
+     ],
+     "cause": "side"
+    },
+    {
+     "target": "reaper",
+     "sx": 240,
+     "ang": 25,
+     "pw": 94,
+     "wd": -4,
+     "tx": 1240,
+     "at": [
+      1246,
+      673
+     ],
+     "cause": "side"
+    },
+    {
+     "target": "reaper",
+     "sx": 240,
+     "ang": 25,
+     "pw": 94,
+     "wd": 2,
+     "tx": 1460,
+     "at": [
+      1445,
+      673
+     ],
+     "cause": "side"
+    }
+   ]
+  },
+  "bat": {
+   "paths": 159136,
+   "overlap": 31343,
+   "overlapNoHit": 2008,
+   "hitNoOverlap": 11392,
+   "causes": {
+    "above": 792,
+    "below": 278,
+    "side": 938
+   },
+   "examples": [
+    {
+     "target": "reaper",
+     "sx": 240,
+     "ang": 25,
+     "pw": 93,
+     "wd": -2,
+     "tx": 1240,
+     "at": [
+      1276,
+      666
+     ],
+     "cause": "above"
+    },
+    {
+     "target": "reaper",
+     "sx": 240,
+     "ang": 25,
+     "pw": 93,
+     "wd": 4,
+     "tx": 1460,
+     "at": [
+      1437,
+      666
+     ],
+     "cause": "above"
+    },
+    {
+     "target": "reaper",
+     "sx": 240,
+     "ang": 25,
+     "pw": 94,
+     "wd": -4,
+     "tx": 1240,
+     "at": [
+      1232,
+      667
+     ],
+     "cause": "above"
+    }
+   ]
+  },
+  "knight": {
+   "paths": 159136,
+   "overlap": 46147,
+   "overlapNoHit": 7014,
+   "hitNoOverlap": 1594,
+   "causes": {
+    "above": 4135,
+    "below": 511,
+    "side": 2368
+   },
+   "examples": [
+    {
+     "target": "wizard",
+     "sx": 240,
+     "ang": 25,
+     "pw": 92,
+     "wd": 2,
+     "tx": 1240,
+     "at": [
+      1255,
+      641
+     ],
+     "cause": "above"
+    },
+    {
+     "target": "bat",
+     "sx": 240,
+     "ang": 25,
+     "pw": 92,
+     "wd": 2,
+     "tx": 1240,
+     "at": [
+      1276,
+      645
+     ],
+     "cause": "above"
+    },
+    {
+     "target": "knight",
+     "sx": 240,
+     "ang": 25,
+     "pw": 92,
+     "wd": 2,
+     "tx": 1240,
+     "at": [
+      1276,
+      645
+     ],
+     "cause": "above"
+    }
+   ]
+  },
+  "reaper": {
+   "paths": 159136,
+   "overlap": 40455,
+   "overlapNoHit": 1835,
+   "hitNoOverlap": 2107,
+   "causes": {
+    "above": 960,
+    "below": 4,
+    "side": 871
+   },
+   "examples": [
+    {
+     "target": "reaper",
+     "sx": 240,
+     "ang": 25,
+     "pw": 93,
+     "wd": -2,
+     "tx": 1240,
+     "at": [
+      1242,
+      655
+     ],
+     "cause": "above"
+    },
+    {
+     "target": "reaper",
+     "sx": 240,
+     "ang": 25,
+     "pw": 93,
+     "wd": 4,
+     "tx": 1460,
+     "at": [
+      1392,
+      655
+     ],
+     "cause": "above"
+    },
+    {
+     "target": "reaper",
+     "sx": 240,
+     "ang": 25,
+     "pw": 94,
+     "wd": -4,
+     "tx": 1240,
+     "at": [
+      1188,
+      650
+     ],
+     "cause": "above"
+    }
+   ]
+  },
+  "hunchback": {
+   "paths": 159136,
+   "overlap": 54860,
+   "overlapNoHit": 14133,
+   "hitNoOverlap": 0,
+   "causes": {
+    "above": 9110,
+    "below": 651,
+    "side": 4372
+   },
+   "examples": [
+    {
+     "target": "skeleton",
+     "sx": 240,
+     "ang": 25,
+     "pw": 92,
+     "wd": 2,
+     "tx": 1240,
+     "at": [
+      1234,
+      637
+     ],
+     "cause": "above"
+    },
+    {
+     "target": "wizard",
+     "sx": 240,
+     "ang": 25,
+     "pw": 92,
+     "wd": 2,
+     "tx": 1240,
+     "at": [
+      1173,
+      626
+     ],
+     "cause": "above"
+    },
+    {
+     "target": "bat",
+     "sx": 240,
+     "ang": 25,
+     "pw": 92,
+     "wd": 2,
+     "tx": 1240,
+     "at": [
+      1193,
+      629
+     ],
+     "cause": "above"
+    }
+   ]
+  },
+  "hag": {
+   "paths": 159136,
+   "overlap": 45666,
+   "overlapNoHit": 5511,
+   "hitNoOverlap": 572,
+   "causes": {
+    "above": 3284,
+    "below": 156,
+    "side": 2071
+   },
+   "examples": [
+    {
+     "target": "wizard",
+     "sx": 240,
+     "ang": 25,
+     "pw": 92,
+     "wd": 2,
+     "tx": 1240,
+     "at": [
+      1255,
+      641
+     ],
+     "cause": "above"
+    },
+    {
+     "target": "bat",
+     "sx": 240,
+     "ang": 25,
+     "pw": 92,
+     "wd": 2,
+     "tx": 1240,
+     "at": [
+      1276,
+      645
+     ],
+     "cause": "above"
+    },
+    {
+     "target": "knight",
+     "sx": 240,
+     "ang": 25,
+     "pw": 92,
+     "wd": 2,
+     "tx": 1240,
+     "at": [
+      1276,
+      645
+     ],
+     "cause": "above"
+    }
+   ]
+  }
+ },
+ "wave": {
+  "overlapInAir": 62397,
+  "landsInRange": 29331,
+  "airNoDamage": 33066
+ }
+}

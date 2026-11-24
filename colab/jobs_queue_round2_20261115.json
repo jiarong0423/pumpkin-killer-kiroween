@@ -1,0 +1,174 @@
+{
+ "refs": {
+  "skeleton": "unit_skeleton.png",
+  "wizard": "unit_wizard.png",
+  "bat": "unit_bat.png",
+  "knight": "unit_knight.png",
+  "bar": "ref_bar_from_video.png",
+  "style_wizard_unit": "assets/units/unit_wizard.png",
+  "style_dart": "assets/weapons/dart.png",
+  "style_poison_bubbles": "assets/fx/sprites/fx_poison_bubbles.png",
+  "style_heal_rain_drop": "assets/fx/sprites/fx_heal_rain_drop.png",
+  "identity_hag_idle1": "out:hag_idle1_r2_v1_q3a.png",
+  "style_skeleton_idle1": "assets/poses/skeleton_idle1.png",
+  "identity_reaper_unit": "assets/units/unit_reaper_idle.png",
+  "identity_necro_idle": "assets/poses/necro_idle.png",
+  "identity_necro_windup": "assets/poses/necro_windup.png",
+  "identity_fx_ghostfire_purple": "assets/fx/sprites/fx_ghostfire_purple.png",
+  "identity_bride_front": "assets/portraits/bride_front.png",
+  "identity_hunchback_front": "assets/portraits/hunchback_front.png",
+  "identity_wizard_unit": "assets/units/unit_wizard.png"
+ },
+ "style": "Keep the EXACT same character design, outfit, colors, proportions, outline thickness and 2D dark-fantasy cartoon art style as the reference image. Character faces LEFT in strict side view. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+ "jobs": [
+  {
+   "id": "hag_idle1_r2",
+   "tier": "Q3",
+   "ref": "style_wizard_unit",
+   "refs": [
+    "style_wizard_unit"
+   ],
+   "prompt": "Use the first reference only for the shared game character style, canvas scale, and full-body proportion; do NOT copy its wizard identity, face, clothing, hat, or pose. Design ONE original full-body hero, the Cross-Throwing Ghost Nun: a chibi two-heads-tall hunched undead nun wearing a black nun's veil over a white wimple (coif) that frames the face, a white collar band, and a black robe with thin purple trim and a rope belt (a GHOST NUN: no witch hat, no pointed hat). Hunched floating ghost nun: back strongly bowed, head thrust forward, shoulders high, the long robe tapering at the bottom into wisps of black smoke so she hovers a few centimetres above the ground with no legs or feet showing, very long sleeves that hang past the hands. Her FACE must be clearly visible and well drawn inside the white wimple, lit by warm orange light: a cartoon ghost-nun face, sallow grey-green skin (a pale grey-green, NOT bone white) with a few thin crack lines on the forehead and cheeks; two large slanted almond eyes with glowing yellow irises and narrow cat-like pupils, ringed by dark smudged liner and eye bags, one eyebrow raised in a sly look; a tiny nose; a sly crooked grin showing two small sharp fangs (the mouth opens wide only when she throws). Stylised chibi cartoon, not photographic, not a copy of any film nun. Exactly two eyes, one nose, one mouth; no melted, blank, black or distorted face. She carries a hollowed-out pumpkin-orange basket with a woven handle, filled with several plain shiny small wooden crosses each a plain Latin cross; thin black smoke rises from the crosses, the basket and the robe hem. Warm orange rim light. Calm idle, three-quarter view facing RIGHT, centred, the robe hem resting on the wizard-comparable feet baseline (she hovers just above it; no legs or feet visible). Do not include text, extra limbs, any other character, a red cross, a single cross held up in one hand, a blue cloak, a witch hat, or a known film or cartoon nun likeness.",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm-orange outer outline glow, flat three-tone cel shading with soft highlights, large expressive cartoon eyes, and small simplified hands. One character, full body, centred, 10 percent empty margin. Flat solid noise-free magenta background #FF00FF, no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, extra limb, extra hand, extra head, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, black face, blank face, faceless, melted face, distorted face, asymmetrical eyes, extra eyes, young face, smooth featureless face, hood, hooded cloak, hoodie, no hat, bare head, smooth white plastic mask, film mask, long hooked nose, black hollow eye sockets, empty eyes, skull face, pale white face, witch hat, pointed hat, film nun likeness, photographic face, pale white face, apple, any fruit, blue-violet glow, blue aura, blue-purple ambient light, cold blue rim light, glowing mist around the figure, visible legs, visible feet, boots, standing on the ground, shadow on the ground"
+  },
+  {
+   "id": "hag_front_r2",
+   "tier": "Q3",
+   "ref": "style_wizard_unit",
+   "refs": [
+    "style_wizard_unit"
+   ],
+   "prompt": "Use the first reference only for the shared game character style; do NOT copy its wizard identity or its hat. Design ONE original Cross-Throwing Ghost Nun face portrait, head and shoulders only, cropped at the upper chest, wearing a black nun's veil over a white wimple (coif) that frames the face, a white collar band, and a black robe with thin purple trim and a rope belt (a GHOST NUN: no witch hat, no pointed hat). Her FACE must be clearly visible and well drawn inside the white wimple, lit by warm orange light: a cartoon ghost-nun face, sallow grey-green skin (a pale grey-green, NOT bone white) with a few thin crack lines on the forehead and cheeks; two large slanted almond eyes with glowing yellow irises and narrow cat-like pupils, ringed by dark smudged liner and eye bags, one eyebrow raised in a sly look; a tiny nose; a sly crooked grin showing two small sharp fangs (the mouth opens wide only when she throws). Stylised chibi cartoon, not photographic, not a copy of any film nun. Exactly two eyes, one nose, one mouth; no melted, blank, black or distorted face. Centre the head with about 10 percent margin; no basket, no cross, no hands. Do not include text, extra limbs, any other character, a red cross, a witch hat, or a known film or cartoon nun likeness.",
+   "style": "Dark-fantasy 2D cartoon game portrait. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush or realistic material rendering. Chibi face, large expressive eyes, stable proportions. Solid noise-free #FF00FF background, no ground or cast shadow, 10 percent margin.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, extra limb, extra hand, extra head, full body, hands, basket, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, black face, blank face, faceless, melted face, distorted face, asymmetrical eyes, extra eyes, young face, smooth featureless face, hood, hooded cloak, hoodie, no hat, bare head, smooth white plastic mask, film mask, long hooked nose, black hollow eye sockets, empty eyes, skull face, pale white face, witch hat, pointed hat, film nun likeness, photographic face, pale white face, apple, any fruit, blue-violet glow, blue aura, blue-purple ambient light, cold blue rim light, glowing mist around the figure"
+  },
+  {
+   "id": "necro_front",
+   "tier": "Q3",
+   "ref": "style_skeleton_idle1",
+   "refs": [
+    "style_skeleton_idle1",
+    "identity_reaper_unit"
+   ],
+   "prompt": "Use the first reference only for the shared game art style. Use the second reference for the exact necromancer identity. Draw ONE face portrait of that same necromancer, head and shoulders only, cropped at the upper chest: the same hooded skull, the same dark purple-black ragged hood with its purple inner lining, the same cream skull and jaw, the same angry brows, the same glowing purple flame-shaped eyes, the same collar and robe shoulders. Three-quarter view turned slightly to the right, like the second reference, with the head filling about 70 percent of the picture height. Show nothing below the chest: no hands, no flame in a hand, no potion bottle, no belt, no legs.",
+   "style": "Dark-fantasy 2D cartoon game art. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush or realistic material rendering. Chibi face, large expressive eyes, stable proportions. Isolated portrait: solid #FF00FF background, no ground or cast shadow, 10 percent margin. Do not use photorealism, 3D or plastic rendering, painterly gradients, thin linework, text, watermarks, extra figures, or magenta or pink inside the subject.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, full body, hand, fingers, flame in a hand, potion bottle, weapon, scythe, skull on a stick, extra head, magenta or pink inside the subject"
+  },
+  {
+   "id": "necro_ult_point",
+   "tier": "Q3",
+   "ref": "identity_necro_windup",
+   "refs": [
+    "identity_necro_windup",
+    "identity_fx_ghostfire_purple"
+   ],
+   "prompt": "Use the first reference for the exact necromancer: same face, hood, robe, belt flask, line style, size, proportions and the same facing direction. Use the second reference only for the shape and purple colour of one ghost fire. Edit the first reference into a pointing pose. Strict side view facing LEFT, the same direction as the first reference; the attack goes toward the LEFT. The hand that holds the flame in the first reference now reaches straight forward toward the LEFT with the palm down and ONLY the index finger pointing forward, the other fingers curled, and nothing burning on that hand. The other hand is empty and hangs at his side. EXACTLY three separate purple ghost fires float in a loose slanted row behind him on the RIGHT side, at head height, each about as large as his head, not touching his body or each other. Fierce face, mouth open as if giving a command. One character, one head, full body, same size and scale as the first reference, feet on the same baseline.",
+   "style": "Dark-fantasy 2D cartoon game art, same art style as the first reference. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush. Isolated sprite: solid #FF00FF background, no ground or cast shadow, 10 percent margin. Do not use photorealism, 3D or plastic rendering, painterly gradients, thin linework, text, watermarks, or magenta or pink inside the subject.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, flame in the hand, more or fewer than three fires, fire touching the body, weapon, scythe, staff, extra limb, extra hand, extra finger pointing, second head, mirrored direction, pink sparkle stars, magenta or pink inside the subject"
+  },
+  {
+   "id": "necro_idle2",
+   "tier": "Q3",
+   "ref": "identity_necro_idle",
+   "refs": [
+    "identity_necro_idle"
+   ],
+   "prompt": "Edit the reference picture. KEEP EXACTLY the same necromancer: same face, hood, robe, belt flask, colours, line style, size, scale, position and three-quarter direction, facing RIGHT as in the reference. The same hand stays raised holding the purple flame; the other hand stays empty at his side. Change ONLY a small idle breath: the purple flame above the raised hand leans a little and has a slightly different flicker shape, the hood edge and the ragged robe hem sway a hair, the body sits one or two percent lower, the face stays calm with the same flame eyes. It must look like the same picture one moment later.",
+   "style": "Dark-fantasy 2D cartoon game art, same art style as the reference. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush. Isolated sprite: solid #FF00FF background, no ground or cast shadow, same margin as the reference. Do not use photorealism, 3D or plastic rendering, painterly gradients, thin linework, text, watermarks, or magenta or pink inside the subject.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, different face, different robe, different size, changed pose, switched hand, weapon, scythe, extra limb, extra hand, second flame, magenta or pink inside the subject"
+  },
+  {
+   "id": "necro_charge2",
+   "tier": "Q3",
+   "ref": "identity_necro_idle",
+   "refs": [
+    "identity_necro_idle",
+    "identity_necro_windup"
+   ],
+   "prompt": "Use the first reference for the exact necromancer at rest (face, hood, robe, belt flask, colours, size and scale). Use the second reference for the strict side view facing LEFT and for the full wind-up. Draw the MIDDLE charge frame between them. Strict side view facing LEFT, the same direction as the second reference; the throw will go toward the LEFT. The same hand that holds the purple flame in both references pulls the flame back behind the body, about halfway between the raised idle position and the fully pulled-back wind-up. The flame is larger than in the idle picture and smaller than in the wind-up picture. The body leans back a little and the face tightens in strain, flame eyes narrowed. The other hand is empty at his side. One character, one head, full body, same size and scale as the first reference, feet on the same baseline.",
+   "style": "Dark-fantasy 2D cartoon game art, same art style as both references. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush. Isolated sprite: solid #FF00FF background, no ground or cast shadow, 10 percent margin. Do not use photorealism, 3D or plastic rendering, painterly gradients, thin linework, text, watermarks, or magenta or pink inside the subject.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, different face, different robe, bigger character, switched hand, weapon, scythe, extra limb, extra hand, second flame, copy of the idle picture, copy of the wind-up picture, mirrored direction, magenta or pink inside the subject"
+  },
+  {
+   "id": "bride_front",
+   "tier": "Q3",
+   "ref": "style_skeleton_idle1",
+   "refs": [
+    "style_skeleton_idle1",
+    "identity_bride_front"
+   ],
+   "prompt": "Use the first reference only for the shared game art style. Use the second reference for the exact ghost bride identity. The second reference is a full-body picture; draw ONE face portrait of the same ghost bride instead, head and shoulders only, cropped at the upper chest: the same pale round face with the same huge black oval eyes and soft cyan glow under them, the same tiny nose dot, no mouth if the reference has none, the same crown of purple roses with green leaves, the same long straight black hair with grey-teal strands, the same translucent teal and lilac veil falling at both sides, the same black high collar. Front view, the head filling about 70 percent of the picture height. Show nothing below the chest: no hands, no dress skirt, no flowers in hands, no legs.",
+   "style": "Dark-fantasy 2D cartoon game art. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush or realistic material rendering. Chibi face, large expressive eyes, stable proportions. Isolated portrait: solid #FF00FF background, no ground or cast shadow, 10 percent margin. Do not use photorealism, 3D or plastic rendering, painterly gradients, thin linework, text, watermarks, extra figures, or magenta inside the subject.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, full body, hands, fingers, skirt, legs, bouquet, weapon, extra head, different face, added mouth, magenta background colour inside the veil or hair"
+  },
+  {
+   "id": "hunchback_front",
+   "tier": "Q3",
+   "ref": "style_skeleton_idle1",
+   "refs": [
+    "style_skeleton_idle1",
+    "identity_hunchback_front"
+   ],
+   "prompt": "Use the first reference only for the shared game art style. Use the second reference for the exact bell-tower hunchback identity. The second reference is a full-body picture with a big axe; draw ONE face portrait of the same hunchback instead, head and shoulders only, cropped at the upper chest: the same grey-green skin, the same short spiky dark hair, the same thick angry black brows, the same small tusks and frown, the same pointed ears, the same broad shoulders in the torn olive vest. Front view turned slightly to the left, the head filling about 70 percent of the picture height. Show nothing below the chest: no axe, no weapon, no hands, no rope belt, no legs.",
+   "style": "Dark-fantasy 2D cartoon game art. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush or realistic material rendering. Chibi face, large expressive eyes, stable proportions. Isolated portrait: solid #FF00FF background, no ground or cast shadow, 10 percent margin. Do not use photorealism, 3D or plastic rendering, painterly gradients, thin linework, text, watermarks, extra figures, or magenta or pink inside the subject.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, full body, axe, weapon, hands, fingers, rope, legs, bell, extra head, different face, magenta or pink inside the subject"
+  },
+  {
+   "id": "wizard_release",
+   "tier": "Q3",
+   "ref": "style_skeleton_idle1",
+   "refs": [
+    "style_skeleton_idle1",
+    "identity_wizard_unit"
+   ],
+   "prompt": "Use the first reference only for the shared game art style. Use the second reference for the exact pumpkin wizard identity: the same glowing carved jack-o'-lantern head, purple witch hat with gold buckle, purple robe with gold trim, dark gloves and boots, brass cannon, size, scale and proportions. Strict side view facing LEFT, the same direction as the second reference; the shot goes toward the LEFT. Draw the RELEASE frame: the brass cannon has just fired, braced forward toward the LEFT by the same hand that holds it in the second reference, with a bright orange muzzle flash and one small puff of grey smoke bursting from the muzzle. The body recoils backward and the robe flares, the carved face roars with a wide open mouth. The other hand is empty at his side. Do not draw the cannonball or any projectile in flight. One character, one head, full body, same size as the second reference, feet on the same baseline.",
+   "style": "Dark-fantasy 2D cartoon game art, same art style as the references. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush. Isolated sprite: solid noise-free #FF00FF background, no ground or cast shadow, 10 percent margin. Do not use photorealism, 3D or plastic rendering, painterly gradients, thin linework, text, watermarks, or magenta or pink inside the subject.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, cannonball, projectile in flight, second cannon, different face, different hat, changed size, switched hand, mirrored direction, extra limb, extra hand, extra head, magenta or pink inside the subject"
+  },
+  {
+   "id": "ui_frost_curse",
+   "tier": "Q3",
+   "ref": "style_dart",
+   "refs": [
+    "style_dart"
+   ],
+   "prompt": "Use the first reference only for compact readable game-item style; do NOT copy its dart identity. Draw ONE small status icon for a frost curse: a cluster of three pale-blue ice crystals with a thin curl of cold mist wrapped around them. No face, no character, no snowflake text, no letters. The silhouette must read at a very small size. Keep it fully inside the picture with a clear margin.",
+   "style": "Dark-fantasy 2D cartoon game item. Thick clean near-black outline, thin warm-orange outer glow, flat three-tone cel shading with soft highlights. One object, centred, 12 percent empty margin. Flat solid noise-free magenta background #FF00FF, no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, numbers, watermark, ground, cast shadow, character, face, hand, snowman, duplicate subject, magenta or pink inside the subject"
+  },
+  {
+   "id": "ui_bleed_drop",
+   "tier": "Q3",
+   "ref": "style_dart",
+   "refs": [
+    "style_dart"
+   ],
+   "prompt": "Use the first reference only for compact readable game-item style; do NOT copy its dart identity. Draw ONE small status icon for bleeding: one large glossy deep-red blood drop with a small highlight, and two smaller drops falling beneath it. No weapon, no character, no skull, no letters. The silhouette must read at a very small size. Keep it fully inside the picture with a clear margin.",
+   "style": "Dark-fantasy 2D cartoon game item. Thick clean near-black outline, thin warm-orange outer glow, flat three-tone cel shading with soft highlights. One object, centred, 12 percent empty margin. Flat solid noise-free magenta background #FF00FF, no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, numbers, watermark, ground, cast shadow, character, face, hand, weapon, skull, splatter pool, duplicate subject, magenta or pink inside the subject"
+  },
+  {
+   "id": "ui_burn_flame",
+   "tier": "Q3",
+   "ref": "style_dart",
+   "refs": [
+    "style_dart"
+   ],
+   "prompt": "Use the first reference only for compact readable game-item style; do NOT copy its dart identity. Draw ONE small status icon for burning: a single purple ghost flame with three tongues and a pale lilac core. No hand, no sparkles, no character, no letters. The silhouette must read at a very small size. Keep it fully inside the picture with a clear margin.",
+   "style": "Dark-fantasy 2D cartoon game item. Thick clean near-black outline, thin warm-orange outer glow, flat three-tone cel shading with soft highlights. One object, centred, 12 percent empty margin. Flat solid noise-free magenta background #FF00FF, no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, numbers, watermark, ground, cast shadow, character, face, hand, sparkle stars, pink sparkles, duplicate subject, magenta or pink inside the subject"
+  },
+  {
+   "id": "ui_poison_bubble",
+   "tier": "Q3",
+   "ref": "style_dart",
+   "refs": [
+    "style_dart"
+   ],
+   "prompt": "Use the first reference only for compact readable game-item style; do NOT copy its dart identity. Draw ONE small status icon for poison: a cluster of three glossy sickly-green bubbles of different sizes with one small drip below them. No skull, no character, no bottle, no letters. The silhouette must read at a very small size. Keep it fully inside the picture with a clear margin.",
+   "style": "Dark-fantasy 2D cartoon game item. Thick clean near-black outline, thin warm-orange outer glow, flat three-tone cel shading with soft highlights. One object, centred, 12 percent empty margin. Flat solid noise-free magenta background #FF00FF, no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, numbers, watermark, ground, cast shadow, character, face, hand, skull, bottle, duplicate subject, magenta or pink inside the subject"
+  }
+ ]
+}

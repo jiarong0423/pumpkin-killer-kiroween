@@ -1,0 +1,349 @@
+{
+  "state": {
+    "match_id": "<match_id>",
+    "mode": "human_vs_agent",
+    "round": 2,
+    "phase": "human",
+    "turn_seconds": 12.0,
+    "turn_seconds_left": null,
+    "wind": 2.4,
+    "weather": {
+      "id": "clear",
+      "label": "Clear",
+      "round": 2,
+      "active": false
+    },
+    "winner": null,
+    "central_wall": {
+      "x_range": [
+        841.0,
+        1079.0
+      ],
+      "top_y": 578,
+      "hp": 92
+    },
+    "shields": {
+      "red": {
+        "charges": 4,
+        "x": 420.0,
+        "y": 430.0,
+        "width": 80.0,
+        "height": 140.0,
+        "active": false,
+        "duration_rounds": 0,
+        "path_ids": []
+      },
+      "white": {
+        "charges": 4,
+        "x": 1440.0,
+        "y": 430.0,
+        "width": 80.0,
+        "height": 140.0,
+        "active": false,
+        "duration_rounds": 0,
+        "path_ids": []
+      }
+    },
+    "units": {
+      "red_1": {
+        "team": "red",
+        "name": "bat",
+        "controller": "human",
+        "x": 252.0,
+        "y": 860.0,
+        "hp": 140.0,
+        "max_hp": 140,
+        "alive": true,
+        "weapon": "proj_shuriken",
+        "hero": "bat",
+        "statuses": [],
+        "class": "bat",
+        "acted": false,
+        "moved": false
+      },
+      "red_2": {
+        "team": "red",
+        "name": "skeleton",
+        "controller": "human",
+        "x": 432.0,
+        "y": 860.0,
+        "hp": 143.0,
+        "max_hp": 143,
+        "alive": true,
+        "weapon": "proj_spear",
+        "hero": "skeleton",
+        "statuses": [],
+        "class": "skeleton",
+        "acted": false,
+        "moved": false
+      },
+      "red_3": {
+        "team": "red",
+        "name": "knight",
+        "controller": "human",
+        "x": 612.0,
+        "y": 860.0,
+        "hp": 188.0,
+        "max_hp": 188,
+        "alive": true,
+        "weapon": "proj_shield",
+        "hero": "knight",
+        "statuses": [],
+        "class": "knight",
+        "acted": false,
+        "moved": false
+      },
+      "white_1": {
+        "team": "white",
+        "name": "wizard",
+        "controller": "subagent",
+        "x": 1296.0,
+        "y": 860.0,
+        "hp": 118.0,
+        "max_hp": 118,
+        "alive": true,
+        "weapon": "cannonball",
+        "hero": "wizard",
+        "statuses": [],
+        "class": "wizard",
+        "acted": false,
+        "moved": false
+      },
+      "white_2": {
+        "team": "white",
+        "name": "knight",
+        "controller": "subagent",
+        "x": 1476.0,
+        "y": 860.0,
+        "hp": 188.0,
+        "max_hp": 188,
+        "alive": true,
+        "weapon": "proj_shield",
+        "hero": "knight",
+        "statuses": [],
+        "class": "knight",
+        "acted": false,
+        "moved": false
+      },
+      "white_3": {
+        "team": "white",
+        "name": "skeleton",
+        "controller": "subagent",
+        "x": 1656.0,
+        "y": 860.0,
+        "hp": 143.0,
+        "max_hp": 143,
+        "alive": true,
+        "weapon": "proj_spear",
+        "hero": "skeleton",
+        "statuses": [],
+        "class": "skeleton",
+        "acted": false,
+        "moved": false
+      }
+    },
+    "ultimates_remaining": {
+      "red": 2,
+      "white": 2
+    },
+    "remembered_enemy_paths": {
+      "red": [
+        2
+      ],
+      "white": [
+        1
+      ]
+    },
+    "last_timeout": null,
+    "pity": {
+      "red": {
+        "misses": 1,
+        "bonus": 0.4
+      },
+      "white": {
+        "misses": 1,
+        "bonus": 0.4
+      }
+    },
+    "underdog_bonus": {
+      "red": 0.0,
+      "white": 0.0
+    },
+    "comeback_multiplier": {
+      "red": 1.4,
+      "white": 1.4
+    },
+    "round_hash": "ca615ffb"
+  },
+  "history": {
+    "round": 2,
+    "throws": [
+      {
+        "throw_id": 1,
+        "round": 1,
+        "team": "red",
+        "unit": "red_1",
+        "controller": "human",
+        "wind_at_throw": 3.0,
+        "landing_x": 882.1,
+        "landing_y": 578.3,
+        "hit_type": "central_wall",
+        "hit_target": null,
+        "damage_dealt": 0.0,
+        "critical": false,
+        "statuses": [],
+        "knockback": 0,
+        "path": [
+          [
+            310.0,
+            750.0
+          ],
+          [
+            359.6,
+            688.7
+          ],
+          [
+            411.0,
+            637.3
+          ],
+          [
+            464.0,
+            595.6
+          ],
+          [
+            518.7,
+            563.7
+          ],
+          [
+            575.0,
+            541.7
+          ],
+          [
+            633.1,
+            529.4
+          ],
+          [
+            692.8,
+            526.9
+          ],
+          [
+            754.2,
+            534.2
+          ],
+          [
+            817.3,
+            551.4
+          ],
+          [
+            882.1,
+            578.3
+          ]
+        ]
+      },
+      {
+        "throw_id": 2,
+        "round": 1,
+        "team": "white",
+        "unit": "white_1",
+        "controller": "subagent",
+        "wind_at_throw": 3.0,
+        "landing_x": 822.4,
+        "landing_y": 860.0,
+        "hit_type": "ground",
+        "hit_target": null,
+        "damage_dealt": 0.0,
+        "critical": false,
+        "statuses": [],
+        "knockback": 0,
+        "angle": 62.0,
+        "power": 70.0,
+        "path": [
+          [
+            1226.0,
+            742.0
+          ],
+          [
+            1182.1,
+            662.4
+          ],
+          [
+            1140.8,
+            592.6
+          ],
+          [
+            1101.9,
+            532.7
+          ],
+          [
+            1065.6,
+            482.5
+          ],
+          [
+            1031.8,
+            442.1
+          ],
+          [
+            1000.5,
+            411.5
+          ],
+          [
+            971.8,
+            390.8
+          ],
+          [
+            945.5,
+            379.8
+          ],
+          [
+            921.8,
+            378.6
+          ],
+          [
+            900.6,
+            387.2
+          ],
+          [
+            881.9,
+            405.7
+          ],
+          [
+            865.7,
+            433.9
+          ],
+          [
+            852.1,
+            471.9
+          ],
+          [
+            841.0,
+            519.7
+          ],
+          [
+            832.4,
+            577.4
+          ],
+          [
+            826.3,
+            644.8
+          ],
+          [
+            822.7,
+            722.0
+          ],
+          [
+            821.7,
+            809.0
+          ],
+          [
+            822.4,
+            860.0
+          ]
+        ]
+      }
+    ]
+  },
+  "notes": {
+    "notes": "",
+    "chars": 0
+  }
+}

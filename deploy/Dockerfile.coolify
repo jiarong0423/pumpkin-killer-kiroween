@@ -1,0 +1,46 @@
+FROM python:3.12-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache nginx \
+    && mkdir -p /run/nginx /usr/share/nginx/html
+
+COPY deploy/relay/requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+RUN sed '1,/^types {/d;/^}/d' /etc/nginx/mime.types > /etc/nginx/pk_mime_body.types
+COPY deploy/nginx.conf /etc/nginx/http.d/default.conf
+COPY deploy/entrypoint.sh /app/entrypoint.sh
+COPY scripts/pk_relay.py /app/pk_relay.py
+COPY scripts/pk_mcp_http.py /app/scripts/pk_mcp_http.py
+COPY scripts/mcp_stdio_server.py /app/scripts/mcp_stdio_server.py
+COPY scripts/mcp_game_server.py /app/scripts/mcp_game_server.py
+COPY scripts/adaptive_level.py /app/scripts/adaptive_level.py
+COPY scripts/comeback_py.py /app/scripts/comeback_py.py
+COPY scripts/determinism_py.py /app/scripts/determinism_py.py
+COPY scripts/flight_py.py /app/scripts/flight_py.py
+COPY scripts/hit_mask_py.py /app/scripts/hit_mask_py.py
+COPY scripts/round_hash_py.py /app/scripts/round_hash_py.py
+COPY scripts/team_tuning_py.py /app/scripts/team_tuning_py.py
+COPY scripts/weather_py.py /app/scripts/weather_py.py
+COPY scripts/pk_ai_gateway.py /app/scripts/pk_ai_gateway.py
+COPY shared/ /app/shared/
+COPY deploy/relay-config.js /usr/share/nginx/html/relay-config.js
+COPY index.html /usr/share/nginx/html/index.html
+COPY sw.js /usr/share/nginx/html/sw.js
+COPY manifest.webmanifest /usr/share/nginx/html/manifest.webmanifest
+COPY icons/ /usr/share/nginx/html/icons/
+COPY css/ /usr/share/nginx/html/css/
+COPY js/ /usr/share/nginx/html/js/
+COPY assets/ /usr/share/nginx/html/assets/
+COPY shared/ /usr/share/nginx/html/shared/
+# A checkout with mode 0600 files (index.html was one) would make nginx answer 403.
+RUN chmod -R a+rX /usr/share/nginx/html
+
+RUN chmod 755 /app/entrypoint.sh
+
+EXPOSE 80
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD wget -q -O - http://127.0.0.1/relay >/dev/null && wget -q -O - http://127.0.0.1/mcp/health >/dev/null || exit 1
+
+ENTRYPOINT ["/app/entrypoint.sh"]

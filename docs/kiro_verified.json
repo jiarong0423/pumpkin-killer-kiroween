@@ -1,0 +1,193 @@
+{
+  "_note": "Maintained by the MAIN LINE only. One entry per Kiro task the main line has re-checked itself. status: verified | partly | read_only | not_checked. Never copy a Kiro report into this file as evidence.",
+  "53": {
+    "status": "partly",
+    "what": "copied into main; recommendations not applied",
+    "date": "2026-11-09"
+  },
+  "58": {
+    "status": "partly",
+    "what": "P0/P1 fixes re-run with synthetic events and merged; other patches (C3 exit, touch 44 px, HUD fonts, power meter, help text, reset confirm) NOT merged",
+    "date": "2026-11-09"
+  },
+  "64": {
+    "status": "verified",
+    "what": "scripts copied into main; python3 -B scripts/test_ingest_sheets.py OK (re-run 2026-11-10)",
+    "date": "2026-11-10"
+  },
+  "67": {
+    "status": "partly",
+    "what": "js/pose_anim.js test passes in ../pumpkin-killer_kiro67; NOT merged or wired",
+    "date": "2026-11-09"
+  },
+  "70": {
+    "status": "read_only",
+    "what": "screenshot review read; its fixes partly applied (HP number removed later by the owner)",
+    "date": "2026-11-10"
+  },
+  "71": {
+    "status": "verified",
+    "what": "test_ingest_wind_sheets OK (rerun by main line 2026-11-11)",
+    "date": "2026-11-11"
+  },
+  "73": {
+    "status": "read_only",
+    "what": "art pack read; reduced list applied by the main line; no prompt run yet",
+    "date": "2026-11-10"
+  },
+  "74": {
+    "status": "verified",
+    "what": "6 spot checks re-run in code, all true; owner corrections applied in the text",
+    "date": "2026-11-10"
+  },
+  "75": {
+    "status": "verified",
+    "what": "9 spot checks re-run, all true; plan not applied",
+    "date": "2026-11-10"
+  },
+  "76": {
+    "status": "partly",
+    "what": "sections 1,2,3,9,10,12 read; cites spot-checked; OWNER CORRECTIONS and KIRO 76 ANSWERS blocks added; nothing built",
+    "date": "2026-11-10"
+  },
+  "77": {
+    "status": "partly",
+    "what": "table read; corrected by docs/overview/task_breakdown_update_20261110.md; diagram not redrawn",
+    "date": "2026-11-10"
+  },
+  "78": {
+    "status": "partly",
+    "what": "test_daily_log OK; daily-logger.json now exists; docs/daily + PROGRESS_TABLE exist (Kiro 83 claim 'missing' is stale)",
+    "date": "2026-11-11"
+  },
+  "79": {
+    "status": "read_only",
+    "what": "diagnosis matches the main line finding; calibration batch not run",
+    "date": "2026-11-10"
+  },
+  "80": {
+    "status": "verified",
+    "what": "test_mcp_game, test_mcp_stdio, test_constants_sync all pass (rerun 2026-11-11)",
+    "date": "2026-11-11"
+  },
+  "82": {
+    "status": "partly",
+    "what": "test_score_ghost_tests OK; Colab cells B/C never run",
+    "date": "2026-11-11"
+  },
+  "83": {
+    "status": "partly",
+    "what": "evidence file read; counts rerun: logs 14 (not 13), briefs 71 (not 68), kiro_queue/docs/daily/daily-logger now exist (stale), js/physics.js, assets/i18n, task72 outputs still missing; worktrees 67, kiro/* branches 66, origin/main ea39931 confirmed; class_stats wired only 3 refs, scene_layers/i18n not wired",
+    "date": "2026-11-11"
+  },
+  "48": {
+    "status": "verified",
+    "what": "build_fonts.py rebuilt 2026-11-11 (added U+30FB, U+8F09); test_fonts 36 OK; backup docs/audition/backup_fonts_20261111",
+    "date": "2026-11-11"
+  },
+  "08": {
+    "status": "partly",
+    "what": "test_i18n FAILED: assets/i18n/zh-TW.json missing (known); js/i18n.js not loaded by index.html",
+    "date": "2026-11-11"
+  },
+  "85a": {
+    "status": "partly",
+    "what": "R1 files exist; test_check_asset_refs 3 OK and test_export_tree 5 OK rerun by main line 2026-11-11; export dry run on real tree exit 0; checker false positive on directory prefixes (8 of 16 MISSING) sent back as task 85c; --apply not run",
+    "date": "2026-11-11"
+  },
+  "86": {
+    "status": "partly",
+    "what": "privacy_gate.py + test_privacy_gate OK (rerun by main line); without PK_TERMS gate fails closed (exit 1) as designed; not run on ../pk-release; no real terms file yet",
+    "date": "2026-11-15"
+  },
+  "89": {
+    "status": "partly",
+    "what": "clean_checkout.sh bash -n OK; run in user terminal: server 200, 404 count 0, 19 tests passed, failed i18n+fonts; limits: 404 count ignores MISSING refs, git clone sees only committed files (uncommitted fonts/scripts absent)",
+    "date": "2026-11-15"
+  },
+  "88": {
+    "status": "not_checked",
+    "what": "drafts exist in docs/release_drafts; main line path check run 2026-11-15 (see log)",
+    "date": "2026-11-15"
+  },
+  "92": {
+    "status": "partly",
+    "what": "README v2 draft: 105 lines, picture + hook on first screen; main line read the first 14 lines only, full claim review and path check pending",
+    "date": "2026-11-15"
+  },
+  "93": {
+    "status": "verified",
+    "what": "deploy/ (Dockerfile, nginx.conf, README) + scripts/release/smoke_url.py; test_smoke_url 2 tests OK rerun by main line in user terminal (sandbox blocks port bind); docker build not run",
+    "date": "2026-11-15"
+  },
+  "94": {
+    "status": "partly",
+    "what": "css/fonts.css: 3 dangling .woff fallbacks removed (diff 3+/6-); test_fonts and test_preload_links OK; check_asset_refs missing 10 -> 7; audio options doc docs/audio_gap_options_20261115.md not reviewed",
+    "date": "2026-11-15"
+  },
+  "99": {
+    "status": "verified",
+    "what": "js/ultimate_fx.js + test_ultimate_fx 6 tests OK, rerun by main line; wired into index.html by main line (Kiro 113 could not write index.html); browser check: launch and impact presets fire, no script error, HUD not covered",
+    "date": "2026-11-15"
+  },
+  "104": {
+    "status": "verified",
+    "what": "agent levels: test OK; sweep rerun by main line 400 throws/level: 11.2 / 29.2 / 52.2 percent, intervals do not overlap",
+    "date": "2026-11-15"
+  },
+  "105": {
+    "status": "verified",
+    "what": "adaptive level py+js share 12 vectors, tests OK, constants sync OK (rerun by main line); not wired into the page",
+    "date": "2026-11-15"
+  },
+  "100": {
+    "status": "verified",
+    "what": "js/knight_ult.js + test_knight_ult OK rerun; module only, not wired",
+    "date": "2026-11-15"
+  },
+  "108": {
+    "status": "partly",
+    "what": "knight back-and-forth + teammate protection: test_knight_ult OK (rerun); not wired",
+    "date": "2026-11-15"
+  },
+  "110": {
+    "status": "partly",
+    "what": "clean_checkout missing-reference count + --worktree: bash -n ok; test_clean_checkout OK (1 skipped: port bind in sandbox)",
+    "date": "2026-11-15"
+  },
+  "107": {
+    "status": "verified",
+    "what": "test_agent_levels no longer overwrites docs/ai_levels_sweep_20261115.md (cmp before/after identical, rerun by main line); Kiro result file is named kiro_107_result_sonnet.md",
+    "date": "2026-11-15"
+  },
+  "necro_page": {
+    "status": "partly",
+    "what": "necromancer (id reaper) playable in index.html by main line: tab, card, profile hp105 dmg23 (provisional), proj_flame image, AI class list, preload block regenerated; browser check: selectable, no script error, flame projectile fires; ultimate, burn, poses not done",
+    "date": "2026-11-15"
+  },
+  "i18n_map": {
+    "status": "partly",
+    "what": "subagent: 153 strings docs/i18n_mapping_20261115.json + assets/i18n zh-TW/en; test_i18n 15 pass 4 fail (page not wired; expected)",
+    "date": "2026-11-15"
+  },
+  "130": {
+    "status": "partly",
+    "what": "reported done; test_export_tree + test_privacy_gate OK rerun; re-export and gate rerun pending",
+    "date": "2026-11-15"
+  },
+  "131": {
+    "status": "partly",
+    "what": "colab/job_refs.py + test_job_refs OK (rerun); runner syntax ok; Colab run itself not possible locally",
+    "date": "2026-11-15"
+  },
+  "117": {
+    "status": "partly",
+    "what": "ultimate_fx: 10 tests OK (rerun); reaper_triple_slash obsolete (task 133 removes)",
+    "date": "2026-11-15"
+  },
+  "118": {
+    "status": "partly",
+    "what": "class_stats 18 + sim_balance 28 tests OK (rerun); balance table includes both reaper and necromancer rows (stale, rerun after 133)",
+    "date": "2026-11-15"
+  }
+}

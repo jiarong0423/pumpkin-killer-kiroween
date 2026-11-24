@@ -1,0 +1,9 @@
+2026-11-15 ~16:08 (local time), Kiro IDE window "pumpkin-killer" (folder trusted by the owner in Workspace Trust).
+Action: one blank line added at the end of index.html in the IDE editor, then File > Save (done by the main line through the computer-use tools, at the owner's request).
+Result seen on screen (screenshot docs/kiro_evidence/raw/ide_hook_run_20261115.jpg):
+  - The IDE showed "Run Command Hook - Engine tests on index.html save" and asked for approval of: python3 -B scripts/test_mcp_game.py
+  - After the owner-requested approval (clicked Allow) the command output appeared in the IDE and began with:
+    "--- 1. Testing Random Assignment Mode ---" ... "Random Assignment Passed!" ... "--- 2. Testing Central Wall Collision ---" ... "Central Wall Block Passed!"
+  - This is the hook defined in .kiro/hooks/test-engine-on-index-save.kiro.hook (trigger fileEdited on index.html).
+Not shown: the hook defined in .kiro/hooks/pk-checks.json (PostFileSave, writes docs/kiro_evidence/raw/hook_runs.log) did NOT write a line for this save, so the IDE does not seem to load that file.
+Cleanup: the added blank line was removed again from index.html on disk (git diff of index.html is empty after the cleanup).

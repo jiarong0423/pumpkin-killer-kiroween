@@ -1,0 +1,46 @@
+{
+ "jobs": [
+  {
+   "id": "fx_ghost_idle",
+   "tier": "Q3",
+   "ref": "bar",
+   "prompt": "Ignore the reference layout. Draw ONE cute round white ghost with a soft teal glow facing RIGHT, eyes closed peacefully, a tiny closed smile, little arms hanging, floating asleep; fully inside the picture with a wide margin.",
+   "style": "Game sprite, glowing, painterly 2D with soft luminous edges, centred, alone. Flat solid magenta background (#FF00FF), no ground, no text, no watermark."
+  },
+  {
+   "id": "fx_ghost_puff",
+   "tier": "Q3",
+   "ref": "bar",
+   "prompt": "Ignore the reference layout. Draw ONE cute round white ghost with a soft teal glow facing RIGHT, both cheeks puffed out round like balloons, lips pressed tightly shut, eyes squeezed with effort, little arms out; the SAME ghost, fully inside the picture with a wide margin.",
+   "style": "Game sprite, glowing, painterly 2D with soft luminous edges, centred, alone. Flat solid magenta background (#FF00FF), no ground, no text, no watermark."
+  },
+  {
+   "id": "fx_ghost_blow",
+   "tier": "Q3",
+   "ref": "bar",
+   "prompt": "Ignore the reference layout. Draw ONE cute round white ghost with a soft teal glow facing RIGHT, the MOUTH WIDE OPEN in a big round O blowing air out to the right, cheeks relaxed, eyes open and bright, little arms out; the SAME ghost, fully inside the picture with a wide margin.",
+   "style": "Game sprite, glowing, painterly 2D with soft luminous edges, centred, alone. Flat solid magenta background (#FF00FF), no ground, no text, no watermark."
+  },
+  {
+   "id": "fx_ghost_blow_hard",
+   "tier": "Q3",
+   "ref": "bar",
+   "prompt": "Ignore the reference layout. Draw ONE cute round white ghost with a soft teal glow facing RIGHT leaning back, the MOUTH OPENED AS WIDE AS POSSIBLE blowing a hurricane to the right, eyes squinted shut, little arms swept back; the SAME ghost, fully inside the picture with a wide margin.",
+   "style": "Game sprite, glowing, painterly 2D with soft luminous edges, centred, alone. Flat solid magenta background (#FF00FF), no ground, no text, no watermark."
+  },
+  {
+   "id": "fx_wind_swirl",
+   "tier": "Q3",
+   "ref": "bar",
+   "prompt": "Ignore the reference layout. Draw ONE stylised wind gust: three thin curved white and pale-cyan streaks with a small curl at the end, flowing to the RIGHT, soft glow, fully inside the picture with a wide margin.",
+   "style": "Game sprite, glowing, painterly 2D with soft luminous edges, centred, alone. Flat solid magenta background (#FF00FF), no ground, no text, no watermark."
+  },
+  {
+   "id": "fx_feet_chain",
+   "tier": "Q3",
+   "ref": "bar",
+   "prompt": "Ignore the reference layout. Draw ONE pair of heavy dark iron ankle shackles joined by a short slack chain, seen from the side at ground level: two thick rusty iron cuffs with rivets, one on each end, and about four chunky chain links hanging between them in a low curve; slightly glowing cold blue rim light; the whole object horizontal, wide and low, fully inside the picture with a wide empty margin on every side.",
+   "style": "Game sprite, dark-fantasy 2D cartoon, thick clean near-black outlines, thin warm orange outer glow, flat three-tone cel shading, centred, alone. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark."
+  }
+ ]
+}

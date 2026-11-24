@@ -1,0 +1,10 @@
+{
+  "bedrock": {
+    "default": "global.anthropic.claude-haiku-5-5",
+    "allowed": ["global.anthropic.claude-haiku-5-5"]
+  },
+  "gemini": {
+    "default": null,
+    "allowed": []
+  }
+}

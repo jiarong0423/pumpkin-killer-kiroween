@@ -1,0 +1,232 @@
+{
+ "built": "2026-11-23",
+ "events": {
+  "charge": {
+   "fired": 0,
+   "per_match": 0.0
+  },
+  "coin_flip": {
+   "fired": 0,
+   "per_match": 0.0
+  },
+  "dice_rattle": {
+   "fired": 92048,
+   "per_match": 4.6024
+  },
+  "dice_result": {
+   "fired": 92013,
+   "per_match": 4.60065
+  },
+  "flight_cannon": {
+   "fired": 0,
+   "per_match": 0.0
+  },
+  "flight_shield": {
+   "fired": 0,
+   "per_match": 0.0
+  },
+  "flight_shuriken": {
+   "fired": 0,
+   "per_match": 0.0
+  },
+  "flight_spear": {
+   "fired": 0,
+   "per_match": 0.0
+  },
+  "heal": {
+   "fired": 49656,
+   "per_match": 2.4828
+  },
+  "impact_fence": {
+   "fired": 204636,
+   "per_match": 10.2318
+  },
+  "impact_fence_break": {
+   "fired": 13335,
+   "per_match": 0.66675
+  },
+  "impact_flame": {
+   "fired": 37103,
+   "per_match": 1.85515
+  },
+  "impact_ground": {
+   "fired": 491088,
+   "per_match": 24.5544
+  },
+  "impact_ground_heavy": {
+   "fired": 5298,
+   "per_match": 0.2649
+  },
+  "impact_unit": {
+   "fired": 132399,
+   "per_match": 6.61995
+  },
+  "impact_unit_heavy": {
+   "fired": 165163,
+   "per_match": 8.25815
+  },
+  "item_pickup": {
+   "fired": 1031436,
+   "per_match": 51.5718
+  },
+  "ko": {
+   "fired": 16944,
+   "per_match": 0.8472
+  },
+  "low_hp_heartbeat": {
+   "fired": 0,
+   "per_match": 0.0
+  },
+  "move_step": {
+   "fired": 92013,
+   "per_match": 4.60065
+  },
+  "poison_tick": {
+   "fired": 92965,
+   "per_match": 4.64825
+  },
+  "round_end": {
+   "fired": 0,
+   "per_match": 0.0
+  },
+  "round_start": {
+   "fired": 393581,
+   "per_match": 19.67905
+  },
+  "shield_block": {
+   "fired": 7376,
+   "per_match": 0.3688
+  },
+  "shield_place": {
+   "fired": 0,
+   "per_match": 0.0
+  },
+  "throw_axe": {
+   "fired": 102835,
+   "per_match": 5.14175
+  },
+  "throw_bomb": {
+   "fired": 25998,
+   "per_match": 1.2999
+  },
+  "throw_cannon": {
+   "fired": 94473,
+   "per_match": 4.72365
+  },
+  "throw_cross": {
+   "fired": 105635,
+   "per_match": 5.28175
+  },
+  "throw_flame": {
+   "fired": 97011,
+   "per_match": 4.85055
+  },
+  "throw_shield": {
+   "fired": 91037,
+   "per_match": 4.55185
+  },
+  "throw_shuriken": {
+   "fired": 97326,
+   "per_match": 4.8663
+  },
+  "throw_soundwave": {
+   "fired": 96121,
+   "per_match": 4.80605
+  },
+  "throw_spear": {
+   "fired": 98203,
+   "per_match": 4.91015
+  },
+  "ui_click": {
+   "fired": 0,
+   "per_match": 0.0
+  },
+  "ui_hover": {
+   "fired": 0,
+   "per_match": 0.0
+  },
+  "ult_bat": {
+   "fired": 6534,
+   "per_match": 0.3267
+  },
+  "ult_bat_hit": {
+   "fired": 4383,
+   "per_match": 0.21915
+  },
+  "ult_bride": {
+   "fired": 7309,
+   "per_match": 0.36545
+  },
+  "ult_bride_hit": {
+   "fired": 2797,
+   "per_match": 0.13985
+  },
+  "ult_hag": {
+   "fired": 8153,
+   "per_match": 0.40765
+  },
+  "ult_hag_hit": {
+   "fired": 3532,
+   "per_match": 0.1766
+  },
+  "ult_hunchback": {
+   "fired": 7879,
+   "per_match": 0.39395
+  },
+  "ult_hunchback_hit": {
+   "fired": 3698,
+   "per_match": 0.1849
+  },
+  "ult_knight": {
+   "fired": 4598,
+   "per_match": 0.2299
+  },
+  "ult_reaper": {
+   "fired": 7334,
+   "per_match": 0.3667
+  },
+  "ult_reaper_hit": {
+   "fired": 4717,
+   "per_match": 0.23585
+  },
+  "ult_skeleton": {
+   "fired": 7132,
+   "per_match": 0.3566
+  },
+  "ult_skeleton_hit": {
+   "fired": 4237,
+   "per_match": 0.21185
+  },
+  "ult_wizard": {
+   "fired": 6315,
+   "per_match": 0.31575
+  },
+  "ult_wizard_hit": {
+   "fired": 3525,
+   "per_match": 0.17625
+  },
+  "ultimate_ready": {
+   "fired": 0,
+   "per_match": 0.0
+  }
+ },
+ "matches": 20000,
+ "never_fired": [
+  "charge",
+  "coin_flip",
+  "flight_cannon",
+  "flight_shield",
+  "flight_shuriken",
+  "flight_spear",
+  "low_hp_heartbeat",
+  "round_end",
+  "shield_place",
+  "ui_click",
+  "ui_hover",
+  "ultimate_ready"
+ ],
+ "note": "front end only: 20,000 computer-versus-computer page matches on the build after the hp-residue and skill-leak fixes (gap N7); the back end has no per-event tally yet (gap EB-BACK)",
+ "source": "redteam/evidence/audit_page_events_20261122_full_after_fix_merged.json",
+ "source_sha256": "4e5a725c9d400a1270549f6f0e8ff4e2f3bd0bff8b88341092361f9ab8531ff6",
+ "tree_head_when_built": "d859fb06"
+}

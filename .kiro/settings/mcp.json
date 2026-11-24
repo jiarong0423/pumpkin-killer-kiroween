@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "pumpkin-killer": {
+      "command": "python3",
+      "args": ["-B", "scripts/mcp_stdio_server.py", "--seat", "white"],
+      "autoApprove": ["get_public_state", "get_history", "get_notes"],
+      "disabled": false
+    }
+  }
+}

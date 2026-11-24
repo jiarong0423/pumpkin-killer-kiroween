@@ -1,0 +1,155 @@
+{
+  "generated": "2026-11-16",
+  "source": "index.html (hp, damage, weapon) and the main line's reading of the code; scripts/make_roster_json.py",
+  "match_rules": {
+    "mode": "1 v 1 in the page (4 v 4 planned for rooms)",
+    "turn_seconds": 12,
+    "wind_range": [
+      -4,
+      4
+    ],
+    "wind_acceleration": {
+      "headwind_px_s2_per_unit": 84,
+      "tailwind_px_s2_per_unit": 56
+    },
+    "weather": "rain x0.9 attack, storm x0.9 attack and +1.5 wind, snow x0.5 movement, fog and clear no change (js/weather.js), seeded by match seed and round",
+    "energy": "each successful throw adds 1 pip, 3 pips arm the ultimate, at most 2 ultimates per match, ultimate damage is capped at 1.5 x the normal hit on one unit (the bride and the hunchback exceed it in their own ways)",
+    "head_shot": "crit multiplier and a stun on the top quarter of the body near the middle",
+    "fence": "central wall, 8 damage per hit"
+  },
+  "heroes": [
+    {
+      "id": "skeleton",
+      "name": "Skeleton Spearman",
+      "hp": 150.0,
+      "damage": 22.0,
+      "weapon": "proj_spear",
+      "normal_attack": "Javelin, bleeds (2 per round start, 2 rounds), frost curse on hit (target attacks 15 percent weaker for its next 2 throws: the code multiplies by 0.85)",
+      "ultimate": "Triple javelin: each carries 1.5 x normal / 3, +5 percent per earlier hit, the third of three is a head crit",
+      "ultimate_wired_in_page": true,
+      "special": "Head shots crit",
+      "provisional": [],
+      "art": "complete",
+      "hits_to_kill_the_average_enemy": 7.0
+    },
+    {
+      "id": "wizard",
+      "name": "Pumpkin Wizard",
+      "hp": 113.0,
+      "damage": 30.0,
+      "weapon": "cannonball",
+      "normal_attack": "Cannonball, poison on hit (2 rounds)",
+      "ultimate": "Big pumpkin blast: 1.5 x normal splash within 234 px of the landing point, 13 flames burn",
+      "ultimate_wired_in_page": true,
+      "special": "Lobbed shell with splash ultimate; damage 24 is the same as the skeleton (the bride 25 and the knight total 30 are higher)",
+      "provisional": [],
+      "art": "complete (face-locked frames)",
+      "hits_to_kill_the_average_enemy": 5.1
+    },
+    {
+      "id": "bat",
+      "name": "Bat-cat Assassin",
+      "hp": 143.0,
+      "damage": 24.0,
+      "weapon": "proj_shuriken",
+      "normal_attack": "One shuriken, slows the target's next move",
+      "ultimate": "Shuriken rain: 5 shurikens, each 1.5 x normal / 5",
+      "ultimate_wired_in_page": true,
+      "special": "Fast, light",
+      "provisional": [],
+      "art": "complete",
+      "hits_to_kill_the_average_enemy": 6.4
+    },
+    {
+      "id": "knight",
+      "name": "Pumpkin Guard",
+      "hp": 210.0,
+      "damage": 23.0,
+      "weapon": "proj_shield",
+      "normal_attack": "Thrown small shield bounces 1 to 6 times (die), total damage shared",
+      "ultimate": "Hidden shield points (js/knight_ult.js): up to 3 hidden blocks (A, B, C) marked on remembered enemy paths while defending, each stops one of the next enemy throws that crosses it; wired in the page",
+      "ultimate_wired_in_page": true,
+      "special": "Floating shield (coffin) over its own head on a slight arc: can give up the attack to place it",
+      "provisional": [
+        "dmg 30 is the TOTAL over the bounces"
+      ],
+      "art": "complete (no-shield idle, throw frames)",
+      "hits_to_kill_the_average_enemy": 6.7
+    },
+    {
+      "id": "reaper",
+      "name": "Necromancer",
+      "hp": 143.0,
+      "damage": 22.0,
+      "weapon": "proj_flame",
+      "normal_attack": "Purple flame, flat quick trajectory. The planned burn status (2 per round for 3 rounds) is NOT implemented in the page: the flame deals its direct damage only",
+      "ultimate": "Soul-fire volley: 3 flames 11.5 each, 0.15 s apart, burn once",
+      "ultimate_wired_in_page": true,
+      "special": "Three circling ghost fires are its energy pips",
+      "provisional": [
+        "hp 105 dmg 23 working values"
+      ],
+      "art": "complete (idle2, charge2, ultimate point)",
+      "hits_to_kill_the_average_enemy": 7.0
+    },
+    {
+      "id": "bride",
+      "name": "Ghost Bride",
+      "hp": 135.0,
+      "damage": 28.0,
+      "weapon": "proj_soundwave",
+      "normal_attack": "Sound wave 105 px half width, hits only the aimed unit, stepped falloff 100/75/50 percent at 40/75/105 px, counts where it lands, poison on hit",
+      "ultimate": "Bat swarm: a hit inside 40 px calls a swarm on every enemy for 25 x 1.3 = 32.5, shield cannot stop it (1v1 total 57.5 at full falloff)",
+      "ultimate_wired_in_page": true,
+      "special": "Aim precision matters more than for any other hero",
+      "provisional": [
+        "band widths 40/75/105 invented"
+      ],
+      "art": "windup, late-charge (old wide-mouth frame), release, hit; expression change is small",
+      "hits_to_kill_the_average_enemy": 5.5
+    },
+    {
+      "id": "hunchback",
+      "name": "Bell-tower Hunchback",
+      "hp": 173.0,
+      "damage": 21.0,
+      "weapon": "proj_axe",
+      "normal_attack": "Giant spinning axe, bleeds, knockback 50 px on a surviving direct hit (kept inside its zone)",
+      "ultimate": "Boomerang axe: pierces every unit on the way out (21 each, shields do not stop it), returns to the first unit hit for 31.5 only if the outbound pass hit someone (1v1 total 52.5)",
+      "ultimate_wired_in_page": true,
+      "special": "Highest HP of the roster except the knight",
+      "provisional": [
+        "boomerang return speed 1400 invented",
+        "knockback 50 px"
+      ],
+      "art": "windup and hit done; release uses the empty-handed stance (a clean throw frame is still missing)",
+      "hits_to_kill_the_average_enemy": 7.3
+    },
+    {
+      "id": "hag",
+      "name": "Ghost Nun",
+      "hp": 158.0,
+      "damage": 24.0,
+      "weapon": "proj_cross",
+      "normal_attack": "Spinning silver cross wrapped in black smoke, no status",
+      "ultimate": "Silver cross strike: two contacts at 0.5 x normal each (11 + 11 = 22 total, provisional), one touched enemy gets an electric stun (next turn shortened to 7 s)",
+      "ultimate_wired_in_page": true,
+      "special": "HP and damage are PROVISIONAL guesses of the main line (the owner gave no numbers)",
+      "provisional": [
+        "hp",
+        "dmg",
+        "ultimate multiplier 0.5"
+      ],
+      "art": "empty-handed idle, idle2, windup, late charge, release, hit; silver cross is a separate picture",
+      "hits_to_kill_the_average_enemy": 6.4
+    }
+  ],
+  "average_hp": 153.1,
+  "known_gaps": [
+    "necromancer burn status not implemented",
+    "reaper hit box is 50 px wide, everyone else 70",
+    "hunchback clean release frame",
+    "class_stats.js rows for bride, hunchback, reaper are older numbers and the balance simulator has no ghost nun",
+    "weather is not in the MCP round hash yet"
+  ]
+}

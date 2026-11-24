@@ -1,0 +1,9 @@
+# Kiro task 108 — knight points: back-and-forth placement and teammate protection (spec requirements 21 and 22)
+
+The IDE session updated `.kiro/specs/ultimates-v2/` on 2026-11-15 with the owner's clarification: the shield knight's ultimate is a predictive three-turn defense; the three points may be placed back and forth (not monotonic); a point blocks an enemy attack that would hit a TEAMMATE if the attack's first projectile passes through the point's zone; the check uses the attack's intended target; most useful in multiplayer.
+
+Read: `.kiro/specs/ultimates-v2/requirements.md` (requirements 10 to 22 and decision 7), `design.md` (the section on `place(pathId, s)` and `answer({ projectilePath, targetId })`), `tasks.md` (task 4), `js/knight_ult.js`, `scripts/test_knight_ult.js`. Do not edit `index.html`.
+
+Do: extend `js/knight_ult.js` so it follows the updated spec exactly (`place(pathId, s)` with the path and position in range; points answer in placement order A, B, C; `answer({ projectilePath, targetId })` takes a `teamIds` list given at creation and blocks when the projectile path crosses the oldest unused point's zone and the target is the knight or a teammate; attacks aimed at other teams are never blocked; a point answers once; two points may share a position). Add named tests for requirements 21 and 22 ("placement allows back-and-forth", "point protects a teammate", "attack aimed at another team is not blocked") and keep every earlier test passing, including the 300-seed property test (extend its shadow model for the new rules). Pure code: no `Math.random`, no `Date`, no DOM.
+
+Run `node scripts/test_knight_ult.js` and `node scripts/test_ultimate.js` and paste the last lines. Result file exactly `docs/kiro_108_result_gpt-5.6-terra.md` (max 20 lines: files, commands with last output lines, what you did not run). Touch only `js/knight_ult.js`, `scripts/test_knight_ult.js` and the result file. No network, no git.

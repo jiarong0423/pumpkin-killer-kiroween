@@ -1,0 +1,15 @@
+# Kiro task 77 — architecture diagram first, then the task split (Sonnet = systems; main line assigns from it)
+
+**READ FIRST: docs/owner_decisions_20261110_agents_headless.md (decided by the owner today: every player brings their own sub-agent, the game is headless in principle, everything modular and maintainable). Your plan must be built on these; where an earlier instruction in this brief conflicts, the decisions file wins.**
+
+
+Owner 2026-11-10: "have him first plan out a complete SVG or Mermaid architecture diagram; you assign, and they split the tasks themselves." So you draw the WHOLE-PROJECT architecture and break it into assignable tasks. Documentation only, no game art, no code or config edits.
+
+Read: docs/asset_inventory.json (modules with status, folders with counts, open art), (not published), docs/ROLES.md, docs/kiro_task_73.md (art pack, Terra, running), 74 (flow and systems, Sonnet, running), 75 (MCP plan, Sonnet, running), 76 (4v4 plan, Sonnet, running), (not published) (decided rules), .kiro/specs/ (names only), index.html structure (read only: top-level sections, main loop, draw order).
+
+Deliver in docs/overview/ (create the folder files only):
+1. architecture.mmd: ONE Mermaid flowchart of the real architecture: browser game (index.html core loop, physics, AI, HUD/dock, particles js, audio js, class_stats), data (constants, class stats, i18n), tools (scripts: kiro_route, ingest, similarity, snapshot server, MCP game server), art pipeline (Colab, image2, keying, assets), agents (main line, Kiro Sonnet, Kiro Terra, subagents, MCP opponent), the 4v4 seat/controller layer (planned), and the test layer. Use classDef colours by status: done, built_unseen, in_progress, planned, blocked_on_owner (same words as asset_inventory.json). Keep it readable (max 60 nodes, subgraphs).
+2. pumpkin_killer_architecture.svg: the same diagram as ONE self-contained SVG (no external fonts or images, 1800x1200 viewBox, Traditional Chinese labels, dark background, legend of the status colours). Plain boxes, arrows and text only.
+3. task_breakdown.md (max 200 lines): a work breakdown table, one row per task, 40 rows at most: `id | task | module (node in the diagram) | owner role (SONNET-flow | TERRA-art | COLAB | IMAGE2 | MAIN-integrate | OWNER-decides) | depends on | size S/M/L | done-when (a check the main line can run)`. Cover: 4v4 build steps (follow the plan structure in task 76: units array with aliases, active-unit pointer, collisions, HUD, AI, seats), overlap damage, splash range, particle budget, MCP opponent steps, the six art gaps, the new classes becoming playable, ultimates, sounds, the wind ghost and chain art, tests and balance. Put a column or section "can run in parallel" grouping them into waves, each wave at most 3 tasks at a time (the machine has 16 GB and a 6 terminal-tab limit).
+4. Mark clearly which rows depend on outputs of tasks 73 to 76 that are not finished yet; do not invent their contents, only reference them.
+Do not claim anything was run. Plain English plus the Chinese module names.

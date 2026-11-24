@@ -1,0 +1,58 @@
+{
+ "jobs": [
+  {
+   "id": "calib_ghost_a_text_control",
+   "tier": "Q3",
+   "ref": "bar",
+   "refs": ["bar"],
+   "prompt": "Ignore the reference layout. Draw ONE cute round white wind ghost facing RIGHT, asleep with closed eyes, a tiny closed smile, little arms hanging, floating, fully inside the picture with a wide margin.",
+   "style": "Game sprite, glowing, painterly 2D with soft luminous edges, centred, alone. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, 3D render, plastic shine, thin line art, text, letters, watermark, ground, cast shadow, extra character"
+  },
+  {
+   "id": "calib_ghost_b_style_only",
+   "tier": "Q3",
+   "ref": "bar",
+   "refs": ["style_skeleton_idle1"],
+   "prompt": "Use the sole reference for art style, not character identity. Draw ONE cute round white wind ghost facing RIGHT, asleep with closed eyes, a tiny closed smile, little arms hanging, floating, fully inside the picture with a wide margin.",
+   "style": "Dark-fantasy 2D cartoon game art. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush or realistic material rendering. Faces, if present: chibi, large expressive eyes, simple mouth, stable proportions; change only expression. Isolated sprite: solid #FF00FF background, no ground or cast shadow, 10–12% margin. Do not use photorealism, 3D/plastic, painterly gradients, thin linework, text, watermarks, extra figures, or magenta/pink inside the subject.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, magenta or pink inside the subject"
+  },
+  {
+   "id": "calib_ghost_c_style_identity",
+   "tier": "Q3",
+   "ref": "bar",
+   "refs": ["style_skeleton_idle1", "identity_ghost_lantern"],
+   "prompt": "Use the first reference only for art style. Use the upper ghost in the second reference as identity. Draw that same cute round white wind ghost facing RIGHT, asleep with closed eyes, a tiny closed smile, little arms hanging, floating. Do NOT draw the lantern, rope, chain, or any other prop. Keep a wide margin.",
+   "style": "Dark-fantasy 2D cartoon game art. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush or realistic material rendering. Faces, if present: chibi, large expressive eyes, simple mouth, stable proportions; change only expression. Isolated sprite: solid #FF00FF background, no ground or cast shadow, 10–12% margin. Do not use photorealism, 3D/plastic, painterly gradients, thin linework, text, watermarks, extra figures, or magenta/pink inside the subject.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, lantern, rope, chain, magenta or pink inside the subject"
+  },
+  {
+   "id": "calib_pose_skeleton_charge1",
+   "tier": "Q3",
+   "ref": "skeleton",
+   "refs": ["identity_skeleton_idle1"],
+   "prompt": "Use this sole reference for the exact skeleton identity and style. STRICT SIDE VIEW FACING LEFT. Charge step 1 of 3: the same spear is just starting to pull back in the same hand, body begins to lean back, knees bend slightly, focused face. EXACT same head, cyan eye flames, bones, size, proportions, and feet baseline. One full-body character only, everything inside the picture with a wide margin. No extra limbs or weapon.",
+   "style": "Dark-fantasy 2D cartoon game art. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush or realistic material rendering. Faces, if present: chibi, large expressive eyes, simple mouth, stable proportions; change only expression. Isolated sprite: solid #FF00FF background, no ground or cast shadow, 10–12% margin. Do not use photorealism, 3D/plastic, painterly gradients, thin linework, text, watermarks, extra figures, or magenta/pink inside the subject.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, extra limb, magenta or pink inside the subject"
+  },
+  {
+   "id": "calib_chain_frame1",
+   "tier": "Q3",
+   "ref": "bar",
+   "refs": ["style_skeleton_idle1", "identity_ghost_lantern"],
+   "prompt": "Use the first reference only for art style. Use only the dark iron chain material from the second reference. Draw ONE short slack chain of five chunky dark iron links, horizontal, seen from the side, with the centre links hanging slightly lower. Do NOT draw the ghost, lantern, rope, hand, or candle. Keep the entire chain inside the picture with a wide margin.",
+   "style": "Dark-fantasy 2D cartoon game art. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush or realistic material rendering. Faces, if present: chibi, large expressive eyes, simple mouth, stable proportions; change only expression. Isolated sprite: solid #FF00FF background, no ground or cast shadow, 10–12% margin. Do not use photorealism, 3D/plastic, painterly gradients, thin linework, text, watermarks, extra figures, or magenta/pink inside the subject.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, ghost, lantern, rope, hand, candle, extra object, magenta or pink inside the subject"
+  },
+  {
+   "id": "calib_chain_frame2",
+   "tier": "Q3",
+   "ref": "bar",
+   "refs": ["style_skeleton_idle1", "identity_calib_chain_frame1"],
+   "prompt": "Use the first reference only for art style. Use the second reference as the EXACT same chain from frame 1. Draw the next continuous moment: keep exactly five links, the same metal, outline, colour, size, and horizontal placement; lift the left two links a little and let the centre sag a little to the right. Do NOT draw any ghost, lantern, rope, hand, or other object. Keep a wide margin.",
+   "style": "Dark-fantasy 2D cartoon game art. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush or realistic material rendering. Faces, if present: chibi, large expressive eyes, simple mouth, stable proportions; change only expression. Isolated sprite: solid #FF00FF background, no ground or cast shadow, 10–12% margin. Do not use photorealism, 3D/plastic, painterly gradients, thin linework, text, watermarks, extra figures, or magenta/pink inside the subject.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, ghost, lantern, rope, hand, extra object, extra link, missing link, magenta or pink inside the subject"
+  }
+ ]
+}

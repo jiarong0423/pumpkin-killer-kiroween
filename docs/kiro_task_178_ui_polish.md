@@ -1,0 +1,16 @@
+# Kiro task 178 — implement the `ui-polish` spec in `index.html`, the CSS and the language files (Kiro writes the page code; the main line only verifies)
+
+Owner 2026-11-16: the UI work goes to Kiro with specs and steering, and Claude only reviews. LOCK: for the whole run you are the only writer of `index.html`, `css/*.css` and `assets/i18n/*.json`; the main line will not touch them until your result file exists. Never push, deploy, or write outside the repository.
+
+Read first, in this order: `.kiro/steering/kiro_assignment.md`, `.kiro/steering/ui_aesthetics.md`, `.kiro/specs/ui-polish/requirements.md`, `design.md`, `tasks.md`, `docs/i18n_mapping_table_20261116.md` (section 3, the English budgets), `(not published)` (rows 2, 11, 12, 14, 15), `docs/PLAYTEST_REVIEW_20261116.md`, `docs/playtest_round3_20261116.md`.
+
+Do the eight tasks of `.kiro/specs/ui-polish/tasks.md` in order, saving after each, tick the box in `tasks.md` when its check passes. Rules:
+1. Keep every existing test green: run `for f in scripts/test_*.js; do node "$f"; done` and the Python tests that need no socket after each task, and paste the last line of each failing one. The tests pin some lines of `index.html` by regex (`scripts/test_sim_balance.js`): do not change those lines (hit box, wind reroll, `p.hitCool = 0.3`, `WIZARD_MUZZLE`, the knight hop line); if a task needs one changed, stop and say which.
+2. The avatar files are `(not published)` (cropped from our portraits; a regenerated set is coming from Colab with the same names, so only ever reference these paths).
+3. Do not change game rules, numbers, hero stats or the physics; this task is presentation only.
+4. Plates (R3): the existing top plates are drawn on the canvas (search `top_plate` and `plate`); replace their drawing code with `drawPlate(side)`; the status chips read the unit fields `bleed`, `poison`, `burn`, `weak` (frost), `slow`, `stun`. Do not draw chips above heads.
+5. Strings: new texts go into BOTH `assets/i18n/zh-TW.json` and `assets/i18n/en.json` with the same keys and are referenced by a literal key in `index.html` (the i18n test requires every key to be used and every used key to exist). After new Chinese characters run `python3 -B scripts/build_fonts.py` and `python3 -B scripts/test_fonts.py`; then `python3 -B scripts/make_sw_precache.py --apply`.
+6. Write `scripts/test_ui_polish.js` (task 8) so it fails if a requirement is broken: read `index.html` as text, check the helpers exist and are used by the HP bar and the text drawing, check the CSS rules for touch targets and the grid, check the card template contains the avatar, role, bars and chips, check the numbers rendered for each hero equal `HERO_PROFILES` (evaluate the `HERO_PROFILES` block in `vm`).
+7. Browser check: you cannot open a browser; list in the result file what the main line must look at (900 x 700 selection screen, 393 x 852 portrait rotate hint, 852 x 393 landscape plates).
+
+Result file: `docs/kiro_178_result.md` with: the tasks ticked, files changed (function names, not line numbers), the commands run and their last lines, the items for the main line to verify. Touch only `index.html`, `css/*.css`, `assets/i18n/*.json`, `assets/fonts/*` (rebuilt), `sw.js` (via the script), `scripts/test_ui_polish.js`, `.kiro/specs/ui-polish/tasks.md`, `docs/kiro_178_result.md`.

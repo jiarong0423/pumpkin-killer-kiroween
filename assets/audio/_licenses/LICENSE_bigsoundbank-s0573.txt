@@ -1,0 +1,8 @@
+Source: https://bigsoundbank.com/whoosh-2-s0573.html
+Work: Whoosh #2 (Joseph Sardin)
+Checked and downloaded: 2026-11-09
+License wording on the page: "CC0 license (public-domain equivalent)"; site-wide https://bigsoundbank.com/licenses.html: "Creative Commons CC0 1.0 Universal", credit optional
+Original file: the site MP3 (UPLOAD/mp3), converted by the reviewer to stereo Ogg Vorbis with ffmpeg (trim, fades, loudness -18/-20 LUFS)
+Saved in the game as: assets/audio/sfx/whoosh_spear.ogg
+sha256 of the saved file: 65e63dcc9be1045603f500fdf794401039c07a057138fc9c3312ec5a0a7d4305
+Not heard by the reviewer.

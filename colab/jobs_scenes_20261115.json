@@ -1,0 +1,44 @@
+{
+  "refs": {
+    "style_concept_mockup": "docs/ref/concept_mockup.png",
+    "identity_bg_graveyard": "assets/env/bg_graveyard.png"
+  },
+  "jobs": [
+    {
+      "id": "bg_ruined_church",
+      "tier": "Q3",
+      "ref": "style_concept_mockup",
+      "refs": ["style_concept_mockup", "identity_bg_graveyard"],
+      "prompt": "Use the first reference for the full game scene style, palette, canvas hierarchy, and clear battlefield horizon. Use the second reference only for ground-band placement, horizon height, open middle battlefield, and top and bottom UI space. Draw ONE original roofless Gothic chapel night battlefield: a broken rose window lit by moonlight, fallen beams, cracked pews, and a toppled statue arranged at the far sides. Add cold cyan ghost-fire wisps, only a few warm orange candles, and one pumpkin lantern near the centre-left without obstructing the open battlefield. Make the mood sacred but wrong, with deep blue-violet, restrained orange, and cyan. Keep the middle battlefield band clear for units and projectiles. Do not copy graveyard landmarks or any real church, school, film, or game location.",
+      "style": "Dark-fantasy 2D cartoon game background with thick soft near-black contours, flat three-tone cel shading, deep blue-violet night, sparse warm orange candlelight and cool cyan spectral accents. Wide 16:9 battlefield composition. No photorealism, 3D/plastic rendering, painterly gradients, text, letters, logos, watermarks, characters, weapons, UI, or empty magenta background.",
+      "negative": "realistic, photo, real church, real location, copied architecture, film location, game location, brand, logo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, text, letters, numbers, readable symbols, watermark, character, character silhouette, weapon, UI, magenta background, blocked middle battlefield, obstacles in the ground band"
+    },
+    {
+      "id": "bg_abandoned_school",
+      "tier": "Q3",
+      "ref": "style_concept_mockup",
+      "refs": ["style_concept_mockup", "identity_bg_graveyard"],
+      "prompt": "Use the first reference for the full game scene style, palette, canvas hierarchy, and clear battlefield horizon. Use the second reference only for ground-band placement, horizon height, open middle battlefield, and top and bottom UI space. Draw ONE original derelict two-storey school night battlefield: broken windows with a faint orange glow, a stuck clock face with no readable digits, an overgrown schoolyard, rusted swings, and a collapsed fence arranged at the far sides. Put one pumpkin lantern on the steps and cold cyan ghost-fire wisps in the distance. Keep the middle battlefield band clear for units and projectiles. Do not copy graveyard landmarks or any real school, film, or game location. No text, signs, letters, or readable marks anywhere.",
+      "style": "Dark-fantasy 2D cartoon game background with thick soft near-black contours, flat three-tone cel shading, deep blue-violet night, sparse warm orange candlelight and cool cyan spectral accents. Wide 16:9 battlefield composition. No photorealism, 3D/plastic rendering, painterly gradients, text, letters, logos, watermarks, characters, weapons, UI, or empty magenta background.",
+      "negative": "realistic, photo, real school, real location, copied architecture, film location, game location, brand, logo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, text, letters, numbers, readable clock digits, signs, watermark, character, character silhouette, weapon, UI, magenta background, blocked middle battlefield, obstacles in the ground band"
+    },
+    {
+      "id": "bg_ruined_church_b",
+      "tier": "Q3",
+      "ref": "style_concept_mockup",
+      "refs": ["style_concept_mockup", "identity_bg_graveyard"],
+      "prompt": "Use the first reference for the full game scene style, palette, canvas hierarchy, and clear battlefield horizon. Use the second reference only for ground-band placement, horizon height, open middle battlefield, and top and bottom UI space. Draw ONE original interior ruined-church battlefield at night: a roofless nave view with a long central aisle, broken stained-glass windows casting moonlit colour on the distant walls, cracked pews, fallen beams, and a toppled statue kept at the far sides. Add cold cyan ghost-fire wisps, only a few warm orange candles, and one pumpkin lantern near the centre-left without obstructing the open battlefield. Keep the middle battlefield band clear for units and projectiles. Do not copy graveyard landmarks or any real church, school, film, or game location.",
+      "style": "Dark-fantasy 2D cartoon game background with thick soft near-black contours, flat three-tone cel shading, deep blue-violet night, sparse warm orange candlelight and cool cyan spectral accents. Wide 16:9 battlefield composition. No photorealism, 3D/plastic rendering, painterly gradients, text, letters, logos, watermarks, characters, weapons, UI, or empty magenta background.",
+      "negative": "realistic, photo, real church, real location, copied architecture, film location, game location, brand, logo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, text, letters, numbers, readable stained-glass symbols, watermark, character, character silhouette, weapon, UI, magenta background, blocked middle battlefield, obstacles in the ground band"
+    },
+    {
+      "id": "bg_abandoned_school_b",
+      "tier": "Q3",
+      "ref": "style_concept_mockup",
+      "refs": ["style_concept_mockup", "identity_bg_graveyard"],
+      "prompt": "Use the first reference for the full game scene style, palette, canvas hierarchy, and clear battlefield horizon. Use the second reference only for ground-band placement, horizon height, open middle battlefield, and top and bottom UI space. Draw ONE original abandoned-school interior battlefield at night: a classroom corridor with a broken blackboard that remains completely blank, shattered windows with a faint orange glow, peeling walls, classroom doors without labels, scattered desks pushed to the far sides, a pumpkin lantern on distant steps, and cold cyan ghost-fire wisps. Keep the middle battlefield band clear for units and projectiles. Do not copy graveyard landmarks or any real school, church, film, or game location. No text, signs, letters, numbers, or readable marks anywhere.",
+      "style": "Dark-fantasy 2D cartoon game background with thick soft near-black contours, flat three-tone cel shading, deep blue-violet night, sparse warm orange candlelight and cool cyan spectral accents. Wide 16:9 battlefield composition. No photorealism, 3D/plastic rendering, painterly gradients, text, letters, logos, watermarks, characters, weapons, UI, or empty magenta background.",
+      "negative": "realistic, photo, real school, real location, copied architecture, film location, game location, brand, logo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, text, letters, numbers, signs, readable blackboard writing, watermark, character, character silhouette, weapon, UI, magenta background, blocked middle battlefield, obstacles in the ground band"
+    }
+  ]
+}

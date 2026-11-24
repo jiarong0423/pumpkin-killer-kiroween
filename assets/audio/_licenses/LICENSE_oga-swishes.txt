@@ -1,0 +1,9 @@
+Source: https://opengameart.org/content/swishes-sound-pack
+Work: Swishes Sound Pack
+Author shown on the page: qubodup
+Checked and downloaded: 2026-11-09
+License wording on the page that day: License(s): CC0
+Chosen by the owner from the audition page (2026-11-09). Converted by the reviewer where needed (ffmpeg: trim, fades, loudness).
+Not heard by the reviewer.
+File swish-13.wav -> assets/audio/sfx/swish_throw.ogg  sha256 902cd5ddcbcbc0a79a3aafbb1f990f9002c6c4cb7bcf01c2b1029566a9d02b18
+Derived file swish_shield.ogg: pitch-shifted copy of the chosen file made by the reviewer (ffmpeg asetrate), sha256 b7e34d94bb62763d016ab84b79cf5a0f1b62520bea9fdf5b20aa7cfc55ecaac2

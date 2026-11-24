@@ -1,0 +1,72 @@
+{
+  "name": "tester",
+  "description": "Pumpkin Killer implementer: reads and writes project files, runs only the project test scripts, no git, no network.",
+  "prompt": "You are a careful implementer for the Pumpkin Killer project. Follow the task brief exactly. Run shell commands exactly as the brief writes them, from the current directory, with no cd and no extra prefix. If a command is refused by the system, record that it was refused; the permission system decides, not you.",
+  "tools": [
+    "read",
+    "grep",
+    "glob",
+    "code",
+    "write",
+    "shell"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "match": [
+          "./**"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "./**"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "python3 -B scripts/test_*.py",
+          "python3 -B scripts/test_*.py *",
+          "node scripts/test_*.js",
+          "node scripts/test_*.js *",
+          "cd *",
+          "pwd",
+          "node scripts/sim_balance.js",
+          "node scripts/sim_balance.js *",
+          "python3 -B -c *",
+          "python3 -I -c *",
+          "grep *",
+          "cat *",
+          "head *",
+          "tail *",
+          "sed -n *",
+          "shasum *",
+          "sort *",
+          "diff *",
+          "cmp *",
+          "stat *",
+          "mmdc *",
+          "npx --no-install *"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git *",
+          "curl *",
+          "wget *",
+          "rm *",
+          "sudo *",
+          "ssh *",
+          "scp *"
+        ],
+        "effect": "deny"
+      }
+    ]
+  }
+}

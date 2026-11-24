@@ -1,0 +1,13 @@
+{
+  "fps": 12,
+  "states": {
+    "idle": {"frames": 12, "loop": true},
+    "move_forward": {"frames": 12, "loop": true},
+    "move_back": {"frames": 12, "loop": true},
+    "arm_charge": {"frames": 10, "loop": false},
+    "arm_throw": {"frames": 10, "loop": false},
+    "hit_react": {"frames": 10, "loop": false},
+    "defend": {"frames": 8, "loop": false},
+    "die": {"frames": 14, "loop": false}
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "source": "Gemini analysis of the concept mockup, pasted by the owner on 2026-11-01. Only the style block and unit_wizard are stored here for the first FLUX test.",
+  "style": {
+    "style_prompt_suffix": "2D side-scrolling cartoon game art style, bold dark outlines, vibrant saturated colors, dramatic rim lighting with vivid orange fire glow and eerie cyan spectral ambient light, stylized hand-painted digital illustration, high contrast, clean asset cutout look."
+  },
+  "unit_wizard": {
+    "body": {
+      "prompt": "Full body character concept of a spooky pumpkin wizard, facing right, side profile standing pose, wearing a carved glowing jack-o'-lantern head with blazing orange flame inside, crooked dark purple wizard hat, flowing indigo and violet sorcerer robe with gold trim, tattered hem, completely missing both arms and cannon weapon, bold outlines, isolated on solid pure white background.",
+      "size": "512x512"
+    },
+    "arm_weapon": {
+      "prompt": "Single isolated character arm asset for 2D game, stylized right arm wearing purple wizard sleeve carrying a heavy antique steampunk bronze hand cannon on shoulder, cannon barrel pointing horizontally to the right, glowing rune engravings on copper metal, clear circular shoulder joint pivot on the left end, isolated on solid pure white background.",
+      "size": "512x256",
+      "arm_pivot": [55, 135]
+    },
+    "anchor_points": {
+      "feet": [256, 480],
+      "muzzle_or_hand": [460, 140],
+      "arm_pivot": [240, 245]
+    }
+  }
+}

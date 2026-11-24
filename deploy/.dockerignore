@@ -1,0 +1,13 @@
+# The documented build uses the repository root as its context.
+# Dockerfile COPY directives are the allowlist for the resulting image.
+.git/
+.kiro/
+.claude/
+docs/
+colab/
+build/
+data/
+node_modules/
+__pycache__/
+*.pyc
+*.log

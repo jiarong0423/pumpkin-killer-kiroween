@@ -1,0 +1,7 @@
+# Kiro 141 task 1 result (stage 1 text), 2026-11-15
+Files: `(not published)` (refreshed, 8 topics, 52 lines), `CREDITS.md` (new disclosure section), `DEVPOST_TEXT.md` (new, 62 lines), `scripts/release/check_draft_paths.py`, `scripts/test_check_draft_paths.py`. `index.html` untouched.
+Command 1: `python3 -B scripts/test_check_draft_paths.py` -> `Ran 8 tests in 0.455s` / `OK` / `OK` (exit 0).
+Command 2: `python3 -B scripts/release/check_draft_paths.py (not published) (not published) (not published)` -> `SUMMARY checked=202 missing=0 excluded=0` (exit 0). README draft: `SUMMARY checked=37 missing=0 excluded=0`.
+Found: the export manifest EXCLUDES `assets/i18n/` (rule `assets/`, not referenced by a literal path), so the English strings would not ship and the page would show keys. Main line: add `{"match": "assets/i18n/", "decision": "INCLUDE"}` before the `assets/` rules (item 7 of `docs/i18n_wiring_plan_20261115.md`). I removed the backticks around those paths in the drafts so no dead link remains; restore them after the rule exists.
+Also found and fixed in the drafts: a cited plan file that the export excludes; two credits lines citing excluded folders. Stale since the last refresh: README draft still says four heroes and no English interface.
+Not run: git (first-commit date 2026-10-31 is quoted from the work queue, not re-read), a browser, the English screens, `kiro_verified.json` edits.

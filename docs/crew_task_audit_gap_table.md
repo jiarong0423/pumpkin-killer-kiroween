@@ -1,0 +1,5 @@
+Project folder: <home>/Developer/pumpkin-killer (local git repo; never push, never deploy, never commit, never read secret values, never edit anything except the one result file named below; other agents are editing code in this folder right now, so do not run test suites that write files).
+
+Task (read-only audit): open `docs/OFFICIAL_VS_GAP_20261116.md`. For EVERY row of table A and table B (the gap table), check its "evidence" or "current state" cell against the repository with `ls`, `grep`, `git log`, `git status`, `.kiro/` files and the `docs/kiro_*_result.md` and `docs/audit_*_result.md` files. Do not trust the table.
+
+Write `(not published)` (under 80 lines): a table `row | where checked | verdict (supported / not supported / cannot tell) | one-line evidence (path or command and its last line)`. Then list: rows that are wrong or stale, gaps that are missing from the table (compare with `.kiro/specs/*/tasks.md` unticked items, `(not published)` and the official requirements in table A), and any row marked "done" without a result file or test that proves it. Do not rewrite the gap table. Say which Kiro surface you are running in.

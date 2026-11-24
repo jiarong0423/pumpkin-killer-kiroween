@@ -1,0 +1,10 @@
+# Kiro task 100 — ultimates v2, task 4 of `.kiro/specs/ultimates-v2/tasks.md` (the shield knight's hidden A, B, C points)
+
+Read: `.kiro/specs/ultimates-v2/requirements.md` (requirements 10 to 18 and the six recorded decisions: the points block only the first projectile of a multi-projectile throw, fully; at least one placed point spends the ultimate), `design.md`, `tasks.md`, `(not published)` lines about the knight shield A-B-C and the knight ultimate (rows only; do not copy private remarks into any file), `docs/kiro_task_54.md` (the brief; its result file does not exist, so every number is provisional), `scripts/test_ultimate.js` (style), `js/ultimate.js`. Do NOT edit `index.html`.
+
+Create:
+1. `js/knight_ult.js`: a pure state machine (browser JavaScript that also works in Node: `module.exports` when `module` exists, otherwise a global `KnightUlt`). It holds up to three hidden points A, B, C placed on the enemy's remembered paths, in order; a point answers at most one attack; the oldest unused point is checked first; the zone is a half-width of 70 px (provisional, a named constant); extra projectiles of the same throw are not blocked; unused points last until three enemy attacks were answered or the knight is knocked out; the public view exposes only `ult_points_left`, never positions, and a position is returned for 1.4 s when a point blocks. No `Math.random`, no `Date`, no DOM; the same inputs give the same results.
+2. `scripts/test_knight_ult.js` (plain Node, no packages): every requirement 10 to 17 as a named test, plus a property test of 300 seeded random scripts against a separately written shadow model, checking: points never exceed three, a point answers at most once, positions never appear in the public view, determinism.
+3. Run `node scripts/test_knight_ult.js` and `node scripts/test_ultimate.js`; paste the last lines in the result file.
+
+Touch only `js/knight_ult.js`, `scripts/test_knight_ult.js` and `(not published)` (max 25 lines: files, commands with last output lines, every provisional number, what you did not run). No network, no git.

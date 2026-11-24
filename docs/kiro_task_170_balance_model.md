@@ -1,0 +1,17 @@
+# Kiro task 170 — rebuild the balance model for all eight heroes under the CURRENT page rules (scripts, tests and docs only; NO edit to index.html)
+
+Owner 2026-11-16: "let Kiro, in parallel, collect evidence, make assets and work on the balance mechanism". This task is the balance mechanism. Three more briefs run beside it (171 evidence, 172 assets and licences); do not touch their files.
+
+Why: `js/class_stats.js` and `scripts/sim_balance.js` model the old rules (4 to 7 heroes, no nun row, old knight bounce, no burn, no weather, bride 75/27, hammer 130/20). Today's page rules are in `docs/ARBITRATION_20261116.md` and `index.html` (read only). The hit-to-kill hand table no longer matches play for the knight (see the widened band in `scripts/test_sim_balance.js`).
+
+Current numbers (hp / normal damage): skeleton 100/22, wizard 75/30, bat 95/22, knight 140/26 (shield bounce now lands every collision, die 1 to 6 splits the total), reaper 95/22 (hit half-width 57, burn 2 x 3 round starts, never lethal), bride 70/28 (sound wave bands 40 / 75 / 105 px, swarm radius 55, swarm 1.3 x normal), hunchback 115/21 (bleed 2 x 2, knockback 50), nun (hag) 105/24 (ultimate contact factor 0.575, two contacts, 7 s stun). Rain and storm multiply attacks by 0.9. Wind: headwind 84, tailwind 56 px/s^2 per wind unit; the first-round wind comes from the seed in [-4, 4].
+
+Do, saving after each, one shell command per call (the shell allowlist may refuse some; say which):
+1. Read `index.html` HERO_PROFILES, the damage block (search `dmgNow`), the knight bounce (search `bouncesLeft`), `js/class_stats.js`, `scripts/sim_balance.js`, `scripts/test_sim_balance.js`, `scripts/test_class_stats.js`.
+2. Extend `scripts/sim_balance.js` so it plays all eight heroes with the numbers above: add the nun row, burn, the knight hop onto the unit, reaper width 57, bride swarm radius 55, weather (a `--weather clear|rain|storm|snow` option, rain and storm 0.9), keeping it deterministic (one seeded generator, no Math.random, no Date) and keeping every existing flag working.
+3. Update `js/class_stats.js` to the same numbers (the nun row, bride 70/28, hunchback 115/21, knight 140/26 with a measured direct/ground table rebuilt from the sim, reaper burn 2 x 3). Keep the exported names; update `scripts/test_class_stats.js` and the knight band in `scripts/test_sim_balance.js` to the rebuilt table (remove the widened 2.2 band if the new table fits within 1.0).
+4. Run `node scripts/sim_balance.js --matches 200 --seed 7` for the full 8 x 8 matrix, once per weather option; save to `docs/balance_matrix_20261116.json` and a short `docs/balance_matrix_20261116.md` (win rate matrix, hits to kill, rounds per match, first-mover win rate). Flag every pairing outside 40 to 60 percent and every hero whose average win rate is outside 42 to 58 percent.
+5. For each flagged hero propose ONE smallest change (hp or damage, at most 10 percent), re-run the sim with it, and write the before and after win rate. Do not apply any change to index.html; list the proposals in the md file under "Proposals".
+6. Run all `scripts/test_*.js` and paste the last line of each failing one, if any.
+
+Touch only: `scripts/sim_balance.js`, `js/class_stats.js`, `scripts/test_sim_balance.js`, `scripts/test_class_stats.js`, `docs/balance_matrix_20261116.json`, `docs/balance_matrix_20261116.md`. Final message: files changed, the matrix summary in five lines, the flagged heroes, test results.

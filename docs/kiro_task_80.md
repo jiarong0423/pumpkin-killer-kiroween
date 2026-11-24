@@ -1,0 +1,12 @@
+# Kiro task 80 — align the Python MCP engine with the page on wall damage and unit positions (Sonnet, MCP owner)
+
+Owner 2026-11-10 answered Kiro 75 Q2 "yes": you may align the Python engine with the client on position changes and wall damage ONLY. Wind stays approximate. Do NOT touch fairness/seat/view work (that is a later step).
+Read: docs/kiro_75_mcp_plan_claude-sonnet-5.5.md section 1.4 item 6, scripts/mcp_game_server.py (wall damage ~line 336: `central_wall_hp - 20`; unit re-placement each round ~lines 412-418), index.html (read only: `WALL_HIT_DMG = 8` at line 412 and how units move: only with the die, 36 px per pip, ranges `lo/hi` in the move code ~1342 and the start positions `220 + random*400` / `1280 + random*400`), scripts/sim_balance.js (already uses WALL_DMG = 8), shared/constants.json, scripts/test_constants_sync.py, scripts/test_mcp_game.py, scripts/test_mcp_stdio.py, (not published)
+You may edit ONLY: scripts/mcp_game_server.py, scripts/mcp_stdio_server.py (only if it must follow), scripts/test_mcp_game.py, scripts/test_mcp_stdio.py, scripts/test_constants_sync.py, shared/constants.json (only to add the wall damage constant if the sync test is the place for it), .kiro/steering/tech.md (the stale 48/45 row). Backups of the four scripts are in (not published)
+Do:
+1. Wall damage 20 -> 8 per hit, read from a named constant (add WALL_HIT_DMG to shared/constants.json and make test_constants_sync.py compare it with `const WALL_HIT_DMG` in index.html; the sim_balance.js value WALL_DMG is 8 too).
+2. Units stop being re-placed at random every round. They start at the same random positions the page uses at match start (red x in 220..620, white x in 1280..1680) and then change position ONLY through the move action (die, 36 px per pip, same allowed range as the page). Keep the seeded RNG, keep determinism for a seed.
+3. Fix tests that encoded the old behaviour; add one test per change (wall loses 8; a unit that did not move keeps its x across rounds; start x ranges).
+4. Update the stale line in .kiro/steering/tech.md to the current numbers.
+Run and report the REAL output tail of: python3 -B scripts/test_mcp_game.py, python3 -B scripts/test_mcp_stdio.py, python3 -B (not published) If you cannot run them say so; do not claim they passed.
+Write docs/kiro_80_result_claude-sonnet-5.5.md (max 20 lines): what changed (file:line), test output tails, what you could not verify.

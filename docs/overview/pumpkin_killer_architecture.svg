@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1200" width="1800" height="1200" font-family="'PingFang TC','Microsoft JhengHei','Noto Sans TC',system-ui,sans-serif">
+  <title>南瓜殺手 整體架構圖 2026-11-10</title>
+  <desc>Same diagram as architecture.mmd. Colours are the status words of docs/asset_inventory.json. T73 to T76 mark boxes that depend on unfinished Kiro task output. Not rendered or checked by any tool.</desc>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#cdbdee"/></marker>
+    <style>
+      .bg { fill: #0d0a14; }
+      .pn { fill: #15101f; stroke: #4b3a6e; stroke-width: 1.5; }
+      .pl { fill: #120e1a; stroke: #6c6c84; stroke-width: 1.5; stroke-dasharray: 10 7; }
+      .gb { fill: none; stroke: #ffcc33; stroke-width: 1.2; stroke-dasharray: 5 4; }
+      .pt { fill: #fff3d6; font-size: 16px; font-weight: 700; }
+      .t { fill: #f4f0ff; font-size: 14px; font-weight: 700; }
+      .h { fill: #b9b0d0; font-size: 11px; }
+      .tg { fill: #1a1200; font-size: 10px; font-weight: 700; }
+      .badge { fill: #ffb347; }
+      .small { fill: #b9b0d0; font-size: 12px; }
+      .lab { fill: #cdbdee; font-size: 11px; }
+      .h1 { fill: #fff3d6; font-size: 26px; font-weight: 700; }
+      .done rect { fill: #1f3d2b; stroke: #3ddc84; stroke-width: 2; }
+      .built_unseen rect { fill: #3b3320; stroke: #ffcc33; stroke-width: 2; }
+      .in_progress rect { fill: #1c2f4a; stroke: #4da3ff; stroke-width: 2; }
+      .planned rect { fill: #26262e; stroke: #9a9ab0; stroke-width: 2; stroke-dasharray: 7 5; }
+      .blocked_on_owner rect { fill: #43202a; stroke: #ff5a6e; stroke-width: 2; }
+      .actor rect { fill: #2a1d44; stroke: #a98bff; stroke-width: 2; }
+      .e { stroke: #cdbdee; stroke-width: 1.8; fill: none; marker-end: url(#ah); }
+      .d { stroke: #cdbdee; stroke-width: 1.8; fill: none; stroke-dasharray: 6 4; marker-end: url(#ah); }
+    </style>
+  </defs>
+  <rect class="bg" width="1800" height="1200"/>
+
+  <!-- header and legend -->
+  <text x="20" y="40" class="h1">南瓜殺手 整體架構圖（2026-11-10）</text>
+  <text x="20" y="64" class="small">顏色 = docs/asset_inventory.json 的狀態詞。T73 到 T76 = 依賴尚未完成的 Kiro 任務輸出（只引用，不推測內容）。節點代號與 architecture.mmd 相同。</text>
+  <g class="done"><rect x="20" y="80" width="26" height="16" rx="4"/></g><text x="54" y="93" class="small">done 已完成</text>
+  <g class="built_unseen"><rect x="230" y="80" width="26" height="16" rx="4"/></g><text x="264" y="93" class="small">built_unseen 已做未看</text>
+  <g class="in_progress"><rect x="470" y="80" width="26" height="16" rx="4"/></g><text x="504" y="93" class="small">in_progress 進行中</text>
+  <g class="planned"><rect x="690" y="80" width="26" height="16" rx="4"/></g><text x="724" y="93" class="small">planned 規劃中</text>
+  <g class="blocked_on_owner"><rect x="880" y="80" width="26" height="16" rx="4"/></g><text x="914" y="93" class="small">blocked_on_owner 等擁有者</text>
+  <g class="actor"><rect x="1150" y="80" width="26" height="16" rx="4"/></g><text x="1184" y="93" class="small">角色（非狀態）</text>
+  <line x1="1330" y1="88" x2="1380" y2="88" class="e"/><text x="1388" y="93" class="small">已連線</text>
+  <line x1="1450" y1="88" x2="1500" y2="88" class="d"/><text x="1508" y="93" class="small">規劃或未接入</text>
+  <rect x="1630" y="80" width="30" height="14" rx="3" class="badge"/><text x="1645" y="91" class="tg" text-anchor="middle">T74</text><text x="1668" y="93" class="small">依賴未完成任務</text>
+
+  <!-- panels -->
+  <rect class="pn" x="20" y="140" width="760" height="320" rx="10"/><text x="36" y="164" class="pt">瀏覽器遊戲 index.html（只載入 5 個 js）</text>
+  <rect class="pn" x="820" y="140" width="460" height="320" rx="10"/><text x="836" y="164" class="pt">資料</text>
+  <rect class="pn" x="1320" y="140" width="460" height="320" rx="10"/><text x="1336" y="164" class="pt">測試層</text>
+  <rect class="pn" x="20" y="510" width="760" height="326" rx="10"/><text x="36" y="532" class="pt">美術管線</text>
+  <rect class="pn" x="820" y="510" width="460" height="326" rx="10"/><text x="836" y="532" class="pt">代理</text>
+  <rect class="pn" x="1320" y="510" width="460" height="326" rx="10"/><text x="1336" y="532" class="pt">工具 scripts</text>
+  <rect class="pl" x="20" y="866" width="1760" height="140" rx="10"/><text x="36" y="890" class="pt">4 對 4 座位與控制者層（規劃中，全部依賴 T76）</text>
+  <rect class="gb" x="28" y="538" width="352" height="232" rx="8"/><text x="36" y="553" class="lab">六個美術缺口（open_art）</text>
+
+  <!-- ============ edges (drawn before boxes) ============ -->
+  <!-- inside the game -->
+  <line class="e" x1="568" y1="282" x2="588" y2="282"/>
+  <line class="d" x1="568" y1="352" x2="588" y2="352"/>
+  <line class="e" x1="568" y1="422" x2="588" y2="422"/>
+  <line class="d" x1="384" y1="352" x2="404" y2="352"/>
+  <line class="e" x1="302" y1="238" x2="302" y2="256"/>
+  <!-- data into game -->
+  <line class="e" x1="836" y1="212" x2="752" y2="212"/>
+  <line class="e" x1="836" y1="282" x2="752" y2="282"/>
+  <line class="d" x1="836" y1="352" x2="752" y2="352"/>
+  <line class="d" x1="836" y1="422" x2="752" y2="422"/>
+  <!-- tests into data -->
+  <line class="e" x1="1336" y1="212" x2="1260" y2="212"/>
+  <line class="e" x1="1336" y1="282" x2="1036" y2="282"/><text x="1064" y="276" class="lab">test_constants_sync</text>
+  <line class="e" x1="1336" y1="352" x2="1036" y2="352"/><text x="1064" y="346" class="lab">test_class_stats</text>
+  <!-- art -->
+  <line class="e" x1="588" y1="604" x2="564" y2="644"/>
+  <line class="e" x1="588" y1="658" x2="564" y2="658"/>
+  <line class="e" x1="484" y1="632" x2="484" y2="614"/>
+  <line class="d" x1="380" y1="588" x2="404" y2="588"/>
+  <line class="e" x1="484" y1="562" x2="484" y2="460"/><text x="494" y="500" class="lab">imgList 載入</text>
+  <!-- agents and art -->
+  <line class="e" x1="836" y1="584" x2="748" y2="576"/>
+  <line class="e" x1="836" y1="650" x2="748" y2="598"/>
+  <line class="e" x1="836" y1="664" x2="748" y2="650"/>
+  <line class="e" x1="836" y1="728" x2="748" y2="672"/>
+  <line class="e" x1="1160" y1="562" x2="1160" y2="448"/><text x="1170" y="500" class="lab">盤點</text>
+  <!-- agents and tools -->
+  <line class="e" x1="1336" y1="658" x2="1036" y2="658"/><text x="1064" y="652" class="lab">派 Kiro 任務</text>
+  <line class="e" x1="1336" y1="664" x2="1260" y2="722"/>
+  <line class="d" x1="1260" y1="798" x2="1336" y2="798"/>
+  <line class="e" x1="1536" y1="798" x2="1560" y2="798"/>
+  <!-- 4v4 layer -->
+  <line class="d" x1="204" y1="942" x2="226" y2="942"/>
+  <line class="d" x1="394" y1="942" x2="416" y2="942"/>
+  <line class="d" x1="584" y1="942" x2="606" y2="942"/>
+  <line class="d" x1="774" y1="942" x2="796" y2="942"/>
+  <line class="d" x1="1154" y1="942" x2="1176" y2="942"/>
+  <line class="d" x1="1344" y1="942" x2="1366" y2="942"/>
+  <line class="d" x1="1200" y1="906" x2="1200" y2="824"/><text x="1208" y="852" class="lab">公開視角</text>
+  <line class="d" x1="900" y1="836" x2="900" y2="866"/><text x="910" y="856" class="lab">Sonnet 規劃，主線實作</text>
+  <polyline class="d" points="20,936 10,936 10,300 20,300"/><text x="24" y="858" class="lab">取代 player 與 ai 單例（左側長虛線）</text>
+
+  <!-- ============ GAME ============ -->
+  <g class="done"><rect x="36" y="186" width="164" height="52" rx="6"/><text x="44" y="205" class="t">主迴圈與回合</text><text x="44" y="223" class="h">loop, resolveRound</text></g>
+  <g class="done"><rect x="36" y="256" width="164" height="52" rx="6"/><text x="44" y="275" class="t">粒子系統</text><text x="44" y="293" class="h">particles.js + draw</text></g>
+  <g class="built_unseen"><rect x="36" y="326" width="164" height="52" rx="6"/><text x="44" y="345" class="t">牆體與棺材平台</text><text x="44" y="363" class="h">中央牆 每擊 8%</text></g>
+  <g class="built_unseen"><rect x="36" y="396" width="164" height="52" rx="6"/><text x="44" y="415" class="t">空投補給</text><text x="44" y="433" class="h">單格道具</text></g>
+
+  <g class="built_unseen"><rect x="220" y="186" width="164" height="52" rx="6"/><text x="228" y="205" class="t">風場粒子</text><text x="228" y="223" class="h">wind_fx.js</text></g>
+  <g class="in_progress"><rect x="220" y="256" width="164" height="52" rx="6"/><text x="228" y="275" class="t">風鬼風向提示</text><text x="228" y="293" class="h">4 幀後備</text></g>
+  <g class="in_progress"><rect x="220" y="326" width="164" height="52" rx="6"/><text x="228" y="345" class="t">絕招</text><text x="228" y="363" class="h">蝙蝠 骷髏 巫師</text><rect x="348" y="318" width="30" height="14" rx="3" class="badge"/><text x="363" y="329" class="tg" text-anchor="middle">T74</text></g>
+  <g class="built_unseen"><rect x="220" y="396" width="164" height="52" rx="6"/><text x="228" y="415" class="t">狀態效果</text><text x="228" y="433" class="h">流血 毒 霜凍 減速 暈眩</text><rect x="348" y="388" width="30" height="14" rx="3" class="badge"/><text x="363" y="399" class="tg" text-anchor="middle">T74</text></g>
+
+  <g class="in_progress"><rect x="404" y="186" width="164" height="52" rx="6"/><text x="412" y="205" class="t">浮空盾與防禦</text><text x="412" y="223" class="h">A-B-C 三點未建</text></g>
+  <g class="built_unseen"><rect x="404" y="256" width="164" height="52" rx="6"/><text x="412" y="275" class="t">內建 AI 對手</text><text x="412" y="293" class="h">aiAttackNow 無模擬器</text></g>
+  <g class="in_progress"><rect x="404" y="326" width="164" height="52" rx="6"/><text x="412" y="345" class="t">新職業</text><text x="412" y="363" class="h">bride hunchback reaper</text><rect x="532" y="318" width="30" height="14" rx="3" class="badge"/><text x="547" y="329" class="tg" text-anchor="middle">T74</text></g>
+  <g class="in_progress"><rect x="404" y="396" width="164" height="52" rx="6"/><text x="412" y="415" class="t">開始畫面與取名</text><text x="412" y="433" class="h">取名模組未接入</text></g>
+
+  <g class="built_unseen"><rect x="588" y="186" width="164" height="52" rx="6"/><text x="596" y="205" class="t">音效與環境音</text><text x="596" y="223" class="h">audio.js ambient_sfx.js</text><rect x="716" y="178" width="30" height="14" rx="3" class="badge"/><text x="731" y="189" class="tg" text-anchor="middle">T74</text></g>
+  <g class="done"><rect x="588" y="256" width="164" height="52" rx="6"/><text x="596" y="275" class="t">物理與風</text><text x="596" y="293" class="h">1/60 s 固定步長</text></g>
+  <g class="done"><rect x="588" y="326" width="164" height="52" rx="6"/><text x="596" y="345" class="t">四職業可玩</text><text x="596" y="363" class="h">骷髏 巫師 蝙蝠 盾衛</text></g>
+  <g class="done"><rect x="588" y="396" width="164" height="52" rx="6"/><text x="596" y="415" class="t">HUD 與底部 dock</text><text x="596" y="433" class="h">drawTopHUD dock.css</text></g>
+
+  <!-- ============ DATA ============ -->
+  <g class="built_unseen"><rect x="836" y="186" width="200" height="52" rx="6"/><text x="844" y="205" class="t">音效事件表</text><text x="844" y="223" class="h">audio_event_map.json</text></g>
+  <g class="done"><rect x="836" y="256" width="200" height="52" rx="6"/><text x="844" y="275" class="t">共用常數</text><text x="844" y="293" class="h">shared/constants.json（10 個）</text></g>
+  <g class="built_unseen"><rect x="836" y="326" width="200" height="52" rx="6"/><text x="844" y="345" class="t">職業數值表</text><text x="844" y="363" class="h">class_stats.js v2（未載入）</text></g>
+  <g class="in_progress"><rect x="836" y="396" width="200" height="52" rx="6"/><text x="844" y="415" class="t">雙語字串</text><text x="844" y="433" class="h">i18n.js（未載入）</text></g>
+  <g class="built_unseen"><rect x="1060" y="186" width="200" height="52" rx="6"/><text x="1068" y="205" class="t">未接入的模組</text><text x="1068" y="223" class="h">ultimate.js scene_layers.js</text></g>
+  <g class="done"><rect x="1060" y="396" width="200" height="52" rx="6"/><text x="1068" y="415" class="t">資產盤點</text><text x="1068" y="433" class="h">asset_inventory.json</text></g>
+
+  <!-- ============ TESTS ============ -->
+  <g class="done"><rect x="1336" y="186" width="408" height="52" rx="6"/><text x="1344" y="205" class="t">JS 測試（node assert）</text><text x="1344" y="223" class="h">particles audio ambient wind_fx i18n class_stats ultimate scene_layers</text></g>
+  <g class="done"><rect x="1336" y="256" width="408" height="52" rx="6"/><text x="1344" y="275" class="t">Python 測試</text><text x="1344" y="293" class="h">mcp_game mcp_stdio constants_sync ingest kiro_route fonts</text></g>
+  <g class="done"><rect x="1336" y="326" width="408" height="52" rx="6"/><text x="1344" y="345" class="t">平衡與 AI 模擬</text><text x="1344" y="363" class="h">sim_balance sim_ai_nosim eval_agent_learning</text></g>
+  <g class="planned"><rect x="1336" y="396" width="408" height="52" rx="6"/><text x="1344" y="415" class="t">新增測試（規劃）</text><text x="1344" y="433" class="h">無畫面規則 瀏覽器冒煙 公平性</text><rect x="1672" y="388" width="30" height="14" rx="3" class="badge"/><text x="1687" y="399" class="tg" text-anchor="middle">T75</text><rect x="1706" y="388" width="30" height="14" rx="3" class="badge"/><text x="1721" y="399" class="tg" text-anchor="middle">T76</text></g>
+
+  <!-- ============ ART ============ -->
+  <g class="in_progress"><rect x="36" y="562" width="160" height="52" rx="6"/><text x="44" y="581" class="t">風鬼連續吹風 8 格</text><text x="44" y="599" class="h">Colab 或 image2</text></g>
+  <g class="in_progress"><rect x="36" y="632" width="160" height="52" rx="6"/><text x="44" y="651" class="t">腳步鎖鏈（減速）</text><text x="44" y="669" class="h">jobs_chain_20261110</text></g>
+  <g class="planned"><rect x="36" y="702" width="160" height="52" rx="6"/><text x="44" y="721" class="t">藍色版棺材</text><text x="44" y="739" class="h">與紫色同質感</text><rect x="160" y="694" width="30" height="14" rx="3" class="badge"/><text x="175" y="705" class="tg" text-anchor="middle">T73</text></g>
+  <g class="planned"><rect x="212" y="562" width="160" height="52" rx="6"/><text x="220" y="581" class="t">圍籬受損破壞圖</text><text x="220" y="599" class="h">現為純黑塊</text><rect x="336" y="554" width="30" height="14" rx="3" class="badge"/><text x="351" y="565" class="tg" text-anchor="middle">T73</text></g>
+  <g class="blocked_on_owner"><rect x="212" y="632" width="160" height="52" rx="6"/><text x="220" y="651" class="t">前視肖像 x3</text><text x="220" y="669" class="h">缺哪幾張待核對</text><rect x="336" y="624" width="30" height="14" rx="3" class="badge"/><text x="351" y="635" class="tg" text-anchor="middle">T73</text></g>
+  <g class="blocked_on_owner"><rect x="212" y="702" width="160" height="52" rx="6"/><text x="220" y="721" class="t">39 張重做姿勢</text><text x="220" y="739" class="h">jobs_retry2_20261110</text><rect x="336" y="694" width="30" height="14" rx="3" class="badge"/><text x="351" y="705" class="tg" text-anchor="middle">T73</text></g>
+
+  <g class="in_progress"><rect x="404" y="562" width="160" height="52" rx="6"/><text x="412" y="581" class="t">assets 資產</text><text x="412" y="599" class="h">14 資料夾 282 檔</text></g>
+  <g class="done"><rect x="404" y="632" width="160" height="52" rx="6"/><text x="412" y="651" class="t">去背與對位</text><text x="412" y="669" class="h">key_*.py make_unarmed_*</text></g>
+  <g class="in_progress"><rect x="588" y="562" width="160" height="52" rx="6"/><text x="596" y="581" class="t">Colab 出圖</text><text x="596" y="599" class="h">Qwen-Image-Edit</text></g>
+  <g class="blocked_on_owner"><rect x="588" y="632" width="160" height="52" rx="6"/><text x="596" y="651" class="t">image2 出圖</text><text x="596" y="669" class="h">擁有者手動貼上</text></g>
+  <g class="planned"><rect x="588" y="702" width="160" height="52" rx="6"/><text x="596" y="721" class="t">新戰場背景</text><text x="596" y="739" class="h">鐘樓 南瓜田</text><rect x="712" y="694" width="30" height="14" rx="3" class="badge"/><text x="727" y="705" class="tg" text-anchor="middle">T73</text></g>
+
+  <!-- ============ AGENTS ============ -->
+  <g class="done"><rect x="836" y="562" width="200" height="52" rx="6"/><text x="844" y="581" class="t">主線 Claude Code</text><text x="844" y="599" class="h">整合 重跑驗證 commit</text></g>
+  <g class="in_progress"><rect x="836" y="632" width="200" height="52" rx="6"/><text x="844" y="651" class="t">Kiro Terra</text><text x="844" y="669" class="h">美術設計與提示詞（任務 73）</text></g>
+  <g class="actor"><rect x="836" y="702" width="200" height="52" rx="6"/><text x="844" y="721" class="t">擁有者</text><text x="844" y="739" class="h">決定 核准 貼 image2</text></g>
+  <g class="done"><rect x="1060" y="562" width="200" height="52" rx="6"/><text x="1068" y="581" class="t">唯讀子代理</text><text x="1068" y="599" class="h">審查 盤點</text></g>
+  <g class="in_progress"><rect x="1060" y="702" width="200" height="52" rx="6"/><text x="1068" y="721" class="t">Kiro Sonnet</text><text x="1068" y="739" class="h">流程 系統 MCP（任務 74 到 76）</text></g>
+  <g class="planned"><rect x="1060" y="772" width="200" height="52" rx="6"/><text x="1068" y="791" class="t">MCP 對手子代理</text><text x="1068" y="809" class="h">只讀公開視角</text><rect x="1224" y="764" width="30" height="14" rx="3" class="badge"/><text x="1239" y="775" class="tg" text-anchor="middle">T75</text></g>
+
+  <!-- ============ TOOLS ============ -->
+  <g class="done"><rect x="1336" y="562" width="200" height="52" rx="6"/><text x="1344" y="581" class="t">匯入管線</text><text x="1344" y="599" class="h">ingest_queue ingest_sheets</text></g>
+  <g class="done"><rect x="1336" y="632" width="200" height="52" rx="6"/><text x="1344" y="651" class="t">Kiro 模型路由</text><text x="1344" y="669" class="h">kiro_route.py</text></g>
+  <g class="done"><rect x="1336" y="702" width="200" height="52" rx="6"/><text x="1344" y="721" class="t">相似度與連續性</text><text x="1344" y="739" class="h">pose_similarity check_continuity</text></g>
+  <g class="done"><rect x="1336" y="772" width="200" height="52" rx="6"/><text x="1344" y="791" class="t">MCP 標準伺服器</text><text x="1344" y="809" class="h">mcp_stdio_server.py</text><rect x="1500" y="764" width="30" height="14" rx="3" class="badge"/><text x="1515" y="775" class="tg" text-anchor="middle">T75</text></g>
+  <g class="done"><rect x="1560" y="562" width="200" height="52" rx="6"/><text x="1568" y="581" class="t">快照與接收伺服器</text><text x="1568" y="599" class="h">snapshot_server.py</text></g>
+  <g class="done"><rect x="1560" y="772" width="200" height="52" rx="6"/><text x="1568" y="791" class="t">規則引擎</text><text x="1568" y="809" class="h">mcp_game_server.py</text></g>
+
+  <!-- ============ SEAT LAYER ============ -->
+  <g class="planned"><rect x="36" y="906" width="168" height="72" rx="6"/><text x="44" y="926" class="t">無畫面規則模組</text><text x="44" y="944" class="h">node 可單獨跑</text><text x="44" y="960" class="h">頁面只當畫面</text></g>
+  <g class="planned"><rect x="226" y="906" width="168" height="72" rx="6"/><text x="234" y="926" class="t">units 陣列與別名</text><text x="234" y="944" class="h">player = units.red 0</text><text x="234" y="960" class="h">ai = units.white 0</text></g>
+  <g class="planned"><rect x="416" y="906" width="168" height="72" rx="6"/><text x="424" y="926" class="t">作用中單位指標</text><text x="424" y="944" class="h">隊伍輪替 擲骰先手</text><text x="424" y="960" class="h">每單位 12 秒</text></g>
+  <g class="planned"><rect x="606" y="906" width="168" height="72" rx="6"/><text x="614" y="926" class="t">重疊傷害與濺射</text><text x="614" y="944" class="h">命中箱 距離衰減</text><text x="614" y="960" class="h">無友軍傷害</text></g>
+  <g class="planned"><rect x="796" y="906" width="168" height="72" rx="6"/><text x="804" y="926" class="t">粒子預算</text><text x="804" y="944" class="h">8 單位同畫面</text><text x="804" y="960" class="h">過多時縮小或略過</text></g>
+  <g class="planned"><rect x="986" y="906" width="168" height="72" rx="6"/><text x="994" y="926" class="t">座位與控制者</text><text x="994" y="944" class="h">agent human</text><text x="994" y="960" class="h">builtin-ai</text></g>
+  <g class="planned"><rect x="1176" y="906" width="168" height="72" rx="6"/><text x="1184" y="926" class="t">座位公開視角</text><text x="1184" y="944" class="h">只含公開資訊</text><text x="1184" y="960" class="h">隱藏點與雜訊不外洩</text><rect x="1272" y="898" width="30" height="14" rx="3" class="badge"/><text x="1287" y="909" class="tg" text-anchor="middle">T75</text><rect x="1306" y="898" width="30" height="14" rx="3" class="badge"/><text x="1321" y="909" class="tg" text-anchor="middle">T76</text></g>
+  <g class="planned"><rect x="1366" y="906" width="168" height="72" rx="6"/><text x="1374" y="926" class="t">多單位 AI</text><text x="1374" y="944" class="h">只讀公開視角</text><text x="1374" y="960" class="h">命中率目標 25 到 30%</text></g>
+  <g class="planned"><rect x="1556" y="906" width="168" height="72" rx="6"/><text x="1564" y="926" class="t">4 單位 HUD</text><text x="1564" y="944" class="h">作用中高亮 小血條</text><text x="1564" y="960" class="h">無血量數字</text></g>
+
+  <!-- ============ NOTES ============ -->
+  <rect class="pn" x="20" y="1036" width="880" height="150" rx="10"/>
+  <text x="36" y="1060" class="pt">依賴尚未完成的任務 73 到 76 輸出</text>
+  <text x="36" y="1082" class="small">T73（Terra 美術包）：藍色棺材、圍籬圖、前視肖像、39 張姿勢、新戰場背景</text>
+  <text x="36" y="1102" class="small">T74（Sonnet 流程與系統）：絕招、狀態效果、新職業、音效事件表</text>
+  <text x="36" y="1122" class="small">T75（Sonnet MCP 計畫）：MCP 對手、MCP 伺服器新工具、座位公開視角、新增測試</text>
+  <text x="36" y="1142" class="small">T76（Sonnet 4 對 4 計畫）：整個座位與控制者層、新增測試</text>
+  <text x="36" y="1166" class="small">狀態來自 asset_inventory.json（生成於 2026-11-09 19:06）加上今天的讀檔，未重新驗證。</text>
+  <rect class="pn" x="920" y="1036" width="860" height="150" rx="10"/>
+  <text x="936" y="1060" class="pt">讀圖說明</text>
+  <text x="936" y="1082" class="small">實線 = 已存在的連線；虛線 = 規劃或尚未接入 index.html 的連線。箭頭 = 資料或責任流向。</text>
+  <text x="936" y="1102" class="small">ingest 與相似度腳本把 Colab 與 image2 的輸出裝進 assets，跨群組線省略以免交錯。</text>
+  <text x="936" y="1122" class="small">class_stats.js、i18n.js、ultimate.js、scene_layers.js 存在於 js/，但 index.html 沒有載入。</text>
+  <text x="936" y="1142" class="small">js/pose_anim.js 不在主線 js/ 內（盤點備註說未整合），所以未畫入。</text>
+  <text x="936" y="1166" class="small">本圖只由讀檔繪製，未用任何渲染器檢查，也沒有執行任何測試。</text>
+</svg>

@@ -1,0 +1,47 @@
+{
+  "generatedBy": "node scripts/sim_balance.js --matches 200 --seed 7 --weather <clear|rain|storm|snow> --json",
+  "seed": 7,
+  "matchesPerPairing": 200,
+  "matchesPerWeather": 7200,
+  "classes": ["skeleton", "wizard", "bat", "knight", "bride", "hunchback", "reaper", "hag"],
+  "flagBands": {"pairing": [0.4, 0.6], "heroAverage": [0.42, 0.58]},
+  "weather": {
+    "clear": {
+      "winRates": [[0.5,0.435,0.615,0.375,0.9,0.495,0.735,0.51],[0.565,0.5,0.59,0.365,0.695,0.475,0.72,0.53],[0.385,0.41,0.5,0.28,0.89,0.425,0.505,0.33],[0.625,0.635,0.72,0.5,0.88,0.655,0.745,0.67],[0.1,0.305,0.11,0.12,0.5,0.215,0.21,0.11],[0.505,0.525,0.575,0.345,0.785,0.5,0.635,0.52],[0.265,0.28,0.495,0.255,0.79,0.365,0.5,0.255],[0.49,0.47,0.67,0.33,0.89,0.48,0.745,0.5]],
+      "perHero": {"skeleton":{"average":0.580714,"hitsToKill":4.429418,"firstMoverRate":0.575},"wizard":{"average":0.562857,"hitsToKill":3.566802,"firstMoverRate":0.555},"bat":{"average":0.460714,"hitsToKill":4.404734,"firstMoverRate":0.58},"knight":{"average":0.704286,"hitsToKill":5.125632,"firstMoverRate":0.55},"bride":{"average":0.167143,"hitsToKill":4.601382,"firstMoverRate":0.595},"hunchback":{"average":0.555714,"hitsToKill":4.833333,"firstMoverRate":0.57},"reaper":{"average":0.386429,"hitsToKill":4.230769,"firstMoverRate":0.595},"hag":{"average":0.582143,"hitsToKill":4.342857,"firstMoverRate":0.54}},
+      "averageRounds":6.434444,"timeouts":0,
+      "flaggedHeroes":["skeleton","knight","bride","reaper","hag"],
+      "flaggedPairings":["skeleton/bat","skeleton/knight","skeleton/bride","skeleton/reaper","wizard/knight","wizard/bride","wizard/reaper","bat/knight","bat/bride","bat/hag","knight/bride","knight/hunchback","knight/reaper","knight/hag","bride/hunchback","bride/reaper","bride/hag","hunchback/reaper","reaper/hag"]
+    },
+    "rain": {
+      "winRates": [[0.5,0.485,0.575,0.335,0.825,0.46,0.69,0.66],[0.515,0.5,0.5,0.365,0.74,0.42,0.6,0.53],[0.425,0.5,0.5,0.21,0.79,0.29,0.595,0.41],[0.665,0.635,0.79,0.5,0.915,0.64,0.845,0.675],[0.175,0.26,0.21,0.085,0.5,0.155,0.385,0.215],[0.54,0.58,0.71,0.36,0.845,0.5,0.775,0.6],[0.31,0.4,0.405,0.155,0.615,0.225,0.5,0.46],[0.34,0.47,0.59,0.325,0.785,0.4,0.54,0.5]],
+      "perHero": {"skeleton":{"average":0.575714,"hitsToKill":5.058648,"firstMoverRate":0.565},"wizard":{"average":0.524286,"hitsToKill":3.730193,"firstMoverRate":0.555},"bat":{"average":0.46,"hitsToKill":4.937204,"firstMoverRate":0.555},"knight":{"average":0.737857,"hitsToKill":5.412003,"firstMoverRate":0.56},"bride":{"average":0.212143,"hitsToKill":5.086519,"firstMoverRate":0.61},"hunchback":{"average":0.63,"hitsToKill":5.202403,"firstMoverRate":0.54},"reaper":{"average":0.367143,"hitsToKill":4.862745,"firstMoverRate":0.59},"hag":{"average":0.492857,"hitsToKill":4.996629,"firstMoverRate":0.54}},
+      "averageRounds":7.156528,"timeouts":0,
+      "flaggedHeroes":["knight","bride","hunchback","reaper"],
+      "flaggedPairings":["skeleton/knight","skeleton/bride","skeleton/reaper","skeleton/hag","wizard/knight","wizard/bride","bat/knight","bat/bride","bat/hunchback","knight/bride","knight/hunchback","knight/reaper","knight/hag","bride/hunchback","bride/reaper","bride/hag","hunchback/reaper"]
+    },
+    "storm": {
+      "winRates": [[0.5,0.54,0.6,0.56,0.78,0.52,0.575,0.665],[0.46,0.5,0.535,0.505,0.65,0.455,0.545,0.48],[0.4,0.465,0.5,0.395,0.755,0.325,0.615,0.455],[0.44,0.495,0.605,0.5,0.71,0.495,0.6,0.495],[0.22,0.35,0.245,0.29,0.5,0.335,0.425,0.27],[0.48,0.545,0.675,0.505,0.665,0.5,0.67,0.565],[0.425,0.455,0.385,0.4,0.575,0.33,0.5,0.435],[0.335,0.52,0.545,0.505,0.73,0.435,0.565,0.5]],
+      "perHero": {"skeleton":{"average":0.605714,"hitsToKill":5.083969,"firstMoverRate":0.565},"wizard":{"average":0.518571,"hitsToKill":3.769978,"firstMoverRate":0.59},"bat":{"average":0.487143,"hitsToKill":5.105442,"firstMoverRate":0.515},"knight":{"average":0.548571,"hitsToKill":5.953512,"firstMoverRate":0.58},"bride":{"average":0.305,"hitsToKill":5.197767,"firstMoverRate":0.555},"hunchback":{"average":0.586429,"hitsToKill":5.25857,"firstMoverRate":0.52},"reaper":{"average":0.429286,"hitsToKill":4.947566,"firstMoverRate":0.475},"hag":{"average":0.519286,"hitsToKill":5.084142,"firstMoverRate":0.635}},
+      "averageRounds":9.368472,"timeouts":0,
+      "flaggedHeroes":["skeleton","bride","hunchback"],
+      "flaggedPairings":["skeleton/bride","skeleton/hag","wizard/bride","bat/knight","bat/bride","bat/hunchback","bat/reaper","knight/bride","bride/hunchback","bride/hag","hunchback/reaper"]
+    },
+    "snow": {
+      "winRates": [[0.5,0.44,0.615,0.395,0.925,0.495,0.73,0.5],[0.56,0.5,0.6,0.375,0.67,0.49,0.715,0.54],[0.385,0.4,0.5,0.285,0.875,0.435,0.5,0.32],[0.605,0.625,0.715,0.5,0.89,0.7,0.745,0.69],[0.075,0.33,0.125,0.11,0.5,0.21,0.22,0.115],[0.505,0.51,0.565,0.3,0.79,0.5,0.61,0.52],[0.27,0.285,0.5,0.255,0.78,0.39,0.5,0.26],[0.5,0.46,0.68,0.31,0.885,0.48,0.74,0.5]],
+      "perHero": {"skeleton":{"average":0.585714,"hitsToKill":4.430392,"firstMoverRate":0.58},"wizard":{"average":0.564286,"hitsToKill":3.574747,"firstMoverRate":0.555},"bat":{"average":0.457143,"hitsToKill":4.419048,"firstMoverRate":0.585},"knight":{"average":0.71,"hitsToKill":5.125628,"firstMoverRate":0.515},"bride":{"average":0.169286,"hitsToKill":4.578947,"firstMoverRate":0.585},"hunchback":{"average":0.542857,"hitsToKill":4.814583,"firstMoverRate":0.535},"reaper":{"average":0.391429,"hitsToKill":4.243316,"firstMoverRate":0.59},"hag":{"average":0.579286,"hitsToKill":4.339268,"firstMoverRate":0.565}},
+      "averageRounds":6.372222,"timeouts":0,
+      "flaggedHeroes":["skeleton","wizard","knight","bride","reaper"],
+      "flaggedPairings":["skeleton/bat","skeleton/knight","skeleton/bride","skeleton/reaper","wizard/knight","wizard/bride","wizard/reaper","bat/knight","bat/bride","bat/hag","knight/bride","knight/hunchback","knight/reaper","knight/hag","bride/hunchback","bride/reaper","bride/hag","hunchback/reaper","reaper/hag"]
+    }
+  },
+  "proposals": {
+    "skeleton":{"weather":"clear","change":"dmg 22 -> 19.8 (-10%)","before":{"average":0.580714,"hitsToKill":4.429418},"after":{"average":0.48,"hitsToKill":5.030963}},
+    "wizard":{"weather":"snow","change":"dmg 30 -> 27 (-10%)","before":{"average":0.564286,"hitsToKill":3.574747},"after":{"average":0.512143,"hitsToKill":3.747001}},
+    "knight":{"weather":"clear","change":"dmg 23 -> 20.7 (-10%)","before":{"average":0.704286,"hitsToKill":5.125632},"after":{"average":0.640714,"hitsToKill":5.380128}},
+    "bride":{"weather":"clear","change":"dmg 28 -> 30.8 (+10%)","before":{"average":0.167143,"hitsToKill":4.601382},"after":{"average":0.215714,"hitsToKill":4.390438}},
+    "hunchback":{"weather":"rain","change":"dmg 21 -> 18.9 (-10%)","before":{"average":0.63,"hitsToKill":5.202403},"after":{"average":0.574286,"hitsToKill":5.417331}},
+    "reaper":{"weather":"clear","change":"dmg 22 -> 24.2 (+10%)","before":{"average":0.386429,"hitsToKill":4.230769},"after":{"average":0.44,"hitsToKill":3.987745}},
+    "hag":{"weather":"clear","change":"dmg 24 -> 21.6 (-10%)","before":{"average":0.582143,"hitsToKill":4.342857},"after":{"average":0.443571,"hitsToKill":4.936663}}
+  }
+}

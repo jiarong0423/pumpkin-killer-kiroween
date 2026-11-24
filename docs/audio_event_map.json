@@ -1,0 +1,1283 @@
+{
+  "version": 1,
+  "note": "Every file path is a PLANNED path. No file exists yet. When a file is missing the module plays the synthesized recipe named in 'synth'. All file/source statements are unverified, see docs/audio_sources.md.",
+  "music": {
+    "bpm": 80,
+    "key": "D minor",
+    "loopSeconds": 24,
+    "crossfadeSeconds": 1.5,
+    "tensionRampSeconds": 0.8,
+    "trimDb": -12,
+    "layers": {
+      "bed": {
+        "file": "assets/audio/music/bed_artifact_room.ogg",
+        "source": "oga-artifact-room-fupi",
+        "synth": "music_bed"
+      },
+      "rhythm": {
+        "file": "assets/audio/music/rhythm_percussion_loop.ogg",
+        "source": "oga-cinematic-percussion-loop",
+        "synth": "music_rhythm"
+      },
+      "tension": {
+        "file": "assets/audio/music/tension_drone.ogg",
+        "source": "oga-ambient-horror",
+        "synth": "music_tension"
+      },
+      "victory": {
+        "file": "assets/audio/music/victory_sting.ogg",
+        "source": "oga-short-jingle",
+        "synth": "music_victory"
+      },
+      "defeat": {
+        "file": "assets/audio/music/defeat_sting.ogg",
+        "source": "oga-game-over-dark",
+        "synth": "music_defeat"
+      }
+    },
+    "moods": {
+      "title": {
+        "battle": false,
+        "bed": 1,
+        "rhythm": 0,
+        "tension": 0,
+        "victory": 0,
+        "defeat": 0
+      },
+      "battle_calm": {
+        "battle": true,
+        "bed": 1,
+        "rhythm": 0.6,
+        "tension": 0,
+        "victory": 0,
+        "defeat": 0
+      },
+      "battle_tense": {
+        "battle": true,
+        "bed": 0.9,
+        "rhythm": 1,
+        "tension": 0.8,
+        "victory": 0,
+        "defeat": 0
+      },
+      "victory": {
+        "battle": false,
+        "bed": 0.4,
+        "rhythm": 0,
+        "tension": 0,
+        "victory": 1,
+        "defeat": 0
+      },
+      "defeat": {
+        "battle": false,
+        "bed": 0.3,
+        "rhythm": 0,
+        "tension": 0,
+        "victory": 0,
+        "defeat": 1
+      }
+    }
+  },
+  "events": {
+    "ui_click": {
+      "sound": "ui_click",
+      "file": "assets/audio/sfx/ui_click.ogg",
+      "source": "kenney-interface",
+      "synth": "click",
+      "sparkle": null,
+      "volume": 0.5,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 3,
+      "band": "high",
+      "duration": 0.12,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ui_hover": {
+      "sound": "ui_hover",
+      "file": "assets/audio/sfx/ui_hover.ogg",
+      "source": "kenney-interface",
+      "synth": "hover",
+      "sparkle": null,
+      "volume": 0.25,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 1,
+      "band": "high",
+      "duration": 0.1,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 60
+    },
+    "round_start": {
+      "sound": "round_start_bell",
+      "file": null,
+      "source": "synth-only",
+      "synth": "bell_strike",
+      "sparkle": "shimmer",
+      "volume": 0.8,
+      "pitch": [
+        0.99,
+        1.01
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 2.4,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0,
+      "extras": [
+        {
+          "file": "assets/audio/sfx/bell_round.ogg",
+          "role": "replace",
+          "volume": 0.75,
+          "pitch": [
+            0.99,
+            1.01
+          ],
+          "delayMs": 0,
+          "maxSeconds": 2.6,
+          "fadeOutMs": 600
+        }
+      ]
+    },
+    "round_end": {
+      "sound": "round_end_bells",
+      "file": null,
+      "source": "synth-only",
+      "synth": "bell_fall",
+      "sparkle": null,
+      "volume": 0.7,
+      "pitch": [
+        0.99,
+        1.01
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 2.0,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0,
+      "extras": [
+        {
+          "file": "assets/audio/sfx/bell_round.ogg",
+          "role": "replace",
+          "volume": 0.5,
+          "pitch": [
+            0.94,
+            0.96
+          ],
+          "delayMs": 0,
+          "maxSeconds": 1.8,
+          "fadeOutMs": 500
+        }
+      ]
+    },
+    "charge": {
+      "sound": "charge_hum",
+      "file": null,
+      "source": "synth-only",
+      "synth": "hum",
+      "sparkle": null,
+      "volume": 0.45,
+      "pitch": [
+        0.97,
+        1.03
+      ],
+      "priority": 3,
+      "band": "mid",
+      "duration": 6,
+      "loop": true,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "throw_spear": {
+      "sound": "spear_whoosh",
+      "file": "assets/audio/sfx/whoosh_spear.ogg",
+      "source": "bigsoundbank-s0573",
+      "synth": "whoosh_spear",
+      "sparkle": null,
+      "volume": 0.7,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 0.6,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "throw_shuriken": {
+      "sound": "shuriken_whirr",
+      "file": "assets/audio/sfx/throw_shuriken_gemini.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "whirr",
+      "sparkle": null,
+      "volume": 0.6,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "high",
+      "duration": 0.5,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "throw_cannon": {
+      "sound": "cannon_boom",
+      "file": "assets/audio/sfx/throw_cannon_rocket.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "boom_cannon",
+      "sparkle": null,
+      "volume": 1.0,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 5,
+      "band": "low",
+      "duration": 1.3,
+      "loop": false,
+      "duck": true,
+      "cooldownMs": 0
+    },
+    "throw_bomb": {
+      "sound": "bomb_boom",
+      "file": "assets/audio/sfx/throw_cannon_boom.ogg",
+      "source": "kenney-scifi",
+      "synth": "boom_cannon",
+      "sparkle": null,
+      "volume": 1.0,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 5,
+      "band": "low",
+      "duration": 1.3,
+      "loop": false,
+      "duck": true,
+      "cooldownMs": 0
+    },
+    "throw_shield": {
+      "sound": "shield_spin_throw",
+      "file": "assets/audio/sfx/throw_shield_gemini.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spin_shield",
+      "sparkle": null,
+      "volume": 0.65,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 0.7,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "throw_flame": {
+      "sound": "flame_cast",
+      "file": "assets/audio/sfx/throw_flame_fire.ogg",
+      "source": "oga-catching-fire",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.6,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 0.6,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "throw_cross": {
+      "sound": "cross_spin",
+      "file": "assets/audio/sfx/throw_cross_gemini.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "whirr",
+      "sparkle": null,
+      "volume": 0.6,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "high",
+      "duration": 0.84,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "throw_axe": {
+      "sound": "axe_heave",
+      "file": "assets/audio/sfx/throw_axe_gemini.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spin_shield",
+      "sparkle": null,
+      "volume": 0.7,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "low",
+      "duration": 0.64,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "throw_soundwave": {
+      "sound": "wave_chime",
+      "file": "assets/audio/sfx/throw_soundwave_sonic.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "chime_two",
+      "sparkle": null,
+      "volume": 0.7,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 0.94,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "coin_flip": {
+      "sound": "coin_flip",
+      "file": "assets/audio/sfx/coin_flip.ogg",
+      "source": "kenney-rpg",
+      "synth": "pickup",
+      "sparkle": null,
+      "volume": 0.7,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 3,
+      "band": "high",
+      "duration": 0.85,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "impact_flame": {
+      "sound": "flame_impact",
+      "file": "assets/audio/sfx/impact_flame_evil_spell.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 0.85,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "flight_spear": {
+      "sound": "flight_spear_air",
+      "file": "assets/audio/sfx/flight_spear_whoosh.ogg",
+      "source": "oga-wind-whoosh-loop",
+      "synth": "air_whistle",
+      "sparkle": null,
+      "volume": 0.25,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 2,
+      "band": "mid",
+      "duration": 6,
+      "loop": true,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "flight_shuriken": {
+      "sound": "flight_shuriken_buzz",
+      "file": null,
+      "source": "synth-only",
+      "synth": "air_buzz",
+      "sparkle": null,
+      "volume": 0.2,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 2,
+      "band": "high",
+      "duration": 6,
+      "loop": true,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "flight_cannon": {
+      "sound": "flight_cannon_rumble",
+      "file": "assets/audio/sfx/flight_cannon_wind.ogg",
+      "source": "oga-air-whoosh",
+      "synth": "air_rumble",
+      "sparkle": null,
+      "volume": 0.2,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 2,
+      "band": "low",
+      "duration": 6,
+      "loop": true,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "flight_shield": {
+      "sound": "flight_shield_spin",
+      "file": "assets/audio/sfx/flight_shield_wind.ogg",
+      "source": "oga-short-wind",
+      "synth": "air_spin",
+      "sparkle": null,
+      "volume": 0.25,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 2,
+      "band": "mid",
+      "duration": 6,
+      "loop": true,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "impact_unit": {
+      "sound": "impact_unit_thud",
+      "file": "assets/audio/sfx/punch_hit.ogg",
+      "source": "oga-punch-qubodup",
+      "synth": "thud_unit",
+      "sparkle": null,
+      "volume": 0.85,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "low",
+      "duration": 0.5,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "impact_unit_heavy": {
+      "sound": "impact_unit_heavy_crash",
+      "file": "assets/audio/sfx/punch_heavy.ogg",
+      "source": "oga-punch-qubodup",
+      "synth": "thud_heavy",
+      "sparkle": null,
+      "volume": 1.0,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 5,
+      "band": "low",
+      "duration": 1.0,
+      "loop": false,
+      "duck": true,
+      "cooldownMs": 0
+    },
+    "impact_fence": {
+      "sound": "impact_fence_knock",
+      "file": "assets/audio/sfx/thwack_wood.ogg",
+      "source": "oga-thwack",
+      "synth": "knock_wood",
+      "sparkle": null,
+      "volume": 0.8,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 3,
+      "band": "mid",
+      "duration": 0.45,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "impact_fence_break": {
+      "sound": "impact_fence_splinter",
+      "file": "assets/audio/sfx/fence_break.ogg",
+      "source": "kenney-scifi",
+      "synth": "splinter",
+      "sparkle": null,
+      "volume": 0.95,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 1.0,
+      "loop": false,
+      "duck": true,
+      "cooldownMs": 0
+    },
+    "impact_ground": {
+      "sound": "impact_ground_thump",
+      "file": "assets/audio/sfx/stone_ground.ogg",
+      "source": "oga-80-cc0-rpg-sfx",
+      "synth": "thump_soft",
+      "sparkle": null,
+      "volume": 0.7,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 3,
+      "band": "low",
+      "duration": 0.4,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "impact_ground_heavy": {
+      "sound": "impact_ground_crump",
+      "file": "assets/audio/sfx/stone_ground_heavy.ogg",
+      "source": "oga-80-cc0-rpg-sfx",
+      "synth": "thump_heavy",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 3,
+      "band": "low",
+      "duration": 0.8,
+      "loop": false,
+      "duck": true,
+      "cooldownMs": 0,
+      "extras": [
+        {
+          "file": "assets/audio/sfx/rock_break.ogg",
+          "role": "layer",
+          "volume": 0.45,
+          "pitch": [
+            0.94,
+            1.06
+          ],
+          "delayMs": 30,
+          "maxSeconds": 0.4,
+          "fadeOutMs": 80
+        }
+      ]
+    },
+    "shield_block": {
+      "sound": "shield_block_clang",
+      "file": "assets/audio/sfx/metal_bing.ogg",
+      "source": "oga-metal-impact",
+      "synth": "clang",
+      "sparkle": "shimmer",
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "high",
+      "duration": 1.0,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "shield_place": {
+      "sound": "shield_place_spell",
+      "file": "assets/audio/sfx/spell_magic.ogg",
+      "source": "oga-magic-spell-sfx",
+      "synth": "spell_rise",
+      "sparkle": "shimmer",
+      "volume": 0.6,
+      "pitch": [
+        0.97,
+        1.03
+      ],
+      "priority": 3,
+      "band": "high",
+      "duration": 1.1,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0,
+      "extras": [
+        {
+          "file": "assets/audio/sfx/chime_single.ogg",
+          "role": "layer",
+          "volume": 0.35,
+          "pitch": [
+            0.99,
+            1.01
+          ],
+          "delayMs": 300,
+          "maxSeconds": 1.4,
+          "fadeOutMs": 500,
+          "replaceSparkle": true
+        }
+      ]
+    },
+    "dice_rattle": {
+      "sound": "dice_rattle",
+      "file": "assets/audio/sfx/dice_throw_short.ogg",
+      "source": "kenney-casino",
+      "synth": "dice_rattle",
+      "sparkle": null,
+      "volume": 0.55,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 2,
+      "band": "mid",
+      "duration": 0.5,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "dice_result": {
+      "sound": "dice_tick",
+      "file": "assets/audio/sfx/dice_tick.ogg",
+      "source": "kenney-interface",
+      "synth": "tick",
+      "sparkle": null,
+      "volume": 0.6,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 3,
+      "band": "high",
+      "duration": 0.15,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "move_step": {
+      "sound": "move_step",
+      "file": "assets/audio/sfx/move_step_footstep.ogg",
+      "source": "kenney-rpg",
+      "synth": "step",
+      "sparkle": null,
+      "volume": 0.4,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 2,
+      "band": "low",
+      "duration": 0.25,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 120,
+      "extras": [
+        {
+          "file": "assets/audio/sfx/step_leaf.ogg",
+          "role": "variant",
+          "volume": 0.4,
+          "pitch": [
+            0.94,
+            1.06
+          ],
+          "delayMs": 0,
+          "maxSeconds": 0.3,
+          "fadeOutMs": 100,
+          "chance": 0.5
+        }
+      ]
+    },
+    "ko": {
+      "sound": "ko_wail",
+      "file": "assets/audio/sfx/roar_ko.ogg",
+      "source": "oga-80-cc0-rpg-sfx",
+      "synth": "ko",
+      "sparkle": "shimmer",
+      "volume": 1.0,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 5,
+      "band": "mid",
+      "duration": 2.0,
+      "loop": false,
+      "duck": true,
+      "cooldownMs": 0,
+      "extras": [
+        {
+          "file": "assets/audio/sfx/bones_rattle.ogg",
+          "role": "layer",
+          "volume": 0.5,
+          "pitch": [
+            0.94,
+            1.06
+          ],
+          "delayMs": 250,
+          "maxSeconds": 1.1,
+          "fadeOutMs": 200,
+          "replaceSparkle": true
+        }
+      ]
+    },
+    "poison_tick": {
+      "sound": "poison_bubble",
+      "file": "assets/audio/sfx/poison_tick_soft.ogg",
+      "source": "kenney-impact",
+      "synth": "bubble",
+      "sparkle": null,
+      "volume": 0.35,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 2,
+      "band": "high",
+      "duration": 0.4,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "status_stun": {
+      "sound": "status_stun_bonk",
+      "file": "assets/audio/sfx/status_stun_owner.ogg",
+      "source": "owner-status-sfx-20261122",
+      "synth": "status_stun",
+      "sparkle": null,
+      "volume": 0.7,
+      "pitch": [
+        0.97,
+        1.03
+      ],
+      "priority": 3,
+      "band": "mid",
+      "duration": 1.55,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 150
+    },
+    "status_slow": {
+      "sound": "status_slow_chain",
+      "file": "assets/audio/sfx/status_slow_owner.ogg",
+      "source": "owner-status-sfx-20261122",
+      "synth": "status_slow",
+      "sparkle": null,
+      "volume": 0.55,
+      "pitch": [
+        0.97,
+        1.03
+      ],
+      "priority": 2,
+      "band": "high",
+      "duration": 1.25,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 150
+    },
+    "status_shock": {
+      "sound": "status_shock_zap",
+      "file": "assets/audio/sfx/status_shock_owner.ogg",
+      "source": "owner-status-sfx-20261122",
+      "synth": "status_shock",
+      "sparkle": null,
+      "volume": 0.6,
+      "pitch": [
+        0.97,
+        1.03
+      ],
+      "priority": 3,
+      "band": "high",
+      "duration": 0.75,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 150
+    },
+    "status_frost": {
+      "sound": "status_frost_chime",
+      "file": "assets/audio/sfx/status_frost_owner.ogg",
+      "source": "owner-status-sfx-20261122",
+      "synth": "status_frost",
+      "sparkle": null,
+      "volume": 0.55,
+      "pitch": [
+        0.98,
+        1.02
+      ],
+      "priority": 2,
+      "band": "high",
+      "duration": 1.95,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 150
+    },
+    "status_bleed": {
+      "sound": "status_bleed_slash",
+      "file": null,
+      "source": "synth-only",
+      "synth": "status_bleed",
+      "sparkle": null,
+      "volume": 0.55,
+      "pitch": [
+        0.97,
+        1.03
+      ],
+      "priority": 2,
+      "band": "mid",
+      "duration": 0.55,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 150
+    },
+    "status_poison": {
+      "sound": "status_poison_hiss",
+      "file": null,
+      "source": "synth-only",
+      "synth": "status_poison",
+      "sparkle": null,
+      "volume": 0.5,
+      "pitch": [
+        0.97,
+        1.03
+      ],
+      "priority": 2,
+      "band": "high",
+      "duration": 0.75,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 150
+    },
+    "status_burn": {
+      "sound": "status_burn_ignite",
+      "file": null,
+      "source": "synth-only",
+      "synth": "status_burn",
+      "sparkle": null,
+      "volume": 0.55,
+      "pitch": [
+        0.97,
+        1.03
+      ],
+      "priority": 2,
+      "band": "mid",
+      "duration": 0.85,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 150
+    },
+    "bleed_tick": {
+      "sound": "bleed_drip",
+      "file": null,
+      "source": "synth-only",
+      "synth": "bleed_tick",
+      "sparkle": null,
+      "volume": 0.35,
+      "pitch": [
+        0.97,
+        1.03
+      ],
+      "priority": 2,
+      "band": "mid",
+      "duration": 0.25,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 150
+    },
+    "burn_tick": {
+      "sound": "burn_crackle",
+      "file": null,
+      "source": "synth-only",
+      "synth": "burn_tick",
+      "sparkle": null,
+      "volume": 0.35,
+      "pitch": [
+        0.97,
+        1.03
+      ],
+      "priority": 2,
+      "band": "mid",
+      "duration": 0.35,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 150
+    },
+    "ultimate_ready": {
+      "sound": "ultimate_ready_chime",
+      "file": "assets/audio/sfx/ultimate_ready_glass.ogg",
+      "source": "kenney-impact",
+      "synth": "arpeggio_up",
+      "sparkle": "shimmer",
+      "volume": 0.8,
+      "pitch": [
+        0.99,
+        1.01
+      ],
+      "priority": 5,
+      "band": "high",
+      "duration": 1.5,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "low_hp_heartbeat": {
+      "sound": "heartbeat",
+      "file": "assets/audio/sfx/heartbeat.ogg",
+      "source": "bigsoundbank-s0770",
+      "synth": "heartbeat",
+      "sparkle": null,
+      "volume": 0.5,
+      "pitch": [
+        1,
+        1
+      ],
+      "priority": 2,
+      "band": "low",
+      "duration": 12,
+      "loop": true,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "heal": {
+      "sound": "heal_chime",
+      "file": "assets/audio/sfx/heal_harp.ogg",
+      "source": "oga-magic-words-healing",
+      "synth": "chime_two",
+      "sparkle": "shimmer",
+      "volume": 0.55,
+      "pitch": [
+        0.99,
+        1.01
+      ],
+      "priority": 3,
+      "band": "high",
+      "duration": 1.0,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0,
+      "extras": [
+        {
+          "file": "assets/audio/sfx/chime_single.ogg",
+          "role": "layer",
+          "volume": 0.3,
+          "pitch": [
+            0.99,
+            1.01
+          ],
+          "delayMs": 200,
+          "maxSeconds": 1.2,
+          "fadeOutMs": 400,
+          "replaceSparkle": true
+        }
+      ]
+    },
+    "item_pickup": {
+      "sound": "item_pickup",
+      "file": "assets/audio/sfx/chime_single.ogg",
+      "source": "bigsoundbank",
+      "synth": "pickup",
+      "sparkle": null,
+      "volume": 0.5,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 3,
+      "band": "high",
+      "duration": 0.4,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_skeleton": {
+      "sound": "ult_skeleton",
+      "file": "assets/audio/sfx/ult_skeleton.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 1.25,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_skeleton_hit": {
+      "sound": "ult_skeleton_hit",
+      "file": "assets/audio/sfx/ult_skeleton_hit.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 1.0,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_wizard": {
+      "sound": "ult_wizard",
+      "file": "assets/audio/sfx/ult_wizard.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 0.7,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_wizard_hit": {
+      "sound": "ult_wizard_hit",
+      "file": "assets/audio/sfx/ult_wizard_hit.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 2.25,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_bat": {
+      "sound": "ult_bat",
+      "file": "assets/audio/sfx/ult_bat.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 0.87,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_bat_hit": {
+      "sound": "ult_bat_hit",
+      "file": "assets/audio/sfx/ult_bat_hit.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 1.3,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_knight": {
+      "sound": "ult_knight",
+      "file": "assets/audio/sfx/ult_knight.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 2.22,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_reaper": {
+      "sound": "ult_reaper",
+      "file": "assets/audio/sfx/ult_reaper.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 1.15,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_reaper_hit": {
+      "sound": "ult_reaper_hit",
+      "file": "assets/audio/sfx/ult_reaper_hit.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 1.55,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_bride": {
+      "sound": "ult_bride",
+      "file": "assets/audio/sfx/ult_bride.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 0.95,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_bride_hit": {
+      "sound": "ult_bride_hit",
+      "file": "assets/audio/sfx/ult_bride_hit.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 1.75,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_hunchback": {
+      "sound": "ult_hunchback",
+      "file": "assets/audio/sfx/ult_hunchback.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 0.98,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_hunchback_hit": {
+      "sound": "ult_hunchback_hit",
+      "file": "assets/audio/sfx/ult_hunchback_hit.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 1.55,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_hag": {
+      "sound": "ult_hag",
+      "file": "assets/audio/sfx/ult_hag.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 0.83,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    },
+    "ult_hag_hit": {
+      "sound": "ult_hag_hit",
+      "file": "assets/audio/sfx/ult_hag_hit.ogg",
+      "source": "owner-gemini-sfx-v3",
+      "synth": "spell_rise",
+      "sparkle": null,
+      "volume": 0.9,
+      "pitch": [
+        0.94,
+        1.06
+      ],
+      "priority": 4,
+      "band": "mid",
+      "duration": 1.6,
+      "loop": false,
+      "duck": false,
+      "cooldownMs": 0
+    }
+  }
+}

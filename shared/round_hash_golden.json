@@ -1,0 +1,1345 @@
+{
+  "cases": [
+    {
+      "canonical": "red_1,220,860,90.0,true,bleed:2|weak:2\nwhite_2,1500,860,120.0,true,\nwall_hp,100.0\nround,1\nphase,red\nseed,90125",
+      "hash": "696f9f69",
+      "name": "state-00",
+      "state": {
+        "phase": "red",
+        "round": 1,
+        "seed": 90125,
+        "units": [
+          {
+            "alive": true,
+            "hp": 120.0,
+            "id": "white_2",
+            "statuses": [],
+            "x": 1499.51,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 90.0,
+            "id": "red_1",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 220.49,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 100
+      }
+    },
+    {
+      "canonical": "red_1,223,860,89.4,true,stun\nwhite_2,1496,860,118.9,true,burn:3\nwall_hp,92.0\nround,2\nphase,white\nseed,90126",
+      "hash": "2df7b83c",
+      "name": "state-01",
+      "state": {
+        "phase": "white",
+        "round": 2,
+        "seed": 90126,
+        "units": [
+          {
+            "alive": true,
+            "hp": 118.9,
+            "id": "white_2",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 1496.26,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 89.4,
+            "id": "red_1",
+            "statuses": [
+              "stun"
+            ],
+            "x": 223.24,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 92
+      }
+    },
+    {
+      "canonical": "red_1,226,860,88.8,true,poison:2|slow:1\nwhite_2,1493,860,117.8,true,bleed:2|weak:2\nwall_hp,84.0\nround,3\nphase,red\nseed,90127",
+      "hash": "66c0be5b",
+      "name": "state-02",
+      "state": {
+        "phase": "red",
+        "round": 3,
+        "seed": 90127,
+        "units": [
+          {
+            "alive": true,
+            "hp": 117.8,
+            "id": "white_2",
+            "statuses": [
+              "weak:2",
+              "bleed:2"
+            ],
+            "x": 1493.01,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 88.8,
+            "id": "red_1",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 225.99,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 84
+      }
+    },
+    {
+      "canonical": "red_1,229,860,88.2,true,\nwhite_2,1490,860,116.7,true,stun\nwall_hp,76.0\nround,4\nphase,white\nseed,90128",
+      "hash": "62765d61",
+      "name": "state-03",
+      "state": {
+        "phase": "white",
+        "round": 4,
+        "seed": 90128,
+        "units": [
+          {
+            "alive": true,
+            "hp": 116.7,
+            "id": "white_2",
+            "statuses": [
+              "stun"
+            ],
+            "x": 1489.76,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 88.2,
+            "id": "red_1",
+            "statuses": [],
+            "x": 228.74,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 76
+      }
+    },
+    {
+      "canonical": "red_1,231,860,87.6,true,burn:3\nwhite_2,1487,860,115.6,true,poison:2|slow:1\nwall_hp,68.0\nround,5\nphase,red\nseed,90129",
+      "hash": "d7cb78ad",
+      "name": "state-04",
+      "state": {
+        "phase": "red",
+        "round": 5,
+        "seed": 90129,
+        "units": [
+          {
+            "alive": true,
+            "hp": 115.6,
+            "id": "white_2",
+            "statuses": [
+              "poison:2",
+              "slow:1"
+            ],
+            "x": 1486.51,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 87.6,
+            "id": "red_1",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 231.49,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 68
+      }
+    },
+    {
+      "canonical": "red_1,234,860,87.0,true,bleed:2|weak:2\nwhite_2,1483,860,114.5,true,\nwall_hp,60.0\nround,6\nphase,white\nseed,90130",
+      "hash": "a53d63d1",
+      "name": "state-05",
+      "state": {
+        "phase": "white",
+        "round": 6,
+        "seed": 90130,
+        "units": [
+          {
+            "alive": true,
+            "hp": 114.5,
+            "id": "white_2",
+            "statuses": [],
+            "x": 1483.26,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 87.0,
+            "id": "red_1",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 234.24,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 60
+      }
+    },
+    {
+      "canonical": "red_1,237,860,86.4,true,stun\nwhite_2,1480,860,113.4,true,burn:3\nwall_hp,52.0\nround,7\nphase,red\nseed,90131",
+      "hash": "90fd36b2",
+      "name": "state-06",
+      "state": {
+        "phase": "red",
+        "round": 7,
+        "seed": 90131,
+        "units": [
+          {
+            "alive": true,
+            "hp": 113.4,
+            "id": "white_2",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 1480.01,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 86.4,
+            "id": "red_1",
+            "statuses": [
+              "stun"
+            ],
+            "x": 236.99,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 52
+      }
+    },
+    {
+      "canonical": "red_1,240,860,85.8,true,poison:2|slow:1\nwhite_2,1477,860,112.3,false,bleed:2|weak:2\nwall_hp,44.0\nround,8\nphase,white\nseed,90132",
+      "hash": "d3ee60a4",
+      "name": "state-07",
+      "state": {
+        "phase": "white",
+        "round": 8,
+        "seed": 90132,
+        "units": [
+          {
+            "alive": false,
+            "hp": 112.3,
+            "id": "white_2",
+            "statuses": [
+              "weak:2",
+              "bleed:2"
+            ],
+            "x": 1476.76,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 85.8,
+            "id": "red_1",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 239.74,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 44
+      }
+    },
+    {
+      "canonical": "red_1,242,860,85.2,true,\nwhite_2,1474,860,111.2,true,stun\nwall_hp,36.0\nround,9\nphase,red\nseed,90133",
+      "hash": "906751c6",
+      "name": "state-08",
+      "state": {
+        "phase": "red",
+        "round": 9,
+        "seed": 90133,
+        "units": [
+          {
+            "alive": true,
+            "hp": 111.2,
+            "id": "white_2",
+            "statuses": [
+              "stun"
+            ],
+            "x": 1473.51,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 85.2,
+            "id": "red_1",
+            "statuses": [],
+            "x": 242.49,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 36
+      }
+    },
+    {
+      "canonical": "red_1,245,860,84.6,true,burn:3\nwhite_2,1470,860,110.1,true,poison:2|slow:1\nwall_hp,28.0\nround,10\nphase,white\nseed,90134",
+      "hash": "59640b6f",
+      "name": "state-09",
+      "state": {
+        "phase": "white",
+        "round": 10,
+        "seed": 90134,
+        "units": [
+          {
+            "alive": true,
+            "hp": 110.1,
+            "id": "white_2",
+            "statuses": [
+              "poison:2",
+              "slow:1"
+            ],
+            "x": 1470.26,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 84.6,
+            "id": "red_1",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 245.24,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 28
+      }
+    },
+    {
+      "canonical": "red_1,248,860,84.0,true,bleed:2|weak:2\nwhite_2,1467,860,109.0,true,\nwall_hp,20.0\nround,11\nphase,red\nseed,90135",
+      "hash": "18db5986",
+      "name": "state-10",
+      "state": {
+        "phase": "red",
+        "round": 11,
+        "seed": 90135,
+        "units": [
+          {
+            "alive": true,
+            "hp": 109.0,
+            "id": "white_2",
+            "statuses": [],
+            "x": 1467.01,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 84.0,
+            "id": "red_1",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 247.99,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 20
+      }
+    },
+    {
+      "canonical": "red_1,251,860,83.4,true,stun\nwhite_2,1464,860,107.9,true,burn:3\nwall_hp,12.0\nround,12\nphase,white\nseed,90136",
+      "hash": "2539fe9f",
+      "name": "state-11",
+      "state": {
+        "phase": "white",
+        "round": 12,
+        "seed": 90136,
+        "units": [
+          {
+            "alive": true,
+            "hp": 107.9,
+            "id": "white_2",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 1463.76,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 83.4,
+            "id": "red_1",
+            "statuses": [
+              "stun"
+            ],
+            "x": 250.74,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 12
+      }
+    },
+    {
+      "canonical": "red_1,253,860,82.8,true,poison:2|slow:1\nwhite_2,1461,860,106.8,true,bleed:2|weak:2\nwall_hp,4.0\nround,13\nphase,red\nseed,90137",
+      "hash": "cf3d7f63",
+      "name": "state-12",
+      "state": {
+        "phase": "red",
+        "round": 13,
+        "seed": 90137,
+        "units": [
+          {
+            "alive": true,
+            "hp": 106.8,
+            "id": "white_2",
+            "statuses": [
+              "weak:2",
+              "bleed:2"
+            ],
+            "x": 1460.51,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 82.8,
+            "id": "red_1",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 253.49,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 4
+      }
+    },
+    {
+      "canonical": "red_1,256,860,82.2,true,\nwhite_2,1457,860,105.7,true,stun\nwall_hp,0.0\nround,14\nphase,white\nseed,90138",
+      "hash": "0e06574f",
+      "name": "state-13",
+      "state": {
+        "phase": "white",
+        "round": 14,
+        "seed": 90138,
+        "units": [
+          {
+            "alive": true,
+            "hp": 105.7,
+            "id": "white_2",
+            "statuses": [
+              "stun"
+            ],
+            "x": 1457.26,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 82.2,
+            "id": "red_1",
+            "statuses": [],
+            "x": 256.24,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 0
+      }
+    },
+    {
+      "canonical": "red_1,259,860,81.6,true,burn:3\nwhite_2,1454,860,104.6,true,poison:2|slow:1\nwall_hp,0.0\nround,15\nphase,red\nseed,90139",
+      "hash": "9989e2f7",
+      "name": "state-14",
+      "state": {
+        "phase": "red",
+        "round": 15,
+        "seed": 90139,
+        "units": [
+          {
+            "alive": true,
+            "hp": 104.6,
+            "id": "white_2",
+            "statuses": [
+              "poison:2",
+              "slow:1"
+            ],
+            "x": 1454.01,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 81.6,
+            "id": "red_1",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 258.99,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 0
+      }
+    },
+    {
+      "canonical": "red_1,262,860,81.0,true,bleed:2|weak:2\nwhite_2,1451,860,103.5,true,\nwall_hp,0.0\nround,16\nphase,white\nseed,90140",
+      "hash": "b3751be0",
+      "name": "state-15",
+      "state": {
+        "phase": "white",
+        "round": 16,
+        "seed": 90140,
+        "units": [
+          {
+            "alive": true,
+            "hp": 103.5,
+            "id": "white_2",
+            "statuses": [],
+            "x": 1450.76,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 81.0,
+            "id": "red_1",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 261.74,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 0
+      }
+    },
+    {
+      "canonical": "red_1,264,860,80.4,true,stun\nwhite_2,1448,860,102.4,true,burn:3\nwall_hp,0.0\nround,17\nphase,red\nseed,90141",
+      "hash": "d5b9eab7",
+      "name": "state-16",
+      "state": {
+        "phase": "red",
+        "round": 17,
+        "seed": 90141,
+        "units": [
+          {
+            "alive": true,
+            "hp": 102.4,
+            "id": "white_2",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 1447.51,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 80.4,
+            "id": "red_1",
+            "statuses": [
+              "stun"
+            ],
+            "x": 264.49,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 0
+      }
+    },
+    {
+      "canonical": "red_1,267,860,79.8,true,poison:2|slow:1\nwhite_2,1444,860,101.3,true,bleed:2|weak:2\nwall_hp,0.0\nround,18\nphase,white\nseed,90142",
+      "hash": "e7897efb",
+      "name": "state-17",
+      "state": {
+        "phase": "white",
+        "round": 18,
+        "seed": 90142,
+        "units": [
+          {
+            "alive": true,
+            "hp": 101.3,
+            "id": "white_2",
+            "statuses": [
+              "weak:2",
+              "bleed:2"
+            ],
+            "x": 1444.26,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 79.8,
+            "id": "red_1",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 267.24,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 0
+      }
+    },
+    {
+      "canonical": "red_1,270,860,79.2,true,\nwhite_2,1441,860,100.2,true,stun\nwall_hp,0.0\nround,19\nphase,red\nseed,90143",
+      "hash": "38f359ef",
+      "name": "state-18",
+      "state": {
+        "phase": "red",
+        "round": 19,
+        "seed": 90143,
+        "units": [
+          {
+            "alive": true,
+            "hp": 100.2,
+            "id": "white_2",
+            "statuses": [
+              "stun"
+            ],
+            "x": 1441.01,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 79.2,
+            "id": "red_1",
+            "statuses": [],
+            "x": 269.99,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 0
+      }
+    },
+    {
+      "canonical": "red_1,273,860,78.6,true,burn:3\nwhite_2,1438,860,99.1,true,poison:2|slow:1\nwall_hp,0.0\nround,20\nphase,white\nseed,90144",
+      "hash": "779e109b",
+      "name": "state-19",
+      "state": {
+        "phase": "white",
+        "round": 20,
+        "seed": 90144,
+        "units": [
+          {
+            "alive": true,
+            "hp": 99.1,
+            "id": "white_2",
+            "statuses": [
+              "poison:2",
+              "slow:1"
+            ],
+            "x": 1437.76,
+            "y": 860.49
+          },
+          {
+            "alive": true,
+            "hp": 78.6,
+            "id": "red_1",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 272.74,
+            "y": 859.51
+          }
+        ],
+        "wallHp": 0
+      }
+    },
+    {
+      "canonical": "left_0,252,860,120.0,true,\nright_0,1657,860,115.3,true,burn:3\nwall_hp,100.0\nround,3\nphase,round_end\nseed,1234578",
+      "hash": "466ba557",
+      "name": "team-1-0",
+      "state": {
+        "phase": "round_end",
+        "round": 3,
+        "seed": 1234578,
+        "teamSize": 1,
+        "units": [
+          {
+            "alive": true,
+            "hp": 115.3,
+            "id": "right_0",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 1656.5,
+            "y": 860.0
+          },
+          {
+            "alive": true,
+            "hp": 120.0,
+            "id": "left_0",
+            "statuses": [],
+            "x": 252.4,
+            "y": 860.0
+          }
+        ],
+        "wallHp": 100.0
+      }
+    },
+    {
+      "canonical": "left_0,249,860,87.1,true,bleed:2|weak:2\nright_0,1653,860,82.4,true,stun\nwall_hp,82.5\nround,4\nphase,round_end\nseed,1234579",
+      "hash": "07595aac",
+      "name": "team-1-1",
+      "state": {
+        "phase": "round_end",
+        "round": 4,
+        "seed": 1234579,
+        "teamSize": 1,
+        "units": [
+          {
+            "alive": true,
+            "hp": 82.4,
+            "id": "right_0",
+            "statuses": [
+              "stun"
+            ],
+            "x": 1653.2,
+            "y": 860.0
+          },
+          {
+            "alive": true,
+            "hp": 87.1,
+            "id": "left_0",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 249.1,
+            "y": 860.0
+          }
+        ],
+        "wallHp": 82.5
+      }
+    },
+    {
+      "canonical": "left_0,246,860,54.2,true,poison:2|slow:1\nright_0,1650,860,49.5,true,\nwall_hp,65.0\nround,5\nphase,round_end\nseed,1234580",
+      "hash": "eba80773",
+      "name": "team-1-2",
+      "state": {
+        "phase": "round_end",
+        "round": 5,
+        "seed": 1234580,
+        "teamSize": 1,
+        "units": [
+          {
+            "alive": true,
+            "hp": 49.5,
+            "id": "right_0",
+            "statuses": [],
+            "x": 1649.9,
+            "y": 859.5
+          },
+          {
+            "alive": true,
+            "hp": 54.2,
+            "id": "left_0",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 245.8,
+            "y": 859.5
+          }
+        ],
+        "wallHp": 65.0
+      }
+    },
+    {
+      "canonical": "left_0,243,860,0.0,false,burn:3\nright_0,1647,860,0.0,false,bleed:2|weak:2\nwall_hp,47.5\nround,6\nphase,round_end\nseed,1234581",
+      "hash": "eff45b33",
+      "name": "team-1-3",
+      "state": {
+        "phase": "round_end",
+        "round": 6,
+        "seed": 1234581,
+        "teamSize": 1,
+        "units": [
+          {
+            "alive": false,
+            "hp": 0.0,
+            "id": "right_0",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 1646.6,
+            "y": 860.0
+          },
+          {
+            "alive": false,
+            "hp": 0.0,
+            "id": "left_0",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 242.5,
+            "y": 860.0
+          }
+        ],
+        "wallHp": 47.5
+      }
+    },
+    {
+      "canonical": "left_0,252,860,120.0,true,\nleft_1,373,874,110.6,true,bleed:2|weak:2\nright_0,1657,860,115.3,true,burn:3\nright_1,1537,874,105.9,true,stun\nwall_hp,100.0\nround,3\nphase,round_end\nseed,1234589",
+      "hash": "186d4140",
+      "name": "team-2-4",
+      "state": {
+        "phase": "round_end",
+        "round": 3,
+        "seed": 1234589,
+        "teamSize": 2,
+        "units": [
+          {
+            "alive": true,
+            "hp": 105.9,
+            "id": "right_1",
+            "statuses": [
+              "stun"
+            ],
+            "x": 1536.99,
+            "y": 874.0
+          },
+          {
+            "alive": true,
+            "hp": 120.0,
+            "id": "left_0",
+            "statuses": [],
+            "x": 252.4,
+            "y": 860.0
+          },
+          {
+            "alive": true,
+            "hp": 110.6,
+            "id": "left_1",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 372.89,
+            "y": 874.0
+          },
+          {
+            "alive": true,
+            "hp": 115.3,
+            "id": "right_0",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 1656.5,
+            "y": 860.0
+          }
+        ],
+        "wallHp": 100.0
+      }
+    },
+    {
+      "canonical": "left_0,249,860,87.1,true,bleed:2|weak:2\nleft_1,370,874,77.7,true,poison:2|slow:1\nright_0,1653,860,82.4,true,stun\nright_1,1534,874,73.0,true,\nwall_hp,82.5\nround,4\nphase,round_end\nseed,1234590",
+      "hash": "17cd0802",
+      "name": "team-2-5",
+      "state": {
+        "phase": "round_end",
+        "round": 4,
+        "seed": 1234590,
+        "teamSize": 2,
+        "units": [
+          {
+            "alive": true,
+            "hp": 73.0,
+            "id": "right_1",
+            "statuses": [],
+            "x": 1533.69,
+            "y": 874.0
+          },
+          {
+            "alive": true,
+            "hp": 82.4,
+            "id": "right_0",
+            "statuses": [
+              "stun"
+            ],
+            "x": 1653.2,
+            "y": 860.0
+          },
+          {
+            "alive": true,
+            "hp": 77.7,
+            "id": "left_1",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 369.59,
+            "y": 874.0
+          },
+          {
+            "alive": true,
+            "hp": 87.1,
+            "id": "left_0",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 249.1,
+            "y": 860.0
+          }
+        ],
+        "wallHp": 82.5
+      }
+    },
+    {
+      "canonical": "left_0,246,860,54.2,true,poison:2|slow:1\nleft_1,366,874,44.8,true,burn:3\nright_0,1650,860,49.5,true,\nright_1,1530,874,40.1,true,bleed:2|weak:2\nwall_hp,65.0\nround,5\nphase,round_end\nseed,1234591",
+      "hash": "6f55ee56",
+      "name": "team-2-6",
+      "state": {
+        "phase": "round_end",
+        "round": 5,
+        "seed": 1234591,
+        "teamSize": 2,
+        "units": [
+          {
+            "alive": true,
+            "hp": 40.1,
+            "id": "right_1",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 1530.39,
+            "y": 873.5
+          },
+          {
+            "alive": true,
+            "hp": 54.2,
+            "id": "left_0",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 245.8,
+            "y": 859.5
+          },
+          {
+            "alive": true,
+            "hp": 44.8,
+            "id": "left_1",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 366.28999999999996,
+            "y": 873.5
+          },
+          {
+            "alive": true,
+            "hp": 49.5,
+            "id": "right_0",
+            "statuses": [],
+            "x": 1649.9,
+            "y": 859.5
+          }
+        ],
+        "wallHp": 65.0
+      }
+    },
+    {
+      "canonical": "left_0,243,860,21.3,true,burn:3\nleft_1,363,874,0.0,false,stun\nright_0,1647,860,16.6,true,bleed:2|weak:2\nright_1,1527,874,0.0,false,poison:2|slow:1\nwall_hp,47.5\nround,6\nphase,round_end\nseed,1234592",
+      "hash": "11371d31",
+      "name": "team-2-7",
+      "state": {
+        "phase": "round_end",
+        "round": 6,
+        "seed": 1234592,
+        "teamSize": 2,
+        "units": [
+          {
+            "alive": false,
+            "hp": 0.0,
+            "id": "right_1",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 1527.09,
+            "y": 874.0
+          },
+          {
+            "alive": true,
+            "hp": 16.6,
+            "id": "right_0",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 1646.6,
+            "y": 860.0
+          },
+          {
+            "alive": false,
+            "hp": 0.0,
+            "id": "left_1",
+            "statuses": [
+              "stun"
+            ],
+            "x": 362.99,
+            "y": 874.0
+          },
+          {
+            "alive": true,
+            "hp": 21.3,
+            "id": "left_0",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 242.5,
+            "y": 860.0
+          }
+        ],
+        "wallHp": 47.5
+      }
+    },
+    {
+      "canonical": "left_0,252,860,120.0,true,\nleft_1,373,874,110.6,true,bleed:2|weak:2\nleft_2,492,888,101.2,true,poison:2|slow:1\nright_0,1657,860,115.3,true,burn:3\nright_1,1537,874,105.9,true,stun\nright_2,1417,888,96.5,true,\nwall_hp,100.0\nround,3\nphase,round_end\nseed,1234600",
+      "hash": "364eed77",
+      "name": "team-3-8",
+      "state": {
+        "phase": "round_end",
+        "round": 3,
+        "seed": 1234600,
+        "teamSize": 3,
+        "units": [
+          {
+            "alive": true,
+            "hp": 96.5,
+            "id": "right_2",
+            "statuses": [],
+            "x": 1416.5,
+            "y": 888.0
+          },
+          {
+            "alive": true,
+            "hp": 120.0,
+            "id": "left_0",
+            "statuses": [],
+            "x": 252.4,
+            "y": 860.0
+          },
+          {
+            "alive": true,
+            "hp": 110.6,
+            "id": "left_1",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 372.89,
+            "y": 874.0
+          },
+          {
+            "alive": true,
+            "hp": 101.2,
+            "id": "left_2",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 492.4,
+            "y": 888.0
+          },
+          {
+            "alive": true,
+            "hp": 115.3,
+            "id": "right_0",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 1656.5,
+            "y": 860.0
+          },
+          {
+            "alive": true,
+            "hp": 105.9,
+            "id": "right_1",
+            "statuses": [
+              "stun"
+            ],
+            "x": 1536.99,
+            "y": 874.0
+          }
+        ],
+        "wallHp": 100.0
+      }
+    },
+    {
+      "canonical": "left_0,249,860,87.1,true,bleed:2|weak:2\nleft_1,370,874,77.7,true,poison:2|slow:1\nleft_2,489,888,68.3,true,burn:3\nright_0,1653,860,82.4,true,stun\nright_1,1534,874,73.0,true,\nright_2,1413,888,63.6,true,bleed:2|weak:2\nwall_hp,82.5\nround,4\nphase,round_end\nseed,1234601",
+      "hash": "303390df",
+      "name": "team-3-9",
+      "state": {
+        "phase": "round_end",
+        "round": 4,
+        "seed": 1234601,
+        "teamSize": 3,
+        "units": [
+          {
+            "alive": true,
+            "hp": 63.6,
+            "id": "right_2",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 1413.2,
+            "y": 888.0
+          },
+          {
+            "alive": true,
+            "hp": 73.0,
+            "id": "right_1",
+            "statuses": [],
+            "x": 1533.69,
+            "y": 874.0
+          },
+          {
+            "alive": true,
+            "hp": 82.4,
+            "id": "right_0",
+            "statuses": [
+              "stun"
+            ],
+            "x": 1653.2,
+            "y": 860.0
+          },
+          {
+            "alive": true,
+            "hp": 68.3,
+            "id": "left_2",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 489.09999999999997,
+            "y": 888.0
+          },
+          {
+            "alive": true,
+            "hp": 77.7,
+            "id": "left_1",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 369.59,
+            "y": 874.0
+          },
+          {
+            "alive": true,
+            "hp": 87.1,
+            "id": "left_0",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 249.1,
+            "y": 860.0
+          }
+        ],
+        "wallHp": 82.5
+      }
+    },
+    {
+      "canonical": "left_0,246,860,54.2,true,poison:2|slow:1\nleft_1,366,874,44.8,true,burn:3\nleft_2,486,888,35.4,true,stun\nright_0,1650,860,49.5,true,\nright_1,1530,874,40.1,true,bleed:2|weak:2\nright_2,1410,888,30.7,true,poison:2|slow:1\nwall_hp,65.0\nround,5\nphase,round_end\nseed,1234602",
+      "hash": "f709abbd",
+      "name": "team-3-10",
+      "state": {
+        "phase": "round_end",
+        "round": 5,
+        "seed": 1234602,
+        "teamSize": 3,
+        "units": [
+          {
+            "alive": true,
+            "hp": 30.7,
+            "id": "right_2",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 1409.9,
+            "y": 887.5
+          },
+          {
+            "alive": true,
+            "hp": 54.2,
+            "id": "left_0",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 245.8,
+            "y": 859.5
+          },
+          {
+            "alive": true,
+            "hp": 44.8,
+            "id": "left_1",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 366.28999999999996,
+            "y": 873.5
+          },
+          {
+            "alive": true,
+            "hp": 35.4,
+            "id": "left_2",
+            "statuses": [
+              "stun"
+            ],
+            "x": 485.79999999999995,
+            "y": 887.5
+          },
+          {
+            "alive": true,
+            "hp": 49.5,
+            "id": "right_0",
+            "statuses": [],
+            "x": 1649.9,
+            "y": 859.5
+          },
+          {
+            "alive": true,
+            "hp": 40.1,
+            "id": "right_1",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 1530.39,
+            "y": 873.5
+          }
+        ],
+        "wallHp": 65.0
+      }
+    },
+    {
+      "canonical": "left_0,243,860,21.3,true,burn:3\nleft_1,363,874,11.9,true,stun\nleft_2,483,888,0.0,false,\nright_0,1647,860,16.6,true,bleed:2|weak:2\nright_1,1527,874,7.2,true,poison:2|slow:1\nright_2,1407,888,0.0,false,burn:3\nwall_hp,47.5\nround,6\nphase,round_end\nseed,1234603",
+      "hash": "2abdf46d",
+      "name": "team-3-11",
+      "state": {
+        "phase": "round_end",
+        "round": 6,
+        "seed": 1234603,
+        "teamSize": 3,
+        "units": [
+          {
+            "alive": false,
+            "hp": 0.0,
+            "id": "right_2",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 1406.6,
+            "y": 888.0
+          },
+          {
+            "alive": true,
+            "hp": 7.2,
+            "id": "right_1",
+            "statuses": [
+              "slow:1",
+              "poison:2"
+            ],
+            "x": 1527.09,
+            "y": 874.0
+          },
+          {
+            "alive": true,
+            "hp": 16.6,
+            "id": "right_0",
+            "statuses": [
+              "bleed:2",
+              "weak:2"
+            ],
+            "x": 1646.6,
+            "y": 860.0
+          },
+          {
+            "alive": false,
+            "hp": 0.0,
+            "id": "left_2",
+            "statuses": [],
+            "x": 482.5,
+            "y": 888.0
+          },
+          {
+            "alive": true,
+            "hp": 11.9,
+            "id": "left_1",
+            "statuses": [
+              "stun"
+            ],
+            "x": 362.99,
+            "y": 874.0
+          },
+          {
+            "alive": true,
+            "hp": 21.3,
+            "id": "left_0",
+            "statuses": [
+              "burn:3"
+            ],
+            "x": 242.5,
+            "y": 860.0
+          }
+        ],
+        "wallHp": 47.5
+      }
+    },
+    {
+      "canonical": "left,221,860,66.0,true,\nright,1500,860,77.7,true,bleed:2\nwall_hp,100.0\nround,2\nphase,throws:left:54:50|right:60:48\nseed,90125",
+      "hash": "c916d09c",
+      "name": "team-1-12",
+      "state": {
+        "phase": "throws:left:54:50|right:60:48",
+        "round": 2,
+        "seed": 90125,
+        "teamSize": 1,
+        "units": [
+          {
+            "alive": true,
+            "hp": 77.7,
+            "id": "right",
+            "statuses": [
+              "bleed:2"
+            ],
+            "x": 1500.4,
+            "y": 860
+          },
+          {
+            "alive": true,
+            "hp": 66.0,
+            "id": "left",
+            "statuses": [],
+            "x": 220.6,
+            "y": 860
+          }
+        ],
+        "wallHp": 100
+      }
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,11 @@
+{
+ "jobs": [
+  {
+   "id": "fx_feet_chain",
+   "tier": "Q3",
+   "ref": "bar",
+   "prompt": "Ignore the reference layout. Draw ONE pair of heavy dark iron ankle shackles joined by a short slack chain, seen from the side at ground level: two thick rusty iron cuffs with rivets, one on each end, and about four chunky chain links hanging between them in a low curve; slightly glowing cold blue rim light; the whole object horizontal, wide and low, fully inside the picture with a wide empty margin on every side.",
+   "style": "Game sprite, dark-fantasy 2D cartoon, thick clean near-black outlines, thin warm orange outer glow, flat three-tone cel shading, centred, alone. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark."
+  }
+ ]
+}

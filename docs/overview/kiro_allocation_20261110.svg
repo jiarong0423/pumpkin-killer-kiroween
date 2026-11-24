@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1860 1290" font-family="-apple-system,Helvetica,Arial,sans-serif">
+<defs><marker id="ar" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#cbd5e0"/></marker></defs>
+<rect x="0" y="0" width="1860" height="1290" fill="#1a1625"/>
+<text x="60" y="52" font-size="34" font-weight="700" fill="#f7fafc">南瓜殺手：Kiro 任務分配圖（2026-11-10）</text>
+<text x="60" y="88" font-size="18" fill="#a0aec0">除了「生成圖片」，其餘預設交給 Kiro；主線只調度、重跑驗證、合併。同時最多 3 個任務；改 index.html 的一次一個、各用 git worktree。</text>
+<text x="60" y="128" font-size="22" font-weight="700" fill="#e2e8f0">第一層（現在可開始）</text>
+<text x="520" y="128" font-size="22" font-weight="700" fill="#e2e8f0">第二層（依賴第一層）</text>
+<text x="980" y="128" font-size="22" font-weight="700" fill="#e2e8f0">第三層（遊戲本體）</text>
+<text x="1440" y="128" font-size="22" font-weight="700" fill="#e2e8f0">繳交包（11-20 起草）</text>
+<path d="M420,196.0 L520,196.0" fill="none" stroke="#cbd5e0" stroke-width="2.5" marker-end="url(#ar)"/>
+<path d="M880,196.0 L980,196.0" fill="none" stroke="#cbd5e0" stroke-width="2.5" marker-end="url(#ar)"/>
+<path d="M420,316.0 L520,316.0" fill="none" stroke="#cbd5e0" stroke-width="2.5" marker-end="url(#ar)"/>
+<path d="M420,436.0 L470,436.0 L470,316.0 L520,316.0" fill="none" stroke="#cbd5e0" stroke-width="2.5" marker-end="url(#ar)"/>
+<path d="M880,316.0 L980,316.0" fill="none" stroke="#cbd5e0" stroke-width="2.5" marker-end="url(#ar)"/>
+<path d="M420,436.0 L980,436.0" fill="none" stroke="#cbd5e0" stroke-width="2.5" marker-end="url(#ar)"/>
+<path d="M420,556.0 L520,556.0" fill="none" stroke="#cbd5e0" stroke-width="2.5" marker-end="url(#ar)"/>
+<path d="M420,676.0 L470,676.0 L470,556.0 L520,556.0" fill="none" stroke="#cbd5e0" stroke-width="2.5" marker-end="url(#ar)"/>
+<path d="M700.0,362 L700.0,510" fill="none" stroke="#cbd5e0" stroke-width="2.5" marker-end="url(#ar)"/>
+<path d="M880,556.0 L930,556.0 L930,436.0 L980,436.0" fill="none" stroke="#cbd5e0" stroke-width="2.5" marker-end="url(#ar)"/>
+<rect x="60" y="150" width="360" height="92" rx="12" fill="#4299e1" fill-opacity="0.2" stroke="#4299e1" stroke-width="3"/>
+<text x="76" y="188" font-size="21" font-weight="700" fill="#f7fafc">A1 開始畫面＋取名接線</text>
+<text x="76" y="218" font-size="16" fill="#cbd5e0">Terra・index.html（工作樹）</text>
+<rect x="520" y="150" width="360" height="92" rx="12" fill="#4299e1" fill-opacity="0.2" stroke="#4299e1" stroke-width="3"/>
+<text x="536" y="188" font-size="21" font-weight="700" fill="#f7fafc">C1 姿勢動畫接線</text>
+<text x="536" y="218" font-size="16" fill="#cbd5e0">Terra・js/pose_anim.js</text>
+<rect x="980" y="150" width="360" height="92" rx="12" fill="#4299e1" fill-opacity="0.2" stroke="#4299e1" stroke-width="3"/>
+<text x="996" y="188" font-size="21" font-weight="700" fill="#f7fafc">C2 58/60 修補＋手機版</text>
+<text x="996" y="218" font-size="16" fill="#cbd5e0">Terra・觸控 44px／橫向</text>
+<rect x="60" y="270" width="360" height="92" rx="12" fill="#4299e1" fill-opacity="0.2" stroke="#4299e1" stroke-width="3"/>
+<text x="76" y="308" font-size="21" font-weight="700" fill="#f7fafc">A2 屬性測試（PBT）</text>
+<text x="76" y="338" font-size="16" fill="#cbd5e0">Terra・同種子同結果</text>
+<rect x="520" y="270" width="360" height="92" rx="12" fill="#4299e1" fill-opacity="0.2" stroke="#4299e1" stroke-width="3"/>
+<text x="536" y="308" font-size="21" font-weight="700" fill="#f7fafc">B1 決定論規則核心</text>
+<text x="536" y="338" font-size="16" fill="#cbd5e0">Terra・Sonnet 審</text>
+<rect x="980" y="270" width="360" height="92" rx="12" fill="#4299e1" fill-opacity="0.2" stroke="#4299e1" stroke-width="3"/>
+<text x="996" y="308" font-size="21" font-weight="700" fill="#f7fafc">C3 四對四 S1…S7</text>
+<text x="996" y="338" font-size="16" fill="#cbd5e0">Terra・Sonnet 審</text>
+<rect x="60" y="390" width="360" height="92" rx="12" fill="#4299e1" fill-opacity="0.2" stroke="#4299e1" stroke-width="3"/>
+<text x="76" y="428" font-size="21" font-weight="700" fill="#f7fafc">A4 擲硬幣模組</text>
+<text x="76" y="458" font-size="16" fill="#cbd5e0">Terra・人頭／字、種子後產生</text>
+<rect x="980" y="390" width="360" height="92" rx="12" fill="#4299e1" fill-opacity="0.2" stroke="#4299e1" stroke-width="3"/>
+<text x="996" y="428" font-size="21" font-weight="700" fill="#f7fafc">C4 大廳＋隨機房間＋硬幣動畫</text>
+<text x="996" y="458" font-size="16" fill="#cbd5e0">Terra・邀請碼／隨機房／選座位</text>
+<rect x="60" y="510" width="360" height="92" rx="12" fill="#4299e1" fill-opacity="0.2" stroke="#4299e1" stroke-width="3"/>
+<text x="76" y="548" font-size="21" font-weight="700" fill="#f7fafc">A5 中繼站（可提前）</text>
+<text x="76" y="578" font-size="16" fill="#cbd5e0">Terra・邀請碼＋隨機房間／Coolify</text>
+<rect x="520" y="510" width="360" height="92" rx="12" fill="#4299e1" fill-opacity="0.2" stroke="#4299e1" stroke-width="3"/>
+<text x="536" y="548" font-size="21" font-weight="700" fill="#f7fafc">B3 MCP 通道（多人）</text>
+<text x="536" y="578" font-size="16" fill="#cbd5e0">Terra・加入隨機房／座位／公平</text>
+<rect x="60" y="630" width="360" height="92" rx="12" fill="#48bb78" fill-opacity="0.2" stroke="#48bb78" stroke-width="3"/>
+<text x="76" y="668" font-size="21" font-weight="700" fill="#f7fafc">MCP 通道規格（多人）</text>
+<text x="76" y="698" font-size="16" fill="#cbd5e0">Sonnet・協定／隨機房／座位</text>
+<rect x="60" y="750" width="360" height="92" rx="12" fill="#48bb78" fill-opacity="0.2" stroke="#48bb78" stroke-width="3"/>
+<text x="76" y="788" font-size="21" font-weight="700" fill="#f7fafc">A3 Kiro 原生證據</text>
+<text x="76" y="818" font-size="16" fill="#cbd5e0">Sonnet・agents／hooks／steering</text>
+<circle cx="396" cy="774" r="13" fill="#fc8181"/><text x="396" y="780" font-size="16" font-weight="700" text-anchor="middle" fill="#1a1625">你</text>
+<rect x="520" y="750" width="360" height="92" rx="12" fill="#4299e1" fill-opacity="0.2" stroke="#4299e1" stroke-width="3"/>
+<text x="536" y="788" font-size="21" font-weight="700" fill="#f7fafc">C5 缺的音效</text>
+<text x="536" y="818" font-size="16" fill="#cbd5e0">Terra・合成或 CC0</text>
+<rect x="520" y="870" width="360" height="92" rx="12" fill="#ecc94b" fill-opacity="0.2" stroke="#ecc94b" stroke-width="3"/>
+<text x="536" y="908" font-size="21" font-weight="700" fill="#f7fafc">主線：出圖（Colab／千問）</text>
+<text x="536" y="938" font-size="16" fill="#cbd5e0">風鬼、硬幣、鎖鏈；逐張驗</text>
+<rect x="980" y="870" width="360" height="92" rx="12" fill="#ecc94b" fill-opacity="0.2" stroke="#ecc94b" stroke-width="3"/>
+<text x="996" y="908" font-size="21" font-weight="700" fill="#f7fafc">主線：重跑驗證＋合併</text>
+<text x="996" y="938" font-size="16" fill="#cbd5e0">核驗檔、總帳、提示詞紀錄</text>
+<rect x="1440" y="150" width="360" height="92" rx="12" fill="#48bb78" fill-opacity="0.2" stroke="#48bb78" stroke-width="3"/>
+<text x="1456" y="188" font-size="21" font-weight="700" fill="#f7fafc">D1 README＋Kiro 使用說明</text>
+<text x="1456" y="218" font-size="16" fill="#cbd5e0">Sonnet・八個主題、附檔案</text>
+<circle cx="1776" cy="174" r="13" fill="#fc8181"/><text x="1776" y="180" font-size="16" font-weight="700" text-anchor="middle" fill="#1a1625">你</text>
+<rect x="1440" y="270" width="360" height="92" rx="12" fill="#48bb78" fill-opacity="0.2" stroke="#48bb78" stroke-width="3"/>
+<text x="1456" y="308" font-size="21" font-weight="700" fill="#f7fafc">D2 三分鐘影片腳本</text>
+<text x="1456" y="338" font-size="16" fill="#cbd5e0">Sonnet・你錄製並上傳</text>
+<circle cx="1776" cy="294" r="13" fill="#fc8181"/><text x="1776" y="300" font-size="16" font-weight="700" text-anchor="middle" fill="#1a1625">你</text>
+<rect x="1440" y="390" width="360" height="92" rx="12" fill="#48bb78" fill-opacity="0.2" stroke="#48bb78" stroke-width="3"/>
+<text x="1456" y="428" font-size="21" font-weight="700" fill="#f7fafc">D3 部落格＋社群貼文</text>
+<text x="1456" y="458" font-size="16" fill="#cbd5e0">Sonnet・你發布</text>
+<circle cx="1776" cy="414" r="13" fill="#fc8181"/><text x="1776" y="420" font-size="16" font-weight="700" text-anchor="middle" fill="#1a1625">你</text>
+<rect x="1440" y="510" width="360" height="92" rx="12" fill="#48bb78" fill-opacity="0.2" stroke="#48bb78" stroke-width="3"/>
+<text x="1456" y="548" font-size="21" font-weight="700" fill="#f7fafc">D4 繳交前檢查</text>
+<text x="1456" y="578" font-size="16" fill="#cbd5e0">Sonnet・對照官方規則</text>
+<circle cx="1776" cy="534" r="13" fill="#fc8181"/><text x="1776" y="540" font-size="16" font-weight="700" text-anchor="middle" fill="#1a1625">你</text>
+<text x="60" y="1010" font-size="22" font-weight="700" fill="#e2e8f0">圖例</text>
+<rect x="60" y="1030" width="26" height="26" rx="6" fill="#4299e1" fill-opacity="0.2" stroke="#4299e1" stroke-width="3"/><text x="96" y="1050" font-size="18" fill="#e2e8f0">Terra（GPT）程式／腳本／測試</text>
+<rect x="490" y="1030" width="26" height="26" rx="6" fill="#48bb78" fill-opacity="0.2" stroke="#48bb78" stroke-width="3"/><text x="526" y="1050" font-size="18" fill="#e2e8f0">Sonnet 規劃／文件／規格</text>
+<rect x="920" y="1030" width="26" height="26" rx="6" fill="#ecc94b" fill-opacity="0.2" stroke="#ecc94b" stroke-width="3"/><text x="956" y="1050" font-size="18" fill="#e2e8f0">主線 調度／驗證／合併／出圖</text>
+<rect x="1350" y="1030" width="26" height="26" rx="6" fill="#fc8181" fill-opacity="0.2" stroke="#fc8181" stroke-width="3"/><text x="1386" y="1050" font-size="18" fill="#e2e8f0">需要你（使用者）動手</text>
+<text x="60" y="1100" font-size="17" fill="#a0aec0">箭頭＝依賴：後面等前面合併、驗證後才開始。箭頭只在方塊之間的空隙轉彎，不穿過任何方塊。</text>
+<text x="60" y="1130" font-size="17" fill="#a0aec0">多人連線鏈全部是 Kiro 的：A5 中繼站（邀請碼＋隨機房間）→ B3 MCP 通道（加入隨機房／座位／公平）→ C4 大廳。主線不寫這條鏈，只驗證。</text>
+<text x="60" y="1160" font-size="17" fill="#a0aec0">Kiro 點數：已用 1,480.73／4,000（待確認是「已用」），12-31 到期。繳交截止：台灣時間 12-05 06:00。</text>
+<text x="60" y="1190" font-size="17" fill="#a0aec0">來源：docs/kiro_queue_20261110.md；總帳 docs/KIRO_LEDGER.md；由 scripts/make_kiro_allocation_svg.py 產生（文件，不是遊戲美術）。</text>
+</svg>

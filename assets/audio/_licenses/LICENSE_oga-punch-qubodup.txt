@@ -1,0 +1,9 @@
+Source: https://opengameart.org/content/punch
+Work: Punch
+Author shown on the page: looneybits
+Checked and downloaded: 2026-11-09
+License wording on the page that day: License(s): CC0
+Chosen by the owner from the audition page (2026-11-09). Converted by the reviewer where needed (ffmpeg: trim, fades, loudness).
+Not heard by the reviewer.
+File qubodupPunch02.ogg -> assets/audio/sfx/punch_hit.ogg  sha256 4093c7be0e2722304ef5ab59dd99411b8e42461dfcc87128eb9f6199466b646f
+File qubodupPunch01.ogg -> assets/audio/sfx/punch_heavy.ogg  sha256 3769b8f1a31b536a26f4ed23193486b07ac644bc9dbd00a132c495ee69e91d84

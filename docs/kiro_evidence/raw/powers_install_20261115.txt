@@ -1,0 +1,8 @@
+2026-11-15 (local time), run in the user's terminal:
+$ kiro-cli powers install .kiro/powers/pumpkin-killer-seat   (absolute path of this repository's folder)
+Installed power "pumpkin-killer-seat"
+exit=0
+$ cat ~/.kiro/powers/installed.json   (after the install)
+{"version": "1.0.0", "installedPowers": [{"name": "pumpkin-killer-seat"}], "dismissedAutoInstalls": []}
+Before the install the same file listed "installedPowers": [] (seen by Kiro IDE and by the main line earlier the same day).
+Not shown here: whether the power activates in a chat session by its keywords.

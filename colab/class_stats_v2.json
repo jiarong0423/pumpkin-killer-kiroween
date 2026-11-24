@@ -1,0 +1,173 @@
+{
+  "version": 2,
+  "date": "2026-11-09",
+  "source": "docs/class_stats_v2.md (hand-computed model, never simulated)",
+  "order": ["skeleton", "wizard", "bat", "knight", "bride", "hunchback", "reaper"],
+  "shared": {
+    "gravity": 980,
+    "windAccelPerUnit": 72,
+    "v0PerPower": 13.8,
+    "launchHeightPx": 110,
+    "chargeSweepSec": 1.3,
+    "bodyBoxHeightPx": 190,
+    "moveRange": { "player": [160, 760], "ai": [1160, 1760] }
+  },
+  "classes": {
+    "skeleton": {
+      "hp": 100,
+      "damage": 24,
+      "typicalHit": 24,
+      "speedMul": 1.0,
+      "gravityMul": 1.0,
+      "windMul": 1.0,
+      "special": {
+        "weapon": "proj_spear",
+        "hitHalfWidth": 70,
+        "frost": { "damageMul": 0.85, "throws": 2, "appliesOnlyIfSurvives": true },
+        "ultimatePerUnit": 36
+      }
+    },
+    "wizard": {
+      "hp": 85,
+      "damage": 28,
+      "typicalHit": 28,
+      "speedMul": 1.0,
+      "gravityMul": 1.0,
+      "windMul": 1.0,
+      "special": {
+        "weapon": "cannonball",
+        "hitHalfWidth": 70,
+        "recoilIsVisualOnly": true,
+        "ultimatePerUnit": 42
+      }
+    },
+    "bat": {
+      "hp": 90,
+      "damage": 26,
+      "typicalHit": 26,
+      "speedMul": 1.0,
+      "gravityMul": 1.0,
+      "windMul": 1.0,
+      "special": {
+        "weapon": "proj_shuriken",
+        "hitHalfWidth": 70,
+        "shurikenPerNormalThrow": 1,
+        "ultimate": { "count": 5, "fanDeg": 8, "perShuriken": 7.8, "maxPerUnit": 39 },
+        "ultimatePerUnit": 39
+      }
+    },
+    "knight": {
+      "hp": 120,
+      "damage": 30,
+      "typicalHit": 20,
+      "speedMul": 1.0,
+      "gravityMul": 1.0,
+      "windMul": 1.0,
+      "special": {
+        "weapon": "proj_shield",
+        "hitHalfWidth": 70,
+        "damageIsTotalOverCollisions": true,
+        "dieMin": 1,
+        "dieMax": 6,
+        "currentRules": { "groundAndFenceCostACollision": true, "hopBackOnUnit": true },
+        "optionA": {
+          "enabled": false,
+          "totalDamage": 17,
+          "dieIsNumberOfUnitHits": true,
+          "freeGroundSkips": 1,
+          "fenceEndsShield": true,
+          "typicalHit": 17,
+          "assumedSkipSuccess": 0.6
+        },
+        "ultimatePerUnit": 45
+      }
+    },
+    "bride": {
+      "hp": 75,
+      "damage": 25,
+      "typicalHit": 20.75,
+      "speedMul": 0.9,
+      "gravityMul": 1.0,
+      "windMul": 1.0,
+      "special": {
+        "weapon": "proj_soundwave",
+        "hitHalfWidth": 105,
+        "centerFullWidthPx": 40,
+        "edgeFactor": 0.45,
+        "centerDamage": 25,
+        "edgeDamage": 11.25,
+        "averageFactorGivenHit": 0.83,
+        "hitsOnlyNearestUnitToWaveCentre": true,
+        "blockedByFenceAndSkyShield": true,
+        "ultimatePerUnit": 37.5
+      }
+    },
+    "hunchback": {
+      "hp": 110,
+      "damage": 21,
+      "typicalHit": 21,
+      "speedMul": 0.85,
+      "gravityMul": 1.0,
+      "windMul": 1.0,
+      "special": {
+        "weapon": "proj_axe",
+        "hitHalfWidth": 70,
+        "spinRadPerSec": 12.57,
+        "spinFollowsVxSign": true,
+        "knockback": {
+          "enabled": true,
+          "px": 50,
+          "onlyOnDirectUnitHit": true,
+          "notOnKillingBlow": true,
+          "direction": "away from thrower along x",
+          "clampToTargetMoveRange": true,
+          "minSpacingToNextFriendlyPx": 160,
+          "usesTargetMoveAction": false,
+          "slideSec": 0.25,
+          "ultimateExtraKnockback": false
+        },
+        "maxRangePx54deg": 1411,
+        "ultimatePerUnit": 31.5,
+        "alternative": { "name": "big-hitter", "hp": 80, "damage": 29, "typicalHit": 29 }
+      }
+    },
+    "reaper": {
+      "hp": 105,
+      "damage": 23,
+      "typicalHit": 23,
+      "speedMul": 1.0,
+      "gravityMul": 1.0,
+      "windMul": 1.0,
+      "special": {
+        "weapon": "proj_skull",
+        "hitHalfWidth": 70,
+        "execute": { "targetHpAtMostFraction": 0.30, "damageMul": 1.5, "damage": 34.5, "appliesToSkullOnly": true },
+        "ultimate": { "trigger": "skull hit (normal damage)", "slashes": 3, "perSlash": 11.5, "total": 34.5, "singleTarget": true },
+        "ultimatePerUnit": 34.5
+      }
+    }
+  },
+  "matrix": [
+    [5, 4, 4, 5, 4, 5, 5],
+    [4, 4, 4, 5, 3, 4, 4],
+    [4, 4, 4, 5, 3, 5, 5],
+    [5, 5, 5, 6, 4, 6, 6],
+    [5, 5, 5, 6, 4, 6, 6],
+    [5, 5, 5, 6, 4, 6, 5],
+    [5, 4, 4, 6, 4, 5, 5]
+  ],
+  "matrixNote": "matrix[row][col] = ceil(HP of order[col] / typicalHit of order[row]); rows are attackers, columns are targets. Reaper execute is not applied (it changes only reaper vs knight from 6 to 5).",
+  "matrixAlternatives": {
+    "knightOptionA17Row": [6, 5, 6, 8, 5, 7, 7],
+    "hunchbackBigHitterRow": [4, 3, 4, 5, 3, 3, 4]
+  },
+  "power": {
+    "definition": "hp * expectedDamagePerThrow (hand model)",
+    "skill": { "A210": "hit rate about 0.33", "A150": "hit rate about 0.47 (observed AI 46%)", "A100": "hit rate about 0.70" },
+    "A210": { "skeleton": 873, "wizard": 793, "bat": 780, "knight": 864, "bride": 865, "hunchback": 906, "reaper": 869, "mean": 850 },
+    "A150": { "skeleton": 1255, "wizard": 1111, "bat": 1092, "knight": 1104, "bride": 1211, "hunchback": 1268, "reaper": 1217, "mean": 1180 },
+    "A100": { "skeleton": 1945, "wizard": 1666, "bat": 1638, "knight": 1530, "bride": 1654, "hunchback": 1902, "reaper": 1826, "mean": 1737 },
+    "knightRange": { "A210": [576, 1152], "A150": [808, 1404], "A100": [1212, 1848] }
+  },
+  "bands": { "hitsToKillTypical": [4, 6], "hitsToKillMin": 3, "hitsToKillMax": 8, "winRatePair": [0.40, 0.60], "winRateClassAverage": [0.45, 0.55] }
+}

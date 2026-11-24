@@ -1,0 +1,22 @@
+# Scene layers: tasks
+
+- [x] 1. `js/scene_layers.js`: UMD wrapper for Node and browser, mulberry32, helpers (R1, R2)
+- [x] 2. Manifest validator with the limits of R3
+- [x] 3. Offset maths: parallax, wind sway, pivot shear, tiled drift, pulse, camera clamp (R5)
+- [x] 4. Drawing: back and front planes, overscan, blend and alpha, tile copies, shear transform (R7)
+- [x] 5. Fallback ladder: layers, single image, flat colour; required and optional layers (R4)
+- [x] 6. `scripts/test_scene_layers.js`: determinism, bounds, fallback, validator, draw order, stub canvas (R6)
+- [x] 7. `docs/visual_quality_plan.md`: ranked quality items, asset split, manifest example parsed by the tests
+- [x] 8. `docs/scene_layers_integration.md`: the `index.html` steps with pass conditions
+- [x] 9. `colab/layered_job.py`: decompose, finish, quality checks (written, never run)
+- [x] 10. Run `node scripts/test_scene_layers.js` (see the last line in the task report)
+- [ ] 11. Main line: wire steps 1 to 4 of the integration note with an empty manifest and compare the screenshot (tolerance in step 3)
+- [ ] 12. Main line: measure the 600-frame sample of the plan (A3) as the baseline before any lift item
+- [ ] 13. Colab: run `colab/layered_job.py` on the graveyard picture, `ONLY = ["graveyard"]`, check the contact sheet, write the layer map, finish
+- [ ] 14. Check the licence of the upscaler (Real-ESRGAN or another) before `LICENSE_ACK = True` and `UPSCALE = True`
+- [ ] 15. Put the first real layers in `(not published)` with a manifest; add a test that loads that manifest and validates it
+- [ ] 16. Main line: plan checks 5, 6, 7, 9, 10 (A4) on the graveyard with real layers
+- [ ] 17. Re-read `(not published)` (task 47) when it exists and update plan B2 and integration section 4
+- [ ] 18. Bell tower and pumpkin field pictures (they are not in `assets/env/` yet), then repeat 13 to 16
+- [ ] 19. Decide with the owner: native 1920 x 1080 or a 2x upscale; whether a rig replaces the pose images (plan B3)
+- [ ] 20. Calm mode bake (integration step 8) once the calm switch exists

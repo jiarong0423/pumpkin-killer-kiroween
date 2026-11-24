@@ -1,0 +1,33 @@
+{
+ "version": 1,
+ "note": "owner 2026-11-16: character size is locked. Unit draw box 220 x 220 for both sides (1024 px art padded), feet baseline y 860; per-art foot/x offsets pinned by hash (comments and whitespace ignored)",
+ "unit_w": 220,
+ "unit_h": 220,
+ "ground_y": 860,
+ "hp_bar": [
+  150,
+  13
+ ],
+ "offset_table_hashes": {
+  "ART_FOOT_FIX": "e2ff23a9215dc73803eb53998588a1acbe420e3ad79bbb17eefec0b696f57e97",
+  "ART_POSE_FOOT": "a7c4153e425d988a81f69e4dac8d723da5809dba9ea7afe845153519c4cf9a20",
+  "ART_POSE_XFIX": "47e1241e25d3aa78ec39781e5d3f7278e7b6821c3586123e900ac5a49549877c",
+  "ART_FACES_RIGHT": "111c147f80b87b085eff2dfe81d4cc84f634d8ab399589fe6cdc0232adf3e69b"
+ },
+ "allowed_picture_sizes": [
+  [
+   1024,
+   1024
+  ],
+  [
+   1536,
+   1024
+  ]
+ ],
+ "unused_crops_exempt": [
+  "assets/units/unit_bride_idle.png",
+  "assets/units/unit_hunchback_idle.png",
+  "assets/units/unit_reaper_idle.png",
+  "assets/units/unit_reaper_idle_lowpalm.png"
+ ]
+}

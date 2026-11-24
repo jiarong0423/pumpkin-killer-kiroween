@@ -1,0 +1,40 @@
+{
+ "refs": {
+  "style_wizard_unit": "assets/units/unit_wizard.png",
+  "ref_assets_units_unit_wizard_png": "assets/units/unit_wizard.png",
+  "ref_assets_env_bg_graveyard_png": "assets/env/bg_graveyard.png",
+  "ref_assets_units_unit_knight_png": "assets/units/unit_knight.png",
+  "ref_assets_weapons_small_shield_png": "assets/weapons/small_shield.png",
+  "ref_assets_fx_sprites_fx_ghost_idle_png": "assets/fx/sprites/fx_ghost_idle.png",
+  "ref_assets_poses_necro_windup_png": "assets/poses/necro_windup.png",
+  "ref_assets_poses_necro_idle_png": "assets/poses/necro_idle.png",
+  "ref_assets_units_unit_reaper_idle_png": "assets/units/unit_reaper_idle.png",
+  "ref_assets_portraits_bride_front_png": "assets/portraits/bride_front.png",
+  "ref_assets_portraits_hunchback_front_png": "assets/portraits/hunchback_front.png",
+  "ref_assets_weapons_dart_png": "assets/weapons/dart.png",
+  "ref_assets_fx_sprites_fx_flame_comet_png": "assets/fx/sprites/fx_flame_comet.png",
+  "ref_assets_ui_socket_special_png": "assets/ui/socket_special.png",
+  "ref_assets_weapons_proj_spear_colab_png": "assets/weapons/proj_spear_colab.png",
+  "ref_assets_fx_sprites_fx_sonic_ring_png": "assets/fx/sprites/fx_sonic_ring.png",
+  "ref_assets_ui_icon_heavy_png": "assets/ui/icon_heavy.png"
+ },
+ "style": " ",
+ "jobs": [
+  {
+   "id": "hag_idle1_b",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "IMPORTANT: ONE single character with exactly ONE head and ONE face in a strict side view; no second head, no second face, no reflection, no duplicate figure; the skin is pale ghost-white, NOT green. Design one original full-body ghost nun game hero: chibi, with a big round head about one third of her whole height (a single head), strongly hunched, strict side view facing LEFT, centred on a square canvas with 10% margin. She hovers: draw no legs or feet; her long black robe with thin purple trim tapers into black smoke wisps, and the robe hem sits on the shared baseline. Give her a black veil over a white wimple, a white collar band, and a rope belt, with no cross or religious symbol except the small wooden chest-cross pendant that is her weapon. Her face is cartoon chibi, pale ghost-white with a cool grey shade with thin crack lines and deep wrinkles, slanted almond eyes with bright glowing yellow irises, narrow cat-like pupils and dark smudged liner, one raised eyebrow, a tiny nose, and a sly crooked grin with two small fangs. One near hand lightly holds the chest cross pendant; the other holds a pumpkin-orange basket of small wooden crosses. Wisps of black smoke float and curl around her and the basket, not blue, purple, or glowing. This is not a javelin throw. Use thick clean near-black outlines, thin warm-orange rim light, flat three-tone cel shading, and a flat noise-free magenta #FF00FF background. Do not include text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, cast shadow, background other than flat magenta, church scene, prayer, watermark, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_front_b",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "IMPORTANT: ONE single character with exactly ONE head and ONE face in a strict side view; no second head, no second face, no reflection, no duplicate figure; the skin is pale ghost-white, NOT green. Design one original ghost nun head-and-shoulders portrait, centred with 10% margin. She wears a black veil over a white wimple and a white collar band above black robe shoulders with thin purple trim. Her face is cartoon chibi, pale ghost-white with a cool grey shade with thin crack lines and deep wrinkles, slanted almond eyes with bright glowing yellow irises, narrow cat-like pupils and dark smudged liner, one raised eyebrow, a tiny nose, and a sly crooked grin with two small fangs. Use thick clean near-black outlines, thin warm-orange rim light, flat three-tone cel shading, and a flat noise-free magenta #FF00FF background. Do not include hands, basket, wooden cross, text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, background other than flat magenta, church scene, prayer, watermark, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  }
+ ]
+}

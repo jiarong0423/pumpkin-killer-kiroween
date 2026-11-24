@@ -1,0 +1,4 @@
+2026-11-15 ~16:10 (local time), Kiro IDE window "pumpkin-killer" (folder trusted), chat message sent by the main line at the owner's request:
+  "Call the pumpkin-killer MCP tool get_public_state once and show me the raw response. Do not edit any file."
+Kiro's answer (screenshot docs/kiro_evidence/raw/ide_mcp_attempt_20261115.jpg): it could not call the tool; the tool catalogue of that IDE session has no pumpkin-killer MCP tool, and loading tool::pumpkin-killer::get_public_state returned an error; the server is probably not configured, not running, or not connected in that session.
+Result: NO successful MCP call from the IDE yet. Same server is listed by `kiro-cli mcp list` (default agent) from the same .kiro/settings/mcp.json, so the CLI sees the configuration. Next step to try (not done): check the IDE's MCP panel for the server state, or restart the IDE after the trust grant.

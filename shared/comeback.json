@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "note": "2026-11-17 comeback pack for TEAM matches only (2 or 3 units per team), from docs/agent_reports_20261117/review_round2_designer.md rows B1, B2, B3. The page (js/comeback.js) and the Python engine (scripts/comeback_py.py) must give identical numbers (shared/comeback_vectors.json). One unit per team never reads this file.",
+  "near_miss": {
+    "enabled": false,
+    "reach_px": 120,
+    "scale": 0.9,
+    "note": "OFF since 2026-11-18 (owner: damage without contact is a bug; the trace of 45,360 shots showed 61 percent of the team-match damage touched nothing with reach 450, 23 percent with 120); set enabled to true to bring it back (reach 120 px was the last value). When on: a throw that lands on the ground (no unit hit) within reach_px of the nearest living enemy box edge hits that unit for dmg x scale x (1 - e / reach_px); e = horizontal distance from the landing x to that unit's box edge; no crit, no ultimate pip, no status"
+  },
+  "underdog": {
+    "max_bonus": 1.0,
+    "full_at_deficit": 0.5,
+    "note": "hit damage x (1 + min(max_bonus, deficit / full_at_deficit)); deficit = max(0, enemy team HP share - own team HP share); HP share = sum of living hp / sum of max hp"
+  },
+  "pity": {
+    "per_miss": 0.4,
+    "cap": 1.6,
+    "note": "every throw of a team that deals no direct hit adds per_miss to that team's next hit (cap); a direct hit uses it and resets it; a near-miss counts as a miss for this counter"
+  },
+  "order": "damage = base x weather x ramp x min(max_total_multiplier, underdog x (1 + pity)), rounded to 0.1 at the end (owner 2026-11-17: the stack was too extreme, 2.3x at most)",
+  "max_total_multiplier": 2.3
+}

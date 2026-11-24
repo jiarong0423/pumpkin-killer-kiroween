@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "note": "2026-11-17 team-match tuning, from docs/agent_reports_20261117/review_round2_designer.md (A1, A2). Applies ONLY when a team has 2 or 3 units; one unit per team never reads this file. The page (js/team_tuning.js) and the Python engine (scripts/team_tuning_py.py) must give identical numbers (shared/team_tuning_vectors.json). 2026-11-17 later: hp_scale raised to 0.80 / 0.55 because the comeback pack (shared/comeback.json) is applied with it (designer round 2, rows A1 and B pack). 2026-11-17 owner: a team match should last about 7 minutes (3 v 3): hp_scale 0.90 / 0.95, ramp from round 13, cap 24 / 28 (study with the comeback pack, 60 matches per cell: 3v3 16.9 / 17.3 / 18.8 rounds for expert / decent / sloppy bots, 2v2 12.0 / 12.7 / 13.9; at 25 s per round that is about 7.0 and 5.3 minutes; seconds per round are an estimate, not measured).",
+  "hp_scale": {
+    "2": 0.9,
+    "3": 0.95
+  },
+  "hp_floor_hits": 2.5,
+  "ramp": {
+    "start_round": 13,
+    "per_round": 0.08
+  },
+  "round_cap": {
+    "1": 40,
+    "2": 24,
+    "3": 28
+  },
+  "round_cap_rule": "when the round counter passes the cap the team with the larger total HP share wins; equal HP share: the team with more living units; still equal: the right side (the second mover)"
+}

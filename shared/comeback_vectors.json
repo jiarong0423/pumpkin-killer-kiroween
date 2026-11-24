@@ -1,0 +1,253 @@
+{
+ "nearMiss": [
+  {
+   "base": 20,
+   "e": 0,
+   "expected": 0.0
+  },
+  {
+   "base": 20,
+   "e": 1,
+   "expected": 17.9
+  },
+  {
+   "base": 20,
+   "e": 30,
+   "expected": 13.5
+  },
+  {
+   "base": 20,
+   "e": 60,
+   "expected": 9.0
+  },
+  {
+   "base": 20,
+   "e": 119,
+   "expected": 0.1
+  },
+  {
+   "base": 20,
+   "e": 120,
+   "expected": 0.0
+  },
+  {
+   "base": 20,
+   "e": 121,
+   "expected": 0.0
+  },
+  {
+   "base": 33,
+   "e": 0,
+   "expected": 0.0
+  },
+  {
+   "base": 33,
+   "e": 1,
+   "expected": 29.5
+  },
+  {
+   "base": 33,
+   "e": 30,
+   "expected": 22.3
+  },
+  {
+   "base": 33,
+   "e": 60,
+   "expected": 14.9
+  },
+  {
+   "base": 33,
+   "e": 119,
+   "expected": 0.2
+  },
+  {
+   "base": 33,
+   "e": 120,
+   "expected": 0.0
+  },
+  {
+   "base": 33,
+   "e": 121,
+   "expected": 0.0
+  },
+  {
+   "base": 47.5,
+   "e": 0,
+   "expected": 0.0
+  },
+  {
+   "base": 47.5,
+   "e": 1,
+   "expected": 42.4
+  },
+  {
+   "base": 47.5,
+   "e": 30,
+   "expected": 32.1
+  },
+  {
+   "base": 47.5,
+   "e": 60,
+   "expected": 21.4
+  },
+  {
+   "base": 47.5,
+   "e": 119,
+   "expected": 0.4
+  },
+  {
+   "base": 47.5,
+   "e": 120,
+   "expected": 0.0
+  },
+  {
+   "base": 47.5,
+   "e": 121,
+   "expected": 0.0
+  }
+ ],
+ "underdog": [
+  {
+   "own": 1,
+   "enemy": 1,
+   "expected": 1.0
+  },
+  {
+   "own": 0.5,
+   "enemy": 0.5,
+   "expected": 1.0
+  },
+  {
+   "own": 0.4,
+   "enemy": 0.6,
+   "expected": 1.4
+  },
+  {
+   "own": 0.2,
+   "enemy": 0.7,
+   "expected": 2.0
+  },
+  {
+   "own": 0.1,
+   "enemy": 0.9,
+   "expected": 2.0
+  },
+  {
+   "own": 0.9,
+   "enemy": 0.1,
+   "expected": 1.0
+  },
+  {
+   "own": 0,
+   "enemy": 1,
+   "expected": 2.0
+  }
+ ],
+ "pity": [
+  {
+   "misses": 0,
+   "expected": 0.0
+  },
+  {
+   "misses": 1,
+   "expected": 0.4
+  },
+  {
+   "misses": 2,
+   "expected": 0.8
+  },
+  {
+   "misses": 3,
+   "expected": 1.2000000000000002
+  },
+  {
+   "misses": 4,
+   "expected": 1.6
+  },
+  {
+   "misses": 5,
+   "expected": 1.6
+  },
+  {
+   "misses": 8,
+   "expected": 1.6
+  }
+ ],
+ "final": [
+  {
+   "base": 20,
+   "own": 1,
+   "enemy": 1,
+   "misses": 0,
+   "expected": 20.0
+  },
+  {
+   "base": 20,
+   "own": 0.5,
+   "enemy": 0.6,
+   "misses": 1,
+   "expected": 33.6
+  },
+  {
+   "base": 33,
+   "own": 0.3,
+   "enemy": 0.8,
+   "misses": 2,
+   "expected": 75.9
+  },
+  {
+   "base": 47.5,
+   "own": 0.1,
+   "enemy": 1,
+   "misses": 6,
+   "expected": 109.2
+  },
+  {
+   "base": 18.5,
+   "own": 0.7,
+   "enemy": 0.3,
+   "misses": 3,
+   "expected": 40.7
+  },
+  {
+   "base": 20,
+   "own": 0.0,
+   "enemy": 1.0,
+   "misses": 8,
+   "expected": 46.0
+  }
+ ],
+ "share": [
+  {
+   "units": [
+    {
+     "hp": 50,
+     "maxHp": 100
+    },
+    {
+     "hp": 0,
+     "maxHp": 100
+    }
+   ],
+   "expected": 0.25
+  },
+  {
+   "units": [
+    {
+     "hp": 30,
+     "maxHp": 30
+    }
+   ],
+   "expected": 1.0
+  },
+  {
+   "units": [
+    {
+     "hp": 0,
+     "maxHp": 10
+    }
+   ],
+   "expected": 0.0
+  }
+ ]
+}

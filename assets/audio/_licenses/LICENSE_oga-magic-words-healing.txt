@@ -1,0 +1,8 @@
+Source: https://opengameart.org/content/magic-words-healing-sound-effect
+Work: Magic Words + Healing Sound Effect
+Author shown on the page: PFNienow
+Checked and downloaded: 2026-11-09
+License wording on the page that day: License(s): CC0
+Chosen by the owner from the audition page (2026-11-09). Converted by the reviewer where needed (ffmpeg: trim, fades, loudness).
+Not heard by the reviewer.
+File health_restore.mp3 -> assets/audio/sfx/heal_harp.ogg  sha256 ee12f95cb7f359200fd1d569ddf48e993af4f9332532d4b4f4185686d0fca91e

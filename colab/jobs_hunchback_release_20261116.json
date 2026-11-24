@@ -1,0 +1,18 @@
+{
+ "refs": {
+  "ref_assets_units_unit_hunchback_idle_png": "assets/units/unit_hunchback_idle.png"
+ },
+ "style": " ",
+ "jobs": [
+  {
+   "id": "hunchback_release_r3",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_hunchback_idle_png",
+   "prompt": "Edit the reference: preserve the identical green-skinned hunchback's face, brown hair, torn olive vest, rope belt, boots, orange outline, proportions, canvas size, scale, direction (facing LEFT), and feet baseline. FACE LOCK: keep the SAME face, hair, body proportions, clothing, colours, and orange outline as the reference; exactly ONE head, TWO arms, and TWO hands. Show his empty-handed stance at the moment after throwing a big axe forward: his right arm is extended forward LEFT and slightly up with an open empty hand, his left hand relaxed and empty, and his body leans forward. No axe remains in either hand or anywhere in the picture. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow.",
+   "style": " ",
+   "negative": "no second head, no extra hands, no axe, no text, no change of face",
+   "w": 1024,
+   "h": 1024
+  }
+ ]
+}

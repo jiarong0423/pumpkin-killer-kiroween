@@ -1,0 +1,15 @@
+# Kiro task 150 — MCP server: turn safety, alternating first team, coarse path, human timer (K3 plus owner answers 8, 9, 10, 12)
+
+Owner answers 2026-11-15 (see the end of `(not published)`): 8 = turn-based, left and right take turns (alternate the first team each round); 9 = REDUCE: the history publishes landings plus a coarse path, not the 6-step path; 10 = DO a 12 s human-phase timer in the .py mode; 11 = the player agent may auto-approve submit_action, end_turn, set_notes (a later task writes `.kiro/agents/pk-player.json`); 12 = KEEP `random_assignment`. K1 (seats, per-seat views) is done and verified: do not weaken it.
+
+Read: `docs/mcp_architecture_opus_20261115.md` (sections 2, 4, 6 K3), `scripts/mcp_stdio_server.py`, `scripts/mcp_game_server.py` (`resolve_round`, spawns, controllers), `scripts/test_mcp_stdio.py`, `scripts/test_mcp_seats.py`, `scripts/test_mcp_game.py`, `scripts/eval_agent_learning.py`, `scripts/pk_mcp_health.py`, `docs/mcp_agent_protocol.md`.
+
+Do, saving after each, one shell command per call:
+1. K3: `end_turn` requires BOTH `round` and `phase` for every seat except `referee`; a replay or stale call returns a clear error and changes nothing. An identical `submit_action` (same unit, same args, same round) returns the stored result with `duplicate: true` instead of an error. Keep the `referee` default behaviour working for the existing tests, and update `scripts/eval_agent_learning.py` to pass `round` and `phase`.
+2. Answer 8: in a shared phase the first team to resolve alternates every round (round 1 red first, round 2 white first, and so on), so one team cannot always kill a unit before it throws. Put the rule in one named function with a test (a unit that would die first in round 1 survives to throw in round 2 in a seeded setup).
+3. Answer 9: `get_history` and `get_public_state` publish, for an enemy throw, the landing, hit, damage and a COARSE path (at most 5 points, rounded to 10 px); an owner still sees its own full path. A test: a least-squares fit on the published enemy points cannot recover `GRAVITY` within 5 percent.
+4. Answer 10: add `--human-turn-seconds` (default 12, `0` = off) so the human phase ends by itself after the deadline, checked lazily like the agent timer; the shipped `.kiro/settings/mcp.json` stays as it is.
+5. Answer 12: keep `random_assignment`; add a docstring saying it is for tests.
+6. Run `python3 -B scripts/test_mcp_stdio.py`, `python3 -B scripts/test_mcp_seats.py`, `python3 -B scripts/test_mcp_game.py` and `python3 -B scripts/pk_mcp_health.py`; paste the last lines. If a command is refused, say so; never invent output.
+
+Touch only `scripts/mcp_stdio_server.py`, `scripts/mcp_game_server.py`, `scripts/test_mcp_stdio.py`, `scripts/test_mcp_seats.py`, `scripts/test_mcp_game.py`, `scripts/eval_agent_learning.py`, a new `scripts/test_mcp_turns.py` if you want separate tests, and the result file exactly named `docs/kiro_150_result_gpt-5.6-terra.md` (max 15 lines). Never `index.html`, never the relay files (task 149). No network, no git.

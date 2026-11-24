@@ -1,0 +1,22 @@
+%% Target MCP architecture, Kiro task 144 (2026-11-15). Solid = build before the freeze. Dashed = later or owner decision.
+flowchart LR
+  subgraph DEV["One device: fixed .py mode, headless"]
+    A1["Agent client<br/>Kiro CLI or IDE"] -- "MCP stdio" --> M1["mcp_stdio_server.py<br/>--seat white"]
+    A2["Second agent client"] -. "MCP stdio, K7" .-> M2["mcp_stdio_server.py<br/>--seat red --connect"]
+    M2 -. "127.0.0.1 only, seat token" .-> HOST["Match host, K7<br/>one Session per match"]
+    M1 --> VIEW
+    HOST -.-> VIEW
+    BI["Built-in seat, K2<br/>LevelAgent + AdaptiveLevel<br/>same six tools in-process"] --> VIEW
+    SP["Spectator seat, K1<br/>read-only tools"] --> VIEW
+    VIEW["view_for(seat), K1<br/>own aim, own shield, own notes<br/>enemy: landings and paths only"] --> SES["Session<br/>phases, 12 s timer<br/>round+phase guard, idempotent submit, K3"]
+    SES --> ENG["Engine GameState<br/>seeded, deterministic<br/>labelled practice engine"]
+    SES --> TR["Transcript JSONL, K2<br/>public fields only"]
+    AL["Allowlist + description pins, K4"] -. "checks" .-> M1
+  end
+  subgraph WEB["Browser page: separate JS rules"]
+    PG["index.html<br/>human vs built-in AI"] --> HUD["Level + reason in HUD, K8<br/>js/adaptive_level.js"]
+  end
+  RELAY["Owner cloud relay, planned<br/>invite codes, forwards actions<br/>never simulates, not MCP"]
+  PG -. "later" .-> RELAY
+  HOST -. "later" .-> RELAY
+  NO["Not built: public MCP over HTTP"]

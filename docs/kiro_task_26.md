@@ -1,0 +1,20 @@
+# Kiro task 26 - write the object prompts for the Colab art (files only)
+
+## Why
+The owner wants every top and bottom UI object and the fence rebuilt as real generated art on Colab, with texture, and asked YOU to write the object prompts first. The art model is Qwen-Image-Edit-2509 (an image EDIT model: every job gets one reference image and a prompt).
+The first quick prompts are in `colab/jobs.json` (tier `U1`, 25 jobs, written by the main line); the Colab run was stopped so your improved prompts can replace them. You cannot generate images; you write and structure the prompts.
+Read `(not published)` first. Look at `(not published)` with the file read tool: the owner's reference for the look of the bottom bar and the scene.
+
+## Do exactly this
+1. Read `(not published)`, `docs/dock_design.md`, `docs/dock_asset_requests.md` (your earlier dock work), `colab/jobs.json` (the U1 jobs and how the other jobs are written: `id`, `tier`, `ref`, `prompt`, optional `style`), `docs/game_mode.md`, and look at the mockup.
+2. Write `docs/art_prompt_guide.md`: (a) a **style bible** in 10 lines: palette with hex codes, line weight, light direction, materials and textures (weathered wood grain, chipped stone, rusted iron, wax, bone), glow rules (cool spectral glow vs warm candle), what to avoid (flat vector look, text, letters, watermark, plastic shine); (b) how to write prompts for an EDIT model (describe what to redraw from the reference, keep composition simple, one object per image, centered, 15 percent margin, flat magenta background `#FF00FF`); (c) per-object-type recipes (frame, button plate, icon, bar fill, flame strip, fence); (d) a QA checklist for each result (silhouette readable at 100 px wide, no baked-in text, magenta key clean, edges not glowing into the background, left-right symmetry where needed); (e) the reference images available on Drive (`unit_skeleton.png`, `unit_wizard.png`, `unit_bat.png`, `unit_knight.png`, `ref_bar_from_video.png`) and which reference to pick per object type.
+3. Write `colab/ui_jobs_kiro.json` (same schema as `colab/jobs.json`: `{"refs": {...}, "style": "...", "jobs": [...]}` with only the jobs): rewrite ALL 25 U1 jobs with richer, concrete prompts (materials, shapes, exact counts of rivets / planks / bars, where glow goes, what must stay empty for text), tier `U2`, 2 variants each is set by the Colab cell, plus the new jobs the dock design needs that are missing:
+   - top HUD: team plate left / right, center info plate, HP frame, HP fill, wind gauge frame and a wind arrow pointer;
+   - bottom dock: dock frame, button plate normal / hover / active / disabled, four skill icons, hero chip plate normal / active, lock plate, candle, two ghost-fire strips, power segments (3), ammo and special sockets, the sound and reset round buttons;
+   - portraits for the four classes (reference = that class's unit image) as head-and-shoulders, facing right, and the three expressions for the cut-in (charge, shout, hit) for the pumpkin wizard first;
+   - fence: BLACK wrought-iron Halloween fence in three states (intact, damaged, broken) with a glowing jack-o'-lantern, the exact size ratio the game uses (the fence is 130 px wide and 250 px tall, a tall narrow object), so say "tall and narrow, about 1 : 2";
+   - the floating-shield slabs already exist; do not redo them.
+   Keep each prompt under 90 words, free of artist, brand and game names. Give every job a `negative` string (no text, no letters, no watermark, no cast shadow, no extra objects).
+4. Write `docs/art_job_order.md`: the order to run them on Colab (highest visual impact first), the estimated minutes at 2 minutes per image, and the "if only 8 images" shortlist.
+5. Do not touch `index.html`, `assets/`, `js/`, `scripts/`. Do not create images. Do not use git or shell.
+6. Finish with a 6-line summary: how many jobs, the 8-image shortlist, the riskiest prompts (the ones the edit model is likely to get wrong), and what you could not verify (you cannot see the results).

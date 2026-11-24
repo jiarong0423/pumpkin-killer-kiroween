@@ -1,0 +1,1 @@
+pixelfx trial 2026-11-22: four effects rendered with the repository tool (node tools/render.mjs <id> --gif --scale 4 --bg dark --no-actor) from https://github.com/patch-gg/pixelfx (MIT, Copyright (c) 2026 Patch and Hugo Duprez; the Patch Pixel font is not included). Trial only: not wired into the game, not in the service worker, not credited in CREDITS yet.

@@ -1,0 +1,481 @@
+{
+ "generated": "2026-11-15 15:37",
+ "folders": {
+  "assets/audio/ambient": {
+   "count": 13,
+   "files": [
+    "cat_growl.ogg",
+    "cat_meow.ogg",
+    "crow.ogg",
+    "dog_bark.ogg",
+    "evil_laugh.ogg",
+    "ghost_cackle.ogg",
+    "ghost_moan1.ogg",
+    "ghost_moan3.ogg",
+    "night_bed.ogg",
+    "thunder.ogg",
+    "wind_bed.ogg",
+    "witch_cackle.ogg",
+    "zombie_moan.ogg"
+   ]
+  },
+  "assets/audio/music": {
+   "count": 7,
+   "files": [
+    "alt_haunted_track.ogg",
+    "alt_music_box_waltz.ogg",
+    "bed_ambient.ogg",
+    "bed_artifact_room.ogg",
+    "defeat_sting.ogg",
+    "tension_drone.ogg",
+    "victory_sting.ogg"
+   ]
+  },
+  "assets/audio/sfx": {
+   "count": 26,
+   "files": [
+    "bell_round.ogg",
+    "bones_rattle.ogg",
+    "chime_single.ogg",
+    "dice_rattle.ogg",
+    "dice_tick.ogg",
+    "fence_break.ogg",
+    "ghost_real.ogg",
+    "heal_harp.ogg",
+    "heartbeat.ogg",
+    "metal_bing.ogg",
+    "punch_heavy.ogg",
+    "punch_hit.ogg",
+    "roar_ko.ogg",
+    "rock_break.ogg",
+    "shield_place_spell.ogg",
+    "spell_magic.ogg",
+    "step_leaf.ogg",
+    "stone_ground.ogg",
+    "stone_ground_heavy.ogg",
+    "swish_shield.ogg",
+    "swish_throw.ogg",
+    "throw_cannon_boom.ogg",
+    "thwack_wood.ogg",
+    "ui_click.ogg",
+    "ui_hover.ogg",
+    "whoosh_spear.ogg"
+   ]
+  },
+  "assets/colab_inputs": {
+   "count": 5,
+   "files": [
+    "ref_bar_from_video.png",
+    "unit_bat.png",
+    "unit_knight.png",
+    "unit_skeleton.png",
+    "unit_wizard.png"
+   ]
+  },
+  "assets/env": {
+   "count": 21,
+   "files": [
+    "bg_graveyard.png",
+    "crate_fire.png",
+    "drop_crate.png",
+    "drop_ghost.png",
+    "drop_parachute.png",
+    "fence_black_broken.png",
+    "fence_black_damaged.png",
+    "fence_black_intact.png",
+    "fx_charge_glow.png",
+    "fx_hit_spark.png",
+    "fx_impact_burst.png",
+    "fx_muzzle_flash.png",
+    "ghost_lantern.png",
+    "ground_strip.png",
+    "platform_coffin_blue.png",
+    "platform_coffin_purple.png",
+    "platform_skull_plank.png",
+    "proj_dagger.png",
+    "proj_pumpkin.png",
+    "proj_spear.png",
+    "ui_target_ring.png"
+   ]
+  },
+  "assets/fonts": {
+   "count": 1,
+   "files": [
+    "build_info.json"
+   ]
+  },
+  "assets/fx": {
+   "count": 6,
+   "files": [
+    "fx_charge_glow_sheet.png",
+    "fx_hit_spark_sheet.png",
+    "fx_impact_burst_sheet.png",
+    "fx_muzzle_flash_sheet.png",
+    "manifest.json",
+    "ui_target_ring_sheet.png"
+   ]
+  },
+  "assets/fx/sprites": {
+   "count": 20,
+   "files": [
+    "fx_axe_thrown.png",
+    "fx_bat_swarm.png",
+    "fx_flame_comet.png",
+    "fx_flame_hand_purple.png",
+    "fx_ghost_blow.png",
+    "fx_ghost_blow_hard.png",
+    "fx_ghost_idle.png",
+    "fx_ghost_puff.png",
+    "fx_ghostfire.png",
+    "fx_ghostfire_purple.png",
+    "fx_heal_rain_drop.png",
+    "fx_impact_flash.png",
+    "fx_molotov_fire.png",
+    "fx_poison_bubbles.png",
+    "fx_rune_circle.png",
+    "fx_sky_lantern_target.png",
+    "fx_sonic_ring.png",
+    "fx_spirit_mist.png",
+    "fx_stardust.png",
+    "fx_wind_swirl.png"
+   ]
+  },
+  "assets/portraits": {
+   "count": 6,
+   "files": [
+    "bride_front.png",
+    "hunchback_front.png",
+    "knight_front.png",
+    "reaper_front.png",
+    "skeleton_front.png",
+    "wizard_front.png"
+   ]
+  },
+  "assets/poses": {
+   "count": 56,
+   "files": [
+    "bat_charge3.png",
+    "bat_draw.png",
+    "bat_empty.png",
+    "bat_hit.png",
+    "bat_idle1.png",
+    "bat_idle2.png",
+    "bat_release.png",
+    "bat_windup.png",
+    "bride_charge1.png",
+    "bride_charge2.png",
+    "bride_charge3.png",
+    "bride_empty.png",
+    "bride_hit.png",
+    "bride_idle1.png",
+    "bride_idle2.png",
+    "bride_release.png",
+    "hunchback_charge1.png",
+    "hunchback_charge2.png",
+    "hunchback_charge3.png",
+    "hunchback_empty.png",
+    "hunchback_hit.png",
+    "hunchback_idle1.png",
+    "hunchback_idle2.png",
+    "hunchback_release.png",
+    "knight_charge1.png",
+    "knight_charge2.png",
+    "knight_charge3.png",
+    "knight_empty.png",
+    "knight_hit.png",
+    "knight_idle1.png",
+    "knight_idle2.png",
+    "knight_release.png",
+    "necro_empty.png",
+    "necro_hit.png",
+    "necro_idle.png",
+    "necro_release.png",
+    "necro_windup.png",
+    "reaper_charge1.png",
+    "reaper_charge3.png",
+    "reaper_idle1.png",
+    "reaper_idle2.png",
+    "skel_hit.png",
+    "skel_release.png",
+    "skel_windup.png",
+    "skeleton_charge1.png",
+    "skeleton_charge3.png",
+    "skeleton_empty.png",
+    "skeleton_idle1.png",
+    "skeleton_idle2.png",
+    "wizard_charge1.png",
+    "wizard_charge2.png",
+    "wizard_charge3.png",
+    "wizard_empty.png",
+    "wizard_hit.png",
+    "wizard_idle1.png",
+    "wizard_idle2.png"
+   ]
+  },
+  "assets/sprites": {
+   "count": 65,
+   "files": [
+    "manifest.json",
+    "unit_bat_red_arm_charge.png",
+    "unit_bat_red_arm_throw.png",
+    "unit_bat_red_defend.png",
+    "unit_bat_red_die.png",
+    "unit_bat_red_hit_react.png",
+    "unit_bat_red_idle.png",
+    "unit_bat_red_move_back.png",
+    "unit_bat_red_move_forward.png",
+    "unit_bat_white_arm_charge.png",
+    "unit_bat_white_arm_throw.png",
+    "unit_bat_white_defend.png",
+    "unit_bat_white_die.png",
+    "unit_bat_white_hit_react.png",
+    "unit_bat_white_idle.png",
+    "unit_bat_white_move_back.png",
+    "unit_bat_white_move_forward.png",
+    "unit_knight_red_arm_charge.png",
+    "unit_knight_red_arm_throw.png",
+    "unit_knight_red_defend.png",
+    "unit_knight_red_die.png",
+    "unit_knight_red_hit_react.png",
+    "unit_knight_red_idle.png",
+    "unit_knight_red_move_back.png",
+    "unit_knight_red_move_forward.png",
+    "unit_knight_white_arm_charge.png",
+    "unit_knight_white_arm_throw.png",
+    "unit_knight_white_defend.png",
+    "unit_knight_white_die.png",
+    "unit_knight_white_hit_react.png",
+    "unit_knight_white_idle.png",
+    "unit_knight_white_move_back.png",
+    "unit_knight_white_move_forward.png",
+    "unit_skeleton_red_arm_charge.png",
+    "unit_skeleton_red_arm_throw.png",
+    "unit_skeleton_red_defend.png",
+    "unit_skeleton_red_die.png",
+    "unit_skeleton_red_hit_react.png",
+    "unit_skeleton_red_idle.png",
+    "unit_skeleton_red_move_back.png",
+    "unit_skeleton_red_move_forward.png",
+    "unit_skeleton_white_arm_charge.png",
+    "unit_skeleton_white_arm_throw.png",
+    "unit_skeleton_white_defend.png",
+    "unit_skeleton_white_die.png",
+    "unit_skeleton_white_hit_react.png",
+    "unit_skeleton_white_idle.png",
+    "unit_skeleton_white_move_back.png",
+    "unit_skeleton_white_move_forward.png",
+    "unit_wizard_red_arm_charge.png",
+    "unit_wizard_red_arm_throw.png",
+    "unit_wizard_red_defend.png",
+    "unit_wizard_red_die.png",
+    "unit_wizard_red_hit_react.png",
+    "unit_wizard_red_idle.png",
+    "unit_wizard_red_move_back.png",
+    "unit_wizard_red_move_forward.png",
+    "unit_wizard_white_arm_charge.png",
+    "unit_wizard_white_arm_throw.png",
+    "unit_wizard_white_defend.png",
+    "unit_wizard_white_die.png",
+    "unit_wizard_white_hit_react.png",
+    "unit_wizard_white_idle.png",
+    "unit_wizard_white_move_back.png",
+    "unit_wizard_white_move_forward.png"
+   ]
+  },
+  "assets/ui": {
+   "count": 41,
+   "files": [
+    "btn_reset.png",
+    "btn_sound.png",
+    "candle.png",
+    "dock_frame.png",
+    "ghostfire_cyan.png",
+    "ghostfire_violet.png",
+    "hp_fill.png",
+    "hp_frame.png",
+    "icon_double.png",
+    "icon_heal.png",
+    "icon_heavy.png",
+    "icon_normal.png",
+    "lock_plate.png",
+    "plate_active.png",
+    "plate_disabled.png",
+    "plate_hover.png",
+    "plate_normal.png",
+    "portrait_bat.png",
+    "portrait_knight.png",
+    "portrait_skeleton.png",
+    "portrait_wizard.png",
+    "power_hot.png",
+    "power_orange.png",
+    "power_unlit.png",
+    "shield_slab_blue.png",
+    "shield_slab_purple.png",
+    "socket_ammo.png",
+    "socket_special.png",
+    "top_center_plate.png",
+    "top_plate_left.png",
+    "top_plate_right.png",
+    "ui_diamond_cyan_off.png",
+    "ui_diamond_cyan_on.png",
+    "ui_diamond_violet_off.png",
+    "ui_diamond_violet_on.png",
+    "ui_top_banner_centre.png",
+    "ui_top_banner_left.png",
+    "ui_top_banner_right.png",
+    "ui_wind_plate.png",
+    "wind_arrow.png",
+    "wind_frame.png"
+   ]
+  },
+  "assets/units": {
+   "count": 14,
+   "files": [
+    "unit_bat.png",
+    "unit_bat_raw.png",
+    "unit_bat_unarmed.png",
+    "unit_bride_idle.png",
+    "unit_hunchback_idle.png",
+    "unit_knight.png",
+    "unit_knight_raw.png",
+    "unit_reaper_idle.png",
+    "unit_reaper_idle_lowpalm.png",
+    "unit_skeleton.png",
+    "unit_skeleton_raw.png",
+    "unit_skeleton_unarmed.png",
+    "unit_wizard.png",
+    "unit_wizard_raw.png"
+   ]
+  },
+  "assets/weapons": {
+   "count": 6,
+   "files": [
+    "dart.png",
+    "dart_bag.png",
+    "proj_spear_colab.png",
+    "shuriken.png",
+    "shuriken_bag.png",
+    "small_shield.png"
+   ]
+  }
+ },
+ "modules": [
+  {
+   "module": "core physics and turns",
+   "status": "done",
+   "note": "fixed step, wind, 12 s turn, countdown bar"
+  },
+  {
+   "module": "AI opponent",
+   "status": "built_unseen",
+   "note": "no-simulator aiming with wind rule; hit rate after the wind rule not re-measured"
+  },
+  {
+   "module": "classes: skeleton, wizard, bat, knight",
+   "status": "done",
+   "note": "playable, 8-frame pose standard for skeleton and bat"
+  },
+  {
+   "module": "classes: bride, hunchback, necromancer, reaper",
+   "status": "in_progress",
+   "note": "not playable yet; art partly done, portraits pending"
+  },
+  {
+   "module": "ultimates",
+   "status": "in_progress",
+   "note": "bat built; skeleton, wizard, knight designed but not built"
+  },
+  {
+   "module": "top HUD (banners, centre piece, countdown)",
+   "status": "done",
+   "note": "round, countdown and distance in the centre piece"
+  },
+  {
+   "module": "top controls: sound, reset, help",
+   "status": "done",
+   "note": "right edge middle column, faded until the pointer is near"
+  },
+  {
+   "module": "wind ghost",
+   "status": "in_progress",
+   "note": "works with a 4-frame fallback; the continuous blowing art is being generated"
+  },
+  {
+   "module": "floating coffin platforms",
+   "status": "built_unseen",
+   "note": "both sides use the purple art; a true blue twin is not drawn yet"
+  },
+  {
+   "module": "status effects: bleed, poison, frost, slow, stun",
+   "status": "built_unseen",
+   "note": "frost blinks blue and slows motion; slow chain waits for its picture"
+  },
+  {
+   "module": "central wall",
+   "status": "built_unseen",
+   "note": "sturdier (8 per hit); damaged and broken art are black slabs, needs redraw"
+  },
+  {
+   "module": "bottom dock",
+   "status": "done",
+   "note": "no health numbers; right end empty"
+  },
+  {
+   "module": "start screen and name input",
+   "status": "in_progress",
+   "note": "name module written and tested, not wired in"
+  },
+  {
+   "module": "Kiro scripts: ingest, continuity, pose animation",
+   "status": "done",
+   "note": "tests re-run in main; pose_anim.js not integrated"
+  },
+  {
+   "module": "audio",
+   "status": "built_unseen",
+   "note": "impact sounds wired; not reviewed this round"
+  }
+ ],
+ "open_art": [
+  {
+   "item": "wind ghost 8-frame blowing loop",
+   "status": "in_progress",
+   "route": "Colab (5 single frames running) or image2 (8-cell sheet prompt written)",
+   "prompt_file": "docs/image2_ghost_blow_prompt.md"
+  },
+  {
+   "item": "feet chain for the slow status",
+   "status": "in_progress",
+   "route": "Colab job queued",
+   "prompt_file": "colab/jobs_chain_20261110.json"
+  },
+  {
+   "item": "blue twin of the purple floating coffin",
+   "status": "not_started",
+   "route": "Colab or image2",
+   "prompt_file": "docs/top_hud_art_jobs.md"
+  },
+  {
+   "item": "broken / damaged fence art (currently solid black slabs)",
+   "status": "not_started",
+   "route": "image2",
+   "prompt_file": "docs/kiro_69_art_optimization.md"
+  },
+  {
+   "item": "front portraits: bride, hunchback, necromancer",
+   "status": "waiting_owner",
+   "route": "image2 via owner",
+   "prompt_file": "docs/kiro_69_art_optimization.md"
+  },
+  {
+   "item": "39 redo pose pictures",
+   "status": "waiting_owner",
+   "route": "image2 via owner",
+   "prompt_file": "colab/jobs_retry2_20261110.json"
+  }
+ ],
+ "totals": {
+  "folders": 14,
+  "files": 287
+ }
+}

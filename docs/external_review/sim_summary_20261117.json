@@ -1,0 +1,379 @@
+{
+ "changes_made_before_these_numbers_were_measured": [
+  "Team units now have their own heroes (mixed teams, no hero twice in a team, the opponent team too); before, a team used one hero for all units.",
+  "The first team is now fixed for the whole match; before, the opener alternated each round, so the second mover of a round also opened the next round and attacked twice in a row. Side effect measured on the engine, where red always opens: red wins 59 percent (2v2) and 65 percent (3v3).",
+  "The bride's sound wave is now judged at the point where it really lands; before, 21 of 3528 swept shots that landed 94 to 105 px from the unit did no damage.",
+  "Hero hp and damage were rebalanced earlier the same day (knight and hunchback weaker, bat, bride, wizard stronger); the table is in hero_table_hp_dmg.",
+  "Opponent strength is random and hidden; skill gap deciding matches and snowballing are accepted properties of the game (owner)."
+ ],
+ "duel_simulation_1v1": {
+  "avgRounds": [
+   [
+    9.213333333333333,
+    7.243333333333333,
+    8.703333333333333,
+    10.693333333333333,
+    8.953333333333333,
+    9.23,
+    8.81,
+    9.11
+   ],
+   [
+    7.243333333333333,
+    5.4366666666666665,
+    6.496666666666667,
+    8.106666666666667,
+    6.84,
+    7.043333333333333,
+    7.51,
+    7.346666666666667
+   ],
+   [
+    8.703333333333333,
+    6.496666666666667,
+    7.5633333333333335,
+    9.316666666666666,
+    7.8566666666666665,
+    8.033333333333333,
+    8.186666666666667,
+    8.253333333333334
+   ],
+   [
+    10.693333333333333,
+    8.106666666666667,
+    9.316666666666666,
+    12.556666666666667,
+    10.396666666666667,
+    9.87,
+    10.086666666666666,
+    10.37
+   ],
+   [
+    8.953333333333333,
+    6.84,
+    7.8566666666666665,
+    10.396666666666667,
+    8.156666666666666,
+    8.41,
+    8.026666666666667,
+    8.606666666666667
+   ],
+   [
+    9.23,
+    7.043333333333333,
+    8.033333333333333,
+    9.87,
+    8.41,
+    8.656666666666666,
+    8.523333333333333,
+    9.016666666666667
+   ],
+   [
+    8.81,
+    7.51,
+    8.186666666666667,
+    10.086666666666666,
+    8.026666666666667,
+    8.523333333333333,
+    8.13,
+    8.15
+   ],
+   [
+    9.11,
+    7.346666666666667,
+    8.253333333333334,
+    10.37,
+    8.606666666666667,
+    9.016666666666667,
+    8.15,
+    8.683333333333334
+   ]
+  ],
+  "avgRoundsOverall": 8.544074074074073,
+  "classes": [
+   "skeleton",
+   "wizard",
+   "bat",
+   "knight",
+   "bride",
+   "hunchback",
+   "reaper",
+   "hag"
+  ],
+  "matches_per_pairing": 300,
+  "seed": 7,
+  "timeouts": 0,
+  "totalMatches": 10800,
+  "winRates": [
+   [
+    0.5,
+    0.47,
+    0.52,
+    0.7366666666666667,
+    0.5266666666666666,
+    0.65,
+    0.6233333333333333,
+    0.59
+   ],
+   [
+    0.53,
+    0.5,
+    0.38,
+    0.45,
+    0.49333333333333335,
+    0.41333333333333333,
+    0.4,
+    0.49666666666666665
+   ],
+   [
+    0.48,
+    0.62,
+    0.5,
+    0.4666666666666667,
+    0.5233333333333333,
+    0.56,
+    0.56,
+    0.5733333333333334
+   ],
+   [
+    0.2633333333333333,
+    0.55,
+    0.5333333333333333,
+    0.5,
+    0.4266666666666667,
+    0.6033333333333334,
+    0.4666666666666667,
+    0.4
+   ],
+   [
+    0.4733333333333334,
+    0.5066666666666666,
+    0.4766666666666667,
+    0.5733333333333333,
+    0.5,
+    0.6266666666666667,
+    0.6533333333333333,
+    0.4766666666666667
+   ],
+   [
+    0.35,
+    0.5866666666666667,
+    0.43999999999999995,
+    0.3966666666666666,
+    0.3733333333333333,
+    0.5,
+    0.5,
+    0.4866666666666667
+   ],
+   [
+    0.3766666666666667,
+    0.6,
+    0.43999999999999995,
+    0.5333333333333333,
+    0.3466666666666667,
+    0.5,
+    0.5,
+    0.37666666666666665
+   ],
+   [
+    0.41000000000000003,
+    0.5033333333333334,
+    0.42666666666666664,
+    0.6,
+    0.5233333333333333,
+    0.5133333333333333,
+    0.6233333333333333,
+    0.5
+   ]
+  ]
+ },
+ "game": "turn-based artillery duel, wind, centre fence, 8 heroes, ultimates, supply crates; team matches of 2 or 3 units per side with one thrower per team per round",
+ "hero_table_hp_dmg": {
+  "bat": {
+   "dmg": 28,
+   "hp": 147
+  },
+  "bride": {
+   "dmg": 34,
+   "hp": 149
+  },
+  "hag": {
+   "dmg": 24,
+   "hp": 158
+  },
+  "hunchback": {
+   "dmg": 19,
+   "hp": 147
+  },
+  "knight": {
+   "dmg": 21,
+   "hp": 185
+  },
+  "reaper": {
+   "dmg": 22,
+   "hp": 143
+  },
+  "skeleton": {
+   "dmg": 22,
+   "hp": 150
+  },
+  "wizard": {
+   "dmg": 33,
+   "hp": 124
+  }
+ },
+ "matrix_240_matches_per_end_after_the_latest_changes": {
+  "engine": {
+   "by_size": {
+    "1v1": {
+     "comeback_hits_per_match": 0.0,
+     "ended_by_round_cap": 0,
+     "hits_per_throw": 0.585,
+     "left_side_wins_percent": 43.8,
+     "matches": 80,
+     "pity_triggers_per_match": 0.0,
+     "rounds_mean": 8.8,
+     "rounds_p10": 6,
+     "rounds_p90": 12
+    },
+    "2v2": {
+     "comeback_hits_per_match": 9.0,
+     "ended_by_round_cap": 0,
+     "hits_per_throw": 0.579,
+     "left_side_wins_percent": 58.8,
+     "matches": 80,
+     "pity_triggers_per_match": 4.7,
+     "rounds_mean": 12.1,
+     "rounds_p10": 10,
+     "rounds_p90": 14
+    },
+    "3v3": {
+     "comeback_hits_per_match": 15.0,
+     "ended_by_round_cap": 0,
+     "hits_per_throw": 0.673,
+     "left_side_wins_percent": 65.0,
+     "matches": 80,
+     "pity_triggers_per_match": 6.5,
+     "rounds_mean": 17.5,
+     "rounds_p10": 16,
+     "rounds_p90": 19
+    }
+   },
+   "left_lead_hero_win_percent_all_sizes": {
+    "bat": 70.0,
+    "bride": 46.7,
+    "hag": 60.0,
+    "hunchback": 40.0,
+    "knight": 70.0,
+    "reaper": 50.0,
+    "skeleton": 66.7,
+    "wizard": 43.3
+   },
+   "left_win_percent_by_strength_gap": {
+    "-1": 37.2,
+    "-2": 27.3,
+    "0": 44.8,
+    "1": 78.3,
+    "2": 92.9
+   },
+   "matches": 240
+  },
+  "page": {
+   "by_size": {
+    "1v1": {
+     "comeback_hits_per_match": 0.0,
+     "ended_by_round_cap": 0,
+     "hits_per_throw": 0.609,
+     "left_side_wins_percent": 43.8,
+     "matches": 80,
+     "pity_triggers_per_match": 0.0,
+     "rounds_mean": 9.1,
+     "rounds_p10": 6,
+     "rounds_p90": 12
+    },
+    "2v2": {
+     "comeback_hits_per_match": 9.4,
+     "ended_by_round_cap": 0,
+     "hits_per_throw": 0.589,
+     "left_side_wins_percent": 56.2,
+     "matches": 80,
+     "pity_triggers_per_match": 5.0,
+     "rounds_mean": 12.2,
+     "rounds_p10": 10,
+     "rounds_p90": 15
+    },
+    "3v3": {
+     "comeback_hits_per_match": 16.2,
+     "ended_by_round_cap": 0,
+     "hits_per_throw": 0.694,
+     "left_side_wins_percent": 53.8,
+     "matches": 80,
+     "pity_triggers_per_match": 6.0,
+     "rounds_mean": 17.4,
+     "rounds_p10": 15,
+     "rounds_p90": 20
+    }
+   },
+   "left_lead_hero_win_percent_all_sizes": {
+    "bat": 66.7,
+    "bride": 20.0,
+    "hag": 53.3,
+    "hunchback": 23.3,
+    "knight": 53.3,
+    "reaper": 53.3,
+    "skeleton": 66.7,
+    "wizard": 73.3
+   },
+   "left_win_percent_by_strength_gap": {
+    "-1": 27.9,
+    "-2": 4.5,
+    "0": 50.6,
+    "1": 73.3,
+    "2": 78.6
+   },
+   "matches": 240
+  }
+ },
+ "not_measured": [
+  "seconds per round (the 7 minute target cannot be converted from rounds without it)",
+  "real human players: every number here is from computer-controlled matches"
+ ],
+ "team_simulation_runs": [],
+ "team_tuning_and_comeback_constants": {
+  "comeback": {
+   "max_total_multiplier": 2.3,
+   "near_miss": {
+    "note": "a throw that lands on the ground (no unit hit) within reach_px of the nearest living enemy box edge hits that unit for dmg x scale x (1 - e / reach_px); e = horizontal distance from the landing x to that unit's box edge; no crit, no ultimate pip, no status",
+    "reach_px": 450,
+    "scale": 0.9
+   },
+   "pity": {
+    "cap": 1.6,
+    "note": "every throw of a team that deals no direct hit adds per_miss to that team's next hit (cap); a direct hit uses it and resets it; a near-miss counts as a miss for this counter",
+    "per_miss": 0.4
+   },
+   "underdog": {
+    "full_at_deficit": 0.5,
+    "max_bonus": 1.0,
+    "note": "hit damage x (1 + min(max_bonus, deficit / full_at_deficit)); deficit = max(0, enemy team HP share - own team HP share); HP share = sum of living hp / sum of max hp"
+   },
+   "version": 1
+  },
+  "team_tuning": {
+   "hp_floor_hits": 2.5,
+   "hp_scale": {
+    "2": 0.9,
+    "3": 0.95
+   },
+   "ramp": {
+    "per_round": 0.08,
+    "start_round": 13
+   },
+   "round_cap": {
+    "2": 24,
+    "3": 28
+   },
+   "version": 1
+  }
+ }
+}

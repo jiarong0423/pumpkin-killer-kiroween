@@ -1,0 +1,6 @@
+# Kiro task 68 — the whole game's style: what would YOU change?
+
+Read docs/game_style_brief.md first (the game, the look, the owner's hard rules), then LOOK at exactly THESE five pictures and no others (more than five can overflow you): (not published), (not published), (not published), (not published), (not published) Read docs/art_style_guide.md and docs/pose_spec.md as text. If you cannot view an image, say so and skip it: never invent what it shows.
+
+The owner asks: "do you have anything you want to modify?" Answer as the art director you are. Give an honest, ranked list, at most 12 items, each with: WHAT you would change (the style rule, a character, the UI, the animation standard, the prompt method, the pipeline, the schedule), WHY (what you saw in the pictures or the rules), the COST (small / medium / large, the owner's deadline is 2026-12-04 and the freeze is 2026-11-27) and whether the owner must decide. Also list what you would NOT touch because it already works, and what the owner may have asked for that conflicts with something else (for example two rules that cannot both hold).
+Write (not published) (Traditional Chinese, plain words, no jargon) and nothing else. Do not edit other files. State what you could not verify.

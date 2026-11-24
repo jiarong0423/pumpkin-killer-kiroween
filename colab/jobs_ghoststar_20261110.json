@@ -1,0 +1,18 @@
+{
+ "jobs": [
+  {
+   "id": "ghoststar_blow",
+   "tier": "Q3",
+   "ref": "out:fx_ghost_idle_v1_ghost1.png",
+   "prompt": "Edit the reference picture. KEEP EXACTLY the same cute round white ghost: same body shape and size, same teal outline and glow, same little arms, same position in the picture, facing RIGHT, same flat solid magenta background (#FF00FF). Change ONLY what is described next. The mouth opens into a round O and a small puff of cool white mist leaves the mouth toward the RIGHT, eyes wide open, the cheeks are normal (not puffed), the body leans a little toward the right.",
+   "style": "Game sprite, same art style as the reference, centred, alone, clean flat magenta background without noise, no text, no watermark, no extra objects."
+  },
+  {
+   "id": "ghoststar_blow_hard",
+   "tier": "Q3",
+   "ref": "out:fx_ghost_idle_v1_ghost1.png",
+   "prompt": "Edit the reference picture. KEEP EXACTLY the same cute round white ghost: same body shape and size, same teal outline and glow, same little arms, same position in the picture, facing RIGHT, same flat solid magenta background (#FF00FF). Change ONLY what is described next. The mouth opens widest, eyes squeezed shut with effort, the body stretches and leans forward toward the right, a strong stream of air spray bursts from the mouth toward the RIGHT.",
+   "style": "Game sprite, same art style as the reference, centred, alone, clean flat magenta background without noise, no text, no watermark, no extra objects."
+  }
+ ]
+}

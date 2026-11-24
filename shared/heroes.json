@@ -1,0 +1,208 @@
+{
+  "skeleton": {
+    "hp": 150,
+    "dmg": 24,
+    "weapon": "proj_spear",
+    "launch": {
+      "fwd": 58,
+      "up": 110
+    },
+    "hitBox": {
+      "halfWidth": 70,
+      "height": 190
+    },
+    "statusOnHit": {
+      "bleed": {
+        "damage": 2,
+        "turns": 2
+      },
+      "weak": {
+        "throws": 2,
+        "multiplier": 0.85
+      }
+    },
+    "ultimate": {
+      "kind": "triple_javelin",
+      "strikes": 3,
+      "damageMultiplier": 1.5
+    }
+  },
+  "wizard": {
+    "hp": 124,
+    "dmg": 36,
+    "weapon": "cannonball",
+    "launch": {
+      "fwd": 70,
+      "up": 118
+    },
+    "hitBox": {
+      "halfWidth": 70,
+      "height": 190
+    },
+    "statusOnHit": {
+      "poison": {
+        "damage": 2,
+        "turns": 2
+      }
+    },
+    "ultimate": {
+      "kind": "pumpkin_blast",
+      "radius": 234,
+      "damageMultiplier": 1.5
+    }
+  },
+  "bat": {
+    "hp": 147,
+    "dmg": 29,
+    "weapon": "proj_shuriken",
+    "launch": {
+      "fwd": 58,
+      "up": 110
+    },
+    "hitBox": {
+      "halfWidth": 70,
+      "height": 190
+    },
+    "statusOnHit": {
+      "slow": {
+        "turns": 1
+      }
+    },
+    "ultimate": {
+      "kind": "shuriken_rain",
+      "strikes": 5,
+      "damageMultiplier": 1.5
+    }
+  },
+  "knight": {
+    "hp": 198,
+    "dmg": 21,
+    "weapon": "proj_shield",
+    "launch": {
+      "fwd": 51,
+      "up": 73
+    },
+    "hitBox": {
+      "halfWidth": 70,
+      "height": 190
+    },
+    "statusOnHit": {},
+    "bounce": {
+      "collisions": {
+        "min": 1,
+        "max": 6
+      },
+      "splitDamageEvenly": true
+    },
+    "ultimate": {
+      "kind": "shield_wall",
+      "points": 3,
+      "pointHalfWidth": 70,
+      "turnCost": false
+    }
+  },
+  "reaper": {
+    "hp": 143,
+    "dmg": 22,
+    "weapon": "proj_flame",
+    "launch": {
+      "fwd": 58,
+      "up": 110
+    },
+    "hitBox": {
+      "halfWidth": 57,
+      "height": 165
+    },
+    "statusOnHit": {
+      "burn": {
+        "damage": 2,
+        "turns": 3,
+        "neverLethal": true
+      }
+    },
+    "ultimate": {
+      "kind": "ghostfire_trio",
+      "multipliers": [
+        0.55,
+        0.65,
+        0.75
+      ],
+      "skipTurn": true
+    }
+  },
+  "bride": {
+    "hp": 149,
+    "dmg": 40,
+    "weapon": "proj_soundwave",
+    "launch": {
+      "fwd": 58,
+      "up": 110
+    },
+    "hitBox": {
+      "halfWidth": 70,
+      "height": 190
+    },
+    "attackHitBox": {
+      "halfWidth": 105,
+      "height": 40
+    },
+    "statusOnHit": {
+      "poison": {
+        "damage": 2,
+        "turns": 2
+      }
+    },
+    "ultimate": {
+      "kind": "bat_swarm",
+      "trigger": "any_hit",
+      "damageMultiplier": 1.3
+    }
+  },
+  "hunchback": {
+    "hp": 157,
+    "dmg": 19,
+    "weapon": "proj_axe",
+    "launch": {
+      "fwd": 58,
+      "up": 110
+    },
+    "hitBox": {
+      "halfWidth": 70,
+      "height": 190
+    },
+    "statusOnHit": {
+      "bleed": {
+        "damage": 2,
+        "turns": 2
+      },
+      "knockback": {
+        "pixels": 50
+      }
+    },
+    "ultimate": {
+      "kind": "boomerang",
+      "outboundDamage": 21,
+      "returnDamage": 31.5
+    }
+  },
+  "hag": {
+    "hp": 158,
+    "dmg": 24,
+    "weapon": "proj_cross",
+    "launch": {
+      "fwd": 58,
+      "up": 110
+    },
+    "hitBox": {
+      "halfWidth": 70,
+      "height": 190
+    },
+    "statusOnHit": {},
+    "ultimate": {
+      "kind": "cross_dart",
+      "contacts": 2,
+      "damageMultiplier": 0.575,
+      "stunSeconds": 7
+    }
+  }
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<title>Pumpkin Killer: font sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Open this page over http (python3 -m http.server 8000, then http://localhost:8000/docs/fonts_sample.html).
+     It uses ../css/fonts.css. Nothing here is loaded by the game. -->
+<link rel="stylesheet" href="../css/fonts.css">
+<style>
+  body { margin: 0; padding: 24px; background: #05020a; color: #f1e9ff; font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+  h1, h2 { font-family: var(--font-display); font-weight: 700; margin: 28px 0 8px; }
+  h1 { font-size: 34px; margin-top: 0; }
+  h2 { font-size: 22px; color: #ffd32a; }
+  .row { margin: 6px 0; }
+  .label { font-size: 12px; color: #9a8fb8; }
+  .scene { position: relative; padding: 18px; border-radius: 10px;
+    background: linear-gradient(135deg, #3a1f5c, #c26a1a 55%, #1b6f6b); }
+  .scene .pk-outline { color: #fff; }
+  table { border-collapse: collapse; }
+  td { padding: 2px 14px 2px 0; }
+  .ok { color: #62e88a; } .bad { color: #ff7675; }
+  canvas { background: #120a22; border-radius: 8px; max-width: 100%; }
+  button { font-family: var(--font-body); font-size: 14px; padding: 6px 12px; margin-right: 8px; }
+  code { background: #1a1230; padding: 1px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<h1>Pumpkin Killer 南瓜殺手</h1>
+<div class="row">
+  <button id="btn-lite" type="button">切換 lite 模式 (system fonts)</button>
+  <button id="btn-recheck" type="button">重新檢查</button>
+  <span class="label">If a line below looks like the same plain sans-serif everywhere, the fonts did not load.</span>
+</div>
+
+<h2>1. Display font (PK Display)</h2>
+<div class="row pk-display" style="font-size:64px">Round 3 第 3 回合</div>
+<div class="row pk-display" style="font-size:34px">HP 120 · 距離 1100 · 你贏了！</div>
+<div class="row pk-display" style="font-size:24px">-24 +30 命中 攔截！ 圍籬倒了</div>
+<div class="row pk-display" style="font-size:17px">17 px: The quick brown fox 0123456789 你的回合</div>
+<div class="label">Latin and digits should be Cinzel Decorative capitals; Chinese should be a heavy Ming serif.</div>
+
+<h2>2. Body font (PK Body), weights 400 and 700</h2>
+<div class="row pk-body" style="font-size:24px">400 / 24 px: 按住蓄力，放開投擲。Hold to charge, release to throw.</div>
+<div class="row pk-body-bold" style="font-size:24px">700 / 24 px: 按住蓄力，放開投擲。Hold to charge, release to throw.</div>
+<div class="row pk-body" style="font-size:16px">400 / 16 px: 風 微風 和風 強風 烈風 狂風 / Calm Breeze Gentle Strong Gale Storm</div>
+<div class="row pk-body" style="font-size:14px">400 / 14 px: 玩法 How to play. 點一下畫面重新開始 Click to play again.</div>
+<div class="row pk-body" style="font-size:12px">400 / 12 px (the smallest allowed in CSS): 我方 子代理 You Agents 物資來了 Supply drop</div>
+
+<h2>3. Minimum sizes, side by side</h2>
+<div class="row"><span class="pk-body" style="font-size:11px">11 px 第 3 回合 Round 3</span> <span class="label">too small (the canvas shows this at about 8 px on screen)</span></div>
+<div class="row"><span class="pk-body" style="font-size:17px">17 px 第 3 回合 Round 3</span> <span class="label">smallest canvas size we allow</span></div>
+<div class="row"><span class="pk-body-bold" style="font-size:22px">22 px 第 3 回合 Round 3</span> <span class="label">HUD main text</span></div>
+
+<h2>4. Digits: proportional or fixed width?</h2>
+<table class="pk-display" style="font-size:28px">
+  <tr><td class="label">default</td><td id="d-default-1">1111</td><td id="d-default-8">8888</td><td class="label" id="r-default"></td></tr>
+  <tr><td class="label">tabular-nums</td><td class="pk-num" id="d-tnum-1">1111</td><td class="pk-num" id="d-tnum-8">8888</td><td class="label" id="r-tnum"></td></tr>
+</table>
+<div class="label">If the two default widths differ, the font has proportional digits. If the tabular-nums widths are still different, the font has no tnum feature: use the digit-cell rule in docs/fonts_report.md.</div>
+
+<h2>5. Text over the scene, with and without an outline</h2>
+<div class="scene">
+  <div class="pk-display" style="font-size:34px">第 3 回合 無outline Round 3</div>
+  <div class="pk-display pk-outline" style="font-size:34px">第 3 回合 .pk-outline Round 3</div>
+  <div class="pk-body-bold" style="font-size:17px; color:#fff">無 outline: 風 強風 Wind 4.0 · 120 HP</div>
+  <div class="pk-body-bold pk-outline" style="font-size:17px">.pk-outline: 風 強風 Wind 4.0 · 120 HP</div>
+</div>
+
+<h2>6. Emoji and symbols (come from the system, not from our fonts)</h2>
+<div class="row pk-body" style="font-size:24px">🎃 💀 🛡 ⭐ ⏱ ▶ ◀ ° ×</div>
+<div class="label">The emoji look different on each system. The triangles, the degree sign and the multiplication sign should come from PK Body.</div>
+
+<h2>7. Canvas text (same stacks, read from the CSS variables)</h2>
+<canvas id="cv" width="900" height="260"></canvas>
+<pre id="log" class="label"></pre>
+
+<h2>8. Load status</h2>
+<table id="status"></table>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var sample = "第回合你的距離風0123456789ABC";
+
+  function stacks() {
+    var cs = getComputedStyle(root);
+    return { display: cs.getPropertyValue("--font-display").trim(), body: cs.getPropertyValue("--font-body").trim() };
+  }
+
+  function width(id) { return document.getElementById(id).getBoundingClientRect().width; }
+
+  function row(label, ok, note) {
+    var tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + label + "</td><td class='" + (ok ? "ok" : "bad") + "'>" + (ok ? "OK" : "NOT LOADED") + "</td><td class='label'>" + (note || "") + "</td>";
+    document.getElementById("status").appendChild(tr);
+  }
+
+  function drawCanvas(st) {
+    var cv = document.getElementById("cv"), ctx = cv.getContext("2d");
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.textBaseline = "middle";
+    ctx.lineJoin = "round";
+    function line(text, font, x, y, color) {
+      ctx.font = font;
+      ctx.lineWidth = 5; ctx.strokeStyle = "rgba(10,4,20,0.85)";
+      ctx.strokeText(text, x, y);
+      ctx.fillStyle = color; ctx.fillText(text, x, y);
+    }
+    line("第 3 回合  Round 3", "700 56px " + st.display, 20, 50, "#ffd32a");
+    line("距離 1100   風 強風", "700 22px " + st.body, 20, 112, "#f6ecd8");
+    line("按住蓄力，放開投擲 Hold to charge", "400 17px " + st.body, 20, 150, "#f6ecd8");
+    // Digit cells: every digit centred in a cell as wide as the widest digit, so 1111 and 8888 take equal width.
+    ctx.font = "700 34px " + st.display;
+    var cell = 0, d;
+    for (d = 0; d <= 9; d++) cell = Math.max(cell, ctx.measureText(String(d)).width);
+    function cells(text, x, y) {
+      ctx.textAlign = "center";
+      for (var i = 0; i < text.length; i++) line(text[i], "700 34px " + st.display, x + cell * i + cell / 2, y, "#4deeea");
+      ctx.textAlign = "left";
+    }
+    cells("1111", 20, 205); cells("8888", 220, 205);
+    ctx.font = "700 34px " + st.display;
+    var w1 = ctx.measureText("1111").width, w8 = ctx.measureText("8888").width;
+    document.getElementById("log").textContent =
+      "canvas stacks: display = " + st.display + "\n                body    = " + st.body +
+      "\nplain measureText: 1111 = " + w1.toFixed(1) + " px, 8888 = " + w8.toFixed(1) + " px" +
+      "\ncell width = " + cell.toFixed(1) + " px, so cells give " + (cell * 4).toFixed(1) + " px for both";
+  }
+
+  function check() {
+    var st = stacks();
+    document.getElementById("status").innerHTML = "";
+    var lite = root.classList.contains("pk-lite");
+    var timeout = new Promise(function (r) { setTimeout(r, 4000); });
+    var loads = Promise.all([
+      document.fonts.load("700 28px " + st.display, sample),
+      document.fonts.load("400 17px " + st.body, sample),
+      document.fonts.load("700 17px " + st.body, sample)
+    ]).catch(function () {});
+    Promise.race([loads, timeout]).then(function () {
+      row("lite mode", true, lite ? "ON: system fonts only" : "off");
+      if (!lite) {
+        row("PK Display 700, Latin", document.fonts.check("700 28px 'PK Display'", "Round 3"), "Cinzel Decorative Bold");
+        row("PK Display 700, Chinese", document.fonts.check("700 28px 'PK Display'", "第回合"), "Noto Serif TC 900 subset");
+        row("PK Body 400", document.fonts.check("400 17px 'PK Body'", "第回合Round"), "Noto Sans TC 400 subset");
+        row("PK Body 700", document.fonts.check("700 17px 'PK Body'", "第回合Round"), "Noto Sans TC 700 subset");
+      }
+      var dd = width("d-default-1") - width("d-default-8"), dt = width("d-tnum-1") - width("d-tnum-8");
+      document.getElementById("r-default").textContent = "width difference " + dd.toFixed(1) + " px";
+      document.getElementById("r-tnum").textContent = "width difference " + dt.toFixed(1) + " px" + (Math.abs(dt) < 0.5 ? " (fixed width)" : " (NOT fixed)");
+      drawCanvas(st);
+    });
+  }
+
+  document.getElementById("btn-lite").addEventListener("click", function () { root.classList.toggle("pk-lite"); check(); });
+  document.getElementById("btn-recheck").addEventListener("click", check);
+  check();
+})();
+</script>
+</body>
+</html>

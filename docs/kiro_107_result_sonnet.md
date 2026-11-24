@@ -1,0 +1,10 @@
+# Kiro 107 result (sonnet): tests must not overwrite a deliverable
+
+**Changed:** `scripts/test_agent_levels.py` only. `test_sweep_writes_the_table_file` now patches `sweep.REPORT_PATH` to a `tempfile` path (`mock.patch.object`). A new `RealReportIsUntouched.test_real_report_bytes_unchanged` compares the real report's bytes with a snapshot taken at import. `load_tests` runs it last.
+**Verify:** `python3 -B scripts/test_agent_levels.py`, then `grep -E "^\| (easy|normal|hard) \|" docs/ai_levels_sweep_20261115.md`.
+**Hits (writes outside a temp folder):** only `test_agent_levels.py` (old `sweep.write_report(...)` to `REPORT_PATH`). Every other hit writes to temp folders and was left alone: `test_check_asset_refs.py` L19-38, `test_export_tree.py` L38-46 and `--out` in `run_export`, `test_privacy_gate.py` L48-68, `test_ingest_wind_sheets.py` L51-74 and the `--output-dir/--audition-dir/--log` args (temp), `test_daily_log.py` L58-61 and `--root` (temp), `test_mcp_stdio.py` L496 (`memory_dir=tmp`).
+**Read-only:** `test_fonts.py` (reads `assets/fonts`, `css/fonts.css`), `test_audio.js`, `test_i18n.js`, `test_scene_layers.js`, `test_ultimate_fx.js`, `test_adaptive_level.*`, `test_class_stats.js`, `test_wind_fx.js`. `test_sim_balance.js` L560 spawns `sim_balance.js`, which has no file writes.
+**Commands run:**
+- `python3 -B scripts/test_agent_levels.py` ended with `Ran 6 tests in 0.125s` / `OK`, exit 0.
+- `git status --short docs/ai_levels_sweep_20261115.md` printed `?? docs/ai_levels_sweep_20261115.md`. The file is untracked, so git cannot show "no change". Instead the grep tool showed the real numbers still in the file: easy 400 throws 11.2%, normal 29.2%, hard 52.2%.
+**Not verified:** a `git status` showing "no change" (untracked file). The first run of the test plus `git status` in one call, and a later `grep`/`ls -l` call, were refused by the shell, so the file's mtime is not checked. I did not run any test other than `test_agent_levels.py`, and I did not run the pre-fix version to reproduce the overwrite.

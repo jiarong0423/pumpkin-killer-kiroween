@@ -1,0 +1,15 @@
+# Kiro task 67 — the continuity module: smooth, connected character animation (write it as an isolated, tested module)
+
+Owner (2026-11-10): "just standing and the weapon flies out is boring", "make everything a loop", "a complete wind-up charge that follows the power", "do not let anything jump", and then: "ask him to generate the part that optimises continuity". The pictures (8 frames per class, later longer strips from image2) are being made; YOU write the code that plays them continuously.
+
+Read: docs/pose_spec.md (the frames and rules), index.html (computePose, drawFullArtCharacter, POSE_SETS, ANIM, animState values idle / charge / throw / hit, u.armed, UNARMED_ART, the throw release callback u.onRelease, chargePower, startCharging, releaseAndThrow), (not published) (newest rows last), scripts/pose_similarity.py (what 'jump' means numerically).
+
+Write WITHOUT editing index.html:
+1. `(not published)` (UMD, no DOM at load, deterministic, testable in node with fake image objects): a per-unit animation controller.
+   - Inputs per frame: dt, the unit state (idle / charge / throw / hit, chargePower 0..1, whether the item is in the hand), and the frame set for the class (named frames: idle1, idle2, charge1, charge2, charge3, release, empty, hit, or strips: idle_loop_1..4, charge_1..6, throw_1..5, hit_1..3).
+   - Output: which frame or which two frames to draw, with a blend weight (crossfade), the offsets (a small body lean, lunge and squash on top, so it also works with ONE picture), and events (item_vanishes at the release frame, item_returns at the next turn).
+   - Rules: the idle loops slowly (alternate idle1 / idle2 with an eased crossfade; a seamless loop); the charge frame FOLLOWS chargePower (low, mid, full: crossfade between the neighbours, never a hard switch, no jump when the power meter goes back down); the release plays at a fixed speed once, then the empty stance holds until the unit's next turn, then idle again; a hit interrupts anything and returns to idle with an eased recovery; feet never slide (the feet line is fixed); the crossfade time and easing are parameters with defaults justified in comments.
+   - Fallback: with ONLY one picture per class (today's skeleton or cat poses, or none) it must still give the lean / lunge / squash motion and never throw.
+2. `(not published)`: node tests (assert) with fake frames: loop closes, charge follows the power in both directions without a jump (assert the weight is continuous, a bounded step per dt), the release plays once and fires item_vanishes exactly once, the empty frame holds, the item returns at the next turn, a hit interrupts and recovers, a missing frame falls back, determinism (same input, same output), no use of Math.random, Date or window. Run `node (not published)` until it passes.
+3. `(not published)`: the exact steps and lines in index.html to wire it (where computePose and POSE_SETS are used today), including how UNARMED_ART becomes the empty frame, and a measurement plan (frame time budget).
+Rules: complete code, no placeholders, no emoji. State what you could not verify (you cannot see the game).

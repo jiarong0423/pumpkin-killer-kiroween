@@ -1,0 +1,276 @@
+{
+ "style_guide": "docs/art_style_guide.md",
+ "source": "Kiro task 40 prompts -> main-line style block -> Gemini polish (owner pasted) -> main-line corrections",
+ "refs": {
+  "skeleton": "unit_skeleton.png",
+  "wizard": "unit_wizard.png",
+  "bat": "unit_bat.png",
+  "knight": "unit_knight.png",
+  "bar": "ref_bar_from_video.png",
+  "bride": "unit_bride.png",
+  "hunchback": "unit_hunchback.png",
+  "reaper": "unit_reaper.png"
+ },
+ "jobs": [
+  {
+   "id": "bride_idle",
+   "tier": "NEW2",
+   "ref": "skeleton",
+   "prompt": "Use the reference image only for its art style and body proportions, NOT for the character's anatomy or clothes. Chibi two-heads-tall ghost bride in three-quarter view facing right, flat solid magenta background. Cracked porcelain-white doll face, hollow black eyes with faint icy pale blue glow, long straight black hair, ragged ivory veil beneath a crown of withered violet roses. Torn ivory gown with trailing mist hem. Small hands clasped at waist. Thick near-black outline, thin warm orange outer glow, flat three-tone cel shading, matching reference proportions.",
+   "negative": "skeleton, bare ribcage, bones, pumpkin head, witch hat, cannon, blue skin, lightning-streak hair, red dress, background scenery, ground, floor, cast shadow, text, watermark, signature, extra limbs, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Three-quarter view facing RIGHT, relaxed standing pose. Icy pale-blue cold glow as the single accent colour.",
+   "risk": "The model may retain the reference skeleton's exposed ribcage or skull texture instead of rendering smooth porcelain doll skin; fallback wording: \"replace bare bone anatomy with a smooth cracked porcelain doll face and draped ivory dress\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "hunchback_idle",
+   "tier": "NEW2",
+   "ref": "skeleton",
+   "prompt": "Use the reference image only for its art style and body proportions, NOT for the character's anatomy or clothes. Chibi two-heads-tall bell-tower hunchback in three-quarter view facing right, flat solid magenta background. Prominent rounded hunched back, tangled dark hair, wide crooked grin, one enlarged eye. Wearing a moss-green patched vest over a dusty cream tunic tied with a rope belt. Both hands grip a GIANT rusty iron battle axe held diagonally across the body, its huge crescent blade as big as his torso and its wooden handle taller than the character; the axe is clearly visible. Thick dark outline, warm orange outer glow, flat cel shading, matching reference proportions.",
+   "negative": "bell, skeleton, bare bones, skull face, pumpkin head, armor, shield, cape, red tunic, purple tunic, cathedral background, ground, floor, cast shadow, text, watermark, extra limbs, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Three-quarter view facing RIGHT, relaxed standing pose. Rusty orange-brown iron as the single accent colour.",
+   "risk": "The model might retain skeleton bone textures across the limbs instead of fleshed arms and cloth sleeves; fallback wording: \"replace bare bone limbs with solid fabric sleeves and rounded cartoon flesh arms\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "reaper_idle",
+   "tier": "NEW2",
+   "ref": "skeleton",
+   "prompt": "Use the reference image only for its art style and body proportions, NOT for the character's anatomy or clothes. Chibi two-heads-tall grim reaper in three-quarter view facing right, flat solid magenta background. Pale bone skull inside a tattered black-violet hood, two glowing violet flame eyes. Flowing dark violet robe with a tattered hovering hem and a small pale hourglass on the belt. Bone hands with one holding a long scythe resting over the shoulder, one palm open. Thick outlines, warm orange outer glow, matching reference scale.",
+   "negative": "spear, armor, helmet, cyan fire, cyan eyes, bare exposed ribcage, bare legs, feet, background scenery, ground, floor, cast shadow, text, watermark, signature, extra limbs, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Three-quarter view facing RIGHT, relaxed standing pose. Violet eye and blade glow as the single accent colour.",
+   "risk": "The model may leak the reference skeleton's exposed ribcage or cyan eye flames instead of violet flames inside a dark hood; fallback wording: \"cover torso completely with a closed dark black-violet hooded robe and switch eye glow to pure violet flames\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "bride_pose_windup",
+   "tier": "NEW2",
+   "ref": "bride",
+   "prompt": "Same chibi ghost bride from reference, strict side view facing left, flat solid magenta background. Inhale wind-up posture: chest expanded forward, head tilted backward, mouth firmly shut, both small hands cupped close to chest. Long black hair and ragged veil billow upward behind head, mist dress hem swirls upward. Consistent cracked porcelain doll face, crown of withered violet roses, thick outlines, warm orange outer glow.",
+   "negative": "sound waves, shockwaves, rings, music notes, speech bubble, open mouth, teeth, background scenery, ground, floor, cast shadow, text, watermark, signature, extra limbs, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Strict side view facing LEFT. Icy pale-blue cold glow as the single accent colour.",
+   "risk": "The model might fail to enforce a strict side profile view and keep the three-quarter head angle from the idle reference; fallback wording: \"full 90-degree pure side profile facing left with single eye visible and head tilted back\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "bride_pose_release",
+   "tier": "NEW2",
+   "ref": "bride",
+   "prompt": "Same chibi ghost bride from reference, strict side view facing left, flat solid magenta background. Screaming attack release: head thrown back, mouth gaping wide into a dark hollow void, both arms thrust outward with open empty hands. Ragged veil and black hair whipped forward by sound force, torn ivory dress hem streaming backward. Cracked porcelain face, thick dark outline, warm orange outer glow, matching proportions.",
+   "negative": "sound waves, circular rings, sonic blast graphics, music notes, speech bubble, mouth lines, teeth, tongue, held items, background scenery, ground, cast shadow, text, watermark, extra limbs, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Strict side view facing LEFT. Icy pale-blue cold glow as the single accent colour.",
+   "risk": "The model might render literal sound wave lines or musical notation emerging from the open mouth; fallback wording: \"empty open mouth showing only dark hollow interior without any lines, arcs, or particles around the head\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "bride_pose_hit",
+   "tier": "NEW2",
+   "ref": "bride",
+   "prompt": "Same chibi ghost bride from reference, strict side view facing left, flat solid magenta background. Impact hit pose: torso flinching sharply backward, hollow eyes tightly clenched shut, one small hand shielding the cheek. A prominent jagged crack splits the porcelain cheek. Ragged veil whips sideways, mist hem scatters into trailing wisps. Consistent withered violet rose crown, thick outlines, warm orange outer glow.",
+   "negative": "blood, gore, sound waves, weapons, projectiles, open eyes, background scenery, ground, floor, cast shadow, text, watermark, signature, extra limbs, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Strict side view facing LEFT. Icy pale-blue cold glow as the single accent colour.",
+   "risk": "The model might misinterpret the facial crack as organic gore or bleeding wounds; fallback wording: \"clean hairline ceramic fracture lines on white porcelain doll skin with zero liquid or red coloring\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "bride_portrait",
+   "tier": "NEW2",
+   "ref": "bride",
+   "prompt": "Chibi ghost bride bust portrait, head and shoulders framed closely, facing right, flat solid magenta background. Calm subtle half-smile, pale cracked porcelain doll skin, hollow black eye sockets with faint icy pale blue glow. Long straight black hair draped beneath a ragged ivory veil and a crown of withered violet roses. Thick dark outlines, warm orange outer glow, flat three-tone cel shading.",
+   "negative": "full body, torso, arms, hands, legs, dress hem, background scenery, ground, floor, cast shadow, text, watermark, signature, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Head-and-shoulders portrait facing RIGHT, crop below the chest. Icy pale-blue cold glow as the single accent colour.",
+   "risk": "The model may include the full body or hands cropped awkwardly from the reference; fallback wording: \"tight close-up crop ending strictly at the collarbone with no hands or dress lower body visible\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "hunchback_pose_windup",
+   "tier": "NEW2",
+   "ref": "hunchback",
+   "prompt": "Same chibi bell-tower hunchback from reference, strict side view facing left, flat solid magenta background. Overhead throw wind-up: knees deeply bent, massive rounded hump raised high, strained grimace with crooked teeth. Both muscular arms swung far behind the head with empty open grasping fingers. Moss-green patched vest, rope belt, thick near-black outlines, warm orange outer glow, identical reference proportions.",
+   "negative": "bell, held item, weapon, ball, rock, projectiles, straight posture, background scenery, ground, floor, cast shadow, text, watermark, signature, extra limbs, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Strict side view facing LEFT. Warm bronze-gold as the single accent colour.",
+   "risk": "The model is prone to keeping the bronze bell glued to his hands from the reference image; fallback wording: \"empty open spread fingers with clear empty space between both hands and zero held objects\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "hunchback_pose_release",
+   "tier": "NEW2",
+   "ref": "hunchback",
+   "prompt": "Same chibi bell-tower hunchback from reference, strict side view facing left, flat solid magenta background. Powerful overhand release: torso lunging forward, large rounded hump pitched forward, mouth wide open in a fierce roar. Both arms snapped forward and down with empty open splayed hands. Moss-green vest fluttering, thick near-black outlines, warm orange outer glow, matching reference scale.",
+   "negative": "bell, weapon, boulder, projectile in hand, held props, background scenery, ground, floor, cast shadow, text, watermark, signature, extra limbs, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Strict side view facing LEFT. Warm bronze-gold as the single accent colour.",
+   "risk": "The model might generate a bell mid-air or still touching the hands during the release pose; fallback wording: \"both empty bare hands thrust forward with completely clear space in front of palms\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "hunchback_pose_hit",
+   "tier": "NEW2",
+   "ref": "hunchback",
+   "prompt": "Same chibi bell-tower hunchback from reference, strict side view facing left, flat solid magenta background. Damage reaction pose: body staggering backward, knees buckling, eyes tightly shut in pain. Both thick arms raised high shielding the face and head, rounded back hunched tight. Moss-green patched vest, knotted rope belt swinging sideways, thick dark outlines, warm orange outer glow.",
+   "negative": "bell, weapon, blood, gore, projectiles, open eyes, background scenery, ground, floor, cast shadow, text, watermark, signature, extra limbs, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Strict side view facing LEFT. Warm bronze-gold as the single accent colour.",
+   "risk": "The model might merge the raised defensive arms into the head or create extra limbs; fallback wording: \"two distinct arms crossed tightly over the forehead with clean visible elbow contours\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "hunchback_portrait",
+   "tier": "NEW2",
+   "ref": "hunchback",
+   "prompt": "Chibi bell-tower hunchback bust portrait, head and shoulders framed closely, facing right, flat solid magenta background. Wide crooked grin, asymmetrical cartoon face with one oversized eye, messy tangled dark hair. Rounded hump silhouette rises behind the far shoulder. Moss-green patched collar and cream neckline visible. Thick dark outlines, warm orange outer glow, flat three-tone cel shading.",
+   "negative": "full body, bell, held items, arms, hands, legs, background scenery, ground, floor, cast shadow, text, watermark, signature, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Head-and-shoulders portrait facing RIGHT, crop below the chest. Warm bronze-gold as the single accent colour.",
+   "risk": "The model might pull the bell from the reference image into the lower crop of the portrait; fallback wording: \"close crop on head and vest collar showing no hands, arms, or bronze bell\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "reaper_pose_windup",
+   "tier": "NEW2",
+   "ref": "reaper",
+   "prompt": "Same chibi grim reaper from reference, strict side view facing left, flat solid magenta background. Throwing wind-up pose: throwing arm pulled far back with an empty open skeletal hand, opposite arm pointing forward for balance. Tattered black-violet hood tilted forward, bright violet flames blazing from eye sockets. Dark robe hem billows backward. Thick dark outlines, warm orange outer glow, matching proportions.",
+   "negative": "scythe, weapon, skull in hand, held item, cyan fire, bare torso, armor, legs, feet, background scenery, ground, floor, cast shadow, text, watermark, extra limbs, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Strict side view facing LEFT. Violet eye and blade glow as the single accent colour.",
+   "risk": "The model might persist in rendering the reference scythe across the back or in the hands; fallback wording: \"both hands completely empty with zero polearms, blades, or scythe handles anywhere on the character\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "reaper_pose_release",
+   "tier": "NEW2",
+   "ref": "reaper",
+   "prompt": "Same chibi grim reaper from reference, strict side view facing left, flat solid magenta background. Skull-throw release pose: throwing arm whipped forward with empty spread bone fingers, tattered black-violet robe streaming backward in motion. Hood thrown slightly back revealing the smooth bone skull, violet flame eye trails streaking forward. Thick clean outlines, warm orange outer glow, matching reference proportions.",
+   "negative": "scythe, weapon, skull held in hand, projectile in hand, cyan fire, bare ribcage, legs, feet, background scenery, ground, floor, cast shadow, text, watermark, extra limbs, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Strict side view facing LEFT. Violet eye and blade glow as the single accent colour.",
+   "risk": "The model may leave a skull projectile attached to or merging into the throwing hand; fallback wording: \"empty skeletal hand fully open with clear empty negative space ahead of fingers\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "reaper_pose_hit",
+   "tier": "NEW2",
+   "ref": "reaper",
+   "prompt": "Same chibi grim reaper from reference, strict side view facing left, flat solid magenta background. Impact recoil pose: body jerking backward, jaw dropped in surprise, violet eye flames squeezed into thin sparks. Tattered black-violet hood slipping loose, two empty bone hands raised defensively before the chest. Robe hem fluttering erratically. Thick dark outlines, warm orange outer glow, matching reference scale.",
+   "negative": "scythe, weapon, spear, cyan fire, blood, gore, held items, legs, feet, background scenery, ground, floor, cast shadow, text, watermark, signature, extra limbs, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Strict side view facing LEFT. Violet eye and blade glow as the single accent colour.",
+   "risk": "The model might re-insert the large scythe from the reference image behind the shoulders; fallback wording: \"character recoiling with totally bare back and empty hands free of any staff or blade\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "reaper_portrait",
+   "tier": "NEW2",
+   "ref": "reaper",
+   "prompt": "Chibi grim reaper bust portrait, head and shoulders framed closely, facing right, flat solid magenta background. Pale bone skull inside a deep tattered black-violet cowl, narrowed eye sockets filled with intense violet flame. Subtle sinister grin along jawbone. Delicate bone fingertips lightly touch the hood rim. Thick clean dark outlines, warm orange outer glow, flat three-tone cel shading.",
+   "negative": "full body, scythe, weapon, hourglass, cyan fire, legs, feet, background scenery, ground, floor, cast shadow, text, watermark, signature, extra characters, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm orange outer outline glow, flat three-tone cel shading with soft highlights, a dark outfit with ONE saturated accent colour, large expressive cartoon eyes, small simplified hands. One character, full body, centered, 10 percent empty margin. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no watermark. Head-and-shoulders portrait facing RIGHT, crop below the chest. Violet eye and blade glow as the single accent colour.",
+   "risk": "The model might show the large scythe blade cutting into the portrait frame; fallback wording: \"tight crop on hooded skull and mantle with background entirely solid magenta and zero weapon blades\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "proj_soundwave",
+   "tier": "NEW2",
+   "ref": "bar",
+   "prompt": "Three nested concentric sonic crescent arcs bulging to the left, traveling leftward, flat solid magenta background. Each crescent is larger than the one behind it, the largest leading on the left. Crisp white and pale violet core bands, bright cyan interior contour line, solid opaque fills. Thick clean near-black outline, thin warm orange outer glow, flat cel-shaded game projectile icon, drawn isolated.",
+   "negative": "person, face, mouth, head, hands, music notes, speech bubble, semi-transparent layers, ground, floor, cast shadow, text, letters, watermark, extra objects, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game item, thick clean near-black outline, flat three-tone cel shading with soft highlights, warm candle key light from the upper left and a cool cyan rim light, one object centered, 12 percent empty margin. Flat solid magenta background #FF00FF, no ground, no shadow, no text, no watermark.",
+   "risk": "The model may copy the rectangular bar shape from the reference instead of curving into crescent sound waves; fallback wording: \"three distinct C-shaped curved concentric shockwave arcs with wide open hollow right sides\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "proj_axe",
+   "tier": "NEW2",
+   "ref": "knight",
+   "prompt": "A single GIANT rusty iron battle axe projectile spinning in flight, one huge crescent blade with a chipped edge, a thick wooden handle wrapped in torn cloth, tilted slightly forward, flat solid magenta background. Thick near-black outline, warm orange outer glow, flat cel-shaded sprite, drawn isolated.",
+   "negative": "knight, pumpkin head, character, person, hands, armor, shield, bell, ground, floor, cast shadow, text, letters, watermark, extra objects, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game item, thick clean near-black outline, flat three-tone cel shading with soft highlights, warm candle key light from the upper left and a cool cyan rim light, one object centered, 12 percent empty margin. Flat solid magenta background #FF00FF, no ground, no shadow, no text, no watermark.",
+   "risk": "The model may keep the knight reference body; fallback: \"solitary battle axe object with zero character parts attached\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "proj_skull",
+   "tier": "NEW2",
+   "ref": "skeleton",
+   "prompt": "A single flying cartoon skull projectile facing left, flat solid magenta background. Cracked ivory bone surface, wicked grin with slightly parted jaw. Solid stylized violet ghost flames stream horizontally behind it to the right. Thick near-black outline, thin warm orange outer glow, flat three-tone cel shading, drawn isolated as an in-flight projectile.",
+   "negative": "body, torso, ribcage, skeleton limbs, spine, hands, feet, cyan fire, ground, floor, cast shadow, text, letters, watermark, extra objects, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game item, thick clean near-black outline, flat three-tone cel shading with soft highlights, warm candle key light from the upper left and a cool cyan rim light, one object centered, 12 percent empty margin. Flat solid magenta background #FF00FF, no ground, no shadow, no text, no watermark.",
+   "risk": "The model may pull the reference skeleton's ribcage and spine along with the skull; fallback wording: \"isolated disembodied skull with horizontal flame tail and completely severed neck base\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "reaper_scythe_item",
+   "tier": "NEW2",
+   "ref": "skeleton",
+   "prompt": "A single grim reaper scythe item laid out horizontally, flat solid magenta background. Dark gnarled wooden pole shaft, large curved pale-violet steel blade mounted at the left tip curving downward with a faint glowing edge. A ragged black-violet cloth ribbon tied below the socket. Thick near-black outlines, warm orange outer glow, flat cel shading, drawn isolated.",
+   "negative": "person, character, skeleton, bone hands, gripping fingers, ground, floor, cast shadow, text, letters, watermark, extra objects, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game item, thick clean near-black outline, flat three-tone cel shading with soft highlights, warm candle key light from the upper left and a cool cyan rim light, one object centered, 12 percent empty margin. Flat solid magenta background #FF00FF, no ground, no shadow, no text, no watermark.",
+   "risk": "The reference skeleton's hands might remain fused to the scythe handle; fallback wording: \"clean unbroken wooden pole shaft with totally bare surface and zero holding fingers\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "fx_dirge_ring",
+   "tier": "NEW2",
+   "ref": "bar",
+   "prompt": "One flat elliptical ground shockwave ring viewed from an isometric low angle, flat solid magenta background. Concentric double ring of solid pale violet and ivory energy bands, adorned with tiny stylized rune symbols and curling edge wisps. Completely hollow open center. Thick clean dark outline, warm orange outer glow, flat cel-shaded VFX sprite, drawn isolated.",
+   "negative": "person, face, bride, music notes, filled center, solid disc, ground terrain, floor, cast shadow, text, letters, watermark, extra objects, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game effect sprite, thick clean near-black outline, flat three-tone cel shading with soft highlights, warm candle key light from the upper left and a cool cyan rim light, one object centered, 12 percent empty margin. Flat solid magenta background #FF00FF, no ground, no shadow, no text, no watermark.",
+   "risk": "The model may fill the center as a solid disc instead of keeping an empty hollow ring; fallback wording: \"thin circular ribbon loop with fully transparent magenta center and clear perimeter runes\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "fx_axe_slam_ring",
+   "tier": "NEW2",
+   "ref": "bar",
+   "prompt": "One flat elliptical ground slam shockwave ring viewed from an isometric low angle, flat solid magenta background. Thick circular band of solid rusty orange and dull iron-grey energy, rimmed with small stone chips and rounded dust puffs. Completely hollow center. Thick near-black outline, warm orange outer glow, flat cel-shaded VFX sprite, drawn isolated.",
+   "negative": "person, bell, weapon, filled circle, solid floor, ground texture, cast shadow, text, letters, watermark, extra objects, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game effect sprite, thick clean near-black outline, flat three-tone cel shading with soft highlights, warm candle key light from the upper left and a cool cyan rim light, one object centered, 12 percent empty margin. Flat solid magenta background #FF00FF, no ground, no shadow, no text, no watermark.",
+   "risk": "The model might spawn an actual 3D bell in the middle of the ring; fallback wording: \"empty hollow shockwave oval made of bronze energy lines with nothing placed inside the ring\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "fx_scythe_slash_arc",
+   "tier": "NEW2",
+   "ref": "bar",
+   "prompt": "A single crescent slash trajectory arc, flat solid magenta background. Razor-sharp curved motion streak in pale violet and brilliant white cel shading, wide and thick at the center curve, tapering to needle points at both tips. A few small diamond spark chips trailing along the edge. Thick dark outline, warm orange outer glow, drawn isolated.",
+   "negative": "scythe, weapon, handle, blade, person, hands, character, ground, cast shadow, text, letters, watermark, extra objects, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game effect sprite, thick clean near-black outline, flat three-tone cel shading with soft highlights, warm candle key light from the upper left and a cool cyan rim light, one object centered, 12 percent empty margin. Flat solid magenta background #FF00FF, no ground, no shadow, no text, no watermark.",
+   "risk": "The model might generate a physical metallic scythe blade rather than a pure energy slash trail; fallback wording: \"pure flat curved energy motion trail graphic without any wooden handle or mechanical blade parts\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "ult2_bat_volley_trail",
+   "tier": "NEW2",
+   "ref": "bat",
+   "prompt": "Five curved projectile motion streaks fanning outward from a right origin point toward the left, flat solid magenta background. Each streak ends at the left with a small silver four-pointed throwing star. Vibrant violet and warm orange cel-shaded energy trails, solid opaque shapes. Thick clean dark outlines, warm orange outer glow, drawn isolated.",
+   "negative": "bat, cat, animal, character, person, hands, ground, cast shadow, text, letters, watermark, extra objects, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game effect sprite, thick clean near-black outline, flat three-tone cel shading with soft highlights, warm candle key light from the upper left and a cool cyan rim light, one object centered, 12 percent empty margin. Flat solid magenta background #FF00FF, no ground, no shadow, no text, no watermark.",
+   "risk": "The model might retain the cat-bat character body from the reference behind the projectile trails; fallback wording: \"isolated spray of five streak lines with small shurikens on flat magenta with zero animal or character features\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "ult2_skeleton_ghost_javelin_trail",
+   "tier": "NEW2",
+   "ref": "skeleton",
+   "prompt": "A long ghostly energy javelin streaking horizontally to the left, flat solid magenta background. Sharp glowing cyan spearhead leading a straight energy shaft, followed by three stepped afterimage silhouette copies and trailing mist wisps. Solid opaque cel shading, thick near-black outlines, warm orange outer glow, drawn isolated as an attack VFX sprite.",
+   "negative": "skeleton, skull, ribs, bones, person, hands, armor, ground, floor, cast shadow, text, letters, watermark, extra objects, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game effect sprite, thick clean near-black outline, flat three-tone cel shading with soft highlights, warm candle key light from the upper left and a cool cyan rim light, one object centered, 12 percent empty margin. Flat solid magenta background #FF00FF, no ground, no shadow, no text, no watermark.",
+   "risk": "The model might retain the reference skeleton throwing the javelin; fallback wording: \"lone flying spectral spear graphic with trailing afterimages and completely absent thrower\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "ult2_wizard_toxic_burst",
+   "tier": "NEW2",
+   "ref": "wizard",
+   "prompt": "A spherical toxic smoke explosion burst, flat solid magenta background. Billowing cartoon smoke clouds in deep and bright toxic green cel tones, dense glowing core, surrounded by outward-flying droplets, glowing spore specks, and stylized pumpkin-seed shards. Thick near-black outline, warm orange outer glow, flat cel-shaded VFX impact, drawn isolated.",
+   "negative": "wizard, witch hat, cannon, person, robes, hands, ground, floor, cast shadow, text, letters, watermark, extra objects, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game effect sprite, thick clean near-black outline, flat three-tone cel shading with soft highlights, warm candle key light from the upper left and a cool cyan rim light, one object centered, 12 percent empty margin. Flat solid magenta background #FF00FF, no ground, no shadow, no text, no watermark.",
+   "risk": "The model might retain the wizard's hat or robe within the center of the cloud; fallback wording: \"pure volumetric cloud blast with flying seeds and zero clothing or humanoid elements inside\".",
+   "gemini_polished": true
+  },
+  {
+   "id": "ult2_knight_aegis_ring",
+   "tier": "NEW2",
+   "ref": "knight",
+   "prompt": "A flat elliptical defensive aura ring viewed from an isometric low angle, flat solid magenta background. Radiant band of glowing gold and orange runic sigils, flanked by four small stylized shield-shaped energy sparks floating around the perimeter. Completely open hollow center. Thick dark outline, warm orange outer glow, flat cel-shaded VFX sprite, drawn isolated.",
+   "negative": "knight, armor, pumpkin head, character, person, hands, solid floor, ground texture, cast shadow, text, letters, watermark, extra objects, photo, 3D render, blurry, realistic, painterly gradient, plastic shine, thin line art, existing movie character, real person",
+   "style": "Dark-fantasy 2D cartoon game effect sprite, thick clean near-black outline, flat three-tone cel shading with soft highlights, warm candle key light from the upper left and a cool cyan rim light, one object centered, 12 percent empty margin. Flat solid magenta background #FF00FF, no ground, no shadow, no text, no watermark.",
+   "risk": "The model might render the pumpkin knight standing in the center of the magical ring; fallback wording: \"unoccupied runic circle with completely vacant magenta center space and zero knight figures\".",
+   "gemini_polished": true
+  }
+ ]
+}

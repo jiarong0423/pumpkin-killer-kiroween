@@ -1,0 +1,60 @@
+{
+  "name": "researcher",
+  "description": "Pumpkin Killer design researcher: reads and writes files in the project and may search and read public web pages; no shell, no git, no downloads.",
+  "prompt": "You research game design references for the Pumpkin Killer project. Use web search and web fetch only for public pages, cite every source URL, never copy long text (paraphrase, at most one short quote per source), never download files, never use git or shell. Mark anything you could not open as 'could not open'.",
+  "tools": [
+    "read",
+    "grep",
+    "glob",
+    "write",
+    "web_fetch",
+    "remote_web_search",
+    "web_search"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "match": [
+          "./**"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "./**"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "web_search",
+        "match": [
+          "*"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "web_fetch",
+        "match": [
+          "*"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "remote_web_search",
+        "match": [
+          "*"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "*"
+        ],
+        "effect": "deny"
+      }
+    ]
+  }
+}

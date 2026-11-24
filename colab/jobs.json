@@ -1,0 +1,505 @@
+{
+  "style": "Keep the EXACT same character design, outfit, colors, proportions, outline thickness and 2D dark-fantasy cartoon art style as the reference image. Character faces LEFT in strict side view. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+  "refs": {
+    "skeleton": "unit_skeleton.png",
+    "wizard": "unit_wizard.png",
+    "bat": "unit_bat.png",
+    "knight": "unit_knight.png",
+    "bar": "ref_bar_from_video.png"
+  },
+  "tiers": {
+    "P1": "must have: weapons, empty-hand bodies, arm poses, floating shield",
+    "P2": "big-head throw cut-in portraits",
+    "P3": "nice to have"
+  },
+  "jobs": [
+    {
+      "id": "skeleton_spear_item",
+      "tier": "P1",
+      "ref": "skeleton",
+      "prompt": "Show ONLY the long wooden spear with the dark steel spearhead from the reference, drawn alone as an isolated game item, horizontal, spearhead pointing right, same wood grain and steel colors."
+    },
+    {
+      "id": "bat_dagger_item",
+      "tier": "P1",
+      "ref": "bat",
+      "prompt": "Show ONLY the short silver dagger from the reference, drawn alone as an isolated game item, horizontal, blade pointing right."
+    },
+    {
+      "id": "knight_small_shield_item",
+      "tier": "P1",
+      "ref": "knight",
+      "prompt": "Show ONLY a small round-topped wooden shield with the pale cross, the same design as the tall shield in the reference but smaller and light enough to be thrown, drawn alone as an isolated game item, front view."
+    },
+    {
+      "id": "wizard_cannonball_item",
+      "tier": "P1",
+      "ref": "wizard",
+      "prompt": "Show ONLY a dark iron cannonball with a small glowing orange pumpkin-stem fuse, drawn alone as an isolated game item, in the same art style as the brass cannon in the reference."
+    },
+    {
+      "id": "skeleton_body_empty_hand",
+      "tier": "P1",
+      "ref": "skeleton",
+      "prompt": "Same skeleton in the same pose, but with NO spear at all. The hand that held the spear is an empty relaxed hand. Nothing carried on the shoulder."
+    },
+    {
+      "id": "bat_body_empty_hand",
+      "tier": "P1",
+      "ref": "bat",
+      "prompt": "Same bat-cat in the same pose, but with NO dagger at all. The hand that held the dagger is an empty relaxed hand."
+    },
+    {
+      "id": "knight_body_no_shield",
+      "tier": "P1",
+      "ref": "knight",
+      "prompt": "Same pumpkin knight in the same pose, but with NO shield at all. The arm that held the shield hangs naturally with an empty gauntlet hand."
+    },
+    {
+      "id": "skeleton_pose_charge",
+      "tier": "P1",
+      "ref": "skeleton",
+      "prompt": "Same skeleton, NO weapon. Javelin wind-up pose: throwing arm pulled far back behind the body, torso leaning back, other arm pointing forward to aim, knees bent."
+    },
+    {
+      "id": "skeleton_pose_release",
+      "tier": "P1",
+      "ref": "skeleton",
+      "prompt": "Same skeleton, NO weapon. Javelin release pose: throwing arm swung up and fully extended forward and high with an OPEN hand, torso lunged forward, back leg stretched."
+    },
+    {
+      "id": "skeleton_pose_follow",
+      "tier": "P1",
+      "ref": "skeleton",
+      "prompt": "Same skeleton, NO weapon. Follow-through pose after a javelin throw: throwing arm swept down across the body, torso twisted, weight on the front leg."
+    },
+    {
+      "id": "skeleton_pose_hit",
+      "tier": "P1",
+      "ref": "skeleton",
+      "prompt": "Same skeleton, NO weapon. Hit reaction: knocked backward, head tilted back, arms flung out, bones slightly shaken apart, eyes squeezed."
+    },
+    {
+      "id": "bat_pose_charge",
+      "tier": "P1",
+      "ref": "bat",
+      "prompt": "Same bat-cat, NO weapon. Wind-up pose: throwing arm pulled back behind the head, body crouched low, wings flared back."
+    },
+    {
+      "id": "bat_pose_release",
+      "tier": "P1",
+      "ref": "bat",
+      "prompt": "Same bat-cat, NO weapon. Release pose: throwing arm snapped forward and up with an open hand, body leaning forward, wings swept back."
+    },
+    {
+      "id": "bat_pose_follow",
+      "tier": "P1",
+      "ref": "bat",
+      "prompt": "Same bat-cat, NO weapon. Follow-through pose: throwing arm sweeping down across the body, tail whipping, wings folding."
+    },
+    {
+      "id": "bat_pose_hit",
+      "tier": "P1",
+      "ref": "bat",
+      "prompt": "Same bat-cat, NO weapon. Hit reaction: knocked back, ears flattened, wings flailing, eyes shut tight."
+    },
+    {
+      "id": "knight_pose_charge",
+      "tier": "P1",
+      "ref": "knight",
+      "prompt": "Same pumpkin knight, NO shield. Throwing wind-up: right arm pulled back to throw something small, heavy armored torso leaning back."
+    },
+    {
+      "id": "knight_pose_release",
+      "tier": "P1",
+      "ref": "knight",
+      "prompt": "Same pumpkin knight, NO shield. Release pose: armored arm thrust forward and up with an open gauntlet hand, torso lunging forward, cloak swinging."
+    },
+    {
+      "id": "knight_pose_follow",
+      "tier": "P1",
+      "ref": "knight",
+      "prompt": "Same pumpkin knight, NO shield. Follow-through: arm swung down across the body, cloak whipping forward."
+    },
+    {
+      "id": "knight_pose_defend",
+      "tier": "P1",
+      "ref": "knight",
+      "prompt": "Same pumpkin knight, NO shield. Casting a defensive spell: both gauntlet hands raised to the sky, the pumpkin head glowing brighter, cloak billowing upward."
+    },
+    {
+      "id": "knight_pose_hit",
+      "tier": "P1",
+      "ref": "knight",
+      "prompt": "Same pumpkin knight, NO shield. Hit reaction: staggering backward, armor plates jolted, pumpkin face grimacing."
+    },
+    {
+      "id": "wizard_pose_aim",
+      "tier": "P1",
+      "ref": "wizard",
+      "prompt": "Same pumpkin wizard with the SAME brass cannon on the shoulder. Aiming pose: cannon barrel pointing forward and up at about 55 degrees, both hands steadying it."
+    },
+    {
+      "id": "wizard_pose_fire",
+      "tier": "P1",
+      "ref": "wizard",
+      "prompt": "Same pumpkin wizard with the SAME brass cannon. Firing recoil pose: body thrown backward, hat tipping off, cannon barrel kicked up, cloak flaring."
+    },
+    {
+      "id": "wizard_pose_hit",
+      "tier": "P1",
+      "ref": "wizard",
+      "prompt": "Same pumpkin wizard with the SAME brass cannon. Hit reaction: knocked back, hat crooked, pumpkin face startled."
+    },
+    {
+      "id": "shield_bar_amber",
+      "tier": "P1",
+      "ref": "bar",
+      "prompt": "Redraw this thin glossy horizontal bar as a polished floating energy shield bar: very long and thin rounded pill, glossy amber-orange with a bright highlight line, tiny carved jack-o'-lantern emblem in the center, faint glowing runes at both ends, soft orange glow. Keep the same thin horizontal proportions. Magenta background."
+    },
+    {
+      "id": "shield_bar_cyan",
+      "tier": "P1",
+      "ref": "bar",
+      "prompt": "Redraw this thin glossy horizontal bar as a polished floating energy shield bar: very long and thin rounded pill, glossy spectral cyan with a bright highlight line, tiny carved jack-o'-lantern emblem in the center, faint glowing runes at both ends, soft cyan glow. Keep the same thin horizontal proportions. Magenta background."
+    },
+    {
+      "id": "skeleton_portrait_neutral",
+      "tier": "P2",
+      "ref": "skeleton",
+      "prompt": "Big-head bust portrait of this skeleton for a game UI, facing right, confident grin, cyan eye fire, shoulders and upper chest only."
+    },
+    {
+      "id": "skeleton_portrait_charge",
+      "tier": "P2",
+      "ref": "skeleton",
+      "prompt": "Big-head bust portrait of this skeleton, facing right, teeth gritted, focused glare, eye fire blazing, as if charging a throw."
+    },
+    {
+      "id": "skeleton_portrait_throw",
+      "tier": "P2",
+      "ref": "skeleton",
+      "prompt": "Big-head bust portrait of this skeleton, facing right, mouth wide open shouting, eye fire flaring, dramatic."
+    },
+    {
+      "id": "skeleton_portrait_hit",
+      "tier": "P2",
+      "ref": "skeleton",
+      "prompt": "Big-head bust portrait of this skeleton, facing right, eye sockets squeezed, jaw rattled loose, hit reaction."
+    },
+    {
+      "id": "bat_portrait_neutral",
+      "tier": "P2",
+      "ref": "bat",
+      "prompt": "Big-head bust portrait of this bat-cat for a game UI, facing right, smug half-lidded grin, shoulders only."
+    },
+    {
+      "id": "bat_portrait_charge",
+      "tier": "P2",
+      "ref": "bat",
+      "prompt": "Big-head bust portrait of this bat-cat, facing right, narrowed eyes, fangs showing, tense and focused."
+    },
+    {
+      "id": "bat_portrait_throw",
+      "tier": "P2",
+      "ref": "bat",
+      "prompt": "Big-head bust portrait of this bat-cat, facing right, mouth open in a battle cry, ears pinned back, dramatic."
+    },
+    {
+      "id": "bat_portrait_hit",
+      "tier": "P2",
+      "ref": "bat",
+      "prompt": "Big-head bust portrait of this bat-cat, facing right, eyes squeezed shut, ears flat, hit reaction."
+    },
+    {
+      "id": "knight_portrait_neutral",
+      "tier": "P2",
+      "ref": "knight",
+      "prompt": "Big-head bust portrait of this pumpkin knight for a game UI, facing right, calm glowing grin, armored shoulders."
+    },
+    {
+      "id": "knight_portrait_charge",
+      "tier": "P2",
+      "ref": "knight",
+      "prompt": "Big-head bust portrait of this pumpkin knight, facing right, glowing eyes narrowed, determined scowl."
+    },
+    {
+      "id": "knight_portrait_throw",
+      "tier": "P2",
+      "ref": "knight",
+      "prompt": "Big-head bust portrait of this pumpkin knight, facing right, mouth wide open roaring, light blazing from the carved face."
+    },
+    {
+      "id": "knight_portrait_hit",
+      "tier": "P2",
+      "ref": "knight",
+      "prompt": "Big-head bust portrait of this pumpkin knight, facing right, face flickering dim, grimacing, hit reaction."
+    },
+    {
+      "id": "wizard_portrait_neutral",
+      "tier": "P2",
+      "ref": "wizard",
+      "prompt": "Big-head bust portrait of this pumpkin wizard for a game UI, facing right, mischievous grin under the witch hat."
+    },
+    {
+      "id": "wizard_portrait_charge",
+      "tier": "P2",
+      "ref": "wizard",
+      "prompt": "Big-head bust portrait of this pumpkin wizard, facing right, one eye squinting as if aiming, grin tight."
+    },
+    {
+      "id": "wizard_portrait_throw",
+      "tier": "P2",
+      "ref": "wizard",
+      "prompt": "Big-head bust portrait of this pumpkin wizard, facing right, mouth wide open laughing, hat blown back by a blast."
+    },
+    {
+      "id": "wizard_portrait_hit",
+      "tier": "P2",
+      "ref": "wizard",
+      "prompt": "Big-head bust portrait of this pumpkin wizard, facing right, startled, hat crooked, hit reaction."
+    },
+    {
+      "id": "knight_small_shield_alone",
+      "tier": "P1b",
+      "ref": "knight",
+      "prompt": "A single small round-topped wooden shield with a pale cross on dark wood and a thin warm outline, drawn alone as an isolated game item icon, front view, centered. Nothing else in the picture: no person, no character, no pumpkin head, no hands, no arms, no cape.",
+      "style": "Dark-fantasy 2D cartoon art with thick clean outlines. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark."
+    },
+    {
+      "id": "bat_dart_item",
+      "tier": "P1c",
+      "ref": "bat",
+      "prompt": "A single small silver throwing dart with a dark grip and an orange tail fin, drawn alone as an isolated game item, horizontal, point to the right. Nothing else in the picture: no person, no cat, no hands.",
+      "style": "Dark-fantasy 2D cartoon art with thick clean outlines. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark."
+    },
+    {
+      "id": "bat_dart_bag",
+      "tier": "P1c",
+      "ref": "bat",
+      "prompt": "A small black leather dart pouch with an orange trim, a flap and a short belt strap, a few silver dart tails sticking out of the top, drawn alone as an isolated game item, side view. Nothing else in the picture: no person, no cat, no hands.",
+      "style": "Dark-fantasy 2D cartoon art with thick clean outlines. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark."
+    },
+    {
+      "id": "shield_bar_slab_blue",
+      "tier": "P1d",
+      "ref": "bar",
+      "prompt": "Redraw this thin bar as a bold floating haunted slab, like a wide flat floating coffin lid: a long thin weathered dark wood plank with iron corner brackets and rivets, a carved white skull in the center, deep cracks glowing electric blue, thick pale blue spectral flames and dripping ghost-fire hanging from the underside, two small candles on top at both ends, strong electric blue rim glow. Highly detailed, premium game-UI finish like a polished mobile-game asset: painted wood grain with chipped edges, fine engraved runes, layered glow and crisp rim lighting, richly shaded flames, sharp readable details. Much stronger, heavier and more dramatic than a plain glossy bar, but keep the same very long and thin horizontal proportions.",
+      "style": "Dark-fantasy 2D cartoon art with thick clean dark outlines, strong contrast and saturated colors. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark."
+    },
+    {
+      "id": "shield_bar_slab_purple",
+      "tier": "P1d",
+      "ref": "bar",
+      "prompt": "Redraw this thin bar as a bold floating haunted slab, like a wide flat floating coffin lid: a long thin weathered dark wood plank with iron corner brackets and rivets, a carved white skull in the center, deep cracks glowing violet, thick purple spectral flames and dripping ghost-fire hanging from the underside, two small candles on top at both ends, strong violet rim glow. Highly detailed, premium game-UI finish like a polished mobile-game asset: painted wood grain with chipped edges, fine engraved runes, layered glow and crisp rim lighting, richly shaded flames, sharp readable details. Much stronger, heavier and more dramatic than a plain glossy bar, but keep the same very long and thin horizontal proportions.",
+      "style": "Dark-fantasy 2D cartoon art with thick clean dark outlines, strong contrast and saturated colors. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark."
+    },
+    {
+      "id": "skeleton_javelin_windup",
+      "tier": "P1e",
+      "ref": "skeleton",
+      "prompt": "Redraw this same skeleton in a javelin-throw windup pose, strict side view facing LEFT. The FRONT hand (the fist that carried the spear on the shoulder in the reference) grips the middle of the long wooden spear, the arm cocked back behind the head, the spear held at shoulder height pointing FORWARD: the steel spearhead leads on the LEFT, the same direction the skull faces, and the iron-capped butt points back to the RIGHT. Knees bent, body leaning back to throw. Keep the spear design exactly as in the reference but with the spearhead pointing LEFT."
+    },
+    {
+      "id": "bat_shuriken_draw",
+      "tier": "P1g",
+      "ref": "bat",
+      "prompt": "Redraw this same cat-bat assassin as a stealthy ninja-style assassin drawing a weapon: strict side view facing LEFT, in a low predator crouch, the REAR hand (right side of the picture) snapping back to its hip and flicking out one four-pointed silver shuriken between two fingers, the dark cape and the bat wing swept back, narrowed cold eyes locked on the target to the LEFT, weight on the back leg, a quick, silent, lethal look. NO dagger anywhere, NO pouch or bag drawn."
+    },
+    {
+      "id": "bat_shuriken_windup",
+      "tier": "P1g",
+      "ref": "bat",
+      "prompt": "Redraw this same cat-bat assassin in an assassin's shuriken-throw windup: strict side view facing LEFT, a low sideways crouch, the throwing arm cocked back and out with THREE silver four-pointed shuriken fanned between the fingers, the other arm tucked in front for balance, the cape and wing trailing behind, ears flattened, narrowed cold eyes locked on the target to the LEFT, ready to flick. NO dagger anywhere, NO pouch or bag drawn."
+    },
+    {
+      "id": "bat_shuriken_item",
+      "tier": "P1g",
+      "ref": "bat",
+      "prompt": "A single four-pointed silver ninja throwing star (shuriken) with a dark round centre hole and a thin warm orange rim, drawn alone as an isolated game item, flat front view, centered. Nothing else in the picture: no person, no cat, no hands.",
+      "style": "Dark-fantasy 2D cartoon art with thick clean outlines. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark."
+    },
+    {
+      "id": "bat_shuriken_bag",
+      "tier": "P1g",
+      "ref": "bat",
+      "prompt": "A small black leather ninja pouch with an orange trim, a flap and a short belt strap, the points of a few silver four-pointed shuriken sticking out of the top, drawn alone as an isolated game item, side view. Nothing else in the picture: no person, no cat, no hands.",
+      "style": "Dark-fantasy 2D cartoon art with thick clean outlines. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark."
+    },
+    {
+      "id": "ui_top_plate_left",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A wide horizontal HUD name plate for the player team: dark carved wood with riveted iron corner brackets, a thin red glowing rune line along the bottom edge, small carved skulls at both ends, and a flat empty dark centre where text will go.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_top_plate_right",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A wide horizontal HUD name plate for the opposing team: dark carved wood with riveted iron corner brackets, a thin ghostly cyan glowing rune line along the bottom edge, small carved skulls at both ends, and a flat empty dark centre where text will go.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_top_center_plate",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A compact ornate center info plate: aged brass frame with a candle-gold rim, two tiny bat wings spreading from the top edge, small iron rivets, and a flat empty dark centre.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_hp_frame",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A long thin health bar frame made of bone and dark iron with an empty dark glass interior, studs at both ends, front view.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_hp_fill",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A plain long thin glossy green liquid fill strip with a bright highlight line along the top, rounded ends, slimy and glowing slightly.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_wind_frame",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A long thin wind gauge frame made of bone and dark iron with a small centered arrow notch, empty dark interior, spiral wind carvings at both ends.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_dock_frame",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A very wide horizontal control-bar frame: weathered dark stone inset in a thick carved wooden beam with iron rivets, cracks, a little moss, tiny carved skulls at both ends and a plain dark stone centre where buttons will sit.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_plate_normal",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A rounded-square dark stone button plate with a riveted iron rim and an empty flat centre.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_plate_active",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A rounded-square dark stone button plate with a riveted iron rim, a glowing orange rune carved at the top and a warm orange inner light, empty flat centre.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_icon_normal",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A single game icon: a bullseye target with a tiny jack-o'-lantern in the middle, carved-stone look with orange accents.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_icon_double",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A single game icon: two small glowing jack-o'-lanterns flying side by side with motion streaks.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_icon_heavy",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A single game icon: a black round iron bomb with a short lit fuse spitting orange sparks.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_icon_heal",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A single game icon: a glass potion bottle filled with glowing green liquid and a tiny candy-corn cork.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_lock_plate",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A wide glossy orange plate shaped like a carved pumpkin-lantern lid with a thick gold rim and an empty flat centre.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_candle",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A single tall cream candle with dripping wax and a small bright yellow flame on a tiny iron holder.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_ghostfire_cyan",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A thin horizontal strip of small spectral cyan-white flames with wispy tips and a flat bottom edge, glowing.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_ghostfire_violet",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A thin horizontal strip of small spectral violet flames with wispy tips and a flat bottom edge, glowing.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_power_unlit",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A single tall rounded-rectangle meter segment made of dark carved stone, unlit.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_power_orange",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A single tall rounded-rectangle meter segment glowing like an orange ember.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_power_hot",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A single tall rounded-rectangle meter segment glowing white-hot gold.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_socket_ammo",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A square dark stone item socket with a thin gold rim and an empty recessed centre.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "ui_socket_special",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A square dark stone item socket with a faint violet dashed rune ring around an empty recessed centre.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "env_fence_intact",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "A Halloween graveyard fence section seen from the front, made of BLACK wrought iron: eleven tall black iron bars with sharp spear-tip tops, a twisting gothic black crossbar with curled scrollwork and small bat silhouettes, thick black end posts with pointed finials, and a small carved glowing jack-o'-lantern hanging at the centre. Glossy black metal with subtle blue rim light, a few cobwebs, detailed and spooky.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "env_fence_damaged",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "The same BLACK wrought-iron Halloween graveyard fence but damaged: two bars bent outward, one bar snapped, the crossbar warped, an end post leaning, scorch marks and cracked glow, the jack-o'-lantern cracked and dim.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    },
+    {
+      "id": "env_fence_broken",
+      "tier": "U1",
+      "ref": "bar",
+      "prompt": "The same BLACK wrought-iron Halloween graveyard fence almost destroyed: only a few twisted black bars and bent stumps remain, the crossbar snapped in two, the jack-o'-lantern fallen and smashed beside it, wisps of smoke.",
+      "style": "Dark-fantasy 2D cartoon game-UI art with thick clean dark outlines, rich texture (weathered wood grain, chipped stone, rusted iron, wax), warm candle highlights and cool spectral glow. The object is centered, drawn alone, front view, with generous empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no watermark."
+    }
+  ]
+}

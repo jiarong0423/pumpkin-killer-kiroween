@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Constants sync test on constants or engine save",
+      "description": "When shared/constants.json or scripts/mcp_game_server.py is saved, run scripts/test_constants_sync.py if it exists.",
+      "trigger": "PostFileSave",
+      "matcher": "(shared/constants\\.json$|scripts/mcp_game_server\\.py$)",
+      "action": {
+        "type": "command",
+        "command": "if [ -f scripts/test_constants_sync.py ]; then python3 -B scripts/test_constants_sync.py; else echo 'skip: scripts/test_constants_sync.py does not exist yet'; fi"
+      },
+      "enabled": true
+    }
+  ]
+}

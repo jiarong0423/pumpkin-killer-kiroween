@@ -1,0 +1,7 @@
+# Pumpkin cannonball picture (owner 2026-11-15: the pumpkin wizard throws a pumpkin cannonball)
+
+Attach `assets/env/proj_pumpkin.png`.
+
+```
+Edit the attached pumpkin picture into ONE round jack-o'-lantern CANNONBALL, a heavy pumpkin cannon shell: an orange pumpkin with deep ribs and a short green stem, a glowing carved face (triangle eyes, jagged grin) lit from inside, a thin burning fuse on the stem trailing a small spark, a thin band of dark iron straps around its middle so it reads as ammunition, slight motion smoke behind it. Centred, fully inside the frame with a clear margin, on a flat noise-free magenta background #FF00FF. Rich stylised game art in the look of a polished Halloween mobile-game concept painting: soft volumetric glow from the carved face, fine surface texture, soft dark outlines, no flat cel shading. Do not include text, a hand, a character, a cannon, a second pumpkin, or any known film or game item.
+```

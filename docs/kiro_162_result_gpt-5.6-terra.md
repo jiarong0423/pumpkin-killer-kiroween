@@ -1,0 +1,8 @@
+# Task 162 result: a Kiro agent played one match through the MCP server (recorded by the main line, 2026-11-16)
+The `pk-player` agent (tools: the six pumpkin-killer MCP tools only; no shell, no files, no web) played the white seat against `builtin:normal` and won in round 19 ("White won in round 19, eliminating the final red knight"). Its own closing words: public landing history is enough to adjust power for the wind, and advancing units during a strong headwind made later shots viable.
+Evidence (re-checked by the main line, not taken from the agent's report):
+- Transcript `docs/kiro_evidence/raw/mcp_pk_player_match.jsonl`: 364 entries (fields `tool`, `arguments`, `is_error`, `result`); `submit_action` accepted 68 times (`is_error` false) and rejected 16 times (the server refused illegal or out-of-turn actions loudly).
+- Hidden information: the transcript contains none of `seed`, `knight_points`, `aim_power`, `opponent_aim` or an aim `angle` field.
+- Console output of the run: `docs/kiro_162_run_output.txt`.
+How it was run: `kiro-cli chat --agent-engine v3 --no-interactive --trust-workspace --agent pk-player --model gpt-5.6-terra --trust-all-tools "Read docs/kiro_task_162_play_via_mcp.md and carry out that task exactly."` The first two attempts failed with `tool permission approval is not supported in non-interactive mode` (also with `--trust-tools=@pumpkin-killer/...`); `--trust-all-tools` was used because the agent can only call these six MCP tools (its tool list is `["@mcp"]`, no shell or file tool).
+Limits: the engine used is the Python engine of task 175 (normal turns: throw, move, defend); ultimates and the one-use skills are not in it yet (Kiro task 185).

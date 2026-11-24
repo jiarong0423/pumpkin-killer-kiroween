@@ -1,0 +1,111 @@
+flowchart LR
+  classDef done fill:#d4edda,stroke:#2f855a,color:#173b24
+  classDef active fill:#fff3cd,stroke:#b7791f,color:#4a3200
+  classDef gap fill:#fed7d7,stroke:#c53030,color:#551515
+  classDef frozen fill:#e2e3e5,stroke:#6c757d,color:#343a40
+
+  subgraph Browser[Browser game]
+    Page[index.html canvas game]:::active
+    P[js/particles.js]:::done
+    PD[js/particles_draw.js]:::done
+    UFX[js/ultimate_fx.js]:::done
+    Hall[js/hallucination.js]:::done
+    Audio[js/audio.js]:::done
+    Ambient[js/ambient_sfx.js]:::done
+    Wind[js/wind_fx.js]:::done
+    Levels[js/ai_levels_page.js<br/>page wiring gap]:::gap
+    AdaptiveJS[js/adaptive_level.js<br/>page wiring gap]:::gap
+  end
+  Page -->|script src| P
+  Page -->|script src| PD
+  Page -->|script src| UFX
+  Page -->|script src| Hall
+  Page -->|script src| Audio
+  Page -->|script src| Ambient
+  Page -->|script src| Wind
+  Page -->|setSprites| PD
+  Page -->|createAudio| Audio
+  Page -->|createAmbient| Ambient
+  Page -->|createWindField| Wind
+  Page -->|timeline| UFX
+
+  subgraph MCP[MCP rule engine, separate from the browser page]
+    Stdio[scripts/mcp_stdio_server.py<br/>JSON-RPC stdio]:::done
+    Engine[scripts/mcp_game_server.py<br/>deterministic rules engine]:::done
+    Shared[shared/constants.json]:::done
+    Public[public state and history]:::done
+    McpLevels[scripts/agent_levels.py<br/>three calibrated levels]:::done
+    AdaptivePy[scripts/adaptive_level.py<br/>adaptive level]:::done
+    Vectors[scripts/adaptive_level_vectors.json]:::done
+  end
+  Stdio -->|imports| Engine
+  Stdio -->|reads| Shared
+  Engine -->|reads| Shared
+  Stdio -->|returns| Public
+  AdaptivePy -->|reads| Vectors
+
+  subgraph Verification[Tests and checks]
+    TParticles[scripts/test_particles.js]:::done
+    TMcp[scripts/test_mcp_game.py<br/>scripts/test_mcp_stdio.py]:::done
+    TConstants[scripts/test_constants_sync.py]:::done
+    TLevels[scripts/test_agent_levels.py<br/>scripts/test_ai_levels_page.js]:::done
+    TAdaptive[scripts/test_adaptive_level.py<br/>scripts/test_adaptive_level.js]:::done
+    TRelease[scripts/test_export_tree.py<br/>scripts/test_privacy_gate.py<br/>scripts/test_clean_checkout.py]:::done
+  end
+  TParticles -->|require| P
+  TParticles -->|require| PD
+  TMcp -->|imports or spawns| Engine
+  TMcp -->|imports or spawns| Stdio
+  TConstants -->|compares| Shared
+  TLevels -->|tests| McpLevels
+  TLevels -->|tests| Levels
+  TAdaptive -->|tests| AdaptivePy
+  TAdaptive -->|tests| AdaptiveJS
+  TAdaptive -->|uses| Vectors
+
+  subgraph Release[Release pipeline]
+    Manifest[scripts/release/export_manifest.json]:::done
+    Export[scripts/release/export_tree.py]:::active
+    Assets[scripts/release/check_asset_refs.py]:::active
+    ReleaseTree[../pk-release<br/>not yet approved]:::gap
+    Privacy[scripts/release/privacy_gate.py]:::active
+    Clean[scripts/release/clean_checkout.sh]:::active
+    PublicRepo[public repository and URL]:::gap
+  end
+  Export -->|imports scan| Assets
+  Manifest -->|input| Export
+  Page -->|source asset references| Assets
+  Export -->|writes on apply| ReleaseTree
+  Assets -->|checks| ReleaseTree
+  Privacy -->|checks| ReleaseTree
+  Clean -->|checks| ReleaseTree
+  ReleaseTree -->|after gates and owner action| PublicRepo
+  TRelease -->|tests| Export
+  TRelease -->|tests| Privacy
+  TRelease -->|tests| Clean
+
+  subgraph Kiro[Kiro evidence and planning layer]
+    Steering[.kiro/steering]:::done
+    Specs[.kiro/specs]:::active
+    Hooks[.kiro/hooks]:::active
+    Agents[.kiro/agents]:::done
+    Powers[.kiro/powers]:::active
+    Config[.kiro/settings/mcp.json]:::active
+    Ledger[docs/KIRO_LEDGER.md<br/>docs/kiro_verified.json]:::active
+  end
+  Config -->|launches| Stdio
+  Steering -->|governs| Specs
+  Ledger -->|records main-line verification| TRelease
+
+  subgraph Colab[Owner Colab art line]
+    Queues[colab/jobs_queue_all_20261115.json<br/>and dated queues]:::active
+    Qwen[owner Qwen/Colab run]:::active
+    Approved[owner-reviewed image outputs]:::gap
+    Art[assets/ units, poses, env, fx]:::active
+    Keying[scripts/key_magenta_items.py<br/>scripts/key_skeleton_poses.py]:::done
+  end
+  Queues -->|documented run input| Qwen
+  Qwen -->|owner review| Approved
+  Approved -->|reviewed install or keying| Art
+  Keying -->|writes approved destinations| Art
+  Art -->|loaded by path| Page

@@ -1,0 +1,13 @@
+# Kiro task 101 — finish the hook format the Kiro IDE itself wrote
+
+Fact (main line, 2026-11-15): at 16:35 the IDE's "Migrate" action (clicked by the owner) wrote three new files in `.kiro/hooks/`: `test-engine-on-index-save.json`, `test-constants-sync-on-save.json`, `test-rig-on-save.json`. They use `{"version": "v1", "hooks": [{ "name", "description", "trigger": "PostFileSave", "matcher": <regex>, "action": {"type": "command", "command": ...}, "enabled": true }]}`. The three old `.kiro.hook` files still exist next to them, so one save can fire a hook twice. `(not published)` (3 hooks in one file, same top-level shape) showed greyed out in the IDE panel and did not run on a save.
+
+Read: the six files named above, `(not published)`, `docs/kiro_97_ide_config_findings_claude-sonnet-5.5.md`, `(not published)` (Hooks section), `docs/kiro_evidence/raw/ide_hook_run_20261115.txt`.
+
+Do, saving after each:
+1. Compare each old `.kiro.hook` with its new `.json`: list any difference in name, trigger, matcher or command that changes behaviour (for example the event type or the regex). If a command or matcher differs in a way that changes behaviour, fix the new `.json` to keep the old behaviour; say so.
+2. Make a backup folder `(not published)` with copies of the three old `.kiro.hook` files and `pk-checks.json`, then remove the three old `.kiro.hook` files from `.kiro/hooks/` (the new `.json` files replace them). Do not remove `pk-checks.json` in this step.
+3. Convert `pk-checks.json` into three single-hook files in the same shape as the IDE's own files, one per hook (`preload-block-fresh-on-index-save.json`, `constants-sync-on-engine-save.json`, `ledger-on-kiro-result-save.json`), each keeping name, description, trigger, matcher, command and timeout; keep the log-line echo in the commands (they write `docs/kiro_evidence/raw/hook_runs.log`). Then remove `pk-checks.json` from `.kiro/hooks/` (the backup keeps it). If a local doc says the IDE ignores one of these fields, keep the field out and say which doc.
+4. Validate every file in `.kiro/hooks/` with `python3 -c "import json,sys;json.load(open(sys.argv[1]))" <file>` for each file and paste the result lines. Run `python3 -B scripts/test_constants_sync.py` and `python3 -B scripts/test_mcp_game.py` and paste the last lines.
+
+Touch only `.kiro/hooks/*`, `(not published)` and `(not published)` (max 25 lines: files, differences found, commands with last output lines, what you did not run). The main line will save `index.html` once in the IDE afterwards to check that each hook runs once. Do not edit `index.html`. No network, no git.

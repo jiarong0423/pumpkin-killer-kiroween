@@ -1,0 +1,59 @@
+/* The dock's ONE owner of size and place (owner 2026-11-17: 'objects decoupled, recompute everything').
+   Design space: the dock is a 52 px high bar, children at the sizes below, drawn for a stage 390 px high (scripts/dock_fit_mask.py: with the real figures, rings and shadows as binary masks, 390 is the smallest reference that never touches them at any stage height from 300 to 800 px). It is placed inside the stage and scaled as one picture by --dock-scale = stage height / 390
+   (set by fitVisibleViewport, never above 3; the JS value and the container-query value differ by the 3 px border at most). Its design width is 84 percent of the stage width divided by that scale (88 percent left no room for the 44 px gear beside it at 640 px: measure_phone_layout flagged dock / settings-btn), so it is about 780 px wide at every size.
+   No media query: a phone, a tablet and a desktop get the same bar. Loaded after css/dock.css and css/dock_art.css, so it wins over their size rules. */
+html #bottom-dock {
+  position: absolute !important; left: 50% !important; bottom: calc(6px * var(--dock-scale, 1)) !important;
+  transform: translateX(-50%) scale(var(--dock-scale, 1)) !important; transform-origin: 50% 100% !important;
+  width: calc(var(--stage-w, 820px) * 0.84 / var(--dock-scale, 1)) !important; height: 52px !important; min-height: 52px !important; max-width: none !important;
+  --dock-h: 52px; --dock-bottom: 0px; --tile-w: 44px; --tile-h: 44px; --gap: 4px; --pad: 4px; z-index: 20;
+}
+html #bottom-dock .skill-btn { width: 44px !important; height: 44px !important; min-width: 44px !important; min-height: 44px !important; }
+html #bottom-dock .skill-btn .btn-tip { position: absolute; left: 1px; right: 1px; bottom: 2px; font-size: 8px !important; line-height: 1; letter-spacing: 0; text-align: center; white-space: nowrap; overflow: hidden; text-shadow: 0 1px 2px #000, 0 0 3px #000; pointer-events: none; }
+html #bottom-dock .dock-readouts { gap: 4px !important; }
+html #bottom-dock .dock-plate { height: 44px !important; padding: 3px 6px !important; }
+html #bottom-dock .dock-angle { width: 58px !important; }
+html #bottom-dock .dock-power { min-width: 92px !important; flex-basis: 92px !important; }
+html #bottom-dock .power-meter { height: 12px !important; }
+
+/* Auto-fill from the container (owner 2026-11-17: 'just look at the container size and fill in automatically'): the stage is a size container, so a browser that supports typed
+   division reads the bar's scale straight from the container height (container height / 390), and the width from the container width. No script, no resize listener involved.
+   Older browsers keep the --dock-scale and --stage-w that fitVisibleViewport sets (same numbers). */
+#game-container { container-type: size; container-name: stage; }
+@supports (scale: calc(10px / 1px)) {
+  html #bottom-dock { --dock-scale: min(3, calc(100cqh / 390px)); width: calc(84cqw / var(--dock-scale)) !important; }
+}
+
+/* Touch area (Apple 44 pt, Google 48 dp): the drawn button stays proportional, the invisible touch area is 8 px bigger all round, so a button at a scale of 0.8 still has a 43 px target. */
+html #bottom-dock .skill-btn { position: relative; }
+html #bottom-dock .skill-btn::after { content: ""; position: absolute; inset: -4px; }
+
+/* Colourful power meter (owner 2026-11-17: 'make the power colourful, a gradual rainbow with a little shimmer'; the arrow gives the angle, this bar gives the power). The fill is revealed from the left by the
+   existing clip-path, so the colours appear in order as the charge grows: blue, cyan, green, yellow, orange, red, violet. While charging, a light sweep runs along the fill and the fill flickers softly. */
+html #bottom-dock .power-fill {
+  background: linear-gradient(90deg, #3b8cff 0%, #27d3e6 16%, #34e08a 32%, #d6e84a 48%, #ffc233 62%, #ff7a2a 78%, #ff3b5c 90%, #c04bff 100%) !important;
+  filter: drop-shadow(0 0 6px rgba(120, 200, 255, 0.7)) !important;
+}
+html #bottom-dock .power-meter::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0;
+  background: linear-gradient(100deg, transparent 35%, rgba(255, 255, 255, 0.55) 50%, transparent 65%); background-size: 40% 100%; background-repeat: no-repeat; background-position: -50% 0;
+  clip-path: inset(0 calc(100% - var(--power, 0) * 1%) 0 0);
+}
+html #bottom-dock.is-charging .power-meter::before { opacity: 1; animation: pk-power-sweep 0.8s linear infinite; }
+html #bottom-dock.is-charging .power-fill { animation: pk-power-flicker 0.45s ease-in-out infinite alternate; }
+@keyframes pk-power-sweep { from { background-position: -50% 0; } to { background-position: 150% 0; } }
+@keyframes pk-power-flicker { from { filter: brightness(1) saturate(1) drop-shadow(0 0 6px rgba(120, 200, 255, 0.7)); } to { filter: brightness(1.3) saturate(1.2) drop-shadow(0 0 11px rgba(255, 255, 255, 0.85)); } }
+@media (prefers-reduced-motion: reduce) {
+  html #bottom-dock.is-charging .power-meter::before, html #bottom-dock.is-charging .power-fill { animation: none; }
+}
+html.reduce-motion #bottom-dock.is-charging .power-meter::before, html.reduce-motion #bottom-dock.is-charging .power-fill { animation: none; }
+
+/* HUD places (owner 2026-11-17: 'put the gear beside the bar, no caption on the supply boxes, make them smaller'). The gear sits in the free margin right of the bar (the bar is 84 percent of the stage wide,
+   so 8 percent is free on each side), at the bar's height, scaled like the bar. The two supply boxes lose their caption (the tooltip stays) and shrink to about 70 percent. The touch area of the gear stays 44 px. */
+html:not(.pk-a):not(.pk-b) #top-controls { position: absolute !important; left: auto !important; top: auto !important; transform: none !important; right: max(0px, calc(4% - 22px)) !important; bottom: calc(8px * var(--dock-scale, 1)) !important;
+  width: max(44px, calc(34px * var(--dock-scale, 1))) !important; height: max(44px, calc(34px * var(--dock-scale, 1))) !important; min-width: 44px !important; min-height: 44px !important; }   /* never below the 44 px touch size (test_start_screen_fit measured the gear at about 31 px) */
+html:not(.pk-a):not(.pk-b) #top-controls #settings-btn { width: 100% !important; height: 100% !important; min-width: 44px !important; min-height: 44px !important; position: relative; }
+html:not(.pk-a):not(.pk-b) #top-controls #settings-btn > span { font-size: calc(26px * var(--dock-scale, 1)) !important; }
+html:not(.pk-a):not(.pk-b) #top-controls #settings-btn::after { content: ""; position: absolute; inset: -6px; }
+html:not(.pk-a):not(.pk-b) .top-supply .ts-label { display: none !important; }
+html:not(.pk-a):not(.pk-b) .top-supply .ts-box { width: max(28px, calc(var(--stage-w, 548px) * (1 - 2 * var(--pad-frac, 0)) * .05)) !important; height: max(28px, calc(var(--stage-w, 548px) * (1 - 2 * var(--pad-frac, 0)) * .05)) !important; }

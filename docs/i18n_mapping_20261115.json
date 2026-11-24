@@ -1,0 +1,1226 @@
+[
+  {
+    "key": "page.title",
+    "zh": "Pumpkin Killer (南瓜殺手) — 經典貓狗大戰手感 ✕ 浮空盾預判 ✕ 軌跡記憶",
+    "en": "Pumpkin Killer — classic cat-and-dog artillery feel ✕ floating-shield prediction ✕ trail memory",
+    "where": "index.html:6",
+    "kind": "title",
+    "note": "<title> element; set with document.title"
+  },
+  {
+    "key": "start.title",
+    "zh": "🎃 南瓜殺手",
+    "en": "🎃 Pumpkin Killer",
+    "where": "index.html:211",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "start.pickHero",
+    "zh": "選一個角色（開局後不能換）",
+    "en": "Pick a character (locked once the match starts)",
+    "where": "index.html:212",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "start.pickScene",
+    "zh": "選一個戰場",
+    "en": "Pick a battlefield",
+    "where": "index.html:214",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "start.go",
+    "zh": "開始戰鬥",
+    "en": "Start Battle",
+    "where": "index.html:216",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "start.loading",
+    "zh": "載入中 {done}/{total}",
+    "en": "Loading {done}/{total}",
+    "where": "index.html:522",
+    "kind": "label",
+    "note": "Assembled: `載入中 ${settledCount}/${IMG_TOTAL}` set as the start button text while images load; {done}=settledCount, {total}=IMG_TOTAL"
+  },
+  {
+    "key": "start.inProduction",
+    "zh": "製作中",
+    "en": "In production",
+    "where": "index.html:388, index.html:395",
+    "kind": "label",
+    "note": "Only shown when SHOW_COMING_SOON is true (currently false). 386 is inside <small> in innerHTML, 393 is the grey scene card text"
+  },
+  {
+    "key": "hero.skeleton.name",
+    "zh": "骷髏長矛兵",
+    "en": "Skeleton Spearman",
+    "where": "index.html:243, index.html:246, index.html:531",
+    "kind": "label",
+    "note": "Also the initial dock name (243) and the hero tab title attribute (246); reuse this key for all three"
+  },
+  {
+    "key": "hero.wizard.name",
+    "zh": "南瓜巫師",
+    "en": "Pumpkin Wizard",
+    "where": "index.html:247, index.html:540",
+    "kind": "label",
+    "note": "Also the hero tab title attribute (247)"
+  },
+  {
+    "key": "hero.bat.name",
+    "zh": "蝙蝠刺客",
+    "en": "Bat Assassin",
+    "where": "index.html:248, index.html:549",
+    "kind": "label",
+    "note": "Also the hero tab title attribute (248)"
+  },
+  {
+    "key": "hero.knight.name",
+    "zh": "南瓜重裝盾衛",
+    "en": "Heavy Pumpkin Guard",
+    "where": "index.html:567",
+    "kind": "label",
+    "note": "Start-card and HUD name. The dock tab title uses a shorter name, see hero.knight.tabTitle"
+  },
+  {
+    "key": "hero.knight.tabTitle",
+    "zh": "南瓜盾衛",
+    "en": "Pumpkin Guard",
+    "where": "index.html:249",
+    "kind": "title",
+    "note": "Title attribute of the knight tab; the same class is named three ways in the source (see md, unsure list)"
+  },
+  {
+    "key": "hero.skeleton.tab",
+    "zh": "骷髏",
+    "en": "Skeleton",
+    "where": "index.html:246",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "hero.wizard.tab",
+    "zh": "巫師",
+    "en": "Wizard",
+    "where": "index.html:247",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "hero.bat.tab",
+    "zh": "刺客",
+    "en": "Assassin",
+    "where": "index.html:248",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "hero.knight.tab",
+    "zh": "盾衛",
+    "en": "Guard",
+    "where": "index.html:249",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "hero.skeleton.blurb",
+    "zh": "標槍：傷害 24，命中附「霜咒」，被擊中的單位接下來 2 次攻擊 −15%。",
+    "en": "Javelin: 24 damage. A hit applies Frost Curse: the target's next 2 attacks deal −15%.",
+    "where": "index.html:357",
+    "kind": "blurb",
+    "note": "Numbers are typed into the text, not read from stats"
+  },
+  {
+    "key": "hero.wizard.blurb",
+    "zh": "南瓜砲：傷害 28，彈道高、威力大，是最直接的輸出。",
+    "en": "Pumpkin Cannon: 28 damage, high arc, big punch. The most direct damage dealer.",
+    "where": "index.html:358",
+    "kind": "blurb",
+    "note": ""
+  },
+  {
+    "key": "hero.bat.blurb",
+    "zh": "手裡劍：一次射出 5 枚，散落一小片範圍，每枚 8 傷害，中幾枚算幾枚。",
+    "en": "Shuriken: throws 5 at once in a small spread, 8 damage each; every one that lands counts.",
+    "where": "index.html:359",
+    "kind": "blurb",
+    "note": ""
+  },
+  {
+    "key": "hero.knight.blurb",
+    "zh": "彈跳小盾：骰子決定 1 到 6 次碰撞，總傷害平均分給每次碰撞；也能放浮空盾防禦。",
+    "en": "Bouncing Shield: a die decides 1 to 6 collisions and the total damage is split evenly between them. It can also place a Floating Shield to defend.",
+    "where": "index.html:360",
+    "kind": "blurb",
+    "note": ""
+  },
+  {
+    "key": "hero.bride.name",
+    "zh": "鬼娃新娘",
+    "en": "Ghost Bride",
+    "where": "index.html:364",
+    "kind": "label",
+    "note": "COMING_HEROES, hidden while SHOW_COMING_SOON is false"
+  },
+  {
+    "key": "hero.bride.blurb",
+    "zh": "音波攻擊：尖叫放出音波環，攻擊範圍寬，飛行路徑上都會受傷。",
+    "en": "Sonic attack: her scream sends out a sound ring with a wide reach; everything along its flight path takes damage.",
+    "where": "index.html:364",
+    "kind": "blurb",
+    "note": "COMING_HEROES, hidden"
+  },
+  {
+    "key": "hero.hunchback.name",
+    "zh": "鐘樓怪人",
+    "en": "Bell Tower Hunchback",
+    "where": "index.html:365",
+    "kind": "label",
+    "note": "COMING_HEROES, hidden"
+  },
+  {
+    "key": "hero.hunchback.blurb",
+    "zh": "巨斧：又重又慢，一擊傷害大。（外型：灰綠皮膚的壯碩怪人，衣服破爛）",
+    "en": "Great Axe: heavy and slow, big damage per hit. (Look: a burly grey-green monster in tattered clothes)",
+    "where": "index.html:365",
+    "kind": "blurb",
+    "note": "COMING_HEROES, hidden. The parenthesis is an art note that leaked into UI text"
+  },
+  {
+    "key": "hero.reaper.name",
+    "zh": "死靈法師",
+    "en": "Necromancer",
+    "where": "index.html:250, index.html:558",
+    "kind": "label",
+    "note": "Class id stays reaper; the owner renamed it to Necromancer. Also the dock tab title attribute (250)"
+  },
+  {
+    "key": "hero.reaper.tab",
+    "zh": "死靈",
+    "en": "Necro",
+    "where": "index.html:250",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "hero.reaper.blurb",
+    "zh": "紫色鬼火：掌心推出一團火焰，傷害 23，彈道平直輕快；背後的三團鬼火是他的能量。",
+    "en": "Purple Ghost Flame: pushes a ball of fire out of the palm, 23 damage, flat and light trajectory. The three ghost flames behind him are his Energy.",
+    "where": "index.html:361",
+    "kind": "blurb",
+    "note": "Damage number is typed into the text"
+  },
+  {
+    "key": "scene.graveyard.name",
+    "zh": "月夜墓園",
+    "en": "Moonlit Graveyard",
+    "where": "index.html:368",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "scene.belltower.name",
+    "zh": "鐘樓",
+    "en": "Bell Tower",
+    "where": "index.html:369",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "scene.pumpkin.name",
+    "zh": "南瓜田",
+    "en": "Pumpkin Field",
+    "where": "index.html:370",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "supply.title",
+    "zh": "補充物資：撿到的箱子放這裡，點一下使用；新的會取代舊的",
+    "en": "Supply: a crate you pick up is stored here. Click to use it; a new one replaces the old one.",
+    "where": "index.html:219",
+    "kind": "title",
+    "note": ""
+  },
+  {
+    "key": "supply.label",
+    "zh": "物資",
+    "en": "Supply",
+    "where": "index.html:219",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "supply.aiTitle",
+    "zh": "對手手上的物資（只看得到，不能用）",
+    "en": "Opponent's supply (view only, cannot be used)",
+    "where": "index.html:220",
+    "kind": "title",
+    "note": ""
+  },
+  {
+    "key": "supply.aiLabel",
+    "zh": "對手物資",
+    "en": "Opp. Supply",
+    "where": "index.html:220",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "supply.heal",
+    "zh": "補血 +30",
+    "en": "Heal +30",
+    "where": "index.html:1488",
+    "kind": "label",
+    "note": "SUPPLY_ITEMS.heal.label (a data object, shown after the icon in the toast at 1495 and 1519)"
+  },
+  {
+    "key": "supply.heavy",
+    "zh": "重彈 +1",
+    "en": "Heavy +1",
+    "where": "index.html:1489",
+    "kind": "label",
+    "note": "SUPPLY_ITEMS.heavy.label"
+  },
+  {
+    "key": "dock.soundTitle",
+    "zh": "音樂與音效開關（M）",
+    "en": "Music and sound on/off (M)",
+    "where": "index.html:223",
+    "kind": "title",
+    "note": ""
+  },
+  {
+    "key": "dock.soundTip",
+    "zh": "聲音",
+    "en": "Sound",
+    "where": "index.html:223",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "dock.resetTitle",
+    "zh": "重新對戰（只有前 {n} 個回合能按）",
+    "en": "Restart match (only in the first {n} rounds)",
+    "where": "index.html:224, index.html:1610",
+    "kind": "title",
+    "note": "Assembled: `\"重新對戰（只有前 \" + RESET_LAST_ROUND + \" 個回合能按）\"`; the static HTML at 224 has the literal 2 and is overwritten by the update loop"
+  },
+  {
+    "key": "dock.resetLockedTitle",
+    "zh": "已鎖定：第 {n} 回合後不能重置",
+    "en": "Locked: reset is not available after round {n}",
+    "where": "index.html:1610",
+    "kind": "title",
+    "note": "Assembled: `\"已鎖定：第 \" + RESET_LAST_ROUND + \" 回合後不能重置\"`"
+  },
+  {
+    "key": "dock.resetAria",
+    "zh": "重新對戰",
+    "en": "Restart match",
+    "where": "index.html:224",
+    "kind": "title",
+    "note": "aria-label"
+  },
+  {
+    "key": "dock.resetTip",
+    "zh": "重置",
+    "en": "Reset",
+    "where": "index.html:224",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "dock.helpTitle",
+    "zh": "說明（H）",
+    "en": "Help (H)",
+    "where": "index.html:225",
+    "kind": "title",
+    "note": ""
+  },
+  {
+    "key": "dock.helpAria",
+    "zh": "說明",
+    "en": "Help",
+    "where": "index.html:225",
+    "kind": "title",
+    "note": "aria-label"
+  },
+  {
+    "key": "dock.portraitAria",
+    "zh": "目前角色",
+    "en": "Current character",
+    "where": "index.html:241",
+    "kind": "title",
+    "note": "aria-label"
+  },
+  {
+    "key": "dock.angle",
+    "zh": "角度",
+    "en": "Angle",
+    "where": "index.html:266",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "dock.power",
+    "zh": "力度",
+    "en": "Power",
+    "where": "index.html:268",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "dock.lock",
+    "zh": "鎖定",
+    "en": "Lock",
+    "where": "index.html:273",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "dock.lockTitle",
+    "zh": "鎖定盾牌位置",
+    "en": "Lock shield position",
+    "where": "index.html:273",
+    "kind": "title",
+    "note": ""
+  },
+  {
+    "key": "help.tapUnit",
+    "zh": "👆 點角色：移動／攻擊／防禦",
+    "en": "👆 Click your character: Move / Attack / Defend",
+    "where": "index.html:228",
+    "kind": "help",
+    "note": ""
+  },
+  {
+    "key": "help.holdThrow",
+    "zh": "🎯 按住蓄力，放開投擲",
+    "en": "🎯 Hold to charge, release to throw",
+    "where": "index.html:229",
+    "kind": "help",
+    "note": ""
+  },
+  {
+    "key": "help.wind",
+    "zh": "🌬 風看上方箭頭，風越強越偏",
+    "en": "🌬 Check the wind above: stronger wind, bigger drift",
+    "where": "index.html:230",
+    "kind": "help",
+    "note": ""
+  },
+  {
+    "key": "help.crit",
+    "zh": "💥 打中頭部＝爆擊＋暈眩",
+    "en": "💥 Head hit = Crit + Stun",
+    "where": "index.html:231",
+    "kind": "help",
+    "note": ""
+  },
+  {
+    "key": "help.ult",
+    "zh": "✨ 三格亮滿，按 U 放大招",
+    "en": "✨ All three pips lit: press U for the Ultimate",
+    "where": "index.html:232",
+    "kind": "help",
+    "note": ""
+  },
+  {
+    "key": "help.guard",
+    "zh": "🛡 盾衛：點 A、B、C 預判三發",
+    "en": "🛡 Guard: click A, B, C to predict three shots",
+    "where": "index.html:233",
+    "kind": "help",
+    "note": ""
+  },
+  {
+    "key": "skill.normalTitle",
+    "zh": "普通投擲",
+    "en": "Normal throw",
+    "where": "index.html:256",
+    "kind": "title",
+    "note": ""
+  },
+  {
+    "key": "skill.normalTip",
+    "zh": "普通",
+    "en": "Normal",
+    "where": "index.html:256",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "skill.doubleTitle",
+    "zh": "雙重投擲 (連續拋射兩發)",
+    "en": "Double throw (two shots in a row)",
+    "where": "index.html:257",
+    "kind": "title",
+    "note": ""
+  },
+  {
+    "key": "skill.doubleTip",
+    "zh": "雙發",
+    "en": "Double",
+    "where": "index.html:257",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "skill.heavyTitle",
+    "zh": "重型炸彈 (高爆範圍傷害)",
+    "en": "Heavy bomb (high-explosive area damage)",
+    "where": "index.html:258",
+    "kind": "title",
+    "note": ""
+  },
+  {
+    "key": "skill.heavyTip",
+    "zh": "重彈",
+    "en": "Heavy",
+    "where": "index.html:258",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "skill.healTitle",
+    "zh": "萬聖糖果回血 (+35 HP)",
+    "en": "Halloween candy heal (+35 HP)",
+    "where": "index.html:259",
+    "kind": "title",
+    "note": ""
+  },
+  {
+    "key": "skill.healTip",
+    "zh": "回血",
+    "en": "Heal",
+    "where": "index.html:259",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "skill.ultTitle",
+    "zh": "大招：三格能量全亮才能用，點一下準備，再點取消",
+    "en": "Ultimate: usable only when all three Energy pips are lit. Click to arm, click again to cancel",
+    "where": "index.html:260",
+    "kind": "title",
+    "note": "Static title; the update loop replaces it with the ult.title* strings"
+  },
+  {
+    "key": "skill.ultTip",
+    "zh": "大招",
+    "en": "Ultimate",
+    "where": "index.html:260",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "skill.shield",
+    "zh": "浮空盾",
+    "en": "Floating Shield",
+    "where": "index.html:262",
+    "kind": "label",
+    "note": "Used for both the title attribute and the button tip"
+  },
+  {
+    "key": "shield.tipGuard",
+    "zh": "防禦（只有南瓜盾衛）：放棄攻擊，放置或移動浮空盾，拖曳後再按一次鎖定",
+    "en": "Defend (Pumpkin Guard only): give up your attack to place or move the Floating Shield; drag it, then press again to lock",
+    "where": "index.html:944",
+    "kind": "help",
+    "note": "Replaces the shield button title (ternary with 932)"
+  },
+  {
+    "key": "shield.tipOther",
+    "zh": "只有南瓜盾衛可以選擇防禦；其他職業只能攻擊或移動",
+    "en": "Only the Pumpkin Guard can Defend; other classes can only Attack or Move",
+    "where": "index.html:945",
+    "kind": "help",
+    "note": ""
+  },
+  {
+    "key": "ult.titleUsedUp",
+    "zh": "大招已用完（一場最多 2 次）",
+    "en": "No Ultimates left (max 2 per match)",
+    "where": "index.html:1613",
+    "kind": "title",
+    "note": ""
+  },
+  {
+    "key": "ult.titleArmed",
+    "zh": "大招已準備：下一發出手（再點取消）",
+    "en": "Ultimate armed: fires on your next throw (click again to cancel)",
+    "where": "index.html:1613",
+    "kind": "title",
+    "note": ""
+  },
+  {
+    "key": "ult.titleReady",
+    "zh": "三格已亮：點一下準備大招",
+    "en": "All three pips lit: click to arm the Ultimate",
+    "where": "index.html:1613",
+    "kind": "title",
+    "note": ""
+  },
+  {
+    "key": "ult.titleCharging",
+    "zh": "大招：要先命中 3 次點亮三格（目前 {n}/3）",
+    "en": "Ultimate: land 3 hits to light all three pips (now {n}/3)",
+    "where": "index.html:1613",
+    "kind": "title",
+    "note": "Assembled: `\"...（目前 \" + energy.player + \"/3）\"`; {n}=energy.player"
+  },
+  {
+    "key": "ult.shuriken",
+    "zh": "✨ 大招：手裡劍雨",
+    "en": "✨ Ultimate: Shuriken Rain",
+    "where": "index.html:1052",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "ult.spear",
+    "zh": "✨ 大招：三連標槍",
+    "en": "✨ Ultimate: Triple Javelin",
+    "where": "index.html:1064",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "ult.cannon",
+    "zh": "✨ 大招：南瓜連環爆",
+    "en": "✨ Ultimate: Pumpkin Chain Blast",
+    "where": "index.html:1072",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "ult.tripleHit",
+    "zh": "💥 三連全中！",
+    "en": "💥 Triple hit!",
+    "where": "index.html:1771",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "ult.blast",
+    "zh": "🔥 爆炸 -{dmg}",
+    "en": "🔥 Blast -{dmg}",
+    "where": "index.html:1831",
+    "kind": "toast",
+    "note": "Assembled: `\"🔥 爆炸 -\" + p.ultBlast`"
+  },
+  {
+    "key": "ult.unbuilt",
+    "zh": "🔧 這個職業的大招還在製作中",
+    "en": "🔧 This class's Ultimate is still being built",
+    "where": "index.html:593",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "ult.cancel",
+    "zh": "大招取消",
+    "en": "Ultimate canceled",
+    "where": "index.html:594",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "ult.spent",
+    "zh": "大招已用完",
+    "en": "No Ultimates left",
+    "where": "index.html:595",
+    "kind": "toast",
+    "note": "Ternary with ult.noEnergy at the same line"
+  },
+  {
+    "key": "ult.noEnergy",
+    "zh": "能量未滿（要打中 3 次）",
+    "en": "Energy not full (land 3 hits)",
+    "where": "index.html:595",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "ult.armed",
+    "zh": "✨ 大招已準備：下一發出手",
+    "en": "✨ Ultimate armed: fires on your next throw",
+    "where": "index.html:596",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "menu.move",
+    "zh": "🎲 移動",
+    "en": "🎲 Move",
+    "where": "index.html:773",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "menu.attack",
+    "zh": "🎯 攻擊",
+    "en": "🎯 Attack",
+    "where": "index.html:773",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "menu.defend",
+    "zh": "🛡️ 防禦",
+    "en": "🛡️ Defend",
+    "where": "index.html:774",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "move.forward",
+    "zh": "前進",
+    "en": "Forward",
+    "where": "index.html:801, index.html:822",
+    "kind": "label",
+    "note": "Inserted into toast.moveRoll / toast.moveResult by a ternary (dir > 0)"
+  },
+  {
+    "key": "move.back",
+    "zh": "後退",
+    "en": "Back",
+    "where": "index.html:801, index.html:822",
+    "kind": "label",
+    "note": "Same ternary as move.forward"
+  },
+  {
+    "key": "move.backBtn",
+    "zh": "◀ 後退",
+    "en": "◀ Back",
+    "where": "index.html:2932",
+    "kind": "label",
+    "note": "Arrow button on the canvas"
+  },
+  {
+    "key": "move.fwdBtn",
+    "zh": "前進 ▶",
+    "en": "Forward ▶",
+    "where": "index.html:2932",
+    "kind": "label",
+    "note": "Arrow button on the canvas"
+  },
+  {
+    "key": "move.aimNeutral",
+    "zh": "往左或往右指，放開擲骰",
+    "en": "Point left or right, release to roll",
+    "where": "index.html:2951",
+    "kind": "help",
+    "note": "Ternary chain with the next two keys"
+  },
+  {
+    "key": "move.releaseFwd",
+    "zh": "放開：前進並擲骰",
+    "en": "Release: move forward and roll",
+    "where": "index.html:2951",
+    "kind": "help",
+    "note": ""
+  },
+  {
+    "key": "move.releaseBack",
+    "zh": "放開：後退並擲骰",
+    "en": "Release: move back and roll",
+    "where": "index.html:2951",
+    "kind": "help",
+    "note": ""
+  },
+  {
+    "key": "move.atEdge",
+    "zh": "（到邊界）",
+    "en": " (at the edge)",
+    "where": "index.html:822",
+    "kind": "label",
+    "note": "Optional suffix {edge} in toast.moveResult; the English value starts with a space"
+  },
+  {
+    "key": "toast.moveHelp",
+    "zh": "🎲 移動：選擇方向（← 後退 / → 前進，或點箭頭），再擲骰子決定距離。Esc 取消",
+    "en": "🎲 Move: choose a direction (← back / → forward, or click an arrow), then roll the die for distance. Esc to cancel",
+    "where": "index.html:794",
+    "kind": "help",
+    "note": ""
+  },
+  {
+    "key": "toast.moveCancel",
+    "zh": "已取消移動",
+    "en": "Move canceled",
+    "where": "index.html:796",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.moveRoll",
+    "zh": "🎲 {dir}：擲骰子決定距離（移動完還可以攻擊）",
+    "en": "🎲 {dir}: roll the die for distance (you can still attack after moving)",
+    "where": "index.html:801",
+    "kind": "toast",
+    "note": "Assembled: `🎲 ${dir > 0 ? \"前進\" : \"後退\"}：...`; {dir}=move.forward or move.back"
+  },
+  {
+    "key": "toast.moveResult",
+    "zh": "🎲 {roll}：{dir} {moved} px{edge}",
+    "en": "🎲 {roll}: {dir} {moved} px{edge}",
+    "where": "index.html:822",
+    "kind": "toast",
+    "note": "Assembled: `🎲 ${d.final}：${dir} ${moved} px${suffix}`; {dir}=move.forward/back, {edge}=move.atEdge or empty"
+  },
+  {
+    "key": "toast.gapShift",
+    "zh": "🎲 1-2 站位動態變化！雙方距離: {px} px",
+    "en": "🎲 Positions shifted! Distance between sides: {px} px",
+    "where": "index.html:844",
+    "kind": "toast",
+    "note": "Assembled: `...距離: ${Math.round(...)} px`"
+  },
+  {
+    "key": "toast.aimHint",
+    "zh": "🎯 移動游標瞄準，在場上按住蓄力，放開就投擲",
+    "en": "🎯 Move the cursor to aim, hold on the field to charge, release to throw",
+    "where": "index.html:782",
+    "kind": "help",
+    "note": ""
+  },
+  {
+    "key": "toast.slowed",
+    "zh": "減速：這回合不能移動",
+    "en": "Slow: you cannot move this round",
+    "where": "index.html:789",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.alreadyMoved",
+    "zh": "本回合已經移動過了，可以直接攻擊",
+    "en": "You already moved this round. You can attack now",
+    "where": "index.html:790",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.healOwnTurn",
+    "zh": "只能在自己的回合回血",
+    "en": "You can only heal on your own turn",
+    "where": "index.html:853",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.hpFull",
+    "zh": "血量已滿，不用回血",
+    "en": "HP is full, no need to heal",
+    "where": "index.html:854",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.healed",
+    "zh": "🧪 生命恢復 +35 HP!",
+    "en": "🧪 Healed +35 HP!",
+    "where": "index.html:862",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.guardOnly",
+    "zh": "🎃 只有南瓜盾衛能操控浮空防禦",
+    "en": "🎃 Only the Pumpkin Guard can control the Floating Shield",
+    "where": "index.html:880",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.shieldNoMoves",
+    "zh": "🛡️ 浮空盾移動次數用完了",
+    "en": "🛡️ No Floating Shield moves left",
+    "where": "index.html:886",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.defendHelp",
+    "zh": "🛡️ 防禦模式：拖曳浮空盾到想擋的路徑，再按一次🛡️鎖定（本回合不能攻擊，Esc 取消）",
+    "en": "🛡️ Defend mode: drag the Floating Shield onto the path you want to block, then press 🛡️ again to lock (no attacking this round, Esc to cancel)",
+    "where": "index.html:894",
+    "kind": "help",
+    "note": ""
+  },
+  {
+    "key": "toast.shieldSnapped",
+    "zh": "🛡️ 卡在有效路徑！剩 {moves} 次移動、攔截 {charges} 次",
+    "en": "🛡️ Locked on a valid path! {moves} moves left, {charges} blocks",
+    "where": "index.html:910",
+    "kind": "toast",
+    "note": "Assembled: `...剩 ${sp.actions} 次移動、攔截 ${sp.charges} 次`; ternary with toast.shieldLocked"
+  },
+  {
+    "key": "toast.shieldLocked",
+    "zh": "🛡️ 已鎖定（不在記憶路徑上），剩 {moves} 次移動",
+    "en": "🛡️ Locked (not on a remembered path), {moves} moves left",
+    "where": "index.html:910",
+    "kind": "toast",
+    "note": "Assembled: `...剩 ${sp.actions} 次移動`"
+  },
+  {
+    "key": "toast.defendCancel",
+    "zh": "已取消防禦模式",
+    "en": "Defend mode canceled",
+    "where": "index.html:920",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.noAttackInDefend",
+    "zh": "🛡️ 防禦模式中不能攻擊",
+    "en": "🛡️ You cannot attack in Defend mode",
+    "where": "index.html:952",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.switchHero",
+    "zh": "切換職業: {name}",
+    "en": "Switched class: {name}",
+    "where": "index.html:933",
+    "kind": "toast",
+    "note": "Assembled: `切換職業: ${HERO_PROFILES[heroKey].name}`; {name}=hero.<id>.name"
+  },
+  {
+    "key": "toast.flip",
+    "zh": "↔ 全部角色水平翻轉：{state}",
+    "en": "↔ Flip all characters horizontally: {state}",
+    "where": "index.html:1256",
+    "kind": "toast",
+    "note": "Debug hotkey F. Assembled with ternary `flipAllArt ? \"開\" : \"關\"`"
+  },
+  {
+    "key": "toast.flipOn",
+    "zh": "開",
+    "en": "On",
+    "where": "index.html:1256",
+    "kind": "label",
+    "note": "{state} value for toast.flip"
+  },
+  {
+    "key": "toast.flipOff",
+    "zh": "關",
+    "en": "Off",
+    "where": "index.html:1256",
+    "kind": "label",
+    "note": "{state} value for toast.flip"
+  },
+  {
+    "key": "toast.aiShield",
+    "zh": "AI 浮空盾切入軌跡（防禦回合，不攻擊）",
+    "en": "AI Floating Shield cuts into your trail (defend round, no attack)",
+    "where": "index.html:1358",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.resetLocked",
+    "zh": "🔒 第 {n} 回合後不能重置",
+    "en": "🔒 Reset is locked after round {n}",
+    "where": "index.html:1415",
+    "kind": "toast",
+    "note": "Assembled: `\"🔒 第 \" + RESET_LAST_ROUND + \" 回合後不能重置\"`"
+  },
+  {
+    "key": "toast.pickup",
+    "zh": "{icon} 拿到物資：{label}",
+    "en": "{icon} Picked up: {label}",
+    "where": "index.html:1532",
+    "kind": "toast",
+    "note": "Assembled: `SUPPLY_ITEMS[d.item].icon + \" 拿到物資：\" + label`; {label}=supply.heal or supply.heavy"
+  },
+  {
+    "key": "toast.aiPickup",
+    "zh": "對手撿到物資",
+    "en": "Opponent picked up a supply",
+    "where": "index.html:1536",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.rearm",
+    "zh": "🔄 補給武器",
+    "en": "🔄 Weapon resupplied",
+    "where": "index.html:1867",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.timeout",
+    "zh": "⏱ 逾時！本回合棄權",
+    "en": "⏱ Time's up! Turn forfeited",
+    "where": "index.html:1641",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "shield.expired",
+    "zh": "🛡️ 浮空盾 2 回合防禦期滿收回",
+    "en": "🛡️ Floating Shield's 2-round defense ended and it was withdrawn",
+    "where": "index.html:1400",
+    "kind": "toast",
+    "note": "The number 2 is typed into the text"
+  },
+  {
+    "key": "shield.holding",
+    "zh": "🛡️ 浮空盾持續防禦中 (剩餘 {rounds} 輪)",
+    "en": "🛡️ Floating Shield holding (rounds left: {rounds})",
+    "where": "index.html:1403",
+    "kind": "toast",
+    "note": "Assembled: `(剩餘 ${s.durationRounds} 輪)`"
+  },
+  {
+    "key": "shield.blocked",
+    "zh": "🛡️ 凌空預判攔截！(0 傷害！防禦餘 {rounds} 輪)",
+    "en": "🛡️ Mid-air block! (0 damage! {rounds} rounds left)",
+    "where": "index.html:1748",
+    "kind": "toast",
+    "note": "Assembled: `(0 傷害！防禦餘 ${shield.durationRounds} 輪)`"
+  },
+  {
+    "key": "shield.dragHint",
+    "zh": "左右拖曳，沿著路徑滑動",
+    "en": "Drag left or right to slide along the path",
+    "where": "index.html:2119, index.html:2153",
+    "kind": "help",
+    "note": "Canvas text above the slab (preview state); ternary with shield.roundsLeft"
+  },
+  {
+    "key": "shield.roundsLeft",
+    "zh": "剩 {rounds} 輪",
+    "en": "Rounds left: {rounds}",
+    "where": "index.html:2119, index.html:2153",
+    "kind": "label",
+    "note": "Assembled: `剩 ${s.durationRounds} 輪` (canvas text above the slab)"
+  },
+  {
+    "key": "fence.label",
+    "zh": "中央圍籬 ({hp}%)",
+    "en": "Center Fence ({hp}%)",
+    "where": "index.html:2545, index.html:2604",
+    "kind": "label",
+    "note": "Assembled: `中央圍籬 (${wallHp}%)`; canvas text above the fence; ternary with fence.broken"
+  },
+  {
+    "key": "fence.broken",
+    "zh": "圍籬已損毀",
+    "en": "Fence destroyed",
+    "where": "index.html:2545, index.html:2604",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "toast.fenceBlock",
+    "zh": "💥 圍籬攔截！",
+    "en": "💥 Fence block!",
+    "where": "index.html:1722",
+    "kind": "toast",
+    "note": "Ternary with toast.fenceBroken"
+  },
+  {
+    "key": "toast.fenceBroken",
+    "zh": "💥 圍籬被打壞了！",
+    "en": "💥 Fence destroyed!",
+    "where": "index.html:1722",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.directHit",
+    "zh": "💥 直擊 -{dmg}!",
+    "en": "💥 Direct hit -{dmg}!",
+    "where": "index.html:1792",
+    "kind": "toast",
+    "note": "Assembled: `💥 直擊 -${dmgNow}!`"
+  },
+  {
+    "key": "toast.mudDeflect",
+    "zh": "泥土偏斜",
+    "en": "Deflected by the dirt",
+    "where": "index.html:1813",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.shieldStuck",
+    "zh": "盾插進地板，不能再彈了",
+    "en": "The shield is stuck in the ground and cannot bounce any more",
+    "where": "index.html:1814",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "toast.bounce",
+    "zh": "🎲 {n} 彈 · 每彈 {dmg}",
+    "en": "🎲 {n} bounces · {dmg} each",
+    "where": "index.html:1077",
+    "kind": "toast",
+    "note": "Assembled: `🎲 ${pj.bounceN} 彈 · 每彈 ${pj.bounceDmg}`"
+  },
+  {
+    "key": "status.crit",
+    "zh": "💥 爆擊！",
+    "en": "💥 Crit!",
+    "where": "index.html:1765",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "status.stun",
+    "zh": "⭐ 暈眩",
+    "en": "⭐ Stun",
+    "where": "index.html:1766",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "status.stunTimer",
+    "zh": "⭐ 暈眩！只剩 {sec} 秒",
+    "en": "⭐ Stunned! Only {sec} s left",
+    "where": "index.html:1381",
+    "kind": "toast",
+    "note": "Assembled: `\"⭐ 暈眩！只剩 \" + STUN_SECONDS + \" 秒\"`"
+  },
+  {
+    "key": "status.slowNext",
+    "zh": "減速：下回合不能移動",
+    "en": "Slow: cannot move next round",
+    "where": "index.html:1775",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "status.frostWeak",
+    "zh": "🧊 被霜咒：傷害 -15%",
+    "en": "🧊 Frost Curse: damage -15%",
+    "where": "index.html:1042",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "status.frostApplied",
+    "zh": "🧊 霜咒：攻擊 -15%（2 次）",
+    "en": "🧊 Frost Curse: attacks -15% (2 times)",
+    "where": "index.html:1795",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "status.poison",
+    "zh": "☠ 中毒",
+    "en": "☠ Poison",
+    "where": "index.html:1566",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "status.bleed",
+    "zh": "🩸 流血",
+    "en": "🩸 Bleed",
+    "where": "index.html:1567",
+    "kind": "toast",
+    "note": ""
+  },
+  {
+    "key": "hud.you",
+    "zh": "我方",
+    "en": "You",
+    "where": "index.html:2780",
+    "kind": "label",
+    "note": "Fallback name used only when no hero profile exists"
+  },
+  {
+    "key": "hud.opponent",
+    "zh": "對手",
+    "en": "Opponent",
+    "where": "index.html:2781",
+    "kind": "label",
+    "note": "Fallback name used only when no hero profile exists"
+  },
+  {
+    "key": "hud.ult",
+    "zh": "大招",
+    "en": "Ultimate",
+    "where": "index.html:2771",
+    "kind": "label",
+    "note": "Label next to the two diamonds on each side banner"
+  },
+  {
+    "key": "hud.countdown",
+    "zh": "倒數 {sec} 秒",
+    "en": "Time left: {sec} s",
+    "where": "index.html:2795",
+    "kind": "label",
+    "note": "Assembled: `倒數 ${sec} 秒`"
+  },
+  {
+    "key": "hud.opponentTurn",
+    "zh": "對手回合",
+    "en": "Opponent's turn",
+    "where": "index.html:2798",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "hud.round",
+    "zh": "第 {round} 回合 ・ 距離 {dist} 步",
+    "en": "Round {round} · Distance {dist} steps",
+    "where": "index.html:2799",
+    "kind": "label",
+    "note": "Assembled: `第 ${roundNum} 回合 ・ 距離 ${...} 步`. English uses a middle dot U+00B7 because the test forbids CJK-range characters in en.json"
+  },
+  {
+    "key": "hud.angle",
+    "zh": "角度 {angle}°",
+    "en": "Angle {angle}°",
+    "where": "index.html:2974",
+    "kind": "label",
+    "note": "Assembled: `角度 ${playerAngle}°`"
+  },
+  {
+    "key": "hud.trailTag",
+    "zh": "軌跡 [R{round}]",
+    "en": "Trail [R{round}]",
+    "where": "index.html:2066",
+    "kind": "label",
+    "note": "Assembled: `軌跡 [R${traj.round}]`"
+  },
+  {
+    "key": "gameover.win",
+    "zh": "🎃 你贏了！",
+    "en": "🎃 You win!",
+    "where": "index.html:2993",
+    "kind": "label",
+    "note": "Ternary with gameover.lose"
+  },
+  {
+    "key": "gameover.lose",
+    "zh": "💀 你輸了",
+    "en": "💀 You lose",
+    "where": "index.html:2993",
+    "kind": "label",
+    "note": ""
+  },
+  {
+    "key": "gameover.restart",
+    "zh": "點一下畫面，回到選角重新開始",
+    "en": "Click anywhere to return to character select and play again",
+    "where": "index.html:2996",
+    "kind": "label",
+    "note": ""
+  }
+]

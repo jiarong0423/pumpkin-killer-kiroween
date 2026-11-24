@@ -1,0 +1,16 @@
+# Kiro task 169 — find and install CC0 sound effects for the three missing sound files (assets + credits + map; NO page edit)
+
+Owner 2026-11-16: "have Kiro find CC0 sound effects". The page asks for three files that do not exist: `(not published)`, `(not published)` (a crate is taken, 0.4 s) and `(not published)` (the third energy pip lights, about 1.5 s, magical rising chime; the main line will add the call). A missing file falls back silently to the synth recipe, so nothing breaks today, but the page-asset check counts three 404s.
+
+Read first: `docs/audio_gap_options_20261115.md` (what the earlier read-only task recommended), `docs/audio_sources.md`, `docs/audio_sources_verified.md`, `docs/audio_event_map.json` and the copy `DEFAULT_EVENT_MAP` in `js/audio.js` (both must stay identical, `node scripts/test_audio.js` checks it), `assets/audio/CREDITS.md` (or wherever the credits rows live: find it with grep), and one existing licence text file such as `LICENSE_kenney-interface.txt`.
+
+Rules for every file: the licence must be CC0 and PROVABLE: a licence file inside the downloaded archive, or the pack page text; write the exact URL, the author, the licence line and the archive size in the credits row. Never use a file whose licence you could not read. Original sounds only from CC0 sources: Kenney packs (kenney.nl), OpenGameArt items marked CC0, BigSoundBank. No audio from games, films or paid libraries. Download each archive once into `(not published)` (that folder is git-ignored; do not commit it), list the file names you listened to by metadata (duration, sample rate), never claim you heard a sound.
+
+Do, saving after each, one shell command per call:
+1. `item_pickup`: pick the best-fitting CC0 file (a short soft "clink" or "pickup", 0.2 to 0.5 s, nothing cheerful or modern; the game is a haunted graveyard). Convert to ogg vorbis, mono or stereo, 44.1 kHz, loudness similar to the other files in `assets/audio/sfx/` (measure with `ffmpeg -i f -af volumedetect -f null -` and match mean volume within 3 dB of `punch_hit.ogg`).
+2. `ultimate_ready_chime`: the same for a magical rising chime, 0.8 to 1.6 s, soft attack. If no CC0 file with a readable licence fits, say so and leave the reference unchanged (do not invent).
+3. `move_step`: set `"file": null` in BOTH copies of the event map (the existing `step_leaf.ogg` variant stays); do not download anything for it.
+4. Credits: one row per new file in the credits file, licence text copied next to the others (name `LICENSE_<pack>.txt`) when the pack has one.
+5. Run `node scripts/test_audio.js`, `python3 -B scripts/release/check_asset_refs.py`, `python3 -B (not published)` if it exists; paste the last lines of each. If a command is refused, say so; never invent output.
+
+Touch only the two new `.ogg` files, the credits file, the licence text file(s), `docs/audio_event_map.json`, `js/audio.js` (only the `DEFAULT_EVENT_MAP` line for `move_step`), `scripts/test_audio.js` if the test pins the old file name, and the result file exactly named `docs/kiro_169_result_gpt-5.6-terra.md` (max 40 lines: for each file the source URL, author, licence line, original file name, duration, conversion command, and what you could not verify). Never touch `index.html`, `.kiro/`, `shared/` or any picture. English only in code and docs.

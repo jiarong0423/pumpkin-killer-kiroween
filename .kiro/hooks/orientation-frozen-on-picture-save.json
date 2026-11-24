@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Orientation check on hero picture save",
+      "description": "When a hero picture under assets/poses or assets/units is saved, compare the repository with the frozen orientation set and print the differences, so a facing is never changed by accident (re-freeze only after looking at the picture).",
+      "trigger": "PostFileSave",
+      "matcher": "assets/(poses|units)/[^/]*\\.png$",
+      "action": {
+        "type": "command",
+        "command": "python3 -B scripts/freeze_orientation.py || echo 'orientation set differs: check that the picture faces LEFT, then run scripts/freeze_orientation.py --write'"
+      },
+      "enabled": true
+    }
+  ]
+}

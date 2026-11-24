@@ -1,0 +1,2035 @@
+{
+  "version": 1,
+  "mode": "n1",
+  "matches": [
+    {
+      "seed": 1326710653,
+      "heroes": {
+        "left": "skeleton",
+        "right": "wizard"
+      },
+      "aiLevel": "normal",
+      "records": [
+        {
+          "label": "start",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 3,
+          "weather": "clear",
+          "roundHash": "50458007",
+          "damageTexts": [],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 1 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 3,
+          "weather": "clear",
+          "roundHash": "0f2f13be",
+          "damageTexts": [
+            "被圍籬擋下"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 1 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": 3,
+          "weather": "clear",
+          "roundHash": "8fadb66a",
+          "damageTexts": [
+            "被圍籬擋下",
+            "沒中：超過 21 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 1 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -2.9,
+          "weather": "clear",
+          "roundHash": "ca2fca6f",
+          "damageTexts": [
+            "被圍籬擋下",
+            "沒中：超過 21 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 2 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -2.9,
+          "weather": "clear",
+          "roundHash": "97f2f806",
+          "damageTexts": [
+            "沒中：超過 21 步",
+            "沒中：差 22 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 2 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": -2.9,
+          "weather": "clear",
+          "roundHash": "306c5519",
+          "damageTexts": [
+            "沒中：差 22 步",
+            "沒中：超過 16 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 2 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 0.8,
+          "weather": "fog",
+          "roundHash": "551b71d4",
+          "damageTexts": [
+            "沒中：差 22 步",
+            "沒中：超過 16 步",
+            "起霧：只有氣氛，沒有效果"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 3 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 0.8,
+          "weather": "fog",
+          "roundHash": "cb82e0f3",
+          "damageTexts": [
+            "沒中：超過 16 步",
+            "起霧：只有氣氛，沒有效果",
+            "被圍籬擋下"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 3 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": 0.8,
+          "weather": "fog",
+          "roundHash": "1228f589",
+          "damageTexts": [
+            "起霧：只有氣氛，沒有效果",
+            "被圍籬擋下",
+            "沒中：超過 19 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 3 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -1.1,
+          "weather": "fog",
+          "roundHash": "2e3c61f1",
+          "damageTexts": [
+            "起霧：只有氣氛，沒有效果",
+            "被圍籬擋下",
+            "沒中：超過 19 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 4 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -1.1,
+          "weather": "fog",
+          "roundHash": "8aae497f",
+          "damageTexts": [
+            "沒中：超過 19 步",
+            "沒中：差 20 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 4 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": -1.1,
+          "weather": "fog",
+          "roundHash": "b3504083",
+          "damageTexts": [
+            "沒中：差 20 步",
+            "沒中：超過 17 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 4 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -3.6,
+          "weather": "clear",
+          "roundHash": "298b8c96",
+          "damageTexts": [
+            "沒中：差 20 步",
+            "沒中：超過 17 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 5 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -3.6,
+          "weather": "clear",
+          "roundHash": "4c2dd98b",
+          "damageTexts": [
+            "沒中：超過 17 步",
+            "沒中：差 23 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 5 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": -3.6,
+          "weather": "clear",
+          "roundHash": "d360d1b6",
+          "damageTexts": [
+            "沒中：差 23 步",
+            "沒中：超過 15 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 5 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 3.1,
+          "weather": "clear",
+          "roundHash": "09a89d83",
+          "damageTexts": [
+            "沒中：差 23 步",
+            "沒中：超過 15 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 6 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 3.1,
+          "weather": "clear",
+          "roundHash": "f5131d1b",
+          "damageTexts": [
+            "沒中：超過 15 步",
+            "被圍籬擋下"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 6 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": 3.1,
+          "weather": "clear",
+          "roundHash": "3fc117bc",
+          "damageTexts": [
+            "被圍籬擋下",
+            "沒中：超過 20 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 6 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 0.2,
+          "weather": "rain",
+          "roundHash": "2ca40f17",
+          "damageTexts": [
+            "被圍籬擋下",
+            "沒中：超過 20 步",
+            "下雨：攻擊 −10%，到第 8 回合"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        }
+      ]
+    },
+    {
+      "seed": 1326710653,
+      "heroes": {
+        "left": "skeleton",
+        "right": "wizard"
+      },
+      "aiLevel": "normal",
+      "records": [
+        {
+          "label": "start",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 3,
+          "weather": "clear",
+          "roundHash": "50458007",
+          "damageTexts": [],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 1 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 3,
+          "weather": "clear",
+          "roundHash": "8f84c745",
+          "damageTexts": [
+            "被圍籬擋下"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 1 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": 3,
+          "weather": "clear",
+          "roundHash": "e40a3643",
+          "damageTexts": [
+            "被圍籬擋下",
+            "沒中：超過 22 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 1 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -2.9,
+          "weather": "clear",
+          "roundHash": "ca2fca6f",
+          "damageTexts": [
+            "被圍籬擋下",
+            "沒中：超過 22 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 2 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -2.9,
+          "weather": "clear",
+          "roundHash": "ac54a518",
+          "damageTexts": [
+            "沒中：超過 22 步",
+            "沒中：差 21 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 2 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": -2.9,
+          "weather": "clear",
+          "roundHash": "4738d774",
+          "damageTexts": [
+            "沒中：差 21 步",
+            "沒中：超過 15 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 2 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 0.8,
+          "weather": "fog",
+          "roundHash": "551b71d4",
+          "damageTexts": [
+            "沒中：差 21 步",
+            "沒中：超過 15 步",
+            "起霧：只有氣氛，沒有效果"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 3 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 0.8,
+          "weather": "fog",
+          "roundHash": "9de59d38",
+          "damageTexts": [
+            "沒中：超過 15 步",
+            "起霧：只有氣氛，沒有效果",
+            "被圍籬擋下"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 3 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": 0.8,
+          "weather": "fog",
+          "roundHash": "58b42e77",
+          "damageTexts": [
+            "起霧：只有氣氛，沒有效果",
+            "被圍籬擋下",
+            "沒中：超過 20 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 3 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -1.1,
+          "weather": "fog",
+          "roundHash": "2e3c61f1",
+          "damageTexts": [
+            "起霧：只有氣氛，沒有效果",
+            "被圍籬擋下",
+            "沒中：超過 20 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 4 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -1.1,
+          "weather": "fog",
+          "roundHash": "8c55c8e8",
+          "damageTexts": [
+            "沒中：超過 20 步",
+            "被圍籬擋下"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 4 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": -1.1,
+          "weather": "fog",
+          "roundHash": "3ed06b24",
+          "damageTexts": [
+            "被圍籬擋下",
+            "沒中：超過 16 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 4 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -2.4,
+          "weather": "clear",
+          "roundHash": "2f215029",
+          "damageTexts": [
+            "被圍籬擋下",
+            "沒中：超過 16 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 5 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -2.4,
+          "weather": "clear",
+          "roundHash": "90bd016b",
+          "damageTexts": [
+            "沒中：超過 16 步",
+            "沒中：差 20 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 5 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": -2.4,
+          "weather": "clear",
+          "roundHash": "e4359b77",
+          "damageTexts": [
+            "沒中：差 20 步",
+            "沒中：超過 16 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 5 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -1.8,
+          "weather": "clear",
+          "roundHash": "793503e5",
+          "damageTexts": [
+            "沒中：差 20 步",
+            "沒中：超過 16 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 6 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -1.8,
+          "weather": "clear",
+          "roundHash": "1e96c509",
+          "damageTexts": [
+            "沒中：超過 16 步",
+            "沒中：差 22 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 6 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": -1.8,
+          "weather": "clear",
+          "roundHash": "ea41a547",
+          "damageTexts": [
+            "沒中：差 22 步",
+            "沒中：超過 18 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 6 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 0.2,
+          "weather": "rain",
+          "roundHash": "2ca40f17",
+          "damageTexts": [
+            "沒中：差 22 步",
+            "沒中：超過 18 步",
+            "下雨：攻擊 −10%，到第 8 回合"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        }
+      ]
+    },
+    {
+      "seed": 1326710653,
+      "heroes": {
+        "left": "skeleton",
+        "right": "wizard"
+      },
+      "aiLevel": "normal",
+      "records": [
+        {
+          "label": "start",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 3,
+          "weather": "clear",
+          "roundHash": "50458007",
+          "damageTexts": [],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 1 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 3,
+          "weather": "clear",
+          "roundHash": "89591f63",
+          "damageTexts": [
+            "被圍籬擋下"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 1 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": 3,
+          "weather": "clear",
+          "roundHash": "a46f20f8",
+          "damageTexts": [
+            "被圍籬擋下",
+            "沒中：超過 20 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 1 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -2.9,
+          "weather": "clear",
+          "roundHash": "ca2fca6f",
+          "damageTexts": [
+            "被圍籬擋下",
+            "沒中：超過 20 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 2 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -2.9,
+          "weather": "clear",
+          "roundHash": "044fe908",
+          "damageTexts": [
+            "沒中：超過 20 步",
+            "沒中：差 23 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 2 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": -2.9,
+          "weather": "clear",
+          "roundHash": "3f471ce9",
+          "damageTexts": [
+            "沒中：差 23 步",
+            "沒中：超過 17 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 2 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 0.8,
+          "weather": "fog",
+          "roundHash": "551b71d4",
+          "damageTexts": [
+            "沒中：差 23 步",
+            "沒中：超過 17 步",
+            "起霧：只有氣氛，沒有效果"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 3 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 0.8,
+          "weather": "fog",
+          "roundHash": "3a6bd52b",
+          "damageTexts": [
+            "沒中：超過 17 步",
+            "起霧：只有氣氛，沒有效果",
+            "被圍籬擋下"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 3 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": 0.8,
+          "weather": "fog",
+          "roundHash": "c375b5fc",
+          "damageTexts": [
+            "起霧：只有氣氛，沒有效果",
+            "被圍籬擋下",
+            "沒中：超過 18 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 3 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -1.1,
+          "weather": "fog",
+          "roundHash": "2e3c61f1",
+          "damageTexts": [
+            "起霧：只有氣氛，沒有效果",
+            "被圍籬擋下",
+            "沒中：超過 18 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 4 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -1.1,
+          "weather": "fog",
+          "roundHash": "02a2049a",
+          "damageTexts": [
+            "起霧：只有氣氛，沒有效果",
+            "沒中：超過 18 步",
+            "沒中：差 21 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 4 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": -1.1,
+          "weather": "fog",
+          "roundHash": "65955697",
+          "damageTexts": [
+            "沒中：差 21 步",
+            "沒中：超過 19 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 4 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -3.6,
+          "weather": "clear",
+          "roundHash": "298b8c96",
+          "damageTexts": [
+            "沒中：差 21 步",
+            "沒中：超過 19 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 5 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -3.6,
+          "weather": "clear",
+          "roundHash": "fdbe1249",
+          "damageTexts": [
+            "沒中：超過 19 步",
+            "沒中：差 22 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 5 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": -3.6,
+          "weather": "clear",
+          "roundHash": "294fe60a",
+          "damageTexts": [
+            "沒中：差 22 步",
+            "被圍籬擋下"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 5 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -1.8,
+          "weather": "clear",
+          "roundHash": "793503e5",
+          "damageTexts": [
+            "沒中：差 22 步",
+            "被圍籬擋下"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 6 player",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": -1.8,
+          "weather": "clear",
+          "roundHash": "c063be6c",
+          "damageTexts": [
+            "被圍籬擋下",
+            "沒中：差 20 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 6 ai",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "ai",
+          "wind": -1.8,
+          "weather": "clear",
+          "roundHash": "ad27e865",
+          "damageTexts": [
+            "沒中：差 20 步",
+            "沒中：超過 17 步"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "label": "round 6 resolved",
+          "units": [
+            {
+              "id": "left_0",
+              "x": 576,
+              "y": 860,
+              "hp": 150,
+              "statuses": []
+            },
+            {
+              "id": "right_0",
+              "x": 1548,
+              "y": 860,
+              "hp": 124,
+              "statuses": []
+            }
+          ],
+          "turn": "player",
+          "wind": 0.2,
+          "weather": "rain",
+          "roundHash": "2ca40f17",
+          "damageTexts": [
+            "沒中：差 20 步",
+            "沒中：超過 17 步",
+            "下雨：攻擊 −10%，到第 8 回合"
+          ],
+          "energy": {
+            "left": 0,
+            "right": 0
+          },
+          "items": {
+            "left": 0,
+            "right": 0
+          }
+        }
+      ]
+    }
+  ]
+}

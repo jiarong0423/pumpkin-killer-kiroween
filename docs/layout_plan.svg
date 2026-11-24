@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1672 1290" font-family="-apple-system, 'PingFang TC', 'Noto Sans TC', sans-serif">
+  <title>Pumpkin Killer layout plan</title>
+  <rect width="1672" height="1290" fill="#14101f"/>
+
+  <!-- screen frame -->
+  <rect x="0" y="0" width="1672" height="941" fill="#221a38" stroke="#6b5aa8" stroke-width="3"/>
+
+  <!-- B: background layer -->
+  <g fill="#2e2450" stroke="#8a78c8" stroke-width="2" stroke-dasharray="10 6">
+    <circle cx="960" cy="230" r="190" fill="#3a2f63"/>
+    <path d="M860 520 L860 260 L900 140 L940 260 L960 200 L1000 260 L1040 120 L1080 260 L1080 520 Z"/>
+    <path d="M1100 520 L1100 330 L1160 250 L1230 330 L1230 520 Z"/>
+    <path d="M640 520 L640 340 L700 280 L760 340 L760 520 Z"/>
+  </g>
+  <g fill="#e9b949" font-size="26" font-weight="700">
+    <text x="880" y="238">B1</text>
+  </g>
+  <g fill="none" stroke="#8a78c8" stroke-width="2" stroke-dasharray="10 6">
+    <path d="M10 120 Q60 200 40 330 M10 330 Q100 300 130 250"/>
+    <path d="M1650 120 Q1600 200 1620 330 M1650 330 Q1560 300 1530 250"/>
+  </g>
+  <text x="40" y="360" fill="#e9b949" font-size="26" font-weight="700">B2</text>
+  <text x="1580" y="360" fill="#e9b949" font-size="26" font-weight="700">B2</text>
+
+  <!-- G: ground -->
+  <rect x="0" y="650" width="1672" height="120" fill="#3b2f55" stroke="#9a88d8" stroke-width="2"/>
+  <text x="780" y="720" fill="#e9b949" font-size="26" font-weight="700">G1 地面（落點判定線 y=650）</text>
+  <g fill="#4a3d6e" stroke="#9a88d8" stroke-width="2">
+    <rect x="880" y="590" width="40" height="60"/><rect x="940" y="600" width="36" height="50"/>
+    <rect x="780" y="595" width="36" height="55"/><rect x="1020" y="590" width="40" height="60"/>
+  </g>
+  <text x="1090" y="625" fill="#e9b949" font-size="22" font-weight="700">G2 墓碑／蠟燭／南瓜燈（裝飾）</text>
+
+  <!-- P: platforms -->
+  <g fill="#5a4630" stroke="#d9a35a" stroke-width="3">
+    <rect x="70" y="230" width="190" height="90" transform="rotate(-8 165 275)"/>
+    <rect x="385" y="335" width="300" height="65"/>
+    <rect x="1060" y="345" width="260" height="60"/>
+    <rect x="1430" y="225" width="180" height="90" transform="rotate(8 1520 270)"/>
+  </g>
+  <g fill="#fff" font-size="26" font-weight="700">
+    <text x="130" y="285">P1</text><text x="510" y="378">P2</text>
+    <text x="1170" y="385">P3</text><text x="1500" y="278">P4</text>
+  </g>
+
+  <!-- A: airdrops -->
+  <g fill="#cfe3ff" stroke="#8fb8ff" stroke-width="3">
+    <ellipse cx="615" cy="110" rx="70" ry="55"/><ellipse cx="1155" cy="130" rx="60" ry="50"/>
+  </g>
+  <g fill="#9a5a1f" stroke="#ffb347" stroke-width="3">
+    <rect x="580" y="235" width="75" height="85"/><rect x="1110" y="260" width="75" height="75"/>
+  </g>
+  <g stroke="#8fb8ff" stroke-width="3"><line x1="617" y1="165" x2="617" y2="235"/><line x1="1147" y1="180" x2="1147" y2="260"/></g>
+  <g fill="#14101f" font-size="24" font-weight="700">
+    <text x="595" y="118">A1</text><text x="1135" y="138">A2</text>
+  </g>
+
+  <!-- U: units -->
+  <g stroke="#fff" stroke-width="2">
+    <rect x="45" y="540" width="95" height="105" fill="#4a5ea8"/>
+    <rect x="175" y="515" width="110" height="130" fill="#4a5ea8"/>
+    <rect x="305" y="540" width="105" height="105" fill="#4a5ea8"/>
+    <rect x="450" y="520" width="140" height="125" fill="#4a5ea8"/>
+    <rect x="1120" y="520" width="140" height="125" fill="#a84a7e"/>
+    <rect x="1290" y="540" width="105" height="105" fill="#a84a7e"/>
+    <rect x="1420" y="515" width="110" height="130" fill="#a84a7e"/>
+    <rect x="1540" y="540" width="95" height="105" fill="#a84a7e"/>
+  </g>
+  <g fill="#fff" font-size="24" font-weight="700" text-anchor="middle">
+    <text x="92" y="585">U1 蝠</text><text x="230" y="585">U2 巫</text>
+    <text x="357" y="585">U3 骷</text><text x="520" y="585">U4 盾</text>
+    <text x="1190" y="585">U5 盾</text><text x="1342" y="585">U6 骷</text>
+    <text x="1475" y="585">U7 巫</text><text x="1587" y="585">U8 蝠</text>
+  </g>
+  <g fill="#e9b949" font-size="20" text-anchor="middle">
+    <text x="92" y="505">血條 90</text><text x="230" y="480">血條 85</text>
+    <text x="357" y="505">血條 100</text><text x="520" y="485">血條 120</text>
+    <text x="1190" y="485">血條 120</text><text x="1342" y="505">血條 100</text>
+    <text x="1475" y="480">血條 85</text><text x="1587" y="505">血條 90</text>
+  </g>
+
+  <!-- T / L: trajectory and landing -->
+  <path d="M290 560 Q640 180 1010 630" fill="none" stroke="#ffd34d" stroke-width="4" stroke-dasharray="14 10"/>
+  <g fill="none" stroke="#ffd34d" stroke-width="4"><ellipse cx="1010" cy="648" rx="45" ry="10"/><ellipse cx="685" cy="648" rx="45" ry="10"/></g>
+  <text x="640" y="260" fill="#ffd34d" font-size="26" font-weight="700">T1 彈道（由座標與風算出）</text>
+  <text x="1060" y="690" fill="#ffd34d" font-size="26" font-weight="700">L1 落點環</text>
+
+  <!-- H: HUD top -->
+  <g fill="#1b1430" stroke="#8a78c8" stroke-width="2">
+    <rect x="30" y="8" width="310" height="85"/><rect x="445" y="0" width="270" height="48"/>
+    <rect x="720" y="0" width="230" height="52"/><rect x="955" y="0" width="240" height="48"/>
+    <rect x="1205" y="0" width="275" height="48"/>
+  </g>
+  <g fill="#e9b949" font-size="24" font-weight="700">
+    <text x="45" y="60">H1 標題 logo</text><text x="460" y="32">H2 玩家數</text>
+    <text x="735" y="34">H3 回合／計時</text><text x="970" y="32">H4 風（0 時不畫箭頭）</text>
+    <text x="1220" y="32">H5 代理數</text>
+  </g>
+
+  <!-- C: control bar -->
+  <rect x="0" y="770" width="1672" height="171" fill="#1b1430" stroke="#8a78c8" stroke-width="3"/>
+  <g fill="#2e2450" stroke="#8a78c8" stroke-width="2">
+    <rect x="35" y="780" width="155" height="150"/><rect x="200" y="790" width="180" height="130"/>
+    <rect x="395" y="790" width="110" height="130"/><rect x="520" y="790" width="110" height="130"/>
+    <rect x="645" y="790" width="110" height="130"/><rect x="800" y="790" width="190" height="130"/>
+    <rect x="1000" y="790" width="190" height="130"/><rect x="1200" y="790" width="100" height="130"/>
+    <rect x="1315" y="790" width="100" height="130"/>
+  </g>
+  <rect x="1440" y="795" width="190" height="120" fill="#5a2d2d" stroke="#ff6b6b" stroke-width="3" stroke-dasharray="10 6"/>
+  <g fill="#e9b949" font-size="22" font-weight="700">
+    <text x="45" y="860">C1 頭像</text><text x="210" y="860">C2 名稱／血量</text>
+    <text x="405" y="860">C3 投射</text><text x="530" y="860">C4 移動</text><text x="655" y="860">C5 防禦</text>
+    <text x="810" y="860">C6 角度</text><text x="1010" y="860">C7 蓄力條</text>
+    <text x="1210" y="860">C8 彈藥</text><text x="1325" y="860">C9 特殊</text>
+  </g>
+  <text x="1452" y="850" fill="#ff9b9b" font-size="22" font-weight="700">C10 鎖定（刪除）</text>
+  <text x="1452" y="880" fill="#ff9b9b" font-size="20">改為放開蓄力即出手</text>
+
+  <!-- legend -->
+  <g fill="#e9e3ff" font-size="24">
+    <text x="30" y="1000" font-weight="700" font-size="30">物件盤點（共 35 項）</text>
+    <text x="30" y="1045">背景 B1 月亮＋城堡　B2 枯樹與蝙蝠　　　地面 G1 地面帶　G2 裝飾（墓碑、蠟燭、南瓜燈）</text>
+    <text x="30" y="1085">平台 P1 P4 浮空石棺板（藍／紫火）　P2 P3 骷髏木板　　　空投 A1 A2 幽靈吊木箱</text>
+    <text x="30" y="1125">角色 U1–U4 左隊　U5–U8 右隊（同圖翻轉換色，4 職業：蝠90、巫85、骷100、盾120）</text>
+    <text x="30" y="1165">畫面層 T1 彈道虛線　L1 落點環　　HUD H1–H5 　　指令列 C1–C10（C10 刪除）</text>
+    <text x="30" y="1205">每個單位附血條，血條與所有文字由程式繪製，不放進圖片。左隊藍、右隊紫為方框顏色，僅示意。</text>
+    <text x="30" y="1245" fill="#ff9b9b">與原概念圖不同：刪除「鎖定」；風為 0 不畫箭頭；彈道依座標計算；去掉 CONCEPT MOCKUP 浮水印。</text>
+  </g>
+</svg>

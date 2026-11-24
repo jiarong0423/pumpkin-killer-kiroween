@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1000" font-family="-apple-system,Helvetica,Arial,sans-serif">
+<rect x="0" y="0" width="2000" height="1000" fill="#1a1625"/>
+<text x="50" y="56" font-size="34" font-weight="700" fill="#f7fafc">南瓜殺手：狀態圖（2026-11-10 收工時）</text>
+<text x="50" y="90" font-size="18" fill="#a0aec0">每個方塊是一個模組或交付項；欄＝目前狀態。狀態由主線依實際檢查判定，「已做、還沒實戰驗證」代表程式或測試過了但沒在真實對局看過。</text>
+<rect x="50" y="120" width="360" height="52" rx="10" fill="#48bb78" fill-opacity="0.25" stroke="#48bb78" stroke-width="3"/>
+<text x="66" y="154" font-size="22" font-weight="700" fill="#f7fafc">完成（看過或測過）（10）</text>
+<rect x="50" y="190" width="360" height="58" rx="10" fill="#48bb78" fill-opacity="0.12" stroke="#48bb78" stroke-width="2"/>
+<text x="64" y="226" font-size="18" fill="#edf2f7">核心物理與回合（倒數條）</text>
+<rect x="50" y="260" width="360" height="58" rx="10" fill="#48bb78" fill-opacity="0.12" stroke="#48bb78" stroke-width="2"/>
+<text x="64" y="296" font-size="18" fill="#edf2f7">四個職業可玩</text>
+<rect x="50" y="330" width="360" height="58" rx="10" fill="#48bb78" fill-opacity="0.12" stroke="#48bb78" stroke-width="2"/>
+<text x="64" y="366" font-size="18" fill="#edf2f7">頂部 HUD、聲音/重來/說明鈕</text>
+<rect x="50" y="400" width="360" height="58" rx="10" fill="#48bb78" fill-opacity="0.12" stroke="#48bb78" stroke-width="2"/>
+<text x="64" y="436" font-size="18" fill="#edf2f7">底部 dock（無血量數字）</text>
+<rect x="50" y="470" width="360" height="58" rx="10" fill="#48bb78" fill-opacity="0.12" stroke="#48bb78" stroke-width="2"/>
+<text x="64" y="506" font-size="18" fill="#edf2f7">靜態預載＋染色快取</text>
+<rect x="50" y="540" width="360" height="58" rx="10" fill="#48bb78" fill-opacity="0.12" stroke="#48bb78" stroke-width="2"/>
+<text x="64" y="576" font-size="18" fill="#edf2f7">音效模組（Kiro）</text>
+<rect x="50" y="610" width="360" height="58" rx="10" fill="#48bb78" fill-opacity="0.12" stroke="#48bb78" stroke-width="2"/>
+<text x="64" y="646" font-size="18" fill="#edf2f7">粒子特效＋屬性測試（Kiro）</text>
+<rect x="50" y="680" width="360" height="58" rx="10" fill="#48bb78" fill-opacity="0.12" stroke="#48bb78" stroke-width="2"/>
+<text x="64" y="716" font-size="18" fill="#edf2f7">Kiro 路由／總帳／核驗紀錄</text>
+<rect x="50" y="750" width="360" height="58" rx="10" fill="#48bb78" fill-opacity="0.12" stroke="#48bb78" stroke-width="2"/>
+<text x="64" y="786" font-size="18" fill="#edf2f7">官方規則對照檢查</text>
+<rect x="50" y="820" width="360" height="58" rx="10" fill="#48bb78" fill-opacity="0.12" stroke="#48bb78" stroke-width="2"/>
+<text x="64" y="856" font-size="18" fill="#edf2f7">Python 引擎對齊（Kiro 80）</text>
+<rect x="430" y="120" width="360" height="52" rx="10" fill="#ecc94b" fill-opacity="0.25" stroke="#ecc94b" stroke-width="3"/>
+<text x="446" y="154" font-size="22" font-weight="700" fill="#f7fafc">已做、還沒實戰驗證（5）</text>
+<rect x="430" y="190" width="360" height="58" rx="10" fill="#ecc94b" fill-opacity="0.12" stroke="#ecc94b" stroke-width="2"/>
+<text x="444" y="226" font-size="18" fill="#edf2f7">AI 對手（加風規則後命中率未量）</text>
+<rect x="430" y="260" width="360" height="58" rx="10" fill="#ecc94b" fill-opacity="0.12" stroke="#ecc94b" stroke-width="2"/>
+<text x="444" y="296" font-size="18" fill="#edf2f7">狀態效果：流血／中毒／霜凍</text>
+<rect x="430" y="330" width="360" height="58" rx="10" fill="#ecc94b" fill-opacity="0.12" stroke="#ecc94b" stroke-width="2"/>
+<text x="444" y="366" font-size="18" fill="#edf2f7">牆體 8% 受擊（暫定）</text>
+<rect x="430" y="400" width="360" height="58" rx="10" fill="#ecc94b" fill-opacity="0.12" stroke="#ecc94b" stroke-width="2"/>
+<text x="444" y="436" font-size="18" fill="#edf2f7">浮空棺（紫色，左邊轉青）</text>
+<rect x="430" y="470" width="360" height="58" rx="10" fill="#ecc94b" fill-opacity="0.12" stroke="#ecc94b" stroke-width="2"/>
+<text x="444" y="506" font-size="18" fill="#edf2f7">風鬼三格＋風旋（暫代圖）</text>
+<rect x="810" y="120" width="360" height="52" rx="10" fill="#4299e1" fill-opacity="0.25" stroke="#4299e1" stroke-width="3"/>
+<text x="826" y="154" font-size="22" font-weight="700" fill="#f7fafc">進行中（4）</text>
+<rect x="810" y="190" width="360" height="58" rx="10" fill="#4299e1" fill-opacity="0.12" stroke="#4299e1" stroke-width="2"/>
+<text x="824" y="226" font-size="18" fill="#edf2f7">風鬼連續圖（千問／Colab，單張未出）</text>
+<rect x="810" y="260" width="360" height="58" rx="10" fill="#4299e1" fill-opacity="0.12" stroke="#4299e1" stroke-width="2"/>
+<text x="824" y="296" font-size="18" fill="#edf2f7">Kiro 83 證據檔（待我驗）</text>
+<rect x="810" y="330" width="360" height="58" rx="10" fill="#4299e1" fill-opacity="0.12" stroke="#4299e1" stroke-width="2"/>
+<text x="824" y="366" font-size="18" fill="#edf2f7">多人 MCP 通道規格</text>
+<rect x="810" y="400" width="360" height="58" rx="10" fill="#4299e1" fill-opacity="0.12" stroke="#4299e1" stroke-width="2"/>
+<text x="824" y="436" font-size="18" fill="#edf2f7">字體／細節／框架整理（波次 E）</text>
+<rect x="1190" y="120" width="360" height="52" rx="10" fill="#a0aec0" fill-opacity="0.25" stroke="#a0aec0" stroke-width="3"/>
+<text x="1206" y="154" font-size="22" font-weight="700" fill="#f7fafc">已規劃、未開工（10）</text>
+<rect x="1190" y="190" width="360" height="58" rx="10" fill="#a0aec0" fill-opacity="0.12" stroke="#a0aec0" stroke-width="2"/>
+<text x="1204" y="226" font-size="18" fill="#edf2f7">4 對 4（S1…S7）</text>
+<rect x="1190" y="260" width="360" height="58" rx="10" fill="#a0aec0" fill-opacity="0.12" stroke="#a0aec0" stroke-width="2"/>
+<text x="1204" y="296" font-size="18" fill="#edf2f7">決定論規則核心＋屬性測試</text>
+<rect x="1190" y="330" width="360" height="58" rx="10" fill="#a0aec0" fill-opacity="0.12" stroke="#a0aec0" stroke-width="2"/>
+<text x="1204" y="366" font-size="18" fill="#edf2f7">擲硬幣＋南瓜硬幣動畫</text>
+<rect x="1190" y="400" width="360" height="58" rx="10" fill="#a0aec0" fill-opacity="0.12" stroke="#a0aec0" stroke-width="2"/>
+<text x="1204" y="436" font-size="18" fill="#edf2f7">中繼站＋邀請碼＋隨機房間</text>
+<rect x="1190" y="470" width="360" height="58" rx="10" fill="#a0aec0" fill-opacity="0.12" stroke="#a0aec0" stroke-width="2"/>
+<text x="1204" y="506" font-size="18" fill="#edf2f7">MCP 通道（座位／公平）</text>
+<rect x="1190" y="540" width="360" height="58" rx="10" fill="#a0aec0" fill-opacity="0.12" stroke="#a0aec0" stroke-width="2"/>
+<text x="1204" y="576" font-size="18" fill="#edf2f7">大廳頁面</text>
+<rect x="1190" y="610" width="360" height="58" rx="10" fill="#a0aec0" fill-opacity="0.12" stroke="#a0aec0" stroke-width="2"/>
+<text x="1204" y="646" font-size="18" fill="#edf2f7">手機版（觸控 44px／橫向）</text>
+<rect x="1190" y="680" width="360" height="58" rx="10" fill="#a0aec0" fill-opacity="0.12" stroke="#a0aec0" stroke-width="2"/>
+<text x="1204" y="716" font-size="18" fill="#edf2f7">缺的音效</text>
+<rect x="1190" y="750" width="360" height="58" rx="10" fill="#a0aec0" fill-opacity="0.12" stroke="#a0aec0" stroke-width="2"/>
+<text x="1204" y="786" font-size="18" fill="#edf2f7">README＋Kiro 使用說明</text>
+<rect x="1190" y="820" width="360" height="58" rx="10" fill="#a0aec0" fill-opacity="0.12" stroke="#a0aec0" stroke-width="2"/>
+<text x="1204" y="856" font-size="18" fill="#edf2f7">三分鐘影片腳本</text>
+<rect x="1570" y="120" width="360" height="52" rx="10" fill="#fc8181" fill-opacity="0.25" stroke="#fc8181" stroke-width="3"/>
+<text x="1586" y="154" font-size="22" font-weight="700" fill="#f7fafc">等你動手（6）</text>
+<rect x="1570" y="190" width="360" height="58" rx="10" fill="#fc8181" fill-opacity="0.12" stroke="#fc8181" stroke-width="2"/>
+<text x="1584" y="226" font-size="18" fill="#edf2f7">公開 GitHub 倉庫＋授權可見</text>
+<rect x="1570" y="260" width="360" height="58" rx="10" fill="#fc8181" fill-opacity="0.12" stroke="#fc8181" stroke-width="2"/>
+<text x="1584" y="296" font-size="18" fill="#edf2f7">部署到 Contabo／Coolify（網址）</text>
+<rect x="1570" y="330" width="360" height="58" rx="10" fill="#fc8181" fill-opacity="0.12" stroke="#fc8181" stroke-width="2"/>
+<text x="1584" y="366" font-size="18" fill="#edf2f7">錄影＋上傳 YouTube</text>
+<rect x="1570" y="400" width="360" height="58" rx="10" fill="#fc8181" fill-opacity="0.12" stroke="#fc8181" stroke-width="2"/>
+<text x="1584" y="436" font-size="18" fill="#edf2f7">Kiro IDE 存檔留 hook 紀錄</text>
+<rect x="1570" y="470" width="360" height="58" rx="10" fill="#fc8181" fill-opacity="0.12" stroke="#fc8181" stroke-width="2"/>
+<text x="1584" y="506" font-size="18" fill="#edf2f7">部落格／社群貼文發布</text>
+<rect x="1570" y="540" width="360" height="58" rx="10" fill="#fc8181" fill-opacity="0.12" stroke="#fc8181" stroke-width="2"/>
+<text x="1584" y="576" font-size="18" fill="#edf2f7">提交前最後按鈕</text>
+<text x="50" y="960" font-size="16" fill="#718096">來源：docs/asset_inventory.json、docs/GAP_QUEUE_20261110.md、docs/kiro_queue_20261110.md；由 scripts/make_status_gantt.py 產生（文件，不是遊戲美術）。</text>
+</svg>

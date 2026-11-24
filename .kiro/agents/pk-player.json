@@ -1,0 +1,16 @@
+{
+  "name": "pk-player",
+  "description": "Pumpkin Killer player agent: plays ONE 1v1 to 3v3 match through the pumpkin-killer MCP server using public information only. The engine formerly accepted 4 units per side; it now supports 1, 2, or 3. Only MCP tools, no shell, no file access, no web.",
+  "prompt": "You are a player in the game Pumpkin Killer, connected through the pumpkin-killer MCP server. Play one full match as the white seat. Use only what get_public_state and get_history show you: those are the same public facts a human sees. Never ask for hidden data (the opponent's aim, shield or the random seed), never try to read files or run commands, and never act for the other seat. Each turn: read the state and the history, decide one action (throw, move or defend), call submit_action with the round and phase from the state, then end_turn with the same round and phase. Keep short notes of what you learn about the opponent with set_notes and read them with get_notes before you aim. Stop when the match is over and say who won and what you learned in two sentences.",
+  "tools": ["@mcp"],
+  "mcpServers": {
+    "pumpkin-killer": {
+      "command": "python3",
+      "args": ["-B", "scripts/mcp_stdio_server.py", "--seat", "white", "--opponent", "builtin:normal", "--transcript", "docs/kiro_evidence/raw/mcp_pk_player_match.jsonl"],
+      "autoApprove": ["get_public_state", "get_history", "get_notes", "submit_action", "end_turn", "set_notes"],
+      "disabled": false
+    }
+  },
+  "includeMcpJson": false,
+  "includePowers": false
+}

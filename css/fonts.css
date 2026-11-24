@@ -1,0 +1,82 @@
+/* ==========================================================================
+   Pumpkin Killer: web fonts (Kiro task 48). Link this BEFORE dock.css.
+   Files are made by scripts/build_fonts.py into assets/fonts/ (see docs/fonts_report.md).
+
+   Family names are ours ("PK Display", "PK Body"): the subsets are Modified Versions under the
+   SIL OFL, so they must not reuse a Reserved Font Name. Cinzel Decorative is the one exception:
+   it is shipped UNMODIFIED, under its own file name.
+
+   PK Display = Cinzel Decorative Bold for ASCII, plus Noto Serif TC at weight 900 for Chinese,
+                Latin-1 and punctuation. The two faces use disjoint unicode-range, so the browser
+                never has to choose between them. Both are declared weight 700 on purpose: pages
+                ask for 700, and the 900 outline sits behind that number.
+   PK Body    = Noto Sans TC 400 and 700 (Latin, digits and Chinese in one file).
+   ========================================================================== */
+
+/* Chinese, Latin-1, general punctuation, arrows, shapes, fullwidth forms */
+@font-face {
+  font-family: "PK Display";
+  src: url("../assets/fonts/pk-display-cjk-900.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+00A0-00FF, U+2000-206F, U+2190-21FF, U+25A0-25FF, U+2E80-9FFF, U+F900-FAFF, U+FF00-FFEF;
+}
+
+/* ASCII letters, digits and punctuation: Cinzel Decorative Bold, the original file */
+@font-face {
+  font-family: "PK Display";
+  src: url("../assets/fonts/CinzelDecorative-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E;
+}
+
+@font-face {
+  font-family: "PK Body";
+  src: url("../assets/fonts/pk-body-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PK Body";
+  src: url("../assets/fonts/pk-body-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Titles, numbers, banners, damage. The system names after "PK Display" are what shows while the
+     files load (font-display: swap) or when they never load. */
+  --font-display: "PK Display", "Noto Serif TC", "Songti TC", "PMingLiU", "MingLiU", Georgia, serif;
+  /* Help, tooltips, status, small labels. */
+  --font-body: "PK Body", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Lite mode: slow network, Save-Data, or the owner's choice. Dropping "PK ..." from the stacks means
+   the browser never requests the font files (a face downloads only when something uses it). The canvas
+   reads these variables too (docs/fonts_report.md), so it follows the same switch. */
+html.pk-lite {
+  --font-display: "Noto Serif TC", "Songti TC", "PMingLiU", "MingLiU", Georgia, serif;
+  --font-body: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Small helpers for DOM text. Optional. */
+.pk-display { font-family: var(--font-display); font-weight: 700; }
+.pk-body { font-family: var(--font-body); font-weight: 400; }
+.pk-body-bold { font-family: var(--font-body); font-weight: 700; }
+
+/* Fixed-width digits. Works only if the font has the tnum feature (build_info.json says which do);
+   otherwise use equal cells, see docs/fonts_report.md. */
+.pk-num { font-variant-numeric: tabular-nums lining-nums; }
+
+/* Dark outline for text over the scene. paint-order puts the stroke under the fill, so only half of
+   the 3px stroke shows (1.5px) and the letters keep their shape. */
+.pk-outline {
+  -webkit-text-stroke: 3px rgba(10, 4, 20, 0.85);
+  paint-order: stroke fill;
+}

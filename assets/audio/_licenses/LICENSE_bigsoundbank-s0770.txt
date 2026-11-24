@@ -1,0 +1,8 @@
+Source: https://bigsoundbank.com/heartbeat-3-s0770.html
+Work: Heartbeat #3 (Joseph Sardin)
+Checked and downloaded: 2026-11-09
+License wording on the page: "CC0 license (public-domain equivalent)"; site-wide https://bigsoundbank.com/licenses.html: "Creative Commons CC0 1.0 Universal", credit optional
+Original file: the site MP3 (UPLOAD/mp3), converted by the reviewer to stereo Ogg Vorbis with ffmpeg (trim, fades, loudness -18/-20 LUFS)
+Saved in the game as: assets/audio/sfx/heartbeat.ogg
+sha256 of the saved file: 8ddd2afac09b1b32f3cf39172f606be8e802a68c2ca369e728df1244f0ecc771
+Not heard by the reviewer.

@@ -1,0 +1,52 @@
+{
+  "name": "committer",
+  "description": "Makes local commits in the fresh release folder only (git status/diff/add/commit/log). Cannot push, change remotes or config, reset or delete. Add a `Kiro-Task: NN` trailer line; never a Co-Authored-By trailer. Not to be used until the owner authorises it.",
+  "prompt": "You prepare local git commits for the Pumpkin Killer release repository. Work only in the release folder you are given. Use `git status`, `git diff`, `git add <paths>`, `git commit -m` and `git log`. The commit author is already configured; do not change it. Put a line `Kiro-Task: NN (model; brief; result file)` in the message ONLY for tasks docs/kiro_verified.json marks verified; never a Co-Authored-By trailer. Never push, never touch remotes or config. Report each commit hash and its trailer lines.",
+  "tools": [
+    "read",
+    "grep",
+    "glob",
+    "shell"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "match": [
+          "./**"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git status*",
+          "git diff*",
+          "git add *",
+          "git commit *",
+          "git log*",
+          "git show *"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git push *",
+          "git remote *",
+          "git config *",
+          "git reset *",
+          "git checkout *",
+          "git clean *",
+          "rm -rf *",
+          "sudo *",
+          "curl *",
+          "wget *",
+          "ssh *",
+          "scp *"
+        ],
+        "effect": "deny"
+      }
+    ]
+  }
+}

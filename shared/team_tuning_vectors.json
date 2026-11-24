@@ -1,0 +1,437 @@
+{
+ "teamMaxHp": [
+  {
+   "hero": "skeleton",
+   "hp": 150,
+   "dmg": 22,
+   "n": 1,
+   "expected": 150
+  },
+  {
+   "hero": "skeleton",
+   "hp": 150,
+   "dmg": 22,
+   "n": 2,
+   "expected": 135
+  },
+  {
+   "hero": "skeleton",
+   "hp": 150,
+   "dmg": 22,
+   "n": 3,
+   "expected": 143
+  },
+  {
+   "hero": "wizard",
+   "hp": 124,
+   "dmg": 33,
+   "n": 1,
+   "expected": 124
+  },
+  {
+   "hero": "wizard",
+   "hp": 124,
+   "dmg": 33,
+   "n": 2,
+   "expected": 112
+  },
+  {
+   "hero": "wizard",
+   "hp": 124,
+   "dmg": 33,
+   "n": 3,
+   "expected": 118
+  },
+  {
+   "hero": "bat",
+   "hp": 147,
+   "dmg": 28,
+   "n": 1,
+   "expected": 147
+  },
+  {
+   "hero": "bat",
+   "hp": 147,
+   "dmg": 28,
+   "n": 2,
+   "expected": 132
+  },
+  {
+   "hero": "bat",
+   "hp": 147,
+   "dmg": 28,
+   "n": 3,
+   "expected": 140
+  },
+  {
+   "hero": "knight",
+   "hp": 185,
+   "dmg": 21,
+   "n": 1,
+   "expected": 185
+  },
+  {
+   "hero": "knight",
+   "hp": 185,
+   "dmg": 21,
+   "n": 2,
+   "expected": 167
+  },
+  {
+   "hero": "knight",
+   "hp": 185,
+   "dmg": 21,
+   "n": 3,
+   "expected": 176
+  },
+  {
+   "hero": "reaper",
+   "hp": 143,
+   "dmg": 22,
+   "n": 1,
+   "expected": 143
+  },
+  {
+   "hero": "reaper",
+   "hp": 143,
+   "dmg": 22,
+   "n": 2,
+   "expected": 129
+  },
+  {
+   "hero": "reaper",
+   "hp": 143,
+   "dmg": 22,
+   "n": 3,
+   "expected": 136
+  },
+  {
+   "hero": "bride",
+   "hp": 149,
+   "dmg": 34,
+   "n": 1,
+   "expected": 149
+  },
+  {
+   "hero": "bride",
+   "hp": 149,
+   "dmg": 34,
+   "n": 2,
+   "expected": 134
+  },
+  {
+   "hero": "bride",
+   "hp": 149,
+   "dmg": 34,
+   "n": 3,
+   "expected": 142
+  },
+  {
+   "hero": "hunchback",
+   "hp": 147,
+   "dmg": 19,
+   "n": 1,
+   "expected": 147
+  },
+  {
+   "hero": "hunchback",
+   "hp": 147,
+   "dmg": 19,
+   "n": 2,
+   "expected": 132
+  },
+  {
+   "hero": "hunchback",
+   "hp": 147,
+   "dmg": 19,
+   "n": 3,
+   "expected": 140
+  },
+  {
+   "hero": "hag",
+   "hp": 158,
+   "dmg": 24,
+   "n": 1,
+   "expected": 158
+  },
+  {
+   "hero": "hag",
+   "hp": 158,
+   "dmg": 24,
+   "n": 2,
+   "expected": 142
+  },
+  {
+   "hero": "hag",
+   "hp": 158,
+   "dmg": 24,
+   "n": 3,
+   "expected": 150
+  }
+ ],
+ "ramp": [
+  {
+   "n": 1,
+   "round": 1,
+   "expected": 1.0
+  },
+  {
+   "n": 1,
+   "round": 8,
+   "expected": 1.0
+  },
+  {
+   "n": 1,
+   "round": 9,
+   "expected": 1.0
+  },
+  {
+   "n": 1,
+   "round": 10,
+   "expected": 1.0
+  },
+  {
+   "n": 1,
+   "round": 14,
+   "expected": 1.0
+  },
+  {
+   "n": 1,
+   "round": 18,
+   "expected": 1.0
+  },
+  {
+   "n": 1,
+   "round": 20,
+   "expected": 1.0
+  },
+  {
+   "n": 1,
+   "round": 25,
+   "expected": 1.0
+  },
+  {
+   "n": 2,
+   "round": 1,
+   "expected": 1.0
+  },
+  {
+   "n": 2,
+   "round": 8,
+   "expected": 1.0
+  },
+  {
+   "n": 2,
+   "round": 9,
+   "expected": 1.0
+  },
+  {
+   "n": 2,
+   "round": 10,
+   "expected": 1.0
+  },
+  {
+   "n": 2,
+   "round": 14,
+   "expected": 1.16
+  },
+  {
+   "n": 2,
+   "round": 18,
+   "expected": 1.48
+  },
+  {
+   "n": 2,
+   "round": 20,
+   "expected": 1.64
+  },
+  {
+   "n": 2,
+   "round": 25,
+   "expected": 2.04
+  },
+  {
+   "n": 3,
+   "round": 1,
+   "expected": 1.0
+  },
+  {
+   "n": 3,
+   "round": 8,
+   "expected": 1.0
+  },
+  {
+   "n": 3,
+   "round": 9,
+   "expected": 1.0
+  },
+  {
+   "n": 3,
+   "round": 10,
+   "expected": 1.0
+  },
+  {
+   "n": 3,
+   "round": 14,
+   "expected": 1.16
+  },
+  {
+   "n": 3,
+   "round": 18,
+   "expected": 1.48
+  },
+  {
+   "n": 3,
+   "round": 20,
+   "expected": 1.64
+  },
+  {
+   "n": 3,
+   "round": 25,
+   "expected": 2.04
+  },
+  {
+   "n": 1,
+   "round": 12,
+   "expected": 1.0
+  },
+  {
+   "n": 1,
+   "round": 13,
+   "expected": 1.0
+  },
+  {
+   "n": 1,
+   "round": 14,
+   "expected": 1.0
+  },
+  {
+   "n": 1,
+   "round": 20,
+   "expected": 1.0
+  },
+  {
+   "n": 2,
+   "round": 12,
+   "expected": 1.0
+  },
+  {
+   "n": 2,
+   "round": 13,
+   "expected": 1.08
+  },
+  {
+   "n": 2,
+   "round": 14,
+   "expected": 1.16
+  },
+  {
+   "n": 2,
+   "round": 20,
+   "expected": 1.64
+  },
+  {
+   "n": 3,
+   "round": 12,
+   "expected": 1.0
+  },
+  {
+   "n": 3,
+   "round": 13,
+   "expected": 1.08
+  },
+  {
+   "n": 3,
+   "round": 14,
+   "expected": 1.16
+  },
+  {
+   "n": 3,
+   "round": 20,
+   "expected": 1.64
+  }
+ ],
+ "cap": [
+  {
+   "n": 1,
+   "expected": 40
+  },
+  {
+   "n": 0,
+   "expected": null
+  },
+  {
+   "n": 2,
+   "expected": 24
+  },
+  {
+   "n": 3,
+   "expected": 28
+  }
+ ],
+ "capWinner": [
+  {
+   "teams": {
+    "left": [
+     {
+      "hp": 50,
+      "maxHp": 100
+     }
+    ],
+    "right": [
+     {
+      "hp": 40,
+      "maxHp": 100
+     }
+    ]
+   },
+   "expected": "left"
+  },
+  {
+   "teams": {
+    "left": [
+     {
+      "hp": 40,
+      "maxHp": 100
+     }
+    ],
+    "right": [
+     {
+      "hp": 40,
+      "maxHp": 100
+     }
+    ]
+   },
+   "expected": "right"
+  },
+  {
+   "teams": {
+    "left": [
+     {
+      "hp": 30,
+      "maxHp": 60
+     },
+     {
+      "hp": 0,
+      "maxHp": 60
+     }
+    ],
+    "right": [
+     {
+      "hp": 15,
+      "maxHp": 30
+     },
+     {
+      "hp": 15,
+      "maxHp": 30
+     },
+     {
+      "hp": 0,
+      "maxHp": 30
+     }
+    ]
+   },
+   "expected": "right"
+  }
+ ]
+}

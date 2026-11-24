@@ -1,0 +1,336 @@
+{
+ "refs": {
+  "ref_assets_units_unit_knight_png": "assets/units/unit_knight.png",
+  "ref_assets_units_unit_wizard_png": "assets/units/unit_wizard.png",
+  "ref_assets_weapons_dart_png": "assets/weapons/dart.png",
+  "ref_assets_poses_bride_idle1_png": "assets/poses/bride_idle1.png",
+  "ref_assets_poses_hunchback_idle1_png": "assets/poses/hunchback_idle1.png"
+ },
+ "style": " ",
+ "jobs": [
+  {
+   "id": "pose_knight_unarmed_windup",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_knight_png",
+   "prompt": "Edit the reference: preserve the identical pumpkin head, dark plate armour, black cape, palette, direction (faces left), scale, canvas size and feet baseline. FACE LOCK: the head is a carved jack-o-lantern pumpkin: glowing yellow-orange triangular eyes, a jagged toothy carved grin, a green curled stem; keep it IDENTICAL to the reference in every frame. No human eyes, no eyebrows, no nose, no lips, no skin, no tears, no change of expression shape (only the glow may flare). Same character, no big kite shield. Wind-up pose: the right arm drawn back behind the shoulder holding ONE small round wooden buckler shield (about the size of the head) by its rim, body leaning back, left hand empty, pumpkin glow unchanged. Dark-fantasy 2D cartoon, chibi with a big round head about one third of the whole height (a single head), soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "pose_knight_unarmed_release",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_knight_png",
+   "prompt": "Edit the reference: preserve the identical pumpkin head, dark plate armour, black cape, palette, direction (faces left), scale, canvas size and feet baseline. FACE LOCK: the head is a carved jack-o-lantern pumpkin: glowing yellow-orange triangular eyes, a jagged toothy carved grin, a green curled stem; keep it IDENTICAL to the reference in every frame. No human eyes, no eyebrows, no nose, no lips, no skin, no tears, no change of expression shape (only the glow may flare). Same character, no big kite shield. Throw release pose: the right arm stretched straight forward-left and slightly up with an EMPTY open hand, fingers spread (the buckler has just left the hand, none in the picture), body leaning forward, left hand empty, pumpkin glow unchanged. Dark-fantasy 2D cartoon, chibi with a big round head about one third of the whole height (a single head), soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "pose_knight_unarmed_hit",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_knight_png",
+   "prompt": "Edit the reference: preserve the identical pumpkin head, dark plate armour, black cape, palette, direction (faces left), scale, canvas size and feet baseline. FACE LOCK: the head is a carved jack-o-lantern pumpkin: glowing yellow-orange triangular eyes, a jagged toothy carved grin, a green curled stem; keep it IDENTICAL to the reference in every frame. No human eyes, no eyebrows, no nose, no lips, no skin, no tears, no change of expression shape (only the glow may flare). Same character, no big kite shield. Hit reaction: the body flinches back, both empty gauntlets raised in front of the chest, pumpkin glow flickers but the carved face shape stays the same, no tears. Dark-fantasy 2D cartoon, chibi with a big round head about one third of the whole height (a single head), soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hag_idle1_r2",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "IMPORTANT: ONE single character with exactly ONE head and ONE face in a strict side view; no second head, no second face, no reflection, no duplicate figure; the skin is porcelain white like a ghost, NOT green, NOT grey-green, NOT olive. Create ONE single original ghost-nun character with exactly ONE big round head, about one third of her whole height, and exactly ONE face; strict side view facing LEFT. She is hunched and hovers with no legs or feet, her black robe tapering into black smoke on the shared baseline; black veil, white wimple, white collar, black robe with thin silver-grey trim, porcelain-white ghost skin with soft blue-grey shading and thin hairline cracks, absolutely no green, glowing yellow slanted almond eyes with dark liner, one lowered brow, tiny nose, and sly fang grin. One hand lightly holds a small wooden cross pendant at her chest; the other holds a pumpkin-orange basket of small wooden crosses. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_front_r2",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "IMPORTANT: ONE single character with exactly ONE head and ONE face in a strict side view; no second head, no second face, no reflection, no duplicate figure; the skin is porcelain white like a ghost, NOT green, NOT grey-green, NOT olive. Create ONE single original ghost-nun head-and-shoulders portrait with exactly ONE big round head and exactly ONE face, turned in strict LEFT side view: black veil, white wimple, white collar, porcelain-white ghost skin with soft blue-grey shading and thin hairline cracks, absolutely no green, glowing yellow slanted almond eyes with dark liner, one lowered brow, tiny nose, and sly grin with two small fangs. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "proj_cross_r2",
+   "tier": "Q3",
+   "ref": "ref_assets_weapons_dart_png",
+   "prompt": "Edit the reference: keep the same painting style and lighting but REPLACE the object completely. The new object is ONE small plain wooden Latin cross about the size of the original object, spinning, with a thin trail of black smoke behind it. Nothing else in the picture. Dark-fantasy 2D cartoon item, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, characters, hands, a wizard, a hat, a cannon, any known film or game item, or magenta inside the object.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "fx_cross_rain_heal_r2",
+   "tier": "Q3",
+   "ref": "ref_assets_weapons_dart_png",
+   "prompt": "Edit the reference: keep the same painting style and lighting but REPLACE the object completely. The new picture is a compact borderless 2 by 2 sprite sheet of four separable cells; each cell shows three small plain wooden crosses falling with a soft light-green healing glow and a few green sparkles, no smoke. Nothing else in the picture. Dark-fantasy 2D cartoon item, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, characters, hands, a wizard, a hat, a cannon, any known film or game item, or magenta inside the object.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "item_cross_silver_smoke_r3",
+   "tier": "Q3",
+   "ref": "ref_assets_weapons_dart_png",
+   "prompt": "Edit the reference: keep the same painting style and lighting but REPLACE the object completely. The new object is a small straight silver metal Latin cross: polished silver-white steel with bright specular highlights and dark edge shading, one long vertical beam crossed by one shorter horizontal beam at exact right angles, flat rectangular beam ends, no extra points, no blade, no wood, about the size of the original object, held centred and upright, wreathed all around by swirling black smoke that curls around the cross. Nothing else in the picture. Dark-fantasy 2D cartoon item, soft dark outlines, rich stylised game art like a polished Halloween mobile-game concept painting: soft volumetric lighting, glowing highlights, fine metal texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, characters, hands, a wizard, a hat, a cannon, a pumpkin, any known film or game item, or magenta inside the object.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "item_cross_silver_plain_r3",
+   "tier": "Q3",
+   "ref": "ref_assets_weapons_dart_png",
+   "prompt": "Edit the reference: keep the same painting style and lighting but REPLACE the object completely. The new object is a small straight silver metal Latin cross: polished silver-white steel with bright specular highlights and dark edge shading, one long vertical beam crossed by one shorter horizontal beam at exact right angles, flat rectangular beam ends, no extra points, no blade, no wood, centred and upright, slightly tilted, with a thin black outline. No smoke, nothing else in the picture. Dark-fantasy 2D cartoon item, soft dark outlines, rich stylised game art like a polished Halloween mobile-game concept painting: soft volumetric lighting, glowing highlights, fine metal texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, characters, hands, a wizard, a hat, a cannon, a pumpkin, any known film or game item, or magenta inside the object.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hag_idle1_r3",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "IMPORTANT: ONE single character with exactly ONE head and ONE face in a strict side view; no second head, no second face, no reflection, no duplicate figure; the skin is porcelain white like a ghost, NOT green, NOT grey-green, NOT olive. Create ONE single original ghost-nun character with exactly ONE big round head, about one third of her whole height, and exactly ONE face; strict side view facing LEFT. She is hunched and hovers with no legs or feet, her black robe tapering into black smoke on the shared baseline; black veil, white wimple, white collar, black robe with thin silver-grey trim, porcelain-white ghost skin with soft blue-grey shading and thin hairline cracks, absolutely no green, glowing yellow slanted almond eyes with dark liner, one lowered brow, tiny nose, and sly fang grin. Her front hand hangs low at her hip and lightly holds a small straight silver metal Latin cross: polished silver-white steel with bright specular highlights and dark edge shading, one long vertical beam crossed by one shorter horizontal beam at exact right angles, flat rectangular beam ends, no extra points, no blade, no wood, pointing up and forward, ready for an underhand upward throw; her other hand rests relaxed and EMPTY at her chest; a tiny silver cross pendant hangs at her chest. She holds NO pumpkin and NO basket. Anatomy rule: she has exactly TWO arms and exactly TWO hands, never three; count them: one hand low at the hip, one hand at the chest, nothing else. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: a third hand; a third arm; extra hands; a pumpkin; a basket; a wooden cross; a bent or distorted cross; text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "bride_wail_windup",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_bride_idle1_png",
+   "prompt": "Edit the reference: preserve the identical ghost bride: skull-white round face with two big round black eyes, long straight black hair, purple rose crown, pastel pink-and-teal translucent veil, black high-neck dress with a teal glowing hem, the same canvas size, scale, direction (three-quarter view facing left) and feet baseline. Exactly TWO arms and TWO hands. Wind-up of her wail: she draws a deep breath, both hands pulled back to her chest with open palms, shoulders raised, chin lifted, mouth slightly open, a faint teal glow gathering in front of her chest. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "bride_wail_release",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_bride_idle1_png",
+   "prompt": "Edit the reference: preserve the identical ghost bride: skull-white round face with two big round black eyes, long straight black hair, purple rose crown, pastel pink-and-teal translucent veil, black high-neck dress with a teal glowing hem, the same canvas size, scale, direction (three-quarter view facing left) and feet baseline. Exactly TWO arms and TWO hands. Release of her wail: both arms thrust straight forward LEFT with open palms facing forward, body leaning into it, mouth wide open in a loud scream, hair and veil blown backward; no sound rings drawn, nothing else. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "bride_wail_hit",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_bride_idle1_png",
+   "prompt": "Edit the reference: preserve the identical ghost bride: skull-white round face with two big round black eyes, long straight black hair, purple rose crown, pastel pink-and-teal translucent veil, black high-neck dress with a teal glowing hem, the same canvas size, scale, direction (three-quarter view facing left) and feet baseline. Exactly TWO arms and TWO hands. Hit reaction: the body flinches back, both hands raised in front of her face, eyes squeezed shut as thin black curves, veil swinging. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hunchback_axe_gone",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_hunchback_idle1_png",
+   "prompt": "Edit the reference: preserve the identical hunchback brute: grey-green muscular body, brown hair, small tusks, ragged olive tunic, rope belt, torn brown trousers and boots, orange outline, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. Remove the giant axe completely: both hands empty, the arms hanging relaxed at his sides in a heavy stance, no axe, no weapon, no replacement prop. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hunchback_axe_windup",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_hunchback_idle1_png",
+   "prompt": "Edit the reference: preserve the identical hunchback brute: grey-green muscular body, brown hair, small tusks, ragged olive tunic, rope belt, torn brown trousers and boots, orange outline, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. Wind-up of an overhand axe throw: he grips the giant axe with both hands high behind his head, knees bent, torso leaning back, face strained. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hunchback_axe_release",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_hunchback_idle1_png",
+   "prompt": "Edit the reference: preserve the identical hunchback brute: grey-green muscular body, brown hair, small tusks, ragged olive tunic, rope belt, torn brown trousers and boots, orange outline, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. Release of the axe throw: the axe has just left his hands and is NOT in the picture; both arms are thrown forward LEFT and down with open empty hands, torso lunging forward, mouth open in a roar. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hunchback_axe_hit",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_hunchback_idle1_png",
+   "prompt": "Edit the reference: preserve the identical hunchback brute: grey-green muscular body, brown hair, small tusks, ragged olive tunic, rope belt, torn brown trousers and boots, orange outline, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. Hit reaction with the axe on his shoulder: the body staggers back, eyes tightly shut, one arm raised to shield his face, the other hand still holding the axe handle. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "wizard_fl_windup",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "Edit the reference: preserve the identical pumpkin-headed wizard: purple pointed hat with a gold buckle, purple robe with gold trim, black trousers and boots, the brass cannon resting on his right shoulder, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. FACE LOCK: the head is a carved jack-o-lantern pumpkin with glowing yellow-orange triangular eyes and a jagged toothy carved grin, keep it IDENTICAL to the reference in every frame; no human eyes, no eyebrows, no nose, no lips, no tears, no change of the carved face shape (only the glow may flare). Wind-up: both hands grip the cannon and lift its muzzle slightly, knees bent, body leaning back to brace, the cannon still dark. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "wizard_fl_charge",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "Edit the reference: preserve the identical pumpkin-headed wizard: purple pointed hat with a gold buckle, purple robe with gold trim, black trousers and boots, the brass cannon resting on his right shoulder, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. FACE LOCK: the head is a carved jack-o-lantern pumpkin with glowing yellow-orange triangular eyes and a jagged toothy carved grin, keep it IDENTICAL to the reference in every frame; no human eyes, no eyebrows, no nose, no lips, no tears, no change of the carved face shape (only the glow may flare). Charge: both hands on the cannon, body braced, the cannon barrel glowing hot orange-red at the muzzle and along the barrel, a few sparks, the pumpkin glow brighter. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "wizard_fl_release",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "Edit the reference: preserve the identical pumpkin-headed wizard: purple pointed hat with a gold buckle, purple robe with gold trim, black trousers and boots, the brass cannon resting on his right shoulder, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. FACE LOCK: the head is a carved jack-o-lantern pumpkin with glowing yellow-orange triangular eyes and a jagged toothy carved grin, keep it IDENTICAL to the reference in every frame; no human eyes, no eyebrows, no nose, no lips, no tears, no change of the carved face shape (only the glow may flare). Release: the cannon fires, a bright muzzle flash and a puff of smoke at the muzzle, the body recoiling backward, the robe and hat swept back, the carved grin wide. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "wizard_fl_hit",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "Edit the reference: preserve the identical pumpkin-headed wizard: purple pointed hat with a gold buckle, purple robe with gold trim, black trousers and boots, the brass cannon resting on his right shoulder, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. FACE LOCK: the head is a carved jack-o-lantern pumpkin with glowing yellow-orange triangular eyes and a jagged toothy carved grin, keep it IDENTICAL to the reference in every frame; no human eyes, no eyebrows, no nose, no lips, no tears, no change of the carved face shape (only the glow may flare). Hit reaction: the body flinches back, one hand raised to the hat, the cannon tilted, the carved face glow flickering, no tears. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hag_e_idle1",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r3_v1_p4.png",
+   "prompt": "Edit the reference: preserve the identical ghost nun: porcelain-white ghost face with thin hairline cracks, glowing yellow eyes and a sly fang grin, black veil, white wimple and collar, black robe with silver-grey trim, one tiny silver cross pendant on her chest, black-smoke robe taper, hovering with no legs, strict side view facing LEFT, the same canvas size, scale, direction and baseline. Skin is porcelain white, NOT green. Exactly TWO arms and TWO hands, and BOTH HANDS ARE EMPTY: no cross, no wood, no staff, no object in any hand. Idle: her front hand hangs low at her hip with relaxed curled fingers, her other hand rests at her chest, calm hovering stance. Warm orange rim light, soft dark outlines, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, flat noise-free #FF00FF background. Do not include: a third hand; extra hands; a cross in a hand; a rosary; a floating cross; wood; a pumpkin; a basket; text; other characters; blue or violet aura; a background other than flat magenta.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hag_e_idle2",
+   "tier": "Q3",
+   "ref": "out:hag_e_idle1_v1_p4.png",
+   "prompt": "Edit the reference: preserve the identical ghost nun: porcelain-white ghost face with thin hairline cracks, glowing yellow eyes and a sly fang grin, black veil, white wimple and collar, black robe with silver-grey trim, one tiny silver cross pendant on her chest, black-smoke robe taper, hovering with no legs, strict side view facing LEFT, the same canvas size, scale, direction and baseline. Skin is porcelain white, NOT green. Exactly TWO arms and TWO hands, and BOTH HANDS ARE EMPTY: no cross, no wood, no staff, no object in any hand. Idle breathing frame: shoulders slightly raised, the robe tail swaying a little, hands as in the reference, both empty. Warm orange rim light, soft dark outlines, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, flat noise-free #FF00FF background. Do not include: a third hand; extra hands; a cross in a hand; a rosary; a floating cross; wood; a pumpkin; a basket; text; other characters; blue or violet aura; a background other than flat magenta.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hag_e_charge1",
+   "tier": "Q3",
+   "ref": "out:hag_e_idle1_v1_p4.png",
+   "prompt": "Edit the reference: preserve the identical ghost nun: porcelain-white ghost face with thin hairline cracks, glowing yellow eyes and a sly fang grin, black veil, white wimple and collar, black robe with silver-grey trim, one tiny silver cross pendant on her chest, black-smoke robe taper, hovering with no legs, strict side view facing LEFT, the same canvas size, scale, direction and baseline. Skin is porcelain white, NOT green. Exactly TWO arms and TWO hands, and BOTH HANDS ARE EMPTY: no cross, no wood, no staff, no object in any hand. Wind-up: the front hand drops lower and swings back behind her hip with the palm up and fingers curled, body dipping slightly low, eyes narrowed. Warm orange rim light, soft dark outlines, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, flat noise-free #FF00FF background. Do not include: a third hand; extra hands; a cross in a hand; a rosary; a floating cross; wood; a pumpkin; a basket; text; other characters; blue or violet aura; a background other than flat magenta.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hag_e_charge2",
+   "tier": "Q3",
+   "ref": "out:hag_e_idle1_v1_p4.png",
+   "prompt": "Edit the reference: preserve the identical ghost nun: porcelain-white ghost face with thin hairline cracks, glowing yellow eyes and a sly fang grin, black veil, white wimple and collar, black robe with silver-grey trim, one tiny silver cross pendant on her chest, black-smoke robe taper, hovering with no legs, strict side view facing LEFT, the same canvas size, scale, direction and baseline. Skin is porcelain white, NOT green. Exactly TWO arms and TWO hands, and BOTH HANDS ARE EMPTY: no cross, no wood, no staff, no object in any hand. Charge: the front hand is pulled to its lowest back point near her knee, body crouched low and coiled for an underhand throw, eyes glowing brighter. Warm orange rim light, soft dark outlines, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, flat noise-free #FF00FF background. Do not include: a third hand; extra hands; a cross in a hand; a rosary; a floating cross; wood; a pumpkin; a basket; text; other characters; blue or violet aura; a background other than flat magenta.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hag_e_charge3",
+   "tier": "Q3",
+   "ref": "out:hag_e_idle1_v1_p4.png",
+   "prompt": "Edit the reference: preserve the identical ghost nun: porcelain-white ghost face with thin hairline cracks, glowing yellow eyes and a sly fang grin, black veil, white wimple and collar, black robe with silver-grey trim, one tiny silver cross pendant on her chest, black-smoke robe taper, hovering with no legs, strict side view facing LEFT, the same canvas size, scale, direction and baseline. Skin is porcelain white, NOT green. Exactly TWO arms and TWO hands, and BOTH HANDS ARE EMPTY: no cross, no wood, no staff, no object in any hand. Charge peak: body coiled lowest, front hand far back and low, curled fingers, a thin trail of black smoke gathers around that hand, eyes blazing. Warm orange rim light, soft dark outlines, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, flat noise-free #FF00FF background. Do not include: a third hand; extra hands; a cross in a hand; a rosary; a floating cross; wood; a pumpkin; a basket; text; other characters; blue or violet aura; a background other than flat magenta.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hag_e_release",
+   "tier": "Q3",
+   "ref": "out:hag_e_idle1_v1_p4.png",
+   "prompt": "Edit the reference: preserve the identical ghost nun: porcelain-white ghost face with thin hairline cracks, glowing yellow eyes and a sly fang grin, black veil, white wimple and collar, black robe with silver-grey trim, one tiny silver cross pendant on her chest, black-smoke robe taper, hovering with no legs, strict side view facing LEFT, the same canvas size, scale, direction and baseline. Skin is porcelain white, NOT green. Exactly TWO arms and TWO hands, and BOTH HANDS ARE EMPTY: no cross, no wood, no staff, no object in any hand. Release: the front arm swings up from low to chest height and forward LEFT with an open palm facing forward and spread fingers, black smoke streaming behind, mouth open in a grin. Warm orange rim light, soft dark outlines, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, flat noise-free #FF00FF background. Do not include: a third hand; extra hands; a cross in a hand; a rosary; a floating cross; wood; a pumpkin; a basket; text; other characters; blue or violet aura; a background other than flat magenta.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hag_e_hit",
+   "tier": "Q3",
+   "ref": "out:hag_e_idle1_v1_p4.png",
+   "prompt": "Edit the reference: preserve the identical ghost nun: porcelain-white ghost face with thin hairline cracks, glowing yellow eyes and a sly fang grin, black veil, white wimple and collar, black robe with silver-grey trim, one tiny silver cross pendant on her chest, black-smoke robe taper, hovering with no legs, strict side view facing LEFT, the same canvas size, scale, direction and baseline. Skin is porcelain white, NOT green. Exactly TWO arms and TWO hands, and BOTH HANDS ARE EMPTY: no cross, no wood, no staff, no object in any hand. Hit reaction: the body flinches back, both hands raised to her chest with spread fingers, eyes squeezed shut, teeth gritted, robe tail whipping. Warm orange rim light, soft dark outlines, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, flat noise-free #FF00FF background. Do not include: a third hand; extra hands; a cross in a hand; a rosary; a floating cross; wood; a pumpkin; a basket; text; other characters; blue or violet aura; a background other than flat magenta.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hunchback_axe_release_r2a",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_hunchback_idle1_png",
+   "prompt": "Edit the reference: preserve the identical hunchback brute: grey-green muscular body, brown hair, small tusks, ragged olive tunic, rope belt, torn brown trousers and boots, orange outline, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. ANATOMY: exactly ONE torso, ONE ragged tunic, ONE rope belt, ONE chest; the body is a single clean muscular figure, never doubled. Release of the axe throw: the axe has just left his hands and is NOT in the picture; both arms are thrown forward LEFT and down with open empty hands, torso lunging forward, mouth open in a roar. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include a duplicated torso, a second tunic, a second belt, two chests, text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hunchback_axe_release_r2b",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_hunchback_idle1_png",
+   "prompt": "Edit the reference: preserve the identical hunchback brute: grey-green muscular body, brown hair, small tusks, ragged olive tunic, rope belt, torn brown trousers and boots, orange outline, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. ANATOMY: exactly ONE torso, ONE ragged tunic, ONE rope belt; keep the pose simple: a forward step, the two arms stretched forward LEFT with open empty hands, the head turned forward, mouth open. Release of the axe throw: the axe has just left his hands and is NOT in the picture; both arms are thrown forward LEFT and down with open empty hands, torso lunging forward, mouth open in a roar. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include a duplicated torso, a second tunic, a second belt, two chests, text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hunchback_axe_hit_r2a",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_hunchback_idle1_png",
+   "prompt": "Edit the reference: preserve the identical hunchback brute: grey-green muscular body, brown hair, small tusks, ragged olive tunic, rope belt, torn brown trousers and boots, orange outline, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. Hit reaction with the axe on his shoulder: HANDS: BOTH hands are fully drawn and visible: one big hand gripping the axe handle, the other a clenched fist hanging at his side with all fingers visible; no arm may end without a hand. the body staggers back, eyes tightly shut, one arm raised to shield his face, the other hand still holding the axe handle. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hunchback_axe_hit_r2b",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_hunchback_idle1_png",
+   "prompt": "Edit the reference: preserve the identical hunchback brute: grey-green muscular body, brown hair, small tusks, ragged olive tunic, rope belt, torn brown trousers and boots, orange outline, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. Hit reaction with the axe on his shoulder, body twisted slightly away, eyes shut, teeth gritted: HANDS: BOTH hands are fully drawn and visible: one big hand gripping the axe handle, the other a clenched fist hanging at his side with all fingers visible; no arm may end without a hand. the body staggers back, eyes tightly shut, one arm raised to shield his face, the other hand still holding the axe handle. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "hunchback_axe_release_r2c",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_hunchback_idle1_png",
+   "prompt": "Edit the reference: preserve the identical hunchback brute: grey-green muscular body, brown hair, small tusks, ragged olive tunic, rope belt, torn brown trousers and boots, orange outline, the same canvas size, scale, direction (facing left) and feet baseline. Exactly TWO arms and TWO hands. DIRECTION: the throw goes toward the LEFT edge of the picture, so both arms stretch toward the LEFT edge of the picture, never toward the right. Release of the axe throw: the axe has just left his hands and is NOT in the picture; both arms are thrown forward LEFT and down with open empty hands, torso lunging forward, mouth open in a roar. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, a third hand, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  }
+ ]
+}

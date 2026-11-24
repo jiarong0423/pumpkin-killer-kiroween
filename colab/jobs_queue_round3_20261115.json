@@ -1,0 +1,308 @@
+{
+ "refs": {
+  "style_wizard_unit": "assets/units/unit_wizard.png",
+  "ref_assets_units_unit_wizard_png": "assets/units/unit_wizard.png",
+  "ref_assets_env_bg_graveyard_png": "assets/env/bg_graveyard.png",
+  "ref_assets_units_unit_knight_png": "assets/units/unit_knight.png",
+  "ref_assets_weapons_small_shield_png": "assets/weapons/small_shield.png",
+  "ref_assets_fx_sprites_fx_ghost_idle_png": "assets/fx/sprites/fx_ghost_idle.png",
+  "ref_assets_poses_necro_windup_png": "assets/poses/necro_windup.png",
+  "ref_assets_poses_necro_idle_png": "assets/poses/necro_idle.png",
+  "ref_assets_units_unit_reaper_idle_png": "assets/units/unit_reaper_idle.png",
+  "ref_assets_portraits_bride_front_png": "assets/portraits/bride_front.png",
+  "ref_assets_portraits_hunchback_front_png": "assets/portraits/hunchback_front.png",
+  "ref_assets_weapons_dart_png": "assets/weapons/dart.png",
+  "ref_assets_fx_sprites_fx_flame_comet_png": "assets/fx/sprites/fx_flame_comet.png",
+  "ref_assets_ui_socket_special_png": "assets/ui/socket_special.png",
+  "ref_assets_weapons_proj_spear_colab_png": "assets/weapons/proj_spear_colab.png",
+  "ref_assets_fx_sprites_fx_sonic_ring_png": "assets/fx/sprites/fx_sonic_ring.png",
+  "ref_assets_ui_icon_heavy_png": "assets/ui/icon_heavy.png"
+ },
+ "style": " ",
+ "jobs": [
+  {
+   "id": "hag_idle1",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "Create ONE single original ghost-nun character with exactly ONE big round head, about one third of her whole height, and exactly ONE face; strict side view facing LEFT. She is hunched and hovers with no legs or feet, her black robe tapering into black smoke on the shared baseline; black veil, white wimple, white collar, black robe with thin silver-grey trim, pale ash-grey skin with a faint green tint and thin cracks, glowing yellow slanted almond eyes with dark liner, one lowered brow, tiny nose, and sly fang grin. One hand lightly holds a small wooden cross pendant at her chest; the other holds a pumpkin-orange basket of small wooden crosses. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_front",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "Create ONE single original ghost-nun head-and-shoulders portrait with exactly ONE big round head and exactly ONE face, turned in strict LEFT side view: black veil, white wimple, white collar, pale ash-grey skin with faint green tint and thin cracks, glowing yellow slanted almond eyes with dark liner, one lowered brow, tiny nose, and sly grin with two small fangs. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "proj_cross",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "Draw one small plain wooden Latin cross projectile, centred with margin, spinning LEFT and trailing thin black smoke. Use warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, and flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "fx_cross_rain",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "Draw one compact borderless 2 by 2 sprite sheet on flat noise-free #FF00FF. Each of four separable cells shows several small plain wooden crosses falling with black-smoke curls, warm orange rim light, soft dark outlines, and rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "fx_cross_rain_heal",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "Draw one compact borderless 2 by 2 sprite sheet on flat noise-free #FF00FF. Each of four separable cells shows several small plain wooden crosses falling with a soft light-green healing glow and no smoke, warm orange rim light, soft dark outlines, and rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "fx_black_smoke",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "Draw one 4-frame horizontal, borderless loop on flat noise-free #FF00FF: one black smoke wisp rises and sways slightly through four separable frames that loop cleanly. Use warm orange rim light, soft dark outlines, and rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading; no blue or violet aura. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "bg_ruined_church",
+   "tier": "Q3",
+   "ref": "ref_assets_env_bg_graveyard_png",
+   "prompt": "Edit the attached picture: keep the 16:9 frame, the big full moon, the framing dark twisted trees at left and right where the exterior scene allows, the horizon at about 78 percent of the height, the empty lower-middle path band for units, the thick soft near-black contours, flat three-tone cel shading, and the warm orange against cold blue-violet palette. Change the distant haunted-house landmark into one original ruined Gothic church: roofless nave walls, a broken rose window glowing with moonlight, fallen beams, cracked pews, and a toppled statue, all kept at the far sides so the lower-middle band stays empty. Add several glowing jack-o'-lanterns, candles, bats, restrained orange-lit broken windows, teal ghost fire, spider webs in corners and branches, tombstones and iron fences, drifting mist, a black cat or crow, and fallen autumn leaves in scene-fitting side layers. Preserve open top and bottom UI space and a spooky but fun cartoon mood. Do not include text, letters, signs, characters, weapons, UI, or any known film or game location or character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 576
+  },
+  {
+   "id": "bg_abandoned_school",
+   "tier": "Q3",
+   "ref": "ref_assets_env_bg_graveyard_png",
+   "prompt": "Edit the attached picture: keep the 16:9 frame, the big full moon, the framing dark twisted trees at left and right where the exterior scene allows, the horizon at about 78 percent of the height, the empty lower-middle path band for units, the thick soft near-black contours, flat three-tone cel shading, and the warm orange against cold blue-violet palette. Change the distant landmark into one original derelict two-storey school at night, with broken windows carrying a faint orange glow, a stuck clock with no readable digits, an overgrown schoolyard, rusted swings, and a collapsed fence at the far sides. Add several glowing jack-o'-lanterns, candles, bats, orange-lit windows, teal ghost fire, spider webs in corners and branches, tombstones and iron fences, drifting mist, a black cat or crow, and fallen autumn leaves in scene-fitting side layers. Preserve open top and bottom UI space and keep the lower-middle band empty. Do not include text, letters, signs, characters, weapons, UI, or any known film or game location or character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 576
+  },
+  {
+   "id": "bg_belltower",
+   "tier": "Q3",
+   "ref": "ref_assets_env_bg_graveyard_png",
+   "prompt": "Edit the attached picture: keep the 16:9 frame, the big full moon, the framing dark twisted trees at left and right where the exterior scene allows, the horizon at about 78 percent of the height, the empty lower-middle path band for units, the thick soft near-black contours, flat three-tone cel shading, and the warm orange against cold blue-violet palette. Change the distant landmark into one original tall ruined Gothic bell tower on a hill, with a cracked open belfry, a broken bell silhouette, collapsed stone at the far sides, and no copied castle or church silhouette. Add several glowing jack-o'-lanterns, candles, bats circling the tower, restrained orange-lit window openings, teal ghost fire, spider webs in corners and branches, tombstones and iron fences, drifting mist, a black cat or crow, and fallen autumn leaves in scene-fitting side layers. Preserve open top and bottom UI space and keep the lower-middle band empty. Do not include text, letters, signs, characters, weapons, UI, or any known film or game location or character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 576
+  },
+  {
+   "id": "bg_pumpkin_field",
+   "tier": "Q3",
+   "ref": "ref_assets_env_bg_graveyard_png",
+   "prompt": "Edit the attached picture: keep the 16:9 frame, the big full moon, the framing dark twisted trees at left and right where the exterior scene allows, the horizon at about 78 percent of the height, the empty lower-middle path band for units, the thick soft near-black contours, flat three-tone cel shading, and the warm orange against cold blue-violet palette. Change the distant landmark into one original night pumpkin field with scarecrow-free rows of glowing jack-o'-lanterns that recede only along the far sides, a crooked fence, curling vines, and a dark barn silhouette on the horizon. Add several glowing jack-o'-lanterns, candles, bats, small orange-lit barn windows, teal ghost fire, spider webs in corners and branches, tombstones and iron fences, drifting mist, a black cat or crow, and fallen autumn leaves in scene-fitting side layers. Preserve open top and bottom UI space and keep the lower-middle band empty, with no scarecrow or crop object crossing it. Do not include text, letters, signs, characters, weapons, UI, or any known film or game location or character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 576
+  },
+  {
+   "id": "bg_ruined_church_b",
+   "tier": "Q3",
+   "ref": "ref_assets_env_bg_graveyard_png",
+   "prompt": "Edit the attached picture: keep the 16:9 frame, the big full moon visible through the roofless nave and broken stained glass, framing dark tree silhouettes at left and right where the interior openings allow, the horizon or ground-band level at about 78 percent of the height, the empty lower-middle aisle band for units, the thick soft near-black contours, flat three-tone cel shading, and the warm orange against cold blue-violet palette. Change the landmark into one original ruined-church interior: a roofless nave view with a long central aisle, broken stained glass, cracked pews, fallen beams, and a toppled statue placed at the sides. Add several glowing jack-o'-lanterns, candles, bats under the open roof, orange-lit broken windows, teal ghost fire, spider webs in corners and between beams, tombstones and iron fences as small side decorations where plausible, drifting mist, a black cat or crow, and fallen autumn leaves blown through the open nave. Preserve open top and bottom UI space and keep the lower-middle aisle empty. Do not include text, letters, signs, characters, weapons, UI, or any known film or game location or character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 576
+  },
+  {
+   "id": "bg_abandoned_school_b",
+   "tier": "Q3",
+   "ref": "ref_assets_env_bg_graveyard_png",
+   "prompt": "Edit the attached picture: keep the 16:9 frame, the big full moon visible through broken corridor windows, framing dark tree silhouettes at left and right where the interior windows allow, the horizon or floor-band level at about 78 percent of the height, the empty lower-middle corridor band for units, the thick soft near-black contours, flat three-tone cel shading, and the warm orange against cold blue-violet palette. Change the landmark into one original abandoned-school classroom corridor with a broken blackboard that stays completely blank, broken windows with a faint orange glow, unlabeled classroom doors, peeling walls, and scattered desks pushed to the far sides. Add several glowing jack-o'-lanterns, candles, bats entering from broken windows, orange-lit broken windows, teal ghost fire, spider webs in corners and along ceiling beams, tombstones and iron fences as small side decorations where plausible, drifting mist, a black cat or crow, and fallen autumn leaves blown through the corridor. Preserve open top and bottom UI space and keep the lower-middle corridor band empty. Do not include text, letters, signs, characters, weapons, UI, or any known film or game location or character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 576
+  },
+  {
+   "id": "unit_knight_unarmed",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_knight_png",
+   "prompt": "Use the first reference only for the shared Pumpkin Killer character style and the second for the exact pumpkin shield knight identity. Edit the second reference: preserve the identical glowing pumpkin face, armour, cape, full-body pose, direction, scale, palette, position, and feet baseline. Remove the held shield completely and leave its gauntlet as one empty relaxed hand in the same position. Dark-fantasy 2D cartoon, chibi with a big round head about one third of her whole height (a single head), soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, shields, weapons, replacement props, or magenta inside the character.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "fx_feet_chain",
+   "tier": "Q3",
+   "ref": "ref_assets_weapons_small_shield_png",
+   "prompt": "Draw one wide, low pair of rusty dark-iron ankle shackles joined by four chunky slack chain links, side view, readable at small size, no feet or legs. Dark-fantasy 2D cartoon item, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, restrained cold-grey metal highlights, centred with margin on a clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, feet, body parts, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "coin_pumpkin_head",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_knight_png",
+   "prompt": "Draw one perfectly front-facing round gold-orange coin with a thick embossed rim and a smiling carved jack-o'-lantern face, triangle eyes and jagged grin glowing warm orange. Dark-fantasy 2D cartoon item, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, centred with margin on a clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, letters, numbers, hands, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "coin_pumpkin_tail",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_knight_png",
+   "prompt": "Draw one perfectly front-facing round gold-orange coin matching the head-side coin in size, rim, outline, and palette; its centre has only an embossed pumpkin stem, curling vine, and one leaf, with no face. Dark-fantasy 2D cartoon item, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, centred with margin on a clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, letters, numbers, faces, hands, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "ghoststar_blow",
+   "tier": "Q3",
+   "ref": "ref_assets_fx_sprites_fx_ghost_idle_png",
+   "prompt": "Edit the reference into the same round wind ghost facing the same direction, with its mouth open in a small O and a short white mist puff leaving its mouth; keep normal cheeks, wide eyes, body scale, teal edge treatment, and placement unchanged. Dark-fantasy 2D cartoon sprite, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, extra objects, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "ghoststar_blow_hard",
+   "tier": "Q3",
+   "ref": "ref_assets_fx_sprites_fx_ghost_idle_png",
+   "prompt": "Edit the reference into the same round wind ghost facing the same direction, mouth opened widest, eyes squeezed shut, body stretched slightly forward, and one strong white air stream blowing forward; keep the ghost's identity, scale, teal edge treatment, and placement unchanged. Dark-fantasy 2D cartoon sprite, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, extra objects, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "necro_ult_point",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_necro_windup_png",
+   "prompt": "Use the first reference for the exact necromancer. Same character as the attached picture, same scale and feet baseline, facing the same direction as the attached picture: strict side view facing LEFT. Edit to an ultimate command pose: the flame-holding hand reaches forward left, palm down, with only one index finger pointing; the other hand is empty; nothing burns in either hand. Exactly three separate purple ghost fires float behind him on the right at head height. Dark-fantasy 2D cartoon sprite, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, scythes, staffs, skulls, more or fewer than three fires, pink sparks, or ground.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "necro_idle2",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_necro_idle_png",
+   "prompt": "Edit the reference into the same necromancer one moment later. Same character as the attached picture, same scale and feet baseline, facing the same direction as the attached picture. Change only a slight breath, a tiny hood-and-robe sway, and a different small flicker shape in the single raised purple hand flame; keep face, hand, position, and calm expression unchanged. Dark-fantasy 2D cartoon sprite, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, weapons, a second flame, changed direction, or ground.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "necro_charge2",
+   "tier": "Q3",
+   "ref": "ref_assets_poses_necro_idle_png",
+   "prompt": "Use the first reference for the exact necromancer identity and the second for the full-charge endpoint. Same character as the attached picture, same scale and feet baseline, facing the same direction as the second attached picture: strict side view facing LEFT. Draw the middle charge: the same flame hand pulls back halfway between idle and full wind-up, with one flame larger than idle and smaller than full charge; body leans back slightly and face strains. Dark-fantasy 2D cartoon sprite, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, weapons, a second flame, a copy of either reference pose, changed hand, or ground.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "necro_front",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_reaper_idle_png",
+   "prompt": "Use the first reference only for shared style and the second for the exact necromancer identity. Draw one head-and-shoulders portrait, cropped at the upper chest: the same cream skull and jaw, ragged purple-black hood, purple inner lining, angry brows, glowing purple flame-shaped eyes, collar, and robe shoulders, three-quarter view slightly right. Dark-fantasy 2D cartoon portrait, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, full body, hands, flames in hands, bottles, scythes, weapons, or ground.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "wizard_release",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_wizard_png",
+   "prompt": "Use the first reference only for style and the second for the exact pumpkin wizard. Same character as the attached picture, same scale and feet baseline, facing the same direction as the attached picture: strict side view facing LEFT. Draw the release: the same brass shoulder cannon fires left with an orange muzzle flash and one small grey smoke puff; body recoils, robe flares, pumpkin face roars, and the other hand is empty. Dark-fantasy 2D cartoon sprite, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, cannonballs, projectiles in flight, a second cannon, changed hat, changed hand, or ground.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "bride_front",
+   "tier": "Q3",
+   "ref": "ref_assets_portraits_bride_front_png",
+   "prompt": "Use the first reference only for shared style and the second for the exact ghost bride identity. Redraw one front head-and-shoulders portrait at upper-chest crop: pale round face, huge black oval eyes with soft cyan underglow, tiny nose dot, no mouth, purple rose crown with green leaves, straight black hair with grey-teal strands, translucent teal-and-lilac veil, and black high collar. Dark-fantasy 2D cartoon portrait, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, full body, hands, skirt, bouquet, weapon, added mouth, or ground.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hunchback_front",
+   "tier": "Q3",
+   "ref": "ref_assets_portraits_hunchback_front_png",
+   "prompt": "Use the first reference only for shared style and the second for the exact bell-tower hunchback identity. Redraw one head-and-shoulders portrait at upper-chest crop: grey-green skin, short spiky dark hair, thick angry brows, small tusks, frown, pointed ears, and broad shoulders in a torn olive vest, front view turned slightly left. Dark-fantasy 2D cartoon portrait, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, full body, hands, axe, bell, rope belt, weapons, or ground.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "ui_frost_curse",
+   "tier": "Q3",
+   "ref": "ref_assets_weapons_dart_png",
+   "prompt": "Draw one small frost-curse status icon: three pale ice crystals wrapped by one thin curl of cold mist, readable at tiny size, no face. Dark-fantasy 2D cartoon item, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, centred on a clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, letters, numbers, hands, snowmen, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "ui_bleed_drop",
+   "tier": "Q3",
+   "ref": "ref_assets_weapons_dart_png",
+   "prompt": "Draw one small bleed status icon: one large glossy deep-red blood drop with a small highlight and two smaller drops below it, readable at tiny size, no gore. Dark-fantasy 2D cartoon item, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, centred on a clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, weapons, skulls, splatter pools, hands, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "ui_burn_flame",
+   "tier": "Q3",
+   "ref": "ref_assets_fx_sprites_fx_flame_comet_png",
+   "prompt": "Draw one small burn status icon: a compact warm-orange flame with three tongues, black inner ember shapes, and no blue-violet glow, readable at tiny size. Dark-fantasy 2D cartoon item, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, centred on a clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, hands, sparkles, faces, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "ui_cross_curse",
+   "tier": "Q3",
+   "ref": "ref_assets_weapons_dart_png",
+   "prompt": "Draw one small curse status icon: one simple dark wooden cross surrounded by a compact curl of black smoke and a tiny warm-orange ember, readable at tiny size and with no religious scene. Dark-fantasy 2D cartoon item, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, centred on a clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, churches, people, hands, prayer symbols, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "ult_pip_socket",
+   "tier": "Q3",
+   "ref": "ref_assets_ui_socket_special_png",
+   "prompt": "Draw one small empty ultimate-pip socket: a dark gothic-metal round recess with gold trim and a dim warm-orange inner rune, made to repeat three times in a row. Dark-fantasy 2D cartoon UI item, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, centred on a clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, letters, numbers, faces, hands, filled gems, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "ult_spectral_spear",
+   "tier": "Q3",
+   "ref": "ref_assets_weapons_proj_spear_colab_png",
+   "prompt": "Draw one long spectral javelin pointing diagonally down-left, with a dark wooden shaft, pale bone-metal spearhead, and a thin translucent ghost trail in cyan-white; this is an effect item, not a held weapon. Dark-fantasy 2D cartoon sprite, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, centred on a clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, hands, skeletons, blood, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "ult_ricochet_shield",
+   "tier": "Q3",
+   "ref": "ref_assets_weapons_small_shield_png",
+   "prompt": "Edit the attached small shield into one spinning ricochet ultimate shield, three-quarter tilt, with a short gold-orange motion arc and tiny black metal sparks; preserve its compact pumpkin-guard shield identity. Dark-fantasy 2D cartoon sprite, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, centred on a clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, hands, a character, duplicate shields, blue-violet glow, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "fx_shockwave_ring",
+   "tier": "Q3",
+   "ref": "ref_assets_fx_sprites_fx_sonic_ring_png",
+   "prompt": "Draw one wide, thin ground-impact shockwave ring, a broken warm-orange and black ellipse with three short outward dust ticks, no blue-violet glow and no character. Dark-fantasy 2D cartoon effect sprite, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, centred on a clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, hands, weapons, debris piles, ground plane, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "ui_hallucination_mark",
+   "tier": "Q3",
+   "ref": "ref_assets_ui_icon_heavy_png",
+   "prompt": "Draw one small hallucination turn-skip status icon: a single black spiral eye-shaped mark with three uneven warm-orange echo lines around it, readable at tiny size, no face and no blue-violet glow. Dark-fantasy 2D cartoon UI item, soft dark outlines, thin warm-orange outer glow, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, centred on a clean noise-free #FF00FF background. Do not include text, extra limbs, other characters, any known film or game character or item, a background other than flat magenta, letters, numbers, hands, real eyes, skulls, ground, or cast shadow.",
+   "style": " ",
+   "negative": " "
+  }
+ ]
+}

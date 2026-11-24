@@ -1,0 +1,5 @@
+# Task 153 result
+Changed: added `docs/scene_image2_prompts_20261115.md` with six standalone image2 scene-edit prompts and the requested six-line usage guide.
+Verification command run: `python3 -B -c 'from pathlib import Path; import re; p=Path("docs/scene_image2_prompts_20261115.md"); t=p.read_text(); blocks=re.findall(r"```\n(.*?)\n```", t, re.S); required="Do not include text, letters, signs, characters, weapons, UI, or any known film or game location or character."; assert len(t.splitlines()) <= 200; assert len(blocks) == 6; assert all(b.startswith("Edit the attached picture: keep ") for b in blocks); assert all(b.endswith(required) for b in blocks); assert t.count("**WHAT to attach:** The FIRST picture, `ref_bg_graveyard.png`.") == 6; print(f"scene prompt structure OK: lines={len(t.splitlines())}, prompts={len(blocks)}")'`
+Output: `scene prompt structure OK: lines=51, prompts=6`.
+Could not verify generated images because this task neither calls the owner's generator nor permits network access; no automated test command was named in the brief.

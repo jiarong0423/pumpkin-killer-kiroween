@@ -1,0 +1,9 @@
+Source: https://opengameart.org/content/short-jingle
+Work: Short Jingle (PositiveChoice)
+Author: OO
+Checked and downloaded: 2026-11-09
+License wording on the page that day: License(s): CC0; "Public Domain. No attribution needed."
+Original file name: PositiveChoice_0.ogg
+Saved in the game as: assets/audio/music/victory_sting.ogg
+sha256: 9a2288c29f9edfc1ab67869a00e84314f7343324f52a0c987baf2de9d7d38177
+Note: verified by Kiro task 22 (page opened) and re-checked by the reviewer (page text contains CC0). Not heard by the reviewer.

@@ -1,0 +1,66 @@
+/* Bottom dock: Colab-made art skin (owner 2026-11-09: "the bottom UI must be redesigned").
+   Loaded AFTER css/dock.css; it only swaps backgrounds for pictures from assets/ui/ and keeps the layout, ids and classes. */
+#bottom-dock {
+  /* The bar art is remade at its real size (owner 2026-11-17: 'rebuild the asset itself, only the parts that deform'): assets/ui/dock_bar.png is 328 x 104 px, exactly twice the 52 px bar.
+     Two 112 px ends (skull, rivet, moss, light) keep their drawn proportions; the 104 px middle is plain wood and is REPEATED, never stretched, so rivets stay round.
+     The dock is always 52 px high in its own design space and scales as one picture (css/dock_stage.css), so these numbers hold at every screen size. */
+  background: none !important;
+  border-style: solid !important; border-color: transparent !important; border-width: 0 56px !important;
+  border-image: url(../assets/ui/dock_bar.png) 0 112 fill / 0 56px / 0 repeat !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.55) !important;
+  padding-left: 0 !important; padding-right: 0 !important;
+}
+#bottom-dock::before, #bottom-dock::after { display: none !important; }   /* the CSS stone and wood layers are replaced by the picture */
+#bottom-dock .dock-candle { display: none; }                              /* the frame already carries the skulls and moss */
+
+/* shot buttons: ONE square stone socket for every state (the old plate_normal/hover/active/disabled pictures had four different ratios, 1.75 / 1.53 / 0.8 / 2.27,
+   and were stretched into a square tile). The state is shown with CSS, so the picture is never distorted. */
+#bottom-dock .skill-btn {
+  background: url(../assets/ui/socket_ammo.webp) center / contain no-repeat !important;
+  border: none !important; box-shadow: none !important;
+}
+#bottom-dock .skill-btn:hover:not(.locked):not(.cooldown) { filter: brightness(1.18); }
+#bottom-dock .skill-btn.active { filter: drop-shadow(0 0 6px rgba(255,138,31,0.85)) brightness(1.1); }
+#bottom-dock .skill-btn.locked, #bottom-dock .skill-btn.cooldown { filter: grayscale(.7) brightness(.8); opacity: 0.85; }
+
+/* icons from Colab replace the emoji (the double shot keeps its emoji until its icon is redrawn) */
+#bottom-dock #skill-normal > span:first-child,
+#bottom-dock #skill-heavy > span:first-child,
+#bottom-dock #skill-heal > span:first-child { font-size: 0 !important; display: block; width: 28px; height: 28px; background: center / contain no-repeat; margin: 0 auto; }
+#bottom-dock #skill-normal > span:first-child { background-image: url(../assets/ui/icon_normal.webp); }
+#bottom-dock #skill-heavy > span:first-child  { background-image: url(../assets/ui/icon_heavy.webp); }
+#bottom-dock #skill-heal > span:first-child   { background-image: url(../assets/ui/icon_heal.webp); }
+
+/* lock button: the pumpkin lid */
+#bottom-dock .dock-lock {
+  background: url(../assets/ui/lock_plate.webp) center / 100% 100% no-repeat !important;
+  border: none !important; box-shadow: none !important; color: #3b1d00 !important; text-shadow: 0 1px 0 rgba(255,220,160,0.6);
+}
+
+/* item sockets */
+#bottom-dock .dock-ammo .dock-slot-box { background: url(../assets/ui/socket_ammo.webp) center / 100% 100% no-repeat !important; border: none !important; box-shadow: none !important; }
+#bottom-dock .dock-special .dock-slot-box { background: url(../assets/ui/socket_special.webp) center / 100% 100% no-repeat !important; border: none !important; box-shadow: none !important; }
+
+/* round buttons */
+#bottom-dock #sound-btn, #bottom-dock .dock-reset { background-color: transparent !important; background-size: contain !important; background-position: center !important; background-repeat: no-repeat !important; border: none !important; box-shadow: none !important; }
+#bottom-dock #sound-btn { background-image: url(../assets/ui/btn_sound.webp) !important; }
+#bottom-dock .dock-reset { background-image: url(../assets/ui/btn_reset.webp) !important; }
+#bottom-dock #sound-btn > span:first-child, #bottom-dock .dock-reset > span:first-child { opacity: 0; }
+
+/* layout fixes after the art skin: keep sockets and round buttons from overlapping */
+#bottom-dock .dock-slots { gap: 14px !important; }
+#bottom-dock .dock-slot-box { width: 58px !important; height: 58px !important; }
+#bottom-dock .dock-utility { gap: 10px !important; }
+#bottom-dock .dock-utility .skill-btn { width: 50px !important; height: 50px !important; min-width: 50px !important; padding: 0 !important; }
+#bottom-dock .dock-utility .btn-tip { display: none !important; }
+
+/* narrow screens: shrink the sockets and round buttons so the angle and power readouts stay visible */
+@media (max-width: 900px) {
+  #bottom-dock .dock-slot-box { width: 42px !important; height: 42px !important; }
+  #bottom-dock .dock-slots { gap: 6px !important; }
+  #bottom-dock .dock-utility .skill-btn { width: 38px !important; height: 38px !important; min-width: 38px !important; }
+  #bottom-dock .dock-sep { display: none !important; }
+  #bottom-dock .dock-readouts { min-width: 170px !important; }
+  #bottom-dock .dock-slot-count { font-size: 10px !important; }
+  #bottom-dock { padding-left: 28px !important; padding-right: 28px !important; }
+}

@@ -1,0 +1,57 @@
+{
+  "name": "daily-logger",
+  "description": "Writes the day's log and progress table: runs scripts/daily_log.py --apply for a given date, then writes a 10-line plain-language summary (Traditional Chinese) between the SUMMARY markers of docs/daily/YYYYMMDD.md. Never runs tests, git or network.",
+  "prompt": "You are the daily logger of the Pumpkin Killer project. Steps: 1) run `python3 -B scripts/daily_log.py --apply --date YYYY-MM-DD` for the date you are given; 2) read docs/daily/YYYYMMDD.md; 3) replace the text between <!-- SUMMARY:START --> and <!-- SUMMARY:END --> with at most 10 plain Traditional Chinese lines: what changed, what was verified, the risks, the owner decisions needed. Facts only from the file; never invent a result; say what you could not verify. Write only docs/daily/ and docs/PROGRESS_TABLE.md.",
+  "tools": [
+    "read",
+    "grep",
+    "glob",
+    "write",
+    "shell"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "match": [
+          "./**"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "./docs/daily/**",
+          "./docs/PROGRESS_TABLE.md"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "python3 -B scripts/daily_log.py",
+          "python3 -B scripts/daily_log.py *"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git push *",
+          "git remote *",
+          "git config *",
+          "git reset *",
+          "git checkout *",
+          "git clean *",
+          "rm -rf *",
+          "sudo *",
+          "curl *",
+          "wget *",
+          "ssh *",
+          "scp *"
+        ],
+        "effect": "deny"
+      }
+    ]
+  }
+}

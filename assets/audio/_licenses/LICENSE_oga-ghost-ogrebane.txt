@@ -1,0 +1,8 @@
+Source: https://opengameart.org/content/ghost
+Work: Ghost
+Author shown on the page: Clint Bellanger
+Checked and downloaded: 2026-11-09
+License wording on the page that day: License(s): CC0
+Chosen by the owner from the audition page (2026-11-09). Converted by the reviewer where needed (ffmpeg: trim, fades, loudness).
+Not heard by the reviewer.
+File ghost.wav -> assets/audio/sfx/ghost_real.ogg  sha256 d1f30d55629198042866becf77e5b7269349fce89bef589b9ec0ee627bd36d28

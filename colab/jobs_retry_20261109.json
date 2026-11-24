@@ -1,0 +1,121 @@
+{
+ "jobs": [
+  {
+   "id": "pose_hunchback_idle2",
+   "tier": "Q2",
+   "ref": "hunchback",
+   "prompt": "Edit this image: keep exactly the same character, the grey-green bell-tower brute with small tusks, a ragged green tunic and a giant rusty axe. THE SAME HAND throughout: always use both hands that hold the axe in the reference; never switch hands. Idle breathing frame: the same standing pose as the reference with the chest very slightly raised and the clothes and cloth shifted a little, a calm face; the item still in the hands. STRICT SIDE VIEW FACING LEFT, the same direction as the reference picture. The character keeps EXACTLY the same size, scale and proportions as the reference and the feet stand on the same baseline. The whole character and everything it does stays completely INSIDE the picture with a wide empty margin on every side; nothing touches or crosses the picture edge. One head, no extra limbs, no new weapon. The face and eyes stay plain, NO lightning, NO cracks, NO extra marks. Do NOT copy the reference pose: this frame must differ visibly: the whole body shifted down a little as if breathing out, the head lowered slightly, the axe resting a bit lower on the shoulder.",
+   "style": "Dark-fantasy 2D cartoon art with thick clean outlines, flat three-tone cel shading, one character only, full body. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  },
+  {
+   "id": "pose_hunchback_charge1",
+   "tier": "Q2",
+   "ref": "hunchback",
+   "prompt": "Edit this image: keep exactly the same character, the grey-green bell-tower brute with small tusks, a ragged green tunic and a giant rusty axe. THE SAME HAND throughout: always use both hands that hold the axe in the reference; never switch hands. The axe is lifted off the shoulder with both hands. STRICT SIDE VIEW FACING LEFT, the same direction as the reference picture. The character keeps EXACTLY the same size, scale and proportions as the reference and the feet stand on the same baseline. The whole character and everything it does stays completely INSIDE the picture with a wide empty margin on every side; nothing touches or crosses the picture edge. One head, no extra limbs, no new weapon. The face and eyes stay plain, NO lightning, NO cracks, NO extra marks. Do NOT copy the reference pose: the axe is lifted OFF the shoulder with both hands and held out in front of the chest, the knees slightly bent.",
+   "style": "Dark-fantasy 2D cartoon art with thick clean outlines, flat three-tone cel shading, one character only, full body. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  },
+  {
+   "id": "pose_hunchback_charge3",
+   "tier": "Q2",
+   "ref": "hunchback",
+   "prompt": "Edit this image: keep exactly the same character, the grey-green bell-tower brute with small tusks, a ragged green tunic and a giant rusty axe. THE SAME HAND throughout: always use both hands that hold the axe in the reference; never switch hands. The axe pulled as far back as possible with both hands, the body leaning far back, a straining grimace. STRICT SIDE VIEW FACING LEFT, the same direction as the reference picture. The character keeps EXACTLY the same size, scale and proportions as the reference and the feet stand on the same baseline. The whole character and everything it does stays completely INSIDE the picture with a wide empty margin on every side; nothing touches or crosses the picture edge. One head, no extra limbs, no new weapon. The face and eyes stay plain, NO lightning, NO cracks, NO extra marks. Do NOT copy the reference pose: the giant axe is swung far BACK behind the head with both arms stretched back, the whole body leaning far back, the face contorted with effort.",
+   "style": "Dark-fantasy 2D cartoon art with thick clean outlines, flat three-tone cel shading, one character only, full body. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  },
+  {
+   "id": "pose_hunchback_release",
+   "tier": "Q2",
+   "ref": "hunchback",
+   "prompt": "Edit this image: keep exactly the same character, the grey-green bell-tower brute with small tusks, a ragged green tunic and a giant rusty axe. THE SAME HAND throughout: always use both hands that hold the axe in the reference; never switch hands. A TWO-HANDED throw: both arms snapped forward, both hands EMPTY (the axe is already flying, a separate picture), the body lunging, a roar. STRICT SIDE VIEW FACING LEFT, the same direction as the reference picture. The character keeps EXACTLY the same size, scale and proportions as the reference and the feet stand on the same baseline. The whole character and everything it does stays completely INSIDE the picture with a wide empty margin on every side; nothing touches or crosses the picture edge. One head, no extra limbs, no new weapon. The face and eyes stay plain, NO lightning, NO cracks, NO extra marks. Do NOT copy the reference pose: both arms thrust forward to the LEFT, both hands open and EMPTY, no axe anywhere in the picture, the body lunging forward, a roaring face.",
+   "style": "Dark-fantasy 2D cartoon art with thick clean outlines, flat three-tone cel shading, one character only, full body. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  },
+  {
+   "id": "pose_hunchback_empty",
+   "tier": "Q2",
+   "ref": "hunchback",
+   "prompt": "Edit this image: keep exactly the same character, the grey-green bell-tower brute with small tusks, a ragged green tunic and a giant rusty axe. THE SAME HAND throughout: always use both hands that hold the axe in the reference; never switch hands. Both hands EMPTY and hanging, a grumpy calm face. STRICT SIDE VIEW FACING LEFT, the same direction as the reference picture. The character keeps EXACTLY the same size, scale and proportions as the reference and the feet stand on the same baseline. The whole character and everything it does stays completely INSIDE the picture with a wide empty margin on every side; nothing touches or crosses the picture edge. One head, no extra limbs, no new weapon. The face and eyes stay plain, NO lightning, NO cracks, NO extra marks. Do NOT copy the reference pose: both hands EMPTY and hanging down, NO axe anywhere in the picture, a grumpy calm face.",
+   "style": "Dark-fantasy 2D cartoon art with thick clean outlines, flat three-tone cel shading, one character only, full body. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  },
+  {
+   "id": "pose_hunchback_hit",
+   "tier": "Q2",
+   "ref": "hunchback",
+   "prompt": "Edit this image: keep exactly the same character, the grey-green bell-tower brute with small tusks, a ragged green tunic and a giant rusty axe. THE SAME HAND throughout: always use both hands that hold the axe in the reference; never switch hands. Staggering backward, eyes shut in pain, both arms raised shielding the face, no axe. STRICT SIDE VIEW FACING LEFT, the same direction as the reference picture. The character keeps EXACTLY the same size, scale and proportions as the reference and the feet stand on the same baseline. The whole character and everything it does stays completely INSIDE the picture with a wide empty margin on every side; nothing touches or crosses the picture edge. One head, no extra limbs, no new weapon. The face and eyes stay plain, NO lightning, NO cracks, NO extra marks. Do NOT copy the reference pose: NO axe in the picture, staggering backward, eyes shut in pain, both arms raised in front of the face.",
+   "style": "Dark-fantasy 2D cartoon art with thick clean outlines, flat three-tone cel shading, one character only, full body. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  },
+  {
+   "id": "pose_skeleton_idle2",
+   "tier": "Q2",
+   "ref": "skeleton",
+   "prompt": "Edit this image: keep exactly the same character, the skeleton javelin soldier with glowing cyan eyes. THE SAME HAND throughout: always use the hand that holds the spear in the reference; never switch hands. Idle breathing frame: the same standing pose as the reference with the chest very slightly raised and the clothes and cloth shifted a little, a calm face; the item still in the hands. STRICT SIDE VIEW FACING LEFT, the same direction as the reference picture. The character keeps EXACTLY the same size, scale and proportions as the reference and the feet stand on the same baseline. The whole character and everything it does stays completely INSIDE the picture with a wide empty margin on every side; nothing touches or crosses the picture edge. One head, no extra limbs, no new weapon. The face and eyes stay plain, NO lightning, NO cracks, NO extra marks. The character must stay the SAME SKELETON as the reference: a bare white skull with glowing cyan eyes and bare white bones, NO hood, NO cloak, NO clothes.",
+   "style": "Dark-fantasy 2D cartoon art with thick clean outlines, flat three-tone cel shading, one character only, full body. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  },
+  {
+   "id": "pose_reaper_charge3",
+   "tier": "Q2",
+   "ref": "reaper",
+   "prompt": "Edit this image: keep exactly the same character, the one-headed hooded skull necromancer with glowing purple eyes. THE SAME HAND throughout: always use the hand that holds the flame in the reference; never switch hands. The arm pulled far back behind the shoulder with the clawed hand around a large bright purple flame. STRICT SIDE VIEW FACING LEFT, the same direction as the reference picture. The character keeps EXACTLY the same size, scale and proportions as the reference and the feet stand on the same baseline. The whole character and everything it does stays completely INSIDE the picture with a wide empty margin on every side; nothing touches or crosses the picture edge. One head, no extra limbs, no new weapon. The face and eyes stay plain, NO lightning, NO cracks, NO extra marks. Only ONE hand holds the flame (the hand that holds it in the reference); the other hand is EMPTY at the side with NO flame at all.",
+   "style": "Dark-fantasy 2D cartoon art with thick clean outlines, flat three-tone cel shading, one character only, full body. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  },
+  {
+   "id": "pose_wizard_release",
+   "tier": "Q2",
+   "ref": "wizard",
+   "prompt": "Edit this image: keep exactly the same character, the pumpkin-headed wizard in a purple hat and robe. THE SAME HANDS throughout: the wizard always holds the cannon with the hands that hold the cannon in the reference. The cannon FIRES: the cannon kicks back in the hands with a short orange muzzle flash at the barrel, the body recoiling; the cannon stays in the hands. STRICT SIDE VIEW FACING LEFT, the same direction as the reference picture. The character keeps EXACTLY the same size, scale and proportions as the reference and the feet stand on the same baseline. The whole character and everything it does stays completely INSIDE the picture with a wide empty margin on every side; nothing touches or crosses the picture edge. One head, no extra limbs, no new weapon. The face and eyes stay plain, NO lightning, NO cracks, NO extra marks. The whole cannon barrel and the muzzle flash stay fully inside the picture; the wizard stands in the LEFT half of the picture.",
+   "style": "Dark-fantasy 2D cartoon art with thick clean outlines, flat three-tone cel shading, one character only, full body. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  },
+  {
+   "id": "portrait_front_bat",
+   "tier": "Q2",
+   "ref": "bat",
+   "prompt": "Edit this image: draw a FRONT-FACING head-and-shoulders portrait of the same character, the black cat assassin with bat ears and cape: the face looks straight at the viewer, shoulders up, the head large and centred, the same colours and outline, a confident look. No weapon visible. The head fills about 70 percent of the picture height. The ears, the shoulders and the whole head stay fully inside the picture with a visible margin on the left and right.",
+   "style": "Dark-fantasy 2D cartoon art with thick clean outlines, flat cel shading. Flat solid magenta background (#FF00FF), no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  },
+  {
+   "id": "portrait_front_bride",
+   "tier": "Q2",
+   "ref": "bride",
+   "prompt": "Edit this image: draw a FRONT-FACING head-and-shoulders portrait of the same character, the ghost bride with a long dark hair, a flower crown and a pale veil: the face looks straight at the viewer, shoulders up, the head large and centred, the same colours and outline, a confident look. No weapon visible. The head fills about 70 percent of the picture height. This must be a CLOSE head-and-shoulders portrait, NOT a full-body picture: the face fills the picture, only the head, the veil and the shoulders are visible.",
+   "style": "Dark-fantasy 2D cartoon art with thick clean outlines, flat cel shading. Flat solid magenta background (#FF00FF), no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  },
+  {
+   "id": "portrait_front_hunchback",
+   "tier": "Q2",
+   "ref": "hunchback",
+   "prompt": "Edit this image: draw a FRONT-FACING head-and-shoulders portrait of the same character, the grey-green bell-tower brute with small tusks, a ragged green tunic and a giant rusty axe: the face looks straight at the viewer, shoulders up, the head large and centred, the same colours and outline, a confident look. No weapon visible. The head fills about 70 percent of the picture height. This must be a CLOSE head-and-shoulders portrait, NOT a full-body picture and NO axe visible: the face fills the picture, only the head and the shoulders.",
+   "style": "Dark-fantasy 2D cartoon art with thick clean outlines, flat cel shading. Flat solid magenta background (#FF00FF), no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  },
+  {
+   "id": "fx_molotov_fire",
+   "tier": "Q2",
+   "ref": "bar",
+   "prompt": "Ignore the reference layout. Draw ONE wide low patch of orange-red molotov fire burning on flat ground, a row of tall flickering flame tongues side by side, yellow cores, a few dark smoke wisps, seen from the side, fully inside the picture with a margin. The background must be flat solid magenta everywhere, NO dark red haze or smoke box around the fire; only the flames and a little smoke wisp, fully inside the picture.",
+   "style": "Game sprite, glowing, painterly 2D with soft luminous edges, centred, alone. Flat solid magenta background (#FF00FF), no ground, no text, no watermark.",
+   "w": 1536,
+   "h": 1024
+  }
+ ]
+}

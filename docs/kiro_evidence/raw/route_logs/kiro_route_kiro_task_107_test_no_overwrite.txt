@@ -1,0 +1,4 @@
+16:58:41 model claude-sonnet-5.5 attempt 1
+16:59:44 result ok (exit 0)
+16:59:44 ERROR exit 0 but expected file is missing: docs/kiro_107_result_claude-sonnet-5.5.md
+16:59:44 ERROR every model in route 'flow' failed

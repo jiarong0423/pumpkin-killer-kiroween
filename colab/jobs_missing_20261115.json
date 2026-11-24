@@ -1,0 +1,72 @@
+{
+  "refs": {
+    "style_concept_mockup": "docs/ref/concept_mockup.png",
+    "identity_bg_graveyard": "assets/env/bg_graveyard.png",
+    "style_skeleton_unit": "assets/units/unit_skeleton.png",
+    "identity_knight_unit": "assets/units/unit_knight.png"
+  },
+  "jobs": [
+    {
+      "id": "ghoststar_blow",
+      "tier": "Q3",
+      "ref": "out:fx_ghost_idle_v1_ghost1.png",
+      "prompt": "Edit the reference picture. KEEP EXACTLY the same cute round white ghost: same body shape and size, same teal outline and glow, same little arms, same position in the picture, facing RIGHT, same flat solid magenta background (#FF00FF). Change ONLY what is described next. The mouth opens into a round O and a small puff of cool white mist leaves the mouth toward the RIGHT, eyes wide open, the cheeks are normal (not puffed), the body leans a little toward the right.",
+      "style": "Game sprite, same art style as the reference, centred, alone, clean flat magenta background without noise, no text, no watermark, no extra objects."
+    },
+    {
+      "id": "ghoststar_blow_hard",
+      "tier": "Q3",
+      "ref": "out:fx_ghost_idle_v1_ghost1.png",
+      "prompt": "Edit the reference picture. KEEP EXACTLY the same cute round white ghost: same body shape and size, same teal outline and glow, same little arms, same position in the picture, facing RIGHT, same flat solid magenta background (#FF00FF). Change ONLY what is described next. The mouth opens widest, eyes squeezed shut with effort, the body stretches and leans forward toward the right, a strong stream of air spray bursts from the mouth toward the RIGHT.",
+      "style": "Game sprite, same art style as the reference, centred, alone, clean flat magenta background without noise, no text, no watermark, no extra objects."
+    },
+    {
+      "id": "coin_pumpkin_head",
+      "tier": "Q3",
+      "ref": "knight",
+      "prompt": "Draw ONE round gold-orange pumpkin coin, seen straight from the front: a thick embossed rim, and in the centre a smiling carved jack-o'-lantern face (triangle eyes, jagged grin) with a glowing warm inner light. Use the pumpkin colours and the carved-face style of the pumpkin head of the reference character.",
+      "style": "Dark-fantasy 2D cartoon game item, thick clean near-black outlines plus a thin warm orange outer glow, flat three-tone cel shading, same style as the reference character. Centred, alone, front view, perfectly flat round coin seen straight on, 10 percent empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no numbers, no watermark."
+    },
+    {
+      "id": "coin_pumpkin_tail",
+      "tier": "Q3",
+      "ref": "knight",
+      "prompt": "Draw ONE round gold-orange pumpkin coin, seen straight from the front, the same coin as the other side (same size, same thick embossed rim, same colours): in the centre an embossed pumpkin stem with a curling vine and one leaf, no face. Use the pumpkin colours of the pumpkin head of the reference character.",
+      "style": "Dark-fantasy 2D cartoon game item, thick clean near-black outlines plus a thin warm orange outer glow, flat three-tone cel shading, same style as the reference character. Centred, alone, front view, perfectly flat round coin seen straight on, 10 percent empty margin. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no letters, no numbers, no watermark."
+    },
+    {
+      "id": "fx_feet_chain",
+      "tier": "Q3",
+      "ref": "bar",
+      "prompt": "Ignore the reference layout. Draw ONE pair of heavy dark iron ankle shackles joined by a short slack chain, seen from the side at ground level: two thick rusty iron cuffs with rivets, one on each end, and about four chunky chain links hanging between them in a low curve; slightly glowing cold blue rim light; the whole object horizontal, wide and low, fully inside the picture with a wide empty margin on every side.",
+      "style": "Game sprite, dark-fantasy 2D cartoon, thick clean near-black outlines, thin warm orange outer glow, flat three-tone cel shading, centred, alone. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark."
+    },
+    {
+      "id": "bg_belltower",
+      "tier": "Q3",
+      "ref": "style_concept_mockup",
+      "refs": ["style_concept_mockup", "identity_bg_graveyard"],
+      "prompt": "Use the first reference for the full game scene style, palette, canvas hierarchy, and clear battlefield horizon. Use the second reference only for the current scene rendering, ground-band placement, and readable depth. Draw ONE new haunted bell-tower night battlefield: a tall ruined Gothic bell tower on a hill, one huge full moon behind it, bare twisted trees and tombstones at the sides, small orange lantern lights, cyan ghost-fire wisps, and a black iron fence with a pumpkin lantern at the centre. Keep the central middle battlefield clear for units and projectiles. Preserve the same wide landscape canvas, horizon height, open ground band, and top/bottom UI space as the second reference. Do not copy its graveyard landmarks.",
+      "style": "Dark-fantasy 2D cartoon game background with thick soft near-black contours, flat three-tone cel shading, deep blue-violet night, sparse warm orange candlelight and cool cyan spectral accents. Wide 16:9 battlefield composition. No photorealism, 3D/plastic rendering, painterly gradients, text, letters, logos, watermarks, characters, weapons, UI, or empty magenta background.",
+      "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, text, letters, watermark, character, character silhouette, weapon, UI, magenta background"
+    },
+    {
+      "id": "bg_pumpkin_field",
+      "tier": "Q3",
+      "ref": "style_concept_mockup",
+      "refs": ["style_concept_mockup", "identity_bg_graveyard"],
+      "prompt": "Use the first reference for the full game scene style, palette, canvas hierarchy, and clear battlefield horizon. Use the second reference only for the current scene rendering, ground-band placement, and readable depth. Draw ONE new moonlit pumpkin-field battlefield: a huge full moon, rows of varied pumpkins and curling vines framing both sides, a distant haunted farmhouse or small scarecrow silhouette, bare trees, a few warm orange lantern lights, cyan ghost-fire wisps, and a black iron fence with a pumpkin lantern at the centre. Keep the central middle battlefield clear for units and projectiles. Preserve the same wide landscape canvas, horizon height, open ground band, and top/bottom UI space as the second reference. Do not copy its graveyard landmarks.",
+      "style": "Dark-fantasy 2D cartoon game background with thick soft near-black contours, flat three-tone cel shading, deep blue-violet night, sparse warm orange candlelight and cool cyan spectral accents. Wide 16:9 battlefield composition. No photorealism, 3D/plastic rendering, painterly gradients, text, letters, logos, watermarks, characters, weapons, UI, or empty magenta background.",
+      "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, text, letters, watermark, character, character silhouette, weapon, UI, magenta background"
+    },
+    {
+      "id": "unit_knight_unarmed",
+      "tier": "Q3",
+      "ref": "style_skeleton_unit",
+      "refs": ["style_skeleton_unit", "identity_knight_unit"],
+      "prompt": "Use the first reference only for the shared game character style. Use the second reference for the exact pumpkin shield knight identity. Edit that same knight: keep exactly the same face, pumpkin glow, armour, cape, full-body pose, direction, size, proportions, feet baseline, palette, and position. Remove the held shield completely. Leave the hand that held it as one empty relaxed gauntlet hand in the same position; do not add a weapon, replacement shield, extra limb, or extra prop. Keep the whole character inside the picture with a 10 percent margin.",
+      "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black contour plus a thin warm-orange outer glow, flat three-tone cel shading and soft highlights. One full-body character, centred. Flat solid magenta background (#FF00FF), no ground, cast shadow, text, watermark, extra figure, or magenta/pink inside the character.",
+      "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, shield, weapon, extra limb, extra hand, magenta or pink inside the subject"
+    }
+  ]
+}

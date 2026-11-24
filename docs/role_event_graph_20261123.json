@@ -1,0 +1,1729 @@
+{
+ "date": "20261123",
+ "roles": {
+  "skeleton": {
+   "plainHit": {
+    "sounds": [
+     "sfx.throw:proj_spear",
+     "throw_spear",
+     "status_bleed",
+     "sfx.hit:impact_unit_heavy",
+     "impact_unit_heavy",
+     "status_frost"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_spear",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "blood_spray",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "sprite_slash_arc",
+     "frost_shatter",
+     "sprite_stardust"
+    ],
+    "texts": [
+     "status#bleed",
+     "hitReport#hit",
+     "status#frostApplied"
+    ],
+    "statuses": [
+     "bleed",
+     "weak"
+    ],
+    "damaged": true,
+    "hpAfter": 276
+   },
+   "power": 46,
+   "fatal": {
+    "sounds": [
+     "sfx.throw:proj_spear",
+     "throw_spear",
+     "sfx.hit:ko",
+     "ko"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_spear",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "blood_spray",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "sprite_slash_arc",
+     "ko_wisps",
+     "sprite_mist"
+    ],
+    "texts": [
+     "hitReport#hit"
+    ],
+    "statuses": [],
+    "damaged": true,
+    "hpAfter": 0
+   },
+   "miss": {
+    "sounds": [
+     "sfx.throw:proj_spear",
+     "throw_spear",
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_spear",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#short"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   },
+   "ultimate": {
+    "sounds": [
+     "ult_skeleton",
+     "sfx.throw:proj_spear",
+     "throw_spear",
+     "ult_skeleton_hit",
+     "status_bleed",
+     "sfx.hit:impact_unit",
+     "impact_unit",
+     "status_frost",
+     "impact_ground"
+    ],
+    "fx": [
+     "shock_ring",
+     "sprite_impact_flash",
+     "sprite_arcane_seal",
+     "sprite_star_ring",
+     "weapon_charge_aura",
+     "face_glow_skeleton",
+     "weapon_trail_spear",
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_enchant_stardust",
+     "blood_spray",
+     "ghost_spear_fall",
+     "sprite_ghostfire",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_slash_arc",
+     "frost_shatter",
+     "sprite_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "ult#spear",
+     "status#bleed",
+     "hitReport#hit",
+     "status#frostApplied",
+     "hitReport#short"
+    ],
+    "statuses": [
+     "bleed",
+     "weak"
+    ],
+    "damaged": true,
+    "hpAfter": 288
+   },
+   "heavy": {
+    "sounds": [
+     "sfx.throw:proj_pumpkin",
+     "throw_bomb",
+     "status_poison",
+     "sfx.hit:impact_unit_heavy",
+     "impact_unit_heavy"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_shield",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash"
+    ],
+    "texts": [
+     "status#poison",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "poison"
+    ],
+    "damaged": true,
+    "hpAfter": 264
+   },
+   "heal": {
+    "sounds": [
+     "heal"
+    ],
+    "fx": [
+     "sprite_stardust",
+     "heal_rain",
+     "sprite_star_ring"
+    ],
+    "texts": [
+     "toast#healed"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 152
+   },
+   "head": {
+    "sounds": [
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_trail_spear",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#long"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   }
+  },
+  "wizard": {
+   "plainHit": {
+    "sounds": [
+     "sfx.throw:cannonball",
+     "throw_cannon",
+     "status_poison",
+     "sfx.hit:impact_unit_heavy",
+     "impact_unit_heavy"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "smoke_puff",
+     "weapon_trail_cannon",
+     "face_glow_pumpkin",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash"
+    ],
+    "texts": [
+     "status#poison",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "poison"
+    ],
+    "damaged": true,
+    "hpAfter": 264
+   },
+   "power": 46,
+   "fatal": {
+    "sounds": [
+     "sfx.throw:cannonball",
+     "throw_cannon",
+     "sfx.hit:ko",
+     "ko"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "smoke_puff",
+     "weapon_trail_cannon",
+     "face_glow_pumpkin",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "ko_wisps",
+     "sprite_mist"
+    ],
+    "texts": [
+     "hitReport#hit"
+    ],
+    "statuses": [],
+    "damaged": true,
+    "hpAfter": 0
+   },
+   "miss": {
+    "sounds": [
+     "sfx.throw:cannonball",
+     "throw_cannon",
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "smoke_puff",
+     "weapon_trail_cannon",
+     "face_glow_pumpkin",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#short"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   },
+   "ultimate": {
+    "sounds": [
+     "ult_wizard",
+     "sfx.throw:cannonball",
+     "throw_cannon",
+     "impact_ground",
+     "ult_wizard_hit"
+    ],
+    "fx": [
+     "shock_ring",
+     "sprite_impact_flash",
+     "sprite_arcane_seal",
+     "sprite_star_ring",
+     "muzzle_flash",
+     "smoke_puff",
+     "weapon_rune_halo",
+     "weapon_trail_cannon",
+     "face_glow_pumpkin",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust",
+     "impact_burst",
+     "sprite_stardust",
+     "sprite_fire_tongue"
+    ],
+    "texts": [
+     "ult#cannon",
+     "hitReport#short",
+     "ult#blast"
+    ],
+    "statuses": [],
+    "damaged": true,
+    "hpAfter": 246
+   },
+   "heavy": {
+    "sounds": [
+     "sfx.throw:proj_pumpkin",
+     "throw_bomb",
+     "status_poison",
+     "sfx.hit:impact_unit_heavy",
+     "impact_unit_heavy"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "smoke_puff",
+     "weapon_trail_shield",
+     "face_glow_pumpkin",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash"
+    ],
+    "texts": [
+     "status#poison",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "poison"
+    ],
+    "damaged": true,
+    "hpAfter": 246
+   },
+   "heal": {
+    "sounds": [
+     "heal"
+    ],
+    "fx": [
+     "sprite_stardust",
+     "heal_rain",
+     "sprite_star_ring"
+    ],
+    "texts": [
+     "toast#healed"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 152
+   },
+   "head": {
+    "sounds": [
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_trail_cannon",
+     "face_glow_pumpkin",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#long"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   }
+  },
+  "bat": {
+   "plainHit": {
+    "sounds": [
+     "sfx.throw:proj_shuriken",
+     "throw_shuriken",
+     "status_slow",
+     "sfx.hit:impact_unit_heavy",
+     "impact_unit_heavy"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_dart",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "sprite_slash_arc"
+    ],
+    "texts": [
+     "status#slowNext",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "slow"
+    ],
+    "damaged": true,
+    "hpAfter": 271
+   },
+   "power": 47,
+   "fatal": {
+    "sounds": [
+     "sfx.throw:proj_shuriken",
+     "throw_shuriken",
+     "sfx.hit:ko",
+     "ko"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_dart",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "sprite_slash_arc",
+     "ko_wisps",
+     "sprite_mist"
+    ],
+    "texts": [
+     "hitReport#hit"
+    ],
+    "statuses": [],
+    "damaged": true,
+    "hpAfter": 0
+   },
+   "miss": {
+    "sounds": [
+     "sfx.throw:proj_shuriken",
+     "throw_shuriken",
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_dart",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#short"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   },
+   "ultimate": {
+    "sounds": [
+     "ult_bat",
+     "sfx.throw:proj_shuriken",
+     "throw_shuriken",
+     "impact_ground",
+     "ult_bat_hit",
+     "status_slow",
+     "sfx.hit:impact_unit",
+     "impact_unit"
+    ],
+    "fx": [
+     "shock_ring",
+     "sprite_impact_flash",
+     "sprite_arcane_seal",
+     "sprite_star_ring",
+     "weapon_charge_aura",
+     "weapon_trail_dart",
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust",
+     "hit_sparks",
+     "impact_burst",
+     "sprite_slash_arc"
+    ],
+    "texts": [
+     "ult#shuriken",
+     "hitReport#short",
+     "status#slowNext",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "slow"
+    ],
+    "damaged": true,
+    "hpAfter": 291.3
+   },
+   "heavy": {
+    "sounds": [
+     "sfx.throw:proj_pumpkin",
+     "throw_bomb",
+     "status_poison",
+     "sfx.hit:impact_unit_heavy",
+     "impact_unit_heavy"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_shield",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash"
+    ],
+    "texts": [
+     "status#poison",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "poison"
+    ],
+    "damaged": true,
+    "hpAfter": 256.5
+   },
+   "heal": {
+    "sounds": [
+     "heal"
+    ],
+    "fx": [
+     "sprite_stardust",
+     "heal_rain",
+     "sprite_star_ring"
+    ],
+    "texts": [
+     "toast#healed"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 152
+   },
+   "head": {
+    "sounds": [
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_trail_dart",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#long"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   }
+  },
+  "knight": {
+   "plainHit": {
+    "sounds": [
+     "sfx.throw:proj_shield",
+     "throw_shield",
+     "sfx.hit:impact_unit",
+     "impact_unit"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_shield",
+     "face_glow_pumpkin",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash"
+    ],
+    "texts": [
+     "toast#bounce",
+     "+#",
+     "hitReport#hit"
+    ],
+    "statuses": [],
+    "damaged": true,
+    "hpAfter": 279
+   },
+   "power": 48,
+   "fatal": {
+    "sounds": [
+     "sfx.throw:proj_shield",
+     "throw_shield",
+     "sfx.hit:ko",
+     "ko"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_shield",
+     "face_glow_pumpkin",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "ko_wisps",
+     "sprite_mist"
+    ],
+    "texts": [
+     "toast#bounce",
+     "+#",
+     "hitReport#hit"
+    ],
+    "statuses": [],
+    "damaged": true,
+    "hpAfter": 0
+   },
+   "miss": {
+    "sounds": [
+     "sfx.throw:proj_shield",
+     "throw_shield",
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_shield",
+     "face_glow_pumpkin",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "toast#bounce",
+     "hitReport#short",
+     "toast#shieldStuck"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   },
+   "ultimate": {
+    "note": "placement (shield wall), not a thrown shot"
+   },
+   "heavy": {
+    "sounds": [
+     "sfx.throw:proj_pumpkin",
+     "throw_bomb",
+     "status_poison",
+     "sfx.hit:impact_unit_heavy",
+     "impact_unit_heavy"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_shield",
+     "face_glow_pumpkin",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash"
+    ],
+    "texts": [
+     "status#poison",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "poison"
+    ],
+    "damaged": true,
+    "hpAfter": 268.5
+   },
+   "heal": {
+    "sounds": [
+     "heal"
+    ],
+    "fx": [
+     "sprite_stardust",
+     "heal_rain",
+     "sprite_star_ring"
+    ],
+    "texts": [
+     "toast#healed"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 152
+   },
+   "head": {
+    "sounds": [
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_trail_shield",
+     "face_glow_pumpkin",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#long"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   }
+  },
+  "reaper": {
+   "plainHit": {
+    "sounds": [
+     "sfx.throw:proj_flame",
+     "throw_flame",
+     "status_burn",
+     "impact_flame"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "face_glow_skeleton",
+     "sprite_fire_tongue",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash"
+    ],
+    "texts": [
+     "status#burn",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "burn"
+    ],
+    "damaged": true,
+    "hpAfter": 278
+   },
+   "power": 46,
+   "fatal": {
+    "sounds": [
+     "sfx.throw:proj_flame",
+     "throw_flame",
+     "sfx.hit:ko",
+     "ko"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "face_glow_skeleton",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "ko_wisps",
+     "sprite_mist"
+    ],
+    "texts": [
+     "hitReport#hit"
+    ],
+    "statuses": [],
+    "damaged": true,
+    "hpAfter": 0
+   },
+   "miss": {
+    "sounds": [
+     "sfx.throw:proj_flame",
+     "throw_flame",
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "face_glow_skeleton",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#short"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   },
+   "ultimate": {
+    "sounds": [
+     "ult_reaper",
+     "sfx.throw:proj_flame",
+     "throw_flame",
+     "ult_reaper_hit",
+     "status_burn",
+     "impact_flame",
+     "impact_ground"
+    ],
+    "fx": [
+     "shock_ring",
+     "sprite_impact_flash",
+     "sprite_arcane_seal",
+     "sprite_star_ring",
+     "weapon_charge_aura",
+     "ko_wisps",
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "face_glow_skeleton",
+     "sprite_fire_tongue",
+     "impact_burst",
+     "hit_sparks",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "ult#soulfire",
+     "status#burn",
+     "status#halluApplied",
+     "hitReport#hit",
+     "hitReport#short"
+    ],
+    "statuses": [
+     "burn"
+    ],
+    "damaged": true,
+    "hpAfter": 287.9
+   },
+   "heavy": {
+    "sounds": [
+     "sfx.throw:proj_pumpkin",
+     "throw_bomb",
+     "status_poison",
+     "sfx.hit:impact_unit_heavy",
+     "impact_unit_heavy"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_shield",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash"
+    ],
+    "texts": [
+     "status#poison",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "poison"
+    ],
+    "damaged": true,
+    "hpAfter": 267
+   },
+   "heal": {
+    "sounds": [
+     "heal"
+    ],
+    "fx": [
+     "sprite_stardust",
+     "heal_rain",
+     "sprite_star_ring"
+    ],
+    "texts": [
+     "toast#healed"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 152
+   },
+   "head": {
+    "sounds": [
+     "status_stun",
+     "status_burn",
+     "impact_flame"
+    ],
+    "fx": [
+     "sprite_slash_arc",
+     "sprite_fire_tongue",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "face_glow_skeleton"
+    ],
+    "texts": [
+     "status#crit",
+     "status#stun",
+     "status#burn",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "burn",
+     "stun"
+    ],
+    "damaged": true,
+    "hpAfter": 275.8
+   }
+  },
+  "bride": {
+   "plainHit": {
+    "sounds": [
+     "sfx.throw:proj_soundwave",
+     "throw_soundwave",
+     "status_poison",
+     "sfx.hit:impact_unit",
+     "impact_unit"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_wave",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "sprite_star_ring"
+    ],
+    "texts": [
+     "status#poison",
+     "hitReport#wave#"
+    ],
+    "statuses": [
+     "poison"
+    ],
+    "damaged": true,
+    "hpAfter": 280
+   },
+   "power": 43,
+   "fatal": {
+    "sounds": [
+     "sfx.throw:proj_soundwave",
+     "throw_soundwave",
+     "sfx.hit:ko",
+     "ko"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_wave",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "sprite_star_ring",
+     "ko_wisps",
+     "sprite_mist"
+    ],
+    "texts": [
+     "hitReport#wave#"
+    ],
+    "statuses": [],
+    "damaged": true,
+    "hpAfter": 0
+   },
+   "miss": {
+    "sounds": [
+     "sfx.throw:proj_soundwave",
+     "throw_soundwave",
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_wave",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#waveout"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   },
+   "ultimate": {
+    "sounds": [
+     "ult_bride",
+     "sfx.throw:proj_soundwave",
+     "throw_soundwave",
+     "status_poison",
+     "ult_bride_hit",
+     "sfx.hit:impact_unit",
+     "impact_unit"
+    ],
+    "fx": [
+     "shock_ring",
+     "sprite_impact_flash",
+     "sprite_arcane_seal",
+     "sprite_star_ring",
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_wave",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks"
+    ],
+    "texts": [
+     "ult#swarm",
+     "status#poison",
+     "-#",
+     "hitReport#wave#"
+    ],
+    "statuses": [
+     "poison"
+    ],
+    "damaged": true,
+    "hpAfter": 228
+   },
+   "heavy": {
+    "sounds": [
+     "sfx.throw:proj_pumpkin",
+     "throw_bomb",
+     "impact_ground_heavy"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_shield",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#short"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   },
+   "heal": {
+    "sounds": [
+     "heal"
+    ],
+    "fx": [
+     "sprite_stardust",
+     "heal_rain",
+     "sprite_star_ring"
+    ],
+    "texts": [
+     "toast#healed"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 152
+   },
+   "head": {
+    "sounds": [
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_trail_wave",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#waveout"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   }
+  },
+  "hunchback": {
+   "plainHit": {
+    "sounds": [
+     "sfx.throw:proj_axe",
+     "throw_axe",
+     "status_bleed",
+     "sfx.hit:impact_unit",
+     "impact_unit"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "axe_spin_trail",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "blood_spray",
+     "landing_ring_dust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "sprite_slash_arc"
+    ],
+    "texts": [
+     "status#bleed",
+     "status#knockback",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "bleed"
+    ],
+    "damaged": true,
+    "hpAfter": 281
+   },
+   "power": 44,
+   "fatal": {
+    "sounds": [
+     "sfx.throw:proj_axe",
+     "throw_axe",
+     "sfx.hit:ko",
+     "ko"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "axe_spin_trail",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "blood_spray",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "sprite_slash_arc",
+     "ko_wisps",
+     "sprite_mist"
+    ],
+    "texts": [
+     "hitReport#hit"
+    ],
+    "statuses": [],
+    "damaged": true,
+    "hpAfter": 0
+   },
+   "miss": {
+    "sounds": [
+     "sfx.throw:proj_axe",
+     "throw_axe",
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "axe_spin_trail",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#short"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   },
+   "ultimate": {
+    "sounds": [
+     "ult_hunchback",
+     "sfx.throw:proj_axe",
+     "throw_axe",
+     "ult_hunchback_hit",
+     "status_bleed",
+     "sfx.hit:impact_unit",
+     "impact_unit",
+     "impact_ground",
+     "sfx.hit:impact_unit_heavy",
+     "impact_unit_heavy"
+    ],
+    "fx": [
+     "shock_ring",
+     "sprite_impact_flash",
+     "sprite_arcane_seal",
+     "sprite_star_ring",
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "axe_spin_trail",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "blood_spray",
+     "landing_ring_dust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_slash_arc"
+    ],
+    "texts": [
+     "ult#boomerang",
+     "status#bleed",
+     "status#knockback",
+     "hitReport#hit",
+     "-#"
+    ],
+    "statuses": [
+     "bleed"
+    ],
+    "damaged": true,
+    "hpAfter": 249.5
+   },
+   "heavy": {
+    "sounds": [
+     "sfx.throw:proj_pumpkin",
+     "throw_bomb",
+     "impact_ground_heavy"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_shield",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#short"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   },
+   "heal": {
+    "sounds": [
+     "heal"
+    ],
+    "fx": [
+     "sprite_stardust",
+     "heal_rain",
+     "sprite_star_ring"
+    ],
+    "texts": [
+     "toast#healed"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 152
+   },
+   "head": {
+    "sounds": [
+     "status_stun",
+     "status_bleed",
+     "sfx.hit:impact_unit",
+     "impact_unit"
+    ],
+    "fx": [
+     "axe_spin_trail",
+     "sprite_slash_arc",
+     "blood_spray",
+     "landing_ring_dust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "face_glow_skeleton"
+    ],
+    "texts": [
+     "status#crit",
+     "status#stun",
+     "status#bleed",
+     "status#knockback",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "bleed",
+     "stun"
+    ],
+    "damaged": true,
+    "hpAfter": 279.1
+   }
+  },
+  "hag": {
+   "plainHit": {
+    "sounds": [
+     "sfx.throw:proj_cross",
+     "throw_cross",
+     "status_shock",
+     "sfx.hit:impact_unit_heavy",
+     "impact_unit_heavy"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "cross_spin_trail",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "spark_electric",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "sprite_slash_arc"
+    ],
+    "texts": [
+     "status#shock",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "shock"
+    ],
+    "damaged": true,
+    "hpAfter": 276
+   },
+   "power": 45,
+   "fatal": {
+    "sounds": [
+     "sfx.throw:proj_cross",
+     "throw_cross",
+     "sfx.hit:ko",
+     "ko"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "cross_spin_trail",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "sprite_slash_arc",
+     "ko_wisps",
+     "sprite_mist"
+    ],
+    "texts": [
+     "hitReport#hit"
+    ],
+    "statuses": [],
+    "damaged": true,
+    "hpAfter": 0
+   },
+   "miss": {
+    "sounds": [
+     "sfx.throw:proj_cross",
+     "throw_cross",
+     "impact_ground"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "cross_spin_trail",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#short"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   },
+   "ultimate": {
+    "sounds": [
+     "ult_hag",
+     "sfx.throw:proj_cross",
+     "throw_cross",
+     "ult_hag_hit",
+     "sfx.hit:impact_unit",
+     "impact_unit"
+    ],
+    "fx": [
+     "shock_ring",
+     "sprite_impact_flash",
+     "sprite_arcane_seal",
+     "sprite_star_ring",
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "cross_spin_trail",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "spark_electric",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_slash_arc"
+    ],
+    "texts": [
+     "ult#nun",
+     "hitReport#hit"
+    ],
+    "statuses": [],
+    "damaged": true,
+    "hpAfter": 286.2
+   },
+   "heavy": {
+    "sounds": [
+     "sfx.throw:proj_pumpkin",
+     "throw_bomb",
+     "impact_ground_heavy"
+    ],
+    "fx": [
+     "weapon_rune_halo",
+     "muzzle_flash",
+     "weapon_trail_shield",
+     "face_glow_skeleton",
+     "weapon_enchant_stardust",
+     "landing_ring_dust"
+    ],
+    "texts": [
+     "hitReport#short"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 300
+   },
+   "heal": {
+    "sounds": [
+     "heal"
+    ],
+    "fx": [
+     "sprite_stardust",
+     "heal_rain",
+     "sprite_star_ring"
+    ],
+    "texts": [
+     "toast#healed"
+    ],
+    "statuses": [],
+    "damaged": false,
+    "hpAfter": 152
+   },
+   "head": {
+    "sounds": [
+     "status_stun",
+     "status_shock",
+     "sfx.hit:impact_unit_heavy",
+     "impact_unit_heavy"
+    ],
+    "fx": [
+     "cross_spin_trail",
+     "sprite_slash_arc",
+     "spark_electric",
+     "impact_burst",
+     "hit_sparks",
+     "sprite_impact_flash",
+     "face_glow_skeleton"
+    ],
+    "texts": [
+     "status#crit",
+     "status#stun",
+     "status#shock",
+     "hitReport#hit"
+    ],
+    "statuses": [
+     "stun",
+     "shock"
+    ],
+    "damaged": true,
+    "hpAfter": 273.6
+   }
+  }
+ },
+ "events": {
+  "ui_click": {
+   "file": "assets/audio/sfx/ui_click.ogg",
+   "source": "kenney-interface"
+  },
+  "ui_hover": {
+   "file": "assets/audio/sfx/ui_hover.ogg",
+   "source": "kenney-interface"
+  },
+  "round_start": {
+   "file": null,
+   "source": "synth-only"
+  },
+  "round_end": {
+   "file": null,
+   "source": "synth-only"
+  },
+  "charge": {
+   "file": null,
+   "source": "synth-only"
+  },
+  "throw_spear": {
+   "file": "assets/audio/sfx/whoosh_spear.ogg",
+   "source": "bigsoundbank-s0573"
+  },
+  "throw_shuriken": {
+   "file": "assets/audio/sfx/throw_shuriken_gemini.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "throw_cannon": {
+   "file": "assets/audio/sfx/throw_cannon_rocket.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "throw_bomb": {
+   "file": "assets/audio/sfx/throw_cannon_boom.ogg",
+   "source": "kenney-scifi"
+  },
+  "throw_shield": {
+   "file": "assets/audio/sfx/throw_shield_gemini.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "throw_flame": {
+   "file": "assets/audio/sfx/throw_flame_fire.ogg",
+   "source": "oga-catching-fire"
+  },
+  "throw_cross": {
+   "file": "assets/audio/sfx/throw_cross_gemini.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "throw_axe": {
+   "file": "assets/audio/sfx/throw_axe_gemini.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "throw_soundwave": {
+   "file": "assets/audio/sfx/throw_soundwave_sonic.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "coin_flip": {
+   "file": "assets/audio/sfx/coin_flip.ogg",
+   "source": "kenney-rpg"
+  },
+  "impact_flame": {
+   "file": "assets/audio/sfx/impact_flame_evil_spell.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "flight_spear": {
+   "file": "assets/audio/sfx/flight_spear_whoosh.ogg",
+   "source": "oga-wind-whoosh-loop"
+  },
+  "flight_shuriken": {
+   "file": null,
+   "source": "synth-only"
+  },
+  "flight_cannon": {
+   "file": "assets/audio/sfx/flight_cannon_wind.ogg",
+   "source": "oga-air-whoosh"
+  },
+  "flight_shield": {
+   "file": "assets/audio/sfx/flight_shield_wind.ogg",
+   "source": "oga-short-wind"
+  },
+  "impact_unit": {
+   "file": "assets/audio/sfx/punch_hit.ogg",
+   "source": "oga-punch-qubodup"
+  },
+  "impact_unit_heavy": {
+   "file": "assets/audio/sfx/punch_heavy.ogg",
+   "source": "oga-punch-qubodup"
+  },
+  "impact_fence": {
+   "file": "assets/audio/sfx/thwack_wood.ogg",
+   "source": "oga-thwack"
+  },
+  "impact_fence_break": {
+   "file": "assets/audio/sfx/fence_break.ogg",
+   "source": "kenney-scifi"
+  },
+  "impact_ground": {
+   "file": "assets/audio/sfx/stone_ground.ogg",
+   "source": "oga-80-cc0-rpg-sfx"
+  },
+  "impact_ground_heavy": {
+   "file": "assets/audio/sfx/stone_ground_heavy.ogg",
+   "source": "oga-80-cc0-rpg-sfx"
+  },
+  "shield_block": {
+   "file": "assets/audio/sfx/metal_bing.ogg",
+   "source": "oga-metal-impact"
+  },
+  "shield_place": {
+   "file": "assets/audio/sfx/spell_magic.ogg",
+   "source": "oga-magic-spell-sfx"
+  },
+  "dice_rattle": {
+   "file": "assets/audio/sfx/dice_throw_short.ogg",
+   "source": "kenney-casino"
+  },
+  "dice_result": {
+   "file": "assets/audio/sfx/dice_tick.ogg",
+   "source": "kenney-interface"
+  },
+  "move_step": {
+   "file": "assets/audio/sfx/move_step_footstep.ogg",
+   "source": "kenney-rpg"
+  },
+  "ko": {
+   "file": "assets/audio/sfx/roar_ko.ogg",
+   "source": "oga-80-cc0-rpg-sfx"
+  },
+  "poison_tick": {
+   "file": "assets/audio/sfx/poison_tick_soft.ogg",
+   "source": "kenney-impact"
+  },
+  "status_stun": {
+   "file": "assets/audio/sfx/status_stun_owner.ogg",
+   "source": "owner-status-sfx-20261122"
+  },
+  "status_slow": {
+   "file": "assets/audio/sfx/status_slow_owner.ogg",
+   "source": "owner-status-sfx-20261122"
+  },
+  "status_shock": {
+   "file": "assets/audio/sfx/status_shock_owner.ogg",
+   "source": "owner-status-sfx-20261122"
+  },
+  "status_frost": {
+   "file": "assets/audio/sfx/status_frost_owner.ogg",
+   "source": "owner-status-sfx-20261122"
+  },
+  "status_bleed": {
+   "file": null,
+   "source": "synth-only"
+  },
+  "status_poison": {
+   "file": null,
+   "source": "synth-only"
+  },
+  "status_burn": {
+   "file": null,
+   "source": "synth-only"
+  },
+  "bleed_tick": {
+   "file": null,
+   "source": "synth-only"
+  },
+  "burn_tick": {
+   "file": null,
+   "source": "synth-only"
+  },
+  "ultimate_ready": {
+   "file": "assets/audio/sfx/ultimate_ready_glass.ogg",
+   "source": "kenney-impact"
+  },
+  "low_hp_heartbeat": {
+   "file": "assets/audio/sfx/heartbeat.ogg",
+   "source": "bigsoundbank-s0770"
+  },
+  "heal": {
+   "file": "assets/audio/sfx/heal_harp.ogg",
+   "source": "oga-magic-words-healing"
+  },
+  "item_pickup": {
+   "file": "assets/audio/sfx/chime_single.ogg",
+   "source": "bigsoundbank"
+  },
+  "ult_skeleton": {
+   "file": "assets/audio/sfx/ult_skeleton.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_skeleton_hit": {
+   "file": "assets/audio/sfx/ult_skeleton_hit.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_wizard": {
+   "file": "assets/audio/sfx/ult_wizard.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_wizard_hit": {
+   "file": "assets/audio/sfx/ult_wizard_hit.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_bat": {
+   "file": "assets/audio/sfx/ult_bat.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_bat_hit": {
+   "file": "assets/audio/sfx/ult_bat_hit.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_knight": {
+   "file": "assets/audio/sfx/ult_knight.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_reaper": {
+   "file": "assets/audio/sfx/ult_reaper.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_reaper_hit": {
+   "file": "assets/audio/sfx/ult_reaper_hit.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_bride": {
+   "file": "assets/audio/sfx/ult_bride.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_bride_hit": {
+   "file": "assets/audio/sfx/ult_bride_hit.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_hunchback": {
+   "file": "assets/audio/sfx/ult_hunchback.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_hunchback_hit": {
+   "file": "assets/audio/sfx/ult_hunchback_hit.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_hag": {
+   "file": "assets/audio/sfx/ult_hag.ogg",
+   "source": "owner-gemini-sfx-v3"
+  },
+  "ult_hag_hit": {
+   "file": "assets/audio/sfx/ult_hag_hit.ogg",
+   "source": "owner-gemini-sfx-v3"
+  }
+ },
+ "statusVisual": {
+  "bleed": true,
+  "bleed_lines": 2,
+  "poison": true,
+  "poison_lines": 3,
+  "burn": true,
+  "burn_lines": 1,
+  "slow": true,
+  "slow_lines": 1,
+  "stun": true,
+  "stun_lines": 1,
+  "shock": true,
+  "shock_lines": 1,
+  "weak": true,
+  "weak_lines": 1
+ },
+ "eventsNotFiredInTheScenarios": [
+  "ui_click",
+  "ui_hover",
+  "round_start",
+  "round_end",
+  "charge",
+  "coin_flip",
+  "flight_spear",
+  "flight_shuriken",
+  "flight_cannon",
+  "flight_shield",
+  "impact_fence",
+  "impact_fence_break",
+  "shield_block",
+  "shield_place",
+  "dice_rattle",
+  "dice_result",
+  "move_step",
+  "poison_tick",
+  "bleed_tick",
+  "burn_tick",
+  "ultimate_ready",
+  "low_hp_heartbeat",
+  "item_pickup",
+  "ult_knight"
+ ],
+ "gaps": [
+  {
+   "kind": "roles that borrow the skeleton face glow (no glow of their own)",
+   "role": "wizard, bat, knight, reaper, bride, hunchback, hag",
+   "detail": "only face_glow_skeleton and face_glow_pumpkin exist"
+  }
+ ]
+}

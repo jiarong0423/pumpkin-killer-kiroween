@@ -1,0 +1,27 @@
+stateDiagram-v2
+  [*] --> SingleMatch
+
+  state "Single-match game (CURRENT)\nExit: a playable, English 1v1 page has the planned\nshowcase systems and no visible missing-reference gaps\nMoves: B04, B05, B07, B08, B09, B21" as SingleMatch
+  state "Stage-1 application ready\nExit: a live public URL is smoke-tested and IDE evidence is filed\nMoves: B01, B02, B03" as StageOne
+  state "Release candidate\nExit: export privacy gate and clean checkout pass;\nprivate repository upload is approved and completed\nMoves: B10, B11, B14, B15" as ReleaseCandidate
+  state "Public showcase ready\nExit: repository is Public, About confirms MIT,\nand URL is accessible to judges\nMoves: B11, owner visibility action" as PublicShowcase
+  state "Presentation ready\nExit: public video is under three minutes and\nshows the working game end to end\nMoves: B16" as Presentation
+  state "Submission package aligned\nExit: English README, judges write-up, credits,\nDevpost draft, blog/social links are aligned\nMoves: B12, B13, B17" as Package
+  state "Scope frozen and reviewed\nExit: one strong review is complete and all accepted\nfixes are finished before 2026-12-04 06:00 Taiwan\nMoves: P2a, P3, P4" as Reviewed
+  state "Submitted\nExit: owner submits the final form before\n2026-12-05 06:00 Taiwan\nMoves: B18" as Submitted
+
+  SingleMatch --> StageOne: Stage-1 page and evidence condition met
+  StageOne --> ReleaseCandidate: URL smoke and evidence filed
+  ReleaseCandidate --> PublicShowcase: gates pass and private push completes
+  PublicShowcase --> Presentation: public access confirmed
+  Presentation --> Package: video and delivery text complete
+  Package --> Reviewed: scope freeze and strong review
+  Reviewed --> Submitted: owner final-form action
+  Submitted --> [*]
+
+  note right of SingleMatch
+    Current evidence: five page profiles, including reaper.
+    Knight ultimate and AI-level page wiring are open.
+    11-15 update: English text applied to the page (not yet viewed in a browser); necromancer ultimate wired; export privacy gate 0 BLOCK on a fresh export; five local commits, nothing pushed.
+    Gaps: public URL, owner-approved English, Colab pictures, MCP seats (see mcp_track_20261115.mmd), video.
+  end note

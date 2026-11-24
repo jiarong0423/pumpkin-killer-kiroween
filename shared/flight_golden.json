@@ -1,0 +1,1163 @@
+{
+  "cases": [
+    {
+      "input": {
+        "angleDeg": 10,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": -5
+      },
+      "name": "grid-00",
+      "result": {
+        "hit": "ground",
+        "landingX": 360.5669189128742,
+        "landingY": 860.2599920869179
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 20,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": 3
+      },
+      "name": "grid-01",
+      "result": {
+        "hit": "wall",
+        "landingX": 845.9933076572344,
+        "landingY": 707.529707050802
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 30,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": 0
+      },
+      "name": "grid-02",
+      "result": {
+        "hit": "ground",
+        "landingX": 1260.6187594184826,
+        "landingY": 864.3166666666666
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 40,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": -3
+      },
+      "name": "grid-03",
+      "result": {
+        "hit": "wall",
+        "landingX": 1077.7445698004133,
+        "landingY": 602.227183040789
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 50,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": 5
+      },
+      "name": "grid-04",
+      "result": {
+        "hit": "ground",
+        "landingX": 485.1002122005555,
+        "landingY": 864.4526047127188
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 60,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": 1
+      },
+      "name": "grid-05",
+      "result": {
+        "hit": "ground",
+        "landingX": 1363.2405555555558,
+        "landingY": 874.473004204755
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 70,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": -1
+      },
+      "name": "grid-06",
+      "result": {
+        "hit": "ground",
+        "landingX": 1318.1886190203588,
+        "landingY": 862.6492026638047
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 80,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": -5
+      },
+      "name": "grid-07",
+      "result": {
+        "hit": "wall",
+        "landingX": 1063.6944381468843,
+        "landingY": 581.5218869141671
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 10,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": 3
+      },
+      "name": "grid-08",
+      "result": {
+        "hit": "ground",
+        "landingX": 441.58025224620764,
+        "landingY": 860.2599920869179
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 20,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": 0
+      },
+      "name": "grid-09",
+      "result": {
+        "hit": "wall",
+        "landingX": 847.1617123379829,
+        "landingY": 708.9498392414166
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 30,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": -3
+      },
+      "name": "grid-10",
+      "result": {
+        "hit": "ground",
+        "landingX": 1226.0387594184801,
+        "landingY": 864.3166666666666
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 40,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": 5
+      },
+      "name": "grid-11",
+      "result": {
+        "hit": "ground",
+        "landingX": 1116.810846029702,
+        "landingY": 863.2260188148988
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 50,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": 1
+      },
+      "name": "grid-12",
+      "result": {
+        "hit": "ground",
+        "landingX": 423.50021220055567,
+        "landingY": 864.4526047127188
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 60,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": -1
+      },
+      "name": "grid-13",
+      "result": {
+        "hit": "wall",
+        "landingX": 1021.1600000000013,
+        "landingY": 578.8444433136332
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 70,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": -5
+      },
+      "name": "grid-14",
+      "result": {
+        "hit": "ground",
+        "landingX": 1245.015285687026,
+        "landingY": 862.6492026638047
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 80,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": 3
+      },
+      "name": "grid-15",
+      "result": {
+        "hit": "ground",
+        "landingX": 1823.3553705461293,
+        "landingY": 872.5914928559847
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 10,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": 0
+      },
+      "name": "grid-16",
+      "result": {
+        "hit": "ground",
+        "landingX": 418.43358557954156,
+        "landingY": 860.2599920869179
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 20,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": -3
+      },
+      "name": "grid-17",
+      "result": {
+        "hit": "wall",
+        "landingX": 850.6885216994823,
+        "landingY": 712.6067702893125
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 30,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": 5
+      },
+      "name": "grid-18",
+      "result": {
+        "hit": "ground",
+        "landingX": 1347.0687594184803,
+        "landingY": 864.3166666666666
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 40,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": 1
+      },
+      "name": "grid-19",
+      "result": {
+        "hit": "wall",
+        "landingX": 1071.2223210700483,
+        "landingY": 635.3275627000567
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 50,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": -1
+      },
+      "name": "grid-20",
+      "result": {
+        "hit": "ground",
+        "landingX": 385.0002122005553,
+        "landingY": 864.4526047127188
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 60,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": -5
+      },
+      "name": "grid-21",
+      "result": {
+        "hit": "ground",
+        "landingX": 655.0583333333333,
+        "landingY": 874.473004204755
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 70,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": 3
+      },
+      "name": "grid-22",
+      "result": {
+        "hit": "ground",
+        "landingX": 1418.8019523536923,
+        "landingY": 862.6492026638047
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 80,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": 0
+      },
+      "name": "grid-23",
+      "result": {
+        "hit": "ground",
+        "landingX": 1356.4553705461242,
+        "landingY": 872.5914928559847
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 10,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": -3
+      },
+      "name": "grid-24",
+      "result": {
+        "hit": "ground",
+        "landingX": 383.7135855795409,
+        "landingY": 860.2599920869179
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 20,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": 5
+      },
+      "name": "grid-25",
+      "result": {
+        "hit": "wall",
+        "landingX": 854.5799743239011,
+        "landingY": 707.529707050802
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 30,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": 1
+      },
+      "name": "grid-26",
+      "result": {
+        "hit": "ground",
+        "landingX": 1277.90875941848,
+        "landingY": 864.3166666666666
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 40,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": -1
+      },
+      "name": "grid-27",
+      "result": {
+        "hit": "wall",
+        "landingX": 1074.7785876376383,
+        "landingY": 612.5981587463477
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 50,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": -5
+      },
+      "name": "grid-28",
+      "result": {
+        "hit": "ground",
+        "landingX": 292.6002122005556,
+        "landingY": 864.4526047127188
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 60,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": 3
+      },
+      "name": "grid-29",
+      "result": {
+        "hit": "ground",
+        "landingX": 1529.8716666666646,
+        "landingY": 874.473004204755
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 70,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": 0
+      },
+      "name": "grid-30",
+      "result": {
+        "hit": "ground",
+        "landingX": 1336.4819523536971,
+        "landingY": 862.6492026638047
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 80,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": -3
+      },
+      "name": "grid-31",
+      "result": {
+        "hit": "wall",
+        "landingX": 1076.7595315706112,
+        "landingY": 807.8941075972258
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 10,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": 5
+      },
+      "name": "grid-32",
+      "result": {
+        "hit": "ground",
+        "landingX": 457.01136335731877,
+        "landingY": 860.2599920869179
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 20,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": 1
+      },
+      "name": "grid-33",
+      "result": {
+        "hit": "wall",
+        "landingX": 851.8283790046504,
+        "landingY": 708.9498392414166
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 30,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": -1
+      },
+      "name": "grid-34",
+      "result": {
+        "hit": "ground",
+        "landingX": 1249.0920927518134,
+        "landingY": 864.3166666666666
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 40,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": -5
+      },
+      "name": "grid-35",
+      "result": {
+        "hit": "wall",
+        "landingX": 1074.0959653163368,
+        "landingY": 596.6743103481944
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 50,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": 3
+      },
+      "name": "grid-36",
+      "result": {
+        "hit": "ground",
+        "landingX": 454.3002122005558,
+        "landingY": 864.4526047127188
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 60,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": 0
+      },
+      "name": "grid-37",
+      "result": {
+        "hit": "ground",
+        "landingX": 1279.9249999999984,
+        "landingY": 874.473004204755
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 70,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": -3
+      },
+      "name": "grid-38",
+      "result": {
+        "hit": "ground",
+        "landingX": 1281.6019523536925,
+        "landingY": 862.6492026638047
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 80,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": 5
+      },
+      "name": "grid-39",
+      "result": {
+        "hit": "out",
+        "landingX": 1923.518256180783,
+        "landingY": 570.6558739328108
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 10,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": 1
+      },
+      "name": "grid-40",
+      "result": {
+        "hit": "ground",
+        "landingX": 426.1491411350965,
+        "landingY": 860.2599920869179
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 20,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": -1
+      },
+      "name": "grid-41",
+      "result": {
+        "hit": "wall",
+        "landingX": 853.6267836854,
+        "landingY": 710.6421936542534
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 30,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": -5
+      },
+      "name": "grid-42",
+      "result": {
+        "hit": "ground",
+        "landingX": 1202.9854260851457,
+        "landingY": 864.3166666666666
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 40,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": 3
+      },
+      "name": "grid-43",
+      "result": {
+        "hit": "wall",
+        "landingX": 1074.6210412483917,
+        "landingY": 693.3904898167328
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 50,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": 0
+      },
+      "name": "grid-44",
+      "result": {
+        "hit": "ground",
+        "landingX": 408.1002122005559,
+        "landingY": 864.4526047127188
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 60,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": -3
+      },
+      "name": "grid-45",
+      "result": {
+        "hit": "wall",
+        "landingX": 877.3800000000008,
+        "landingY": 578.8444433136332
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 70,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": 5
+      },
+      "name": "grid-46",
+      "result": {
+        "hit": "ground",
+        "landingX": 1473.681952353692,
+        "landingY": 862.6492026638047
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 80,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": 1
+      },
+      "name": "grid-47",
+      "result": {
+        "hit": "ground",
+        "landingX": 1512.088703879464,
+        "landingY": 872.5914928559847
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 10,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": -1
+      },
+      "name": "grid-48",
+      "result": {
+        "hit": "ground",
+        "landingX": 406.8602522462076,
+        "landingY": 860.2599920869179
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 20,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": -5
+      },
+      "name": "grid-49",
+      "result": {
+        "hit": "wall",
+        "landingX": 845.2069263802321,
+        "landingY": 714.8435691465937
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 30,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": 3
+      },
+      "name": "grid-50",
+      "result": {
+        "hit": "ground",
+        "landingX": 1312.48875941848,
+        "landingY": 864.3166666666666
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 40,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": 0
+      },
+      "name": "grid-51",
+      "result": {
+        "hit": "wall",
+        "landingX": 1070.9294143439342,
+        "landingY": 620.8732536611647
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 50,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": -3
+      },
+      "name": "grid-52",
+      "result": {
+        "hit": "ground",
+        "landingX": 338.8002122005557,
+        "landingY": 864.4526047127188
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 60,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": 5
+      },
+      "name": "grid-53",
+      "result": {
+        "hit": "ground",
+        "landingX": 1696.502777777776,
+        "landingY": 874.473004204755
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 70,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": 1
+      },
+      "name": "grid-54",
+      "result": {
+        "hit": "ground",
+        "landingX": 1363.9219523536924,
+        "landingY": 862.6492026638047
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 80,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": -1
+      },
+      "name": "grid-55",
+      "result": {
+        "hit": "ground",
+        "landingX": 1252.6998149905737,
+        "landingY": 872.5914928559847
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 10,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": -5
+      },
+      "name": "grid-56",
+      "result": {
+        "hit": "ground",
+        "landingX": 360.5669189128742,
+        "landingY": 860.2599920869179
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 20,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": 3
+      },
+      "name": "grid-57",
+      "result": {
+        "hit": "wall",
+        "landingX": 845.9933076572344,
+        "landingY": 707.529707050802
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 30,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": 0
+      },
+      "name": "grid-58",
+      "result": {
+        "hit": "ground",
+        "landingX": 1260.6187594184826,
+        "landingY": 864.3166666666666
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 40,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": -3
+      },
+      "name": "grid-59",
+      "result": {
+        "hit": "wall",
+        "landingX": 1077.7445698004133,
+        "landingY": 602.227183040789
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 50,
+        "dirX": 1,
+        "power": 20,
+        "startX": 278,
+        "startY": 750,
+        "wind": 5
+      },
+      "name": "grid-60",
+      "result": {
+        "hit": "ground",
+        "landingX": 485.1002122005555,
+        "landingY": 864.4526047127188
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 60,
+        "dirX": 1,
+        "power": 65,
+        "startX": 510,
+        "startY": 750,
+        "wind": 1
+      },
+      "name": "grid-61",
+      "result": {
+        "hit": "ground",
+        "landingX": 1363.2405555555558,
+        "landingY": 874.473004204755
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 70,
+        "dirX": -1,
+        "power": 20,
+        "startX": 1412,
+        "startY": 750,
+        "wind": -1
+      },
+      "name": "grid-62",
+      "result": {
+        "hit": "ground",
+        "landingX": 1318.1886190203588,
+        "landingY": 862.6492026638047
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 80,
+        "dirX": -1,
+        "power": 65,
+        "startX": 1655,
+        "startY": 750,
+        "wind": -5
+      },
+      "name": "grid-63",
+      "result": {
+        "hit": "wall",
+        "landingX": 1063.6944381468843,
+        "landingY": 581.5218869141671
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 35,
+        "dirX": 1,
+        "power": 70,
+        "startX": 300,
+        "startY": 750,
+        "wind": 0
+      },
+      "name": "fence-hit",
+      "result": {
+        "hit": "wall",
+        "landingX": 853.9106123482168,
+        "landingY": 607.9642804060893
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 10,
+        "dirX": 1,
+        "power": 100,
+        "startX": 1660,
+        "startY": 750,
+        "wind": 0
+      },
+      "name": "right-out",
+      "result": {
+        "hit": "out",
+        "landingX": 1931.80693983137,
+        "landingY": 723.3064362972606
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 55,
+        "dirX": 1,
+        "power": 85,
+        "startX": 300,
+        "startY": 750,
+        "wave": true,
+        "wind": 0
+      },
+      "name": "wave-00",
+      "result": {
+        "hit": "ground",
+        "landingX": 1681.657008728934,
+        "landingY": 860.0
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 50,
+        "dirX": 1,
+        "power": 95,
+        "startX": 300,
+        "startY": 750,
+        "wave": true,
+        "wind": -3
+      },
+      "name": "wave-01",
+      "result": {
+        "hit": "ground",
+        "landingX": 1521.1944760015447,
+        "landingY": 860.0
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 65,
+        "dirX": 1,
+        "power": 80,
+        "startX": 300,
+        "startY": 750,
+        "wave": true,
+        "wind": 0
+      },
+      "name": "wave-02",
+      "result": {
+        "hit": "ground",
+        "landingX": 1294.096229968544,
+        "landingY": 860.0
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 58,
+        "dirX": 1,
+        "power": 92,
+        "startX": 300,
+        "startY": 750,
+        "wave": true,
+        "wind": -2
+      },
+      "name": "wave-03",
+      "result": {
+        "hit": "ground",
+        "landingX": 1393.8347539646807,
+        "landingY": 860.0
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 55,
+        "dirX": -1,
+        "power": 85,
+        "startX": 1660,
+        "startY": 750,
+        "wave": true,
+        "wind": 0
+      },
+      "name": "wave-04",
+      "result": {
+        "hit": "ground",
+        "landingX": 278.34299127106584,
+        "landingY": 860.0
+      }
+    },
+    {
+      "input": {
+        "angleDeg": 65,
+        "dirX": -1,
+        "power": 80,
+        "startX": 1660,
+        "startY": 750,
+        "wave": true,
+        "wind": 0
+      },
+      "name": "wave-05",
+      "result": {
+        "hit": "ground",
+        "landingX": 665.9037700314598,
+        "landingY": 860.0
+      }
+    }
+  ],
+  "version": 1
+}

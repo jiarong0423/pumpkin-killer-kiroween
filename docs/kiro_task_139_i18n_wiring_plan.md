@@ -1,0 +1,13 @@
+# Kiro task 139 (IDE) — exact edit plan to wire the English UI into `index.html` (work block B09, B13; contest stage 1: English materials)
+
+The Chinese game text stays the default; an English switch must show the same screens in English (owner 2026-11-15: all materials in English, game text in Chinese, with a switch). `assets/i18n/zh-TW.json` and `assets/i18n/en.json` (153 strings) and `(not published)` already exist; the page does not use them yet. `index.html` has ONE writer (the main line), so you do NOT edit it: you write the plan and a new standalone module, and the main line applies the plan.
+
+Read: `assets/i18n/zh-TW.json`, `assets/i18n/en.json`, `docs/i18n_mapping_20261115.md`, `index.html` (read only: the start screen, hero tabs, HUD labels, dock buttons, float texts built with template strings, `HERO_BLURB`, `HERO_PROFILES` names, `SCENES`, the game-over text).
+
+Do, saving after each:
+1. Create `js/i18n.js` (pure, browser and Node, no DOM access at load): `I18n.setLang('zh'|'en')`, `I18n.t(key, vars)` with `{name}` placeholders, `I18n.lang()`, fallback to the Chinese string and then to the key, a function `I18n.apply(root)` that sets `textContent` of every element with `data-i18n` and `placeholder`/`title` of `data-i18n-attr`, and loading from the two JSON files through an injected loader (so Node tests need no network). The chosen language is kept in `localStorage` guarded by try/catch.
+2. Create `scripts/test_i18n.js` (plain Node, `assert`): missing key falls back, placeholders, both files have identical key sets, no empty strings, no Chinese character in `en.json`, `apply` on a tiny fake element tree, determinism. Run `node scripts/test_i18n.js`.
+3. Write `docs/i18n_wiring_plan_20261115.md` (max 120 lines): a numbered list of EVERY edit to `index.html` as `line N: old text -> new text` (add `data-i18n="key"` attributes in the markup; for strings built in JS, the exact `I18n.t('key', {...})` replacement), the `<script src="js/i18n.js">` line and its position, the language switch button (where, label, behaviour), the list of strings in the page that have no key yet (add them to BOTH json files and say which), and the export manifest line for `js/i18n.js`. Also list the places that must stay Chinese on purpose (the game text).
+4. Run `node scripts/test_i18n.js` and the existing `node scripts/test_ultimate_fx.js`; paste the last lines. If a shell call is refused, say so; do not invent output.
+
+Touch only `js/i18n.js`, `scripts/test_i18n.js`, `assets/i18n/zh-TW.json` and `assets/i18n/en.json` (new keys only, same keys in both), `docs/i18n_wiring_plan_20261115.md` and `docs/kiro_139_result_gpt-5.6-terra.md` (max 12 lines). Do not edit `index.html`. No network, no git.

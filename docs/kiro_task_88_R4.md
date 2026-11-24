@@ -1,0 +1,12 @@
+# Kiro task 88 — stage R4 / spec task T4: root documents (English drafts)
+
+Execute task T4 from `.kiro/specs/release-package/tasks.md` (your own spec). Read first: that T4 section and the requirements it cites, `docs/kiro_task_85_release_delivery.md` stage R4, `docs/kiro_84_release_plan_claude-sonnet-5.5.md` section 4, `(not published)` (the 8 write-up topics and the 5 scoring criteria), `docs/ASSET_PROVENANCE.md`, `assets/audio/_licenses`, `.kiro/steering/tech.md`, `docs/KIRO_LEDGER.md`, `docs/kiro_verified.json`.
+
+Write three English drafts in `(not published)` (not at the repository root), saving each as soon as it is written:
+1. `README.md` — what the game is, how to run it in three commands (static server then open the page), how to play, the bring-your-own-agent idea described as it exists today (the MCP server is a separate channel with its own tests; the browser game does not call it), the prototype is 1 vs 1 (not 4v4), licence MIT, credits pointer, and the literal text `HOSTED_URL` where the live link will go.
+2. `JUDGES.md` — one page: the 8 write-up topics (IDE/CLI/Web/Crew, custom agents, hooks, specs vs vibe coding, steering, MCP, property-based tests, powers) and the 5 scoring criteria, each with a file path and a command that reproduces the claim. Use `docs/kiro_verified.json` and the ledger: say "verified" only for tasks whose entry says verified; say "not checked" otherwise. Say plainly what Kiro did (tooling, plans, effects, sound, wind, dock, engine, fonts, the release package scripts) and what the main line did (index.html and the game page). Do not claim hooks ran in the IDE: no evidence file exists yet.
+3. `CREDITS.md` — every third-party asset and its licence, from `docs/ASSET_PROVENANCE.md` and the audio licence files (CC0 sources named); fonts under OFL with the licence files named. List anything whose provenance the files do not state under "provenance not recorded" instead of guessing.
+
+Rules: plain English, short sentences, every claim backed by a path that exists in the repository; no owner name, email, handle, absolute local path, credits balance or other private detail; no Co-Authored-By text.
+
+Check yourself without a script: every backticked path in the three drafts must exist (list each one you checked). Write `(not published)` (max 40 lines): files created, the paths you checked, what you did not verify. Update only the T4 boxes of `tasks.md` that your own check proves. Touch no other file. No network, no git, no GitHub.

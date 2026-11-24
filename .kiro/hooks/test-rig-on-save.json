@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Rig test on rig save",
+      "description": "When js/rig.js or a rig JSON in assets/rigs/ is saved, run scripts/test_rig.js if it exists. The script and both inputs are planned and do not exist yet, so the command is a no-op until they are added.",
+      "trigger": "PostFileSave",
+      "matcher": "(js/rig\\.js$|assets/rigs/[^/]*\\.json$)",
+      "action": {
+        "type": "command",
+        "command": "if [ -f scripts/test_rig.js ]; then node scripts/test_rig.js; else echo 'skip: scripts/test_rig.js does not exist yet'; fi"
+      },
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,1008 @@
+/* =============================================================================
+   Pumpkin Killer: bottom dock ("haunted stone and wood" control bar)
+   Drop-in stylesheet. CSS only: gradients, borders, shadows, pseudo-elements.
+   No images, no external fonts. Design notes: docs/dock_design.md
+   Preview: docs/dock_preview.html
+
+   HOW TO LOAD: add  <link rel="stylesheet" href="css/dock.css">  AFTER the
+   inline <style> block of index.html. Every rule is scoped under #bottom-dock
+   (id specificity), so it wins over the old .skill-bar / .skill-btn /
+   .hero-selector / .hero-tab rules whatever the order.
+
+   Existing ids and classes kept: #bottom-dock, .skill-bar, .skill-btn (.active,
+   .locked), .count-badge, .btn-tip, .hero-selector, .hero-tab (.active),
+   #skill-normal, #skill-double, #skill-heavy, #skill-heal, #skill-shield,
+   #badge-double, #badge-heavy, #badge-heal, #badge-shield.
+   New classes all start with "dock-" or "power-", plus state classes
+   (.ready, .cooldown, .is-*).
+
+   Size tiers (the game surface is the 16:9 #game-container, capped at 1400 px):
+     L  default       container > 1200 px   dock 104 px high
+     M  max-width 1200px                    dock  88 px high, no portrait
+     S  max-width  900px                    dock  76 px high, 44 px targets
+   The dock is placed BELOW the ground line (canvas y 860 of 1080 = 79.6 % of
+   the container height) so it never covers a character. See the clearance
+   table in docs/dock_design.md.
+   ========================================================================== */
+
+/* ---------- 1. Tokens ------------------------------------------------------ */
+#bottom-dock {
+  /* palette */
+  --stone-0: #120e1a;
+  --stone-1: #1d1828;
+  --stone-2: #2a2337;
+  --stone-3: #3b3249;
+  --iron: #6f6580;
+  --wood-0: #26160b;
+  --wood-1: #4a2e1a;
+  --wood-2: #6c4526;
+  --gold: #ffcf5a;
+  --gold-d: #b9852b;
+  --orange: #ff8a1f;
+  --orange-d: #c24e0b;
+  --cyan: #5df2ee;
+  --violet: #a98bff;
+  --violet-d: #5b3aa8;
+  --ink: #f6ecd8;
+  --ink-dim: #b9aecb;
+  --good: #62e88a;
+  --warn: #ffb347;
+  --danger: #ff5d6c;
+  --recess: #0c0913;
+
+  /* type */
+  --serif: Georgia, "Palatino Linotype", "Book Antiqua", "Noto Serif TC", "PMingLiU", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Noto Sans TC", sans-serif;
+  --fs-label: 12px;
+  --fs-name: 17px;
+  --fs-value: 28px;
+  --fs-hp: 14px;
+
+  /* geometry, tier L */
+  --dock-h: 104px;
+  --dock-bottom: 12px;
+  --bd: 6px;            /* wood frame thickness */
+  --pad: 6px;           /* gap between frame and content */
+  --gap: 10px;
+  --portrait: 80px;
+  --tile-w: 60px;
+  --tile-h: 76px;
+  --chip: 44px;
+  --slot: 60px;
+  --lock-w: 120px;
+  --lock-h: 68px;
+  --util: 44px;
+}
+
+/* ---------- 2. Frame ------------------------------------------------------- */
+#bottom-dock {
+  position: absolute;
+  left: 50%;
+  bottom: var(--dock-bottom);
+  transform: translateX(-50%);
+  width: 96%;
+  max-width: 1280px;
+  height: var(--dock-h);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap);
+  padding: var(--pad);
+  z-index: 20;
+  pointer-events: auto;            /* the plate is solid: a click on it must not start a charge */
+  color: var(--ink);
+  font-family: var(--sans);
+  border: var(--bd) solid transparent;
+  border-radius: 16px 16px 8px 8px;
+  /* padding-box = aged stone, border-box = wood beam */
+  background:
+    /* candle light falling from the top edge */
+    radial-gradient(90% 70% at 50% -15%, rgba(255, 190, 90, 0.16), transparent 62%) padding-box,
+    /* cracks and chisel marks */
+    repeating-linear-gradient(97deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 9px) padding-box,
+    repeating-linear-gradient(8deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 11px) padding-box,
+    /* weathering blotches */
+    radial-gradient(circle at 12% 70%, rgba(0, 0, 0, 0.30) 0 18px, transparent 19px) padding-box,
+    radial-gradient(circle at 47% 28%, rgba(255, 255, 255, 0.04) 0 22px, transparent 23px) padding-box,
+    radial-gradient(circle at 83% 76%, rgba(0, 0, 0, 0.26) 0 16px, transparent 17px) padding-box,
+    linear-gradient(180deg, var(--stone-2), var(--stone-1) 55%, var(--stone-0)) padding-box,
+    /* wood grain on the frame */
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.30) 0 1px, transparent 1px 6px) border-box,
+    repeating-linear-gradient(90deg, rgba(255, 220, 160, 0.06) 0 2px, transparent 2px 13px) border-box,
+    linear-gradient(180deg, var(--wood-2), var(--wood-1) 45%, var(--wood-0)) border-box;
+  box-shadow:
+    0 0 0 2px #07040b,                              /* dark outline */
+    inset 0 2px 10px rgba(0, 0, 0, 0.85),           /* stone sits recessed in the beam */
+    0 -2px 18px rgba(93, 242, 238, 0.10),           /* faint ghost-fire spill upward */
+    0 10px 28px rgba(0, 0, 0, 0.85);
+}
+
+/* ghost-fire line along the top edge of the stone */
+#bottom-dock::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 0;
+  height: 3px;
+  border-radius: 3px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--cyan) 18%, var(--violet) 50%, var(--cyan) 82%, transparent);
+  background-size: 200% 100%;
+  opacity: 0.55;
+  filter: blur(0.6px) drop-shadow(0 0 5px rgba(93, 242, 238, 0.8));
+  animation: dock-wisp-drift 7s linear infinite;
+}
+
+/* iron rivets in the four corners of the stone */
+#bottom-dock::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, #d8c28c 0 2px, #5b4a2a 3px, transparent 4.5px) left 5px top 5px / 10px 10px no-repeat,
+    radial-gradient(circle, #d8c28c 0 2px, #5b4a2a 3px, transparent 4.5px) right 5px top 5px / 10px 10px no-repeat,
+    radial-gradient(circle, #d8c28c 0 2px, #5b4a2a 3px, transparent 4.5px) left 5px bottom 5px / 10px 10px no-repeat,
+    radial-gradient(circle, #d8c28c 0 2px, #5b4a2a 3px, transparent 4.5px) right 5px bottom 5px / 10px 10px no-repeat,
+    radial-gradient(120% 100% at 50% 50%, transparent 62%, rgba(0, 0, 0, 0.35));   /* vignette */
+}
+
+/* groups inside the dock never shrink below their content, except the power meter */
+#bottom-dock > * { position: relative; z-index: 1; flex: 0 0 auto; }
+
+/* carved groove between groups */
+#bottom-dock .dock-sep {
+  align-self: stretch;
+  width: 3px;
+  margin: 6px 0;
+  border-radius: 2px;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.75) 20%, rgba(0, 0, 0, 0.75) 80%, transparent);
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.07);
+}
+
+/* ---------- 3. Decoration (CSS candles); hidden in tiers M and S ------------ */
+#bottom-dock .dock-candle {
+  position: absolute;
+  top: -14px;                     /* sticks up at most 14 px over the frame */
+  width: 9px;
+  height: 18px;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 2px 2px 1px 1px;
+  background: linear-gradient(90deg, #cdbf9c, #f5ead0 45%, #b3a583);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
+}
+#bottom-dock .dock-candle.left { left: 22px; }
+#bottom-dock .dock-candle.right { right: 22px; }
+#bottom-dock .dock-candle::before {            /* flame */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -11px;
+  width: 8px;
+  height: 12px;
+  margin-left: -4px;
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: radial-gradient(ellipse at 50% 70%, #fff6c8 0 25%, #ffc24a 55%, rgba(255, 120, 20, 0) 100%);
+  transform-origin: 50% 100%;
+  animation: dock-flicker 1.6s ease-in-out infinite;
+}
+#bottom-dock .dock-candle::after {             /* soft glow, low alpha so it never hides a character */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -34px;
+  width: 64px;
+  height: 64px;
+  margin-left: -32px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 190, 80, 0.22), transparent 68%);
+  animation: dock-flicker-glow 1.6s ease-in-out infinite;
+}
+#bottom-dock .dock-candle.right::before,
+#bottom-dock .dock-candle.right::after { animation-delay: -0.7s; }
+
+/* ---------- 4. Hero cluster: portrait, name, HP, hero chips ----------------- */
+#bottom-dock .dock-hero {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#bottom-dock .dock-portrait {
+  position: relative;
+  width: var(--portrait);
+  height: var(--portrait);
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 3px solid var(--gold-d);
+  background:
+    var(--portrait-img, none) center / cover no-repeat,       /* real art later: style="--portrait-img:url(...)" */
+    radial-gradient(circle at 50% 35%, #6a3cc0, #1b0f33 72%);
+  box-shadow:
+    inset 0 0 16px rgba(0, 0, 0, 0.85),
+    0 0 0 2px #07040b,
+    0 0 14px rgba(169, 139, 255, 0.35);
+}
+#bottom-dock .dock-portrait-art {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: calc(var(--portrait) * 0.58);
+  line-height: 1;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.7));
+}
+#bottom-dock .dock-portrait::after {                           /* glass sheen */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.16), transparent 38%);
+}
+/* it is my unit's turn: cyan ring that breathes */
+#bottom-dock.is-my-turn .dock-portrait { border-color: var(--cyan); animation: dock-ring 2s ease-in-out infinite; }
+/* throw drama (owner request): the portrait reacts while charging, at release, and when hit */
+#bottom-dock .dock-portrait.is-charging { border-color: var(--orange); animation: dock-shake 0.18s linear infinite; }
+#bottom-dock .dock-portrait.is-shout { border-color: var(--gold); animation: dock-shout 0.35s ease-out 1; }
+#bottom-dock .dock-portrait.is-hit { border-color: var(--danger); animation: dock-shake 0.12s linear 4; }
+#bottom-dock .dock-portrait.is-hit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 60, 80, 0.35);
+}
+
+#bottom-dock .dock-id {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: calc(var(--chip) * 4 + 6px);
+}
+#bottom-dock .dock-name-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  height: 20px;
+  white-space: nowrap;
+}
+#bottom-dock .dock-name {
+  font: 700 var(--fs-name) / 1 var(--serif);
+  color: var(--ink);
+  text-shadow: 0 1px 0 #000, 0 0 8px rgba(255, 190, 90, 0.35);
+}
+#bottom-dock .dock-hp-num {
+  font: 700 var(--fs-hp) / 1 var(--sans);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 0 #000;
+}
+#bottom-dock .dock-hp {
+  position: relative;
+  height: 12px;
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid #000;
+  background: var(--recess);
+  box-shadow: inset 0 2px 4px #000, 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+#bottom-dock .dock-hp-fill {
+  display: block;
+  height: 100%;
+  width: calc(var(--hp, 100) * 1%);       /* JS sets style="--hp:70" */
+  border-radius: 7px;
+  background: linear-gradient(180deg, #9bf5b3, var(--good) 45%, #2f9d55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 0 8px rgba(98, 232, 138, 0.5);
+  transition: width 0.35s ease-out;
+}
+#bottom-dock .dock-hp.is-mid .dock-hp-fill { background: linear-gradient(180deg, #ffe08a, var(--warn) 45%, #b9741a); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 0 8px rgba(255, 179, 71, 0.5); }
+#bottom-dock .dock-hp.is-low .dock-hp-fill { background: linear-gradient(180deg, #ff9aa5, var(--danger) 45%, #a3202f); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 8px rgba(255, 93, 108, 0.6); animation: dock-low-hp 1s ease-in-out infinite; }
+#bottom-dock .dock-hp-inner { display: none; }   /* number inside the bar, tiers M and S only */
+
+/* hero chips: the old .hero-tab buttons, now 44 px tiles with a glyph and a short name */
+#bottom-dock .hero-selector {
+  display: flex;
+  gap: 2px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  backdrop-filter: none;
+  pointer-events: auto;
+}
+#bottom-dock .hero-tab {
+  position: relative;
+  width: var(--chip);
+  height: var(--chip);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  border-radius: 10px;
+  border: 2px solid var(--iron);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.10), transparent 60%),
+    linear-gradient(180deg, var(--stone-3), var(--stone-1));
+  color: var(--ink-dim);
+  font: 700 var(--fs-label) / 1 var(--serif);
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -3px 5px rgba(0, 0, 0, 0.5), 0 2px 0 #07040b;
+  transition: transform 0.12s ease-out, box-shadow 0.15s, border-color 0.15s, color 0.15s;
+}
+#bottom-dock .hero-tab .hero-glyph { font-size: 20px; line-height: 1; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7)); }
+#bottom-dock .hero-tab .hero-name { font-size: var(--fs-label); line-height: 1; white-space: nowrap; }
+/* switchHero() in index.html uses event.target; make the chip itself the target, not its inner spans */
+#bottom-dock .hero-tab > * { pointer-events: none; }
+#bottom-dock .hero-tab.active {
+  color: var(--ink);
+  border-color: var(--cyan);
+  background:
+    radial-gradient(circle at 50% 25%, rgba(93, 242, 238, 0.40), transparent 65%),
+    linear-gradient(180deg, #1f4a52, #10252e);
+  box-shadow: inset 0 0 10px rgba(93, 242, 238, 0.45), 0 0 12px rgba(93, 242, 238, 0.55), 0 2px 0 #07040b;
+}
+
+/* ---------- 5. Shot buttons (.skill-bar / .skill-btn) ----------------------- */
+#bottom-dock .skill-bar {
+  display: flex;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  pointer-events: auto;
+}
+/* the old markup carries inline colours on two elements; neutralise them */
+#bottom-dock .skill-bar[style] { background: none !important; border-color: transparent !important; }
+#bottom-dock .skill-btn[style] { border-color: var(--iron) !important; }
+
+#bottom-dock .skill-btn {
+  position: relative;
+  width: var(--tile-w);
+  height: var(--tile-h);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 12px;
+  border: 2px solid var(--iron);
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.13), transparent 58%),
+    repeating-linear-gradient(100deg, rgba(255, 255, 255, 0.025) 0 2px, transparent 2px 7px),
+    linear-gradient(180deg, var(--stone-3), var(--stone-1) 70%, var(--stone-0));
+  color: var(--ink);
+  font: 700 var(--fs-label) / 1 var(--serif);
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -4px 7px rgba(0, 0, 0, 0.55),
+    0 3px 0 #07040b,
+    0 6px 10px rgba(0, 0, 0, 0.55);
+  transition: transform 0.12s ease-out, box-shadow 0.15s ease-out, border-color 0.15s, filter 0.15s;
+}
+/* the icon is the first span (emoji now, Colab icon later: set background-image on it) */
+#bottom-dock .skill-btn > span:first-child {
+  font-size: calc(var(--tile-w) * 0.42);
+  line-height: 1;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.7));
+}
+#bottom-dock .skill-btn .btn-tip {
+  margin: 0;
+  font-size: var(--fs-label);
+  line-height: 1;
+  color: var(--ink-dim);
+  letter-spacing: 0.04em;
+}
+/* cooldown overlay (sweeps clockwise) and ready ring share the pseudo-elements */
+#bottom-dock .skill-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: none;
+}
+#bottom-dock .skill-btn::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 14px;
+  pointer-events: none;
+  border: 2px solid transparent;
+}
+
+/* hover (pointer devices only): lift and glow in candle gold */
+@media (hover: hover) {
+  #bottom-dock .skill-btn:hover:not(:disabled):not(.locked):not(.cooldown),
+  #bottom-dock .hero-tab:hover {
+    transform: translateY(-2px);
+    border-color: var(--gold);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -4px 7px rgba(0, 0, 0, 0.5),
+      0 3px 0 #07040b,
+      0 0 16px rgba(255, 207, 90, 0.55);
+  }
+  #bottom-dock .skill-btn:hover:not(:disabled):not(.locked):not(.cooldown) .btn-tip { color: var(--ink); }
+}
+
+/* active = the selected shot type: warm orange glow, gold rim */
+#bottom-dock .skill-btn.active {
+  border-color: var(--gold);
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255, 190, 80, 0.60), transparent 66%),
+    linear-gradient(180deg, #7a4216, #3b1d0a);
+  transform: none;
+  box-shadow:
+    inset 0 0 14px rgba(255, 160, 50, 0.6),
+    inset 0 -4px 7px rgba(0, 0, 0, 0.45),
+    0 3px 0 #07040b,
+    0 0 18px rgba(255, 150, 40, 0.6);
+}
+#bottom-dock .skill-btn.active .btn-tip { color: var(--gold); }
+
+/* pressed: the plate sinks 2 px */
+#bottom-dock .skill-btn:active:not(:disabled):not(.locked):not(.cooldown),
+#bottom-dock .hero-tab:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 3px 9px rgba(0, 0, 0, 0.75), 0 1px 0 #07040b;
+}
+
+/* disabled / locked: desaturated, no hover, not-allowed cursor */
+#bottom-dock .skill-btn:disabled,
+#bottom-dock .skill-btn.locked {
+  opacity: 0.5;
+  filter: grayscale(1) brightness(0.8);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: inset 0 -4px 7px rgba(0, 0, 0, 0.55), 0 2px 0 #07040b;
+}
+
+/* cooldown: dark clockwise sweep, driven by --cd (1 = just used, 0 = ready) */
+#bottom-dock .skill-btn.cooldown { cursor: not-allowed; filter: saturate(0.5); }
+#bottom-dock .skill-btn.cooldown::before {
+  background: conic-gradient(rgba(8, 5, 14, 0.78) calc(var(--cd, 1) * 1turn), transparent 0);
+}
+
+/* ready pulse: a violet ring breathes when a shot type has a charge available */
+#bottom-dock .skill-btn.ready:not(.active)::after {
+  border-color: rgba(169, 139, 255, 0.85);
+  animation: dock-ready 1.8s ease-in-out infinite;
+}
+
+/* count badge: wax seal in the top-right corner */
+#bottom-dock .skill-btn .count-badge {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  bottom: auto;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  border-radius: 11px;
+  border: 2px solid #ffd98a;
+  background: radial-gradient(circle at 35% 30%, #ff6b5a, #b3202c 70%);
+  color: #fff;
+  font: 700 var(--fs-label) / 1 var(--sans);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+#bottom-dock .skill-btn .count-badge.is-empty { background: radial-gradient(circle at 35% 30%, #8a8095, #4a4256); border-color: #8a8095; }
+
+/* keyboard focus */
+#bottom-dock .skill-btn:focus-visible,
+#bottom-dock .hero-tab:focus-visible,
+#bottom-dock .dock-lock:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+/* old buttons that the click menu replaced: keep them in the DOM, hide them */
+#bottom-dock .dock-hidden { display: none !important; }
+
+/* ---------- 6. Readouts: angle and segmented power meter -------------------- */
+#bottom-dock .dock-readouts {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+#bottom-dock .dock-label {
+  display: block;
+  font: 700 var(--fs-label) / 1 var(--serif);
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  text-shadow: 0 1px 0 #000;
+}
+#bottom-dock .dock-plate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid #000;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(169, 139, 255, 0.10), transparent 70%),
+    var(--recess);
+  box-shadow: inset 0 3px 8px #000, 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+#bottom-dock .dock-angle { width: 88px; flex: 0 0 auto; text-align: center; }
+#bottom-dock .dock-value {
+  font: 700 var(--fs-value) / 1 var(--serif);
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 10px rgba(255, 190, 80, 0.55), 0 2px 0 #000;
+}
+#bottom-dock .dock-power { flex: 1 1 150px; min-width: 110px; max-width: 320px; }
+#bottom-dock .dock-power-head { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; }
+#bottom-dock .dock-power .dock-value { font-size: 16px; }
+
+#bottom-dock .power-meter {
+  position: relative;
+  height: 22px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+/* 20 segments: each is 5 % of the width with a 3 px gap, made with a repeating mask */
+#bottom-dock .power-track,
+#bottom-dock .power-fill {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: repeating-linear-gradient(90deg, #000 0, #000 calc(5% - 3px), transparent calc(5% - 3px), transparent 5%);
+          mask-image: repeating-linear-gradient(90deg, #000 0, #000 calc(5% - 3px), transparent calc(5% - 3px), transparent 5%);
+}
+#bottom-dock .power-track { background: linear-gradient(180deg, #2b2536, #17121f); }
+#bottom-dock .power-fill {
+  /* JS sets style="--power:55" (0..100, steps of 5 look best); clip-path hides the unfilled part */
+  background: linear-gradient(90deg, #ffe27a 0%, #ffb02e 40%, #ff7a1a 72%, #ff3b2e 100%);
+  clip-path: inset(0 calc(100% - var(--power, 0) * 1%) 0 0);
+  filter: drop-shadow(0 0 6px rgba(255, 150, 40, 0.8));
+}
+#bottom-dock .power-meter::after {              /* glass highlight over the whole meter */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 45%);
+}
+#bottom-dock.is-charging .power-meter { box-shadow: 0 0 14px rgba(255, 150, 40, 0.6); }
+
+/* ---------- 7. Ammo and special-weapon slots -------------------------------- */
+#bottom-dock .dock-slots { display: flex; gap: 8px; align-items: flex-end; }
+#bottom-dock .dock-slot { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: var(--slot); }
+#bottom-dock .dock-slot-box {
+  position: relative;
+  width: var(--slot);
+  height: var(--slot);
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  border: 2px solid var(--gold-d);
+  background:
+    radial-gradient(circle at 50% 30%, rgba(255, 190, 90, 0.18), transparent 65%),
+    var(--recess);
+  box-shadow: inset 0 3px 8px #000, 0 0 0 1px #000, 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+#bottom-dock .dock-slot-icon { font-size: calc(var(--slot) * 0.55); line-height: 1; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.7)); }
+#bottom-dock .dock-slot-count {
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+  font: 700 var(--fs-label) / 1 var(--sans);
+  color: var(--ink);
+  text-shadow: 0 1px 0 #000, 0 0 3px #000;
+}
+/* special-weapon slot: dashed violet socket while empty, glowing when an airdrop item sits in it */
+#bottom-dock .dock-special .dock-slot-box { border: 2px dashed rgba(169, 139, 255, 0.65); }
+#bottom-dock .dock-special .dock-slot-box::after {
+  content: "✦";
+  color: rgba(169, 139, 255, 0.35);
+  font-size: calc(var(--slot) * 0.4);
+}
+#bottom-dock .dock-special.is-full .dock-slot-box {
+  border-style: solid;
+  border-color: var(--violet);
+  animation: dock-ready 1.8s ease-in-out infinite;
+}
+#bottom-dock .dock-special.is-full .dock-slot-box::after { content: none; }
+
+/* ---------- 8. Lock button -----------------------------------------------------
+   Shown only when there is something to confirm: today, while the Pumpkin Guard
+   places the floating shield (set the hidden attribute off, click calls
+   toggleShieldDefend()); later, the round Lock of the 4 vs 4 mode.
+   Hidden by default with the "hidden" attribute. */
+#bottom-dock .dock-lock {
+  position: relative;
+  width: var(--lock-w);
+  height: var(--lock-h);
+  min-height: 44px;
+  padding: 0 10px;
+  border-radius: 14px;
+  border: 3px solid #ffd98a;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(255, 245, 200, 0.55), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(120, 40, 0, 0.12) 0 2px, transparent 2px 9px),
+    linear-gradient(180deg, #ffa83e, #ec6a0e 55%, #a8420a);
+  color: #2a1204;
+  font: 700 24px / 1 var(--serif);
+  letter-spacing: 0.12em;
+  text-shadow: 0 1px 0 rgba(255, 224, 170, 0.8);
+  cursor: pointer;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -6px 9px rgba(120, 40, 0, 0.55),
+    0 4px 0 #5a2204,
+    0 0 20px rgba(255, 138, 31, 0.5);
+  transition: transform 0.12s ease-out, box-shadow 0.15s, filter 0.15s;
+}
+@media (hover: hover) {
+  #bottom-dock .dock-lock:hover:not(:disabled) {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.55), inset 0 -6px 9px rgba(120, 40, 0, 0.5), 0 4px 0 #5a2204, 0 0 28px rgba(255, 170, 60, 0.8);
+  }
+}
+#bottom-dock .dock-lock:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: inset 0 4px 10px rgba(90, 30, 0, 0.8), 0 1px 0 #5a2204;
+}
+#bottom-dock .dock-lock:disabled {
+  cursor: not-allowed;
+  filter: grayscale(1) brightness(0.55);
+  box-shadow: inset 0 -6px 9px rgba(0, 0, 0, 0.5), 0 2px 0 #07040b;
+}
+#bottom-dock .dock-lock.ready { animation: dock-lock-pulse 1.8s ease-in-out infinite; }
+#bottom-dock .dock-lock[hidden] { display: none; }
+
+/* ---------- 9. Utility (reset) ---------------------------------------------- */
+#bottom-dock .dock-utility { margin-left: auto; display: flex; align-items: center; }
+#bottom-dock .skill-btn.dock-reset {
+  width: var(--util);
+  height: var(--util);
+  gap: 1px;
+  border-radius: 10px;
+  opacity: 0.85;
+}
+#bottom-dock .skill-btn.dock-reset > span:first-child { font-size: 18px; }
+
+/* ---------- 10. Motion ------------------------------------------------------- */
+@keyframes dock-wisp-drift { from { background-position: 0 0; } to { background-position: 200% 0; } }
+@keyframes dock-flicker {
+  0%, 100% { transform: scale(1, 1) rotate(0deg); opacity: 0.95; }
+  30% { transform: scale(0.92, 1.08) rotate(-3deg); opacity: 1; }
+  60% { transform: scale(1.05, 0.94) rotate(2deg); opacity: 0.85; }
+}
+@keyframes dock-flicker-glow { 0%, 100% { opacity: 0.85; } 40% { opacity: 1; } 70% { opacity: 0.7; } }
+@keyframes dock-ring {
+  0%, 100% { box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.85), 0 0 0 2px #07040b, 0 0 8px rgba(93, 242, 238, 0.35); }
+  50%      { box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.85), 0 0 0 2px #07040b, 0 0 20px rgba(93, 242, 238, 0.85); }
+}
+@keyframes dock-ready { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@keyframes dock-lock-pulse {
+  0%, 100% { box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5), inset 0 -6px 9px rgba(120, 40, 0, 0.55), 0 4px 0 #5a2204, 0 0 14px rgba(255, 138, 31, 0.4); }
+  50%      { box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5), inset 0 -6px 9px rgba(120, 40, 0, 0.55), 0 4px 0 #5a2204, 0 0 30px rgba(255, 170, 60, 0.9); }
+}
+@keyframes dock-shake { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(-1px, 1px); } 75% { transform: translate(1px, -1px); } }
+@keyframes dock-shout { 0% { transform: scale(1); filter: brightness(1); } 35% { transform: scale(1.1); filter: brightness(1.5); } 100% { transform: scale(1); filter: brightness(1); } }
+@keyframes dock-low-hp { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.45); } }
+
+@media (prefers-reduced-motion: reduce) {
+  #bottom-dock,
+  #bottom-dock *,
+  #bottom-dock *::before,
+  #bottom-dock *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- 11. Tier M: container 901 to 1200 px ---------------------------- */
+@media (max-width: 1200px) {
+  #bottom-dock {
+    --dock-h: 88px;
+    --dock-bottom: 8px;
+    --bd: 5px;
+    --pad: 5px;
+    --gap: 8px;
+    --tile-w: 56px;
+    --tile-h: 68px;
+    --slot: 52px;
+    --lock-w: 96px;
+    --lock-h: 56px;
+    --fs-value: 24px;
+  }
+  #bottom-dock .dock-portrait,
+  #bottom-dock .dock-candle,
+  #bottom-dock .dock-name-row { display: none; }     /* the active hero chip stands in for the portrait */
+  #bottom-dock .dock-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  #bottom-dock .dock-hp { height: 16px; }
+  #bottom-dock .dock-hp-inner {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font: 700 12px / 1 var(--sans);
+    color: var(--ink);
+    text-shadow: 0 1px 0 #000, 0 0 3px #000;
+  }
+  #bottom-dock .dock-angle { width: 72px; }
+  #bottom-dock .dock-lock { font-size: 20px; }
+}
+
+/* ---------- 12. Tier S: 900 px and below (the 800 px pane) ------------------- */
+@media (max-width: 900px) {
+  #bottom-dock {
+    --dock-h: 76px;
+    --dock-bottom: 6px;
+    --bd: 4px;
+    --pad: 4px;
+    --gap: 6px;
+    --tile-w: 44px;
+    --tile-h: 60px;
+    --chip: 44px;
+    --slot: 44px;
+    --lock-w: 60px;
+    --lock-h: 48px;
+    --util: 44px;
+    --fs-value: 20px;
+    border-radius: 12px 12px 6px 6px;
+  }
+  #bottom-dock::after { background: radial-gradient(120% 100% at 50% 50%, transparent 62%, rgba(0, 0, 0, 0.35)); }   /* no rivets */
+  #bottom-dock .dock-sep { display: none; }          /* saves 24 px so the optional Lock still fits in 768 px */
+  #bottom-dock .dock-hero { gap: 0; }
+  #bottom-dock .dock-id { gap: 2px; }
+  #bottom-dock .dock-hp { height: 14px; }
+  #bottom-dock .skill-bar { gap: 4px; }
+  #bottom-dock .skill-btn { gap: 2px; border-radius: 10px; }
+  #bottom-dock .skill-btn > span:first-child { font-size: 22px; }
+  #bottom-dock .skill-btn .count-badge { top: -6px; right: -5px; min-width: 20px; height: 20px; }
+  #bottom-dock .dock-readouts { gap: 6px; }
+  #bottom-dock .dock-plate { padding: 4px 6px; gap: 2px; border-radius: 8px; }
+  #bottom-dock .dock-angle { width: 56px; }
+  #bottom-dock .dock-power { flex-basis: 90px; min-width: 80px; }
+  #bottom-dock .dock-power .dock-value { font-size: 14px; }
+  #bottom-dock .power-meter { height: 16px; }
+  #bottom-dock .dock-slots { gap: 4px; }
+  #bottom-dock .dock-slot { gap: 2px; min-width: 44px; }
+  #bottom-dock .dock-slot-box { border-radius: 10px; }
+  #bottom-dock .dock-lock { font-size: 16px; letter-spacing: 0.02em; padding: 0 4px; border-width: 2px; }
+  #bottom-dock .skill-btn.dock-reset > span:first-child { font-size: 16px; }
+}
+
+/* The dock itself ignores the mouse so a press beside the plates still starts a charge, but EVERY control on the right side must take clicks:
+   the supply slot, the sound and reset buttons, the shield lock and the ultimate button (owner 2026-11-09: 'the right-side buttons do nothing';
+   cause: they inherited pointer-events none from #bottom-dock, so real clicks fell through to the canvas). */
+#bottom-dock .dock-special,
+#bottom-dock .dock-utility,
+#bottom-dock .dock-utility button,
+#bottom-dock .dock-lock,
+#bottom-dock .dock-ammo { pointer-events: auto; }
+#bottom-dock .dock-special.is-full { cursor: pointer; }
+
+/* ultimate button in the skill row: dim while locked, pulsing when the three pips are lit (owner 2026-11-09) */
+#bottom-dock #skill-ult.is-locked { opacity: 0.45; filter: grayscale(0.6); }
+#bottom-dock #skill-ult.is-ready { animation: dock-lock-pulse 1.6s ease-in-out infinite; filter: drop-shadow(0 0 8px rgba(255, 210, 90, 0.85)); }
+
+/* sound and reset live at the top of the screen now (owner 2026-11-09); same Colab round-button art as before */
+#top-controls { position: absolute; top: 34px; left: 62%; display: flex; gap: 8px; z-index: 30; pointer-events: auto; }
+#top-controls .skill-btn { width: 40px; height: 40px; min-width: 40px; padding: 0; cursor: pointer; background-color: transparent; background-size: contain; background-position: center; background-repeat: no-repeat; border: none; box-shadow: none; }
+#top-controls #sound-btn { background-image: url(../assets/ui/btn_sound.webp); }
+#top-controls #reset-btn { background-image: url(../assets/ui/btn_reset.webp); }
+#top-controls .skill-btn > span { opacity: 0; }
+#top-controls .btn-tip { display: none; }
+#top-controls .skill-btn.is-locked { opacity: 0.4; filter: grayscale(1); cursor: not-allowed; }
+
+/* supply slots moved to the top, under each side banner (owner 2026-11-10: not in the bottom dock); the ammo slot is gone (ammo is infinite) */
+.top-supply { position: absolute; top: 15.5%; z-index: 30; display: flex; flex-direction: column; align-items: center; gap: 2px; pointer-events: auto; }
+.top-supply.left { left: 2.2%; } .top-supply.right { right: 2.2%; pointer-events: none; }
+.top-supply .ts-label { font: bold 12px system-ui, "Noto Sans TC", sans-serif; color: #f5d98a; text-shadow: 0 1px 3px #000; }
+.top-supply .ts-box { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: url(../assets/ui/socket_special.webp) center / 100% 100% no-repeat; font-size: 26px; }
+.top-supply.left { cursor: default; } .top-supply.left.is-full { cursor: pointer; }
+.top-supply.is-full .ts-box { filter: drop-shadow(0 0 8px rgba(255, 210, 90, 0.9)); }
+
+/* LAYOUT of the top objects (owner 2026-11-10: they must not overlap). On the 1920x1080 canvas the banners fill y 6..170, the diamonds y 171..205,
+   the centre piece y 6..152 and the wind plate y 156..225. So: the supply slots sit under the diamonds (y 215 up, 20 percent), and the sound / reset / help row
+   is centred under the wind plate (y 232 up, 21.8 percent). */
+#top-controls { left: 50% !important; top: 25.5% !important; transform: translateX(-50%); gap: 10px; }
+#top-controls #help-btn { font-size: 20px; }
+.top-supply { top: 20.2% !important; }
+.top-supply.left { left: 1.2% !important; } .top-supply.right { right: 1.2% !important; }
+
+/* the three round buttons under the wind ghost are smaller now (owner 2026-11-10) */
+#top-controls { gap: 6px !important; }
+#top-controls .skill-btn { width: 28px !important; height: 28px !important; min-width: 28px !important; }
+#top-controls #help-btn { width: 28px !important; height: 28px !important; font-size: 15px !important; border-width: 1.5px; }
+
+/* sound / reset / help: half transparent and grey until the pointer comes NEAR them, then they take their colour (owner 2026-11-10).
+   "Near" = anywhere in a 16 px halo around the row (the padding below is part of the hover area), not only on a button. Touch screens have no hover: they stay clearly visible. */
+#top-controls { padding: 16px !important; margin: -16px; }
+#top-controls .skill-btn, #top-controls #help-btn { opacity: 0.34; filter: grayscale(0.85); transition: opacity 0.18s ease, filter 0.18s ease, transform 0.12s ease; }
+#top-controls:hover .skill-btn, #top-controls:hover #help-btn, #top-controls:focus-within .skill-btn, #top-controls:focus-within #help-btn { opacity: 0.92; filter: none; }
+#top-controls .skill-btn:hover, #top-controls #help-btn:hover { opacity: 1; transform: scale(1.12); }
+#top-controls .skill-btn.is-locked { opacity: 0.22 !important; filter: grayscale(1) !important; }
+@media (hover: none) { #top-controls .skill-btn, #top-controls #help-btn { opacity: 0.8; filter: none; } }
+
+/* owner 2026-11-10: put sound / reset / help in the empty space right of the timer piece, left of the opponent banner */
+#top-controls { left: 66.5% !important; top: 7.4% !important; transform: translate(-50%, 0); }
+
+/* owner 2026-11-10 "右邊中間": right edge, vertical middle, as a column (the row at the top overlapped the moon and the opponent banner ornament) */
+/* owner 2026-11-16 "move these three to the top": a row at the top, in the gap between the turn banner and the opponent plate (the plates are narrower now, so the old overlap with the moon is gone) */
+#top-controls { left: 69.5% !important; top: 3.4% !important; flex-direction: row; transform: translate(-50%, 0); }
+
+/* owner 2026-11-10 "no numbers on the health bar": the percent next to the name and any number inside the bar are hidden; the bar alone shows health */
+#bottom-dock .dock-hp-num, #bottom-dock .dock-hp-inner { display: none !important; }
+/* empty supply boxes show a dash instead of looking like an unfinished placeholder (review 2026-11-16) */
+.top-supply .ts-box span:empty::before { content: "\2014"; color: rgba(255, 255, 255, 0.4); font-size: 22px; }
+.top-supply:not(.is-full) .ts-box { opacity: 0.8; }
+
+/* Touch devices need visible, finger-sized controls without relying on hover. */
+@media (hover: none) {
+  #top-controls .skill-btn,
+  #top-controls #help-btn {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    opacity: 1;
+    filter: none;
+  }
+  #top-controls #help-btn {
+    background: #5df2ee;
+    color: #120a22;
+    box-shadow: 0 0 14px rgba(93, 242, 238, 0.85);
+  }
+}
+
+/* the language button was invisible (its span had opacity 0 and it had no picture): a round globe like its neighbours, always readable (owner asked 2026-11-16 where the language switch is) */
+#top-controls #lang-btn { border: 1.5px solid rgba(255, 255, 255, 0.6) !important; border-radius: 50%; background-color: rgba(20, 10, 40, 0.6) !important; }
+#top-controls #lang-btn > span:not(.btn-tip) { opacity: 1 !important; font-size: 15px; line-height: 1; }
+
+
+/* Phone landscape: preserve 44 px touch controls while the dock fits inside the visible viewport. */
+@media (max-height: 480px) and (orientation: landscape) {
+  #bottom-dock {
+    --dock-h: min(76px, 18dvh);
+    --dock-bottom: max(0px, env(safe-area-inset-bottom));
+    --tile-w: 44px;
+    --tile-h: 44px;
+    --gap: 3px;
+    --pad: 3px;
+    width: calc(100% - 8px);
+  }
+  #bottom-dock .skill-bar { gap: 2px; }
+  #bottom-dock .skill-btn {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  #bottom-dock .skill-btn .btn-tip { display: none; }
+  #bottom-dock .dock-readouts { gap: 3px; min-width: 0; }
+  #bottom-dock .dock-angle { width: 52px; }
+  #bottom-dock .dock-power { min-width: 76px; flex-basis: 76px; }
+  #bottom-dock .dock-plate { padding: 3px 5px; }
+  #bottom-dock .dock-label { font-size: 11px; }
+  #bottom-dock .dock-value { font-size: 17px; }
+  #bottom-dock .dock-power .dock-value { font-size: 12px; }
+  #bottom-dock .power-meter { height: 12px; }
+
+  /* Keep the four 44 px controls to the right of the countdown board. */
+  #top-controls {
+    left: auto !important;
+    right: 2% !important;
+    top: 2% !important;
+    transform: none !important;
+    margin: 0;
+    padding: 0 !important;
+    gap: 4px !important;
+  }
+}
+
+/* A wide phone keeps secondary controls in the scenic side margin, never over the centre board. */
+html.has-side-margin #top-controls {
+  position: fixed;
+  z-index: 31;
+  left: auto !important;
+  right: max(12px, env(safe-area-inset-right)) !important;
+  top: max(12px, env(safe-area-inset-top)) !important;
+  transform: none !important;
+  flex-direction: column;
+  margin: 0;
+  padding: 0 !important;
+  gap: 8px !important;
+}
+
+/* One utility-menu target keeps phone controls out of the opponent HUD. */
+#top-controls {
+  position: absolute;
+  z-index: 57;
+  left: 50% !important;
+  right: auto !important;
+  top: 15% !important;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%) !important;
+  flex-direction: row;
+  margin: 0;
+  padding: 0 !important;
+  gap: 0 !important;
+}
+#top-controls .skill-btn {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  opacity: 1;
+  filter: none;
+}
+/* Settings button: larger, see-through, no frame; colour only on hover/focus/press. */
+#top-controls #settings-btn {
+  --gear: clamp(44px, calc(var(--stage-w, 548px) * .066), 56px);   /* 44 px touch minimum up to the owner's 56 px; on a narrow stage (640 x 360) it stays clear of the opponent plate */
+  width: var(--gear) !important;
+  height: var(--gear) !important;
+  min-width: var(--gear) !important;
+  min-height: var(--gear) !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  opacity: .5;
+  filter: none;
+  transition: opacity .15s ease, background-color .15s ease;
+}
+#top-controls #settings-btn > span { opacity: 1 !important; font-size: calc(var(--gear) * .6); line-height: 1; color: rgba(255,255,255,.9); }
+#top-controls #settings-btn:hover,
+#top-controls #settings-btn:focus-visible,
+#top-controls #settings-btn:active,
+#top-controls #settings-btn[aria-expanded="true"] {
+  opacity: 1;
+  background-color: transparent !important;   /* owner: no filled circle on hover, only the glyph changes colour */
+  box-shadow: none !important;
+  transform: none !important;   /* owner: the object itself only, no lift or scale of the button */
+  outline: none;
+}
+#top-controls #settings-btn:hover > span,
+#top-controls #settings-btn:focus-visible > span,
+#top-controls #settings-btn:active > span,
+#top-controls #settings-btn[aria-expanded="true"] > span {
+  color: #7fe3ff;
+  text-shadow: none;
+  animation: settings-blue-blink .9s ease-in-out infinite;
+}
+@keyframes settings-blue-blink { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+@media (prefers-reduced-motion: reduce) { #top-controls #settings-btn > span { animation: none !important; } }
+#top-controls .btn-tip { display: none; }
+html.has-side-margin #top-controls {
+  position: fixed;
+  left: auto !important;
+  right: max(12px, env(safe-area-inset-right)) !important;
+  top: max(12px, env(safe-area-inset-top)) !important;
+  transform: none !important;
+}

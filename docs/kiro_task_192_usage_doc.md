@@ -1,0 +1,11 @@
+# Kiro task 192 — complete the Kiro usage document (docs only; Kiro writes, the main line re-checks every claim)
+
+LOCK: you write only `docs/KIRO_USAGE_20261116.md` and `docs/kiro_192_result.md`. Do not touch code, `.kiro/` or any other file. Never push.
+Read `docs/finishing_brief_20261116.md` task C1 (this is that task) and `docs/OFFICIAL_VS_GAP_20261116.md` row 11. Keep the document under 120 lines, plain English, claims only what the repository proves (cite file paths). The official page asks the judges to see: IDE / CLI / Web / Crew differences; custom agents; agent hooks; spec-driven development against ad-hoc coding; steering; MCP; property-based testing; third-party tools. Add what is missing from the current 47-line version:
+- IDE / CLI / Web / Crew: we used Kiro CLI (`scripts/kiro_route.py`) and the Kiro desktop app; say so. Kiro Crew: write only what a later main-line note adds; see the Crew line already in the document (Crew used once for a read-only audit).
+- Spec versus ad-hoc: use real examples from the repository history (the golden vectors file that was reported written but was not, the simulator rewrite that dropped 18 tests, the poison model that did not match the page): cite the commit or the file and what the spec or test made visible. Run `git log --oneline` and read `docs/DEV_LOG_20261116.md`, `docs/KIRO_USAGE_20261116.md`, `docs/kiro_*_result.md`.
+- Hooks: read each file in `.kiro/hooks/` and the logs in `docs/`; list a hook as useful only when a log or commit shows it ran and caught something; otherwise say it is configured and has no recorded catch.
+- Property-based tests: list the properties in `scripts/test_properties.js`, `(not published)` and the balance simulator, and which defects they found (cite).
+- Third-party tools: image generation on Colab (disclosed in `docs/ASSET_PROVENANCE.md`), kiro-cli models used, Python and Node only.
+- Roles: what Kiro wrote versus what the main line verified (keep the numbers from `docs/KIRO_USAGE_20261116.md` only if the files still support them; recount with `git log --format` and `git shortlog` if needed).
+Result `docs/kiro_192_result.md`: the commands you ran with last lines, every claim you could not verify and removed.

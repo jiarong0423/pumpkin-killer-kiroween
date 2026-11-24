@@ -1,0 +1,10 @@
+# Kiro task 81 (queue step K1) — wire the start screen and name module into the page (Terra writes code in a WORKTREE; the main line verifies and merges)
+
+Owner 2026-11-10: "have him do them in order". Step 1 of (not published) Work ONLY in your own git worktree of this project (the main line creates it with `git worktree add ../pumpkin-killer_kiro81 <branch>` and copies today's uncommitted index.html, css and js into it); the main line diffs and merges your result, so keep every change small and listed.
+Read: (not published), docs/KIRO_LEDGER.md, .kiro/steering/kiro_assignment.md, (not published) and (not published) (in ../pumpkin-killer_kiro59; 48 tests pass there) and (not published), index.html (the start screen is `#start-screen` with `#start-go`; name rules: Chinese and English letters only, max 8, no digits, no spaces, no symbols, IME-safe), (not published) (owner rules; do not reopen).
+Do:
+1. Load (not published) from index.html and wire the name input into the start screen above the start button; pass the validated name to the player's banner (the top-left banner shows the class name now; the player's name goes there, the class name stays beside or under it: state your choice); keep the start-button preload gate (`data-gate`, `settledCount`) untouched.
+2. Use the big front-facing portraits assets/portraits/<class>_front.png that exist (skeleton, wizard, knight, bride, hunchback, reaper) and fall back to the emoji for a class with no file (bat).
+3. Touch only index.html, (not published), (not published), css/*.css and docs/. Do not touch the game loop, physics, HUD drawing; remove no existing behaviour.
+4. Run `node (not published)` and every `node scripts/test_*.js` (only test_i18n.js is a known failure: missing assets/i18n/zh-TW.json) and quote the real last lines. If you cannot run them, say so; never claim they passed.
+Write (not published) (max 25 lines): the exact changes (file and function names, not line numbers), the test tails, what you could not verify.

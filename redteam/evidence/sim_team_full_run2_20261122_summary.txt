@@ -1,0 +1,22 @@
+2026-11-22 22:42:55,976 INFO check cap        pass 262371 fail 0
+2026-11-22 22:42:55,976 INFO check cap_len    pass 20001  fail 0
+2026-11-22 22:42:55,976 INFO check crossing   pass 1268   fail 0
+2026-11-22 22:42:55,976 INFO check data       pass 9      fail 0
+2026-11-22 22:42:55,976 INFO check first_hit  pass 1337286 fail 0
+2026-11-22 22:42:55,976 INFO check frozen     pass 309737 fail 0
+2026-11-22 22:42:55,976 INFO check gap        pass 459363 fail 0
+2026-11-22 22:42:55,976 INFO check hp_scale   pass 1261054 fail 0
+2026-11-22 22:42:55,976 INFO check near_miss  pass 397548 fail 0
+2026-11-22 22:42:55,976 INFO check no_repeat  pass 309737 fail 0
+2026-11-22 22:42:55,976 INFO check one_unit   pass 164502 fail 0
+2026-11-22 22:42:55,976 INFO check phase      pass 524742 fail 0
+2026-11-22 22:42:55,976 INFO check pity       pass 604080 fail 0
+2026-11-22 22:42:55,976 INFO check ramp       pass 293267 fail 0
+2026-11-22 22:42:55,976 INFO check rotation   pass 1049484 fail 0
+2026-11-22 22:42:55,976 INFO check throw_log  pass 1030953 fail 0
+2026-11-22 22:42:55,976 INFO check tie_nearest pass 2361   fail 0
+2026-11-22 22:42:55,976 INFO check underdog   pass 1060439 fail 0
+2026-11-22 22:42:55,976 INFO check wave       pass 80685  fail 0
+2026-11-22 22:42:55,976 INFO check winner     pass 584745 fail 0
+2026-11-22 22:42:55,976 INFO elapsed 2697.3s  failures 0  log logs_local/sim_team_full.log
+2026-11-22 22:42:55,976 INFO RESULT PASS

@@ -1,0 +1,477 @@
+{
+  "version": 1,
+  "comment": "Ordered rules, FIRST MATCH WINS. match = exact path, directory prefix (trailing slash optional) or glob (* ? [ ] ; * also crosses /). only_if=referenced keeps a file only when index.html, js/*.js or css/*.css names it (scripts/release/check_asset_refs.py); otherwise the rule is skipped and the next rule decides. The last rule is the catch-all EXCLUDE. Source: docs/kiro_84_release_plan_claude-sonnet-5.5.md section 1.",
+  "rules": [
+    {
+      "match": "*.DS_Store",
+      "decision": "EXCLUDE",
+      "reason": "macOS noise (gate P6)"
+    },
+    {
+      "match": "*__pycache__/*",
+      "decision": "EXCLUDE",
+      "reason": "Python cache"
+    },
+    {
+      "match": "*.pyc",
+      "decision": "EXCLUDE",
+      "reason": "Python cache"
+    },
+    {
+      "match": "node_modules/",
+      "decision": "EXCLUDE",
+      "reason": "dependencies are not published"
+    },
+    {
+      "match": ".gitignore",
+      "decision": "TRANSFORM",
+      "transform": "gitignore",
+      "reason": "drop the blanket *.log line (it hid the Kiro route logs), and the data/ and docs/audition/ lines because those folders are not exported; never any .kiro line"
+    },
+    {
+      "match": "LICENSE",
+      "decision": "INCLUDE",
+      "reason": "MIT licence, must show in the GitHub About box"
+    },
+    {
+      "match": "requirements.txt",
+      "decision": "INCLUDE",
+      "reason": "the room relay needs the websockets package: pip install -r requirements.txt"
+    },
+    {
+      "match": ".dockerignore",
+      "decision": "INCLUDE",
+      "reason": "keeps the Docker build context small (checked by scripts/check_coolify_deploy.py)"
+    },
+    {
+      "match": "README.md",
+      "decision": "EXCLUDE",
+      "reason": "the old README overclaims (plan finding 4); the reviewed draft from docs/release_drafts/ is copied to the root by the main line"
+    },
+    {
+      "match": "HANDOFF.md",
+      "decision": "EXCLUDE",
+      "reason": "working notes with a credits balance and planning chatter"
+    },
+    {
+      "match": "HANDOFF_20261108.md",
+      "decision": "EXCLUDE",
+      "reason": "working notes"
+    },
+    {
+      "match": ".kiro/steering/",
+      "decision": "TRANSFORM",
+      "transform": "unpublish_refs",
+      "reason": "replace excluded local references in exported steering text, including nested text files"
+    },
+    {
+      "match": ".kiro/specs/",
+      "decision": "TRANSFORM",
+      "transform": "unpublish_refs",
+      "reason": "replace excluded local references in exported spec text, including nested text files"
+    },
+    {
+      "match": ".kiro/",
+      "decision": "INCLUDE",
+      "reason": "contest rules require /.kiro at the repository root (agents, hooks, powers, settings, specs, steering)"
+    },
+    {
+      "match": ".claude/",
+      "decision": "EXCLUDE",
+      "reason": "internal Claude Code tool state and skills are not part of the public submission"
+    },
+    {
+      "match": "index.html",
+      "decision": "INCLUDE",
+      "reason": "the game page"
+    },
+    {
+      "match": "relay-config.js",
+      "decision": "INCLUDE",
+      "reason": "runtime relay URL configuration precached by sw.js"
+    },
+    {
+      "match": "manifest.webmanifest",
+      "decision": "INCLUDE",
+      "reason": "PWA manifest"
+    },
+    {
+      "match": "sw.js",
+      "decision": "INCLUDE",
+      "reason": "PWA service worker"
+    },
+    {
+      "match": "icons/",
+      "decision": "INCLUDE",
+      "reason": "PWA icons"
+    },
+    {
+      "match": "css/",
+      "decision": "INCLUDE",
+      "reason": "the game"
+    },
+    {
+      "match": "js/",
+      "decision": "INCLUDE",
+      "reason": "the game"
+    },
+    {
+      "match": "shared/",
+      "decision": "INCLUDE",
+      "reason": "the game"
+    },
+    {
+      "match": "deploy/",
+      "decision": "INCLUDE",
+      "reason": "Coolify deployment image, relay configuration, and local launch scripts"
+    },
+    {
+      "match": "scripts/",
+      "decision": "INCLUDE",
+      "reason": "tests, engine, MCP server and tools must run from a clean checkout; push_queue_to_drive.sh and kiro_models.json are reviewed by the privacy gate (P9, P8)"
+    },
+    {
+      "match": "colab/PumpkinKiller_inputs.zip",
+      "decision": "EXCLUDE",
+      "reason": "contents unknown, may hold third-party reference pictures"
+    },
+    {
+      "match": "colab/inputs_pack/",
+      "decision": "EXCLUDE",
+      "reason": "contents unknown, may hold third-party reference pictures"
+    },
+    {
+      "match": "colab/",
+      "decision": "INCLUDE",
+      "reason": "prompt-engineering evidence (jobs files and cells)"
+    },
+    {
+      "match": "assets/colab_inputs/",
+      "decision": "EXCLUDE",
+      "reason": "reference inputs of unknown provenance"
+    },
+    {
+      "match": "assets/i18n/",
+      "decision": "INCLUDE",
+      "reason": "the English and Chinese UI dictionaries: without them the page shows keys (found by Kiro 141 task 3)"
+    },
+    {
+      "match": "assets/audio/music/alt_haunted_track.ogg",
+      "decision": "EXCLUDE",
+      "reason": "unused alternate track listed in docs/EXPORT_EXCLUDE_20261116.md"
+    },
+    {
+      "match": "assets/audio/music/alt_music_box_waltz.ogg",
+      "decision": "EXCLUDE",
+      "reason": "unused alternate track listed in docs/EXPORT_EXCLUDE_20261116.md"
+    },
+    {
+      "match": "assets/audio/",
+      "decision": "INCLUDE",
+      "reason": "CC0 licence files and CREDITS.md must travel with the audio"
+    },
+    {
+      "match": "assets/fonts/",
+      "decision": "INCLUDE",
+      "reason": "OFL licence files travel with the fonts; files still need the E1 review"
+    },
+    {
+      "match": "assets/",
+      "decision": "INCLUDE",
+      "only_if": "referenced",
+      "reason": "picture or file named by the page; the load gate needs it"
+    },
+    {
+      "match": "assets/",
+      "decision": "EXCLUDE",
+      "reason": "not named by index.html, js/ or css/; spares size (bake-script inputs are not auto-detected, add an explicit rule above if one is needed)"
+    },
+    {
+      "match": "build/",
+      "decision": "EXCLUDE",
+      "reason": "build artefacts (git-ignored)"
+    },
+    {
+      "match": "data/",
+      "decision": "EXCLUDE",
+      "reason": "local data (git-ignored)"
+    },
+    {
+      "match": "kiro_route_kiro_task_*.log",
+      "decision": "TRANSFORM",
+      "transform": "route_log_txt",
+      "reason": "raw proof that Kiro CLI ran; copied as .txt into docs/kiro_evidence/raw/route_logs/ because *.log was git-ignored; the privacy gate reads them afterwards"
+    },
+    {
+      "match": "docs/ui_shots/",
+      "decision": "EXCLUDE",
+      "reason": "local visual-review captures are not public release assets"
+    },
+    {
+      "match": "docs/audition/",
+      "decision": "EXCLUDE",
+      "reason": "git-ignored working folder; gate P16 asserts it is absent"
+    },
+    {
+      "match": "docs/kiro_queue_20261110.md",
+      "decision": "TRANSFORM",
+      "transform": [
+        "drop_credit_sentence",
+        "unpublish_refs"
+      ],
+      "reason": "remove the private balance sentence, then replace remaining excluded local references"
+    },
+    {
+      "match": "docs/kiro_evidence/",
+      "decision": "INCLUDE",
+      "reason": "Kiro evidence layer (README, daily files, raw logs)"
+    },
+    {
+      "match": "docs/official/",
+      "decision": "EXCLUDE",
+      "reason": "plan section 4: judges have the rules; COMPLIANCE_CHECK is internal (owner answer 4 can overrule for the rules extract only)"
+    },
+    {
+      "match": "docs/handoff/",
+      "decision": "EXCLUDE",
+      "reason": "working notes"
+    },
+    {
+      "match": "docs/ref/",
+      "decision": "EXCLUDE",
+      "reason": "screen recording may show the owner's screen; mockup has no provenance line"
+    },
+    {
+      "match": "docs/gifs/all_heroes_idle_quad.gif",
+      "decision": "INCLUDE",
+      "reason": "one of the two gifs the README may use"
+    },
+    {
+      "match": "docs/gifs/svg_scene_gameplay_showcase.gif",
+      "decision": "INCLUDE",
+      "reason": "one of the two gifs the README may use"
+    },
+    {
+      "match": "docs/gifs/",
+      "decision": "EXCLUDE",
+      "reason": "working previews"
+    },
+    {
+      "match": "docs/playtest/LOG.md",
+      "decision": "INCLUDE",
+      "reason": "playtest evidence"
+    },
+    {
+      "match": "docs/playtest/RECORD.md",
+      "decision": "INCLUDE",
+      "reason": "playtest evidence"
+    },
+    {
+      "match": "docs/playtest/kiro_review.md",
+      "decision": "TRANSFORM",
+      "reason": "playtest evidence; the reference to the excluded concept picture is replaced",
+      "transform": "unpublish_refs"
+    },
+    {
+      "match": "docs/playtest/",
+      "decision": "EXCLUDE",
+      "reason": "frames are many screenshots that may show a desktop"
+    },
+    {
+      "match": "docs/owner_feedback_log.md",
+      "decision": "EXCLUDE",
+      "reason": "running log of the owner's remarks, risk of private content"
+    },
+    {
+      "match": "docs/GAP_QUEUE_*",
+      "decision": "EXCLUDE",
+      "reason": "working notes"
+    },
+    {
+      "match": "docs/briefing_for_kiro_*",
+      "decision": "EXCLUDE",
+      "reason": "working notes"
+    },
+    {
+      "match": "docs/agent_memory_paths.md",
+      "decision": "EXCLUDE",
+      "reason": "local paths and the AWS warning"
+    },
+    {
+      "match": "docs/gemini_*",
+      "decision": "EXCLUDE",
+      "reason": "third-party tool traces (art provenance question 2)"
+    },
+    {
+      "match": "docs/GEMINI_*",
+      "decision": "EXCLUDE",
+      "reason": "internal Gemini asset prompt lists and copy-paste packs referencing excluded local refs"
+    },
+    {
+      "match": "docs/aws_image_calls.log",
+      "decision": "EXCLUDE",
+      "reason": "third-party tool trace"
+    },
+    {
+      "match": "docs/make_unarmed_*.log",
+      "decision": "EXCLUDE",
+      "reason": "judgment call, plan is silent: git-ignored tool logs"
+    },
+    {
+      "match": "docs/*.log",
+      "decision": "EXCLUDE",
+      "reason": "judgment call, plan is silent: git-ignored working logs"
+    },
+    {
+      "match": "docs/vfx_reference_hearthstone.md",
+      "decision": "EXCLUDE",
+      "reason": "refers to a third party game, low value for judges"
+    },
+    {
+      "match": "docs/human_vs_ai_20rounds.json",
+      "decision": "EXCLUDE",
+      "reason": "raw data; the .md report is the evidence"
+    },
+    {
+      "match": "docs/match12*.json",
+      "decision": "EXCLUDE",
+      "reason": "raw data; the .md report is the evidence"
+    },
+    {
+      "match": "docs/playtest_data_*.json",
+      "decision": "EXCLUDE",
+      "reason": "raw data; the .md report is the evidence"
+    },
+    {
+      "match": "docs/*.png",
+      "decision": "EXCLUDE",
+      "reason": "large screenshots and mockups; SVG twins stay"
+    },
+    {
+      "match": "docs/release_drafts/",
+      "decision": "EXCLUDE",
+      "reason": "working release drafts are copied to root or Devpost separately and must not leak into docs/"
+    },
+    {
+      "match": "docs/fonts_sample.html",
+      "decision": "INCLUDE",
+      "reason": "font verification sample checked by scripts/test_fonts.py"
+    },
+    {
+      "match": "docs/*.html",
+      "decision": "EXCLUDE",
+      "reason": "working review pages"
+    },
+    {
+      "match": "docs/*.mov",
+      "decision": "EXCLUDE",
+      "reason": "screen recording"
+    },
+    {
+      "match": "docs/kiro_102_result_*",
+      "decision": "EXCLUDE",
+      "reason": "names local folders of other projects (gate P2/P7, 2026-11-15)"
+    },
+    {
+      "match": "docs/kiro_103_result_*",
+      "decision": "EXCLUDE",
+      "reason": "names local folders of other projects (gate P2/P7, 2026-11-15)"
+    },
+    {
+      "match": "docs/kiro_task_102_*",
+      "decision": "EXCLUDE",
+      "reason": "names local folders of other projects (gate P2/P7, 2026-11-15)"
+    },
+    {
+      "match": "docs/mcp_framework_plan_20261115.md",
+      "decision": "EXCLUDE",
+      "reason": "names local folders of other projects (gate P2/P7, 2026-11-15)"
+    },
+    {
+      "match": "docs/kiro_task_144_*",
+      "decision": "EXCLUDE",
+      "reason": "names other local projects and local paths"
+    },
+    {
+      "match": "docs/kiro_144_*",
+      "decision": "EXCLUDE",
+      "reason": "result may name other local projects"
+    },
+    {
+      "match": "docs/*.md",
+      "decision": "TRANSFORM",
+      "transform": "unpublish_refs",
+      "reason": "replace excluded local references in exported documentation"
+    },
+    {
+      "match": "docs/*.json",
+      "decision": "INCLUDE",
+      "reason": "JSON data files must not be mutated by markdown reference rewriters"
+    },
+    {
+      "match": "docs/*.txt",
+      "decision": "TRANSFORM",
+      "transform": "unpublish_refs",
+      "reason": "replace excluded local references in exported documentation"
+    },
+    {
+      "match": "docs/",
+      "decision": "INCLUDE",
+      "reason": "briefs, results, ledger, provenance, design and rules documents, overview SVG and mmd (privacy gate P1 to P13 and P10 decide the rest)"
+    },
+    {
+      "match": "redteam/evidence/full_suite_20261124_prepush.txt",
+      "decision": "INCLUDE",
+      "reason": "publicly cited full-suite evidence log"
+    },
+    {
+      "match": "redteam/evidence/recheck_full_suite_v3_20261125.txt",
+      "decision": "INCLUDE",
+      "reason": "publicly cited full-suite evidence log of the 2026-11-25 re-check"
+    },
+    {
+      "match": "redteam/evidence/recheck_socket_v3_20261125.txt",
+      "decision": "INCLUDE",
+      "reason": "publicly cited socket-suite evidence of the 2026-11-25 re-check"
+    },
+    {
+      "match": "redteam/evidence/hit_wall_down_judge_counts_20261119.json",
+      "decision": "INCLUDE",
+      "reason": "publicly cited physics verification evidence"
+    },
+    {
+      "match": "redteam/evidence/n10_diagnosis_20261123.md",
+      "decision": "INCLUDE",
+      "reason": "publicly cited parity diagnosis evidence"
+    },
+    {
+      "match": "redteam/evidence/prepush_docker_e2e_20261124.txt",
+      "decision": "INCLUDE",
+      "reason": "publicly cited container end-to-end verification log"
+    },
+    {
+      "match": "redteam/evidence/sim_team_full_run2_20261122_summary.txt",
+      "decision": "INCLUDE",
+      "reason": "publicly cited 6,667-match simulation summary"
+    },
+    {
+      "match": "*",
+      "decision": "EXCLUDE",
+      "reason": "catch-all: nothing is copied by accident"
+    }
+  ],
+  "new_files": [
+    {
+      "path": "README.md",
+      "reason": "written fresh from docs/release_drafts/README.md by the main line after review (R4)"
+    },
+    {
+      "path": "JUDGES.md",
+      "reason": "written from docs/release_drafts/JUDGES.md by the main line after review (R4)"
+    },
+    {
+      "path": "CREDITS.md",
+      "reason": "written from docs/release_drafts/CREDITS.md by the main line after review (R4)"
+    }
+  ]
+}

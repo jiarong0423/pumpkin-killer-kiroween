@@ -1,0 +1,21 @@
+/* The agent waiting card and the seats panel on a phone (owner 2026-11-18: 'the MCP part on the phone was never laid out'). Loaded last; stronger selectors than the old rules in index.html. */
+html #turn-curtain #agent-wait { display: grid; gap: 8px; justify-items: stretch; width: min(94vw, 660px); padding: 10px 14px 12px; border: 1.5px solid rgba(165, 243, 255, 0.55); border-radius: 12px; background: rgba(18, 10, 34, 0.96); box-shadow: 0 0 0 100vmax rgba(8, 4, 16, 0.5); text-align: left; }
+html #turn-curtain #agent-wait[hidden] { display: none; }
+html #agent-wait .aw-title { color: #a5f3ff; font: 700 clamp(14px, 2.6vw, 18px) var(--font-body, sans-serif); text-align: center; }
+html #agent-wait .aw-body { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: center; }
+html #agent-wait .aw-left { display: grid; justify-items: center; gap: 6px; }
+html #agent-wait #agent-room-qr { width: clamp(84px, 36vh, 150px); height: clamp(84px, 36vh, 150px); background: #fff; image-rendering: pixelated; border-radius: 6px; }
+html #agent-wait #agent-room-code { color: #ffd32a; letter-spacing: 0.14em; font: 700 clamp(18px, 5vh, 28px) var(--font-display, sans-serif); text-align: center; }
+html #agent-wait .aw-right { display: grid; gap: 8px; min-width: 0; }
+html #agent-wait .aw-step { margin: 0; color: #cfe9ff; font: 600 clamp(12px, 2.2vw, 14px)/1.3 var(--font-body, sans-serif); }
+html #agent-wait #agent-cmd { display: block; padding: 8px 10px; border-radius: 8px; background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(165, 243, 255, 0.35); color: #d9f7ff; font: 600 11px/1.35 ui-monospace, Menlo, Consolas, monospace; word-break: break-all; max-height: 76px; overflow: auto; user-select: all; -webkit-user-select: all; }
+html #agent-wait .aw-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+html #agent-wait .aw-actions button { min-height: 44px; min-width: 112px; padding: 4px 14px; border-radius: 10px; border: 2px solid #7158e2; background: rgba(40, 24, 72, 0.9); color: #fff; font: 700 14px var(--font-body, sans-serif); }
+html #agent-wait #agent-copy { border-color: #ffd32a; color: #ffd32a; }
+html #agent-wait.no-room .aw-body { grid-template-columns: 1fr; }
+html #agent-wait.no-room #agent-room-qr, html #agent-wait.no-room #agent-cmd, html #agent-wait.no-room .aw-step { display: none; }
+html #agent-wait.no-room #agent-room-code { font-size: 18px; letter-spacing: 0.02em; }
+/* seats panel: solid card instead of a see-through one, so the start screen behind it never shows through the text */
+html #start-screen.seats-open #friends-panel { background: rgba(18, 10, 34, 0.97) !important; backdrop-filter: none !important; }
+/* room status line in the seats panel */
+html #friends-panel .room-status { margin: 6px 0 0; padding: 6px 10px; border-radius: 8px; background: rgba(255, 90, 90, 0.14); border: 1px solid rgba(255, 160, 160, 0.5); color: #ffd1d1; font: 600 13px/1.3 var(--font-body, sans-serif); }

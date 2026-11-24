@@ -1,0 +1,88 @@
+{
+  "charset_base": 379,
+  "charset_margin": 2000,
+  "charset_screen": 494,
+  "charset_total": 2598,
+  "cinzel_source_sha256": "e854e68a388aa50d742a4415c1ae5c17a617ef7956c95a70021d0a4a44f20518",
+  "features": {
+    "CinzelDecorative-Bold.ttf": [],
+    "NotoSansTC[wght].ttf": [
+      "aalt",
+      "ccmp",
+      "dlig",
+      "fwid",
+      "hist",
+      "hwid",
+      "liga",
+      "locl",
+      "pwid",
+      "ruby",
+      "vert",
+      "vrt2"
+    ],
+    "NotoSerifTC[wght].ttf": [
+      "aalt",
+      "ccmp",
+      "dlig",
+      "fwid",
+      "hist",
+      "hwid",
+      "liga",
+      "locl",
+      "pwid",
+      "ruby",
+      "vert",
+      "vrt2"
+    ]
+  },
+  "files": {
+    "CinzelDecorative-Bold.ttf": {
+      "bytes": 62300,
+      "sha256": "e854e68a388aa50d742a4415c1ae5c17a617ef7956c95a70021d0a4a44f20518"
+    },
+    "pk-body-400.woff2": {
+      "bytes": 323896,
+      "sha256": "92ef7aab44f0da20ff1116044871748f70c71c04d7eee9f97a7f140824821ebb"
+    },
+    "pk-body-700.woff2": {
+      "bytes": 331224,
+      "sha256": "68eb4c1842213c03106bb9348b2f5196ff2078249e7092e6505da5569b05056f"
+    },
+    "pk-display-cjk-900.woff2": {
+      "bytes": 417168,
+      "sha256": "dcbf03ff4a200598ce9bc750cbcfe37ad11d1972ba0c7c4aaf66e9c8f4c07e42"
+    }
+  },
+  "flavor": "woff2",
+  "fonttools": "4.51.0",
+  "margin": 2000,
+  "not_in_source": {
+    "cinzel": [],
+    "sans": [
+      "‗",
+      "‛",
+      "‟",
+      "‣",
+      "․",
+      "↻"
+    ],
+    "serif": [
+      "‗",
+      "‛",
+      "‟",
+      "‣",
+      "․",
+      "↻"
+    ]
+  },
+  "reserved_font_names": {
+    "cinzel": [
+      "Cinzel"
+    ],
+    "sans": [
+      "Source"
+    ],
+    "serif": []
+  },
+  "total_bytes": 1134588
+}

@@ -1,0 +1,842 @@
+{
+ "_about": "Allowlist for scripts/test_sim_clock_reads.js: every read of performance.now, Date.now, Math.random or new Date in index.html and js/*.js must match an entry (file, a text fragment of the line, how many reads). Add an entry with a class and a reason when a new read is intended; status unreviewed or known_issue entries are listed by the test as warnings.",
+ "entries": [
+  {
+   "file": "index.html",
+   "before": "const AI_CLASSES = [\"skeleton\", \"wizard\", \"bat\", \"knight\", \"",
+   "needle": "let aiClass = AI_CLASSES[Math.floor(Math.random() * AI_CLASSES.length)];",
+   "count": 1,
+   "class": "setup",
+   "status": "reviewed",
+   "why": "roster shuffle and daily seed at match setup, before anything is shared"
+  },
+  {
+   "file": "index.html",
+   "before": "if (dailyCode) { const k = AI_CLASSES.indexOf(first); return",
+   "needle": "for (let i = rest.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = rest[i]; ",
+   "count": 1,
+   "class": "setup",
+   "status": "reviewed",
+   "why": "roster shuffle and daily seed at match setup, before anything is shared"
+  },
+  {
+   "file": "index.html",
+   "before": "if (!smooth) { sb.scrollLeft = left; done(); return; }",
+   "needle": "const from = sb.scrollLeft, t0 = performance.now(); sb.style.scrollSnapType = \"none\";",
+   "count": 1,
+   "class": "ui_input",
+   "status": "reviewed",
+   "why": "input timing on this device (tap guard, scrolling, charge hold, result-screen delay); the shot it makes is sent as numbers"
+  },
+  {
+   "file": "index.html",
+   "before": "const selectScene = (raw, smooth) => { // raw may be -1 or n",
+   "needle": "navUntil = performance.now() + (smooth ? 700 : 200);",
+   "count": 1,
+   "class": "ui_input",
+   "status": "reviewed",
+   "why": "input timing on this device (tap guard, scrolling, charge hold, result-screen delay); the shot it makes is sent as numbers"
+  },
+  {
+   "file": "index.html",
+   "before": "settle = setTimeout(function again() {",
+   "needle": "if (performance.now() < navUntil) { settle = setTimeout(again, navUntil - performance.now() + 30); return; }",
+   "count": 2,
+   "class": "ui_input",
+   "status": "reviewed",
+   "why": "input timing on this device (tap guard, scrolling, charge hold, result-screen delay); the shot it makes is sent as numbers"
+  },
+  {
+   "file": "index.html",
+   "before": "relayRoomConfirmed = false; relayCreateSent = false; // a cl",
+   "needle": "relayClient = RelayClient.createClient({ socketFactory: () => new WebSocket(RelayClient.relaySocketUrl(relayAd",
+   "count": 1,
+   "class": "net",
+   "status": "reviewed",
+   "why": "relay client clock for reconnect timing, not a simulation input"
+  },
+  {
+   "file": "index.html",
+   "before": "let dailyCode = 0; // yyyymmdd of the daily match being play",
+   "needle": "function dailySeedOf(date) { const d = date || new Date(); return d.getUTCFullYear() * 10000 + (d.getUTCMonth(",
+   "count": 1,
+   "class": "setup",
+   "status": "reviewed",
+   "why": "roster shuffle and daily seed at match setup, before anything is shared"
+  },
+  {
+   "file": "index.html",
+   "before": "try { const bd = document.getElementById(\"scene-backdrop\"); ",
+   "needle": "aiClass = AI_CLASSES[Math.floor(Math.random() * AI_CLASSES.length)];",
+   "count": 1,
+   "class": "setup",
+   "status": "reviewed",
+   "why": "roster shuffle and daily seed at match setup, before anything is shared"
+  },
+  {
+   "file": "index.html",
+   "before": "historyTrajectories.filter(t => t.team === foe && t.points &",
+   "needle": "while (xs.length < 3) xs.push(lo + Math.random() * (hi - lo));",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "})();",
+   "needle": "const newMatchSeed = () => fixedMatchSeed === null ? (Math.random() * 4294967296) >>> 0 : fixedMatchSeed;",
+   "count": 1,
+   "class": "seed_source",
+   "status": "reviewed",
+   "why": "creates the match seed once; the host sends it and every device uses that seed"
+  },
+  {
+   "file": "index.html",
+   "before": "if (!hit) return;",
+   "needle": "const now = performance.now();",
+   "count": 1,
+   "class": "ui_input",
+   "status": "reviewed",
+   "why": "input timing on this device (tap guard, scrolling, charge hold, result-screen delay); the shot it makes is sent as numbers"
+  },
+  {
+   "file": "index.html",
+   "before": "snd(\"dice_rattle\");",
+   "needle": "diceRoll = { owner, dir, t: 0, final: 1 + Math.floor(Math.random() * 6), shown: 1, applied: false, afterT: 0 }",
+   "count": 1,
+   "class": "local_dice",
+   "status": "reviewed",
+   "why": "Z2 reviewed 2026-11-23: the mover rolls the die on its own device and sends it in the move action (die, index.html broadcastLocalAction); the remote page replaces the roll with m.die (relayApplyAction sets diceRoll.final). The tumble display value is drawing only"
+  },
+  {
+   "file": "index.html",
+   "before": "d.t += dt;",
+   "needle": "if (d.t < DICE_TUMBLE_SEC) { d.shown = 1 + Math.floor(Math.random() * 6); return; } // tumbling",
+   "count": 1,
+   "class": "local_dice",
+   "status": "reviewed",
+   "why": "Z2 reviewed 2026-11-23: the mover rolls the die on its own device and sends it in the move action (die, index.html broadcastLocalAction); the remote page replaces the roll with m.die (relayApplyAction sets diceRoll.final). The tumble display value is drawing only"
+  },
+  {
+   "file": "index.html",
+   "before": "isCharging = true;",
+   "needle": "chargeStart = performance.now();",
+   "count": 1,
+   "class": "ui_input",
+   "status": "reviewed",
+   "why": "input timing on this device (tap guard, scrolling, charge hold, result-screen delay); the shot it makes is sent as numbers"
+  },
+  {
+   "file": "index.html",
+   "before": "isCharging = false;",
+   "needle": "if (performance.now() - chargeStart < 250 || chargePower < 12) { // a tap, or a release while the meter is nea",
+   "count": 1,
+   "class": "ui_input",
+   "status": "reviewed",
+   "why": "input timing on this device (tap guard, scrolling, charge hold, result-screen delay); the shot it makes is sent as numbers"
+  },
+  {
+   "file": "index.html",
+   "before": "// owner 2026-11-15: \"the three behind fly forward\": each fl",
+   "needle": "const nowS = performance.now() / 1000, orbitCy = u.y - 125;",
+   "count": 1,
+   "class": "known_issue_sim_clock",
+   "status": "known_issue",
+   "why": "N10: the necromancer ultimate flame start points read the clock (orbitAt); the bridge refuses this ultimate in rooms and the page UI blocks it, making it room-safe is the owner's decision"
+  },
+  {
+   "file": "index.html",
+   "before": "if (gameOver) { // two buttons instead of a tap anywhere (pl",
+   "needle": "if (performance.now() - gameOverSeenAt < 800) return;",
+   "count": 1,
+   "class": "ui_input",
+   "status": "reviewed",
+   "why": "input timing on this device (tap guard, scrolling, charge hold, result-screen delay); the shot it makes is sent as numbers"
+  },
+  {
+   "file": "index.html",
+   "before": "function aiModelFor(side) {",
+   "needle": "if (!aiModelBy[side]) { const k = levelKnobs(side); aiModelBy[side] = { g: (Math.random() * 2 - 1) * k.modelG,",
+   "count": 2,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "const angleMin = AI_ANGLE_MIN_BY_LEVEL[levelFor(side)] || AI",
+   "needle": "const angle = angleMin + Math.floor(Math.random() * (AI_ANGLE_MAX - angleMin + 1));",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "}",
+   "needle": "function aiSeenWind(side, trueWind) { const k = levelKnobs(side); return Math.round((trueWind + (Math.random()",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "const aiKnobs = levelKnobs(\"right\");",
+   "needle": "const seenTargetX = Math.round((aiTarget().x + (Math.random() * 2 - 1) * aiKnobs.viewPosNoise) / DICE_STEP_PX)",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "if (preferredSkill === \"normal\") return;",
+   "needle": "if (aiLevel !== \"easy\" && inRange && aiCharges.heavy > 0 && Math.random() < skillChance) { aiCharges.heavy--; ",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "if (aiLevel !== \"easy\" && inRange && aiCharges.heavy > 0 && ",
+   "needle": "else if (aiLevel !== \"easy\" && inRange && aiCharges.double > 0 && Math.random() < skillChance) { aiCharges.dou",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "const aiErr = levelKnobs(\"right\").aimError * consumeAiAimSta",
+   "needle": "power += (Math.random() - 0.5) * 2 * aiErr;",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "const muzzle = aiMuzzle(player, 1);",
+   "needle": "const seenTargetX = Math.round((ai.x + (Math.random() * 2 - 1) * levelKnobs(\"left\").viewPosNoise) / DICE_STEP_",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "aiAimPendingLeft = { want: plan.want, power: plan.power };",
+   "needle": "const power = Math.max(15, Math.min(MAX_POWER, plan.power + (Math.random() - 0.5) * 2 * levelKnobs(\"left\").aim",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "selectedSkill = \"normal\";",
+   "needle": "if (level !== \"easy\" && inRange && charges.heavy > 0 && Math.random() < skillChance) { charges.heavy--; select",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "if (level !== \"easy\" && inRange && charges.heavy > 0 && Math",
+   "needle": "else if (level !== \"easy\" && inRange && charges.double > 0 && Math.random() < skillChance) { charges.double--;",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "// The normal knight occasionally spends its turn on the sam",
+   "needle": "if (ai.profile === \"knight\" && historyTrajectories.length > 0 && (!shields.ai.active || shields.ai.actions > 0",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "// The AI sometimes does a dice Move first; a moved unit can",
+   "needle": "if (!(ai.slow > 0) && Math.random() < 0.25) {",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "const gap = Math.abs(ai.x - player.x);",
+   "needle": "startDiceRoll(\"ai\", (gap > 900 ? 0.75 : 0.35) > Math.random() ? 1 : -1);",
+   "count": 1,
+   "class": "ai_choice",
+   "status": "reviewed",
+   "why": "computer decision noise on this device; the chosen shot is sent as numbers (never replayed from the clock)"
+  },
+  {
+   "file": "index.html",
+   "before": "// Random round wind is generated in the world frame, then l",
+   "needle": "wind = parseFloat(((Math.random() - 0.5) * 8.0).toFixed(1));",
+   "count": 1,
+   "class": "wind_replaced",
+   "status": "reviewed",
+   "why": "round wind is random only outside rooms; line after it replaces it with Determinism.wind(seed, round) in a room"
+  },
+  {
+   "file": "index.html",
+   "before": "if (relayPlaying) endRelayRoom();",
+   "needle": "matchSeed = (Math.random() * 4294967296) >>> 0; weatherCache.round = -1; weatherFxKey = \"\";",
+   "count": 1,
+   "class": "seed_source",
+   "status": "reviewed",
+   "why": "creates the match seed once; the host sends it and every device uses that seed"
+  },
+  {
+   "file": "index.html",
+   "before": "for (let i = 0; i < limit; i++) {",
+   "needle": "const ang = Math.random() * Math.PI * 2;",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "const ang = Math.random() * Math.PI * 2;",
+   "needle": "const spd = 90 + Math.random() * 380;",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "vy: Math.sin(ang) * spd,",
+   "needle": "r: 5 + Math.random() * 8,",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "alpha: 1.0,",
+   "needle": "decay: 0.8 + Math.random() * 1.5",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "}",
+   "needle": "let lastTime = performance.now();",
+   "count": 1,
+   "class": "frame_dt",
+   "status": "reviewed",
+   "why": "Z2 reviewed 2026-11-23: the loop advances the simulation in fixed 1/60 s steps (updatePhysics with an accumulator), so the clock only changes how many steps run per frame, not their results; setTimeout effects are a separate matter (see the R1-1 ledger row)"
+  },
+  {
+   "file": "index.html",
+   "before": "if (d.landed) {",
+   "needle": "const bob = Math.sin(performance.now() / 300) * 6;",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "function drawShockArcs(c, cy) { // three jagged arcs, new on",
+   "needle": "const ts = Math.floor(performance.now() / 70), rnd = n => { const v = Math.sin(n * 12.9898 + ts * 78.233) * 43",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "dock.classList.toggle(\"is-charging\", !!isCharging);",
+   "needle": "if (gameOver && !gameOverWas) gameOverSeenAt = performance.now(); gameOverWas = !!gameOver;",
+   "count": 1,
+   "class": "ui_input",
+   "status": "reviewed",
+   "why": "input timing on this device (tap guard, scrolling, charge hold, result-screen delay); the shot it makes is sent as numbers"
+  },
+  {
+   "file": "index.html",
+   "before": "if (isCharging) {",
+   "needle": "const elapsed = (performance.now() - chargeStart) / 1000.0;",
+   "count": 1,
+   "class": "ui_input",
+   "status": "reviewed",
+   "why": "input timing on this device (tap guard, scrolling, charge hold, result-screen delay); the shot it makes is sent as numbers"
+  },
+  {
+   "file": "index.html",
+   "before": "fxEmit(\"impact_burst\", p.ultBlock.x, p.ultBlock.y, { dirX: 1",
+   "needle": "knightReveal = { x: p.ultBlock.x, y: p.ultBlock.y, until: performance.now() + 1400 };",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (p.weapon === \"proj_flame\" && opp.hp - dmgNow > 0) { appl",
+   "needle": "if (p.weapon === \"proj_cross\" && !p.ultNun && !opp.shock && opp.hp - dmgNow > 0 && Math.random() < SHOCK_CHANC",
+   "count": 1,
+   "class": "seeded_in_rooms",
+   "status": "reviewed",
+   "why": "shock, lifesteal procs: in a room Math.random is swapped for relayStream(throwId) around the hit code (rngKeep, index.html about line 4042 and 4072)"
+  },
+  {
+   "file": "index.html",
+   "before": "opp.hp = hpAfter(opp.hp, dmgNow);",
+   "needle": "if (p.weapon === \"proj_shield\" && Math.random() < LIFESTEAL_CHANCE) { const src = p.team === \"player\" ? player",
+   "count": 1,
+   "class": "seeded_in_rooms",
+   "status": "reviewed",
+   "why": "shock, lifesteal procs: in a room Math.random is swapped for relayStream(throwId) around the hit code (rngKeep, index.html about line 4042 and 4072)"
+  },
+  {
+   "file": "index.html",
+   "before": "fxClock.aura -= dt;",
+   "needle": "if (fxClock.aura <= 0) { fxClock.aura = 0.12; fxEmit(\"weapon_charge_aura\", player.x + 58, player.y - 110, { sc",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "ctx.setLineDash([4, 7]);",
+   "needle": "ctx.lineDashOffset = -performance.now() / 60;",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (u.animState === \"idle\") {",
+   "needle": "P.sy = (TEAM_N > 1 && u !== unitOf(sideOfUnit(u))) ? 0 : Math.sin(performance.now() / 700 + u.x) * 0.7; // a u",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (ps) {",
+   "needle": "if (ps.ult && performance.now() < (u.ultPoseUntil || 0)) poseKey = ps.ult; // the finger-pointing ultimate pos",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "else if (ps.idle && u.animState === \"idle\" && u.armed !== fa",
+   "needle": "else if (ps.idle2 && u.animState === \"idle\" && Math.floor(performance.now() / 1800 + (sideOfUnit(u) === \"left\"",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (u.poison > 0) { // poisoned: the body pulses green, soft",
+   "needle": "ctx.globalAlpha = 0.12 + 0.2 * (0.5 + 0.5 * Math.sin(performance.now() / 170));",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (u.burn > 0) { // burn (gap N9): the body glows a slow em",
+   "needle": "ctx.globalAlpha = 0.1 + 0.18 * (0.5 + 0.5 * Math.sin(performance.now() / 210));",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (u.weak > 0) { // frost (owner 2026-11-10): blue blinking",
+   "needle": "const bl = Math.pow(0.5 + 0.5 * Math.sin(performance.now() / 230), 2); // blink phase 0..1",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "// only OCCASIONALLY (owner 2026-11-10: 'it is only now and ",
+   "needle": "const nowMs = performance.now();",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if ((u.bleed > 0 || u.poison > 0) && !gameOver) {",
+   "needle": "if (!u._stNext) u._stNext = nowMs + 600 + Math.random() * 1200;",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (nowMs >= u._stNext) {",
+   "needle": "u._stNext = nowMs + 2000 + Math.random() * 2500;",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "u._stNext = nowMs + 2000 + Math.random() * 2500;",
+   "needle": "if (u.bleed > 0) fxEmit(\"blood_spray\", u.x + (Math.random() - 0.5) * 50, u.y - 60 - Math.random() * 90, { dirX",
+   "count": 3,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (u.bleed > 0) fxEmit(\"blood_spray\", u.x + (Math.random() ",
+   "needle": "if (u.poison > 0) fxEmit(\"sprite_poison\", u.x + (Math.random() - 0.5) * 50, u.y - 70 - Math.random() * 90, { s",
+   "count": 2,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (u.stun || u.stunNow) { // drawn stars (the emoji changed",
+   "needle": "const tt = performance.now() / 400;",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "// three pips above the head: the ultimate energy (each lit ",
+   "needle": "const en = energy[team === \"red\" ? \"player\" : \"ai\"], armed = ultArmed[team === \"red\" ? \"player\" : \"ai\"], full ",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (!(defendMode && currentHero === \"knight\")) return;",
+   "needle": "const x0 = shieldClampX(player.x - SHIELD_ARC.halfSpan), x1 = shieldClampX(player.x + SHIELD_ARC.halfSpan), no",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "function drawKnightMarks() { // the three hidden points (pla",
+   "needle": "const now = performance.now();",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (energy[who] < 3 || ultUsed[who] >= 2 || gameOver) return",
+   "needle": "const col = ULT_RING_COLOR[cls] || \"255,215,60\", style = ULT_RING_STYLE[cls] || \"runes\", now = performance.now",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "setScreenShake(0.12); ultDim = reduceMotionEnabled() ? 0 : 0",
+   "needle": "if (cls === \"reaper\") u.ultPoseUntil = performance.now() + 1000; // the necromancer points a finger for one se",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (ORBIT_FIRE_CLASSES.indexOf(cls) < 0 || !gf || !gf.comple",
+   "needle": "const now = performance.now() / 1000, speed = full ? 1.7 : 1.1, rx = 96, ry = 96, cy = u.y - 125; // a vertica",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "function drawTipGlow(x, y, size) {",
+   "needle": "const pulse = 0.82 + 0.18 * Math.sin(performance.now() / 90);",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (p.weapon === \"proj_flame\" && p.trail.length > 1) { // dr",
+   "needle": "const sp = images.fx_ghostfire_purple, tm = performance.now();",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "// owner 2026-11-15: the pumpkin wizard throws a PUMPKIN can",
+   "needle": "ctx.rotate(-rot + performance.now() / 260);",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "ctx.beginPath(); ctx.moveTo(-11, 6); ctx.lineTo(-6, 11); ctx",
+   "needle": "ctx.fillStyle = \"#fff4b0\"; ctx.beginPath(); ctx.arc(7, -R * 1.05, 3 + 1.5 * Math.sin(performance.now() / 60), ",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "} else if (p.weapon === \"proj_shuriken\" && img && img.comple",
+   "needle": "ctx.rotate(-rot + performance.now() / 45); // a shuriken spins flat and fast in flight",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "} else if (p.weapon === \"proj_flame\" && img && img.complete)",
+   "needle": "const tm = performance.now();",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "ctx.rotate(-rot * 0.8);",
+   "needle": "const wob = 0.42 + 0.58 * Math.abs(Math.cos(performance.now() / 110));",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "// (three swelling copies of the ring, 0.35 to 1.2 times wLe",
+   "needle": "const tw = performance.now() / 420;",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "ctx.globalCompositeOperation = \"lighter\";",
+   "needle": "{ const t2 = knTinted(\"kn_twirl2\", \"205,160,255\"), t3 = knTinted(\"kn_twirl3\", \"150,235,255\"), sz0 = p.wLen * (",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "// flared kite-shaped ends, a lit bevel along the shaft and ",
+   "needle": "ctx.rotate((performance.now() / 1000) * 6 * Math.PI * (p.vx >= 0 ? 1 : -1));",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "} else if (p.weapon === \"proj_axe\" && img && img.complete) {",
+   "needle": "ctx.rotate((performance.now() / 1000) * (p.weapon === \"proj_cross\" ? 6 : 4) * Math.PI * (p.vx >= 0 ? 1 : -1));",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "{",
+   "needle": "const tt = performance.now() / 1000, gim = images.wind_ghost, mist = images.fx_spirit_mist;",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (!im || !im.complete || !im.naturalWidth) return;",
+   "needle": "const side = activeSide(), u = unitOf(side), dirX = side === \"left\" ? 1 : -1, L = aimLaunchOf(u), sc = AIM_ARR",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (!im || !im.complete || !im.naturalWidth) return;",
+   "needle": "const sc = AIM_ARROW_LEN * (0.5 + 0.8 * k) / 440, t = performance.now() / 1000;",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (n > 2) {",
+   "needle": "const [ex, ey] = pts[n - 1], pulse = 1 + 0.08 * Math.sin(performance.now() / 140);",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (moveMode) {",
+   "needle": "const idle = 1 + Math.floor(performance.now() / 600) % 6;",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "const idle = 1 + Math.floor(performance.now() / 600) % 6;",
+   "needle": "drawDie(player.x, player.y - MOVE_ROW_DY + Math.sin(performance.now() / 300) * 3, idle, 56);",
+   "count": 1,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "ctx.translate(PAD, 0);",
+   "needle": "if (screenShake > 0) ctx.translate((Math.random() - 0.5) * 14 * (screenShake / 0.18), (Math.random() - 0.5) * ",
+   "count": 2,
+   "class": "draw",
+   "status": "reviewed",
+   "why": "drawing, animation phase, particles, sound timing or pose timing: changes what is seen, not hit points, positions or statuses"
+  },
+  {
+   "file": "index.html",
+   "before": "if (!audioCtx) audioCtx = new (window.AudioContext || window",
+   "needle": "gameAudio = GameAudio.createAudio({ ctx: audioCtx, loader: loadAudioFile, random: Math.random });",
+   "count": 1,
+   "class": "sound",
+   "status": "reviewed",
+   "why": "random source handed to the sound engine (variation of sound effects only)"
+  },
+  {
+   "file": "index.html",
+   "before": "// bats and ghosts, now and then (owner request): code-made ",
+   "needle": "if (typeof AmbientSfx !== \"undefined\") { ambientSfx = AmbientSfx.createAmbient({ ctx: audioCtx, random: Math.r",
+   "count": 1,
+   "class": "sound",
+   "status": "reviewed",
+   "why": "random source handed to the ambient sound engine (ambient variation only)"
+  },
+  {
+   "file": "index.html",
+   "before": "let relayPlaying = false, relayLeft = false, relayIsHost = f",
+   "needle": "const NATIVE_RANDOM = Math.random; // a throw or hit that stops half way must never leave the seeded stream in",
+   "count": 1,
+   "class": "rng_plumbing",
+   "status": "reviewed",
+   "why": "keeps the native Math.random so loop() can restore it after a seeded window"
+  },
+  {
+   "file": "index.html",
+   "before": "const ids = []; p.nunTouched.forEach(u => { ids.push(u.id, u",
+   "needle": "const res = NunUlt.resolve({ normal: HERO_PROFILES.hag.dmg, targets: ids, rng: relayLive() ? relayStream(p.thr",
+   "count": 1,
+   "class": "seeded_in_rooms",
+   "status": "reviewed",
+   "why": "R1-1 fixed 2026-11-23: in a room the nun ultimate stun pick uses relayStream(throwId + 200000) (test_page_nun_stun_seed.js); Math.random only outside rooms"
+  },
+  {
+   "file": "index.html",
+   "before": "function executeThrow(shooter, power, requestedAngle, throwe",
+   "needle": "const throwRand = relayLive() ? relayStream(throwSeq + 1) : Math.random; // in a room the shuriken spread and ",
+   "count": 1,
+   "class": "seeded_in_rooms",
+   "status": "reviewed",
+   "why": "in a room the throw's randomness is relayStream(throwSeq + 1), Math.random only outside rooms"
+  },
+  {
+   "file": "index.html",
+   "before": "if (p.weapon === \"proj_soundwave\") dmgNow = Math.round(waveD",
+   "needle": "const rngKeep = relayLive() ? Math.random : null; if (rngKeep) Math.random = relayStream(p.throwId + 100000); ",
+   "count": 2,
+   "class": "seeded_in_rooms",
+   "status": "reviewed",
+   "why": "rngKeep window: in a room Math.random is replaced by relayStream(throwId + 100000) for the hit code, restored at the end (line 4072)"
+  },
+  {
+   "file": "index.html",
+   "before": "let nunRes = null;",
+   "needle": "if (p.ultNun && !p.nunDone) { nunRes = NunUlt.resolve({ normal: HERO_PROFILES.hag.dmg, targets: [\"opp\", \"opp\"]",
+   "count": 1,
+   "class": "seeded_in_rooms",
+   "status": "reviewed",
+   "why": "inside the rngKeep window, so in a room the nun pick uses the seeded stream (the second hit path outside the window is line 2322)"
+  },
+  {
+   "file": "index.html",
+   "before": "if (p.weapon === \"proj_shield\" && Math.random() < LIFESTEAL_",
+   "needle": "if (rngKeep) Math.random = rngKeep;",
+   "count": 1,
+   "class": "rng_plumbing",
+   "status": "reviewed",
+   "why": "restores Math.random after the seeded hit window"
+  },
+  {
+   "file": "index.html",
+   "before": "function loop(time) {",
+   "needle": "if (Math.random !== NATIVE_RANDOM) Math.random = NATIVE_RANDOM;",
+   "count": 2,
+   "class": "rng_plumbing",
+   "status": "reviewed",
+   "why": "main loop puts the native Math.random back so a half-finished throw never leaves the seeded stream installed"
+  },
+  {
+   "file": "index.html",
+   "before": "const filler = { team, heroes, seatId: \"\", readySent: false,",
+   "needle": "filler.client = RelayClient.createClient({ socketFactory: () => new WebSocket(RelayClient.relaySocketUrl(relay",
+   "count": 1,
+   "class": "net",
+   "status": "reviewed",
+   "why": "lobby AI filler WebSocket client passes Date.now() to RelayClient for network heartbeat/reconnect timing only"
+  }
+ ]
+}

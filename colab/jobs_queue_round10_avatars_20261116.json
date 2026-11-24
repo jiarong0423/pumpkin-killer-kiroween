@@ -1,0 +1,106 @@
+{
+ "refs": {
+  "ref_assets_units_unit_hunchback_idle_png": "assets/units/unit_hunchback_idle.png",
+  "ref_assets_portraits_skeleton_front_png": "assets/portraits/skeleton_front.png",
+  "ref_assets_portraits_wizard_front_png": "assets/portraits/wizard_front.png",
+  "ref_assets_ui_portrait_bat_png": "assets/ui/portrait_bat.png",
+  "ref_assets_portraits_knight_front_png": "assets/portraits/knight_front.png",
+  "ref_assets_portraits_reaper_front_png": "assets/portraits/reaper_front.png",
+  "ref_assets_portraits_bride_front_png": "assets/portraits/bride_front.png",
+  "ref_assets_portraits_hunchback_front_png": "assets/portraits/hunchback_front.png",
+  "ref_assets_portraits_hag_front_png": "assets/portraits/hag_front.png"
+ },
+ "style": " ",
+ "jobs": [
+  {
+   "id": "hunchback_release_r3",
+   "tier": "Q3",
+   "ref": "ref_assets_units_unit_hunchback_idle_png",
+   "prompt": "Edit the reference: preserve the identical green-skinned hunchback's face, brown hair, torn olive vest, rope belt, boots, orange outline, proportions, canvas size, scale, direction (facing LEFT), and feet baseline. FACE LOCK: keep the SAME face, hair, body proportions, clothing, colours, and orange outline as the reference; exactly ONE head, TWO arms, and TWO hands. Show his empty-handed stance at the moment after throwing a big axe forward: his right arm is extended forward LEFT and slightly up with an open empty hand, his left hand relaxed and empty, and his body leans forward. No axe remains in either hand or anywhere in the picture. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground or shadow.",
+   "style": " ",
+   "negative": "no second head, no extra hands, no axe, no text, no change of face",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "avatar_skeleton",
+   "tier": "Q3",
+   "ref": "ref_assets_portraits_skeleton_front_png",
+   "prompt": "Edit the reference into a square HEAD-AND-SHOULDERS character avatar icon (a game head shot). Preserve the IDENTICAL face, colours, outline, proportions and art style of the reference: same character, same expression shape, no redesign. Frame: the white skull with glowing cyan flame eyes and the collar bones, the whole skull top to jaw fully inside the frame. The whole head is COMPLETE and centred with a clear margin on every side (about 8 percent of the canvas): NOTHING is cut off by the canvas edge, no ear, hat, hood, veil, hair, horn or stem is clipped; shoulders and upper chest fade out at the bottom edge inside the frame. Slight three-quarter turn toward the viewer's left like the reference, eyes looking out. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game character portrait: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground, no shadow plate, no frame, no border. Do not include text, extra heads, extra faces, extra hands, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "avatar_wizard",
+   "tier": "Q3",
+   "ref": "ref_assets_portraits_wizard_front_png",
+   "prompt": "Edit the reference into a square HEAD-AND-SHOULDERS character avatar icon (a game head shot). Preserve the IDENTICAL face, colours, outline, proportions and art style of the reference: same character, same expression shape, no redesign. Frame: the carved glowing jack-o-lantern head and the whole purple witch hat with its gold buckle and the full brim, nothing cut off. The whole head is COMPLETE and centred with a clear margin on every side (about 8 percent of the canvas): NOTHING is cut off by the canvas edge, no ear, hat, hood, veil, hair, horn or stem is clipped; shoulders and upper chest fade out at the bottom edge inside the frame. Slight three-quarter turn toward the viewer's left like the reference, eyes looking out. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game character portrait: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground, no shadow plate, no frame, no border. Do not include text, extra heads, extra faces, extra hands, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "avatar_bat",
+   "tier": "Q3",
+   "ref": "ref_assets_ui_portrait_bat_png",
+   "prompt": "Edit the reference into a square HEAD-AND-SHOULDERS character avatar icon (a game head shot). Preserve the IDENTICAL face, colours, outline, proportions and art style of the reference: same character, same expression shape, no redesign. Frame: the black cat-bat face with BOTH tall orange-lined ears completely visible and the cyan rim light, shoulders in a dark outfit. The whole head is COMPLETE and centred with a clear margin on every side (about 8 percent of the canvas): NOTHING is cut off by the canvas edge, no ear, hat, hood, veil, hair, horn or stem is clipped; shoulders and upper chest fade out at the bottom edge inside the frame. Slight three-quarter turn toward the viewer's left like the reference, eyes looking out. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game character portrait: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground, no shadow plate, no frame, no border. Do not include text, extra heads, extra faces, extra hands, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "avatar_knight",
+   "tier": "Q3",
+   "ref": "ref_assets_portraits_knight_front_png",
+   "prompt": "Edit the reference into a square HEAD-AND-SHOULDERS character avatar icon (a game head shot). Preserve the IDENTICAL face, colours, outline, proportions and art style of the reference: same character, same expression shape, no redesign. Frame: the carved glowing jack-o-lantern head with its green curled stem fully visible and the dark plate armour shoulders. The whole head is COMPLETE and centred with a clear margin on every side (about 8 percent of the canvas): NOTHING is cut off by the canvas edge, no ear, hat, hood, veil, hair, horn or stem is clipped; shoulders and upper chest fade out at the bottom edge inside the frame. Slight three-quarter turn toward the viewer's left like the reference, eyes looking out. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game character portrait: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground, no shadow plate, no frame, no border. Do not include text, extra heads, extra faces, extra hands, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "avatar_reaper",
+   "tier": "Q3",
+   "ref": "ref_assets_portraits_reaper_front_png",
+   "prompt": "Edit the reference into a square HEAD-AND-SHOULDERS character avatar icon (a game head shot). Preserve the IDENTICAL face, colours, outline, proportions and art style of the reference: same character, same expression shape, no redesign. Frame: the pale skull face with glowing purple eyes inside the dark purple hood, the whole hood and its edge fully visible. The whole head is COMPLETE and centred with a clear margin on every side (about 8 percent of the canvas): NOTHING is cut off by the canvas edge, no ear, hat, hood, veil, hair, horn or stem is clipped; shoulders and upper chest fade out at the bottom edge inside the frame. Slight three-quarter turn toward the viewer's left like the reference, eyes looking out. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game character portrait: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground, no shadow plate, no frame, no border. Do not include text, extra heads, extra faces, extra hands, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "avatar_bride",
+   "tier": "Q3",
+   "ref": "ref_assets_portraits_bride_front_png",
+   "prompt": "Edit the reference into a square HEAD-AND-SHOULDERS character avatar icon (a game head shot). Preserve the IDENTICAL face, colours, outline, proportions and art style of the reference: same character, same expression shape, no redesign. Frame: the pale face with big black eyes, the purple rose crown and the whole pastel veil and long black hair fully visible, shoulders in a black dress. The whole head is COMPLETE and centred with a clear margin on every side (about 8 percent of the canvas): NOTHING is cut off by the canvas edge, no ear, hat, hood, veil, hair, horn or stem is clipped; shoulders and upper chest fade out at the bottom edge inside the frame. Slight three-quarter turn toward the viewer's left like the reference, eyes looking out. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game character portrait: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground, no shadow plate, no frame, no border. Do not include text, extra heads, extra faces, extra hands, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "avatar_hunchback",
+   "tier": "Q3",
+   "ref": "ref_assets_portraits_hunchback_front_png",
+   "prompt": "Edit the reference into a square HEAD-AND-SHOULDERS character avatar icon (a game head shot). Preserve the IDENTICAL face, colours, outline, proportions and art style of the reference: same character, same expression shape, no redesign. Frame: the green-skinned hunchback with brown hair, pointed ears, tusks and the torn olive vest shoulders, his whole head and both ears fully visible. The whole head is COMPLETE and centred with a clear margin on every side (about 8 percent of the canvas): NOTHING is cut off by the canvas edge, no ear, hat, hood, veil, hair, horn or stem is clipped; shoulders and upper chest fade out at the bottom edge inside the frame. Slight three-quarter turn toward the viewer's left like the reference, eyes looking out. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game character portrait: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground, no shadow plate, no frame, no border. Do not include text, extra heads, extra faces, extra hands, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "id": "avatar_hag",
+   "tier": "Q3",
+   "ref": "ref_assets_portraits_hag_front_png",
+   "prompt": "Edit the reference into a square HEAD-AND-SHOULDERS character avatar icon (a game head shot). Preserve the IDENTICAL face, colours, outline, proportions and art style of the reference: same character, same expression shape, no redesign. Frame: the ghost nun with the black veil and the whole white wimple, a pale ghost-white face with thin cracks and glowing yellow eyes (NOT green skin), the whole veil edge fully visible. The whole head is COMPLETE and centred with a clear margin on every side (about 8 percent of the canvas): NOTHING is cut off by the canvas edge, no ear, hat, hood, veil, hair, horn or stem is clipped; shoulders and upper chest fade out at the bottom edge inside the frame. Slight three-quarter turn toward the viewer's left like the reference, eyes looking out. Dark-fantasy 2D cartoon, chibi proportions, soft dark outlines, thin warm-orange outer glow, rich stylised game art like a polished Halloween mobile-game character portrait: layered depth, soft volumetric lighting, fine surface texture, no flat cel shading, clean noise-free #FF00FF background, no ground, no shadow plate, no frame, no border. Do not include text, extra heads, extra faces, extra hands, other characters, any known film or game character, a background other than flat magenta, or magenta inside the character.",
+   "style": " ",
+   "negative": " ",
+   "w": 1024,
+   "h": 1024
+  }
+ ]
+}

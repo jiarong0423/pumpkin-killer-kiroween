@@ -1,0 +1,8 @@
+Source: https://opengameart.org/content/thwack-sounds
+Work: Thwack Sounds
+Author shown on the page: see page
+Checked and downloaded: 2026-11-09
+License wording on the page that day: License(s): CC0
+Chosen by the owner from the audition page (2026-11-09). Converted by the reviewer where needed (ffmpeg: trim, fades, loudness).
+Not heard by the reviewer.
+File thwack-01.wav -> assets/audio/sfx/thwack_wood.ogg  sha256 a7b88e3e9f1ed39d40b23039762bb83d0a078e37f99d57737204bb6ddb1d2399

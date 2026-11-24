@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="system-ui, -apple-system, 'Segoe UI', 'PingFang TC', 'Noto Sans TC', sans-serif">
+  <title>Pumpkin Killer: runtime architecture</title>
+  <desc>Solid orange boxes exist and are used. Dashed grey boxes are planned or not wired. The dashed red line marks that the page does not call the MCP server (an open owner decision).</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#150d22"/>
+      <stop offset="1" stop-color="#0a0710"/>
+    </linearGradient>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2ee6d6"/>
+    </marker>
+    <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff5a5a"/>
+    </marker>
+    <style>
+      .grp { fill: #170f26; stroke: #4b3a6e; stroke-width: 1.5; }
+      .gplan { fill: #120e1a; stroke: #6c6c84; stroke-width: 1.5; stroke-dasharray: 10 7; }
+      .node { fill: #2a1d44; stroke: #ff9f1c; stroke-width: 2; }
+      .plan { fill: #1a1724; stroke: #8a8aa0; stroke-width: 2; stroke-dasharray: 8 6; }
+      .t { fill: #fff3d6; font-size: 18px; font-weight: 700; }
+      .s { fill: #cdbdee; font-size: 14px; }
+      .lab { fill: #a98bff; font-size: 17px; font-weight: 700; }
+      .flow { stroke: #2ee6d6; stroke-width: 2.5; fill: none; }
+      .nc { stroke: #ff5a5a; stroke-width: 3; fill: none; stroke-dasharray: 10 7; }
+      .red { fill: #ff8a8a; font-size: 14px; font-weight: 700; }
+      .small { fill: #9d92b8; font-size: 13px; }
+      .h1 { fill: #fff3d6; font-size: 28px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <!-- header and legend -->
+  <text x="30" y="46" class="h1">Pumpkin Killer: runtime architecture</text>
+  <rect x="900" y="26" width="34" height="20" rx="5" class="node"/>
+  <text x="942" y="42" class="s">exists, used</text>
+  <rect x="1060" y="26" width="34" height="20" rx="5" class="plan"/>
+  <text x="1102" y="42" class="s">planned or not wired</text>
+  <line x1="1290" y1="36" x2="1328" y2="36" class="nc"/>
+  <text x="1338" y="42" class="s">not connected (owner decides)</text>
+
+  <!-- ===== browser page ===== -->
+  <rect x="30" y="70" width="780" height="470" rx="14" class="grp"/>
+  <text x="48" y="96" class="lab">Browser page: plain JS, canvas 1920x1080, no framework</text>
+
+  <rect x="62" y="108" width="736" height="152" rx="10" class="node"/>
+  <text x="78" y="134" class="t">index.html</text>
+  <text x="78" y="154" class="s">rules, input, fixed 1/60 s physics, draw loop, start screen, HUD, airdrop, energy pips</text>
+  <rect x="78" y="166" width="704" height="84" rx="8" class="node"/>
+  <text x="94" y="190" class="t" style="font-size:16px">In-page AI opponent (code inside index.html)</text>
+  <text x="94" y="212" class="s">estimatePowerForTarget + simulateLandingX: exact simulator, true wind and position</text>
+  <text x="94" y="234" class="red">aim error 14 power units. It is not an MCP client.</text>
+
+  <!-- spine from index.html to the files it loads -->
+  <path d="M62,200 H46 V473" class="flow"/>
+  <path d="M46,311 H62" class="flow" marker-end="url(#ah)"/>
+  <path d="M46,383 H62" class="flow" marker-end="url(#ah)"/>
+  <path d="M46,473 H62" class="flow" marker-end="url(#ah)"/>
+
+  <rect x="62" y="282" width="236" height="58" rx="10" class="node"/>
+  <text x="76" y="306" class="t">js/particles.js</text>
+  <text x="76" y="326" class="s">seeded particle system</text>
+  <rect x="312" y="282" width="236" height="58" rx="10" class="node"/>
+  <text x="326" y="306" class="t">js/particles_draw.js</text>
+  <text x="326" y="326" class="s">canvas drawing</text>
+  <rect x="562" y="282" width="236" height="58" rx="10" class="node"/>
+  <text x="576" y="306" class="t">js/wind_fx.js</text>
+  <text x="576" y="326" class="s">leaves, dust, fog follow wind</text>
+
+  <rect x="62" y="354" width="236" height="58" rx="10" class="node"/>
+  <text x="76" y="378" class="t">css/dock.css</text>
+  <text x="76" y="398" class="s">bottom dock styles</text>
+  <rect x="312" y="354" width="236" height="58" rx="10" class="node"/>
+  <text x="326" y="378" class="t">js/audio.js</text>
+  <text x="326" y="398" class="s">GameAudio, 30 events, fallback</text>
+  <rect x="562" y="354" width="236" height="58" rx="10" class="node"/>
+  <text x="576" y="378" class="t">js/ambient_sfx.js</text>
+  <text x="576" y="398" class="s">bats, ghosts, crows, beds</text>
+
+  <rect x="62" y="438" width="366" height="72" rx="10" class="node"/>
+  <text x="76" y="464" class="t">assets/ images</text>
+  <text x="76" y="486" class="s">env, units, poses, weapons, ui, fx/sprites</text>
+  <rect x="442" y="438" width="356" height="72" rx="10" class="node"/>
+  <text x="456" y="464" class="t">assets/audio .ogg files</text>
+  <text x="456" y="486" class="s">7 music, 26 sfx, 13 ambient</text>
+  <path d="M480,412 V438" class="flow" marker-end="url(#ah)"/>
+  <path d="M680,412 V438" class="flow" marker-end="url(#ah)"/>
+
+  <!-- ===== python side ===== -->
+  <rect x="890" y="70" width="680" height="470" rx="14" class="grp"/>
+  <text x="908" y="96" class="lab">Python 3, standard library only</text>
+
+  <rect x="910" y="108" width="640" height="56" rx="10" class="node"/>
+  <text x="926" y="132" class="t">shared/constants.json</text>
+  <text x="926" y="152" class="s">10 shared numbers: ground, gravity, launch speed, fence, wind range, turn time</text>
+
+  <rect x="910" y="196" width="640" height="82" rx="10" class="node"/>
+  <text x="926" y="222" class="t">scripts/mcp_game_server.py</text>
+  <text x="926" y="244" class="s">GameState rule engine, 4 + 4 spawn slots</text>
+  <text x="926" y="264" class="s">also an older hand-rolled JSON-RPC loop (not the standard MCP handshake)</text>
+
+  <rect x="910" y="310" width="640" height="106" rx="10" class="node"/>
+  <text x="926" y="336" class="t">scripts/mcp_stdio_server.py</text>
+  <text x="926" y="358" class="s">standard MCP over stdio: McpServer, Session, TrackedGameState, MatchStore</text>
+  <text x="926" y="380" class="s">tools: get_public_state, get_history, submit_action, end_turn, set_notes, get_notes</text>
+  <text x="926" y="402" class="s">public state only; the engine's own AI is switched off in this subclass</text>
+
+  <rect x="910" y="440" width="300" height="70" rx="10" class="node"/>
+  <text x="926" y="466" class="t">match folder (optional)</text>
+  <text x="926" y="488" class="s">--memory-dir, off by default</text>
+  <rect x="1250" y="440" width="300" height="70" rx="10" class="node"/>
+  <text x="1266" y="464" class="t">MCP client</text>
+  <text x="1266" y="483" class="s">Kiro or a sub-agent, configured in</text>
+  <text x="1266" y="501" class="s">.kiro/settings/mcp.json</text>
+
+  <path d="M1230,196 V164" class="flow" marker-end="url(#ah)"/>
+  <text x="1242" y="184" class="small">reads</text>
+  <path d="M1230,310 V278" class="flow" marker-end="url(#ah)"/>
+  <text x="1242" y="298" class="small">imports, subclasses</text>
+  <path d="M1060,416 V440" class="flow" marker-end="url(#ah)"/>
+  <path d="M1400,416 V440" class="flow" marker-start="url(#ah)" marker-end="url(#ah)"/>
+  <text x="1412" y="432" class="small">stdio JSON-RPC 2.0</text>
+
+  <!-- not connected -->
+  <path d="M798,160 H850 V363 H910" class="nc" marker-end="url(#ahr)"/>
+  <rect x="822" y="236" width="56" height="60" rx="6" fill="#170f26" stroke="#ff5a5a" stroke-width="1.5"/>
+  <text x="850" y="262" text-anchor="middle" class="red">NOT</text>
+  <text x="850" y="282" text-anchor="middle" class="red">linked</text>
+
+  <!-- ===== checks ===== -->
+  <rect x="30" y="578" width="380" height="84" rx="10" class="node"/>
+  <text x="46" y="604" class="t">JS tests (Node assert)</text>
+  <text x="46" y="626" class="s">test_particles, test_audio, test_ambient_sfx,</text>
+  <text x="46" y="646" class="s">test_wind_fx, test_i18n</text>
+  <path d="M220,578 V541" class="flow" marker-end="url(#ah)"/>
+  <text x="232" y="564" class="small">tests cover the js/*.js modules, not index.html</text>
+
+  <rect x="440" y="578" width="370" height="84" rx="10" class="node"/>
+  <text x="456" y="604" class="t">.kiro/hooks (3 files)</text>
+  <text x="456" y="626" class="s">2 run a test when a file is saved,</text>
+  <text x="456" y="646" class="s">1 is a no-op (rig inputs missing)</text>
+  <path d="M810,620 H890" class="flow" marker-end="url(#ah)"/>
+
+  <rect x="890" y="578" width="420" height="84" rx="10" class="node"/>
+  <text x="906" y="604" class="t">Python tests</text>
+  <text x="906" y="626" class="s">test_mcp_game, test_mcp_stdio, test_postprocess_audio,</text>
+  <text x="906" y="646" class="s">test_constants_sync (parses index.html, reads the json)</text>
+  <path d="M1100,578 V541" class="flow" marker-end="url(#ah)"/>
+
+  <rect x="1330" y="578" width="240" height="84" rx="10" class="node"/>
+  <text x="1346" y="604" class="t" style="font-size:17px">eval_agent_learning.py</text>
+  <text x="1346" y="626" class="s">history-only agent,</text>
+  <text x="1346" y="646" class="s">learning-curve check</text>
+  <path d="M1450,578 V541" class="flow" marker-end="url(#ah)"/>
+
+  <!-- ===== planned ===== -->
+  <rect x="30" y="690" width="1540" height="190" rx="14" class="gplan"/>
+  <text x="48" y="716" class="lab">Planned or not wired (dashed)</text>
+
+  <rect x="46" y="736" width="290" height="124" rx="10" class="plan"/>
+  <text x="62" y="762" class="t">4 vs 4, new classes</text>
+  <text x="62" y="784" class="s">bride, hunchback, reaper:</text>
+  <text x="62" y="803" class="s">grey cards and art prompts only</text>
+  <text x="62" y="822" class="s">the page is 1 vs 1</text>
+
+  <rect x="350" y="736" width="290" height="124" rx="10" class="plan"/>
+  <text x="366" y="762" class="t">Ultimate effects</text>
+  <text x="366" y="784" class="s">3 energy pips and an arm toggle</text>
+  <text x="366" y="803" class="s">exist; the effects are designs</text>
+  <text x="366" y="822" class="s">only (docs/ultimates_design.md)</text>
+
+  <rect x="654" y="736" width="290" height="124" rx="10" class="plan"/>
+  <text x="670" y="762" class="t">js/i18n.js</text>
+  <text x="670" y="784" class="s">file exists, index.html does</text>
+  <text x="670" y="803" class="s">not load it; dictionaries in</text>
+  <text x="670" y="822" class="s">assets/i18n are absent</text>
+
+  <rect x="958" y="736" width="290" height="124" rx="10" class="plan"/>
+  <text x="974" y="762" class="t">Experience modules</text>
+  <text x="974" y="784" class="s">fx_budget, screen_fx,</text>
+  <text x="974" y="803" class="s">landing_memory, onboarding:</text>
+  <text x="974" y="822" class="s">spec only, no files yet</text>
+
+  <rect x="1262" y="736" width="290" height="124" rx="10" class="plan"/>
+  <text x="1278" y="762" class="t">More scenes</text>
+  <text x="1278" y="784" class="s">belltower and pumpkin field</text>
+  <text x="1278" y="803" class="s">are listed in SCENES; their</text>
+  <text x="1278" y="822" class="s">background files do not exist</text>
+
+  <text x="30" y="896" class="small">Built from files read by Kiro task 41. Counts and paths: docs/architecture.md. Not rendered or run by the author.</text>
+</svg>

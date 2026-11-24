@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+'use strict';
+var assert = require('assert');
+var fs = require('fs');
+var page = fs.readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+assert.match(page, /let seats = \{ left: "human", right: "ai" \}/);
+assert.match(page, /function activeSide\(\)/);
+assert.match(page, /function unitOf\(side\)/);
+assert.match(page, /function skillChargesOf\(side\)/);
+assert.match(page, /function seatOptionsValid\(left, right\)/);
+assert.match(page, /player: \{ double: 1, heavy: 1, heal: 1 \}, ai: \{ double: 1, heavy: 1, heal: 1 \}/);
+assert.match(page, /skillChargesOf\(side\)\.heavy\+\+/);
+assert.match(page, /ai\.hp < ai\.maxHp \* 0\.45/);
+assert.match(page, /Math\.random\(\) < 0\.2/);
+assert.match(page, /label: T\(it\.labelKey\)/);
+var start = page.lastIndexOf('<script>') + '<script>'.length;
+var end = page.lastIndexOf('</script>');
+assert.ok(start >= '<script>'.length && end > start, 'inline game script must be present');
+new Function(page.slice(start, end));
+console.log('seats and symmetric one-use items: ok');

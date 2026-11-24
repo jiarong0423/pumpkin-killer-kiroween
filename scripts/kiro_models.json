@@ -1,0 +1,22 @@
+{
+  "retries": 6,
+  "pause_seconds": 60,
+  "routes": {
+    "design": [
+      "gpt-5.6-terra"
+    ],
+    "gpt": [
+      "gpt-5.6-terra"
+    ],
+    "codex": [
+      "gpt-5.6-terra"
+    ],
+    "flow": [
+      "claude-sonnet-5.5"
+    ],
+    "opus": [
+      "claude-opus-5.5"
+    ]
+  },
+  "note": "Owner rules 2026-11-09: never fall back to a LOWER model. Order picked by the owner: claude-sonnet-5.5 (1.30x credits), then gpt-5.6-terra (2.20x), then gpt-5.6-sol (4.40x); ids and multipliers verified with `kiro-cli chat --list-models`. The first model waits 60, 120, 180, 240 s on throttling before the router moves on. claude-opus-5.5 (2.00x) is NOT in the route; add it only when the owner says so. The last step costs 3.4 times a Sonnet 5.5 run, so the log line 'model gpt-5.6-sol' is the signal that the spend happened. Routes 'gpt' and 'sonnet' pin ONE model each: used to get two independent authors for the same job (owner 2026-11-10: have Kiro write the image prompts, with an OpenAI model as a second author). Route 'codex' (owner 2026-11-10: 'the codex inside Kiro writes the scripts'): gpt-5.6-terra first, gpt-5.6-sol as the backup. OWNER 2026-11-10: ALL writing goes to Terra ('give everything to Terra', 'do not let Sonnet write'): the default route 'design' is now gpt-5.6-terra then gpt-5.6-sol; Sonnet is out of every route. OWNER 2026-11-10: 'do not use Sol': gpt-5.6-sol is out of EVERY route (it was used once for a task that then failed). Only gpt-5.6-terra remains; when throttled the router waits and retries (6 retries, 60 s growing pauses) and then reports failure instead of switching to a dearer model. OWNER 2026-11-10 (svg overview diagram task 72): route 'svg' pins claude-sonnet-5.5 (1.30x, cheaper than Terra) because the owner named Kiro Sonnet for this one documentation job; every other route stays Terra only. OWNER 2026-11-10 (latest, replaces the Terra-only and 'svg' notes): Sonnet (claude-sonnet-5.5) does GAME FLOW and SYSTEM PLANNING (route 'flow': rules, turn flow, progression, status/ultimate systems, schedules, overview diagrams); GPT (gpt-5.6-terra) does ART DESIGN and image prompts (routes 'design', 'gpt', 'codex'). Sol stays out of every route. OWNER 2026-11-15: route 'opus' pins claude-opus-5.5 (2.00x, cheaper than Terra 2.20x per this note) for the MCP architecture design task only; it is not a fallback for any other route."
+}

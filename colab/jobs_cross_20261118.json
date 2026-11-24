@@ -1,0 +1,57 @@
+{
+ "note": "2026-11-18 owner: the thrown cross does not look like a cross; spec docs/COLAB_SPEC_CROSS_20261118.md. Nothing has been run. 4 seeds, pick one, key out the magenta, save as assets/fx/sprites/fx_cross_silver.png (+ .webp).",
+ "jobs": [
+  {
+   "id": "fx_cross_silver_a",
+   "tier": "Q3",
+   "ref": "bar",
+   "refs": [
+    "bar"
+   ],
+   "prompt": "Ignore the reference layout. Draw ONE slender silver Latin cross standing upright: a long shaft, a shorter crossbar high up (about 30 percent from the top), the four ends slightly flared in a gothic style, polished bevelled metal. No chain, no hand, no ring at the top.",
+   "style": "Game item sprite, flat dark-fantasy 2D cartoon with a thick clean near-black contour and a thin cool-blue outer glow; polished bevelled silver metal in flat three-tone cel shading with one bright specular line; isolated item, centred, fully inside the picture with a wide margin (8 to 10 percent). Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, jewelry product photo, necklace chain, bail ring, hand, 3D render, plastic shine, thin line art, text, letters, watermark, ground, cast shadow, extra objects, crucifix figure",
+   "seed": 1000,
+   "out": "assets/fx/sprites/fx_cross_silver.png"
+  },
+  {
+   "id": "fx_cross_silver_b",
+   "tier": "Q3",
+   "ref": "bar",
+   "refs": [
+    "bar"
+   ],
+   "prompt": "Ignore the reference layout. Draw ONE slender silver Latin cross standing upright: a long shaft, a shorter crossbar high up (about 30 percent from the top), the four ends slightly flared in a gothic style, polished bevelled metal. No chain, no hand, no ring at the top.",
+   "style": "Game item sprite, flat dark-fantasy 2D cartoon with a thick clean near-black contour and a thin cool-blue outer glow; polished bevelled silver metal in flat three-tone cel shading with one bright specular line; isolated item, centred, fully inside the picture with a wide margin (8 to 10 percent). Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, jewelry product photo, necklace chain, bail ring, hand, 3D render, plastic shine, thin line art, text, letters, watermark, ground, cast shadow, extra objects, crucifix figure",
+   "seed": 1017,
+   "out": "assets/fx/sprites/fx_cross_silver.png"
+  },
+  {
+   "id": "fx_cross_silver_c",
+   "tier": "Q3",
+   "ref": "bar",
+   "refs": [
+    "bar"
+   ],
+   "prompt": "Ignore the reference layout. Draw ONE slender silver Latin cross standing upright: a long shaft, a shorter crossbar high up (about 30 percent from the top), the four ends slightly flared in a gothic style, polished bevelled metal. No chain, no hand, no ring at the top.",
+   "style": "Game item sprite, flat dark-fantasy 2D cartoon with a thick clean near-black contour and a thin cool-blue outer glow; polished bevelled silver metal in flat three-tone cel shading with one bright specular line; isolated item, centred, fully inside the picture with a wide margin (8 to 10 percent). Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, jewelry product photo, necklace chain, bail ring, hand, 3D render, plastic shine, thin line art, text, letters, watermark, ground, cast shadow, extra objects, crucifix figure",
+   "seed": 1034,
+   "out": "assets/fx/sprites/fx_cross_silver.png"
+  },
+  {
+   "id": "fx_cross_silver_d",
+   "tier": "Q3",
+   "ref": "bar",
+   "refs": [
+    "bar"
+   ],
+   "prompt": "Ignore the reference layout. Draw ONE slender silver Latin cross standing upright: a long shaft, a shorter crossbar high up (about 30 percent from the top), the four ends slightly flared in a gothic style, polished bevelled metal. No chain, no hand, no ring at the top.",
+   "style": "Game item sprite, flat dark-fantasy 2D cartoon with a thick clean near-black contour and a thin cool-blue outer glow; polished bevelled silver metal in flat three-tone cel shading with one bright specular line; isolated item, centred, fully inside the picture with a wide margin (8 to 10 percent). Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, jewelry product photo, necklace chain, bail ring, hand, 3D render, plastic shine, thin line art, text, letters, watermark, ground, cast shadow, extra objects, crucifix figure",
+   "seed": 1051,
+   "out": "assets/fx/sprites/fx_cross_silver.png"
+  }
+ ]
+}

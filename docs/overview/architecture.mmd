@@ -1,0 +1,165 @@
+%% Pumpkin Killer whole-project architecture, 2026-11-10 (Kiro task 77)
+%% Drawn from reading files only. Not rendered, not run, no test executed.
+%% Status words are the ones in docs/asset_inventory.json: done, built_unseen, in_progress, planned, blocked_on_owner.
+%% "actor" is a neutral style for the owner (not a status).
+%% (T73) (T74) (T75) (T76) = depends on the output of Kiro task 73..76, which is not finished yet.
+flowchart TB
+
+  subgraph GAME["瀏覽器遊戲 index.html（只載入 5 個 js）"]
+    direction TB
+    B_CORE["主迴圈與回合<br/>loop, resolveRound"]
+    B_PART["粒子系統<br/>particles.js + draw"]
+    B_SCENE["牆體與棺材平台<br/>中央牆 每擊 8%"]
+    B_DROP["空投補給<br/>單格道具"]
+    B_WFX["風場粒子<br/>wind_fx.js"]
+    B_WGHOST["風鬼風向提示<br/>4 幀後備"]
+    B_ULT["絕招 (T74)<br/>蝙蝠 骷髏 巫師"]
+    B_STAT["狀態效果 (T74)<br/>流血 毒 霜凍 減速 暈眩"]
+    B_SHLD["浮空盾與防禦<br/>A-B-C 三點未建"]
+    B_AI["內建 AI 對手<br/>aiAttackNow 無模擬器"]
+    B_CNEW["新職業 (T74)<br/>bride hunchback reaper"]
+    B_START["開始畫面與取名<br/>取名模組未接入"]
+    B_AUD["音效與環境音 (T74)<br/>audio.js ambient_sfx.js"]
+    B_PHYS["物理與風<br/>1/60 s 固定步長"]
+    B_C4["四職業可玩<br/>骷髏 巫師 蝙蝠 盾衛"]
+    B_HUD["HUD 與底部 dock<br/>drawTopHUD dock.css"]
+  end
+
+  subgraph DATA["資料"]
+    D_AMAP["音效事件表<br/>audio_event_map.json"]
+    D_CONST["共用常數<br/>shared/constants.json"]
+    D_CSTAT["職業數值表<br/>class_stats.js v2"]
+    D_I18N["雙語字串<br/>i18n.js 未載入"]
+    D_MODS["未接入的模組<br/>ultimate.js scene_layers.js"]
+    D_AINV["資產盤點<br/>asset_inventory.json"]
+  end
+
+  subgraph TESTS["測試層"]
+    X_JS["JS 測試 node assert<br/>particles audio wind_fx i18n class_stats ultimate"]
+    X_PY["Python 測試<br/>mcp_game mcp_stdio constants_sync ingest kiro_route"]
+    X_BAL["平衡與 AI 模擬<br/>sim_balance sim_ai_nosim eval_agent_learning"]
+    X_NEW["新增測試 規劃 (T75 T76)<br/>無畫面規則 瀏覽器 公平性"]
+  end
+
+  subgraph ART["美術管線"]
+    direction TB
+    subgraph GAPS["六個美術缺口"]
+      A_GHOST["風鬼連續吹風 8 格<br/>Colab 或 image2"]
+      A_CHAIN["腳步鎖鏈 減速<br/>jobs_chain_20261110"]
+      A_COFFIN["藍色版棺材 (T73)"]
+      A_FENCE["圍籬受損破壞圖 (T73)<br/>現為純黑塊"]
+      A_PORT["前視肖像 x3 (T73)<br/>缺哪幾張待核對"]
+      A_POSE39["39 張重做姿勢 (T73)<br/>jobs_retry2_20261110"]
+    end
+    A_ASSETS["assets 資產<br/>14 資料夾 282 檔"]
+    A_KEY["去背與對位<br/>key_*.py make_unarmed_*"]
+    A_COLAB["Colab 出圖<br/>Qwen-Image-Edit"]
+    A_IMG2["image2 出圖<br/>擁有者手動貼上"]
+    A_BG["新戰場背景 (T73)<br/>鐘樓 南瓜田"]
+  end
+
+  subgraph AGENTS["代理"]
+    G_MAIN["主線 Claude Code<br/>整合 重跑驗證 commit"]
+    G_TERRA["Kiro Terra<br/>美術設計與提示詞 任務73"]
+    G_OWNER["擁有者<br/>決定 核准 貼 image2"]
+    G_SUB["唯讀子代理<br/>審查 盤點"]
+    G_SONNET["Kiro Sonnet<br/>流程 系統 MCP 任務74-76"]
+    G_MCPOPP["MCP 對手子代理 (T75)<br/>只讀公開視角"]
+  end
+
+  subgraph TOOLS["工具 scripts"]
+    T_INGEST["匯入管線<br/>ingest_queue ingest_sheets"]
+    T_KROUTE["Kiro 模型路由<br/>kiro_route.py"]
+    T_SIM["相似度與連續性<br/>pose_similarity check_continuity"]
+    T_MCPSTD["MCP 標準伺服器 (T75)<br/>mcp_stdio_server.py"]
+    T_SNAP["快照與接收伺服器<br/>snapshot_server.py"]
+    T_MCPENG["規則引擎<br/>mcp_game_server.py"]
+  end
+
+  subgraph SEAT["4 對 4 座位與控制者層（規劃中，全部依賴 T76）"]
+    direction LR
+    S_RULES["無畫面規則模組<br/>node 可單獨跑"]
+    S_UNITS["units 陣列與別名<br/>player=units.red 0"]
+    S_ACTIVE["作用中單位指標<br/>隊伍輪替 每單位 12 秒"]
+    S_COLL["重疊傷害與濺射<br/>命中箱 距離衰減"]
+    S_BUDGET["粒子預算<br/>8 單位同畫面"]
+    S_SEATS["座位與控制者<br/>agent human builtin-ai"]
+    S_PUBVIEW["座位公開視角 (T75)<br/>只含公開資訊"]
+    S_AI4["多單位 AI<br/>命中率目標 25-30%"]
+    S_HUD4["4 單位 HUD<br/>作用中高亮 無血量數字"]
+  end
+
+  %% inside the game
+  B_AI --> B_PHYS
+  B_CNEW -.-> B_C4
+  B_START --> B_HUD
+  B_ULT -.-> B_CNEW
+  B_WFX --> B_WGHOST
+
+  %% data into the game
+  D_AMAP --> B_AUD
+  D_CONST --> B_PHYS
+  D_CSTAT -.-> B_C4
+  D_I18N -.-> B_HUD
+
+  %% tests into data
+  X_JS --> D_MODS
+  X_PY --> D_CONST
+  X_BAL --> D_CSTAT
+
+  %% art pipeline
+  A_COLAB --> A_KEY
+  A_IMG2 --> A_KEY
+  A_KEY --> A_ASSETS
+  GAPS -.-> A_ASSETS
+  A_ASSETS -->|"imgList 載入"| GAME
+
+  %% agents and art
+  G_MAIN --> A_COLAB
+  G_TERRA --> A_COLAB
+  G_TERRA --> A_IMG2
+  G_OWNER --> A_IMG2
+  G_SUB -->|"盤點"| D_AINV
+
+  %% agents and tools
+  T_KROUTE -->|"派 Kiro 任務"| G_TERRA
+  T_KROUTE --> G_SONNET
+  G_MCPOPP -.-> T_MCPSTD
+  T_MCPSTD --> T_MCPENG
+
+  %% 4v4 layer
+  S_RULES -.-> S_UNITS
+  S_UNITS -.-> S_ACTIVE
+  S_ACTIVE -.-> S_COLL
+  S_COLL -.-> S_BUDGET
+  S_SEATS -.-> S_PUBVIEW
+  S_PUBVIEW -.-> S_AI4
+  S_PUBVIEW -.->|"公開視角"| G_MCPOPP
+  AGENTS -.->|"Sonnet 規劃 主線實作"| SEAT
+  SEAT -.->|"取代 player 與 ai 單例"| GAME
+
+  classDef done fill:#1f3d2b,stroke:#3ddc84,color:#e8f5ec;
+  classDef built_unseen fill:#3b3320,stroke:#ffcc33,color:#fff3d6;
+  classDef in_progress fill:#1c2f4a,stroke:#4da3ff,color:#e3f0ff;
+  classDef planned fill:#26262e,stroke:#9a9ab0,color:#d6d6e4,stroke-dasharray:6 4;
+  classDef blocked_on_owner fill:#43202a,stroke:#ff5a6e,color:#ffe3e7;
+  classDef actor fill:#2a1d44,stroke:#a98bff,color:#efe6ff;
+
+  class B_CORE,B_PART,B_PHYS,B_C4,B_HUD done;
+  class B_SCENE,B_DROP,B_WFX,B_STAT,B_AI,B_AUD built_unseen;
+  class B_WGHOST,B_ULT,B_SHLD,B_CNEW,B_START in_progress;
+  class D_CONST,D_AINV done;
+  class D_AMAP,D_CSTAT,D_MODS built_unseen;
+  class D_I18N in_progress;
+  class X_JS,X_PY,X_BAL done;
+  class X_NEW planned;
+  class A_KEY done;
+  class A_COLAB,A_ASSETS,A_GHOST,A_CHAIN in_progress;
+  class A_COFFIN,A_FENCE,A_BG planned;
+  class A_IMG2,A_PORT,A_POSE39 blocked_on_owner;
+  class G_MAIN,G_SUB done;
+  class G_TERRA,G_SONNET in_progress;
+  class G_MCPOPP planned;
+  class G_OWNER actor;
+  class T_INGEST,T_KROUTE,T_SIM,T_MCPSTD,T_SNAP,T_MCPENG done;
+  class S_RULES,S_UNITS,S_ACTIVE,S_COLL,S_BUDGET,S_SEATS,S_PUBVIEW,S_AI4,S_HUD4 planned;

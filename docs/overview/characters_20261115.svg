@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1720 1222" width="1720" height="1222" font-family="-apple-system,PingFang TC,Noto Sans TC,sans-serif">
+<rect width="100%" height="100%" fill="#120b22"/>
+<text x="30" y="52" font-size="30" font-weight="700" fill="#ffd32a">南瓜殺手 Pumpkin Killer — 角色規劃表（2026-11-15）</text>
+<text x="30" y="82" font-size="15" fill="#b8a9d9">每個角色的狀態、日常攻擊與大招。綠＝大招已接進頁面　黃＝部分完成　橘＝尚未進頁面。數字標「暫定」者待你確認；第 8 個角色尚未決定。</text>
+<text x="30" y="116" font-size="16" font-weight="700" fill="#8be9ff">角色</text>
+<text x="250" y="116" font-size="16" font-weight="700" fill="#8be9ff">狀態／數值</text>
+<text x="470" y="116" font-size="16" font-weight="700" fill="#8be9ff">日常攻擊</text>
+<text x="960" y="116" font-size="16" font-weight="700" fill="#8be9ff">大招</text>
+<text x="1480" y="116" font-size="16" font-weight="700" fill="#8be9ff">備註</text>
+<line x1="20" y1="124" x2="1700" y2="124" stroke="#4b3a78" stroke-width="2"/>
+<rect x="20" y="130" width="1680" height="138" rx="10" fill="#1d1236" stroke="#4b3a78"/>
+<image href="../../assets/ui/portrait_skeleton.png" x="32" y="140" width="96" height="96" preserveAspectRatio="xMidYMid slice"/>
+<text x="140" y="164" font-size="19" font-weight="700" fill="#fff">骷髏長矛兵</text>
+<text x="140" y="186" font-size="12" fill="#b8a9d9">Skeleton Spearman</text>
+<text x="140" y="208" font-size="12" fill="#b8a9d9">id: skeleton</text>
+<circle cx="266" cy="158" r="7" fill="#2ecc71"/>
+<text x="282" y="162" font-size="13" fill="#2ecc71" font-weight="700">可玩 · 大招已接進頁面</text>
+<text x="250" y="188" font-size="13" fill="#e8deff">HP 100 · 傷害 24</text>
+<text x="470" y="160" font-size="13.5" fill="#f2ecff">標槍（骨矛）：命中附「霜咒」，被擊中單位接下來 2 次攻擊 −15%；</text>
+<text x="470" y="180" font-size="13.5" fill="#f2ecff">矛會造成流血（每回合起 2 點，共 2 回合）。頭部命中 = 爆擊 ×1.25</text>
+<text x="470" y="200" font-size="13.5" fill="#f2ecff"> 並暈眩（下回合只剩 7 秒）。</text>
+<text x="960" y="160" font-size="13.5" fill="#f2ecff">三連標槍：一次射出 3 支，每支 1.5×普攻÷3；每中一支，下一支 +5%；</text>
+<text x="960" y="180" font-size="13.5" fill="#f2ecff">三支全中 → 第三支爆擊。需先命中 3 次點亮三格能量，一場最多 2 次。</text>
+<text x="1480" y="160" font-size="13.5" fill="#c9bde6">特效：蓄力光環、臉部冷焰、</text>
+<text x="1480" y="180" font-size="13.5" fill="#c9bde6">矛尾軌跡、命中鬼火與爆裂（j</text>
+<text x="1480" y="200" font-size="13.5" fill="#c9bde6">s/ultimate_fx.js）</text>
+<rect x="20" y="276" width="1680" height="138" rx="10" fill="#1d1236" stroke="#4b3a78"/>
+<image href="../../assets/ui/portrait_wizard.png" x="32" y="286" width="96" height="96" preserveAspectRatio="xMidYMid slice"/>
+<text x="140" y="310" font-size="19" font-weight="700" fill="#fff">南瓜巫師</text>
+<text x="140" y="332" font-size="12" fill="#b8a9d9">Pumpkin Wizard</text>
+<text x="140" y="354" font-size="12" fill="#b8a9d9">id: wizard</text>
+<circle cx="266" cy="304" r="7" fill="#2ecc71"/>
+<text x="282" y="308" font-size="13" fill="#2ecc71" font-weight="700">可玩 · 大招已接進頁面</text>
+<text x="250" y="334" font-size="13" fill="#e8deff">HP 85 · 傷害 28（普攻）</text>
+<text x="470" y="306" font-size="13.5" fill="#f2ecff">南瓜砲：彈道高、威力大；命中使目標中毒（綠色閃爍，每回合起 2 點</text>
+<text x="470" y="326" font-size="13.5" fill="#f2ecff">，共 2 回合）。</text>
+<text x="960" y="306" font-size="13.5" fill="#f2ecff">南瓜連環爆：砲彈本身是一次普通命中；落點 234 px 內的單位再吃 1.5×</text>
+<text x="960" y="326" font-size="13.5" fill="#f2ecff">普攻 的爆炸，並留下 13 團鬼火（約 468 px 寬）。爆炸不流血。</text>
+<text x="1480" y="306" font-size="13.5" fill="#c9bde6">特效：砲口閃光、煙霧、落地</text>
+<text x="1480" y="326" font-size="13.5" fill="#c9bde6">塵環、星塵、鬼火排（已與頁</text>
+<text x="1480" y="346" font-size="13.5" fill="#c9bde6">面原有效果合併）</text>
+<rect x="20" y="422" width="1680" height="138" rx="10" fill="#1d1236" stroke="#4b3a78"/>
+<image href="../../assets/ui/portrait_bat.png" x="32" y="432" width="96" height="96" preserveAspectRatio="xMidYMid slice"/>
+<text x="140" y="456" font-size="19" font-weight="700" fill="#fff">蝙蝠刺客</text>
+<text x="140" y="478" font-size="12" fill="#b8a9d9">Bat Assassin</text>
+<text x="140" y="500" font-size="12" fill="#b8a9d9">id: bat</text>
+<circle cx="266" cy="450" r="7" fill="#2ecc71"/>
+<text x="282" y="454" font-size="13" fill="#2ecc71" font-weight="700">可玩 · 大招已接進頁面</text>
+<text x="250" y="480" font-size="13" fill="#e8deff">HP 90 · 傷害 22</text>
+<text x="470" y="452" font-size="13.5" fill="#f2ecff">手裡劍（普攻一次一枚、打一個單位）：命中令目標減速，下回合不能</text>
+<text x="470" y="472" font-size="13.5" fill="#f2ecff">移動。（開始畫面簡介寫「一次 5 枚」是舊文字，與程式不符，待修）</text>
+<text x="960" y="452" font-size="13.5" fill="#f2ecff">手裡劍雨：5 枚散射，扇形 −8 / −4 / 0 / +4 / +8 度，每枚 1.5×普攻÷</text>
+<text x="960" y="472" font-size="13.5" fill="#f2ecff">5，全中同一單位上限 1.5×普攻。</text>
+<text x="1480" y="452" font-size="13.5" fill="#c9bde6">特效：蓄力光環、五道飛鏢軌</text>
+<text x="1480" y="472" font-size="13.5" fill="#c9bde6">跡、命中火花（數字沿用頁面</text>
+<text x="1480" y="492" font-size="13.5" fill="#c9bde6">原有的浮動字）</text>
+<rect x="20" y="568" width="1680" height="138" rx="10" fill="#1d1236" stroke="#4b3a78"/>
+<image href="../../assets/ui/portrait_knight.png" x="32" y="578" width="96" height="96" preserveAspectRatio="xMidYMid slice"/>
+<text x="140" y="602" font-size="19" font-weight="700" fill="#fff">南瓜重裝盾衛</text>
+<text x="140" y="624" font-size="12" fill="#b8a9d9">Pumpkin Shield Knight</text>
+<text x="140" y="646" font-size="12" fill="#b8a9d9">id: knight</text>
+<circle cx="266" cy="596" r="7" fill="#f1c40f"/>
+<text x="282" y="600" font-size="13" fill="#f1c40f" font-weight="700">可玩 · 大招尚未接進頁面（</text>
+<text x="282" y="618" font-size="13" fill="#f1c40f" font-weight="700">模組與測試完成）</text>
+<text x="250" y="644" font-size="13" fill="#e8deff">HP 120 · 傷害 30（總和）</text>
+<text x="470" y="598" font-size="13.5" fill="#f2ecff">彈跳小盾：骰子決定 1–6 次碰撞，總傷害平均分給每次碰撞。防禦模式</text>
+<text x="470" y="618" font-size="13.5" fill="#f2ecff">：放「浮空盾」擋對手攻擊（只有盾衛能防禦）。</text>
+<text x="960" y="598" font-size="13.5" fill="#f2ecff">預判三回合防禦：防禦模式下放 A、B、C 三個隱藏點，依序回應對手接下</text>
+<text x="960" y="618" font-size="13.5" fill="#f2ecff">來的三次攻擊；可來回折返、也能保護隊友；多人對戰最有用。一個點只</text>
+<text x="960" y="638" font-size="13.5" fill="#f2ecff">擋一次、只擋多發投擲的第一發、完全擋住。</text>
+<text x="1480" y="598" font-size="13.5" fill="#c9bde6">模組 js/knight_ult.js（測試</text>
+<text x="1480" y="618" font-size="13.5" fill="#c9bde6">過）；點寬 70 px 為暫定；接</text>
+<text x="1480" y="638" font-size="13.5" fill="#c9bde6">進頁面是下一個 index.html </text>
+<text x="1480" y="658" font-size="13.5" fill="#c9bde6">任務</text>
+<rect x="20" y="714" width="1680" height="138" rx="10" fill="#1d1236" stroke="#4b3a78"/>
+<image href="../../assets/portraits/reaper_front.png" x="32" y="724" width="96" height="96" preserveAspectRatio="xMidYMid slice"/>
+<text x="140" y="748" font-size="19" font-weight="700" fill="#fff">死靈法師</text>
+<text x="140" y="770" font-size="12" fill="#b8a9d9">Necromancer (id reaper)</text>
+<text x="140" y="792" font-size="12" fill="#b8a9d9">id: reaper</text>
+<circle cx="266" cy="742" r="7" fill="#f1c40f"/>
+<text x="282" y="746" font-size="13" fill="#f1c40f" font-weight="700">今天可選 · 普攻可玩 · 大</text>
+<text x="282" y="764" font-size="13" fill="#f1c40f" font-weight="700">招未做</text>
+<text x="250" y="790" font-size="13" fill="#e8deff">HP 105（暫定）· 傷害 23</text>
+<text x="470" y="744" font-size="13.5" fill="#f2ecff">紫色鬼火：掌心推出一團火焰，彈道平直輕快。背後三團鬼火繞身＝能</text>
+<text x="470" y="764" font-size="13.5" fill="#f2ecff">量格。（燃燒狀態 2 點 × 3 回合尚未接進頁面）</text>
+<text x="960" y="744" font-size="13.5" fill="#f2ecff">手指向前，背後三團鬼火變色飛出：三團各 11.5（共 34.5），偏移力道 </text>
+<text x="960" y="764" font-size="13.5" fill="#f2ecff">−1.2 / 0 / +1.2，間隔 0.15 秒，燃燒只算一次。</text>
+<text x="1480" y="744" font-size="13.5" fill="#c9bde6">舊死神（骷髏鐮刀）設計已作</text>
+<text x="1480" y="764" font-size="13.5" fill="#c9bde6">廢；Kiro 133 正在清理舊文件</text>
+<text x="1480" y="784" font-size="13.5" fill="#c9bde6">與數值</text>
+<rect x="20" y="860" width="1680" height="138" rx="10" fill="#1d1236" stroke="#4b3a78"/>
+<image href="../../assets/portraits/bride_front.png" x="32" y="870" width="96" height="96" preserveAspectRatio="xMidYMid slice"/>
+<text x="140" y="894" font-size="19" font-weight="700" fill="#fff">鬼娃新娘</text>
+<text x="140" y="916" font-size="12" fill="#b8a9d9">Ghost Bride</text>
+<text x="140" y="938" font-size="12" fill="#b8a9d9">id: bride</text>
+<circle cx="266" cy="888" r="7" fill="#e67e22"/>
+<text x="282" y="892" font-size="13" fill="#e67e22" font-weight="700">未進頁面 · 素材已備</text>
+<text x="250" y="918" font-size="13" fill="#e8deff">HP 75 · 傷害 25（決定值）</text>
+<text x="470" y="890" font-size="13.5" fill="#f2ecff">音波攻擊：尖叫放出音波環；環是視覺，只傷被瞄準的那一個單位</text>
+<text x="470" y="910" font-size="13.5" fill="#f2ecff">（依距離分三段 100 / 75 / 50%）；命中使目標中毒。</text>
+<text x="960" y="890" font-size="13.5" fill="#f2ecff">精準命中後，蝙蝠群飛向每個敵人：25×1.3＝32.5 傷害，不能被擋；1v1 </text>
+<text x="960" y="910" font-size="13.5" fill="#f2ecff">總共 57.5。</text>
+<text x="1480" y="890" font-size="13.5" fill="#c9bde6">八張姿勢圖與音波環素材已在 </text>
+<text x="1480" y="910" font-size="13.5" fill="#c9bde6">assets/；音效暫用 spell_mag</text>
+<text x="1480" y="930" font-size="13.5" fill="#c9bde6">ic、ghost_real</text>
+<rect x="20" y="1006" width="1680" height="138" rx="10" fill="#1d1236" stroke="#4b3a78"/>
+<image href="../../assets/portraits/hunchback_front.png" x="32" y="1016" width="96" height="96" preserveAspectRatio="xMidYMid slice"/>
+<text x="140" y="1040" font-size="19" font-weight="700" fill="#fff">鐘樓怪人</text>
+<text x="140" y="1062" font-size="12" fill="#b8a9d9">Bell-tower Hunchback</text>
+<text x="140" y="1084" font-size="12" fill="#b8a9d9">id: hunchback</text>
+<circle cx="266" cy="1034" r="7" fill="#e67e22"/>
+<text x="282" y="1038" font-size="13" fill="#e67e22" font-weight="700">未進頁面 · 素材已備</text>
+<text x="250" y="1064" font-size="13" fill="#e8deff">HP 110 · 傷害 21</text>
+<text x="470" y="1036" font-size="13.5" fill="#f2ecff">巨斧：又重又慢、一擊傷害大；命中流血，非致命直擊擊退 50 px（圍</text>
+<text x="470" y="1056" font-size="13.5" fill="#f2ecff">欄、地面、盾不擊退）。</text>
+<text x="960" y="1036" font-size="13.5" fill="#f2ecff">迴旋斧：斧頭穿透飛出，只有在最後一擊命中時才折返打第一個單位，折</text>
+<text x="960" y="1056" font-size="13.5" fill="#f2ecff">返傷害 31.5，不能被擋；1v1 先 21 後 31.5。</text>
+<text x="1480" y="1036" font-size="13.5" fill="#c9bde6">八張姿勢圖已在 assets/（早</text>
+<text x="1480" y="1056" font-size="13.5" fill="#c9bde6">期版本曾是閒置圖複本，需檢</text>
+<text x="1480" y="1076" font-size="13.5" fill="#c9bde6">查）；迴旋斧是最大的程式量</text>
+<text x="1480" y="1096" font-size="13.5" fill="#c9bde6">，必要時最先砍</text>
+<text x="30" y="1182" font-size="14" fill="#b8a9d9">第 8 個角色：待你決定（死神已改為死靈法師＝同一個職業）。資料來源：index.html、docs/remaining_heroes_plan_20261115.md、docs/ultimate_mapping.md、docs/kiro_verified.json。</text>
+</svg>

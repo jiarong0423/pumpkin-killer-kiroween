@@ -1,0 +1,184 @@
+PASS scripts/test_adaptive_level.js | OK: 12 shared adaptive-level vectors passed.
+PASS scripts/test_ai_aim_model.js | test_ai_aim_model: 7 checks passed
+PASS scripts/test_ai_angle_min.js | test_ai_angle_min: hard min 42, normal min 25, easy min 25 ok
+PASS scripts/test_ai_levels_page.js | PASS: page AI level table is deterministic, safe, and ordered
+PASS scripts/test_aim_arrow.js | test_aim_arrow: 7 ok, 0 failed
+PASS scripts/test_ambient_sfx.js | test_ambient_sfx: 13 passed, 0 failed
+PASS scripts/test_audio.js | test_audio: 32 passed, 0 failed
+PASS scripts/test_boomerang.js | test_boomerang: all 6 tests passed
+PASS scripts/test_choose_side.js | test_choose_side: 6 passed
+PASS scripts/test_class_stats.js | test_class_stats: all 16 tests passed
+PASS scripts/test_comeback.js | test_comeback: 5/5 checks passed
+PASS scripts/test_dead_unit_hits.js | dead-unit hit matrix: 152 combinations (16 not applicable), 0 failing
+PASS scripts/test_decisions_frozen.js | test_decisions_frozen: 10/10 checks passed
+PASS scripts/test_determinism.js | test_determinism.js: 10000 seed property cases passed
+PASS scripts/test_dice_no_charge.js | test_dice_no_charge: 1 ok, 0 failed
+PASS scripts/test_electric_stun.js | test_electric_stun: all 7 tests passed
+PASS scripts/test_element_fx.js | 5/5 tests passed
+PASS scripts/test_eye_anchor_poses.js | test_eye_anchor_poses: 12 passed
+PASS scripts/test_face_glow.js | test_face_glow: ok (wizard and knight: 1 flicker + 2 halos, radius <= 11; five other roles unchanged)
+PASS scripts/test_fence_bounce_side.js | test_fence_bounce_side: 2 ok, 0 failed
+PASS scripts/test_flight_golden.js | PASS: 72 flight goldens (6 wave), 500 Python/JS cases, 30 page parity cases
+PASS scripts/test_h1_source_pins.js | test_h1_source_pins: 6 ok
+PASS scripts/test_hallucination.js | test_hallucination: all 6 tests passed
+PASS scripts/test_hit_confirm.js | test_hit_confirm: 30 reach-band rows × 3 phone viewports passed
+PASS scripts/test_hit_report.js | test_hit_report: 32 shared vectors passed
+PASS scripts/test_hit_sound.js | test_hit_sound: 4 ok, 0 failed
+PASS scripts/test_hp_bar_width.js | test_hp_bar_width: 2 ok, 0 failed
+PASS scripts/test_i18n.js | 26 passed, 0 failed (305 keys per language)
+PASS scripts/test_invite_panel_fit.js | test_invite_panel_fit: 7 views passed
+PASS scripts/test_join_flow.js | join flow fake socket and QR wiring: ok
+PASS scripts/test_knight_ai_ult.js | test_knight_ai_ult: 2 ok, 0 failed
+PASS scripts/test_knight_ult.js | test_knight_ult: all 13 tests passed
+PASS scripts/test_knockback.js | test_knockback: all 3 tests passed
+PASS scripts/test_late_join_page.js | test_late_join_page: passed
+PASS scripts/test_left_ai_parity.js | test_left_ai_parity: 2 ok, 0 failed
+PASS scripts/test_nun_ult.js | test_nun_ult: all 6 tests passed
+PASS scripts/test_opening.js | opening coin toss, seat levels, and agent option: ok
+PASS scripts/test_orientation_frozen.js | test_orientation_frozen: 5/5 checks passed
+PASS scripts/test_page_ai_hit_rates.js | test_page_ai_hit_rates: easy 0.141, normal 0.332, hard 0.462 inside the bands
+PASS scripts/test_page_match_driver.js | test_page_match_driver: 17 ok
+PASS scripts/test_page_nun_pierce_pair.js | test_page_nun_pierce_pair: OK
+PASS scripts/test_page_nun_stun_seed.js | test_page_nun_stun_seed: OK
+PASS scripts/test_page_parses.js | test_page_parses: 3 inline scripts and every js/*.js parse
+PASS scripts/test_page_relay_pair.js | test_page_relay_pair: 10 checks passed
+PASS scripts/test_page_relay_split.js | test_page_relay_split: 11 passed
+PASS scripts/test_page_team_exec.js | test_page_team_exec: 91 ok, 0 failed (1.41 s)
+PASS scripts/test_page_ult_room_guard.js | test_page_ult_room_guard: OK
+PASS scripts/test_page_wave2a.js | test_page_wave2a: 14 checks passed
+PASS scripts/test_particles.js | 72/72 properties passed
+PASS scripts/test_perspective.js | test_perspective: rendering and orientation tables remain perspective-free
+PASS scripts/test_phone_layout.js | test_phone_layout: 9/9 checks passed
+PASS scripts/test_properties.js | test_properties: all 6 properties passed
+PASS scripts/test_qr_code.js | qr code capacity L v1-v5 and M v1-v6: ok
+PASS scripts/test_relay_client.js | relay client connection scenario matrix: ok
+PASS scripts/test_relay_client_real.js | relay client against the real relay: resume inside the grace period, seat_left after it: ok
+PASS scripts/test_relay_client_team.js | relay client team options, hero lists and unit ids: ok
+PASS scripts/test_render_scale.js | test_render_scale: 3 ok, 0 failed
+PASS scripts/test_room_status.js | room status: 17 checks passed
+PASS scripts/test_round_hash.js | PASS: 33 round-hash goldens; sub-pixel stable and one-pixel sensitive
+PASS scripts/test_round_hash_team.js | PASS: team round hash (13 vectors for N=1..3; order, field, roster and id-mapping checks)
+PASS scripts/test_safe_area_center.js | test_safe_area_center: 7 cases passed
+PASS scripts/test_scene_layers.js | ALL 81 TESTS PASSED
+PASS scripts/test_seat_leave_dead.js | test_seat_leave_dead: 6 passed
+PASS scripts/test_seats_items.js | seats and symmetric one-use items: ok
+PASS scripts/test_shield_wall.js | test_shield_wall: all page and rule parity cases passed
+PASS scripts/test_side_choice.js | test_side_choice.js: no side-choice UI and frozen orientation passed
+PASS scripts/test_side_chooser_layout.js | test_side_chooser_layout: 7 views and the old-link case passed
+PASS scripts/test_sim_balance.js | test_sim_balance: all 29 tests passed
+PASS scripts/test_sim_clock_reads.js | test_sim_clock_reads: OK
+PASS scripts/test_size_frozen.js | test_size_frozen: 5/5 checks passed
+PASS scripts/test_skill_state_no_leak.js | test_skill_state_no_leak: ok (leftover heavy -> proj_pumpkin, cleared -> proj_spear)
+PASS scripts/test_sling.js | test_sling: 3 ok, 0 failed
+PASS scripts/test_slot_picker.js | test_slot_picker: 7 passed
+PASS scripts/test_smart_candidates.js | test_smart_candidates: determinism, public fields, sorting, defend, and ultimate rules passed
+PASS scripts/test_smart_opponent.js | test_smart_opponent: fake pick gateway, timeout, fallback, host, and secret checks passed
+PASS scripts/test_sound_wave.js | test_sound_wave: all 7 tests passed
+PASS scripts/test_start_map_loop.js | test_start_map_loop: 10 ok, 0 failed
+PASS scripts/test_start_screen_fit.js | test_start_screen_fit: 15 landscape viewports passed
+PASS scripts/test_start_screen_hidden.js | test_start_screen_hidden: 7 views passed
+PASS scripts/test_status_cues.js | test_status_cues: ok (frost status_bleed,status_frost, slow, shock, stun cues once each; helpers 78 canvas calls)
+PASS scripts/test_team_battle.js | test_team_battle: rotation, alive lists, winners, N=1..3 slots, and N=1 accessors passed
+PASS scripts/test_team_heroes.js | test_team_heroes: 14 ok, 0 failed
+PASS scripts/test_team_knockback.js | test_team_knockback: 3 checks passed
+PASS scripts/test_team_rules.js | test_team_rules: 10/10 checks passed
+PASS scripts/test_team_tuning.js | test_team_tuning: 5/5 checks passed
+PASS scripts/test_ui_polish.js | test_ui_polish: 6/6 checks passed
+PASS scripts/test_ui_settings.js | test_ui_settings: 7/7 checks passed
+PASS scripts/test_ult_sounds.js | test_ult_sounds: 3 ok, 0 failed
+PASS scripts/test_ultimate.js | test_ultimate: all 24 tests passed
+PASS scripts/test_ultimate_fx.js | test_ultimate_fx: all 13 tests passed
+PASS scripts/test_wall_break_midflight.js |   HURT_ON_BREAK L2R bat 65 86 0/0/9.6
+PASS scripts/test_wave_landing.js | test_wave_landing: 2 ok, 0 failed
+PASS scripts/test_weather.js | test_weather: all 6 tests passed
+PASS scripts/test_weather_fx.js | test_weather_fx: all 7 tests passed
+PASS scripts/test_weather_golden.js | test_weather_golden.js: 800 cases passed
+PASS scripts/test_wind_fx.js | test_wind_fx: all 19 tests passed
+PASS scripts/test_wind_reach.js | test_wind_reach: all passed
+PASS scripts/test_adaptive_level.py | OK
+PASS scripts/test_agent_levels.py | OK
+PASS scripts/test_ai_gateway.py | OK
+PASS scripts/test_asset_pipeline.py | OK
+PASS scripts/test_bedrock_backend.py | OK
+PASS scripts/test_check_asset_refs.py | OK
+PASS scripts/test_check_coolify_deploy.py | OK
+PASS scripts/test_check_deploy_files.py | OK
+PASS scripts/test_check_draft_paths.py | OK
+PASS scripts/test_check_missing_mapped.py | OK
+PASS scripts/test_clean_checkout.py | OK
+PASS scripts/test_comeback.py | OK
+PASS scripts/test_compare_front_back.py | OK
+PASS scripts/test_constants_sync.py | OK: shared/constants.json matches index.html for all 16 constants and adaptive-level tables.
+PASS scripts/test_daily_log.py | OK
+PASS scripts/test_determinism_golden.py | test_determinism_golden.py: 10000 seed property cases passed
+PASS scripts/test_doc_log_numbers.py | OK
+PASS scripts/test_e2e_local.py | OK
+PASS scripts/test_event_tally_backend.py | OK
+PASS scripts/test_export_tree.py | OK
+PASS scripts/test_fence_matches_picture.py | OK
+PASS scripts/test_fill_room_logic.py | OK
+SKIP scripts/test_fill_room_selftest.py | needs sockets
+PASS scripts/test_flight_golden.py | PASS: 72 flight goldens (6 wave), 500 Python/JS cases
+PASS scripts/test_fonts.py | OK
+PASS scripts/test_handoff_numbers.py | test_handoff_numbers: OK (5-trace=353,066, break=72,795, area=52,222 [14.8%], suite=146/1/5, rear_rear=67,456)
+PASS scripts/test_hero_blurb_numbers.py | OK
+PASS scripts/test_heroes_sync.py | OK: shared/heroes.json matches index.html HERO_PROFILES for 8 heroes.
+PASS scripts/test_hit_masks.py | OK
+PASS scripts/test_hit_radius.py | OK
+PASS scripts/test_hit_report.py | test_hit_report.py: 32 shared vectors passed
+PASS scripts/test_hit_rule_parity.py | OK
+PASS scripts/test_hp_residue_engine.py | OK
+PASS scripts/test_ingest_missing.py | OK
+PASS scripts/test_ingest_sheets.py | test_ingest_sheets: OK
+PASS scripts/test_ingest_wind_sheets.py | test_ingest_wind_sheets: OK
+PASS scripts/test_job_refs.py | OK
+PASS scripts/test_kiro_record.py | OK
+PASS scripts/test_kiro_route.py | OK
+PASS scripts/test_make_agent_join_config.py | OK
+PASS scripts/test_make_download_package.py | OK
+PASS scripts/test_mcp_allowlist.py | OK
+PASS scripts/test_mcp_connect.py | OK
+PASS scripts/test_mcp_connect_weather.py | OK
+PASS scripts/test_mcp_game.py | ✅ Eight hero table / status / 1v1 mode Passed!
+PASS scripts/test_mcp_hash_parity.py | OK
+PASS scripts/test_mcp_risk_ab.py | OK
+PASS scripts/test_mcp_room_tools.py | OK
+PASS scripts/test_mcp_seats.py | OK
+PASS scripts/test_mcp_skills_ultimates.py | OK
+SKIP scripts/test_mcp_stdio.py | needs sockets
+PASS scripts/test_mcp_team_rules.py | OK
+PASS scripts/test_mcp_turns.py | OK
+PASS scripts/test_mcp_units.py | OK
+PASS scripts/test_move_catalog.py | OK
+PASS scripts/test_mutation_smoke.py | test_mutation_smoke: 5/5 mutations detected
+PASS scripts/test_no_secrets_in_tree.py | test_no_secrets_in_tree: no secrets detected in tracked text files (self-test passed)
+PASS scripts/test_page_judge_relay.py | OK
+PASS scripts/test_page_judge_relay_sizes.py | OK
+SKIP scripts/test_phone_room_check.py | needs sockets
+PASS scripts/test_pk_headless_match.py | OK
+PASS scripts/test_pk_mcp_health.py | OK
+PASS scripts/test_pk_mcp_http.py | OK
+PASS scripts/test_pk_relay.py | OK
+PASS scripts/test_pk_relay_limits.py | OK
+PASS scripts/test_postprocess_audio.py | test_postprocess_audio: 27 passed, 0 failed
+PASS scripts/test_preload_links.py | test_preload_links: OK (20 links)
+PASS scripts/test_privacy_gate.py | OK
+PASS scripts/test_pwa_files.py | OK
+PASS scripts/test_qr_decode.py | qr decode proof: 590 random ASCII matrices decoded at L and M; L1-L10 and M1-M7 covered
+SKIP scripts/test_relay_late_join.py | needs sockets
+SKIP scripts/test_relay_reconnect.py | needs sockets
+SKIP scripts/test_relay_seat_grace.py | needs sockets
+PASS scripts/test_room_codes.py | OK
+PASS scripts/test_round_hash.py | PASS: 33 round-hash goldens; sub-pixel stable and one-pixel sensitive
+PASS scripts/test_round_hash_team.py | PASS: team round hash (13 vectors for N=1..3; order, field, roster and id-mapping checks)
+PASS scripts/test_score_ghost_tests.py | OK
+PASS scripts/test_shield_wall.py | OK
+PASS scripts/test_smoke_deployed.py | OVERALL PASS
+PASS scripts/test_smoke_url.py | OK
+PASS scripts/test_stdio_wave_flag.py | OK
+PASS scripts/test_stress_judge_relay_parse.py | OK
+PASS scripts/test_team_tuning.py | OK
+PASS scripts/test_weather_golden.py | test_weather_golden.py: 800 cases passed
+PASS scripts/test_webp_assets.py | OK
+PASS scripts/sim_team_headless.py | RESULT PASS
+DONE failed=0

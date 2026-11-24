@@ -1,0 +1,197 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="system-ui, -apple-system, 'Segoe UI', 'PingFang TC', 'Noto Sans TC', sans-serif">
+  <title>Pumpkin Killer: how the work moves</title>
+  <desc>Swim lanes for the owner, the main line (Claude), Kiro, Kiro helpers, sub-agents and Colab. Numbered circles are the five gates. Orange boxes are recorded in the repo. The dashed grey box is defined but has no recorded run.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#150d22"/>
+      <stop offset="1" stop-color="#0a0710"/>
+    </linearGradient>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2ee6d6"/>
+    </marker>
+    <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ff5a5a"/>
+    </marker>
+    <style>
+      .laneA { fill: #170f26; stroke: #3a2c58; stroke-width: 1; }
+      .laneB { fill: #120c1e; stroke: #3a2c58; stroke-width: 1; }
+      .lanelab { fill: #231838; }
+      .node { fill: #2a1d44; stroke: #ff9f1c; stroke-width: 2; }
+      .plan { fill: #1a1724; stroke: #8a8aa0; stroke-width: 2; stroke-dasharray: 8 6; }
+      .t { fill: #fff3d6; font-size: 15px; font-weight: 700; }
+      .s { fill: #cdbdee; font-size: 13px; }
+      .ln { fill: #a98bff; font-size: 17px; font-weight: 700; }
+      .lns { fill: #9d92b8; font-size: 13px; }
+      .flow { stroke: #2ee6d6; stroke-width: 2.5; fill: none; }
+      .nc { stroke: #ff5a5a; stroke-width: 2.5; fill: none; stroke-dasharray: 9 6; }
+      .red { fill: #ff8a8a; font-size: 13px; font-weight: 700; }
+      .small { fill: #9d92b8; font-size: 13px; }
+      .h1 { fill: #fff3d6; font-size: 28px; font-weight: 700; }
+      .gate { fill: #ff9f1c; }
+      .gnum { fill: #1a1024; font-size: 16px; font-weight: 700; text-anchor: middle; }
+      .gnum2 { fill: #1a1024; font-size: 13px; font-weight: 700; text-anchor: middle; }
+      .leg { fill: #cdbdee; font-size: 14px; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <text x="30" y="46" class="h1">Pumpkin Killer: how the work moves</text>
+  <text x="640" y="46" class="small">owner, main line (Claude), Kiro, Colab, sub-agents. Details: docs/workflow.md</text>
+
+  <!-- lanes -->
+  <rect x="30" y="80" width="1540" height="116" class="laneA"/>
+  <rect x="30" y="80" width="170" height="116" class="lanelab"/>
+  <text x="44" y="116" class="ln">Owner</text>
+  <text x="44" y="138" class="lns">decides rules, art,</text>
+  <text x="44" y="156" class="lns">and when to ship</text>
+
+  <rect x="30" y="204" width="1540" height="116" class="laneB"/>
+  <rect x="30" y="204" width="170" height="116" class="lanelab"/>
+  <text x="44" y="240" class="ln">Main line</text>
+  <text x="44" y="262" class="lns">Claude: orchestrates,</text>
+  <text x="44" y="280" class="lns">integrates, commits</text>
+
+  <rect x="30" y="328" width="1540" height="116" class="laneA"/>
+  <rect x="30" y="328" width="170" height="116" class="lanelab"/>
+  <text x="44" y="364" class="ln">Kiro CLI</text>
+  <text x="44" y="386" class="lns">specs, modules,</text>
+  <text x="44" y="404" class="lns">tests, design docs</text>
+
+  <rect x="30" y="452" width="1540" height="116" class="laneB"/>
+  <rect x="30" y="452" width="170" height="116" class="lanelab"/>
+  <text x="44" y="488" class="ln">Kiro helpers</text>
+  <text x="44" y="510" class="lns">custom agents,</text>
+  <text x="44" y="528" class="lns">hooks, MCP</text>
+
+  <rect x="30" y="576" width="1540" height="116" class="laneA"/>
+  <rect x="30" y="576" width="170" height="116" class="lanelab"/>
+  <text x="44" y="612" class="ln">Sub-agents</text>
+  <text x="44" y="634" class="lns">Claude, read-only,</text>
+  <text x="44" y="652" class="lns">no edits, no git</text>
+
+  <rect x="30" y="700" width="1540" height="116" class="laneB"/>
+  <rect x="30" y="700" width="170" height="116" class="lanelab"/>
+  <text x="44" y="736" class="ln">Colab</text>
+  <text x="44" y="758" class="lns">all final images,</text>
+  <text x="44" y="776" class="lns">nothing else</text>
+
+  <!-- arrows (drawn first so nodes sit on top) -->
+  <path d="M310,172 V228" class="flow" marker-end="url(#ah)"/>
+  <path d="M310,296 V352" class="flow" marker-end="url(#ah)"/>
+  <path d="M310,420 V472" class="flow" marker-start="url(#ah)" marker-end="url(#ah)"/>
+  <path d="M405,386 H435" class="flow" marker-end="url(#ah)"/>
+  <path d="M625,386 H700 V296" class="flow" marker-end="url(#ah)"/>
+  <path d="M800,296 V600" class="flow" marker-end="url(#ah)"/>
+  <path d="M845,634 H970 V420" class="flow" marker-end="url(#ah)"/>
+  <path d="M1065,386 H1140 V296" class="flow" marker-end="url(#ah)"/>
+  <path d="M1240,296 V724" class="flow" marker-start="url(#ah)" marker-end="url(#ah)"/>
+  <path d="M1285,262 H1315" class="flow" marker-end="url(#ah)"/>
+  <path d="M1410,228 V172" class="flow" marker-end="url(#ah)"/>
+  <path d="M655,262 H405" class="nc" marker-end="url(#ahr)"/>
+  <text x="530" y="252" text-anchor="middle" class="red">test fails: new brief</text>
+  <text x="1252" y="500" class="small">prompts out,</text>
+  <text x="1252" y="518" class="small">PNGs back via Drive,</text>
+  <text x="1252" y="536" class="small">keyed by scripts/key_*.py</text>
+  <text x="824" y="438" class="small">independent check</text>
+
+  <!-- owner lane -->
+  <rect x="215" y="104" width="190" height="68" rx="10" class="node"/>
+  <text x="227" y="127" class="t">1 Short request</text>
+  <text x="227" y="147" class="s">or a rule decision,</text>
+  <text x="227" y="164" class="s">or an art choice</text>
+
+  <rect x="1315" y="104" width="190" height="68" rx="10" class="node"/>
+  <text x="1327" y="127" class="t">10 Owner says yes</text>
+  <text x="1327" y="147" class="s">push, merge, deploy,</text>
+  <text x="1327" y="164" class="s">cloud write</text>
+
+  <!-- main line lane -->
+  <rect x="215" y="228" width="190" height="68" rx="10" class="node"/>
+  <text x="227" y="251" class="t">2 Brief for Kiro</text>
+  <text x="227" y="271" class="s">owner_feedback_log,</text>
+  <text x="227" y="288" class="s">docs/kiro_task_NN.md</text>
+
+  <rect x="655" y="228" width="190" height="68" rx="10" class="node"/>
+  <text x="667" y="251" class="t">5 Re-run all tests</text>
+  <text x="667" y="271" class="s">does not trust a</text>
+  <text x="667" y="288" class="s">Kiro summary</text>
+
+  <rect x="1095" y="228" width="190" height="68" rx="10" class="node"/>
+  <text x="1107" y="251" class="t">8 Integrate, commit</text>
+  <text x="1107" y="271" class="s">index.html, one writer;</text>
+  <text x="1107" y="288" class="s">re-run tests, commit</text>
+
+  <rect x="1315" y="228" width="190" height="68" rx="10" class="node"/>
+  <text x="1327" y="251" class="t">9 Report to owner</text>
+  <text x="1327" y="271" class="s">plain Chinese,</text>
+  <text x="1327" y="288" class="s">one-word questions</text>
+
+  <!-- Kiro lane -->
+  <rect x="215" y="352" width="190" height="68" rx="10" class="node"/>
+  <text x="227" y="375" class="t">3 Spec, then build</text>
+  <text x="227" y="395" class="s">steering + .kiro/specs</text>
+  <text x="227" y="412" class="s">worktree kiro/name</text>
+
+  <rect x="435" y="352" width="190" height="68" rx="10" class="node"/>
+  <text x="447" y="375" class="t">4 6-line summary</text>
+  <text x="447" y="395" class="s">says what it could</text>
+  <text x="447" y="412" class="s">not run</text>
+
+  <rect x="875" y="352" width="190" height="68" rx="10" class="node"/>
+  <text x="887" y="375" class="t">7 Review findings</text>
+  <text x="887" y="395" class="s">Kiro tasks 36, 37, 38;</text>
+  <text x="887" y="412" class="s">fixes the design</text>
+
+  <!-- helpers lane -->
+  <rect x="215" y="472" width="410" height="76" rx="10" class="node"/>
+  <text x="227" y="493" class="t">Used while Kiro builds</text>
+  <text x="227" y="511" class="s">agent tester: test scripts only, no git</text>
+  <text x="227" y="527" class="s">agent researcher: public web pages, no shell</text>
+  <text x="227" y="543" class="s">hooks: test on save. MCP: pumpkin-killer, six tools</text>
+
+  <rect x="990" y="472" width="235" height="76" rx="10" class="plan"/>
+  <text x="1002" y="493" class="t">Defined, no run recorded</text>
+  <text x="1002" y="513" class="s">rules-reviewer, asset-inventory</text>
+  <text x="1002" y="531" class="s">Kiro playing the MCP opponent</text>
+
+  <!-- sub-agent lane -->
+  <rect x="655" y="600" width="190" height="68" rx="10" class="node"/>
+  <text x="667" y="623" class="t">6 Cross-check</text>
+  <text x="667" y="643" class="s">playtest, recording,</text>
+  <text x="667" y="660" class="s">arbitration</text>
+
+  <!-- colab lane -->
+  <rect x="1095" y="724" width="190" height="68" rx="10" class="node"/>
+  <text x="1107" y="747" class="t">Colab: all art</text>
+  <text x="1107" y="767" class="s">Qwen-Image-Edit-2509,</text>
+  <text x="1107" y="784" class="s">Kiro: prompts only</text>
+  <text x="215" y="750" class="small">Kiro never makes images. Code never fakes art.</text>
+  <text x="215" y="770" class="small">Prompts: colab/jobs.json and two more job files.</text>
+
+  <!-- gates -->
+  <circle cx="310" cy="200" r="15" class="gate"/><text x="310" y="206" class="gnum">1</text>
+  <circle cx="655" cy="228" r="15" class="gate"/><text x="655" y="234" class="gnum">2</text>
+  <circle cx="800" cy="450" r="15" class="gate"/><text x="800" y="456" class="gnum">3</text>
+  <circle cx="1285" cy="228" r="15" class="gate"/><text x="1285" y="234" class="gnum">4</text>
+  <circle cx="1410" cy="200" r="15" class="gate"/><text x="1410" y="206" class="gnum">5</text>
+
+  <!-- legend -->
+  <circle cx="44" cy="842" r="10" class="gate"/><text x="44" y="847" class="gnum2">1</text>
+  <text x="62" y="847" class="leg">Owner approves rule changes and art choices</text>
+  <circle cx="44" cy="864" r="10" class="gate"/><text x="44" y="869" class="gnum2">2</text>
+  <text x="62" y="869" class="leg">Main line re-runs every test itself</text>
+  <circle cx="44" cy="886" r="10" class="gate"/><text x="44" y="891" class="gnum2">3</text>
+  <text x="62" y="891" class="leg">Cross-check by an agent that did not write the code</text>
+
+  <circle cx="660" cy="842" r="10" class="gate"/><text x="660" y="847" class="gnum2">4</text>
+  <text x="678" y="847" class="leg">Commit on branch kiro/name after the touched tests pass</text>
+  <circle cx="660" cy="864" r="10" class="gate"/><text x="660" y="869" class="gnum2">5</text>
+  <text x="678" y="869" class="leg">Push, merge or deploy only after the owner says yes</text>
+
+  <rect x="1180" y="832" width="30" height="16" rx="4" class="node"/>
+  <text x="1220" y="846" class="leg">recorded in the repo</text>
+  <rect x="1180" y="855" width="30" height="16" rx="4" class="plan"/>
+  <text x="1220" y="869" class="leg">defined, no run recorded</text>
+  <line x1="1180" y1="886" x2="1210" y2="886" class="nc"/>
+  <text x="1220" y="891" class="leg">failure path</text>
+</svg>

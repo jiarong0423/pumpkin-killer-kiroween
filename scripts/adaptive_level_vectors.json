@@ -1,0 +1,14 @@
+[
+  {"name": "initial", "hits": [], "levels": [], "last_change": null},
+  {"name": "one-miss", "hits": [false], "levels": [2], "last_change": null},
+  {"name": "three-hits-raise", "hits": [true, true, true], "levels": [2, 2, 3], "last_change": "human rolling hit rate above 40%"},
+  {"name": "three-misses-lower", "hits": [false, false, false], "levels": [2, 2, 1], "last_change": "human rolling hit rate below 15%"},
+  {"name": "one-hit-stays-normal", "hits": [true, false, false], "levels": [2, 2, 2], "last_change": null},
+  {"name": "two-hits-raise", "hits": [true, true, false], "levels": [2, 2, 3], "last_change": "human rolling hit rate above 40%"},
+  {"name": "raise-cooldown-then-lower", "hits": [true, true, true, false, false, false], "levels": [2, 2, 3, 3, 3, 2], "last_change": "human rolling hit rate below 15%"},
+  {"name": "lower-cooldown-then-raise", "hits": [false, false, false, true, true, true], "levels": [2, 2, 1, 1, 1, 2], "last_change": "human rolling hit rate above 40%"},
+  {"name": "change-limit", "hits": [true, true, true, false, false, false, true, true, true], "levels": [2, 2, 3, 3, 3, 2, 2, 2, 2], "last_change": "human rolling hit rate below 15%"},
+  {"name": "mixed-results-stay-normal", "hits": [false, true, false, false, true, false], "levels": [2, 2, 2, 2, 2, 2], "last_change": null},
+  {"name": "cooldown-keeps-high-level", "hits": [true, true, true, true, false, false], "levels": [2, 2, 3, 3, 3, 3], "last_change": "human rolling hit rate above 40%"},
+  {"name": "cooldown-keeps-low-level", "hits": [false, false, false, false, false, true], "levels": [2, 2, 1, 1, 1, 1], "last_change": "human rolling hit rate below 15%"}
+]

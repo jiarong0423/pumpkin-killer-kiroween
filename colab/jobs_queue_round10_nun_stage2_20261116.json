@@ -1,0 +1,110 @@
+{
+ "refs": {},
+ "style": " ",
+ "jobs": [
+  {
+   "id": "hag_idle2",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Edit the attachment into ONE single character with exactly ONE head and ONE face, strict side view facing LEFT; keep its hunched hovering ghost-nun identity, no legs or feet, black-smoke robe taper, veil, wimple, collar, porcelain-white ghost face with thin hairline cracks, not green, glowing yellow eyes, sly fang grin, chest cross, basket side, scale, camera, and baseline exactly the same. Change only a slight breath, robe settling, basket settling, and black-smoke curl. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_charge1",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Edit the attachment into ONE single character with exactly ONE head and ONE face, strict side view facing LEFT; preserve its hunched hovering ghost-nun look, no legs or feet, black-smoke robe taper, veil, wimple, collar, porcelain-white ghost face with thin hairline cracks, not green, glowing yellow eyes, sly fang grin, basket side, scale, camera, and baseline. First charge frame: the throwing hand rises to grip the small wooden cross at chest height while the other hand keeps the basket. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_charge2",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Edit the attachment into ONE single character with exactly ONE head and ONE face, strict side view facing LEFT; preserve its hunched hovering ghost-nun look, no legs or feet, black-smoke robe taper, veil, wimple, collar, porcelain-white ghost face with thin hairline cracks, not green, glowing yellow eyes, sly fang grin, basket side, scale, camera, and baseline. Middle charge: the throwing hand grips the wooden cross beside the chest with a bent elbow and a small backward lean, never above the shoulder; the other hand holds the basket. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_charge3",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Edit the attachment into ONE single character with exactly ONE head and ONE face, strict side view facing LEFT; preserve its hunched hovering ghost-nun look, no legs or feet, black-smoke robe taper, veil, wimple, collar, porcelain-white ghost face with thin hairline cracks, not green, glowing yellow eyes, strained sly fang grin, basket side, scale, camera, and baseline. Full charge: the throwing hand grips the wooden cross at its farthest chest-height point beside the shoulder, elbow bent, with the greatest slight backward coil; the other hand holds the basket. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_release",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Edit the attachment into ONE single character with exactly ONE head and ONE face, strict side view facing LEFT; preserve its hunched hovering ghost-nun look, no legs or feet, black-smoke robe taper, veil, wimple, collar, porcelain-white ghost face with thin hairline cracks, not green, glowing yellow eyes, open sly fang grin, basket side, scale, camera, and baseline. Release: the throwing arm pushes straight LEFT at chest height with an open empty hand; a separate small wooden cross has just left it, spins LEFT, and trails black smoke; the other hand holds the basket. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_empty",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Edit the attachment into ONE single character with exactly ONE head and ONE face, strict side view facing LEFT; preserve its hunched hovering ghost-nun look, no legs or feet, black-smoke robe taper, veil, wimple, collar, porcelain-white ghost face with thin hairline cracks, not green, glowing yellow eyes, sly fang grin, basket side, scale, camera, and baseline. After the push-throw, keep the throwing arm extended at chest height with an open empty hand and loose pendant cord; the other hand holds the basket, with no projectile present. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_hit",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Edit the attachment into ONE single character with exactly ONE head and ONE face, strict side view facing LEFT; preserve its hunched hovering ghost-nun look, no legs or feet, black-smoke robe taper, veil, wimple, collar, porcelain-white ghost face with thin hairline cracks, not green, closed glowing-yellow eyes, basket side, scale, camera, and baseline. Make a readable flinch: recoil slightly and hold the basket tight while the other hand is empty; no projectile pose. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hand_1_reach_to_chest",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Close-up of only the attached nun’s single LEFT-facing throwing hand and forearm: porcelain-white ghost skin with soft blue-grey shading, thin hairline cracks, absolutely no green, dark pointed nails, and the same black sleeve. The open hand reaches for the small wooden chest cross at chest height. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hand_2_grip_cross",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Close-up of only the attached nun’s single LEFT-facing throwing hand and forearm: porcelain-white ghost skin with thin hairline cracks, absolutely no green, dark pointed nails, and the same black sleeve. Fingers close securely around the small wooden chest cross. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hand_3_pull_back",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Close-up of only the attached nun’s single LEFT-facing throwing hand and forearm: porcelain-white ghost skin with thin hairline cracks, absolutely no green, dark pointed nails, and the same black sleeve. The fist grips the wooden cross beside the chest, elbow implied bent, prepared for a chest-level push. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hand_4_snap_forward",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Close-up of only the attached nun’s single LEFT-facing throwing hand and forearm: porcelain-white ghost skin with thin hairline cracks, absolutely no green, dark pointed nails, and the same black sleeve. The forearm pushes straight LEFT at chest height as fingers start opening around the wooden cross. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hand_5_release_open",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Close-up of only the attached nun’s single LEFT-facing throwing hand and forearm: porcelain-white ghost skin with thin hairline cracks, absolutely no green, dark pointed nails, and the same black sleeve. Fingers spread fully open at chest height; the wooden cross is gone and a small black-smoke curl leaves the palm. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hand_6_empty_relaxed",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_r2_v1_p4.png",
+   "prompt": "Close-up of only the attached nun’s single LEFT-facing throwing hand and forearm: porcelain-white ghost skin with thin hairline cracks, absolutely no green, dark pointed nails, and the same black sleeve. The hand relaxes open after the throw, with the loose pendant cord below it. Warm orange rim light, soft dark outlines, rich stylised game art in the look of a polished Halloween mobile-game concept painting: layered depth, soft volumetric lighting, glowing light sources that tint nearby surfaces, fine surface texture, soft dark outlines, no flat cel shading, flat noise-free #FF00FF background; the cross is the thrown weapon, not a javelin throw. Do not include: text; extra limbs; other characters; a second head or face; any known film or game character; blue or violet aura; church scene; bats; ghosts; a background other than flat magenta.",
+   "style": " ",
+   "negative": " "
+  }
+ ]
+}

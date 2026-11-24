@@ -1,0 +1,10 @@
+Source: https://opengameart.org/content/80-cc0-rpg-sfx
+Work: 80 CC0 RPG SFX
+Author shown on the page: NoirPhantom89
+Checked and downloaded: 2026-11-09
+License wording on the page that day: License(s): CC0
+Chosen by the owner from the audition page (2026-11-09). Converted by the reviewer where needed (ffmpeg: trim, fades, loudness).
+Not heard by the reviewer.
+File creature_roar_02.ogg -> assets/audio/sfx/roar_ko.ogg  sha256 4da0cf77a3506e1b573ec40e3688dc66400d1734853510db357fb3f843cde242
+File stones_02.ogg -> assets/audio/sfx/stone_ground.ogg  sha256 57dc6b85ee986e68ddc4b7fb2b41cc1c885151677d32439fdb299492a3103a65
+Derived file stone_ground_heavy.ogg: pitch-shifted copy of the chosen file made by the reviewer (ffmpeg asetrate), sha256 9e569a10f4d824128c767b45ecf2d821261b04bf82f3791d361c1cbfa8af9a65

@@ -1,0 +1,12 @@
+# Kiro task 79 — make the Colab (Qwen-Image-Edit) model understand the game's art style (Terra = art design)
+
+Owner 2026-11-10: "see whether he can make Colab understand the style." Qwen is our ONLY image generator. The first Colab results for the wind ghost came out in the wrong style.
+Read first: docs/colab_pipeline_excerpt.md (how a job becomes a picture, and the finding: the ghost jobs had no style/face reference), docs/game_style_brief.md, docs/pose_spec.md, docs/kiro_69_art_optimization.md, (not published) (the bad result), the game's own ghost art (assets/env/ghost_lantern.png and assets/sprites/*ghost*, look at them; you can read images), assets/poses/skeleton_idle1.png and assets/poses/bat_idle1.png (good style examples), colab/jobs_ghost_20261110.json (the five prompts that failed), scripts/make_art_queue.py (how jobs are built, FACE_LOCK and GENERIC_EXAGGERATE wording).
+Deliver docs/kiro_79_style_for_colab_gpt-5.6-terra.md (max 200 lines) containing:
+1. DIAGNOSIS: why Qwen-Image-Edit ignored the style (no style reference picture, wrong reference, style text too generic, anything else you can show from the files).
+2. A reusable STYLE BLOCK (English, and a Chinese twin) tuned for Qwen: outline, glow, shading, face rules, background rule, "do not" list; short enough not to dilute the subject (max 90 words each).
+3. A REFERENCE STRATEGY: which picture files to pass as STYLE reference and which as IDENTITY reference for each kind of job (ghost, gust/wind pictures, chain/props, coffin twin, backgrounds, portraits, poses), and the order of pictures in the list (state your reasoning; the pipeline takes a list of images). Name the exact files in the project.
+4. A JOB FORMAT proposal: `refs: [..]` plus per-job `style`/`negative` defaults, and the exact small change to the notebook's job loop (a code snippet in the doc is fine here; the main line applies it).
+5. A CALIBRATION BATCH: 6 jobs written as a valid JSON file colab/jobs_style_calib_20261110.json (same schema as colab/jobs_ghost_20261110.json plus your `refs`), designed so the main line can measure style match (scripts/pose_similarity.py palette/scale metrics and the existing checks) between variants: for example the same ghost with 3 different style-block / reference combinations, and a chain frame 2 made from frame 1.
+6. The acceptance checks per job that the main line can measure, and what to change when a check fails.
+Create only that doc and that JSON; do not edit any other file; do not claim anything was generated. Art is never drawn by code.

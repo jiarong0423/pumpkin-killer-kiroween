@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "note": "Design only. Nothing was heard; every statement about sound is unverified. Paths and the .ogg extension of the new files are ASSUMED: assets/audio/ambient/ and the five new sfx files were not present when this was written. Layer counts include the synthesized sparkle. Pitch values stay inside the 0.94 to 1.06 clamp. Mirrors docs/sound_mapping.md.",
+  "maxLayersPerEvent": 2,
+  "events": {
+    "round_start": {
+      "add": [
+        { "file": "assets/audio/sfx/bell_round.ogg", "role": "replace", "replaces": "synth:bell_strike", "volume": 0.75, "pitch": [0.99, 1.01], "delayMs": 0, "maxSeconds": 2.6, "fadeOutMs": 600, "band": "mid" }
+      ],
+      "keep": ["sparkle:shimmer"],
+      "layersAfter": 2,
+      "reason": "Church bell for the round start. Cut at 2.6 s (file is 5 s, event 2.4 s). Pitch near 1.0 to avoid sourness next to D minor music (unverified)."
+    },
+    "round_end": {
+      "add": [
+        { "file": "assets/audio/sfx/bell_round.ogg", "role": "replace", "replaces": "synth:bell_fall", "volume": 0.5, "pitch": [0.94, 0.96], "delayMs": 0, "maxSeconds": 1.8, "fadeOutMs": 500, "band": "mid" }
+      ],
+      "keep": [],
+      "layersAfter": 1,
+      "reason": "Same bell, lower, quieter and shorter so start and end differ. If it sounds the same as round_start, restore the synth bell_fall."
+    },
+    "move_step": {
+      "add": [
+        { "file": "assets/audio/sfx/step_leaf.ogg", "role": "random_variant", "variantOf": "current move_step sound (file move_step.ogg is missing today, so synth:step)", "variantWeight": 0.5, "volume": 0.4, "pitch": [0.94, 1.06], "delayMs": 0, "maxSeconds": 0.3, "fadeOutMs": 100, "band": "low" }
+      ],
+      "keep": [],
+      "cooldownMs": 120,
+      "layersAfter": 1,
+      "reason": "Leaves on a graveyard path. A pool of two stops identical repeats. Cooldown stops stacking on fast moves."
+    },
+    "impact_ground_heavy": {
+      "add": [
+        { "file": "assets/audio/sfx/rock_break.ogg", "role": "extra_layer", "volume": 0.45, "pitch": [0.94, 1.06], "delayMs": 30, "maxSeconds": 0.4, "fadeOutMs": 80, "band": "mid" }
+      ],
+      "keep": ["file:assets/audio/sfx/stone_ground_heavy.ogg"],
+      "layersAfter": 2,
+      "reason": "Adds a crack on top of the dull thump. Tagged mid so it does not fill a second low-band slot (unverified). Not for impact_ground (light)."
+    },
+    "ko": {
+      "add": [
+        { "file": "assets/audio/sfx/bones_rattle.ogg", "role": "extra_layer", "replaces": "sparkle:shimmer", "volume": 0.5, "pitch": [0.94, 1.06], "delayMs": 250, "maxSeconds": 1.1, "fadeOutMs": 200, "band": "mid" }
+      ],
+      "keep": ["file:assets/audio/sfx/roar_ko.ogg"],
+      "layersAfter": 2,
+      "reason": "Owner-picked roar stays as the body. Rattle reads as knocked apart and ends inside the 2 s event. zombie_moan rejected for ko: 4 s and a third voice."
+    },
+    "shield_place": {
+      "add": [
+        { "file": "assets/audio/sfx/chime_single.ogg", "role": "extra_layer", "replaces": "sparkle:shimmer", "volume": 0.35, "pitch": [0.99, 1.01], "delayMs": 300, "maxSeconds": 1.4, "fadeOutMs": 500, "band": "high" }
+      ],
+      "keep": ["file:assets/audio/sfx/spell_magic.ogg"],
+      "layersAfter": 2,
+      "reason": "Chime lands as the shield settles. Narrow pitch so a clear note does not fight the music (unverified)."
+    },
+    "heal": {
+      "add": [
+        { "file": "assets/audio/sfx/chime_single.ogg", "role": "extra_layer", "replaces": "sparkle:shimmer", "volume": 0.3, "pitch": [0.99, 1.01], "delayMs": 200, "maxSeconds": 1.2, "fadeOutMs": 400, "band": "high", "dropFirstIfBusy": true }
+      ],
+      "keep": ["file:assets/audio/sfx/heal_harp.ogg"],
+      "layersAfter": 2,
+      "reason": "Requested in the brief. Quieter than shield_place because the harp is already musical. First layer to drop if heal sounds busy; harp and chime may clash in pitch (unverified)."
+    }
+  },
+  "eventsUnchanged": [
+    "ui_click", "ui_hover", "charge", "throw_spear", "throw_shuriken", "throw_cannon", "throw_shield",
+    "flight_spear", "flight_shuriken", "flight_cannon", "flight_shield",
+    "impact_unit", "impact_unit_heavy", "impact_fence", "impact_fence_break", "impact_ground",
+    "shield_block", "dice_rattle", "dice_result", "poison_tick", "ultimate_ready",
+    "low_hp_heartbeat", "item_pickup"
+  ],
+  "ambient": {
+    "bat": { "type": "oneshot", "file": null, "synth": true, "lenSec": 1, "weight": 4, "minGapSec": 12, "volume": 1.0, "pan": [[-0.8, 0.8]], "pitch": null, "family": "animal", "long": false },
+    "crow": { "type": "oneshot", "file": "assets/audio/ambient/crow.ogg", "lenSec": 0.5, "weight": 4, "minGapSec": 25, "volume": 0.45, "pan": [[-0.9, 0.9]], "pitch": [0.95, 1.05], "family": "animal", "long": false },
+    "cat_meow": { "type": "oneshot", "file": "assets/audio/ambient/cat_meow.ogg", "lenSec": 1.8, "weight": 1, "minGapSec": 60, "volume": 0.35, "pan": [[-0.9, -0.5], [0.5, 0.9]], "pitch": [0.97, 1.03], "family": "animal", "long": false, "note": "Cat is a playable unit; keep rare, quiet, off-centre. Drop if testers read it as the unit speaking." },
+    "ghost_real": { "type": "oneshot", "file": "assets/audio/sfx/ghost_real.ogg", "lenSec": 4, "weight": 2, "minGapSec": 30, "volume": 0.8, "pan": [[-0.6, 0.6]], "pitch": [0.97, 1.03], "family": "moan", "long": true, "path": "existing ghostReal echo path" },
+    "ghost_moan1": { "type": "oneshot", "file": "assets/audio/ambient/ghost_moan1.ogg", "lenSec": 3, "weight": 2, "minGapSec": 30, "volume": 0.7, "pan": [[-0.6, 0.6]], "pitch": [0.97, 1.03], "family": "moan", "long": true, "path": "existing ghostReal echo path" },
+    "ghost_moan3": { "type": "oneshot", "file": "assets/audio/ambient/ghost_moan3.ogg", "lenSec": 4, "weight": 1, "minGapSec": 40, "volume": 0.7, "pan": [[-0.6, 0.6]], "pitch": [0.97, 1.03], "family": "moan", "long": true, "path": "existing ghostReal echo path" },
+    "zombie_moan": { "type": "oneshot", "file": "assets/audio/ambient/zombie_moan.ogg", "lenSec": 4, "weight": 1, "minGapSec": 60, "volume": 0.4, "pan": [[-0.7, 0.7]], "pitch": [0.97, 1.03], "family": "moan", "long": true },
+    "witch_cackle": { "type": "oneshot", "file": "assets/audio/ambient/witch_cackle.ogg", "lenSec": 1.2, "weight": 2, "minGapSec": 45, "volume": 0.5, "pan": [[-0.8, 0.8]], "pitch": [0.95, 1.05], "family": "voice", "long": false },
+    "thunder": { "type": "oneshot", "file": "assets/audio/ambient/thunder.ogg", "lenSec": 4, "weight": 1, "minGapSec": 90, "volume": 0.5, "pan": [[-0.3, 0.3]], "pitch": [0.94, 1.06], "family": "weather", "long": true, "blockedAfterDuckEventSec": 6 },
+    "night_bed": {
+      "type": "bed", "file": "assets/audio/ambient/night_bed.ogg", "lenSec": 28,
+      "playsIn": ["title"], "volume": 0.08, "volumeRange": [0.08, 0.08], "followWind": false,
+      "crossfadeSec": 2, "moodFadeSec": 1.5, "randomStartOffset": true, "fadeOutIn": ["victory", "defeat", "battle_calm", "battle_tense"]
+    },
+    "wind_bed": {
+      "type": "bed", "file": "assets/audio/ambient/wind_bed.ogg", "lenSec": 20,
+      "playsIn": ["battle_calm", "battle_tense"], "volume": 0.04, "volumeRange": [0.04, 0.14], "followWind": true, "windSmoothingSec": 1,
+      "crossfadeSec": 2, "moodFadeSec": 1.5, "randomStartOffset": true, "fadeOutIn": ["victory", "defeat", "title"]
+    }
+  },
+  "ambientRules": {
+    "gapSec": [9, 22],
+    "retryWhenBlockedSec": 1,
+    "maxActive": 2,
+    "maxLongActive": 1,
+    "longThresholdSec": 3,
+    "noSameKindBackToBack": true,
+    "noSameFileInLast": 2,
+    "familyGapSec": { "moan": 30, "animal": 12, "voice": 45, "weather": 90 },
+    "blockedWindows": [
+      { "name": "throw", "opensOn": ["throw_spear", "throw_shuriken", "throw_cannon", "throw_shield"], "closesAfterSec": 0.8, "closesAfterEvent": "matching impact_* event or flight_* loop stop, whichever is later", "alsoBlockedWhile": ["charge"] },
+      { "name": "ko", "opensOn": ["ko"], "closesAfterSec": 3 },
+      { "name": "round_bell", "opensOn": ["round_start", "round_end"], "closesAfterSec": 3 }
+    ],
+    "fadeOutOnWindowOpen": { "minLenSec": 1, "fadeMs": 250 },
+    "noCreaturesInMoods": ["victory", "defeat"],
+    "bedsOneAtATime": true,
+    "bedsBus": "separate from creature BASE_GAIN, not counted in maxActive",
+    "musicTrimLinear": 0.251,
+    "windValue": "public wind value divided by the maximum wind; main line supplies the maximum"
+  },
+  "reject": [
+    { "file": "cat_growl", "scope": "all", "reason": "5 s is too long for a sprinkle and uses the single long-sound slot; a growl reads as a threat from a playable unit (unverified)." },
+    { "file": "evil_laugh", "scope": "ambient and all current events", "reason": "Fits only a match-lost moment. Random play would read as the game laughing mid-turn. No such event exists; a defeat sting already exists. If wanted, add a new event as a layer on the defeat sting." },
+    { "file": "zombie_moan", "scope": "ko layer", "reason": "4 s against a 2 s event and a third voice over the roar. Kept as a rare ambient kind." },
+    { "file": "bell_round", "scope": "charge, ultimate_ready, UI events", "reason": "A 5 s bell is a punctuation mark; keep it to round start and end." },
+    { "file": "chime_single", "scope": "ultimate_ready", "reason": "Ultimates are not designed yet (owner log, section 1)." },
+    { "file": "wind_bed + night_bed", "scope": "played together", "reason": "Two noise beds at once blur the music bed and effects. One at a time." },
+    { "file": "any new layer", "scope": "throw_*", "reason": "Throws are the core feedback moment and have their own sounds; extra layers risk muddying them." }
+  ],
+  "askOwnerToPickFromAuditionMore": [
+    { "type": "wolf howl", "count": 1, "use": "ambient, family animal or weather, very low weight" },
+    { "type": "coffin lid or door creak (shortest)", "count": 1, "use": "shield_place body option or lobby accent" },
+    { "type": "owl hoot or night-bird call (only if present)", "count": 1, "use": "second short animal sound beside crow" }
+  ],
+  "unverified": [
+    "How every sound actually sounds, including loop smoothness of the beds and pitch clash between chime_single and heal_harp.",
+    "That the new files, assets/audio/ambient/ and docs/audition/more exist: they were absent in this checkout.",
+    "Band tags of the new layers, all volumes, delays and gaps: first guesses.",
+    "That the 16-voice cap holds in a busy round."
+  ]
+}

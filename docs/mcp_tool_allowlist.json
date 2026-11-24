@@ -1,0 +1,78 @@
+{
+  "server": "pumpkin-killer",
+  "transport": "stdio",
+  "command": "python3",
+  "args": [
+    "-B",
+    "scripts/mcp_stdio_server.py"
+  ],
+  "allowedFlags": {
+    "--seat": [
+      "red",
+      "white",
+      "spectator",
+      "referee"
+    ],
+    "--opponent": [
+      "builtin:easy",
+      "builtin:normal",
+      "builtin:hard",
+      "builtin:adaptive"
+    ],
+    "--transcript": "docs/kiro_evidence/raw/<recorded-match>.jsonl"
+  },
+  "tools": [
+    {
+      "name": "get_public_state",
+      "readOnly": true,
+      "descriptionSha256": "573ed8282b08c358fcd31bb2d145fdef52814ca38570a769a3cbd1d55f6badbb"
+    },
+    {
+      "name": "get_roster",
+      "readOnly": true,
+      "descriptionSha256": "cad6f9c17d470753ce24d0aa08c6dd47405577efd5a9e9e8dea4472007c58eee"
+    },
+    {
+      "name": "get_history",
+      "readOnly": true,
+      "descriptionSha256": "3633a68e4519ed83eeeaa7c42c6cf1b06a941762b9bc09dff5912f56abf67d00"
+    },
+    {
+      "name": "submit_action",
+      "readOnly": false,
+      "descriptionSha256": "65be3cc5f9e0e0025b97f143db81baa4fcfbbb04db753306732c30851410e9c1"
+    },
+    {
+      "name": "end_turn",
+      "readOnly": false,
+      "descriptionSha256": "453b731d01f89432e74f143881a761bb0832b2935e61f8ec9978aebc31ade13b"
+    },
+    {
+      "name": "set_notes",
+      "readOnly": false,
+      "descriptionSha256": "5953ef2f1e01689171ba6f9ad7656467c7bfe1838f46c22929126221a4ffcc6b"
+    },
+    {
+      "name": "get_notes",
+      "readOnly": true,
+      "descriptionSha256": "0763b5dd3a8d2b487598e86091e1084201e42ab34bcbf2e766850a6c4e32b537"
+    }
+  ],
+  "autoApprove": {
+    "readOnly": [
+      "get_public_state",
+      "get_roster",
+      "get_history",
+      "get_notes"
+    ],
+    "pk-player": [
+      "get_public_state",
+      "get_history",
+      "submit_action",
+      "end_turn",
+      "set_notes",
+      "get_notes"
+    ],
+    "rule": "Nothing else may be auto-approved."
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "made": "2026-11-17",
+  "method": "balance_search.js coordinate descent, isolation only",
+  "matchesPerPairingSearch": 150,
+  "matchesPerPairingFinal": 600,
+  "seed": 5,
+  "limit": 0.35,
+  "multipliers": {
+    "skeleton": {
+      "hp": 1,
+      "dmg": 1
+    },
+    "wizard": {
+      "hp": 1.1012523719165086,
+      "dmg": 1.1133333333333335
+    },
+    "bat": {
+      "hp": 1.0261986084756485,
+      "dmg": 1.1601924165251842
+    },
+    "knight": {
+      "hp": 1,
+      "dmg": 1
+    },
+    "bride": {
+      "hp": 1.1012523719165086,
+      "dmg": 1.2250290178323737
+    },
+    "hunchback": {
+      "hp": 1,
+      "dmg": 1
+    },
+    "reaper": {
+      "hp": 1,
+      "dmg": 1
+    },
+    "hag": {
+      "hp": 1,
+      "dmg": 1
+    }
+  },
+  "resultingStats": {
+    "skeleton": {
+      "hp": 150,
+      "dmg": 22
+    },
+    "wizard": {
+      "hp": 124.4,
+      "dmg": 33.4
+    },
+    "bat": {
+      "hp": 146.7,
+      "dmg": 27.8
+    },
+    "knight": {
+      "hp": 185,
+      "dmg": 21
+    },
+    "bride": {
+      "hp": 148.7,
+      "dmg": 34.3
+    },
+    "hunchback": {
+      "hp": 147,
+      "dmg": 19
+    },
+    "reaper": {
+      "hp": 143,
+      "dmg": 22
+    },
+    "hag": {
+      "hp": 158,
+      "dmg": 24
+    }
+  },
+  "averages": {
+    "skeleton": 59,
+    "wizard": 47.2,
+    "bat": 53.8,
+    "knight": 47.4,
+    "bride": 53.1,
+    "hunchback": 43.4,
+    "reaper": 43.4,
+    "hag": 52.7
+  },
+  "finalValue": 25.3,
+  "timeouts": 0
+}

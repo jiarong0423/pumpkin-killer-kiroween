@@ -1,0 +1,6339 @@
+{
+ "meta": {
+  "generated": "2026-11-16 03:08",
+  "task": "Pumpkin Killer i18n mapping table 2026-11-16",
+  "snapshot": {
+   "index_html_lines": 3517,
+   "index_html_sha256": "e7a221c5f960d1032b2df573cadaa1b452b19540d7497b067521cc9466d26dd9",
+   "en_json_sha256": "8bc967c97e67b51ab68c9dc90608e2e21df78bf5e25d02c0eae3bca357a2ff9c",
+   "zh_json_sha256": "4cd5f57a49829251462e878059eb8ff692367fa00b1df6f05418b69ad2963b46",
+   "note": "index.html and the i18n JSON were being edited while this ran; where-lines refer to this snapshot only. Re-locate by key."
+  },
+  "counts": {
+   "i18n_keys": 181,
+   "extra_rows": 15,
+   "by_status": {
+    "OK": 164,
+    "TERM_INCONSISTENT": 22,
+    "MISMATCH": 3,
+    "HARDCODED": 4,
+    "MISSING_ZH": 3
+   },
+   "by_code_check": {
+    "ok": 178,
+    "INCOMPLETE": 2,
+    "STALE": 5,
+    "OK": 3,
+    "BUG": 1,
+    "n/a": 4,
+    "a11y": 1,
+    "unused": 2
+   }
+  },
+  "method": {
+   "width": "PIL ImageFont on assets/fonts/pk-body-700.woff2 (sans), CinzelDecorative-Bold.ttf (display ASCII), Georgia Bold.ttf (dock serif); CJK counted 1 em; emoji 0.95 em. Calibration: gameover.restart 580 px (UI reviewer ~576), shield.expired 574 px (reviewer ~573), storm line 450 px with 1-digit round (reviewer 445). Treat as +-3 %.",
+   "budgets": {
+    "unit_popup": 560,
+    "centre_popup": 900,
+    "hud_centre_piece": 400,
+    "hud_hard_limit": 440,
+    "result_panel": 520,
+    "result_panel_hard": 560,
+    "hero_chip": 40,
+    "skill_tile": 54,
+    "dock_hero_name": 120,
+    "menu_button": 96,
+    "move_button": 92,
+    "help_pill_line": 440,
+    "note": "unit popup 560 = reviewer-confirmed threshold; a unit stands at x 160..760 (player) or 1160..1760 (AI), so any popup wider than 2 x unit x is clipped at the canvas edge: clamp ft.x in code instead of relying on length. Other budgets are my estimates (marked in table)."
+   }
+  },
+  "font_note": "PK Body woff2 has no CJK glyphs, so Chinese on the canvas and in the DOM uses PingFang TC / Microsoft JhengHei / Noto Sans TC by fallback; zh widths are 1 em per character."
+ },
+ "task_177_application": {
+  "date": "2026-11-16",
+  "supersedes_snapshot_rows": true,
+  "fixed": [
+   {"keys": ["gameover.restart", "shield.expired", "weather.storm", "skill.ultTip", "toast.defendHelp", "move.fwdBtn", "toast.moveHelp", "toast.moveRoll", "toast.aimHint"], "status": "OK", "note": "Applied the proposed shorter English strings; weather.storm is 414.1 px, below the 440 px hard limit but above the 400 px comfort budget."},
+   {"keys": ["hero.skeleton.tab", "hero.wizard.tab", "hero.bat.tab", "hero.hunchback.tab"], "status": "OK", "note": "Applied the short dock-chip labels Bones, Mage, Bat, and Bell."},
+   {"keys": ["help.wind", "help.guard", "shield.tipGuard", "ult.nun", "toast.gapShift"], "status": "OK", "note": "Corrected stale instructions, released shield placement, the Silver Cross Combo, and the stray 1-2 tag."},
+   {"keys": ["status.frostWeak", "status.frostApplied", "ult.soulfire"], "status": "OK", "note": "Standardized damage −15% and Triple Ghost Flame."},
+   {"keys": ["supply.heal", "toast.healed", "toast.switchHero", "toast.aiShield", "shield.holding", "shield.blocked", "shield.roundsLeft", "dock.resetLockedTitle", "dock.resetTip", "toast.resetLocked", "shield.tipOther", "ult.unbuilt"], "status": "OK", "note": "Standardized terms for heal, character, opponent, round, and restart."},
+   {"keys": ["help.tapUnit", "knightUlt.place"], "status": "OK", "note": "Uses Tap for touch instructions and US spelling defense."},
+   {"keys": ["toast.rotatePhone", "ui.playAgain", "ui.backToPick", "ui.installApp", "ui.installIosHint", "weather.notice.rain", "weather.notice.snow", "weather.notice.storm", "weather.notice.fog", "hint.goal", "hint.step1", "hint.step2", "hint.step3"], "status": "OK", "note": "Added to both language files with matching placeholder sets."},
+   {"keys": ["manifest.webmanifest"], "status": "OK", "note": "Applied the bilingual name, Chinese short name, and short English description."}
+  ],
+  "remaining": [
+   {"keys": ["hero.bat.name", "hero.knight.name", "hero.knight.tabTitle", "hero.knight.tab"], "status": "OWNER_DECISION", "note": "Task 177 preserves Bat Assassin and 盾衛 / Guard."},
+   {"keys": ["ult.knight"], "status": "PAGE_WIRING_REQUIRED", "note": "The page does not use this unlisted key."},
+   {"keys": ["hero.skeleton.name", "hero.wizard.name", "hero.knight.name", "hero.hunchback.name"], "status": "INDEX_HTML_REQUIRED", "note": "The documented CSS/ellipsis fixes are outside task 177's allowed files."},
+   {"keys": ["useSupply", "hardcoded_and_unused_strings"], "status": "OUT_OF_SCOPE", "note": "These need page or JavaScript changes."}
+  ]
+ },
+ "rows": [
+  {
+   "key": "page.title",
+   "zh": "Pumpkin Killer (南瓜殺手) — 經典貓狗大戰手感 ✕ 浮空盾預判 ✕ 軌跡記憶",
+   "en": "Pumpkin Killer — classic cat-and-dog artillery feel ✕ floating-shield prediction ✕ trail memory",
+   "where": [
+    "index.html:9"
+   ],
+   "surface": "browser tab title (document.title)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 1
+  },
+  {
+   "key": "start.title",
+   "zh": "🎃 南瓜殺手",
+   "en": "🎃 Pumpkin Killer",
+   "where": [
+    "index.html:212"
+   ],
+   "surface": "start screen h1 (DOM)",
+   "max_px": null,
+   "en_px": 331.0,
+   "zh_px": 166.4,
+   "fits": null,
+   "measures": [
+    {
+     "surface": "start screen h1 (DOM)",
+     "en_px": 331.0,
+     "zh_px": 166.4,
+     "max_px": null
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 2
+  },
+  {
+   "key": "start.pickHero",
+   "zh": "選一個角色（開局後不能換）",
+   "en": "Pick a character (locked once the match starts)",
+   "where": [
+    "index.html:213"
+   ],
+   "surface": "start screen h2 (DOM)",
+   "max_px": null,
+   "en_px": 369.9,
+   "zh_px": 208.0,
+   "fits": null,
+   "measures": [
+    {
+     "surface": "start screen h2 (DOM)",
+     "en_px": 369.9,
+     "zh_px": 208.0,
+     "max_px": null
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 3
+  },
+  {
+   "key": "start.pickScene",
+   "zh": "選一個戰場",
+   "en": "Pick a battlefield",
+   "where": [
+    "index.html:215"
+   ],
+   "surface": "start screen h2 (DOM)",
+   "max_px": null,
+   "en_px": 133.4,
+   "zh_px": 80.0,
+   "fits": null,
+   "measures": [
+    {
+     "surface": "start screen h2 (DOM)",
+     "en_px": 133.4,
+     "zh_px": 80.0,
+     "max_px": null
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 4
+  },
+  {
+   "key": "start.go",
+   "zh": "開始戰鬥",
+   "en": "Start Battle",
+   "where": [
+    "index.html:217",
+    "index.html:580"
+   ],
+   "surface": "start button (DOM)",
+   "max_px": null,
+   "en_px": 114.5,
+   "zh_px": 80.0,
+   "fits": null,
+   "measures": [
+    {
+     "surface": "start button (DOM)",
+     "en_px": 114.5,
+     "zh_px": 80.0,
+     "max_px": null
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 5
+  },
+  {
+   "key": "start.loading",
+   "zh": "載入中 {done}/{total}",
+   "en": "Loading {done}/{total}",
+   "where": [
+    "index.html:581"
+   ],
+   "surface": "start button (DOM)",
+   "max_px": null,
+   "en_px": 150.9,
+   "zh_px": 131.3,
+   "fits": null,
+   "measures": [
+    {
+     "surface": "start button (DOM)",
+     "en_px": 150.9,
+     "zh_px": 131.3,
+     "max_px": null
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 6
+  },
+  {
+   "key": "start.inProduction",
+   "zh": "製作中",
+   "en": "In production",
+   "where": [
+    "index.html:408",
+    "index.html:415"
+   ],
+   "surface": "grey card label (DOM; hidden while SHOW_COMING_SOON=false)",
+   "max_px": null,
+   "en_px": 83.8,
+   "zh_px": 37.5,
+   "fits": null,
+   "measures": [
+    {
+     "surface": "grey card label (DOM; hidden while SHOW_COMING_SOON=false)",
+     "en_px": 83.8,
+     "zh_px": 37.5,
+     "max_px": null
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 7
+  },
+  {
+   "key": "hero.skeleton.name",
+   "zh": "骷髏長矛兵",
+   "en": "Skeleton Spearman",
+   "where": [
+    "index.html:248",
+    "index.html:590"
+   ],
+   "surface": "start card name / dock hero name / HUD banner name / switch-hero popup",
+   "max_px": 162,
+   "en_px": 164.9,
+   "zh_px": 85.0,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "start card name (17px)",
+     "en_px": 164.9,
+     "zh_px": 85.0,
+     "max_px": 162,
+     "en_ok": false,
+     "zh_ok": true
+    },
+    {
+     "surface": "dock hero name (17px serif, row 182 px shared with HP%)",
+     "en_px": 170.8,
+     "zh_px": 85.0,
+     "max_px": 140,
+     "en_ok": false,
+     "zh_ok": true
+    },
+    {
+     "surface": "HUD side banner (24px)",
+     "en_px": 232.8,
+     "zh_px": 120.0,
+     "max_px": 340,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "switch-hero popup (18px, unit)",
+     "en_px": 315.1,
+     "zh_px": 171.9,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "Spearman, but the weapon and ultimate are javelins (標槍 / Javelin in hero.skeleton.blurb, ult.spear). Same split in Chinese (長矛兵 vs 標槍). Accepted: a spearman throws javelins; code id proj_spear.",
+   "order": 8
+  },
+  {
+   "key": "hero.wizard.name",
+   "zh": "南瓜巫師",
+   "en": "Pumpkin Wizard",
+   "where": [
+    "index.html:249",
+    "index.html:599"
+   ],
+   "surface": "start card name / dock hero name / HUD banner name / switch-hero popup",
+   "max_px": 140,
+   "en_px": 149.0,
+   "zh_px": 68.0,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "start card name (17px)",
+     "en_px": 137.5,
+     "zh_px": 68.0,
+     "max_px": 162,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "dock hero name (17px serif, row 182 px shared with HP%)",
+     "en_px": 149.0,
+     "zh_px": 68.0,
+     "max_px": 140,
+     "en_ok": false,
+     "zh_ok": true
+    },
+    {
+     "surface": "HUD side banner (24px)",
+     "en_px": 194.1,
+     "zh_px": 96.0,
+     "max_px": 340,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "switch-hero popup (18px, unit)",
+     "en_px": 286.1,
+     "zh_px": 153.9,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 9
+  },
+  {
+   "key": "hero.bat.name",
+   "zh": "蝙蝠刺客",
+   "en": "Bat Assassin",
+   "where": [
+    "index.html:250",
+    "index.html:608"
+   ],
+   "surface": "start card name / dock hero name / HUD banner name / switch-hero popup",
+   "max_px": 162,
+   "en_px": 103.2,
+   "zh_px": 68.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start card name (17px)",
+     "en_px": 103.2,
+     "zh_px": 68.0,
+     "max_px": 162,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "dock hero name (17px serif, row 182 px shared with HP%)",
+     "en_px": 109.6,
+     "zh_px": 68.0,
+     "max_px": 140,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "HUD side banner (24px)",
+     "en_px": 145.7,
+     "zh_px": 96.0,
+     "max_px": 340,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "switch-hero popup (18px, unit)",
+     "en_px": 249.8,
+     "zh_px": 153.9,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "Page says \"Bat Assassin\"; docs say \"Bat-cat Assassin\" (9 files) and \"Cat-bat\" (18 files); zh docs say 蝙蝠貓 (8). Owner to confirm which one; the page name has no cat.",
+   "order": 10
+  },
+  {
+   "key": "hero.knight.name",
+   "zh": "南瓜重裝盾衛",
+   "en": "Heavy Pumpkin Guard",
+   "where": [
+    "index.html:653"
+   ],
+   "surface": "start card name / dock hero name / HUD banner name / switch-hero popup",
+   "max_px": 162,
+   "en_px": 187.3,
+   "zh_px": 102.0,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "start card name (17px)",
+     "en_px": 187.3,
+     "zh_px": 102.0,
+     "max_px": 162,
+     "en_ok": false,
+     "zh_ok": true
+    },
+    {
+     "surface": "dock hero name (17px serif, row 182 px shared with HP%)",
+     "en_px": 199.0,
+     "zh_px": 102.0,
+     "max_px": 140,
+     "en_ok": false,
+     "zh_ok": true
+    },
+    {
+     "surface": "HUD side banner (24px)",
+     "en_px": 264.4,
+     "zh_px": 144.0,
+     "max_px": 340,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "switch-hero popup (18px, unit)",
+     "en_px": 338.8,
+     "zh_px": 189.9,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "Knight has 3 long names: 南瓜重裝盾衛/Heavy Pumpkin Guard (start card, dock, HUD, switch toast), 南瓜盾衛/Pumpkin Guard (tooltip, shield.tipGuard, toast.guardOnly), 盾衛/Guard (chip, help). Docs use \"Pumpkin Guard\" in 16 files, \"Heavy Pumpkin Guard\" in 1. English also overflows the dock name row.",
+   "proposal": {
+    "zh": "南瓜盾衛",
+    "en": "Pumpkin Guard",
+    "why": "one canonical name; shorter; fixes the dock-name overflow (owner decision)",
+    "en_px": 140.1,
+    "px_note": "dock hero name, 17px serif (budget 140); start card 131.1 px (budget 162)"
+   },
+   "order": 11
+  },
+  {
+   "key": "hero.knight.tabTitle",
+   "zh": "南瓜盾衛",
+   "en": "Pumpkin Guard",
+   "where": [
+    "index.html:251"
+   ],
+   "surface": "hero chip tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "Second long name for the same hero (see hero.knight.name); proposal: make both keys identical or drop this key.",
+   "proposal": {
+    "zh": "南瓜盾衛",
+    "en": "Pumpkin Guard",
+    "why": "same as hero.knight.name"
+   },
+   "order": 12
+  },
+  {
+   "key": "hero.skeleton.tab",
+   "zh": "骷髏",
+   "en": "Skeleton",
+   "where": [
+    "index.html:248"
+   ],
+   "surface": "dock hero chip caption (DOM)",
+   "max_px": 40,
+   "en_px": 53.9,
+   "zh_px": 24.0,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "dock hero chip caption (12px serif, chip 44 px, nowrap)",
+     "en_px": 53.9,
+     "zh_px": 24.0,
+     "max_px": 40,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "proposal": {
+    "zh": null,
+    "en": "Bones",
+    "why": "dock chip is 44 px; \"Skeleton\" is 54 px (12px serif)",
+    "en_px": 38.0
+   },
+   "order": 13
+  },
+  {
+   "key": "hero.wizard.tab",
+   "zh": "巫師",
+   "en": "Wizard",
+   "where": [
+    "index.html:249"
+   ],
+   "surface": "dock hero chip caption (DOM)",
+   "max_px": 40,
+   "en_px": 45.4,
+   "zh_px": 24.0,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "dock hero chip caption (12px serif, chip 44 px, nowrap)",
+     "en_px": 45.4,
+     "zh_px": 24.0,
+     "max_px": 40,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "proposal": {
+    "zh": null,
+    "en": "Mage",
+    "why": "dock chip is 44 px; \"Wizard\" is 45 px",
+    "en_px": 33.2
+   },
+   "order": 14
+  },
+  {
+   "key": "hero.bat.tab",
+   "zh": "刺客",
+   "en": "Assassin",
+   "where": [
+    "index.html:250"
+   ],
+   "surface": "dock hero chip caption (DOM)",
+   "max_px": 40,
+   "en_px": 53.3,
+   "zh_px": 24.0,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "dock hero chip caption (12px serif, chip 44 px, nowrap)",
+     "en_px": 53.3,
+     "zh_px": 24.0,
+     "max_px": 40,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "proposal": {
+    "zh": null,
+    "en": "Bat",
+    "why": "dock chip is 44 px; \"Assassin\" is 53 px",
+    "en_px": 21.0
+   },
+   "order": 15
+  },
+  {
+   "key": "hero.knight.tab",
+   "zh": "盾衛",
+   "en": "Guard",
+   "where": [
+    "index.html:251"
+   ],
+   "surface": "dock hero chip caption (DOM)",
+   "max_px": 40,
+   "en_px": 39.2,
+   "zh_px": 24.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "dock hero chip caption (12px serif, chip 44 px, nowrap)",
+     "en_px": 39.2,
+     "zh_px": 24.0,
+     "max_px": 40,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 16
+  },
+  {
+   "key": "hero.skeleton.blurb",
+   "zh": "標槍：傷害 24，命中附「霜咒」，被擊中的單位接下來 2 次攻擊 −15%。",
+   "en": "Javelin: 24 damage. A hit applies Frost Curse: the target's next 2 attacks deal −15%.",
+   "where": [
+    "index.html:373"
+   ],
+   "surface": "start card blurb (DOM)",
+   "max_px": null,
+   "en_px": 481.7,
+   "zh_px": 401.9,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start card blurb (12.5px, card text width 162 px) est. lines",
+     "en_px": 481.7,
+     "zh_px": 401.9,
+     "max_px": null,
+     "en_lines": 3,
+     "zh_lines": 3,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "INCOMPLETE",
+   "note": "CODE: Damage 24 and Frost Curse -15% x2 match the code; the javelin also makes the target bleed (applyBleed, 2 rounds) and the blurb does not say so.",
+   "proposal": {
+    "zh": "標槍：傷害 24，命中會流血，並附「霜咒」：被擊中的單位接下來 2 次攻擊 −15%。",
+    "en": "Javelin: 24 damage; a hit makes the target bleed and applies Frost Curse: its next 2 attacks deal −15%.",
+    "why": "adds bleed (code applies it)"
+   },
+   "order": 17
+  },
+  {
+   "key": "hero.wizard.blurb",
+   "zh": "南瓜砲：傷害 28，彈道高、威力大，是最直接的輸出。",
+   "en": "Pumpkin Cannon: 28 damage, high arc, big punch. The most direct damage dealer.",
+   "where": [
+    "index.html:374"
+   ],
+   "surface": "start card blurb (DOM)",
+   "max_px": null,
+   "en_px": 479.9,
+   "zh_px": 304.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start card blurb (12.5px, card text width 162 px) est. lines",
+     "en_px": 479.9,
+     "zh_px": 304.2,
+     "max_px": null,
+     "en_lines": 3,
+     "zh_lines": 2,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "STALE",
+   "note": "CODE: Says damage 28; HERO_PROFILES.wizard.dmg is 24 at snapshot (class_stats module/docs still say 28: owner to settle the number). Also omits that a hit poisons (applyPoison on cannonball).",
+   "proposal": {
+    "zh": "南瓜砲：傷害 24，彈道高、威力大，命中會中毒。",
+    "en": "Pumpkin Cannon: 24 damage, high arc, big punch; a hit Poisons the target.",
+    "why": "number follows HERO_PROFILES.wizard.dmg (24); owner to confirm 24 vs 28; adds poison"
+   },
+   "order": 18
+  },
+  {
+   "key": "hero.bat.blurb",
+   "zh": "手裡劍：一次射出 5 枚，散落一小片範圍，每枚 8 傷害，中幾枚算幾枚。",
+   "en": "Shuriken: throws 5 at once in a small spread, 8 damage each; every one that lands counts.",
+   "where": [
+    "index.html:375"
+   ],
+   "surface": "start card blurb (DOM)",
+   "max_px": null,
+   "en_px": 520.8,
+   "zh_px": 400.1,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start card blurb (12.5px, card text width 162 px) est. lines",
+     "en_px": 520.8,
+     "zh_px": 400.1,
+     "max_px": null,
+     "en_lines": 4,
+     "zh_lines": 3,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "STALE",
+   "note": "CODE: Both languages describe the old design (5 shuriken, 8 each). Code: the normal attack is ONE shuriken, damage 22 (HERO_PROFILES.bat.dmg), a hit applies Slow (no move next round). Five shuriken is the Ultimate (Shuriken Rain, 1.5 x 22 / 5 = 6.6 each).",
+   "proposal": {
+    "zh": "手裡劍：傷害 22，命中會減速（對手下回合不能移動）。大招一次射出 5 枚。",
+    "en": "Shuriken: 22 damage; a hit Slows the target (no moving next round). The Ultimate throws 5 at once.",
+    "why": "blurb was written for the old 5 x 8 design"
+   },
+   "order": 19
+  },
+  {
+   "key": "hero.knight.blurb",
+   "zh": "彈跳小盾：骰子決定 1 到 6 次碰撞，總傷害平均分給每次碰撞；也能放浮空盾防禦。",
+   "en": "Bouncing Shield: a die decides 1 to 6 collisions and the total damage is split evenly between them. It can also place a Floating Shield to defend.",
+   "where": [
+    "index.html:376"
+   ],
+   "surface": "start card blurb (DOM)",
+   "max_px": null,
+   "en_px": 828.0,
+   "zh_px": 462.6,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start card blurb (12.5px, card text width 162 px) est. lines",
+     "en_px": 828.0,
+     "zh_px": 462.6,
+     "max_px": null,
+     "en_lines": 6,
+     "zh_lines": 3,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "OK",
+   "note": "CODE: Die decides 1-6 bounces, total 30 split evenly (HERO_PROFILES.knight.dmg 30, toast.bounce): consistent.",
+   "order": 20
+  },
+  {
+   "key": "hero.bride.name",
+   "zh": "鬼娃新娘",
+   "en": "Ghost Bride",
+   "where": [
+    "index.html:253",
+    "index.html:383",
+    "index.html:635"
+   ],
+   "surface": "start card name / dock hero name / HUD banner name / switch-hero popup",
+   "max_px": 162,
+   "en_px": 98.2,
+   "zh_px": 68.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start card name (17px)",
+     "en_px": 98.2,
+     "zh_px": 68.0,
+     "max_px": 162,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "dock hero name (17px serif, row 182 px shared with HP%)",
+     "en_px": 104.6,
+     "zh_px": 68.0,
+     "max_px": 140,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "HUD side banner (24px)",
+     "en_px": 138.6,
+     "zh_px": 96.0,
+     "max_px": 340,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "switch-hero popup (18px, unit)",
+     "en_px": 244.5,
+     "zh_px": 153.9,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 21
+  },
+  {
+   "key": "hero.bride.tab",
+   "zh": "新娘",
+   "en": "Bride",
+   "where": [
+    "index.html:253"
+   ],
+   "surface": "dock hero chip caption (DOM)",
+   "max_px": 40,
+   "en_px": 34.4,
+   "zh_px": 24.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "dock hero chip caption (12px serif, chip 44 px, nowrap)",
+     "en_px": 34.4,
+     "zh_px": 24.0,
+     "max_px": 40,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 22
+  },
+  {
+   "key": "hero.bride.blurb",
+   "zh": "音波：尖叫放出音波環，只打瞄準的那一個目標，離中心越近傷害越高，命中會中毒。",
+   "en": "Sound wave: her scream sends out rings that hit only the unit it is aimed at; the closer to the centre, the harder. Poisons on a hit.",
+   "where": [
+    "index.html:378",
+    "index.html:383"
+   ],
+   "surface": "start card blurb (DOM)",
+   "max_px": null,
+   "en_px": 742.8,
+   "zh_px": 475.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start card blurb (12.5px, card text width 162 px) est. lines",
+     "en_px": 742.8,
+     "zh_px": 475.0,
+     "max_px": null,
+     "en_lines": 5,
+     "zh_lines": 3,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "UK spelling \"centre\"; fence.label uses \"Center\". Use US spelling.",
+   "proposal": {
+    "zh": null,
+    "en": "Sound wave: her scream sends out rings that hit only the unit it is aimed at; the closer to the center, the harder. Poisons on a hit.",
+    "why": "US spelling"
+   },
+   "order": 23
+  },
+  {
+   "key": "hero.hunchback.name",
+   "zh": "鐘樓怪人",
+   "en": "Bell Tower Hunchback",
+   "where": [
+    "index.html:254",
+    "index.html:384",
+    "index.html:644"
+   ],
+   "surface": "start card name / dock hero name / HUD banner name / switch-hero popup",
+   "max_px": 162,
+   "en_px": 187.9,
+   "zh_px": 68.0,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "start card name (17px)",
+     "en_px": 187.9,
+     "zh_px": 68.0,
+     "max_px": 162,
+     "en_ok": false,
+     "zh_ok": true
+    },
+    {
+     "surface": "dock hero name (17px serif, row 182 px shared with HP%)",
+     "en_px": 198.9,
+     "zh_px": 68.0,
+     "max_px": 140,
+     "en_ok": false,
+     "zh_ok": true
+    },
+    {
+     "surface": "HUD side banner (24px)",
+     "en_px": 265.3,
+     "zh_px": 96.0,
+     "max_px": 340,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "switch-hero popup (18px, unit)",
+     "en_px": 339.5,
+     "zh_px": 153.9,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 24
+  },
+  {
+   "key": "hero.hunchback.tab",
+   "zh": "怪人",
+   "en": "Hunchback",
+   "where": [
+    "index.html:254"
+   ],
+   "surface": "dock hero chip caption (DOM)",
+   "max_px": 40,
+   "en_px": 70.8,
+   "zh_px": 24.0,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "dock hero chip caption (12px serif, chip 44 px, nowrap)",
+     "en_px": 70.8,
+     "zh_px": 24.0,
+     "max_px": 40,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "proposal": {
+    "zh": null,
+    "en": "Bell",
+    "why": "dock chip is 44 px; \"Hunchback\" is 71 px",
+    "en_px": 24.2
+   },
+   "order": 25
+  },
+  {
+   "key": "hero.hag.name",
+   "zh": "鬼修女",
+   "en": "Ghost Nun",
+   "where": [
+    "index.html:255",
+    "index.html:626"
+   ],
+   "surface": "start card name / dock hero name / HUD banner name / switch-hero popup",
+   "max_px": 162,
+   "en_px": 87.6,
+   "zh_px": 51.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start card name (17px)",
+     "en_px": 87.6,
+     "zh_px": 51.0,
+     "max_px": 162,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "dock hero name (17px serif, row 182 px shared with HP%)",
+     "en_px": 93.4,
+     "zh_px": 51.0,
+     "max_px": 140,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "HUD side banner (24px)",
+     "en_px": 123.7,
+     "zh_px": 72.0,
+     "max_px": 340,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "switch-hero popup (18px, unit)",
+     "en_px": 233.3,
+     "zh_px": 135.9,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 26
+  },
+  {
+   "key": "hero.hag.tab",
+   "zh": "修女",
+   "en": "Nun",
+   "where": [
+    "index.html:255"
+   ],
+   "surface": "dock hero chip caption (DOM)",
+   "max_px": 40,
+   "en_px": 26.5,
+   "zh_px": 24.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "dock hero chip caption (12px serif, chip 44 px, nowrap)",
+     "en_px": 26.5,
+     "zh_px": 24.0,
+     "max_px": 40,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 27
+  },
+  {
+   "key": "hero.hag.blurb",
+   "zh": "銀色十字：飄浮的鬼修女甩出纏著黑煙的旋轉銀十字，傷害 22，彈道平直輕快。",
+   "en": "Silver cross: a hovering ghost nun hurls a spinning silver cross wrapped in black smoke, 22 damage, flat and quick.",
+   "where": [
+    "index.html:380"
+   ],
+   "surface": "start card blurb (DOM)",
+   "max_px": null,
+   "en_px": 662.2,
+   "zh_px": 441.7,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start card blurb (12.5px, card text width 162 px) est. lines",
+     "en_px": 662.2,
+     "zh_px": 441.7,
+     "max_px": null,
+     "en_lines": 5,
+     "zh_lines": 3,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "OK",
+   "note": "CODE: 22 damage: matches HERO_PROFILES.hag.dmg.",
+   "order": 28
+  },
+  {
+   "key": "hero.hunchback.blurb",
+   "zh": "巨斧：旋轉飛出，傷害 21，命中會流血並擊退目標。",
+   "en": "Giant axe: heavy and spinning, 21 damage, makes the target bleed and knocks it back.",
+   "where": [
+    "index.html:379",
+    "index.html:384"
+   ],
+   "surface": "start card blurb (DOM)",
+   "max_px": null,
+   "en_px": 499.1,
+   "zh_px": 291.7,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start card blurb (12.5px, card text width 162 px) est. lines",
+     "en_px": 499.1,
+     "zh_px": 291.7,
+     "max_px": null,
+     "en_lines": 4,
+     "zh_lines": 2,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "OK",
+   "note": "CODE: 21 damage, bleed, knock back 50 px: matches.",
+   "order": 29
+  },
+  {
+   "key": "hero.reaper.name",
+   "zh": "死靈法師",
+   "en": "Necromancer",
+   "where": [
+    "index.html:252",
+    "index.html:617"
+   ],
+   "surface": "start card name / dock hero name / HUD banner name / switch-hero popup",
+   "max_px": 162,
+   "en_px": 113.3,
+   "zh_px": 68.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start card name (17px)",
+     "en_px": 113.3,
+     "zh_px": 68.0,
+     "max_px": 162,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "dock hero name (17px serif, row 182 px shared with HP%)",
+     "en_px": 119.4,
+     "zh_px": 68.0,
+     "max_px": 140,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "HUD side banner (24px)",
+     "en_px": 159.9,
+     "zh_px": 96.0,
+     "max_px": 340,
+     "en_ok": true,
+     "zh_ok": true
+    },
+    {
+     "surface": "switch-hero popup (18px, unit)",
+     "en_px": 260.5,
+     "zh_px": 153.9,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 30
+  },
+  {
+   "key": "hero.reaper.tab",
+   "zh": "死靈",
+   "en": "Necro",
+   "where": [
+    "index.html:252"
+   ],
+   "surface": "dock hero chip caption (DOM)",
+   "max_px": 40,
+   "en_px": 37.2,
+   "zh_px": 24.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "dock hero chip caption (12px serif, chip 44 px, nowrap)",
+     "en_px": 37.2,
+     "zh_px": 24.0,
+     "max_px": 40,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 31
+  },
+  {
+   "key": "hero.reaper.blurb",
+   "zh": "紫色鬼火：掌心推出一團火焰，傷害 23，彈道平直輕快；背後的三團鬼火是他的能量。",
+   "en": "Purple Ghost Flame: pushes a ball of fire out of the palm, 23 damage, flat and light trajectory. The three ghost flames behind him are his Energy.",
+   "where": [
+    "index.html:377"
+   ],
+   "surface": "start card blurb (DOM)",
+   "max_px": null,
+   "en_px": 832.6,
+   "zh_px": 479.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start card blurb (12.5px, card text width 162 px) est. lines",
+     "en_px": 832.6,
+     "zh_px": 479.2,
+     "max_px": null,
+     "en_lines": 6,
+     "zh_lines": 3,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "INCOMPLETE",
+   "note": "CODE: Damage 23 matches; the flame also applies Burn (2 damage x 3 rounds, never lethal) and the blurb does not say so.",
+   "proposal": {
+    "zh": "紫色鬼火：掌心推出一團火焰，傷害 23，命中會灼燒；背後的三團鬼火是他的能量。",
+    "en": "Purple Ghost Flame: pushes a ball of fire out of the palm, 23 damage, a hit Burns the target. The three ghost flames behind him are his Energy.",
+    "why": "adds burn (code applies it)"
+   },
+   "order": 32
+  },
+  {
+   "key": "scene.graveyard.name",
+   "zh": "月夜墓園",
+   "en": "Moonlit Graveyard",
+   "where": [
+    "index.html:387"
+   ],
+   "surface": "start screen scene card name (DOM)",
+   "max_px": 180,
+   "en_px": 155.8,
+   "zh_px": 68.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start screen scene card name (DOM)",
+     "en_px": 155.8,
+     "zh_px": 68.0,
+     "max_px": 180,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 33
+  },
+  {
+   "key": "scene.belltower.name",
+   "zh": "鐘樓",
+   "en": "Bell Tower",
+   "where": [
+    "index.html:388"
+   ],
+   "surface": "start screen scene card name (DOM)",
+   "max_px": 180,
+   "en_px": 89.3,
+   "zh_px": 34.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start screen scene card name (DOM)",
+     "en_px": 89.3,
+     "zh_px": 34.0,
+     "max_px": 180,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 34
+  },
+  {
+   "key": "scene.church.name",
+   "zh": "廢墟教堂",
+   "en": "Ruined Church",
+   "where": [
+    "index.html:389"
+   ],
+   "surface": "start screen scene card name (DOM)",
+   "max_px": 180,
+   "en_px": 123.3,
+   "zh_px": 68.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start screen scene card name (DOM)",
+     "en_px": 123.3,
+     "zh_px": 68.0,
+     "max_px": 180,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 35
+  },
+  {
+   "key": "scene.school.name",
+   "zh": "荒廢學校",
+   "en": "Abandoned School",
+   "where": [
+    "index.html:390"
+   ],
+   "surface": "start screen scene card name (DOM)",
+   "max_px": 180,
+   "en_px": 157.3,
+   "zh_px": 68.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "start screen scene card name (DOM)",
+     "en_px": 157.3,
+     "zh_px": 68.0,
+     "max_px": 180,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 36
+  },
+  {
+   "key": "supply.title",
+   "zh": "補充物資：撿到的箱子放這裡，點一下使用；新的會取代舊的",
+   "en": "Supply: a crate you pick up is stored here. Click to use it; a new one replaces the old one.",
+   "where": [
+    "index.html:220"
+   ],
+   "surface": "supply slot tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 37
+  },
+  {
+   "key": "supply.label",
+   "zh": "物資",
+   "en": "Supply",
+   "where": [
+    "index.html:220"
+   ],
+   "surface": "supply slot label above the box (DOM, 12px)",
+   "max_px": 90,
+   "en_px": 41.3,
+   "zh_px": 24.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "supply slot label above the box (DOM, 12px)",
+     "en_px": 41.3,
+     "zh_px": 24.0,
+     "max_px": 90,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 38
+  },
+  {
+   "key": "supply.aiTitle",
+   "zh": "對手手上的物資（只看得到，不能用）",
+   "en": "Opponent's supply (view only, cannot be used)",
+   "where": [
+    "index.html:221"
+   ],
+   "surface": "supply slot tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 39
+  },
+  {
+   "key": "supply.aiLabel",
+   "zh": "對手物資",
+   "en": "Opp. Supply",
+   "where": [
+    "index.html:221"
+   ],
+   "surface": "supply slot label above the box (DOM, 12px)",
+   "max_px": 90,
+   "en_px": 72.7,
+   "zh_px": 48.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "supply slot label above the box (DOM, 12px)",
+     "en_px": 72.7,
+     "zh_px": 48.0,
+     "max_px": 90,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 40
+  },
+  {
+   "key": "supply.heal",
+   "zh": "補血 +30",
+   "en": "Heal +30",
+   "where": [
+    "index.html:1715"
+   ],
+   "surface": "fragment of toast.pickup",
+   "max_px": 560,
+   "en_px": 194.4,
+   "zh_px": 183.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "assembled toast.pickup popup (18px, unit)",
+     "en_px": 194.4,
+     "zh_px": 183.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "zh uses 補血 / 生命恢復 here but 回血 in skill.healTip, skill.healTitle, toast.healOwnTurn, toast.hpFull.",
+   "proposal": {
+    "zh": "回血 +30",
+    "en": null,
+    "why": "回血 everywhere"
+   },
+   "order": 41
+  },
+  {
+   "key": "supply.heavy",
+   "zh": "重彈 +1",
+   "en": "Heavy +1",
+   "where": [
+    "index.html:1716"
+   ],
+   "surface": "fragment of toast.pickup",
+   "max_px": 560,
+   "en_px": 198.8,
+   "zh_px": 172.6,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "assembled toast.pickup popup (18px, unit)",
+     "en_px": 198.8,
+     "zh_px": 172.6,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 42
+  },
+  {
+   "key": "dock.soundTitle",
+   "zh": "音樂與音效開關（M）",
+   "en": "Music and sound on/off (M)",
+   "where": [
+    "index.html:224"
+   ],
+   "surface": "top-controls / dock tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 43
+  },
+  {
+   "key": "dock.soundTip",
+   "zh": "聲音",
+   "en": "Sound",
+   "where": [
+    "index.html:224"
+   ],
+   "surface": "top-controls chip caption (CSS display:none, never shown)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 44
+  },
+  {
+   "key": "dock.resetTitle",
+   "zh": "重新對戰（只有前 {n} 個回合能按）",
+   "en": "Restart match (only in the first {n} rounds)",
+   "where": [
+    "index.html:1845"
+   ],
+   "surface": "reset button tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 45
+  },
+  {
+   "key": "dock.resetLockedTitle",
+   "zh": "已鎖定：第 {n} 回合後不能重置",
+   "en": "Locked: reset is not available after round {n}",
+   "where": [
+    "index.html:1845"
+   ],
+   "surface": "top-controls / dock tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "\"Reset / 重置\" here but \"Restart match / 重新對戰\" in dock.resetTitle and dock.resetAria. Pick one: 重新對戰 / Restart.",
+   "proposal": {
+    "zh": "已鎖定：第 {n} 回合後不能重新對戰",
+    "en": "Locked: restart is not available after round {n}",
+    "why": "重新對戰/Restart everywhere"
+   },
+   "order": 46
+  },
+  {
+   "key": "dock.resetAria",
+   "zh": "重新對戰",
+   "en": "Restart match",
+   "where": [
+    "index.html:225"
+   ],
+   "surface": "aria-label (screen reader)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 47
+  },
+  {
+   "key": "dock.resetTip",
+   "zh": "重置",
+   "en": "Reset",
+   "where": [
+    "index.html:225"
+   ],
+   "surface": "top-controls chip caption (CSS display:none, never shown)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "\"Reset / 重置\" here but \"Restart match / 重新對戰\" in dock.resetTitle and dock.resetAria. Pick one: 重新對戰 / Restart.",
+   "order": 48
+  },
+  {
+   "key": "dock.helpTitle",
+   "zh": "說明（H）",
+   "en": "Help (H)",
+   "where": [
+    "index.html:227"
+   ],
+   "surface": "top-controls / dock tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 49
+  },
+  {
+   "key": "dock.helpAria",
+   "zh": "說明",
+   "en": "Help",
+   "where": [
+    "index.html:227"
+   ],
+   "surface": "aria-label (screen reader)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 50
+  },
+  {
+   "key": "dock.portraitAria",
+   "zh": "目前角色",
+   "en": "Current character",
+   "where": [
+    "index.html:243"
+   ],
+   "surface": "aria-label (screen reader)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 51
+  },
+  {
+   "key": "dock.angle",
+   "zh": "角度",
+   "en": "Angle",
+   "where": [
+    "index.html:271"
+   ],
+   "surface": "dock readout label (DOM, 12px serif)",
+   "max_px": 60,
+   "en_px": 40.1,
+   "zh_px": 25.9,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "dock readout label (DOM, 12px serif)",
+     "en_px": 40.1,
+     "zh_px": 25.9,
+     "max_px": 60,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 52
+  },
+  {
+   "key": "dock.power",
+   "zh": "力度",
+   "en": "Power",
+   "where": [
+    "index.html:273"
+   ],
+   "surface": "dock readout label (DOM, 12px serif)",
+   "max_px": 60,
+   "en_px": 44.3,
+   "zh_px": 25.9,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "dock readout label (DOM, 12px serif)",
+     "en_px": 44.3,
+     "zh_px": 25.9,
+     "max_px": 60,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 53
+  },
+  {
+   "key": "dock.lock",
+   "zh": "鎖定",
+   "en": "Lock",
+   "where": [
+    "index.html:278"
+   ],
+   "surface": "dock Lock button (DOM, 24px serif)",
+   "max_px": 100,
+   "en_px": 59.6,
+   "zh_px": 48.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "dock Lock button (DOM, 24px serif)",
+     "en_px": 59.6,
+     "zh_px": 48.0,
+     "max_px": 100,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 54
+  },
+  {
+   "key": "dock.lockTitle",
+   "zh": "鎖定盾牌位置",
+   "en": "Lock shield position",
+   "where": [
+    "index.html:278"
+   ],
+   "surface": "top-controls / dock tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 55
+  },
+  {
+   "key": "help.tapUnit",
+   "zh": "👆 點角色：移動／攻擊／防禦",
+   "en": "👆 Click your character: Move / Attack / Defend",
+   "where": [
+    "index.html:230"
+   ],
+   "surface": "help pill line (DOM, 11px, pill 250px wide, max 2 lines)",
+   "max_px": 440,
+   "en_px": 249.4,
+   "zh_px": 145.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "help pill line (DOM, 11px, pill 250px wide, max 2 lines)",
+     "en_px": 249.4,
+     "zh_px": 145.0,
+     "max_px": 440,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "English says \"Click\" while knightUlt.place says \"Tap\" (the game is played with a finger too). Rule proposed: \"Tap\" on the canvas and in the help pill, \"Click\" only in hover tooltips (title attributes).",
+   "proposal": {
+    "zh": null,
+    "en": "👆 Tap your character: Move / Attack / Defend",
+    "why": "Tap on canvas/help",
+    "en_px": 243.4
+   },
+   "order": 56
+  },
+  {
+   "key": "help.holdThrow",
+   "zh": "🎯 按住蓄力，放開投擲",
+   "en": "🎯 Hold to charge, release to throw",
+   "where": [
+    "index.html:231"
+   ],
+   "surface": "help pill line (DOM, 11px, pill 250px wide, max 2 lines)",
+   "max_px": 440,
+   "en_px": 187.2,
+   "zh_px": 112.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "help pill line (DOM, 11px, pill 250px wide, max 2 lines)",
+     "en_px": 187.2,
+     "zh_px": 112.0,
+     "max_px": 440,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 57
+  },
+  {
+   "key": "help.wind",
+   "zh": "🌬 風看上方箭頭，風越強越偏",
+   "en": "🌬 Check the wind above: stronger wind, bigger drift",
+   "where": [
+    "index.html:232"
+   ],
+   "surface": "help pill line (DOM, 11px, pill 250px wide, max 2 lines)",
+   "max_px": 440,
+   "en_px": 281.2,
+   "zh_px": 145.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "help pill line (DOM, 11px, pill 250px wide, max 2 lines)",
+     "en_px": 281.2,
+     "zh_px": 145.0,
+     "max_px": 440,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "MISMATCH",
+   "code_check": "STALE",
+   "note": "zh says 看上方箭頭 (look at the arrow above) but en says \"Check the wind above\"; neither names the wind ghost. CODE: zh says arrow (箭頭), en says \"the wind above\". The page has no wind arrow: wind is shown by the wind ghost (strength = how hard it blows), no number, no plate (drawTopHUD comment, owner 2026-11-10).",
+   "proposal": {
+    "zh": "🌬 看上方風鬼：吹得越猛，風越強；逆風更吃力",
+    "en": "🌬 Watch the wind ghost above: the harder it blows, the stronger the wind; headwind drags more",
+    "why": "wind is shown by the ghost, not an arrow; adds head/tail wind",
+    "zh_px": 233.0,
+    "en_px": 521.9
+   },
+   "order": 58
+  },
+  {
+   "key": "help.crit",
+   "zh": "💥 打中頭部＝爆擊＋暈眩",
+   "en": "💥 Head hit = Crit + Stun",
+   "where": [
+    "index.html:233"
+   ],
+   "surface": "help pill line (DOM, 11px, pill 250px wide, max 2 lines)",
+   "max_px": 440,
+   "en_px": 127.3,
+   "zh_px": 123.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "help pill line (DOM, 11px, pill 250px wide, max 2 lines)",
+     "en_px": 127.3,
+     "zh_px": 123.0,
+     "max_px": 440,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 59
+  },
+  {
+   "key": "help.ult",
+   "zh": "✨ 三格亮滿，按 U 放大招",
+   "en": "✨ All three pips lit: press U for the Ultimate",
+   "where": [
+    "index.html:234"
+   ],
+   "surface": "help pill line (DOM, 11px, pill 250px wide, max 2 lines)",
+   "max_px": 440,
+   "en_px": 233.3,
+   "zh_px": 125.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "help pill line (DOM, 11px, pill 250px wide, max 2 lines)",
+     "en_px": 233.3,
+     "zh_px": 125.2,
+     "max_px": 440,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 60
+  },
+  {
+   "key": "help.guard",
+   "zh": "🛡 盾衛：點 A、B、C 預判三發",
+   "en": "🛡 Guard: click A, B, C to predict three shots",
+   "where": [
+    "index.html:235"
+   ],
+   "surface": "help pill line (DOM, 11px, pill 250px wide, max 2 lines)",
+   "max_px": 440,
+   "en_px": 233.1,
+   "zh_px": 149.7,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "help pill line (DOM, 11px, pill 250px wide, max 2 lines)",
+     "en_px": 233.1,
+     "zh_px": 149.7,
+     "max_px": 440,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "STALE",
+   "note": "CODE: Still says tap A, B, C to predict three shots. Code: the Guard Ultimate asks for taps 1, 2, 3 (knightMarks letter = String(n)); the normal defence is Defend from the click menu, then drag the shield (coffin) along the arc and let go.",
+   "proposal": {
+    "zh": "🛡 盾衛：拖曳棺材擋攻擊；大招點 1、2、3 設防",
+    "en": "🛡 Guard: drag the coffin to block; Ultimate: tap 1, 2, 3 to set defense points",
+    "why": "A,B,C -> 1,2,3 and the real normal defence",
+    "zh_px": 235.4,
+    "en_px": 405.6
+   },
+   "order": 61
+  },
+  {
+   "key": "skill.normalTitle",
+   "zh": "普通投擲",
+   "en": "Normal throw",
+   "where": [
+    "index.html:261"
+   ],
+   "surface": "skill tile tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 62
+  },
+  {
+   "key": "skill.normalTip",
+   "zh": "普通",
+   "en": "Normal",
+   "where": [
+    "index.html:261"
+   ],
+   "surface": "dock skill tile caption (DOM, 12px serif, tile 60px)",
+   "max_px": 54,
+   "en_px": 50.3,
+   "zh_px": 25.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "dock skill tile caption (DOM, 12px serif, tile 60px)",
+     "en_px": 50.3,
+     "zh_px": 25.0,
+     "max_px": 54,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 63
+  },
+  {
+   "key": "skill.doubleTitle",
+   "zh": "雙重投擲 (連續拋射兩發)",
+   "en": "Double throw (two shots in a row)",
+   "where": [
+    "index.html:262"
+   ],
+   "surface": "skill tile tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 64
+  },
+  {
+   "key": "skill.doubleTip",
+   "zh": "雙發",
+   "en": "Double",
+   "where": [
+    "index.html:262"
+   ],
+   "surface": "dock skill tile caption (DOM, 12px serif, tile 60px)",
+   "max_px": 54,
+   "en_px": 47.4,
+   "zh_px": 25.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "dock skill tile caption (DOM, 12px serif, tile 60px)",
+     "en_px": 47.4,
+     "zh_px": 25.0,
+     "max_px": 54,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 65
+  },
+  {
+   "key": "skill.heavyTitle",
+   "zh": "重型炸彈 (高爆範圍傷害)",
+   "en": "Heavy bomb (high-explosive area damage)",
+   "where": [
+    "index.html:263"
+   ],
+   "surface": "skill tile tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 66
+  },
+  {
+   "key": "skill.heavyTip",
+   "zh": "重彈",
+   "en": "Heavy",
+   "where": [
+    "index.html:263"
+   ],
+   "surface": "dock skill tile caption (DOM, 12px serif, tile 60px)",
+   "max_px": 54,
+   "en_px": 40.9,
+   "zh_px": 25.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "dock skill tile caption (DOM, 12px serif, tile 60px)",
+     "en_px": 40.9,
+     "zh_px": 25.0,
+     "max_px": 54,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 67
+  },
+  {
+   "key": "skill.healTitle",
+   "zh": "萬聖糖果回血 (+35 HP)",
+   "en": "Halloween candy heal (+35 HP)",
+   "where": [
+    "index.html:264"
+   ],
+   "surface": "skill tile tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 68
+  },
+  {
+   "key": "skill.healTip",
+   "zh": "回血",
+   "en": "Heal",
+   "where": [
+    "index.html:264"
+   ],
+   "surface": "dock skill tile caption (DOM, 12px serif, tile 60px)",
+   "max_px": 54,
+   "en_px": 31.0,
+   "zh_px": 25.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "dock skill tile caption (DOM, 12px serif, tile 60px)",
+     "en_px": 31.0,
+     "zh_px": 25.0,
+     "max_px": 54,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 69
+  },
+  {
+   "key": "skill.ultTitle",
+   "zh": "大招：三格能量全亮才能用，點一下準備，再點取消",
+   "en": "Ultimate: usable only when all three Energy pips are lit. Click to arm, click again to cancel",
+   "where": [
+    "index.html:265"
+   ],
+   "surface": "skill tile tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 70
+  },
+  {
+   "key": "skill.ultTip",
+   "zh": "大招",
+   "en": "Ultimate",
+   "where": [
+    "index.html:265"
+   ],
+   "surface": "dock skill tile caption (DOM, 12px serif, tile 60px)",
+   "max_px": 54,
+   "en_px": 57.9,
+   "zh_px": 25.0,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "dock skill tile caption (DOM, 12px serif, tile 60px)",
+     "en_px": 57.9,
+     "zh_px": 25.0,
+     "max_px": 54,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "proposal": {
+    "zh": null,
+    "en": "Ult",
+    "why": "overflow: 58 px vs 60 px tile (54 px inner)",
+    "en_px": 20.3
+   },
+   "order": 71
+  },
+  {
+   "key": "skill.shield",
+   "zh": "浮空盾",
+   "en": "Floating Shield",
+   "where": [
+    "index.html:267"
+   ],
+   "surface": "Defend tile caption + tooltip (tile is dock-hidden, caption not visible)",
+   "max_px": null,
+   "en_px": 100.6,
+   "zh_px": 37.4,
+   "fits": null,
+   "measures": [
+    {
+     "surface": "Defend tile caption + tooltip (tile is dock-hidden, caption not visible)",
+     "en_px": 100.6,
+     "zh_px": 37.4,
+     "max_px": null
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 72
+  },
+  {
+   "key": "shield.tipGuard",
+   "zh": "防禦（只有南瓜盾衛）：放棄攻擊，放置或移動浮空盾，拖曳後再按一次鎖定",
+   "en": "Defend (Pumpkin Guard only): give up your attack to place or move the Floating Shield; drag it, then press again to lock",
+   "where": [
+    "index.html:1100"
+   ],
+   "surface": "Defend tile tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "STALE",
+   "note": "CODE: Says \"drag it, then press again to lock\". Letting go places the shield (toast.defendHelp, lockShield from pointer-up); the second press is optional.",
+   "proposal": {
+    "zh": "防禦（只有南瓜盾衛）：放棄攻擊，放置或移動浮空盾；沿弧線拖曳，放開就定位",
+    "en": "Defend (Pumpkin Guard only): give up your attack to place or move the Floating Shield; drag it along the arc and let go to set it",
+    "why": "release places it; the second press is optional"
+   },
+   "order": 73
+  },
+  {
+   "key": "shield.tipOther",
+   "zh": "只有南瓜盾衛可以選擇防禦；其他職業只能攻擊或移動",
+   "en": "Only the Pumpkin Guard can Defend; other classes can only Attack or Move",
+   "where": [
+    "index.html:1101"
+   ],
+   "surface": "Defend tile tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "zh says 職業 / en says \"class\" here, but 角色 / \"character\" in start.pickHero, help.tapUnit, dock.portraitAria. One word for the player-facing concept: 角色 / character.",
+   "proposal": {
+    "zh": "只有南瓜盾衛可以選擇防禦；其他角色只能攻擊或移動",
+    "en": "Only the Pumpkin Guard can Defend; other characters can only Attack or Move",
+    "why": "角色/character everywhere"
+   },
+   "order": 74
+  },
+  {
+   "key": "ult.titleUsedUp",
+   "zh": "大招已用完（一場最多 2 次）",
+   "en": "No Ultimates left (max 2 per match)",
+   "where": [
+    "index.html:1848"
+   ],
+   "surface": "ultimate tile tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 75
+  },
+  {
+   "key": "ult.titleArmed",
+   "zh": "大招已準備：下一發出手（再點取消）",
+   "en": "Ultimate armed: fires on your next throw (click again to cancel)",
+   "where": [
+    "index.html:1848"
+   ],
+   "surface": "ultimate tile tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 76
+  },
+  {
+   "key": "ult.titleReady",
+   "zh": "三格已亮：點一下準備大招",
+   "en": "All three pips lit: click to arm the Ultimate",
+   "where": [
+    "index.html:1848"
+   ],
+   "surface": "ultimate tile tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 77
+  },
+  {
+   "key": "ult.titleCharging",
+   "zh": "大招：要先命中 3 次點亮三格（目前 {n}/3）",
+   "en": "Ultimate: land 3 hits to light all three pips (now {n}/3)",
+   "where": [
+    "index.html:1848"
+   ],
+   "surface": "ultimate tile tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 78
+  },
+  {
+   "key": "ult.shuriken",
+   "zh": "✨ 大招：手裡劍雨",
+   "en": "✨ Ultimate: Shuriken Rain",
+   "where": [
+    "index.html:1222"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 233.7,
+   "zh_px": 147.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 233.7,
+     "zh_px": 147.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 79
+  },
+  {
+   "key": "ult.spear",
+   "zh": "✨ 大招：三連標槍",
+   "en": "✨ Ultimate: Triple Javelin",
+   "where": [
+    "index.html:1256"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 230.0,
+   "zh_px": 147.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 230.0,
+     "zh_px": 147.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 80
+  },
+  {
+   "key": "ult.swarm",
+   "zh": "✨ 大招：蝙蝠群",
+   "en": "✨ Ultimate: Bat Swarm",
+   "where": [
+    "index.html:1249"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 206.4,
+   "zh_px": 129.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 206.4,
+     "zh_px": 129.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 81
+  },
+  {
+   "key": "ult.boomerang",
+   "zh": "✨ 大招：迴旋巨斧",
+   "en": "✨ Ultimate: Boomerang Axe",
+   "where": [
+    "index.html:1242"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 248.8,
+   "zh_px": 147.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 248.8,
+     "zh_px": 147.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 82
+  },
+  {
+   "key": "ult.nun",
+   "zh": "✨ 大招：銀十字連擊",
+   "en": "✨ Ultimate: Silver Cross Strike",
+   "where": [
+    "index.html:1235"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 270.8,
+   "zh_px": 165.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 270.8,
+     "zh_px": 165.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "MISMATCH",
+   "code_check": "ok",
+   "note": "zh 連擊 = combo; English \"Strike\" drops the multi-hit meaning. Also: zh/en blurb call the weapon \"銀色十字 / Silver cross\".",
+   "proposal": {
+    "zh": null,
+    "en": "✨ Ultimate: Silver Cross Combo",
+    "why": "連擊 = combo",
+    "en_px": 280.7
+   },
+   "order": 83
+  },
+  {
+   "key": "knightUlt.place",
+   "zh": "在弧線上點 1、2、3：三個隱藏防禦點，各擋一次攻擊",
+   "en": "Tap 1, 2, 3 on the arc: three hidden defence points, each stops one attack",
+   "where": [
+    "index.html:688"
+   ],
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 644.1,
+   "zh_px": 432.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, centred)",
+     "en_px": 644.1,
+     "zh_px": 432.0,
+     "max_px": 900,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "English: \"Tap\" here but \"Click\" in help.tapUnit, dock tooltips; \"defence\" (UK) here vs \"defense\" (US) in shield.expired. Pick US spelling and one verb per surface.",
+   "proposal": {
+    "zh": null,
+    "en": "Tap 1, 2, 3 on the arc: three hidden defense points, each stops one attack",
+    "why": "US spelling",
+    "en_px": 643.5
+   },
+   "order": 84
+  },
+  {
+   "key": "knightUlt.locked",
+   "zh": "✨ 隱藏點已鎖定",
+   "en": "✨ Hidden points locked",
+   "where": [
+    "index.html:704"
+   ],
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 209.5,
+   "zh_px": 129.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, centred)",
+     "en_px": 209.5,
+     "zh_px": 129.2,
+     "max_px": 900,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 85
+  },
+  {
+   "key": "toast.defendHelp",
+   "zh": "🛡️ 防禦：沿弧線拖曳盾牌（棺材），放開就停在那個位置（本回合不能攻擊，Esc 取消）",
+   "en": "🛡️ Defend: drag the shield (coffin) along the arc and let go: it stays where you let go (no attack this round, Esc to cancel)",
+   "where": [
+    "index.html:1044"
+   ],
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 1052.6,
+   "zh_px": 702.8,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, centred)",
+     "en_px": 1052.6,
+     "zh_px": 702.8,
+     "max_px": 900,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "One object, three names in one sentence: 盾牌 (shield) + 棺材 (coffin) vs 浮空盾 / Floating Shield used by the other 12 shield strings. Also over the soft width budget in English.",
+   "proposal": {
+    "zh": "🛡️ 防禦：沿弧線拖曳棺材，放開就停在那個位置（本回合不能攻擊，Esc 取消）",
+    "en": "🛡️ Defend: drag the coffin along the arc, let go to place it (no attack this round, Esc cancels)",
+    "why": "term fix (one object name) + overflow 1053 px vs 900 px soft budget",
+    "zh_px": 630.8,
+    "en_px": 802.7
+   },
+   "order": 86
+  },
+  {
+   "key": "knightUlt.blocked",
+   "zh": "擋下！",
+   "en": "Blocked!",
+   "where": [
+    "index.html:2012"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 78.4,
+   "zh_px": 54.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 78.4,
+     "zh_px": 54.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 87
+  },
+  {
+   "key": "status.knockback",
+   "zh": "擊退！",
+   "en": "Knocked back!",
+   "where": [
+    "index.html:2048"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 131.0,
+   "zh_px": 54.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 131.0,
+     "zh_px": 54.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 88
+  },
+  {
+   "key": "ult.cannon",
+   "zh": "✨ 大招：南瓜連環爆",
+   "en": "✨ Ultimate: Pumpkin Chain Blast",
+   "where": [
+    "index.html:1265"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 293.8,
+   "zh_px": 165.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 293.8,
+     "zh_px": 165.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 89
+  },
+  {
+   "key": "ult.tripleHit",
+   "zh": "💥 三連全中！",
+   "en": "💥 Triple hit!",
+   "where": [
+    "index.html:2038"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 108.9,
+   "zh_px": 111.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 108.9,
+     "zh_px": 111.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 90
+  },
+  {
+   "key": "ult.blast",
+   "zh": "🔥 爆炸 -{dmg}",
+   "en": "🔥 Blast -{dmg}",
+   "where": [
+    "index.html:2136"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 114.7,
+   "zh_px": 105.6,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 114.7,
+     "zh_px": 105.6,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 91
+  },
+  {
+   "key": "ult.unbuilt",
+   "zh": "🔧 這個職業的大招還在製作中",
+   "en": "🔧 This class's Ultimate is still being built",
+   "where": [
+    "index.html:720"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 358.7,
+   "zh_px": 237.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 358.7,
+     "zh_px": 237.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "zh says 職業 / en says \"class\" here, but 角色 / \"character\" in start.pickHero, help.tapUnit, dock.portraitAria. One word for the player-facing concept: 角色 / character.",
+   "proposal": {
+    "zh": "🔧 這個角色的大招還在製作中",
+    "en": "🔧 This character's Ultimate is still being built",
+    "why": "角色/character everywhere",
+    "zh_px": 237.2,
+    "en_px": 400.6
+   },
+   "order": 92
+  },
+  {
+   "key": "ult.cancel",
+   "zh": "大招取消",
+   "en": "Ultimate canceled",
+   "where": [
+    "index.html:715",
+    "index.html:721"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 161.6,
+   "zh_px": 72.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 161.6,
+     "zh_px": 72.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 93
+  },
+  {
+   "key": "ult.spent",
+   "zh": "大招已用完",
+   "en": "No Ultimates left",
+   "where": [
+    "index.html:686",
+    "index.html:716",
+    "index.html:722"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 150.4,
+   "zh_px": 90.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 150.4,
+     "zh_px": 90.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 94
+  },
+  {
+   "key": "ult.noEnergy",
+   "zh": "能量未滿（要打中 3 次）",
+   "en": "Energy not full (land 3 hits)",
+   "where": [
+    "index.html:686",
+    "index.html:722"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 239.8,
+   "zh_px": 198.8,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 239.8,
+     "zh_px": 198.8,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 95
+  },
+  {
+   "key": "ult.armed",
+   "zh": "✨ 大招已準備：下一發出手",
+   "en": "✨ Ultimate armed: fires on your next throw",
+   "where": [
+    "index.html:723"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 384.3,
+   "zh_px": 219.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 384.3,
+     "zh_px": 219.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 96
+  },
+  {
+   "key": "menu.move",
+   "zh": "🎲 移動",
+   "en": "🎲 Move",
+   "where": [
+    "index.html:922"
+   ],
+   "surface": "canvas action-menu button (20px, button 108 px)",
+   "max_px": 96,
+   "en_px": 76.2,
+   "zh_px": 63.5,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas action-menu button (20px, button 108 px)",
+     "en_px": 76.2,
+     "zh_px": 63.5,
+     "max_px": 96,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 97
+  },
+  {
+   "key": "menu.attack",
+   "zh": "🎯 攻擊",
+   "en": "🎯 Attack",
+   "where": [
+    "index.html:922"
+   ],
+   "surface": "canvas action-menu button (20px, button 108 px)",
+   "max_px": 96,
+   "en_px": 87.6,
+   "zh_px": 63.5,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas action-menu button (20px, button 108 px)",
+     "en_px": 87.6,
+     "zh_px": 63.5,
+     "max_px": 96,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 98
+  },
+  {
+   "key": "menu.defend",
+   "zh": "🛡️ 防禦",
+   "en": "🛡️ Defend",
+   "where": [
+    "index.html:923"
+   ],
+   "surface": "canvas action-menu button (20px, button 108 px)",
+   "max_px": 96,
+   "en_px": 94.2,
+   "zh_px": 63.5,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas action-menu button (20px, button 108 px)",
+     "en_px": 94.2,
+     "zh_px": 63.5,
+     "max_px": 96,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 99
+  },
+  {
+   "key": "move.forward",
+   "zh": "前進",
+   "en": "Forward",
+   "where": [
+    "index.html:950",
+    "index.html:972"
+   ],
+   "surface": "fragment of toast.moveRoll",
+   "max_px": 560,
+   "en_px": 615.0,
+   "zh_px": 381.2,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "assembled toast.moveRoll popup (18px, unit)",
+     "en_px": 615.0,
+     "zh_px": 381.2,
+     "max_px": 560,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 100
+  },
+  {
+   "key": "move.back",
+   "zh": "後退",
+   "en": "Back",
+   "where": [
+    "index.html:950",
+    "index.html:972"
+   ],
+   "surface": "fragment of toast.moveRoll",
+   "max_px": 560,
+   "en_px": 582.9,
+   "zh_px": 381.2,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "assembled toast.moveRoll popup (18px, unit)",
+     "en_px": 582.9,
+     "zh_px": 381.2,
+     "max_px": 560,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 101
+  },
+  {
+   "key": "move.backBtn",
+   "zh": "◀ 後退",
+   "en": "◀ Back",
+   "where": [
+    "index.html:3404"
+   ],
+   "surface": "canvas move arrow button (20px, button 104 px)",
+   "max_px": 92,
+   "en_px": 72.6,
+   "zh_px": 64.5,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas move arrow button (20px, button 104 px)",
+     "en_px": 72.6,
+     "zh_px": 64.5,
+     "max_px": 92,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 102
+  },
+  {
+   "key": "move.fwdBtn",
+   "zh": "前進 ▶",
+   "en": "Forward ▶",
+   "where": [
+    "index.html:3404"
+   ],
+   "surface": "canvas move arrow button (20px, button 104 px)",
+   "max_px": 92,
+   "en_px": 108.2,
+   "zh_px": 64.5,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "canvas move arrow button (20px, button 104 px)",
+     "en_px": 108.2,
+     "zh_px": 64.5,
+     "max_px": 92,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "proposal": {
+    "zh": null,
+    "en": "Fwd ▶",
+    "why": "overflow: 108 px vs 104 px button (or widen the canvas button to 124 px in code and keep \"Forward ▶\")",
+    "en_px": 66.4
+   },
+   "order": 103
+  },
+  {
+   "key": "move.aimNeutral",
+   "zh": "往左或往右指，放開擲骰",
+   "en": "Point left or right, release to roll",
+   "where": [
+    "index.html:3423"
+   ],
+   "surface": "canvas caption under the die (16px)",
+   "max_px": 560,
+   "en_px": 253.2,
+   "zh_px": 176.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas caption under the die (16px)",
+     "en_px": 253.2,
+     "zh_px": 176.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 104
+  },
+  {
+   "key": "move.releaseFwd",
+   "zh": "放開：前進並擲骰",
+   "en": "Release: move forward and roll",
+   "where": [
+    "index.html:3423"
+   ],
+   "surface": "canvas caption under the die (16px)",
+   "max_px": 560,
+   "en_px": 245.6,
+   "zh_px": 128.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas caption under the die (16px)",
+     "en_px": 245.6,
+     "zh_px": 128.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 105
+  },
+  {
+   "key": "move.releaseBack",
+   "zh": "放開：後退並擲骰",
+   "en": "Release: move back and roll",
+   "where": [
+    "index.html:3423"
+   ],
+   "surface": "canvas caption under the die (16px)",
+   "max_px": 560,
+   "en_px": 220.0,
+   "zh_px": 128.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas caption under the die (16px)",
+     "en_px": 220.0,
+     "zh_px": 128.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 106
+  },
+  {
+   "key": "move.atEdge",
+   "zh": "（到邊界）",
+   "en": " (at the edge)",
+   "where": [
+    "index.html:972"
+   ],
+   "surface": "fragment of toast.moveResult",
+   "max_px": 560,
+   "en_px": 295.7,
+   "zh_px": 237.6,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "assembled toast.moveResult popup (18px, unit)",
+     "en_px": 295.7,
+     "zh_px": 237.6,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 107
+  },
+  {
+   "key": "toast.moveHelp",
+   "zh": "🎲 移動：選擇方向（← 後退 / → 前進，或點箭頭），再擲骰子決定距離。Esc 取消",
+   "en": "🎲 Move: choose a direction (← back / → forward, or click an arrow), then roll the die for distance. Esc to cancel",
+   "where": [
+    "index.html:943"
+   ],
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 974.6,
+   "zh_px": 654.1,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, centred)",
+     "en_px": 974.6,
+     "zh_px": 654.1,
+     "max_px": 900,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "proposal": {
+    "zh": null,
+    "en": "🎲 Move: pick a direction (← back / → forward, or an arrow), then roll for distance. Esc cancels",
+    "why": "overflow: 975 px vs 900 px soft budget",
+    "en_px": 824.6
+   },
+   "order": 108
+  },
+  {
+   "key": "toast.moveCancel",
+   "zh": "已取消移動",
+   "en": "Move canceled",
+   "where": [
+    "index.html:945"
+   ],
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 130.9,
+   "zh_px": 90.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, centred)",
+     "en_px": 130.9,
+     "zh_px": 90.0,
+     "max_px": 900,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 109
+  },
+  {
+   "key": "toast.moveRoll",
+   "zh": "🎲 {dir}：擲骰子決定距離（移動完還可以攻擊）",
+   "en": "🎲 {dir}: roll the die for distance (you can still attack after moving)",
+   "where": [
+    "index.html:950"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 615.0,
+   "zh_px": 381.2,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 615.0,
+     "zh_px": 381.2,
+     "max_px": 560,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "proposal": {
+    "zh": null,
+    "en": "🎲 {dir}: rolling for distance (you can still attack)",
+    "why": "overflow: 615 px (Forward) vs 560 px",
+    "en_px": 459.4
+   },
+   "order": 110
+  },
+  {
+   "key": "toast.moveResult",
+   "zh": "🎲 {roll}：{dir} {moved} px{edge}",
+   "en": "🎲 {roll}: {dir} {moved} px{edge}",
+   "where": [
+    "index.html:972"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 295.7,
+   "zh_px": 237.6,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 295.7,
+     "zh_px": 237.6,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "Distance in px here and in toast.gapShift, but in steps (步 / steps) in hud.round. DICE_STEP_PX converts between them in code.",
+   "order": 111
+  },
+  {
+   "key": "toast.gapShift",
+   "zh": "🎲 1-2 站位動態變化！雙方距離: {px} px",
+   "en": "🎲 Positions shifted! Distance between sides: {px} px",
+   "where": [
+    "index.html:994"
+   ],
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 456.3,
+   "zh_px": 318.8,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, centred)",
+     "en_px": 456.3,
+     "zh_px": 318.8,
+     "max_px": 900,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "MISMATCH",
+   "code_check": "ok",
+   "note": "numbers differ zh ['1', '2'] vs en []. zh keeps the spec label \"1-2\" (\"1-2 站位動態變化\") that the English drops; players do not know what 1-2 means. Distance is also in px here but in steps (步) on the HUD.",
+   "proposal": {
+    "zh": "🎲 站位變動！雙方距離: {px} px",
+    "en": null,
+    "why": "drop the spec label \"1-2\" from the Chinese",
+    "zh_px": 250.8
+   },
+   "order": 112
+  },
+  {
+   "key": "toast.aimHint",
+   "zh": "🎯 移動游標瞄準，在場上按住蓄力，放開就投擲",
+   "en": "🎯 Move the cursor to aim, hold on the field to charge, release to throw",
+   "where": [
+    "index.html:931"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 621.5,
+   "zh_px": 381.2,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 621.5,
+     "zh_px": 381.2,
+     "max_px": 560,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "proposal": {
+    "zh": null,
+    "en": "🎯 Move the cursor to aim, hold to charge, release to throw",
+    "why": "overflow: 621 px vs 560 px",
+    "en_px": 516.9
+   },
+   "order": 113
+  },
+  {
+   "key": "toast.slowed",
+   "zh": "減速：這回合不能移動",
+   "en": "Slow: you cannot move this round",
+   "where": [
+    "index.html:938"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 301.9,
+   "zh_px": 180.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 301.9,
+     "zh_px": 180.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 114
+  },
+  {
+   "key": "toast.alreadyMoved",
+   "zh": "本回合已經移動過了，可以直接攻擊",
+   "en": "You already moved this round. You can attack now",
+   "where": [
+    "index.html:939"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 447.3,
+   "zh_px": 288.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 447.3,
+     "zh_px": 288.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 115
+  },
+  {
+   "key": "toast.healOwnTurn",
+   "zh": "只能在自己的回合回血",
+   "en": "You can only heal on your own turn",
+   "where": [
+    "index.html:1003"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 311.4,
+   "zh_px": 180.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 311.4,
+     "zh_px": 180.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 116
+  },
+  {
+   "key": "toast.hpFull",
+   "zh": "血量已滿，不用回血",
+   "en": "HP is full, no need to heal",
+   "where": [
+    "index.html:1004"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 224.0,
+   "zh_px": 162.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 224.0,
+     "zh_px": 162.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 117
+  },
+  {
+   "key": "toast.healed",
+   "zh": "🧪 生命恢復 +35 HP!",
+   "en": "🧪 Healed +35 HP!",
+   "where": [
+    "index.html:1012"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 156.0,
+   "zh_px": 165.6,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 156.0,
+     "zh_px": 165.6,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "zh uses 補血 / 生命恢復 here but 回血 in skill.healTip, skill.healTitle, toast.healOwnTurn, toast.hpFull.",
+   "proposal": {
+    "zh": "🧪 回血 +35 HP!",
+    "en": null,
+    "why": "回血 everywhere",
+    "zh_px": 129.6
+   },
+   "order": 118
+  },
+  {
+   "key": "toast.guardOnly",
+   "zh": "🎃 只有南瓜盾衛能操控浮空防禦",
+   "en": "🎃 Only the Pumpkin Guard can control the Floating Shield",
+   "where": [
+    "index.html:1030"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 515.3,
+   "zh_px": 255.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 515.3,
+     "zh_px": 255.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 119
+  },
+  {
+   "key": "toast.shieldNoMoves",
+   "zh": "🛡️ 浮空盾移動次數用完了",
+   "en": "🛡️ No Floating Shield moves left",
+   "where": [
+    "index.html:1036"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 280.6,
+   "zh_px": 201.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 280.6,
+     "zh_px": 201.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 120
+  },
+  {
+   "key": "toast.shieldSnapped",
+   "zh": "🛡️ 卡在有效路徑！剩 {moves} 次移動、攔截 {charges} 次",
+   "en": "🛡️ Locked on a valid path! {moves} moves left, {charges} blocks",
+   "where": [
+    "index.html:1063"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 421.2,
+   "zh_px": 328.8,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 421.2,
+     "zh_px": 328.8,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 121
+  },
+  {
+   "key": "toast.shieldLocked",
+   "zh": "🛡️ 已鎖定（不在記憶路徑上），剩 {moves} 次移動",
+   "en": "🛡️ Locked (not on a remembered path), {moves} moves left",
+   "where": [
+    "index.html:1063"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 457.7,
+   "zh_px": 346.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 457.7,
+     "zh_px": 346.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 122
+  },
+  {
+   "key": "toast.defendCancel",
+   "zh": "已取消防禦模式",
+   "en": "Defend mode canceled",
+   "where": [
+    "index.html:1073"
+   ],
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 201.9,
+   "zh_px": 126.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, centred)",
+     "en_px": 201.9,
+     "zh_px": 126.0,
+     "max_px": 900,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 123
+  },
+  {
+   "key": "toast.noAttackInDefend",
+   "zh": "🛡️ 防禦模式中不能攻擊",
+   "en": "🛡️ You cannot attack in Defend mode",
+   "where": [
+    "index.html:1108"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 325.0,
+   "zh_px": 183.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 325.0,
+     "zh_px": 183.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 124
+  },
+  {
+   "key": "toast.switchHero",
+   "zh": "切換職業: {name}",
+   "en": "Switched class: {name}",
+   "where": [
+    "index.html:1086"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 339.5,
+   "zh_px": 189.9,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 339.5,
+     "zh_px": 189.9,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "zh says 職業 / en says \"class\" here, but 角色 / \"character\" in start.pickHero, help.tapUnit, dock.portraitAria. One word for the player-facing concept: 角色 / character.",
+   "proposal": {
+    "zh": "切換角色：{name}",
+    "en": "Switched character: {name}",
+    "why": "角色/character everywhere",
+    "zh_px": 198.0,
+    "en_px": 381.4
+   },
+   "order": 125
+  },
+  {
+   "key": "toast.flip",
+   "zh": "↔ 全部角色水平翻轉：{state}",
+   "en": "↔ Flip all characters horizontally: {state}",
+   "where": [
+    "index.html:1471"
+   ],
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 329.6,
+   "zh_px": 202.1,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, centred)",
+     "en_px": 329.6,
+     "zh_px": 202.1,
+     "max_px": 900,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 126
+  },
+  {
+   "key": "toast.flipOn",
+   "zh": "開",
+   "en": "On",
+   "where": [
+    "index.html:1471"
+   ],
+   "surface": "fragment of toast.flip",
+   "max_px": 900,
+   "en_px": 327.7,
+   "zh_px": 202.1,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "assembled toast.flip popup (18px, centred)",
+     "en_px": 327.7,
+     "zh_px": 202.1,
+     "max_px": 900,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 127
+  },
+  {
+   "key": "toast.flipOff",
+   "zh": "關",
+   "en": "Off",
+   "where": [
+    "index.html:1471"
+   ],
+   "surface": "fragment of toast.flip",
+   "max_px": 900,
+   "en_px": 329.6,
+   "zh_px": 202.1,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "assembled toast.flip popup (18px, centred)",
+     "en_px": 329.6,
+     "zh_px": 202.1,
+     "max_px": 900,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 128
+  },
+  {
+   "key": "toast.aiShield",
+   "zh": "AI 浮空盾切入軌跡（防禦回合，不攻擊）",
+   "en": "AI Floating Shield cuts into your trail (defend round, no attack)",
+   "where": [
+    "index.html:1578"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 554.5,
+   "zh_px": 327.5,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 554.5,
+     "zh_px": 327.5,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "Calls the opponent \"AI\"; everywhere else 對手 / Opponent (hud.opponent, supply.aiLabel, toast.aiPickup, hud.opponentTurn).",
+   "proposal": {
+    "zh": "對手的浮空盾切入軌跡（防禦回合，不攻擊）",
+    "en": "Opponent's Floating Shield cuts into your trail (defend round, no attack)",
+    "why": "對手/Opponent, not AI",
+    "zh_px": 360.0,
+    "en_px": 641.4
+   },
+   "order": 129
+  },
+  {
+   "key": "toast.resetLocked",
+   "zh": "🔒 第 {n} 回合後不能重置",
+   "en": "🔒 Reset is locked after round {n}",
+   "where": [
+    "index.html:1640"
+   ],
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 283.3,
+   "zh_px": 194.6,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, centred)",
+     "en_px": 283.3,
+     "zh_px": 194.6,
+     "max_px": 900,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "\"Reset / 重置\" here but \"Restart match / 重新對戰\" in dock.resetTitle and dock.resetAria. Pick one: 重新對戰 / Restart.",
+   "proposal": {
+    "zh": "🔒 第 {n} 回合後不能重新對戰",
+    "en": "🔒 Restart is locked after round {n}",
+    "why": "重新對戰/Restart everywhere",
+    "zh_px": 230.6,
+    "en_px": 298.9
+   },
+   "order": 130
+  },
+  {
+   "key": "toast.pickup",
+   "zh": "{icon} 拿到物資：{label}",
+   "en": "{icon} Picked up: {label}",
+   "where": [
+    "index.html:1759"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 198.8,
+   "zh_px": 172.6,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 198.8,
+     "zh_px": 172.6,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 131
+  },
+  {
+   "key": "toast.aiPickup",
+   "zh": "對手撿到物資",
+   "en": "Opponent picked up a supply",
+   "where": [
+    "index.html:1763"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 258.7,
+   "zh_px": 108.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 258.7,
+     "zh_px": 108.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 132
+  },
+  {
+   "key": "toast.rearm",
+   "zh": "🔄 補給武器",
+   "en": "🔄 Weapon resupplied",
+   "where": [
+    "index.html:2172"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 192.4,
+   "zh_px": 93.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 192.4,
+     "zh_px": 93.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 133
+  },
+  {
+   "key": "toast.timeout",
+   "zh": "⏱ 逾時！本回合棄權",
+   "en": "⏱ Time's up! Turn forfeited",
+   "where": [
+    "index.html:1877"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 242.7,
+   "zh_px": 165.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 242.7,
+     "zh_px": 165.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 134
+  },
+  {
+   "key": "shield.expired",
+   "zh": "🛡️ 浮空盾 2 回合防禦期滿收回",
+   "en": "🛡️ Floating Shield's 2-round defense ended and it was withdrawn",
+   "where": [
+    "index.html:1620"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 574.2,
+   "zh_px": 238.0,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 574.2,
+     "zh_px": 238.0,
+     "max_px": 560,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "proposal": {
+    "zh": null,
+    "en": "🛡️ Floating Shield expired after 2 rounds",
+    "why": "overflow: 574 px popup; also drops the awkward \"was withdrawn\"",
+    "en_px": 355.2
+   },
+   "order": 135
+  },
+  {
+   "key": "shield.holding",
+   "zh": "🛡️ 浮空盾持續防禦中 (剩餘 {rounds} 輪)",
+   "en": "🛡️ Floating Shield holding (rounds left: {rounds})",
+   "where": [
+    "index.html:1623"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 362.2,
+   "zh_px": 255.8,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 362.2,
+     "zh_px": 255.8,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "zh says 輪 for \"round\" here; 回合 everywhere else (hud.round, shield.expired, dock.resetTitle, toast.resetLocked). English always \"round(s)\".",
+   "proposal": {
+    "zh": "🛡️ 浮空盾持續防禦中 (剩餘 {rounds} 回合)",
+    "en": null,
+    "why": "回合 everywhere",
+    "zh_px": 273.8
+   },
+   "order": 136
+  },
+  {
+   "key": "shield.blocked",
+   "zh": "🛡️ 凌空預判攔截！(0 傷害！防禦餘 {rounds} 輪)",
+   "en": "🛡️ Mid-air block! (0 damage! {rounds} rounds left)",
+   "where": [
+    "index.html:2003"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 370.6,
+   "zh_px": 320.4,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 370.6,
+     "zh_px": 320.4,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "zh says 輪 for \"round\" here; 回合 everywhere else (hud.round, shield.expired, dock.resetTitle, toast.resetLocked). English always \"round(s)\".",
+   "proposal": {
+    "zh": "🛡️ 凌空預判攔截！(0 傷害！防禦餘 {rounds} 回合)",
+    "en": null,
+    "why": "回合 everywhere",
+    "zh_px": 338.4
+   },
+   "order": 137
+  },
+  {
+   "key": "shield.dragHint",
+   "zh": "左右拖曳，沿著路徑滑動",
+   "en": "Drag left or right to slide along the path",
+   "where": [
+    "index.html:2420",
+    "index.html:2439",
+    "index.html:2473"
+   ],
+   "surface": "canvas label above the floating shield (12px)",
+   "max_px": 260,
+   "en_px": 232.9,
+   "zh_px": 132.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas label above the floating shield (12px)",
+     "en_px": 232.9,
+     "zh_px": 132.0,
+     "max_px": 260,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 138
+  },
+  {
+   "key": "shield.roundsLeft",
+   "zh": "剩 {rounds} 輪",
+   "en": "Rounds left: {rounds}",
+   "where": [
+    "index.html:2420",
+    "index.html:2439",
+    "index.html:2473"
+   ],
+   "surface": "canvas label above the floating shield (12px)",
+   "max_px": 260,
+   "en_px": 81.4,
+   "zh_px": 36.5,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas label above the floating shield (12px)",
+     "en_px": 81.4,
+     "zh_px": 36.5,
+     "max_px": 260,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "zh says 輪 for \"round\" here; 回合 everywhere else (hud.round, shield.expired, dock.resetTitle, toast.resetLocked). English always \"round(s)\".",
+   "proposal": {
+    "zh": "剩 {rounds} 回合",
+    "en": null,
+    "why": "回合 everywhere",
+    "zh_px": 48.5
+   },
+   "order": 139
+  },
+  {
+   "key": "fence.label",
+   "zh": "中央圍籬 ({hp}%)",
+   "en": "Center Fence ({hp}%)",
+   "where": [
+    "index.html:2973",
+    "index.html:3032"
+   ],
+   "surface": "canvas label above the fence (14px)",
+   "max_px": 200,
+   "en_px": 142.5,
+   "zh_px": 108.1,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas label above the fence (14px)",
+     "en_px": 142.5,
+     "zh_px": 108.1,
+     "max_px": 200,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 140
+  },
+  {
+   "key": "fence.broken",
+   "zh": "圍籬已損毀",
+   "en": "Fence destroyed",
+   "where": [
+    "index.html:2973",
+    "index.html:3032"
+   ],
+   "surface": "canvas label above the fence (14px)",
+   "max_px": 200,
+   "en_px": 114.1,
+   "zh_px": 70.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas label above the fence (14px)",
+     "en_px": 114.1,
+     "zh_px": 70.0,
+     "max_px": 200,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 141
+  },
+  {
+   "key": "toast.fenceBlock",
+   "zh": "💥 圍籬攔截！",
+   "en": "💥 Fence block!",
+   "where": [
+    "index.html:1977"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 133.5,
+   "zh_px": 111.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 133.5,
+     "zh_px": 111.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 142
+  },
+  {
+   "key": "toast.fenceBroken",
+   "zh": "💥 圍籬被打壞了！",
+   "en": "💥 Fence destroyed!",
+   "where": [
+    "index.html:1977"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 174.6,
+   "zh_px": 147.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 174.6,
+     "zh_px": 147.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 143
+  },
+  {
+   "key": "toast.directHit",
+   "zh": "💥 直擊 -{dmg}!",
+   "en": "💥 Direct hit -{dmg}!",
+   "where": [
+    "index.html:2087"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 158.6,
+   "zh_px": 112.3,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 158.6,
+     "zh_px": 112.3,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 144
+  },
+  {
+   "key": "toast.mudDeflect",
+   "zh": "泥土偏斜",
+   "en": "Deflected by the dirt",
+   "where": [
+    "index.html:2118"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 181.5,
+   "zh_px": 72.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 181.5,
+     "zh_px": 72.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 145
+  },
+  {
+   "key": "toast.shieldStuck",
+   "zh": "盾插進地板，不能再彈了",
+   "en": "The shield is stuck in the ground and cannot bounce any more",
+   "where": [
+    "index.html:2119"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 546.9,
+   "zh_px": 198.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 546.9,
+     "zh_px": 198.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 146
+  },
+  {
+   "key": "toast.bounce",
+   "zh": "🎲 {n} 彈 · 每彈 {dmg}",
+   "en": "🎲 {n} bounces · {dmg} each",
+   "where": [
+    "index.html:1289"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 231.3,
+   "zh_px": 168.5,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 231.3,
+     "zh_px": 168.5,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 147
+  },
+  {
+   "key": "status.crit",
+   "zh": "💥 爆擊！",
+   "en": "💥 Crit!",
+   "where": [
+    "index.html:2032"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 60.6,
+   "zh_px": 75.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 60.6,
+     "zh_px": 75.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 148
+  },
+  {
+   "key": "status.stun",
+   "zh": "⭐ 暈眩",
+   "en": "⭐ Stun",
+   "where": [
+    "index.html:2033",
+    "index.html:2062"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 63.0,
+   "zh_px": 57.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 63.0,
+     "zh_px": 57.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 149
+  },
+  {
+   "key": "status.stunTimer",
+   "zh": "⭐ 暈眩！只剩 {sec} 秒",
+   "en": "⭐ Stunned! Only {sec} s left",
+   "where": [
+    "index.html:1601"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 221.8,
+   "zh_px": 158.6,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 221.8,
+     "zh_px": 158.6,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 150
+  },
+  {
+   "key": "status.slowNext",
+   "zh": "減速：下回合不能移動",
+   "en": "Slow: cannot move next round",
+   "where": [
+    "index.html:2043"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 271.0,
+   "zh_px": 180.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 271.0,
+     "zh_px": 180.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 151
+  },
+  {
+   "key": "status.frostWeak",
+   "zh": "🧊 被霜咒：傷害 -15%",
+   "en": "🧊 Frost Curse: damage -15%",
+   "where": [
+    "index.html:1204"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 252.5,
+   "zh_px": 178.6,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 252.5,
+     "zh_px": 178.6,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 152
+  },
+  {
+   "key": "status.frostApplied",
+   "zh": "🧊 霜咒：攻擊 -15%（2 次）",
+   "en": "🧊 Frost Curse: attacks -15% (2 times)",
+   "where": [
+    "index.html:2090"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 329.0,
+   "zh_px": 229.3,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 329.0,
+     "zh_px": 229.3,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "Says 攻擊 -15% / \"attacks -15%\"; status.frostWeak and hero.skeleton.blurb say 傷害 / damage. The code lowers damage (x0.85) on the next 2 attacks.",
+   "proposal": {
+    "zh": "🧊 霜咒：傷害 -15%（2 次攻擊）",
+    "en": "🧊 Frost Curse: damage -15% (next 2 attacks)",
+    "why": "same wording as status.frostWeak",
+    "zh_px": 265.3,
+    "en_px": 394.5
+   },
+   "order": 153
+  },
+  {
+   "key": "status.poison",
+   "zh": "☠ 中毒",
+   "en": "☠ Poison",
+   "where": [
+    "index.html:1793"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 81.7,
+   "zh_px": 57.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 81.7,
+     "zh_px": 57.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 154
+  },
+  {
+   "key": "status.bleed",
+   "zh": "🩸 流血",
+   "en": "🩸 Bleed",
+   "where": [
+    "index.html:1794"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 71.6,
+   "zh_px": 57.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 71.6,
+     "zh_px": 57.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 155
+  },
+  {
+   "key": "status.burn",
+   "zh": "🔥 灼燒",
+   "en": "🔥 Burn",
+   "where": [
+    "index.html:1796"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 64.3,
+   "zh_px": 57.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 64.3,
+     "zh_px": 57.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 156
+  },
+  {
+   "key": "toast.tapCancel",
+   "zh": "按住蓄力再放開",
+   "en": "Hold to charge, then release",
+   "where": [
+    "index.html:1125"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 249.6,
+   "zh_px": 126.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 249.6,
+     "zh_px": 126.0,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 157
+  },
+  {
+   "key": "hud.you",
+   "zh": "我方",
+   "en": "You",
+   "where": [
+    "index.html:3251"
+   ],
+   "surface": "canvas HUD side banner name fallback (24px)",
+   "max_px": 340,
+   "en_px": 44.2,
+   "zh_px": 48.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas HUD side banner name fallback (24px)",
+     "en_px": 44.2,
+     "zh_px": 48.0,
+     "max_px": 340,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 158
+  },
+  {
+   "key": "hud.opponent",
+   "zh": "對手",
+   "en": "Opponent",
+   "where": [
+    "index.html:3252"
+   ],
+   "surface": "canvas HUD side banner name fallback (24px)",
+   "max_px": 340,
+   "en_px": 119.4,
+   "zh_px": 48.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas HUD side banner name fallback (24px)",
+     "en_px": 119.4,
+     "zh_px": 48.0,
+     "max_px": 340,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 159
+  },
+  {
+   "key": "hud.ult",
+   "zh": "大招",
+   "en": "Ultimate",
+   "where": [
+    "index.html:3242"
+   ],
+   "surface": "canvas HUD side banner caption (15px)",
+   "max_px": 100,
+   "en_px": 65.1,
+   "zh_px": 30.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas HUD side banner caption (15px)",
+     "en_px": 65.1,
+     "zh_px": 30.0,
+     "max_px": 100,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 160
+  },
+  {
+   "key": "hud.countdown",
+   "zh": "倒數 {sec} 秒",
+   "en": "Time left: {sec} s",
+   "where": [
+    "index.html:3266"
+   ],
+   "surface": "canvas HUD centre piece (28px, piece 440 px)",
+   "max_px": 400,
+   "en_px": 191.6,
+   "zh_px": 129.8,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas HUD centre piece (28px, piece 440 px)",
+     "en_px": 191.6,
+     "zh_px": 129.8,
+     "max_px": 400,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 161
+  },
+  {
+   "key": "hud.opponentTurn",
+   "zh": "對手回合",
+   "en": "Opponent's turn",
+   "where": [
+    "index.html:3269"
+   ],
+   "surface": "canvas HUD centre piece (26px, piece 440 px)",
+   "max_px": 400,
+   "en_px": 212.1,
+   "zh_px": 104.0,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas HUD centre piece (26px, piece 440 px)",
+     "en_px": 212.1,
+     "zh_px": 104.0,
+     "max_px": 400,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 162
+  },
+  {
+   "key": "hud.round",
+   "zh": "第 {round} 回合 ・ 距離 {dist} 步",
+   "en": "Round {round} · Distance {dist} steps",
+   "where": [
+    "index.html:3270"
+   ],
+   "surface": "canvas HUD centre piece (17px, piece 440 px)",
+   "max_px": 400,
+   "en_px": 248.8,
+   "zh_px": 182.3,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas HUD centre piece (17px, piece 440 px)",
+     "en_px": 248.8,
+     "zh_px": 182.3,
+     "max_px": 400,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 163
+  },
+  {
+   "key": "hud.angle",
+   "zh": "角度 {angle}°",
+   "en": "Angle {angle}°",
+   "where": [
+    "index.html:3446"
+   ],
+   "surface": "canvas label above the player (18px)",
+   "max_px": 300,
+   "en_px": 82.6,
+   "zh_px": 68.7,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas label above the player (18px)",
+     "en_px": 82.6,
+     "zh_px": 68.7,
+     "max_px": 300,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 164
+  },
+  {
+   "key": "hud.trailTag",
+   "zh": "軌跡 [R{round}]",
+   "en": "Trail [R{round}]",
+   "where": [
+    "index.html:2370"
+   ],
+   "surface": "canvas label on a remembered path (11px)",
+   "max_px": 120,
+   "en_px": 56.3,
+   "zh_px": 53.3,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas label on a remembered path (11px)",
+     "en_px": 56.3,
+     "zh_px": 53.3,
+     "max_px": 120,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 165
+  },
+  {
+   "key": "gameover.win",
+   "zh": "🎃 你贏了！",
+   "en": "🎃 You win!",
+   "where": [
+    "index.html:3465"
+   ],
+   "surface": "canvas result panel title (44px display, panel 560 px)",
+   "max_px": 520,
+   "en_px": 277.5,
+   "zh_px": 228.8,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas result panel title (44px display, panel 560 px)",
+     "en_px": 277.5,
+     "zh_px": 228.8,
+     "max_px": 520,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 166
+  },
+  {
+   "key": "gameover.lose",
+   "zh": "💀 你輸了",
+   "en": "💀 You lose",
+   "where": [
+    "index.html:3465"
+   ],
+   "surface": "canvas result panel title (44px display, panel 560 px)",
+   "max_px": 520,
+   "en_px": 287.0,
+   "zh_px": 184.8,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas result panel title (44px display, panel 560 px)",
+     "en_px": 287.0,
+     "zh_px": 184.8,
+     "max_px": 520,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 167
+  },
+  {
+   "key": "gameover.restart",
+   "zh": "點一下畫面，回到選角重新開始",
+   "en": "Click anywhere to return to character select and play again",
+   "where": [
+    "index.html:3468"
+   ],
+   "surface": "canvas result panel line (20px, panel 560 px)",
+   "max_px": 520,
+   "en_px": 580.2,
+   "zh_px": 280.0,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "canvas result panel line (20px, panel 560 px)",
+     "en_px": 580.2,
+     "zh_px": 280.0,
+     "max_px": 520,
+     "en_ok": false,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "proposal": {
+    "zh": null,
+    "en": "Click anywhere to pick a character and play again",
+    "why": "overflow: 580 px vs 560 px panel",
+    "en_px": 486.7
+   },
+   "order": 168
+  },
+  {
+   "key": "ult.soulfire",
+   "zh": "✨ 大招：三發鬼火",
+   "en": "✨ Ultimate: Triple Soulfire",
+   "where": [
+    "index.html:1275"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 235.8,
+   "zh_px": 147.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 235.8,
+     "zh_px": 147.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "TERM_INCONSISTENT",
+   "code_check": "ok",
+   "note": "zh 鬼火 on both sides, but English is \"Ghost Flame\" in hero.reaper.blurb and \"Soulfire\" here.",
+   "proposal": {
+    "zh": null,
+    "en": "✨ Ultimate: Triple Ghost Flame",
+    "why": "same English word as hero.reaper.blurb",
+    "en_px": 276.7
+   },
+   "order": 169
+  },
+  {
+   "key": "status.halluActive",
+   "zh": "😵 幻覺中：這回合不能行動",
+   "en": "😵 Hallucinating: cannot act this round",
+   "where": [
+    "index.html:1556",
+    "index.html:1630"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 339.9,
+   "zh_px": 219.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 339.9,
+     "zh_px": 219.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 170
+  },
+  {
+   "key": "status.halluApplied",
+   "zh": "😵 幻覺：下回合停止",
+   "en": "😵 Hallucination: skips next round",
+   "where": [
+    "index.html:2072"
+   ],
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 298.6,
+   "zh_px": 165.2,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, unit-anchored)",
+     "en_px": 298.6,
+     "zh_px": 165.2,
+     "max_px": 560,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 171
+  },
+  {
+   "key": "lang.title",
+   "zh": "語言：中文（點一下切換成 English）",
+   "en": "Language: English (click to switch to 中文)",
+   "where": [
+    "index.html:226"
+   ],
+   "surface": "top-controls / dock tooltip (title attr)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "English contains CJK. Intentional: each side shows the OTHER language name (en.json holds 中文 on purpose). Not a mismatch.",
+   "order": 172
+  },
+  {
+   "key": "lang.label",
+   "zh": "EN",
+   "en": "中文",
+   "where": [
+    "index.html:226"
+   ],
+   "surface": "top-controls chip caption (CSS display:none, never shown)",
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": [],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "English contains CJK. Intentional: each side shows the OTHER language name (en.json holds 中文 on purpose). Not a mismatch.",
+   "order": 173
+  },
+  {
+   "key": "hud.weather",
+   "zh": "天氣：{label}（到第 {round} 回合）",
+   "en": "Weather: {label} (until round {round})",
+   "where": [
+    "index.html:3271"
+   ],
+   "surface": "canvas HUD centre piece (15px, piece 440 px)",
+   "max_px": 400,
+   "en_px": 256.9,
+   "zh_px": 210.7,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas HUD centre piece (15px, piece 440 px)",
+     "en_px": 256.9,
+     "zh_px": 210.7,
+     "max_px": 400,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 174
+  },
+  {
+   "key": "weather.clear",
+   "zh": "晴",
+   "en": "Clear",
+   "where": [
+    "index.html:737",
+    "index.html:3271"
+   ],
+   "surface": "fragment of hud.weather",
+   "max_px": 400,
+   "en_px": 228.3,
+   "zh_px": 174.5,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "assembled hud.weather line (15px, piece 440 px)",
+     "en_px": 228.3,
+     "zh_px": 174.5,
+     "max_px": 400,
+     "en_ok": true,
+     "zh_ok": true,
+     "assembled_en": "Weather: Clear (until round 12)",
+     "assembled_zh": "天氣：晴（到第 12 回合）"
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 175
+  },
+  {
+   "key": "weather.rain",
+   "zh": "下雨（攻擊 -10%）",
+   "en": "Rain (attacks -10%)",
+   "where": [
+    "index.html:737"
+   ],
+   "surface": "fragment of hud.weather",
+   "max_px": 400,
+   "en_px": 333.5,
+   "zh_px": 290.7,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "assembled hud.weather line (15px, piece 440 px)",
+     "en_px": 333.5,
+     "zh_px": 290.7,
+     "max_px": 400,
+     "en_ok": true,
+     "zh_ok": true,
+     "assembled_en": "Weather: Rain (attacks -10%) (until round 12)",
+     "assembled_zh": "天氣：下雨（攻擊 -10%）（到第 12 回合）"
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 176
+  },
+  {
+   "key": "weather.snow",
+   "zh": "下雪（移動減半）",
+   "en": "Snow (movement halved)",
+   "where": [
+    "index.html:737"
+   ],
+   "surface": "fragment of hud.weather",
+   "max_px": 400,
+   "en_px": 379.8,
+   "zh_px": 279.5,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "assembled hud.weather line (15px, piece 440 px)",
+     "en_px": 379.8,
+     "zh_px": 279.5,
+     "max_px": 400,
+     "en_ok": true,
+     "zh_ok": true,
+     "assembled_en": "Weather: Snow (movement halved) (until round 12)",
+     "assembled_zh": "天氣：下雪（移動減半）（到第 12 回合）"
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 177
+  },
+  {
+   "key": "weather.storm",
+   "zh": "暴風雨（攻擊 -10%、風更強）",
+   "en": "Storm (attacks -10%, stronger wind)",
+   "where": [
+    "index.html:737"
+   ],
+   "surface": "fragment of hud.weather",
+   "max_px": 400,
+   "en_px": 458.4,
+   "zh_px": 365.7,
+   "fits": false,
+   "measures": [
+    {
+     "surface": "assembled hud.weather line (15px, piece 440 px)",
+     "en_px": 458.4,
+     "zh_px": 365.7,
+     "max_px": 400,
+     "en_ok": false,
+     "zh_ok": true,
+     "assembled_en": "Weather: Storm (attacks -10%, stronger wind) (until round 12)",
+     "assembled_zh": "天氣：暴風雨（攻擊 -10%、風更強）（到第 12 回合）"
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "proposal": {
+    "zh": null,
+    "en": "Storm (attacks -10%, wind up)",
+    "why": "overflow: hud.weather line 458 px vs 440 px piece",
+    "en_px": 414.1,
+    "px_note": "assembled hud.weather line"
+   },
+   "order": 178
+  },
+  {
+   "key": "weather.fog",
+   "zh": "起霧",
+   "en": "Fog",
+   "where": [
+    "index.html:737"
+   ],
+   "surface": "fragment of hud.weather",
+   "max_px": 400,
+   "en_px": 216.7,
+   "zh_px": 189.5,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "assembled hud.weather line (15px, piece 440 px)",
+     "en_px": 216.7,
+     "zh_px": 189.5,
+     "max_px": 400,
+     "en_ok": true,
+     "zh_ok": true,
+     "assembled_en": "Weather: Fog (until round 12)",
+     "assembled_zh": "天氣：起霧（到第 12 回合）"
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 179
+  },
+  {
+   "key": "toast.auraSimple",
+   "zh": "光圈：簡化（按 J 切換）",
+   "en": "Aura: simple (press J to switch)",
+   "where": [
+    "index.html:2856"
+   ],
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 276.2,
+   "zh_px": 198.4,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, centred)",
+     "en_px": 276.2,
+     "zh_px": 198.4,
+     "max_px": 900,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 180
+  },
+  {
+   "key": "toast.auraFull",
+   "zh": "光圈：完整（按 J 切換）",
+   "en": "Aura: full (press J to switch)",
+   "where": [
+    "index.html:2856"
+   ],
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 246.3,
+   "zh_px": 198.4,
+   "fits": true,
+   "measures": [
+    {
+     "surface": "canvas popup (floatTexts, centred)",
+     "en_px": 246.3,
+     "zh_px": 198.4,
+     "max_px": 900,
+     "en_ok": true,
+     "zh_ok": true
+    }
+   ],
+   "status": "OK",
+   "code_check": "ok",
+   "note": "",
+   "order": 181
+  },
+  {
+   "key": null,
+   "id": "useSupply",
+   "zh": "(none: shows undefined)",
+   "en": "(none: shows undefined)",
+   "where": [
+    "index.html:1735"
+   ],
+   "surface": "canvas popup after tapping the supply slot",
+   "status": "HARDCODED",
+   "code_check": "BUG",
+   "note": "useSupply() builds the popup from it.label, but SUPPLY_ITEMS now has labelKey only, so the popup reads \"🧪 undefined\" in both languages. Fix: T(it.labelKey) (keys supply.heal / supply.heavy already exist).",
+   "order": 182,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "manifest.name",
+   "zh": "(missing)",
+   "en": "Pumpkin Killer — classic cat-and-dog artillery feel ✕ floating-shield prediction ✕ trail memory",
+   "where": [
+    "manifest.webmanifest:name"
+   ],
+   "surface": "installed-app name (PWA)",
+   "status": "MISSING_ZH",
+   "code_check": "n/a",
+   "note": "English only and 92 characters (home screens cut it at about 12-20). A manifest cannot switch language at run time. Proposal: name \"Pumpkin Killer 南瓜殺手\", short_name \"南瓜殺手\" or \"Pumpkin Killer\" (owner picks one); \"lang\" stays \"en\" unless the zh manifest is served separately.",
+   "order": 184,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "manifest.short_name",
+   "zh": "(missing)",
+   "en": "Pumpkin Killer",
+   "where": [
+    "manifest.webmanifest:short_name"
+   ],
+   "surface": "installed-app label under the icon",
+   "status": "MISSING_ZH",
+   "code_check": "n/a",
+   "note": "English only; add 南瓜殺手 in the same name field or ship a zh manifest.",
+   "order": 186,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "html.title.fallback",
+   "zh": "(none)",
+   "en": "Pumpkin Killer",
+   "where": [
+    "index.html:9"
+   ],
+   "surface": "<title> before JS runs",
+   "status": "OK",
+   "code_check": "ok",
+   "note": "Static fallback only; replaced by page.title on load. page.title itself is 92 characters in English (tab shows about 30): proposal zh \"南瓜殺手 Pumpkin Killer — 浮空盾預判 ✕ 軌跡記憶\", en \"Pumpkin Killer — floating-shield prediction ✕ trail memory\" (drops 經典貓狗大戰手感 / classic cat-and-dog artillery feel: owner call).",
+   "order": 188,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "angle-plates",
+   "zh": "▲ ▼",
+   "en": "▲ ▼",
+   "where": [
+    "index.html:1324"
+   ],
+   "surface": "canvas angle plates",
+   "status": "OK",
+   "code_check": "ok",
+   "note": "Language-neutral symbols, no translation needed.",
+   "order": 190,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "stun-stars",
+   "zh": "⭐",
+   "en": "⭐",
+   "where": [
+    "index.html:2832"
+   ],
+   "surface": "canvas stars circling the head",
+   "status": "OK",
+   "code_check": "ok",
+   "note": "Symbol only. The word is status.stun.",
+   "order": 192,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "help-btn-glyph",
+   "zh": "?",
+   "en": "?",
+   "where": [
+    "index.html:227"
+   ],
+   "surface": "help button glyph",
+   "status": "OK",
+   "code_check": "ok",
+   "note": "Symbol; title and aria-label come from dock.helpTitle / dock.helpAria.",
+   "order": 194,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "damage-numbers",
+   "zh": "-N",
+   "en": "-N",
+   "where": [
+    "index.html:1801",
+    "index.html:1933",
+    "index.html:2068"
+   ],
+   "surface": "canvas damage numbers",
+   "status": "OK",
+   "code_check": "ok",
+   "note": "Numbers only.",
+   "order": 196,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "dice-arrows",
+   "zh": "▶ N / ◀ N",
+   "en": "▶ N / ◀ N",
+   "where": [
+    "index.html:3439"
+   ],
+   "surface": "canvas dice result",
+   "status": "OK",
+   "code_check": "ok",
+   "note": "Symbols and a number.",
+   "order": 198,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "portrait-alt",
+   "zh": "(empty alt)",
+   "en": "(empty alt)",
+   "where": [
+    "index.html:401"
+   ],
+   "surface": "start card portrait <img>",
+   "status": "HARDCODED",
+   "code_check": "a11y",
+   "note": "alt=\"\" is empty; screen readers skip the portrait. Optional: alt = hero name (already next to it in .nm, so empty is acceptable).",
+   "order": 200,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "weather.js.labels",
+   "zh": "(none)",
+   "en": "Clear / Rain / Snow / Storm / Fog",
+   "where": [
+    "js/weather.js:18-22"
+   ],
+   "surface": "data only (WEATHER_TYPES[*].label); the HUD uses weather.* keys through WEATHER_LABEL",
+   "status": "HARDCODED",
+   "code_check": "unused",
+   "note": "English-only labels that are never drawn. Safe to delete or leave; do not read them in new UI code.",
+   "order": 202,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "class_stats.names",
+   "zh": "骷髏長矛兵 / 南瓜巫師 / 蝙蝠刺客 / 南瓜重裝盾衛 / 鬼娃新娘 / 鐘樓怪人 / 死靈法師",
+   "en": "(none)",
+   "where": [
+    "js/class_stats.js:100-252"
+   ],
+   "surface": "Node/test module only (not loaded by index.html)",
+   "status": "HARDCODED",
+   "code_check": "unused",
+   "note": "Chinese hero names kept in a second place; if it ever reaches a screen or an MCP reply it will not follow the language switch. Its knight name is the long 南瓜重裝盾衛.",
+   "order": 204,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "sw.js.console",
+   "zh": "(none)",
+   "en": "Service worker registration failed:",
+   "where": [
+    "index.html (end of file)"
+   ],
+   "surface": "browser console only",
+   "status": "OK",
+   "code_check": "ok",
+   "note": "Not player-facing.",
+   "order": 206,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "mcp.agent.text",
+   "zh": "(none)",
+   "en": "(English only)",
+   "where": [
+    "scripts/mcp_game_server.py",
+    "scripts/mcp_stdio_server.py"
+   ],
+   "surface": "messages returned to AI agents, not to human players",
+   "status": "OK",
+   "code_check": "n/a",
+   "note": "Out of scope for the player UI mapping; not scanned in detail.",
+   "order": 208,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  },
+  {
+   "key": null,
+   "id": "ult.knight (proposed)",
+   "zh": "(missing)",
+   "en": "(missing)",
+   "where": [
+    "index.html knightBegin() / lockShield area (no popup with the ultimate name)"
+   ],
+   "surface": "canvas popup at cast time (like ult.shuriken etc.)",
+   "status": "MISSING_ZH",
+   "code_check": "n/a",
+   "note": "MISSING_EN too. The other 7 heroes show a named popup when the Ultimate fires; the Guard has none. Proposal: zh \"✨ 大招：隱藏防禦點\", en \"✨ Ultimate: Hidden Defense Points\" (owner approves the name).",
+   "order": 210,
+   "max_px": null,
+   "en_px": null,
+   "zh_px": null,
+   "fits": null,
+   "measures": []
+  }
+ ],
+ "terms": [
+  {
+   "group": "hero",
+   "concept": "Skeleton Spearman (id skeleton)",
+   "zh": "骷髏長矛兵",
+   "en": "Skeleton Spearman",
+   "zh_short": "骷髏",
+   "en_short": "Skeleton (chip: Bones)",
+   "variants": "page: consistent. docs: \"Skeleton Spearman\" 12 files.",
+   "verdict": "OK",
+   "action": "Note: weapon/ultimate are javelins (標槍 / Javelin)."
+  },
+  {
+   "group": "hero",
+   "concept": "Pumpkin Wizard (id wizard)",
+   "zh": "南瓜巫師",
+   "en": "Pumpkin Wizard",
+   "zh_short": "巫師",
+   "en_short": "Wizard (chip: Mage)",
+   "variants": "consistent everywhere.",
+   "verdict": "OK",
+   "action": "-"
+  },
+  {
+   "group": "hero",
+   "concept": "Bat Assassin (id bat)",
+   "zh": "蝙蝠刺客",
+   "en": "Bat Assassin",
+   "zh_short": "刺客",
+   "en_short": "Assassin (chip: Bat)",
+   "variants": "page: Bat Assassin / 蝙蝠刺客. Docs: \"Bat-cat Assassin\" 9 files, \"Cat-bat\" 18 files, 蝙蝠貓 8 files. Code comments say \"cat-bat\".",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "Two names for one hero (page vs docs/owner brief \"bat-cat assassin\"). Default: keep the page name \"Bat Assassin\" (no cat in the art/name); owner to confirm, then rename docs."
+  },
+  {
+   "group": "hero",
+   "concept": "Pumpkin Guard (id knight)",
+   "zh": "南瓜盾衛",
+   "en": "Pumpkin Guard",
+   "zh_short": "盾衛",
+   "en_short": "Guard",
+   "variants": "page: 南瓜重裝盾衛/Heavy Pumpkin Guard (hero.knight.name: start card, dock, HUD, popup), 南瓜盾衛/Pumpkin Guard (tooltip, shield.tipGuard, toast.guardOnly), 盾衛/Guard (chip, help). Docs: \"Pumpkin Guard\" 16 files, \"Heavy Pumpkin Guard\" 1, \"Pumpkin Knight\" 6 (old).",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "Flagged: hero called two different names. Recommend 南瓜盾衛 / Pumpkin Guard as the one full name (drop 重裝/Heavy); 盾衛/Guard stays as the short form. Owner decision (zh name is theirs)."
+  },
+  {
+   "group": "hero",
+   "concept": "Necromancer (id reaper)",
+   "zh": "死靈法師",
+   "en": "Necromancer",
+   "zh_short": "死靈",
+   "en_short": "Necro",
+   "variants": "page consistent. Docs: \"Grim Reaper\" 8 files, 死神 13 files (old names). Internal id stays reaper.",
+   "verdict": "OK",
+   "action": "Never show \"Reaper\"/死神 in the UI."
+  },
+  {
+   "group": "hero",
+   "concept": "Ghost Bride (id bride)",
+   "zh": "鬼娃新娘",
+   "en": "Ghost Bride",
+   "zh_short": "新娘",
+   "en_short": "Bride",
+   "variants": "consistent.",
+   "verdict": "OK",
+   "action": "Her ultimate is \"Bat Swarm\" (蝙蝠群): not the Bat Assassin's."
+  },
+  {
+   "group": "hero",
+   "concept": "Bell Tower Hunchback (id hunchback)",
+   "zh": "鐘樓怪人",
+   "en": "Bell Tower Hunchback",
+   "zh_short": "怪人",
+   "en_short": "Hunchback (chip: Bell)",
+   "variants": "page: \"Bell Tower\" two words (also scene.belltower.name). Docs: \"Bell-tower Hunchback\" 18 files (hyphen).",
+   "verdict": "OK",
+   "action": "Hyphenation differs only in docs."
+  },
+  {
+   "group": "hero",
+   "concept": "Ghost Nun (id hag)",
+   "zh": "鬼修女",
+   "en": "Ghost Nun",
+   "zh_short": "修女",
+   "en_short": "Nun",
+   "variants": "consistent on the page. Internal id \"hag\" appears in file names and code only.",
+   "verdict": "OK",
+   "action": "Never show \"Hag\" in the UI. Owner rule (pale ghost-white nun) is art/prompt only; no UI string mentions colour or any disease."
+  },
+  {
+   "group": "status",
+   "concept": "Bleed",
+   "zh": "流血",
+   "en": "Bleed",
+   "variants": "status.bleed only.",
+   "verdict": "OK",
+   "action": "Applied by javelin and axe (2 rounds)."
+  },
+  {
+   "group": "status",
+   "concept": "Poison (owner: may be called curse)",
+   "zh": "中毒",
+   "en": "Poison",
+   "variants": "status.poison; hero.bride.blurb 中毒/Poisons.",
+   "verdict": "OK",
+   "action": "Keep Poison. If the owner renames it to Curse (詛咒), Frost Curse (霜咒) would sit beside it; keep the two words distinct."
+  },
+  {
+   "group": "status",
+   "concept": "Stun",
+   "zh": "暈眩",
+   "en": "Stun",
+   "variants": "status.stun, status.stunTimer, help.crit: consistent.",
+   "verdict": "OK",
+   "action": "Plain gameplay word, not a disease name."
+  },
+  {
+   "group": "status",
+   "concept": "Slow",
+   "zh": "減速",
+   "en": "Slow",
+   "variants": "toast.slowed, status.slowNext: consistent. Effect = cannot move for one round.",
+   "verdict": "OK",
+   "action": "No standalone badge text (only a chain at the feet)."
+  },
+  {
+   "group": "status",
+   "concept": "Frost Curse (code: weak)",
+   "zh": "霜咒",
+   "en": "Frost Curse",
+   "variants": "status.frostWeak says 傷害/damage, status.frostApplied says 攻擊/attacks.",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "Use \"damage -15%\" in both (proposal in table)."
+  },
+  {
+   "group": "status",
+   "concept": "Burn",
+   "zh": "灼燒",
+   "en": "Burn",
+   "variants": "status.burn only (new).",
+   "verdict": "OK",
+   "action": "Not mentioned in hero.reaper.blurb (proposal in table)."
+  },
+  {
+   "group": "status",
+   "concept": "Hallucination",
+   "zh": "幻覺",
+   "en": "Hallucination",
+   "variants": "status.halluActive / status.halluApplied: consistent.",
+   "verdict": "OK",
+   "action": "Not a disease name; alternative plain word \"Daze\" if the owner wants zero symptom words."
+  },
+  {
+   "group": "status",
+   "concept": "Crit / Knockback",
+   "zh": "爆擊 / 擊退",
+   "en": "Crit / Knocked back",
+   "variants": "consistent.",
+   "verdict": "OK",
+   "action": "-"
+  },
+  {
+   "group": "ultimate",
+   "concept": "Ultimate (generic)",
+   "zh": "大招",
+   "en": "Ultimate",
+   "zh_short": "大招",
+   "en_short": "Ult (tile caption)",
+   "variants": "consistent; only the tile caption is abbreviated (proposal).",
+   "verdict": "OK",
+   "action": "-"
+  },
+  {
+   "group": "ultimate",
+   "concept": "Energy pips (three, one per hit)",
+   "zh": "能量 / 三格 (能量格)",
+   "en": "Energy / pips",
+   "variants": "zh uses 能量 (skill.ultTitle, ult.noEnergy) and 三格 (help.ult, ult.titleReady); English uses Energy and \"pips\". Needs 3 hits; max 2 per match.",
+   "verdict": "OK",
+   "action": "Canonical: 能量格 / Energy pip. No change required."
+  },
+  {
+   "group": "ultimate",
+   "concept": "Bat Assassin ultimate",
+   "zh": "手裡劍雨",
+   "en": "Shuriken Rain",
+   "variants": "ult.shuriken.",
+   "verdict": "OK",
+   "action": "-"
+  },
+  {
+   "group": "ultimate",
+   "concept": "Skeleton Spearman ultimate",
+   "zh": "三連標槍",
+   "en": "Triple Javelin",
+   "variants": "ult.spear.",
+   "verdict": "OK",
+   "action": "-"
+  },
+  {
+   "group": "ultimate",
+   "concept": "Pumpkin Wizard ultimate",
+   "zh": "南瓜連環爆",
+   "en": "Pumpkin Chain Blast",
+   "variants": "ult.cannon.",
+   "verdict": "OK",
+   "action": "-"
+  },
+  {
+   "group": "ultimate",
+   "concept": "Bell Tower Hunchback ultimate",
+   "zh": "迴旋巨斧",
+   "en": "Boomerang Axe",
+   "variants": "ult.boomerang; blurb says 巨斧 / Giant axe.",
+   "verdict": "OK",
+   "action": "-"
+  },
+  {
+   "group": "ultimate",
+   "concept": "Ghost Nun ultimate",
+   "zh": "銀十字連擊",
+   "en": "Silver Cross Strike",
+   "variants": "ult.nun; 連擊 = combo.",
+   "verdict": "MISMATCH",
+   "action": "English -> Silver Cross Combo."
+  },
+  {
+   "group": "ultimate",
+   "concept": "Necromancer ultimate",
+   "zh": "三發鬼火",
+   "en": "Triple Soulfire",
+   "variants": "ult.soulfire (Soulfire) vs hero.reaper.blurb (Ghost Flame).",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "English -> Triple Ghost Flame."
+  },
+  {
+   "group": "ultimate",
+   "concept": "Ghost Bride ultimate",
+   "zh": "蝙蝠群",
+   "en": "Bat Swarm",
+   "variants": "ult.swarm.",
+   "verdict": "OK",
+   "action": "Bride owns it (owner 2026-11-16)."
+  },
+  {
+   "group": "ultimate",
+   "concept": "Pumpkin Guard ultimate",
+   "zh": "(no name string)",
+   "en": "(no name string)",
+   "variants": "7 of 8 heroes show \"✨ 大招：<name>\" when cast; the Guard shows nothing at cast time, only knightUlt.place / locked / blocked.",
+   "verdict": "MISSING_ZH",
+   "action": "Proposal: key ult.knight zh \"✨ 大招：隱藏防禦點\" / en \"✨ Ultimate: Hidden Defense Points\" (owner approves the name)."
+  },
+  {
+   "group": "world",
+   "concept": "Fence (code: wall)",
+   "zh": "圍籬 (中央圍籬)",
+   "en": "Fence (Center Fence)",
+   "variants": "fence.label, fence.broken, toast.fenceBlock, toast.fenceBroken: consistent. Code and some docs say \"wall\" / \"picket fence\".",
+   "verdict": "OK",
+   "action": "UI never says wall."
+  },
+  {
+   "group": "world",
+   "concept": "Floating Shield",
+   "zh": "浮空盾",
+   "en": "Floating Shield",
+   "variants": "浮空盾 in 12 strings; toast.defendHelp also says 盾牌 + 棺材 (shield + coffin); HANDOFF says 浮空棺.",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "Rule text: 浮空盾 / Floating Shield. The coffin is the art: name it only in the help line that teaches dragging (proposal in help.guard / toast.defendHelp)."
+  },
+  {
+   "group": "world",
+   "concept": "Wind",
+   "zh": "風",
+   "en": "Wind",
+   "variants": "help.wind, weather.storm (風更強 / stronger wind), hud.weather.",
+   "verdict": "OK",
+   "action": "-"
+  },
+  {
+   "group": "world",
+   "concept": "Wind ghost (the wind indicator)",
+   "zh": "風鬼",
+   "en": "wind ghost",
+   "variants": "Docs 19 + 21 files; no on-screen word. help.wind says \"arrow\" which does not exist.",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "Teach it as 風鬼 / wind ghost in help.wind (proposal)."
+  },
+  {
+   "group": "world",
+   "concept": "Headwind / tailwind",
+   "zh": "逆風 / 順風",
+   "en": "Headwind / Tailwind",
+   "variants": "Docs: 逆風 9, 順風 11. No UI string at all (code: headwind drags more, WIND_HEAD 84 vs WIND_TAIL 56).",
+   "verdict": "MISSING_EN",
+   "action": "Add to help.wind (proposal) or leave to the ghost; either way these are the two words."
+  },
+  {
+   "group": "world",
+   "concept": "Weather",
+   "zh": "天氣 (晴 / 下雨 / 下雪 / 暴風雨 / 起霧)",
+   "en": "Weather (Clear / Rain / Snow / Storm / Fog)",
+   "variants": "weather.* + hud.weather: consistent.",
+   "verdict": "OK",
+   "action": "Storm wording shortened (proposal)."
+  },
+  {
+   "group": "world",
+   "concept": "Trail (remembered path)",
+   "zh": "軌跡 / 有效路徑",
+   "en": "Trail / valid path",
+   "variants": "hud.trailTag, toast.aiShield, toast.shieldSnapped.",
+   "verdict": "OK",
+   "action": "-"
+  },
+  {
+   "group": "general",
+   "concept": "Round",
+   "zh": "回合",
+   "en": "Round",
+   "variants": "zh: 回合 in 5 strings, 輪 in 3 (shield.*). English always Round.",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "zh -> 回合 everywhere."
+  },
+  {
+   "group": "general",
+   "concept": "Character (what the player picks)",
+   "zh": "角色",
+   "en": "character",
+   "variants": "角色/character in 3 strings; 職業/class in 3 (toast.switchHero, ult.unbuilt, shield.tipOther).",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "zh -> 角色, en -> character everywhere."
+  },
+  {
+   "group": "general",
+   "concept": "Opponent",
+   "zh": "對手",
+   "en": "Opponent",
+   "variants": "toast.aiShield says \"AI\".",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "Use 對手 / Opponent."
+  },
+  {
+   "group": "general",
+   "concept": "Heal",
+   "zh": "回血",
+   "en": "Heal",
+   "variants": "supply.heal 補血 and toast.healed 生命恢復 vs 回血 in 4 strings.",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "zh -> 回血."
+  },
+  {
+   "group": "general",
+   "concept": "Restart vs Reset",
+   "zh": "重新對戰",
+   "en": "Restart",
+   "variants": "dock.resetTitle/aria: Restart match; dock.resetTip, toast.resetLocked, dock.resetLockedTitle: Reset/重置.",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "Restart / 重新對戰 everywhere (chip caption is hidden)."
+  },
+  {
+   "group": "general",
+   "concept": "Tap vs Click",
+   "zh": "點",
+   "en": "Tap (canvas, help) / Click (hover tooltips)",
+   "variants": "en: \"Click\" in help.tapUnit, supply.title, ult titles; \"Tap\" in knightUlt.place.",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "Rule in table notes."
+  },
+  {
+   "group": "general",
+   "concept": "English spelling",
+   "zh": "-",
+   "en": "US English",
+   "variants": "UK: \"defence\" (knightUlt.place), \"centre\" (hero.bride.blurb); US: \"defense\" (shield.expired), \"Center\" (fence.label), \"canceled\".",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "US everywhere."
+  },
+  {
+   "group": "general",
+   "concept": "Distance unit",
+   "zh": "步 / px",
+   "en": "steps / px",
+   "variants": "HUD (hud.round) in steps; toast.gapShift and toast.moveResult in px.",
+   "verdict": "TERM_INCONSISTENT",
+   "action": "P2: show steps in both toasts (needs code: divide by DICE_STEP_PX)."
+  },
+  {
+   "group": "general",
+   "concept": "Supply (crate)",
+   "zh": "物資",
+   "en": "Supply",
+   "variants": "consistent; AI label \"Opp. Supply\" is the only abbreviation.",
+   "verdict": "OK",
+   "action": "-"
+  },
+  {
+   "group": "general",
+   "concept": "Move / Attack / Defend; Forward / Back",
+   "zh": "移動 / 攻擊 / 防禦；前進 / 後退",
+   "en": "Move / Attack / Defend; Forward / Back",
+   "variants": "consistent.",
+   "verdict": "OK",
+   "action": "-"
+  },
+  {
+   "group": "general",
+   "concept": "Timer",
+   "zh": "倒數 N 秒",
+   "en": "Time left: N s",
+   "variants": "hud.countdown, status.stunTimer.",
+   "verdict": "OK",
+   "action": "-"
+  }
+ ],
+ "overflow": [
+  {
+   "severity": "clip",
+   "key": "shield.expired",
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 574.2,
+   "zh_px": 238.0,
+   "en": "🛡️ Floating Shield's 2-round defense ended and it was withdrawn",
+   "proposal": "🛡️ Floating Shield expired after 2 rounds",
+   "proposal_px": 355.2,
+   "confirmed_by_ui_reviewer": true
+  },
+  {
+   "severity": "clip",
+   "key": "gameover.restart",
+   "surface": "canvas result panel line (20px, panel 560 px)",
+   "max_px": 520,
+   "en_px": 580.2,
+   "zh_px": 280.0,
+   "en": "Click anywhere to return to character select and play again",
+   "proposal": "Click anywhere to pick a character and play again",
+   "proposal_px": 486.7,
+   "confirmed_by_ui_reviewer": true
+  },
+  {
+   "severity": "clip",
+   "key": "weather.storm",
+   "surface": "assembled hud.weather line (15px, piece 440 px)",
+   "max_px": 400,
+   "en_px": 458.4,
+   "zh_px": 365.7,
+   "en": "Storm (attacks -10%, stronger wind)",
+   "proposal": "Storm (attacks -10%, wind up)",
+   "proposal_px": 414.1,
+   "confirmed_by_ui_reviewer": true
+  },
+  {
+   "severity": "clip",
+   "key": "skill.ultTip",
+   "surface": "dock skill tile caption (DOM, 12px serif, tile 60px)",
+   "max_px": 54,
+   "en_px": 57.9,
+   "zh_px": 25.0,
+   "en": "Ultimate",
+   "proposal": "Ult",
+   "proposal_px": 20.3,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "toast.defendHelp",
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 1052.6,
+   "zh_px": 702.8,
+   "en": "🛡️ Defend: drag the shield (coffin) along the arc and let go: it stays where you let go (no attack this round, Esc to cancel)",
+   "proposal": "🛡️ Defend: drag the coffin along the arc, let go to place it (no attack this round, Esc cancels)",
+   "proposal_px": 802.7,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "move.fwdBtn",
+   "surface": "canvas move arrow button (20px, button 104 px)",
+   "max_px": 92,
+   "en_px": 108.2,
+   "zh_px": 64.5,
+   "en": "Forward ▶",
+   "proposal": "Fwd ▶",
+   "proposal_px": 66.4,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "toast.moveHelp",
+   "surface": "canvas popup (floatTexts, centred)",
+   "max_px": 900,
+   "en_px": 974.6,
+   "zh_px": 654.1,
+   "en": "🎲 Move: choose a direction (← back / → forward, or click an arrow), then roll the die for distance. Esc to cancel",
+   "proposal": "🎲 Move: pick a direction (← back / → forward, or an arrow), then roll for distance. Esc cancels",
+   "proposal_px": 824.6,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "toast.moveRoll",
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 615.0,
+   "zh_px": 381.2,
+   "en": "🎲 {dir}: roll the die for distance (you can still attack after moving)",
+   "proposal": "🎲 {dir}: rolling for distance (you can still attack)",
+   "proposal_px": 459.4,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "toast.aimHint",
+   "surface": "canvas popup (floatTexts, unit-anchored)",
+   "max_px": 560,
+   "en_px": 621.5,
+   "zh_px": 381.2,
+   "en": "🎯 Move the cursor to aim, hold on the field to charge, release to throw",
+   "proposal": "🎯 Move the cursor to aim, hold to charge, release to throw",
+   "proposal_px": 516.9,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "wrap",
+   "key": "hero.skeleton.name",
+   "surface": "start card name (17px)",
+   "max_px": 162,
+   "en_px": 164.9,
+   "zh_px": 85.0,
+   "en": "Skeleton Spearman",
+   "proposal": null,
+   "proposal_px": null,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "hero.skeleton.name",
+   "surface": "dock hero name (17px serif, row 182 px shared with HP%)",
+   "max_px": 140,
+   "en_px": 170.8,
+   "zh_px": 85.0,
+   "en": "Skeleton Spearman",
+   "proposal": null,
+   "proposal_px": null,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "hero.wizard.name",
+   "surface": "dock hero name (17px serif, row 182 px shared with HP%)",
+   "max_px": 140,
+   "en_px": 149.0,
+   "zh_px": 68.0,
+   "en": "Pumpkin Wizard",
+   "proposal": null,
+   "proposal_px": null,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "wrap",
+   "key": "hero.knight.name",
+   "surface": "start card name (17px)",
+   "max_px": 162,
+   "en_px": 187.3,
+   "zh_px": 102.0,
+   "en": "Heavy Pumpkin Guard",
+   "proposal": "Pumpkin Guard",
+   "proposal_px": 140.1,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "hero.knight.name",
+   "surface": "dock hero name (17px serif, row 182 px shared with HP%)",
+   "max_px": 140,
+   "en_px": 199.0,
+   "zh_px": 102.0,
+   "en": "Heavy Pumpkin Guard",
+   "proposal": "Pumpkin Guard",
+   "proposal_px": 140.1,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "hero.skeleton.tab",
+   "surface": "dock hero chip caption (12px serif, chip 44 px, nowrap)",
+   "max_px": 40,
+   "en_px": 53.9,
+   "zh_px": 24.0,
+   "en": "Skeleton",
+   "proposal": "Bones",
+   "proposal_px": 38.0,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "hero.wizard.tab",
+   "surface": "dock hero chip caption (12px serif, chip 44 px, nowrap)",
+   "max_px": 40,
+   "en_px": 45.4,
+   "zh_px": 24.0,
+   "en": "Wizard",
+   "proposal": "Mage",
+   "proposal_px": 33.2,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "hero.bat.tab",
+   "surface": "dock hero chip caption (12px serif, chip 44 px, nowrap)",
+   "max_px": 40,
+   "en_px": 53.3,
+   "zh_px": 24.0,
+   "en": "Assassin",
+   "proposal": "Bat",
+   "proposal_px": 21.0,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "wrap",
+   "key": "hero.hunchback.name",
+   "surface": "start card name (17px)",
+   "max_px": 162,
+   "en_px": 187.9,
+   "zh_px": 68.0,
+   "en": "Bell Tower Hunchback",
+   "proposal": null,
+   "proposal_px": null,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "hero.hunchback.name",
+   "surface": "dock hero name (17px serif, row 182 px shared with HP%)",
+   "max_px": 140,
+   "en_px": 198.9,
+   "zh_px": 68.0,
+   "en": "Bell Tower Hunchback",
+   "proposal": null,
+   "proposal_px": null,
+   "confirmed_by_ui_reviewer": false
+  },
+  {
+   "severity": "clip",
+   "key": "hero.hunchback.tab",
+   "surface": "dock hero chip caption (12px serif, chip 44 px, nowrap)",
+   "max_px": 40,
+   "en_px": 70.8,
+   "zh_px": 24.0,
+   "en": "Hunchback",
+   "proposal": "Bell",
+   "proposal_px": 24.2,
+   "confirmed_by_ui_reviewer": false
+  }
+ ],
+ "proposals": {
+  "gameover.restart": {
+   "zh": null,
+   "en": "Click anywhere to pick a character and play again",
+   "why": "overflow: 580 px vs 560 px panel"
+  },
+  "weather.storm": {
+   "zh": null,
+   "en": "Storm (attacks -10%, wind up)",
+   "why": "overflow: hud.weather line 458 px vs 440 px piece"
+  },
+  "shield.expired": {
+   "zh": null,
+   "en": "🛡️ Floating Shield expired after 2 rounds",
+   "why": "overflow: 574 px popup; also drops the awkward \"was withdrawn\""
+  },
+  "toast.moveRoll": {
+   "zh": null,
+   "en": "🎲 {dir}: rolling for distance (you can still attack)",
+   "why": "overflow: 615 px (Forward) vs 560 px"
+  },
+  "toast.aimHint": {
+   "zh": null,
+   "en": "🎯 Move the cursor to aim, hold to charge, release to throw",
+   "why": "overflow: 621 px vs 560 px"
+  },
+  "toast.defendHelp": {
+   "zh": "🛡️ 防禦：沿弧線拖曳棺材，放開就停在那個位置（本回合不能攻擊，Esc 取消）",
+   "en": "🛡️ Defend: drag the coffin along the arc, let go to place it (no attack this round, Esc cancels)",
+   "why": "term fix (one object name) + overflow 1053 px vs 900 px soft budget"
+  },
+  "toast.moveHelp": {
+   "zh": null,
+   "en": "🎲 Move: pick a direction (← back / → forward, or an arrow), then roll for distance. Esc cancels",
+   "why": "overflow: 975 px vs 900 px soft budget"
+  },
+  "move.fwdBtn": {
+   "zh": null,
+   "en": "Fwd ▶",
+   "why": "overflow: 108 px vs 104 px button (or widen the canvas button to 124 px in code and keep \"Forward ▶\")"
+  },
+  "skill.ultTip": {
+   "zh": null,
+   "en": "Ult",
+   "why": "overflow: 58 px vs 60 px tile (54 px inner)"
+  },
+  "hero.skeleton.tab": {
+   "zh": null,
+   "en": "Bones",
+   "why": "dock chip is 44 px; \"Skeleton\" is 54 px (12px serif)"
+  },
+  "hero.wizard.tab": {
+   "zh": null,
+   "en": "Mage",
+   "why": "dock chip is 44 px; \"Wizard\" is 45 px"
+  },
+  "hero.bat.tab": {
+   "zh": null,
+   "en": "Bat",
+   "why": "dock chip is 44 px; \"Assassin\" is 53 px"
+  },
+  "hero.hunchback.tab": {
+   "zh": null,
+   "en": "Bell",
+   "why": "dock chip is 44 px; \"Hunchback\" is 71 px"
+  },
+  "hero.knight.name": {
+   "zh": "南瓜盾衛",
+   "en": "Pumpkin Guard",
+   "why": "one canonical name; shorter; fixes the dock-name overflow (owner decision)"
+  },
+  "hero.knight.tabTitle": {
+   "zh": "南瓜盾衛",
+   "en": "Pumpkin Guard",
+   "why": "same as hero.knight.name"
+  },
+  "toast.switchHero": {
+   "zh": "切換角色：{name}",
+   "en": "Switched character: {name}",
+   "why": "角色/character everywhere"
+  },
+  "ult.unbuilt": {
+   "zh": "🔧 這個角色的大招還在製作中",
+   "en": "🔧 This character's Ultimate is still being built",
+   "why": "角色/character everywhere"
+  },
+  "shield.tipOther": {
+   "zh": "只有南瓜盾衛可以選擇防禦；其他角色只能攻擊或移動",
+   "en": "Only the Pumpkin Guard can Defend; other characters can only Attack or Move",
+   "why": "角色/character everywhere"
+  },
+  "shield.holding": {
+   "zh": "🛡️ 浮空盾持續防禦中 (剩餘 {rounds} 回合)",
+   "en": null,
+   "why": "回合 everywhere"
+  },
+  "shield.blocked": {
+   "zh": "🛡️ 凌空預判攔截！(0 傷害！防禦餘 {rounds} 回合)",
+   "en": null,
+   "why": "回合 everywhere"
+  },
+  "shield.roundsLeft": {
+   "zh": "剩 {rounds} 回合",
+   "en": null,
+   "why": "回合 everywhere"
+  },
+  "toast.aiShield": {
+   "zh": "對手的浮空盾切入軌跡（防禦回合，不攻擊）",
+   "en": "Opponent's Floating Shield cuts into your trail (defend round, no attack)",
+   "why": "對手/Opponent, not AI"
+  },
+  "ult.soulfire": {
+   "zh": null,
+   "en": "✨ Ultimate: Triple Ghost Flame",
+   "why": "same English word as hero.reaper.blurb"
+  },
+  "ult.nun": {
+   "zh": null,
+   "en": "✨ Ultimate: Silver Cross Combo",
+   "why": "連擊 = combo"
+  },
+  "status.frostApplied": {
+   "zh": "🧊 霜咒：傷害 -15%（2 次攻擊）",
+   "en": "🧊 Frost Curse: damage -15% (next 2 attacks)",
+   "why": "same wording as status.frostWeak"
+  },
+  "supply.heal": {
+   "zh": "回血 +30",
+   "en": null,
+   "why": "回血 everywhere"
+  },
+  "toast.healed": {
+   "zh": "🧪 回血 +35 HP!",
+   "en": null,
+   "why": "回血 everywhere"
+  },
+  "toast.resetLocked": {
+   "zh": "🔒 第 {n} 回合後不能重新對戰",
+   "en": "🔒 Restart is locked after round {n}",
+   "why": "重新對戰/Restart everywhere"
+  },
+  "dock.resetLockedTitle": {
+   "zh": "已鎖定：第 {n} 回合後不能重新對戰",
+   "en": "Locked: restart is not available after round {n}",
+   "why": "重新對戰/Restart everywhere"
+  },
+  "toast.gapShift": {
+   "zh": "🎲 站位變動！雙方距離: {px} px",
+   "en": null,
+   "why": "drop the spec label \"1-2\" from the Chinese"
+  },
+  "knightUlt.place": {
+   "zh": null,
+   "en": "Tap 1, 2, 3 on the arc: three hidden defense points, each stops one attack",
+   "why": "US spelling"
+  },
+  "help.tapUnit": {
+   "zh": null,
+   "en": "👆 Tap your character: Move / Attack / Defend",
+   "why": "Tap on canvas/help"
+  },
+  "hero.bride.blurb": {
+   "zh": null,
+   "en": "Sound wave: her scream sends out rings that hit only the unit it is aimed at; the closer to the center, the harder. Poisons on a hit.",
+   "why": "US spelling"
+  },
+  "hero.bat.blurb": {
+   "zh": "手裡劍：傷害 22，命中會減速（對手下回合不能移動）。大招一次射出 5 枚。",
+   "en": "Shuriken: 22 damage; a hit Slows the target (no moving next round). The Ultimate throws 5 at once.",
+   "why": "blurb was written for the old 5 x 8 design"
+  },
+  "hero.wizard.blurb": {
+   "zh": "南瓜砲：傷害 24，彈道高、威力大，命中會中毒。",
+   "en": "Pumpkin Cannon: 24 damage, high arc, big punch; a hit Poisons the target.",
+   "why": "number follows HERO_PROFILES.wizard.dmg (24); owner to confirm 24 vs 28; adds poison"
+  },
+  "hero.skeleton.blurb": {
+   "zh": "標槍：傷害 24，命中會流血，並附「霜咒」：被擊中的單位接下來 2 次攻擊 −15%。",
+   "en": "Javelin: 24 damage; a hit makes the target bleed and applies Frost Curse: its next 2 attacks deal −15%.",
+   "why": "adds bleed (code applies it)"
+  },
+  "hero.reaper.blurb": {
+   "zh": "紫色鬼火：掌心推出一團火焰，傷害 23，命中會灼燒；背後的三團鬼火是他的能量。",
+   "en": "Purple Ghost Flame: pushes a ball of fire out of the palm, 23 damage, a hit Burns the target. The three ghost flames behind him are his Energy.",
+   "why": "adds burn (code applies it)"
+  },
+  "help.wind": {
+   "zh": "🌬 看上方風鬼：吹得越猛，風越強；逆風更吃力",
+   "en": "🌬 Watch the wind ghost above: the harder it blows, the stronger the wind; headwind drags more",
+   "why": "wind is shown by the ghost, not an arrow; adds head/tail wind"
+  },
+  "help.guard": {
+   "zh": "🛡 盾衛：拖曳棺材擋攻擊；大招點 1、2、3 設防",
+   "en": "🛡 Guard: drag the coffin to block; Ultimate: tap 1, 2, 3 to set defense points",
+   "why": "A,B,C -> 1,2,3 and the real normal defence"
+  },
+  "shield.tipGuard": {
+   "zh": "防禦（只有南瓜盾衛）：放棄攻擊，放置或移動浮空盾；沿弧線拖曳，放開就定位",
+   "en": "Defend (Pumpkin Guard only): give up your attack to place or move the Floating Shield; drag it along the arc and let go to set it",
+   "why": "release places it; the second press is optional"
+  }
+ }
+}

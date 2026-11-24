@@ -1,0 +1,110 @@
+{
+ "refs": {},
+ "style": " ",
+ "jobs": [
+  {
+   "id": "hag_idle2",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Same character as the attached picture: same veil, white wimple, face, robe, rope belt, chest cross, basket side, scale, camera, and robe hem on the baseline; strict side view facing LEFT. She hovers with no legs or feet, and the long robe tapers into black smoke wisps. Her face is cartoon chibi, sallow grey-green with thin crack lines and deep wrinkles, slanted almond eyes with bright glowing yellow irises, narrow cat-like pupils and dark smudged liner, one raised eyebrow, a tiny nose, and a sly crooked grin with two small fangs. Keep one near hand lightly on the chest cross pendant and the other on the pumpkin-orange basket of wooden crosses. Change only a small breathing motion: robe, basket, and black smoke wisps settle slightly. Wisps of black smoke float and curl around her and the basket, not blue, purple, or glowing. This is not a javelin throw. Flat three-tone cel shading, thick near-black outline, thin warm-orange rim light, flat noise-free magenta #FF00FF background. Do not include text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, cast shadow, background other than flat magenta, church scene, prayer, watermark, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_charge1",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Same character as the attached picture: same veil, white wimple, face, robe, rope belt, basket side, scale, camera, and robe hem on the baseline; strict side view facing LEFT. She hovers with no legs or feet, her long robe tapers into black smoke wisps, and her body stays hunched with only a slight lean. Her face is cartoon chibi, sallow grey-green with thin crack lines and deep wrinkles, slanted almond eyes with bright glowing yellow irises, narrow cat-like pupils and dark smudged liner, one raised eyebrow, a tiny nose, and a sly crooked grin with two small fangs. Draw the first charge: the throwing hand rises to the chest and closes around the small wooden cross pendant; the other hand keeps the pumpkin-orange basket of wooden crosses. Wisps of black smoke float and curl around her and the basket, not blue, purple, or glowing. This is a chest-level push-throw preparation, not a javelin throw. Flat three-tone cel shading, thick near-black outline, thin warm-orange rim light, flat noise-free magenta #FF00FF background. Do not include text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, cast shadow, background other than flat magenta, church scene, prayer, watermark, an underhand lob, overhand pose, arm over the shoulder, spear-like thrust, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_charge2",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Same character as the attached picture: same veil, white wimple, face, robe, rope belt, basket side, scale, camera, and robe hem on the baseline; strict side view facing LEFT. She hovers with no legs or feet, her long robe tapers into black smoke wisps, and her hunched body makes a small backward lean. Her face is cartoon chibi, sallow grey-green with thin crack lines and deep wrinkles, slanted almond eyes with bright glowing yellow irises, narrow cat-like pupils and dark smudged liner, one raised eyebrow, a tiny nose, and a sly crooked grin with two small fangs. Draw the second charge: the throwing hand still grips the small wooden chest cross, pulled back beside the chest with a bent elbow; the other hand holds the pumpkin-orange basket of wooden crosses. Wisps of black smoke float and curl around her and the basket, not blue, purple, or glowing. This is a chest-level push-throw preparation, not a javelin throw. Flat three-tone cel shading, thick near-black outline, thin warm-orange rim light, flat noise-free magenta #FF00FF background. Do not include text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, cast shadow, background other than flat magenta, church scene, prayer, watermark, an underhand lob, overhand pose, arm over the shoulder, spear-like thrust, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_charge3",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Same character as the attached picture: same veil, white wimple, face, robe, rope belt, basket side, scale, camera, and robe hem on the baseline; strict side view facing LEFT. She hovers with no legs or feet, her long robe tapers into black smoke wisps, and her hunched body reaches its greatest slight backward coil without leg movement. Her face is cartoon chibi, sallow grey-green with thin crack lines and deep wrinkles, slanted almond eyes with bright glowing yellow irises, narrow cat-like pupils and dark smudged liner, one raised eyebrow, a tiny nose, and a sly crooked grin with two small fangs. Draw the full charge: the throwing hand grips the small wooden chest cross at the farthest point beside the shoulder but still at chest height, elbow bent and coiled; the other hand holds the pumpkin-orange basket of wooden crosses. Wisps of black smoke float and curl around her and the basket, not blue, purple, or glowing. This is a chest-level push-throw preparation, not a javelin throw. Flat three-tone cel shading, thick near-black outline, thin warm-orange rim light, flat noise-free magenta #FF00FF background. Do not include text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, cast shadow, background other than flat magenta, church scene, prayer, watermark, an underhand lob, overhand pose, arm over the shoulder, spear-like thrust, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_release",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Same character as the attached picture: same veil, white wimple, face, robe, rope belt, basket side, scale, camera, and robe hem on the baseline; strict side view facing LEFT. She hovers with no legs or feet, her long robe tapers into black smoke wisps, and the hunched body makes a slight forward lean without leg movement. Her face is cartoon chibi, sallow grey-green with thin crack lines and deep wrinkles, slanted almond eyes with bright glowing yellow irises, narrow cat-like pupils and dark smudged liner, one raised eyebrow, a tiny nose, and a flat grim thin dark mouth open in a wail. Draw the release: the throwing arm snaps straight forward at chest height, its hand open and empty; a separate small wooden cross flies LEFT ahead of the hand, spinning and trailing black smoke. The other hand keeps the pumpkin-orange basket of wooden crosses. Wisps of black smoke float and curl around her and the basket, not blue, purple, or glowing. This is a chest-level push-throw, not a javelin throw. Flat three-tone cel shading, thick near-black outline, thin warm-orange rim light, flat noise-free magenta #FF00FF background. Do not include text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, cast shadow, background other than flat magenta, church scene, prayer, watermark, an underhand lob, overhand pose, arm over the shoulder, spear-like thrust, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_empty",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Same character as the attached picture: same veil, white wimple, face, robe, rope belt, basket side, scale, camera, and robe hem on the baseline; strict side view facing LEFT. She hovers with no legs or feet, and her long robe tapers into black smoke wisps. Her face is cartoon chibi, sallow grey-green with thin crack lines and deep wrinkles, slanted almond eyes with bright glowing yellow irises, narrow cat-like pupils and dark smudged liner, one raised eyebrow, a tiny nose, and a sly crooked grin with two small fangs. Draw the post-throw stance: the throwing arm remains extended forward at chest height, its hand open and empty, and the pendant cord hangs loose; the other hand holds the pumpkin-orange basket of wooden crosses. Wisps of black smoke float and curl around her and the basket, not blue, purple, or glowing. This is a chest-level push-throw follow-through, not a javelin throw. Flat three-tone cel shading, thick near-black outline, thin warm-orange rim light, flat noise-free magenta #FF00FF background. Do not include text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, cast shadow, background other than flat magenta, church scene, prayer, watermark, an underhand lob, overhand pose, arm over the shoulder, spear-like thrust, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hag_hit",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Same character as the attached picture: same veil, white wimple, face, robe, rope belt, basket side, scale, camera, and robe hem on the baseline; strict side view facing LEFT. She hovers with no legs or feet, and her long robe tapers into black smoke wisps. Her face is cartoon chibi, sallow grey-green with thin crack lines and deep wrinkles, slanted almond eyes with bright glowing yellow irises, narrow cat-like pupils and dark smudged liner, one raised eyebrow, a tiny nose, and a flat grim thin dark mouth in pain. Draw a readable flinch: her hunched body recoils, veil shifts slightly, and she holds the pumpkin-orange basket of wooden crosses tight while the other hand is empty. Wisps of black smoke float and curl around her and the basket, not blue, purple, or glowing. This is not a javelin throw. Flat three-tone cel shading, thick near-black outline, thin warm-orange rim light, flat noise-free magenta #FF00FF background. Do not include text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, cast shadow, background other than flat magenta, church scene, prayer, watermark, an underhand lob, overhand pose, arm over the shoulder, spear-like thrust, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hand_1_reach_to_chest",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Close-up of only the same throwing hand and forearm as the attached picture, with a long crooked black sleeve and the same sallow grey-green cracked cartoon skin; flat magenta #FF00FF background. This is the first motion: the open hand reaches toward the small wooden chest-cross pendant. Use thick near-black outline, thin warm-orange rim light, flat three-tone cel shading. This is not a javelin throw. Do not include face, body, basket, text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, background other than flat magenta, church scene, prayer, watermark, an underhand lob, overhand pose, arm over the shoulder, spear-like thrust, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hand_2_grip_cross",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Close-up of only the same throwing hand and forearm as the attached picture, with a long crooked black sleeve and the same sallow grey-green cracked cartoon skin; flat magenta #FF00FF background. This is the second motion: fingers close around the small wooden chest-cross pendant. Use thick near-black outline, thin warm-orange rim light, flat three-tone cel shading. This is not a javelin throw. Do not include face, body, basket, text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, background other than flat magenta, church scene, prayer, watermark, an underhand lob, overhand pose, arm over the shoulder, spear-like thrust, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hand_3_pull_back",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Close-up of only the same throwing hand and forearm as the attached picture, with a long crooked black sleeve and the same sallow grey-green cracked cartoon skin; flat magenta #FF00FF background. This is the third motion: the fist grips the wooden cross beside the chest, knuckles tight, elbow implied bent, ready for a chest-level push. Use thick near-black outline, thin warm-orange rim light, flat three-tone cel shading. This is not a javelin throw. Do not include face, body, basket, text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, background other than flat magenta, church scene, prayer, watermark, an underhand lob, overhand pose, arm over the shoulder, spear-like thrust, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hand_4_snap_forward",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Close-up of only the same throwing hand and forearm as the attached picture, with a long crooked black sleeve and the same sallow grey-green cracked cartoon skin; flat magenta #FF00FF background. This is the fourth motion: the forearm extends straight forward at chest height while the fingers begin to open around the wooden cross. Use thick near-black outline, thin warm-orange rim light, flat three-tone cel shading. This is not a javelin throw. Do not include face, body, basket, text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, background other than flat magenta, church scene, prayer, watermark, an underhand lob, overhand pose, arm over the shoulder, spear-like thrust, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hand_5_release_open",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Close-up of only the same throwing hand and forearm as the attached picture, with a long crooked black sleeve and the same sallow grey-green cracked cartoon skin; flat magenta #FF00FF background. This is the fifth motion: fingers spread fully open, the wooden cross is gone, and a small curl of black smoke leaves the palm. Use thick near-black outline, thin warm-orange rim light, flat three-tone cel shading. This is not a javelin throw. Do not include face, body, basket, cross, text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, background other than flat magenta, church scene, prayer, watermark, an underhand lob, overhand pose, arm over the shoulder, spear-like thrust, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  },
+  {
+   "id": "hand_6_empty_relaxed",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_b_v1_p3.png",
+   "prompt": "Close-up of only the same throwing hand and forearm as the attached picture, with a long crooked black sleeve and the same sallow grey-green cracked cartoon skin; flat magenta #FF00FF background. This is the sixth motion: the hand relaxes open after the throw and the loose pendant cord hangs below it. Use thick near-black outline, thin warm-orange rim light, flat three-tone cel shading. This is not a javelin throw. Do not include face, body, basket, wooden cross, text, extra limbs, other characters, apples, witch hat, hood, hair, blue or violet aura, ground, background other than flat magenta, church scene, prayer, watermark, an underhand lob, overhand pose, arm over the shoulder, spear-like thrust, or a javelin throw.",
+   "style": " ",
+   "negative": " "
+  }
+ ]
+}

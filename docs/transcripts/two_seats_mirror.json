@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "mode": "two_seats_mirror",
+  "records": [
+    {
+      "round": 1,
+      "world": {
+        "seed": 2230001,
+        "round": 1,
+        "phase": "throws:left:54:48",
+        "wallHp": 100,
+        "wind": 3.1,
+        "weather": "clear",
+        "units": [
+          { "id": "left_0", "x": 612, "y": 860, "hp": 100, "alive": true, "statuses": [] },
+          { "id": "right_0", "x": 1296, "y": 860, "hp": 72, "alive": true, "statuses": ["burn:2"] }
+        ]
+      },
+      "left": {
+        "units": [
+          { "id": "left_0", "x": 612, "y": 860, "hp": 100, "alive": true, "statuses": [] },
+          { "id": "right_0", "x": 1296, "y": 860, "hp": 72, "alive": true, "statuses": ["burn:2"] }
+        ],
+        "wind": 3.1, "weather": "clear", "round": 1, "phase": "throws:left:54:48", "seed": 2230001, "wallHp": 100
+      },
+      "right": {
+        "units": [
+          { "id": "left_0", "x": 624, "y": 860, "hp": 72, "alive": true, "statuses": ["burn:2"] },
+          { "id": "right_0", "x": 1308, "y": 860, "hp": 100, "alive": true, "statuses": [] }
+        ],
+        "wind": -3.1, "weather": "clear", "round": 1, "phase": "throws:left:54:48", "seed": 2230001, "wallHp": 100
+      },
+      "roundHash": "e728ac8e"
+    },
+    {
+      "round": 2,
+      "world": {
+        "seed": 2230001,
+        "round": 2,
+        "phase": "throws:right:54:48",
+        "wallHp": 100,
+        "wind": -2.8,
+        "weather": "clear",
+        "units": [
+          { "id": "left_0", "x": 612, "y": 860, "hp": 91, "alive": true, "statuses": ["slow:1"] },
+          { "id": "right_0", "x": 1188, "y": 860, "hp": 72, "alive": true, "statuses": ["burn:2"] }
+        ]
+      },
+      "left": {
+        "units": [
+          { "id": "left_0", "x": 612, "y": 860, "hp": 91, "alive": true, "statuses": ["slow:1"] },
+          { "id": "right_0", "x": 1188, "y": 860, "hp": 72, "alive": true, "statuses": ["burn:2"] }
+        ],
+        "wind": -2.8, "weather": "clear", "round": 2, "phase": "throws:right:54:48", "seed": 2230001, "wallHp": 100
+      },
+      "right": {
+        "units": [
+          { "id": "left_0", "x": 732, "y": 860, "hp": 72, "alive": true, "statuses": ["burn:2"] },
+          { "id": "right_0", "x": 1308, "y": 860, "hp": 91, "alive": true, "statuses": ["slow:1"] }
+        ],
+        "wind": 2.8, "weather": "clear", "round": 2, "phase": "throws:right:54:48", "seed": 2230001, "wallHp": 100
+      },
+      "roundHash": "165785ca"
+    },
+    {
+      "round": 3,
+      "world": {
+        "seed": 2230001,
+        "round": 3,
+        "phase": "throws:left:54:48",
+        "wallHp": 100,
+        "wind": -1.8,
+        "weather": "clear",
+        "units": [
+          { "id": "left_0", "x": 648, "y": 860, "hp": 91, "alive": true, "statuses": ["slow:1"] },
+          { "id": "right_0", "x": 1188, "y": 860, "hp": 55, "alive": true, "statuses": ["poison:2"] }
+        ]
+      },
+      "left": {
+        "units": [
+          { "id": "left_0", "x": 648, "y": 860, "hp": 91, "alive": true, "statuses": ["slow:1"] },
+          { "id": "right_0", "x": 1188, "y": 860, "hp": 55, "alive": true, "statuses": ["poison:2"] }
+        ],
+        "wind": -1.8, "weather": "clear", "round": 3, "phase": "throws:left:54:48", "seed": 2230001, "wallHp": 100
+      },
+      "right": {
+        "units": [
+          { "id": "left_0", "x": 732, "y": 860, "hp": 55, "alive": true, "statuses": ["poison:2"] },
+          { "id": "right_0", "x": 1272, "y": 860, "hp": 91, "alive": true, "statuses": ["slow:1"] }
+        ],
+        "wind": 1.8, "weather": "clear", "round": 3, "phase": "throws:left:54:48", "seed": 2230001, "wallHp": 100
+      },
+      "roundHash": "a784d88d"
+    }
+  ]
+}

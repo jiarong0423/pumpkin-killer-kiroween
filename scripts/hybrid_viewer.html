@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pumpkin Killer spectator</title>
+<style>
+  :root { --bg: #14110f; --panel: #1e1a17; --ink: #efe6da; --dim: #9a8f82; --red: #e0533d; --white: #8fd3ff; --line: #3a322c; --ok: #7bd88f; --bad: #ff8a7a; }
+  @media (prefers-color-scheme: light) { :root { --bg: #f4efe8; --panel: #fffaf3; --ink: #2a211b; --dim: #7a6e62; --red: #c4361f; --white: #1b78b8; --line: #d8cdbf; --ok: #2d8a46; --bad: #c4361f; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.4 system-ui, sans-serif; }
+  header { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+  header h1 { margin: 0; font-size: 16px; }
+  .tag { color: var(--dim); }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 12px; padding: 12px 16px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  canvas { width: 100%; height: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; display: block; }
+  aside { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-width: 0; }
+  aside h2 { margin: 0 0 6px; font-size: 13px; color: var(--dim); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  #log div { font-family: ui-monospace, Menlo, monospace; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #log .bad { color: var(--bad); }
+  #done { margin-top: 12px; max-height: 260px; overflow: auto; }
+  #done div { font-size: 12px; padding: 2px 0; border-bottom: 1px solid var(--line); }
+  .team-red { color: var(--red); } .team-white { color: var(--white); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Pumpkin Killer: whole match on one page</h1>
+  <span id="label" class="tag">waiting for a match</span>
+  <span id="where" class="tag"></span>
+</header>
+<main>
+  <canvas id="c" width="1920" height="620"></canvas>
+  <aside>
+    <h2>Match</h2>
+    <div id="info" class="tag">-</div>
+    <h2 style="margin-top:12px">Last messages</h2>
+    <div id="log"></div>
+    <div id="done"><h2>Finished</h2></div>
+  </aside>
+</main>
+<script>
+(function () {
+  var canvas = document.getElementById("c"), g = canvas.getContext("2d");
+  var GROUND = 540, state = null, drawn = [];
+  var css = function (n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };
+  function arc(shot, alpha) {
+    if (!shot.start || !shot.landing) return;
+    var x0 = shot.start.x, y0 = shot.start.y, x1 = shot.landing.x, y1 = shot.landing.y, dx = x1 - x0, tan = Math.tan((shot.angle || 54) * Math.PI / 180);
+    var cx = x0 + dx / 2, cy = y0 - Math.abs(dx) / 2 * tan;
+    g.globalAlpha = alpha; g.lineWidth = 3; g.strokeStyle = shot.dirX > 0 ? css("--red") : css("--white");
+    g.beginPath(); g.moveTo(x0, y0); g.quadraticCurveTo(cx, cy, x1, y1); g.stroke();
+    g.fillStyle = g.strokeStyle; g.beginPath(); g.arc(x1, y1, 7, 0, 6.3); g.fill();
+    if (shot.hit) { g.font = "bold 22px system-ui"; g.fillText("hit", x1 + 10, y1 - 12); }
+    g.globalAlpha = 1;
+  }
+  function draw() {
+    g.clearRect(0, 0, canvas.width, canvas.height);
+    g.fillStyle = css("--line"); g.fillRect(0, GROUND, canvas.width, 3);
+    var m = state && state.match;
+    if (!m || !m.units) return;
+    (m.shots || []).forEach(function (s, i, a) { arc(s, 0.25 + 0.75 * (i + 1) / a.length); });
+    m.units.forEach(function (u) {
+      var w = 70, h = 190, x = u.x, y = GROUND;
+      var col = u.team === "red" ? css("--red") : css("--white");
+      g.globalAlpha = u.alive ? 1 : 0.25;
+      g.fillStyle = col; g.fillRect(x - w / 2, y - h, w, h);
+      g.fillStyle = css("--bg"); g.font = "bold 28px system-ui"; g.textAlign = "center"; g.fillText((u.hero || "?").slice(0, 3).toUpperCase(), x, y - h / 2 + 8);
+      g.globalAlpha = 1;
+      g.fillStyle = css("--line"); g.fillRect(x - 50, y - h - 26, 100, 12);
+      g.fillStyle = u.hp / u.max_hp > 0.35 ? css("--ok") : css("--bad"); g.fillRect(x - 50, y - h - 26, 100 * Math.max(0, u.hp) / u.max_hp, 12);
+      g.fillStyle = css("--ink"); g.font = "16px system-ui"; g.fillText(Math.max(0, Math.round(u.hp)) + " / " + Math.round(u.max_hp), x, y - h - 34);
+    });
+    g.textAlign = "left";
+  }
+  function render() {
+    var m = state && state.match;
+    document.getElementById("label").textContent = m ? m.label : "waiting for a match";
+    document.getElementById("where").textContent = m && m.code ? "room " + m.code : "";
+    var info = document.getElementById("info");
+    if (m) {
+      var alive = function (t) { return (m.units || []).filter(function (u) { return u.team === t && u.hp > 0; }).length; };
+      info.innerHTML = "round <b>" + (m.round || 1) + "</b>, turn of <b class='team-" + (m.phase || "") + "'>" + (m.phase || "-") + "</b><br>" +
+        "<span class='team-red'>left (red): " + (m.seat_left || "?") + " (" + (m.tier_left || "?") + "), " + alive("red") + " alive</span><br>" +
+        "<span class='team-white'>right (white): " + (m.seat_right || "?") + " (" + (m.tier_right || "?") + "), " + alive("white") + " alive</span><br>" +
+        "<span class='tag'>teams " + (m.heroes_left || []).join(", ") + " | " + (m.heroes_right || []).join(", ") + "</span>";
+    }
+    var log = document.getElementById("log"); log.innerHTML = "";
+    ((m && m.log) || []).forEach(function (line) { var d = document.createElement("div"); if (/OUT OF SYNC/.test(line)) d.className = "bad"; d.textContent = line; log.appendChild(d); });
+    var done = document.getElementById("done"); done.innerHTML = "<h2>Finished</h2>";
+    ((state && state.finished) || []).slice(-12).reverse().forEach(function (f) { var d = document.createElement("div"); d.textContent = f.label + ": " + f.winner + ", " + f.rounds + " rounds" + (f.errors || f.relay_errors || f.hash_mismatches ? " (errors " + f.errors + ", relay " + f.relay_errors + ", hash " + f.hash_mismatches + ")" : ""); done.appendChild(d); });
+    draw();
+  }
+  function poll() {
+    fetch("state.json", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (s) { state = s; render(); }).catch(function () {}).then(function () { setTimeout(poll, 300); });
+  }
+  poll();
+})();
+</script>
+</body>
+</html>

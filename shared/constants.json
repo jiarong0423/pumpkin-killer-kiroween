@@ -1,0 +1,28 @@
+{
+  "GROUND_Y": 860,
+  "GRAVITY": 980.0,
+  "V0_PER_POWER": 13.8,
+  "FENCE_X": 960,
+  "FENCE_W": 238,
+  "FENCE_H": 282,
+  "WIND_TAIL": 56.0,
+  "WIND_HEAD": 84.0,
+  "WIND_MIN": -4.0,
+  "WIND_MAX": 4.0,
+  "THROW_ANGLE_DEFAULT": 54,
+  "TURN_SECONDS": 12,
+  "WALL_HIT_DMG": 8,
+  "KNIGHT_ZONE": 70,
+  "SHIELD_WALL_COFFIN_HEIGHT": 18,
+  "SHIELD_WALL_EXPIRES_AFTER_ATTACKS": 3,
+  "ADAPTIVE_LEVEL": {
+    "INITIAL_LEVEL": 2,
+    "WINDOW_THROWS": 3,
+    "HIGH_RATE": 0.4,
+    "LOW_RATE": 0.15,
+    "MAX_CHANGES": 2,
+    "COOLDOWN_THROWS": 2,
+    "UP_REASON": "human rolling hit rate above 40%",
+    "DOWN_REASON": "human rolling hit rate below 15%"
+  }
+}

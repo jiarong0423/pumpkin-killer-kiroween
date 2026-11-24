@@ -1,0 +1,8 @@
+Source: https://opengameart.org/content/ambient-horror
+Work: Ambient horror
+Author shown on the page: Pixels67
+Checked and downloaded: 2026-11-09
+License wording on the page that day: License(s): CC0
+Chosen by the owner from the audition page (2026-11-09). Converted by the reviewer where needed (ffmpeg: trim, fades, loudness).
+Not heard by the reviewer.
+File ambient_horror.ogg -> assets/audio/music/tension_drone.ogg  sha256 70943868cd7df14310bf0613da1c0c8858e0fb82ce554cb45bfd5a268d6f44d4

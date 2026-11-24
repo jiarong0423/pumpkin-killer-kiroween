@@ -1,0 +1,17 @@
+# Kiro task 37 - review the playtest data and give concrete FIXES and weapon-effect improvements (review + design only)
+
+## Owner words (2026-11-09)
+"Play many rounds yourself, at least 20, and feed the wind, attack and experience back to Kiro; let him give fixes." "Also optimise the weapon effects."
+
+## Read (read only)
+docs/playtest_20261109.md and (not published) (the data and the main line's own conclusions: check them, do not trust them), (not published) (owner rules, newest at the bottom, they win), docs/roster_design.md, docs/ultimates_design.md, docs/review_reconcile.md if present (task 36), docs/wind_design.md, docs/sound_mapping.md, index.html (throw code, hit code, the bounce shield, drawThrownPaths, fxEmit calls) and js/particles.js (preset names), the effect sprites listed in index.html (fx_*).
+Rules to hold: a normal attack is ONE shot at ONE unit; the cat-bat's 5-shuriken scatter is now its ULTIMATE (3 lit pips, max 2 per match, 1.5 x total); an ultimate hits multiple units, each takes 1.5 x; the knight's shield bounces (die 1 to 6 collisions, even split over collisions); the javelin frost curse; wind factor 72 px/s^2 per unit; AI aim error 14; screen must stay clean.
+
+## Do exactly this
+1. Write docs/playtest_fixes.md:
+   a. DATA CHECK: recompute from the JSON the hit rate, average damage per throw and hits-to-kill per class; say what the data can and cannot show (the bot knows the wind and target exactly). Point out anything the main line concluded that the data does not support.
+   b. FIXES: a ranked list, each with the problem, the evidence (row numbers), the exact change (constant or rule with numbers) and how to verify it (an automated test or a screenshot): (1) knight strength (should its bounce cost only on unit hits? alternative: damage per bounce is total/N but the die minimum is 2? give 2 options and a recommendation with expected average damage), (2) AI difficulty and how to lower the accuracy gap without hiding information, (3) fence interaction (12% blocked), (4) wind feel for a HUMAN player: what a human needs to see to read the wind (give a minimal in-scene cue list with numbers), (5) energy pacing (3 hits fill in about 3 to 4 rounds: propose a rule so ultimates are rarer but still reachable, e.g. blocked hits do not count, or bar drains), (6) time to kill per class (target 4 to 6 hits).
+   c. WEAPON EFFECTS: per weapon (javelin, cannon shell, single shuriken, shuriken volley ultimate, bouncing shield, bride's sound wave, hunchback bell, reaper skull, reaper scythe slashes) specify: trail (preset name, size, colour, lifetime), flight (sprite spin, wobble, glow), impact (flash sprite, particles, sound event from docs/sound_mapping.md), bounce (shield: spark per bounce, ring on the ground), screen feedback (hit-stop ms, shake px; keep within the budget), and a readability rule so the weapon is visible against the night background. Give a global particle and sprite budget and name which existing presets to change versus which new presets to write; mark new Colab sprites as requests (name, size, one-sentence prompt, flat magenta background).
+   d. A TEST PLAN the main line can run: for each fix, the metric, the pass band, and how many simulated matches are needed.
+2. Do not touch index.html, assets/, js/, scripts/. Do not use git. Do not download or create images.
+3. Finish with a 6-line summary and say what you could not verify.

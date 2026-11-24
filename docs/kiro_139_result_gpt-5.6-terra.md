@@ -1,0 +1,8 @@
+# Kiro 139 result (English UI wiring plan), 2026-11-15
+Done after task 137. `index.html` not edited. `js/i18n.js` and `scripts/test_i18n.js` already existed (2026-11-09, global `I18N`, 15 passing checks), so I extended them without breaking the old API; I did not re-create them.
+Added to `js/i18n.js`: `apply(root)` (`data-i18n`, `data-i18n-attr="attr:key;attr2:key2"`), `toggle()`, `lang()`, `init(fallback)` (keeps Chinese default), `loadDictionaries(langs, loader)` with an injected loader, and the global alias `I18n`. `setLang("zh")` already maps to `zh-TW`.
+Added to `scripts/test_i18n.js`: 7 checks (apply, bad input, toggle, injected loader, determinism over 300 calls, browser globals, `init(fallback)`), a `--no-page` flag, and a key scan that also reads keys inside `data-i18n-attr`.
+New keys in both JSON files (158 each): `ult.soulfire`, `status.halluActive`, `status.halluApplied`, `lang.title`, `lang.label`.
+Plan: `docs/i18n_wiring_plan_20261115.md` (76 lines, 57 numbered edit groups covering all 131 index.html lines that still hold CJK, plus the export-manifest rule for `assets/i18n/`).
+Output: `node scripts/test_i18n.js --no-page` -> `22 passed, 0 failed (158 keys per language)`. Without the flag: `22 passed, 4 failed`; the 4 failures are the page checks (CJK in index.html, script tag, keys used, keys unused) and will pass only after the main line applies the plan. `node scripts/test_ultimate_fx.js` -> `all 6 tests passed`.
+Open: `docs/i18n_mapping_20261115.json` lacks the 5 new keys (not in my touch list). The English is a machine draft and needs owner approval. The JSON must be served over http.

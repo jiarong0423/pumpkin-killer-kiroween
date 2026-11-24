@@ -1,0 +1,6 @@
+create_room -> room_state True
+join -> room_state
+start -> True True
+late join into started room -> error room_started
+foreign Origin -> refused: InvalidStatus
+mcp initialize -> 200 session True

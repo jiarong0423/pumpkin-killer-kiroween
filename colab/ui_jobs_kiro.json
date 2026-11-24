@@ -1,0 +1,285 @@
+{
+  "refs": {
+    "skeleton": "unit_skeleton.png",
+    "wizard": "unit_wizard.png",
+    "bat": "unit_bat.png",
+    "knight": "unit_knight.png",
+    "bar": "ref_bar_from_video.png"
+  },
+  "style": "2D dark-fantasy cartoon game-UI art. Thick clean dark-ink outline, three-tone painted shading with visible material texture (weathered wood grain, chipped stone, rusted iron, wax, bone). Warm candle-gold key light from the upper left, cool cyan rim light on the lower right. One object, drawn alone, centered, front view, 15 percent empty margin on every side. Opaque painting, glow kept inside the outline. Flat solid magenta background #FF00FF, no ground, no cast shadow, no text, no letters, no watermark.",
+  "jobs": [
+    {
+      "id": "ui_top_plate_left",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Redraw as a wide horizontal HUD team plate, about 4 : 1, symmetrical left to right. Dark oak plank with visible grain and chipped edges, one iron rivet in each of the four corners, a small carved bone skull on each end cap. A thin glowing azure-blue rune line with ten tiny runes runs along the bottom edge. The large centre is a flat, smooth, empty dark panel with no marks, kept free for text.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, flat vector look, plastic shine, magenta or pink tones inside the object, marks or symbols in the centre panel"
+    },
+    {
+      "id": "ui_top_plate_right",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Redraw as a wide horizontal HUD team plate, about 4 : 1, symmetrical left to right. Dark oak plank with visible grain and chipped edges, one iron rivet in each of the four corners, a small carved horned bone skull on each end cap. A thin glowing blue-violet (#a98bff) rune line with ten tiny runes runs along the bottom edge. The large centre is a flat, smooth, empty dark panel with no marks, kept free for text.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, flat vector look, plastic shine, magenta or pink tones inside the object, marks or symbols in the centre panel"
+    },
+    {
+      "id": "ui_top_center_plate",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Redraw as a compact center info plate, about 5 : 2, symmetrical left to right. Aged brass frame with a candle-gold rim and angled ends, four iron rivets, two small folded dark-leather bat wings spreading from the top edge, one on each side of the center. The inside is a flat, smooth, empty dark panel with no marks, kept free for a number and a wind arrow.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, flat vector look, plastic shine, magenta or pink tones inside the object, marks or symbols in the centre panel"
+    },
+    {
+      "id": "ui_hp_frame",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Redraw as a long thin health bar frame, about 8 : 1, symmetrical left to right. Pale cracked bone rim, black iron end caps with three small rivets on each cap. The interior is an empty dark glass trough with one thin highlight line along its top edge and nothing inside it, so a fill strip can show through.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, flat vector look, plastic shine, magenta or pink tones inside the object, liquid or color inside the trough"
+    },
+    {
+      "id": "ui_hp_fill",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Redraw as a plain long thin liquid fill strip, about 8 : 1, with fully rounded ends and no frame. Glowing healing-green (#62e88a) slime, a bright highlight line along the upper third, a darker green flat lower edge, three tiny bubbles inside, a faint inner glow. Opaque, smooth and glossy.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, frame, border, bone, iron, magenta or pink tones inside the object, transparency"
+    },
+    {
+      "id": "ui_wind_frame",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Redraw as a long thin wind gauge frame, about 8 : 1, symmetrical left to right. Pale cracked bone rim and black iron end caps, each cap carved with a small spiral gust. Seven short evenly spaced tick notches on the lower edge, the center one longest, a small triangular notch at the exact top center. The interior is empty dark glass.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, flat vector look, plastic shine, magenta or pink tones inside the object, arrow or pointer inside the gauge"
+    },
+    {
+      "id": "ui_wind_arrow",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Redraw as a single arrow pointer pointing right, about 3 : 1, mirror-symmetrical top to bottom. A pale carved bone shaft, a black iron arrowhead with a thin edge highlight, three small feather-like wisps at the tail. A thin ghostly cyan (#5df2ee) glow stays inside the outline along the shaft.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, bow, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_dock_frame",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Redraw as a very wide control-bar frame, about 4 : 1, symmetrical left to right, built for stretching in the middle. A thick dark-brown carved wooden beam border with visible grain, eight iron rivets evenly spaced along the top beam, a small carved bone skull at the left and right ends. Inside, a weathered dark stone slab with fine cracks and a little green moss in the lower corners. The central stone area is plain, dark and empty.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, buttons, icons, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_plate_normal",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "A slightly tall rounded-rectangle button plate, about 4 : 5, front view. Chipped dark stone face with fine cracks, a thick rusted iron rim with one rivet in each of the four corners, a soft bevel. No glow. The centre is a flat, empty, slightly darker recess kept free for an icon and a label.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, icon, symbol, glow, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_plate_hover",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "A slightly tall rounded-rectangle button plate, about 4 : 5, front view. Chipped dark stone face with fine cracks, one rivet in each of the four corners, a soft bevel. The iron rim is polished and glows warm candle gold, with a faint gold light just inside the rim. The centre is a flat, empty, slightly darker recess kept free for an icon and a label.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, icon, symbol, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_plate_active",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "A slightly tall rounded-rectangle button plate, about 4 : 5, front view. Chipped dark stone face, one rivet in each of the four corners, a gold rim. One glowing orange rune is carved at the top center, and warm orange light fills the stone from inside. The centre is a flat, empty recess kept free for an icon and a label.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, icon, symbol in the centre, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_plate_disabled",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "A slightly tall rounded-rectangle button plate, about 4 : 5, front view. Chipped stone face drained to cold grey, extra cracks, a dull dark iron rim with one rivet in each of the four corners, one faint cobweb in the top left corner. No glow and no color. The centre is a flat, empty recess kept free for an icon and a label.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, icon, symbol, glow, bright colors, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_icon_normal",
+      "tier": "U2",
+      "ref": "wizard",
+      "prompt": "Draw only a square game icon: a round bullseye target carved in dark stone with four concentric rings painted orange and black, and a tiny glowing jack-o'-lantern face in the exact center. Thick outline, bold silhouette that stays readable at small size. Nothing else: no wizard, no character, no hat, no cannon, no hands.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, people, character, hat, cannon, hands, arrow, extra objects, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_icon_double",
+      "tier": "U2",
+      "ref": "wizard",
+      "prompt": "Draw only a square game icon: two small glowing orange jack-o'-lanterns with triangle eyes and jagged grins flying to the right side by side, the rear one slightly higher, each trailing three curved orange speed streaks. Thick outline, bold silhouette that stays readable at small size. Nothing else: no wizard, no character, no hat, no hands.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, people, character, hat, cannon, hands, extra objects, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_icon_heavy",
+      "tier": "U2",
+      "ref": "wizard",
+      "prompt": "Draw only a square game icon: a heavy round black iron bomb with one riveted rust band, a short curled fuse lit at the tip with a burst of five orange sparks, and a small pale highlight on the upper left. Thick outline, bold silhouette that stays readable at small size. Nothing else: no wizard, no cannon, no character, no hands.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, people, character, hat, cannon, hands, extra objects, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_icon_heal",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only a square game icon: a round-bellied glass potion bottle two-thirds full of glowing healing-green liquid, three small bubbles, a cork striped yellow, orange and white like candy corn, a thin iron wire around the neck. Thick outline, bold silhouette that stays readable at small size. Nothing else.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, people, hands, extra bottles, label, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_lock_plate",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Redraw as a wide button plate, about 5 : 2, symmetrical left to right, shaped like a carved pumpkin-lantern lid. Glossy pumpkin orange (#ff8a1f) with five faint vertical ribs, a short curled green stem at the top center, a thick candle-gold rim, one iron rivet in each corner. The center band is flat, smooth and empty, kept free for text.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, face, carved eyes, flat vector look, magenta or pink tones inside the object, marks in the centre band"
+    },
+    {
+      "id": "ui_candle",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only a single tall narrow candle, about 1 : 2. Cream wax with three uneven drips down the side, one bright yellow-white teardrop flame with an orange core, a short black wick, a small black iron saucer holder with a ring handle. The flame glow is a tight bright halo hugging the flame, not a wide light.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, table, extra candles, people, hands, wide light rays, smoke, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_ghostfire_cyan",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only a thin horizontal strip of spectral flames, about 4 : 1, with a straight flat bottom edge. Seven flame tongues of different heights with wispy curled tips, opaque painted layers: white-hot core, bright cyan (#5df2ee) body, deeper teal outer rim. The left and right ends match in height so the strip can repeat side by side.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, smoke, haze, transparency, soft glow outside the flames, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_ghostfire_violet",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only a thin horizontal strip of spectral flames, about 4 : 1, with a straight flat bottom edge. Seven flame tongues of different heights with wispy curled tips, opaque painted layers: pale lavender core, blue-violet (#a98bff) body, deeper indigo outer rim. The left and right ends match in height so the strip can repeat side by side.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, smoke, haze, transparency, soft glow outside the flames, pink, magenta, or red-violet tones"
+    },
+    {
+      "id": "ui_power_unlit",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only one tall rounded-rectangle meter segment, about 3 : 5, front view. Dark carved stone with a soft inset bevel, one hairline crack, four small chips on the edges, a thin dark rim. Unlit and cold, no glow, no color.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, glow, bright colors, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_power_orange",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only one tall rounded-rectangle meter segment, about 3 : 5, front view. Dark carved stone with a soft inset bevel, one hairline crack, four small chips on the edges, glowing like an orange (#ff8a1f) ember from inside: the crack and the face glow, the rim stays dark. The glow stays inside the outline.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, sparks outside the shape, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_power_hot",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only one tall rounded-rectangle meter segment, about 3 : 5, front view. Dark carved stone with a soft inset bevel, one hairline crack, four small chips on the edges, glowing white-hot candle gold (#ffcf5a) from inside: a white center fading to gold, the crack blazing, the rim stays dark. The glow stays inside the outline.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, sparks outside the shape, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_socket_ammo",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only a square item socket, 1 : 1, front view. Dark chipped stone with a thin candle-gold rim, one small gold stud in each of the four corners, and a deep recessed square center with a dark inner shadow. The recess is completely empty, kept free for an item icon.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, icon, item inside the socket, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_socket_special",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only a square item socket, 1 : 1, front view. Dark chipped stone with a dull iron rim, no gold. Around the empty recessed center runs a ring of twelve short dashed rune marks glowing faint blue-violet (#a98bff). The recess is completely empty, kept free for an item icon.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, icon, item inside the socket, gold, flat vector look, plastic shine, pink, magenta, or red-violet tones"
+    },
+    {
+      "id": "ui_hero_chip_normal",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only a small square class-chip plate, 1 : 1, front view. Dark chipped stone, a thin rusted iron rim with one tiny rivet in each of the four corners, a soft bevel. No glow. The center is a flat, empty, slightly darker recess kept free for a small glyph and two characters.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, icon, symbol, glow, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_hero_chip_active",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only a small square class-chip plate, 1 : 1, front view. Dark chipped stone, one tiny rivet in each of the four corners, a soft bevel. The rim glows spectral cyan (#5df2ee) and a cyan rune is carved at the top center, with a faint cyan light just inside the rim. The center is a flat, empty recess kept free for a glyph.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, icon in the centre, orange glow, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_btn_sound",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only a round button, 1 : 1, front view. A circular dark stone face inside a rusted iron ring with eight rivets evenly spaced. In the center a pale bone-white speaker shape with two curved sound waves on its right, carved in relief, no glow. Thick outline, readable at 44 pixels.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, musical notes, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "ui_btn_reset",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Draw only a round button, 1 : 1, front view. A circular dark stone face inside a rusted iron ring with eight rivets evenly spaced. In the center a pale bone-white circular arrow, a three-quarter circle with one arrowhead turning clockwise, carved in relief, no glow. Thick outline, readable at 44 pixels.",
+      "negative": "text, letters, numbers, watermark, logo, cast shadow, ground, extra objects, people, hands, two arrows, flat vector look, plastic shine, magenta or pink tones inside the object"
+    },
+    {
+      "id": "portrait_wizard",
+      "tier": "U2",
+      "ref": "wizard",
+      "prompt": "Redraw this same pumpkin wizard as a head-and-shoulders portrait facing RIGHT, turned slightly toward the viewer. Same purple witch hat with buckle, same carved glowing jack-o'-lantern face, same colors and outline. Mischievous confident grin. The brass cannon muzzle shows at the lower edge of the frame. Crop below the chest, nothing below.",
+      "negative": "text, letters, watermark, logo, cast shadow, ground, full body, legs, weapon in hand, extra characters, frame, border, flat vector look, magenta or pink tones inside the object"
+    },
+    {
+      "id": "portrait_skeleton",
+      "tier": "U2",
+      "ref": "skeleton",
+      "prompt": "Redraw this same skeleton as a head-and-shoulders portrait facing RIGHT, turned slightly toward the viewer. Same skull, same outfit, same colors and outline. Confident toothy grin, cyan eye fire glowing in both sockets. Crop below the chest, nothing below.",
+      "negative": "text, letters, watermark, logo, cast shadow, ground, full body, legs, spear, extra characters, frame, border, flat vector look, magenta or pink tones inside the object"
+    },
+    {
+      "id": "portrait_bat",
+      "tier": "U2",
+      "ref": "bat",
+      "prompt": "Redraw this same bat-cat assassin as a head-and-shoulders portrait facing RIGHT, turned slightly toward the viewer. Same large ears, same cape collar and shoulder, same colors and outline. Smug half-lidded eyes, a small fanged smirk. Crop below the chest, nothing below.",
+      "negative": "text, letters, watermark, logo, cast shadow, ground, full body, legs, dagger, shuriken, extra characters, frame, border, flat vector look, magenta or pink tones inside the object"
+    },
+    {
+      "id": "portrait_knight",
+      "tier": "U2",
+      "ref": "knight",
+      "prompt": "Redraw this same pumpkin knight as a head-and-shoulders portrait facing RIGHT, turned slightly toward the viewer. Same carved glowing pumpkin head, same armored shoulders and cloak, same colors and outline. Calm confident glowing grin. Crop below the chest, nothing below.",
+      "negative": "text, letters, watermark, logo, cast shadow, ground, full body, legs, shield, extra characters, frame, border, flat vector look, magenta or pink tones inside the object"
+    },
+    {
+      "id": "portrait_cutin_wizard_charge",
+      "tier": "U2",
+      "ref": "wizard",
+      "prompt": "Redraw this same pumpkin wizard as a head-and-shoulders portrait facing RIGHT, same framing, hat, colors and outline. Charging a throw: one carved eye squeezed to a slit as if aiming, the other glaring, the grin pulled tight over clenched teeth, a faint orange glow building inside the face. Crop below the chest.",
+      "negative": "text, letters, watermark, logo, cast shadow, ground, full body, legs, extra characters, frame, border, flat vector look, magenta or pink tones inside the object"
+    },
+    {
+      "id": "portrait_cutin_wizard_shout",
+      "tier": "U2",
+      "ref": "wizard",
+      "prompt": "Redraw this same pumpkin wizard as a head-and-shoulders portrait facing RIGHT, same framing, hat, colors and outline. Firing: mouth stretched wide open in a laughing shout, eyes blazing bright orange-white, the witch hat blown back and tilted off the head by the blast, light bursting from the carved face. Crop below the chest.",
+      "negative": "text, letters, watermark, logo, cast shadow, ground, full body, legs, extra characters, frame, border, flat vector look, magenta or pink tones inside the object"
+    },
+    {
+      "id": "portrait_cutin_wizard_hit",
+      "tier": "U2",
+      "ref": "wizard",
+      "prompt": "Redraw this same pumpkin wizard as a head-and-shoulders portrait facing RIGHT, same framing, colors and outline. Taking a hit: eyes squeezed shut, mouth twisted in a grimace, the witch hat knocked crooked, the inner glow dimmed low, a few extra cracks on the pumpkin skin. Crop below the chest.",
+      "negative": "text, letters, watermark, logo, cast shadow, ground, full body, legs, extra characters, frame, border, stars, flat vector look, magenta or pink tones inside the object"
+    },
+    {
+      "id": "env_fence_intact",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Redraw as a tall narrow graveyard fence section, about 1 : 2 (width half the height), front view, BLACK wrought iron. Two thick end posts with pointed finials and four thin bars between them with spear-tip tops, an upper and a lower crossbar with curled scrollwork. A small glowing orange jack-o'-lantern hangs by a short chain at the center. Glossy black metal with a thin blue rim light.",
+      "negative": "text, letters, watermark, logo, cast shadow, ground, grass, extra objects, people, wide fence, horizontal layout, brown or rust color, flat vector look, magenta or pink tones inside the object"
+    },
+    {
+      "id": "env_fence_damaged",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Redraw as the same tall narrow BLACK wrought-iron graveyard fence, about 1 : 2, same footprint, but damaged: one bar snapped in half, one bar bent outward, the upper crossbar sagging at an angle, the right post leaning, black scorch marks. The jack-o'-lantern hangs cracked with a dim flicker.",
+      "negative": "text, letters, watermark, logo, cast shadow, ground, grass, extra objects, people, wide fence, horizontal layout, brown or rust color, flat vector look, magenta or pink tones inside the object"
+    },
+    {
+      "id": "env_fence_broken",
+      "tier": "U2",
+      "ref": "bar",
+      "prompt": "Redraw as the same tall narrow BLACK wrought-iron graveyard fence, about 1 : 2, same footprint, almost destroyed: only two bars still stand, the others are twisted stumps, the crossbar snapped in two and hangs by a bend, the right post toppled against the rest. The jack-o'-lantern lies smashed at the base with a dying ember glow.",
+      "negative": "text, letters, watermark, logo, cast shadow, ground, grass, extra objects, people, wide fence, horizontal layout, brown or rust color, smoke, flat vector look, magenta or pink tones inside the object"
+    }
+  ]
+}

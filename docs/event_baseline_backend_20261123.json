@@ -1,0 +1,911 @@
+{
+ "built": "2026-11-23",
+ "by_hero": {
+  "action.defend": {
+   "knight": 2191
+  },
+  "action.move": {
+   "bat": 3353,
+   "bride": 3064,
+   "hag": 3574,
+   "hunchback": 3683,
+   "knight": 4562,
+   "reaper": 3206,
+   "skeleton": 3759,
+   "wizard": 2829
+  },
+  "skill.heal": {
+   "bat": 690,
+   "bride": 660,
+   "hag": 700,
+   "hunchback": 685,
+   "knight": 742,
+   "reaper": 628,
+   "skeleton": 714,
+   "wizard": 608
+  },
+  "status.applied.bleed": {
+   "bat": 1049,
+   "bride": 998,
+   "hag": 1177,
+   "hunchback": 1166,
+   "knight": 1497,
+   "reaper": 982,
+   "skeleton": 1076,
+   "wizard": 835
+  },
+  "status.applied.burn": {
+   "bat": 414,
+   "bride": 345,
+   "hag": 387,
+   "hunchback": 409,
+   "knight": 468,
+   "reaper": 384,
+   "skeleton": 425,
+   "wizard": 338
+  },
+  "status.applied.poison": {
+   "bat": 784,
+   "bride": 683,
+   "hag": 818,
+   "hunchback": 811,
+   "knight": 1002,
+   "reaper": 680,
+   "skeleton": 873,
+   "wizard": 593
+  },
+  "status.applied.slow": {
+   "bat": 392,
+   "bride": 436,
+   "hag": 527,
+   "hunchback": 544,
+   "knight": 671,
+   "reaper": 461,
+   "skeleton": 545,
+   "wizard": 351
+  },
+  "status.applied.stun": {
+   "bat": 581,
+   "bride": 536,
+   "hag": 719,
+   "hunchback": 633,
+   "knight": 760,
+   "reaper": 559,
+   "skeleton": 748,
+   "wizard": 585
+  },
+  "status.applied.weak": {
+   "bat": 415,
+   "bride": 412,
+   "hag": 465,
+   "hunchback": 433,
+   "knight": 544,
+   "reaper": 391,
+   "skeleton": 410,
+   "wizard": 353
+  },
+  "status.expired.bleed": {
+   "bat": 862,
+   "bride": 815,
+   "hag": 977,
+   "hunchback": 978,
+   "knight": 1328,
+   "reaper": 829,
+   "skeleton": 887,
+   "wizard": 660
+  },
+  "status.expired.burn": {
+   "bat": 300,
+   "bride": 217,
+   "hag": 277,
+   "hunchback": 297,
+   "knight": 365,
+   "reaper": 275,
+   "skeleton": 293,
+   "wizard": 207
+  },
+  "status.expired.poison": {
+   "bat": 598,
+   "bride": 512,
+   "hag": 649,
+   "hunchback": 676,
+   "knight": 870,
+   "reaper": 529,
+   "skeleton": 721,
+   "wizard": 441
+  },
+  "status.expired.slow": {
+   "bat": 374,
+   "bride": 409,
+   "hag": 505,
+   "hunchback": 518,
+   "knight": 650,
+   "reaper": 445,
+   "skeleton": 522,
+   "wizard": 331
+  },
+  "status.expired.stun": {
+   "bat": 562,
+   "bride": 503,
+   "hag": 672,
+   "hunchback": 600,
+   "knight": 739,
+   "reaper": 535,
+   "skeleton": 721,
+   "wizard": 543
+  },
+  "status.expired.weak": {
+   "bat": 280,
+   "bride": 288,
+   "hag": 328,
+   "hunchback": 307,
+   "knight": 387,
+   "reaper": 286,
+   "skeleton": 297,
+   "wizard": 224
+  },
+  "status.tick_damage.bleed": {
+   "bat": 1129,
+   "bride": 1042,
+   "hag": 1279,
+   "hunchback": 1225,
+   "knight": 1648,
+   "reaper": 1067,
+   "skeleton": 1123,
+   "wizard": 770
+  },
+  "status.tick_damage.burn": {
+   "bat": 675,
+   "bride": 460,
+   "hag": 645,
+   "hunchback": 592,
+   "knight": 680,
+   "reaper": 607,
+   "skeleton": 641,
+   "wizard": 484
+  },
+  "status.tick_damage.poison": {
+   "bat": 721,
+   "bride": 642,
+   "hag": 814,
+   "hunchback": 759,
+   "knight": 996,
+   "reaper": 625,
+   "skeleton": 829,
+   "wizard": 519
+  },
+  "throw.critical": {
+   "bat": 1788,
+   "hag": 1512,
+   "hunchback": 1366,
+   "knight": 1809,
+   "reaper": 1309,
+   "skeleton": 1810,
+   "wizard": 1436
+  },
+  "throw.damage": {
+   "bat": 5355,
+   "bride": 5118,
+   "hag": 6336,
+   "hunchback": 7024,
+   "knight": 6338,
+   "reaper": 5364,
+   "skeleton": 6333,
+   "wizard": 4178
+  },
+  "throw.kind.double": {
+   "bat": 751,
+   "bride": 711,
+   "hag": 703,
+   "hunchback": 763,
+   "knight": 721,
+   "reaper": 648,
+   "skeleton": 763,
+   "wizard": 680
+  },
+  "throw.kind.heavy": {
+   "bat": 716,
+   "bride": 691,
+   "hag": 704,
+   "hunchback": 734,
+   "knight": 748,
+   "reaper": 665,
+   "skeleton": 725,
+   "wizard": 704
+  },
+  "throw.kind.plain": {
+   "bat": 9333,
+   "bride": 8356,
+   "hag": 9982,
+   "hunchback": 10391,
+   "knight": 12680,
+   "reaper": 8923,
+   "skeleton": 10550,
+   "wizard": 7861
+  },
+  "throw.kind.ultimate": {
+   "bat": 1060,
+   "bride": 1026,
+   "hag": 1215,
+   "hunchback": 1258,
+   "reaper": 1021,
+   "skeleton": 1147,
+   "wizard": 844
+  },
+  "throw.knockback": {
+   "hunchback": 6184
+  },
+  "throw.result.central_wall": {
+   "bat": 2016,
+   "bride": 1908,
+   "hag": 2103,
+   "hunchback": 1856,
+   "knight": 2777,
+   "reaper": 1923,
+   "skeleton": 2209,
+   "wizard": 1730
+  },
+  "throw.result.ground": {
+   "bat": 4235,
+   "bride": 3531,
+   "hag": 3911,
+   "hunchback": 3986,
+   "knight": 4750,
+   "reaper": 3767,
+   "skeleton": 4359,
+   "wizard": 3982
+  },
+  "throw.result.hero": {
+   "bat": 5355,
+   "bride": 5118,
+   "hag": 6336,
+   "hunchback": 7024,
+   "knight": 6338,
+   "reaper": 5364,
+   "skeleton": 6333,
+   "wizard": 4154
+  },
+  "throw.result.shield_blocked": {
+   "bat": 113,
+   "bride": 90,
+   "hag": 91,
+   "hunchback": 121,
+   "knight": 111,
+   "reaper": 79,
+   "skeleton": 117,
+   "wizard": 81
+  },
+  "throw.result.ultimate_blocked": {
+   "bat": 141,
+   "bride": 137,
+   "hag": 163,
+   "hunchback": 159,
+   "knight": 173,
+   "reaper": 124,
+   "skeleton": 167,
+   "wizard": 142
+  },
+  "throw.status_carried.bleed": {
+   "bat": 231,
+   "bride": 228,
+   "hag": 281,
+   "hunchback": 6432,
+   "knight": 268,
+   "reaper": 239,
+   "skeleton": 5623,
+   "wizard": 229
+  },
+  "throw.status_carried.burn": {
+   "bat": 161,
+   "bride": 138,
+   "hag": 133,
+   "hunchback": 152,
+   "knight": 155,
+   "reaper": 5010,
+   "skeleton": 159,
+   "wizard": 108
+  },
+  "throw.status_carried.poison": {
+   "bat": 170,
+   "bride": 4334,
+   "hag": 190,
+   "hunchback": 213,
+   "knight": 209,
+   "reaper": 156,
+   "skeleton": 190,
+   "wizard": 3283
+  },
+  "throw.status_carried.slow": {
+   "bat": 4470
+  },
+  "throw.status_carried.stun": {
+   "bat": 1504,
+   "hag": 1889,
+   "hunchback": 1227,
+   "knight": 1584,
+   "reaper": 1171,
+   "skeleton": 1569,
+   "wizard": 1148
+  },
+  "throw.status_carried.weak": {
+   "bat": 202,
+   "bride": 158,
+   "hag": 185,
+   "hunchback": 236,
+   "knight": 207,
+   "reaper": 208,
+   "skeleton": 5824,
+   "wizard": 144
+  },
+  "throw.total": {
+   "bat": 11860,
+   "bride": 10784,
+   "hag": 12604,
+   "hunchback": 13146,
+   "knight": 14149,
+   "reaper": 11257,
+   "skeleton": 13185,
+   "wizard": 10089
+  },
+  "turn.skipped": {
+   "bat": 53,
+   "bride": 37,
+   "hag": 52,
+   "hunchback": 60,
+   "knight": 65,
+   "reaper": 44,
+   "skeleton": 64,
+   "wizard": 38
+  },
+  "ultimate.used": {
+   "bat": 1060,
+   "bride": 1026,
+   "hag": 1215,
+   "hunchback": 1258,
+   "knight": 1374,
+   "reaper": 1021,
+   "skeleton": 1147,
+   "wizard": 844
+  },
+  "unit.ko": {
+   "bat": 1026,
+   "bride": 815,
+   "hag": 1057,
+   "hunchback": 1005,
+   "knight": 1105,
+   "reaper": 1000,
+   "skeleton": 1015,
+   "wizard": 938
+  },
+  "wall.hit": {
+   "bat": 2016,
+   "bride": 1908,
+   "hag": 2103,
+   "hunchback": 1856,
+   "knight": 2777,
+   "reaper": 1923,
+   "skeleton": 2209,
+   "wizard": 1730
+  }
+ },
+ "by_size": {
+  "action.defend": {
+   "1": 674,
+   "2": 683,
+   "3": 834
+  },
+  "action.move": {
+   "1": 7897,
+   "2": 8670,
+   "3": 11463
+  },
+  "energy.gained": {
+   "1": 9311,
+   "2": 11400,
+   "3": 14913
+  },
+  "energy.ultimate_ready": {
+   "1": 2798,
+   "2": 3467,
+   "3": 4961
+  },
+  "knight_wall.set": {
+   "1": 375,
+   "2": 477,
+   "3": 522
+  },
+  "knight_wall.used_up": {
+   "1": 339,
+   "2": 437,
+   "3": 512
+  },
+  "match.end.ko": {
+   "1": 925,
+   "2": 916,
+   "3": 923
+  },
+  "match.end.round_cap": {
+   "1": 75,
+   "2": 84,
+   "3": 77
+  },
+  "match.rounds": {
+   "1": 13862,
+   "2": 14962,
+   "3": 19311
+  },
+  "match.winner.red": {
+   "1": 483,
+   "2": 554,
+   "3": 538
+  },
+  "match.winner.white": {
+   "1": 517,
+   "2": 446,
+   "3": 462
+  },
+  "round.end": {
+   "1": 13862,
+   "2": 14962,
+   "3": 19311
+  },
+  "shield.expired": {
+   "1": 513,
+   "2": 584,
+   "3": 745
+  },
+  "shield.placed": {
+   "1": 537,
+   "2": 610,
+   "3": 770
+  },
+  "skill.heal": {
+   "1": 1659,
+   "2": 1842,
+   "3": 1926
+  },
+  "status.applied.bleed": {
+   "1": 1624,
+   "2": 2824,
+   "3": 4332
+  },
+  "status.applied.burn": {
+   "1": 437,
+   "2": 968,
+   "3": 1765
+  },
+  "status.applied.poison": {
+   "1": 1070,
+   "2": 1910,
+   "3": 3264
+  },
+  "status.applied.slow": {
+   "1": 910,
+   "2": 1153,
+   "3": 1864
+  },
+  "status.applied.stun": {
+   "1": 1151,
+   "2": 1503,
+   "3": 2467
+  },
+  "status.applied.weak": {
+   "1": 633,
+   "2": 1037,
+   "3": 1753
+  },
+  "status.expired.bleed": {
+   "1": 1349,
+   "2": 2351,
+   "3": 3636
+  },
+  "status.expired.burn": {
+   "1": 266,
+   "2": 652,
+   "3": 1313
+  },
+  "status.expired.poison": {
+   "1": 773,
+   "2": 1524,
+   "3": 2699
+  },
+  "status.expired.slow": {
+   "1": 872,
+   "2": 1083,
+   "3": 1799
+  },
+  "status.expired.stun": {
+   "1": 1078,
+   "2": 1422,
+   "3": 2375
+  },
+  "status.expired.weak": {
+   "1": 527,
+   "2": 749,
+   "3": 1121
+  },
+  "status.tick_damage.bleed": {
+   "1": 2161,
+   "2": 2792,
+   "3": 4330
+  },
+  "status.tick_damage.burn": {
+   "1": 871,
+   "2": 1497,
+   "3": 2416
+  },
+  "status.tick_damage.poison": {
+   "1": 1217,
+   "2": 1801,
+   "3": 2887
+  },
+  "throw.critical": {
+   "1": 2296,
+   "2": 3296,
+   "3": 5438
+  },
+  "throw.damage": {
+   "1": 11371,
+   "2": 13901,
+   "3": 20774
+  },
+  "throw.kind.double": {
+   "1": 1869,
+   "2": 1914,
+   "3": 1957
+  },
+  "throw.kind.heavy": {
+   "1": 1814,
+   "2": 1908,
+   "3": 1965
+  },
+  "throw.kind.plain": {
+   "1": 22706,
+   "2": 23875,
+   "3": 31495
+  },
+  "throw.kind.ultimate": {
+   "1": 1999,
+   "2": 2456,
+   "3": 3116
+  },
+  "throw.knockback": {
+   "1": 1742,
+   "2": 1842,
+   "3": 2600
+  },
+  "throw.result.central_wall": {
+   "1": 4336,
+   "2": 5606,
+   "3": 6580
+  },
+  "throw.result.ground": {
+   "1": 12143,
+   "2": 9995,
+   "3": 10383
+  },
+  "throw.result.hero": {
+   "1": 11365,
+   "2": 13894,
+   "3": 20763
+  },
+  "throw.result.shield_blocked": {
+   "1": 231,
+   "2": 254,
+   "3": 318
+  },
+  "throw.result.ultimate_blocked": {
+   "1": 313,
+   "2": 404,
+   "3": 489
+  },
+  "throw.status_carried.bleed": {
+   "1": 3250,
+   "2": 4126,
+   "3": 6155
+  },
+  "throw.status_carried.burn": {
+   "1": 1258,
+   "2": 1796,
+   "3": 2962
+  },
+  "throw.status_carried.poison": {
+   "1": 1944,
+   "2": 2648,
+   "3": 4153
+  },
+  "throw.status_carried.slow": {
+   "1": 1205,
+   "2": 1278,
+   "3": 1987
+  },
+  "throw.status_carried.stun": {
+   "1": 2349,
+   "2": 2971,
+   "3": 4772
+  },
+  "throw.status_carried.weak": {
+   "1": 1442,
+   "2": 2069,
+   "3": 3653
+  },
+  "throw.total": {
+   "1": 28388,
+   "2": 30153,
+   "3": 38533
+  },
+  "turn.skipped": {
+   "1": 100,
+   "2": 105,
+   "3": 208
+  },
+  "ultimate.used": {
+   "1": 2374,
+   "2": 2933,
+   "3": 3638
+  },
+  "unit.ko": {
+   "1": 925,
+   "2": 2618,
+   "3": 4418
+  },
+  "wall.broken": {
+   "1": 75,
+   "2": 35,
+   "3": 60
+  },
+  "wall.hit": {
+   "1": 4336,
+   "2": 5606,
+   "3": 6580
+  }
+ },
+ "disabled_by_design": {
+  "throw.near_miss": "owner decision: near-miss compensation is completely off (shared/comeback.json near_miss.enabled false); the field exists but never fires"
+ },
+ "events": {
+  "action.defend": {
+   "fired": 2191,
+   "per_match": 0.7303
+  },
+  "action.move": {
+   "fired": 28030,
+   "per_match": 9.3433
+  },
+  "energy.gained": {
+   "fired": 35624,
+   "per_match": 11.8747
+  },
+  "energy.ultimate_ready": {
+   "fired": 11226,
+   "per_match": 3.742
+  },
+  "knight_wall.set": {
+   "fired": 1374,
+   "per_match": 0.458
+  },
+  "knight_wall.used_up": {
+   "fired": 1288,
+   "per_match": 0.4293
+  },
+  "match.end.ko": {
+   "fired": 2764,
+   "per_match": 0.9213
+  },
+  "match.end.round_cap": {
+   "fired": 236,
+   "per_match": 0.0787
+  },
+  "match.rounds": {
+   "fired": 48135,
+   "per_match": 16.045
+  },
+  "match.winner.red": {
+   "fired": 1575,
+   "per_match": 0.525
+  },
+  "match.winner.white": {
+   "fired": 1425,
+   "per_match": 0.475
+  },
+  "round.end": {
+   "fired": 48135,
+   "per_match": 16.045
+  },
+  "shield.expired": {
+   "fired": 1842,
+   "per_match": 0.614
+  },
+  "shield.placed": {
+   "fired": 1917,
+   "per_match": 0.639
+  },
+  "skill.heal": {
+   "fired": 5427,
+   "per_match": 1.809
+  },
+  "status.applied.bleed": {
+   "fired": 8780,
+   "per_match": 2.9267
+  },
+  "status.applied.burn": {
+   "fired": 3170,
+   "per_match": 1.0567
+  },
+  "status.applied.poison": {
+   "fired": 6244,
+   "per_match": 2.0813
+  },
+  "status.applied.slow": {
+   "fired": 3927,
+   "per_match": 1.309
+  },
+  "status.applied.stun": {
+   "fired": 5121,
+   "per_match": 1.707
+  },
+  "status.applied.weak": {
+   "fired": 3423,
+   "per_match": 1.141
+  },
+  "status.expired.bleed": {
+   "fired": 7336,
+   "per_match": 2.4453
+  },
+  "status.expired.burn": {
+   "fired": 2231,
+   "per_match": 0.7437
+  },
+  "status.expired.poison": {
+   "fired": 4996,
+   "per_match": 1.6653
+  },
+  "status.expired.slow": {
+   "fired": 3754,
+   "per_match": 1.2513
+  },
+  "status.expired.stun": {
+   "fired": 4875,
+   "per_match": 1.625
+  },
+  "status.expired.weak": {
+   "fired": 2397,
+   "per_match": 0.799
+  },
+  "status.tick_damage.bleed": {
+   "fired": 9283,
+   "per_match": 3.0943
+  },
+  "status.tick_damage.burn": {
+   "fired": 4784,
+   "per_match": 1.5947
+  },
+  "status.tick_damage.poison": {
+   "fired": 5905,
+   "per_match": 1.9683
+  },
+  "throw.critical": {
+   "fired": 11030,
+   "per_match": 3.6767
+  },
+  "throw.damage": {
+   "fired": 46046,
+   "per_match": 15.3487
+  },
+  "throw.kind.double": {
+   "fired": 5740,
+   "per_match": 1.9133
+  },
+  "throw.kind.heavy": {
+   "fired": 5687,
+   "per_match": 1.8957
+  },
+  "throw.kind.plain": {
+   "fired": 78076,
+   "per_match": 26.0253
+  },
+  "throw.kind.ultimate": {
+   "fired": 7571,
+   "per_match": 2.5237
+  },
+  "throw.knockback": {
+   "fired": 6184,
+   "per_match": 2.0613
+  },
+  "throw.result.central_wall": {
+   "fired": 16522,
+   "per_match": 5.5073
+  },
+  "throw.result.ground": {
+   "fired": 32521,
+   "per_match": 10.8403
+  },
+  "throw.result.hero": {
+   "fired": 46022,
+   "per_match": 15.3407
+  },
+  "throw.result.shield_blocked": {
+   "fired": 803,
+   "per_match": 0.2677
+  },
+  "throw.result.ultimate_blocked": {
+   "fired": 1206,
+   "per_match": 0.402
+  },
+  "throw.status_carried.bleed": {
+   "fired": 13531,
+   "per_match": 4.5103
+  },
+  "throw.status_carried.burn": {
+   "fired": 6016,
+   "per_match": 2.0053
+  },
+  "throw.status_carried.poison": {
+   "fired": 8745,
+   "per_match": 2.915
+  },
+  "throw.status_carried.slow": {
+   "fired": 4470,
+   "per_match": 1.49
+  },
+  "throw.status_carried.stun": {
+   "fired": 10092,
+   "per_match": 3.364
+  },
+  "throw.status_carried.weak": {
+   "fired": 7164,
+   "per_match": 2.388
+  },
+  "throw.total": {
+   "fired": 97074,
+   "per_match": 32.358
+  },
+  "turn.skipped": {
+   "fired": 413,
+   "per_match": 0.1377
+  },
+  "ultimate.used": {
+   "fired": 8945,
+   "per_match": 2.9817
+  },
+  "unit.ko": {
+   "fired": 7961,
+   "per_match": 2.6537
+  },
+  "wall.broken": {
+   "fired": 170,
+   "per_match": 0.0567
+  },
+  "wall.hit": {
+   "fired": 16522,
+   "per_match": 5.5073
+  }
+ },
+ "exceptions": 0,
+ "heroes_seen": [
+  "bat",
+  "bride",
+  "hag",
+  "hunchback",
+  "knight",
+  "reaper",
+  "skeleton",
+  "wizard"
+ ],
+ "kind": "back end event tally",
+ "label": "baseline",
+ "matches": 3000,
+ "matches_by_size": {
+  "1": 1000,
+  "2": 1000,
+  "3": 1000
+ },
+ "never_fired": [],
+ "never_fired_by_hero": [],
+ "note": "Back end only: the rules engine driven by a bot (plain, heavy, double, heal, move, knight shield and wall, every ultimate). Events come from before/after snapshots of the match; nothing in the engine was changed.",
+ "rejected_tool_calls": {
+  "submit_action:defend": 2202,
+  "submit_action:move": 824
+ },
+ "tree_head": "931720c9"
+}

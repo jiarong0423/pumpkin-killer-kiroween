@@ -1,0 +1,9 @@
+Source: https://opengameart.org/content/creepy-ambient-loop
+Work: Creepy Ambient Loop
+Author: epb9000
+Checked and downloaded: 2026-11-09
+License wording on the page that day: License(s): CC0
+Original file name: creepyloop-v2_0.ogg
+Saved in the game as: assets/audio/music/bed_ambient.ogg
+sha256: 609bd62e824d77df3d35af26064bfd824cb6fce95cb9637c467fb80b717d6050
+Note: verified by Kiro task 22 (page opened) and re-checked by the reviewer (page text contains CC0). Not heard by the reviewer.

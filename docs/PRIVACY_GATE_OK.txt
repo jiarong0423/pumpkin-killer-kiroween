@@ -1,0 +1,10 @@
+Privacy gate result (locations only; the gate never prints matched material)
+date: 2026-11-16 13:50
+command: python3 -B scripts/release/privacy_gate.py --tree <fresh export of this repository> --check all   (terms file read by the script from the owner's home directory; never read by the assistant)
+export: python3 -B scripts/release/export_tree.py --source . --manifest scripts/release/export_manifest.json --out <empty folder> --apply   (exit 0)
+gate exit code: 0
+BLOCK findings: 0
+REVIEW findings by rule: P10=4274 P5=272 P8=791 P9=29 
+REVIEW meaning: P5 secret-like variable names, P8 balance-like words (game balance), P9 generic Drive folder names in colab scripts, P10 Chinese text outside the page; reviewed as benign by sampling.
+Before this run the gate reported 50 BLOCK findings (local home paths and the owner's handle) in 10 internal documents; they were replaced by <home> and <owner> placeholders.
+Note: re-run the export and the gate right before pushing; anything changed after this file was written is not covered.

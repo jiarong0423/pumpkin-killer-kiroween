@@ -1,0 +1,3 @@
+23:00:10 model claude-sonnet-5.5 attempt 1
+23:06:26 result bad_model (exit 0)
+23:06:26 ERROR every model in route 'flow' failed

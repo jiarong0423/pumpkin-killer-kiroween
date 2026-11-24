@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "constants-sync-on-engine-save",
+      "description": "When the shared constants or the Python engine are saved, run the constants sync test.",
+      "trigger": "PostFileSave",
+      "matcher": "(shared/constants\\.json|scripts/mcp_(game|stdio)_server\\.py)$",
+      "action": {
+        "type": "command",
+        "command": "mkdir -p docs/kiro_evidence/raw && echo \"$(date -u +%Y-%m-%dT%H:%M:%SZ) hook fired: constants or engine saved\" >> docs/kiro_evidence/raw/hook_runs.log ; python3 -B scripts/test_constants_sync.py >> docs/kiro_evidence/raw/hook_runs.log 2>&1 ; true"
+      },
+      "timeout": 60,
+      "enabled": true
+    }
+  ]
+}

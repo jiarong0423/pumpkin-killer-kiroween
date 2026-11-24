@@ -1,0 +1,173 @@
+{
+ "refs": {
+  "style_wizard_unit": "assets/units/unit_wizard.png",
+  "style_dart": "assets/weapons/dart.png",
+  "style_poison_bubbles": "assets/fx/sprites/fx_poison_bubbles.png",
+  "style_heal_rain_drop": "assets/fx/sprites/fx_heal_rain_drop.png",
+  "identity_hag_idle1": "out:hag_idle1_r2_v1_q3a.png"
+ },
+ "jobs": [
+  {
+   "id": "hag_idle1_r2",
+   "tier": "Q3",
+   "ref": "style_wizard_unit",
+   "refs": [
+    "style_wizard_unit"
+   ],
+   "prompt": "Use the first reference only for the shared game character style, canvas scale, and full-body proportion; do NOT copy its wizard identity, face, clothing, hat, or pose. Design ONE original full-body hero, the Cross-Throwing Ghost Nun: a chibi two-heads-tall hunched undead nun wearing a black nun's veil over a white wimple (coif) that frames the face, a white collar band, and a black robe with thin purple trim and a rope belt (a GHOST NUN: no witch hat, no pointed hat). Hunched floating ghost nun: back strongly bowed, head thrust forward, shoulders high, the long robe tapering at the bottom into wisps of black smoke so she hovers a few centimetres above the ground with no legs or feet showing, very long sleeves that hang past the hands. Her FACE must be clearly visible and well drawn inside the white wimple, lit by warm orange light: a cartoon ghost-nun face, sallow grey-green skin (a pale grey-green, NOT bone white) with a few thin crack lines on the forehead and cheeks; two large slanted almond eyes with glowing yellow irises and narrow cat-like pupils, ringed by dark smudged liner and eye bags, one eyebrow raised in a sly look; a tiny nose; a sly crooked grin showing two small sharp fangs (the mouth opens wide only when she throws). Stylised chibi cartoon, not photographic, not a copy of any film nun. Exactly two eyes, one nose, one mouth; no melted, blank, black or distorted face. She carries a hollowed-out pumpkin-orange basket with a woven handle, filled with several plain shiny small wooden crosses each a plain Latin cross; thin black smoke rises from the crosses, the basket and the robe hem. Warm orange rim light. Calm idle, three-quarter view facing RIGHT, centred, the robe hem resting on the wizard-comparable feet baseline (she hovers just above it; no legs or feet visible). Do not include text, extra limbs, any other character, a red cross, a single cross held up in one hand, a blue cloak, a witch hat, or a known film or cartoon nun likeness.",
+   "style": "Dark-fantasy 2D cartoon game character, chibi two-heads-tall proportions with a big head and small body, thick clean near-black outline plus a thin warm-orange outer outline glow, flat three-tone cel shading with soft highlights, large expressive cartoon eyes, and small simplified hands. One character, full body, centred, 10 percent empty margin. Flat solid noise-free magenta background #FF00FF, no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, extra limb, extra hand, extra head, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, black face, blank face, faceless, melted face, distorted face, asymmetrical eyes, extra eyes, young face, smooth featureless face, hood, hooded cloak, hoodie, no hat, bare head, smooth white plastic mask, film mask, long hooked nose, black hollow eye sockets, empty eyes, skull face, pale white face, witch hat, pointed hat, film nun likeness, photographic face, pale white face, apple, any fruit, blue-violet glow, blue aura, blue-purple ambient light, cold blue rim light, glowing mist around the figure, visible legs, visible feet, boots, standing on the ground, shadow on the ground"
+  },
+  {
+   "id": "hag_front_r2",
+   "tier": "Q3",
+   "ref": "style_wizard_unit",
+   "refs": [
+    "style_wizard_unit"
+   ],
+   "prompt": "Use the first reference only for the shared game character style; do NOT copy its wizard identity or its hat. Design ONE original Cross-Throwing Ghost Nun face portrait, head and shoulders only, cropped at the upper chest, wearing a black nun's veil over a white wimple (coif) that frames the face, a white collar band, and a black robe with thin purple trim and a rope belt (a GHOST NUN: no witch hat, no pointed hat). Her FACE must be clearly visible and well drawn inside the white wimple, lit by warm orange light: a cartoon ghost-nun face, sallow grey-green skin (a pale grey-green, NOT bone white) with a few thin crack lines on the forehead and cheeks; two large slanted almond eyes with glowing yellow irises and narrow cat-like pupils, ringed by dark smudged liner and eye bags, one eyebrow raised in a sly look; a tiny nose; a sly crooked grin showing two small sharp fangs (the mouth opens wide only when she throws). Stylised chibi cartoon, not photographic, not a copy of any film nun. Exactly two eyes, one nose, one mouth; no melted, blank, black or distorted face. Centre the head with about 10 percent margin; no basket, no cross, no hands. Do not include text, extra limbs, any other character, a red cross, a witch hat, or a known film or cartoon nun likeness.",
+   "style": "Dark-fantasy 2D cartoon game portrait. Thick clean near-black contour, then a thin warm-orange outer glow. Flat three-tone cel shading and soft highlights; no airbrush or realistic material rendering. Chibi face, large expressive eyes, stable proportions. Solid noise-free #FF00FF background, no ground or cast shadow, 10 percent margin.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, extra limb, extra hand, extra head, full body, hands, basket, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, black face, blank face, faceless, melted face, distorted face, asymmetrical eyes, extra eyes, young face, smooth featureless face, hood, hooded cloak, hoodie, no hat, bare head, smooth white plastic mask, film mask, long hooked nose, black hollow eye sockets, empty eyes, skull face, pale white face, witch hat, pointed hat, film nun likeness, photographic face, pale white face, apple, any fruit, blue-violet glow, blue aura, blue-purple ambient light, cold blue rim light, glowing mist around the figure"
+  },
+  {
+   "id": "hag_idle2",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_v1_hag1.png",
+   "refs": [
+    "style_wizard_unit",
+    "identity_hag_idle1"
+   ],
+   "prompt": "Use the first reference only for the shared game art style. Use the second reference for the exact owner-selected Ghost Nun identity: same face, a black nun's veil over a white wimple that frames the face, a white collar band, and a black robe with thin purple trim, a thin silver cross embroidered down the front, a small cross pendant on a thin cord, and a rope belt (a ghost nun, no witch hat), robe, pumpkin basket, crosses, size, scale, position, and feet baseline. Edit the second reference into the next idle moment. Keep the same three-quarter RIGHT-facing direction. Change ONLY a small breath: the robe hem and black smoke curls shift slightly, and the basket settles a little. Her expression stays calm. Do not include text, extra limbs, any other character, a red cross, a single cross held up in one hand, a blue cloak, white hair, a hooked-nose pose, or a known cartoon-witch likeness.",
+   "style": "Dark-fantasy 2D cartoon game character. Thick clean near-black contour, thin warm-orange outer glow, flat three-tone cel shading, soft highlights, no airbrush. One full-body character, centred, solid noise-free #FF00FF background, no ground or cast shadow, same margin as the identity reference.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, different face, different robe, changed size, extra limb, extra hand, extra head, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, hood, witch hat, pointed hat, film nun likeness, photographic face, pale white face, apple, any fruit, blue-violet glow, blue aura, blue-purple ambient light, cold blue rim light, glowing mist around the figure, visible legs, visible feet, boots, standing on the ground, shadow on the ground"
+  },
+  {
+   "id": "hag_charge1",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_v1_hag1.png",
+   "refs": [
+    "style_wizard_unit",
+    "identity_hag_idle1"
+   ],
+   "prompt": "Use the first reference only for the shared game art style. Use the second reference for the exact owner-selected Ghost Nun identity: same face, a black nun's veil over a white wimple that frames the face, a white collar band, and a black robe with thin purple trim, a thin silver cross embroidered down the front, a small cross pendant on a thin cord, and a rope belt (a ghost nun, no witch hat), robe, pumpkin basket, crosses, size, scale, and feet baseline. Strict side view facing LEFT, the same throwing direction for every action frame; the throw goes toward the LEFT. Draw the first charge frame: the throwing hand rises to her chest and closes around the small cross pendant hanging at the chest, the other hand keeps the basket at her side, the body tilts slightly forward, the sly grin tightens. She is a hunched, hovering ghost nun; the throw is a chest-level push-throw FROM the chest cross FORWARD (not an underhand lob, not an overhand javelin throw, nothing over the shoulder). One character, one head, full body, same scale as the second reference, the robe hem on the same baseline as the second reference (she hovers just above it; no legs or feet visible). Do not include text, extra limbs, any other character, a red cross, a single cross held up in one hand, a blue cloak, white hair, a hooked-nose pose, or a known cartoon-witch likeness.",
+   "style": "Dark-fantasy 2D cartoon game character. Thick clean near-black contour, thin warm-orange outer glow, flat three-tone cel shading, soft highlights, no airbrush. One full-body character, centred, solid noise-free #FF00FF background, no ground or cast shadow, 10 percent margin.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, different face, changed scale, mirrored direction, extra limb, extra hand, extra head, switched throwing hand, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, hood, witch hat, pointed hat, film nun likeness, photographic face, pale white face, apple, any fruit, blue-violet glow, blue aura, blue-purple ambient light, cold blue rim light, glowing mist around the figure, visible legs, visible feet, boots, standing on the ground, shadow on the ground, overhand throw, javelin throw, arm raised over the shoulder, underhand lob from the hip, apples, a cross taken from the basket"
+  },
+  {
+   "id": "hag_charge2",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_v1_hag1.png",
+   "refs": [
+    "style_wizard_unit",
+    "identity_hag_idle1"
+   ],
+   "prompt": "Use the first reference only for the shared game art style. Use the second reference for the exact owner-selected Ghost Nun identity: same face, a black nun's veil over a white wimple that frames the face, a white collar band, and a black robe with thin purple trim, a thin silver cross embroidered down the front, a small cross pendant on a thin cord, and a rope belt (a ghost nun, no witch hat), robe, pumpkin basket, crosses, size, scale, and feet baseline. Strict side view facing LEFT; the throw goes toward the LEFT. Draw the mid charge frame: the hand still grips the cross, now pulled slightly back beside the chest with the elbow bent, the cross held up in front of the collarbone, black smoke wisps curling around the fist, the body leaning back a little. She is a hunched, hovering ghost nun; the throw is a chest-level push-throw FROM the chest cross FORWARD (not an underhand lob, not an overhand javelin throw, nothing over the shoulder). One character, one head, full body, same scale as the second reference, the robe hem on the same baseline as the second reference (she hovers just above it; no legs or feet visible). Do not include text, extra limbs, any other character, a red cross, a single cross held up in one hand, a blue cloak, white hair, a hooked-nose pose, or a known cartoon-witch likeness.",
+   "style": "Dark-fantasy 2D cartoon game character. Thick clean near-black contour, thin warm-orange outer glow, flat three-tone cel shading, soft highlights, no airbrush. One full-body character, centred, solid noise-free #FF00FF background, no ground or cast shadow, 10 percent margin.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, copy of charge1, full-charge pose, different face, changed scale, mirrored direction, extra limb, extra hand, extra head, switched throwing hand, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, hood, witch hat, pointed hat, film nun likeness, photographic face, pale white face, apple, any fruit, blue-violet glow, blue aura, blue-purple ambient light, cold blue rim light, glowing mist around the figure, visible legs, visible feet, boots, standing on the ground, shadow on the ground, overhand throw, javelin throw, arm raised over the shoulder, underhand lob from the hip, apples, a cross taken from the basket"
+  },
+  {
+   "id": "hag_charge3",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_v1_hag1.png",
+   "refs": [
+    "style_wizard_unit",
+    "identity_hag_idle1"
+   ],
+   "prompt": "Use the first reference only for the shared game art style. Use the second reference for the exact owner-selected Ghost Nun identity: same face, a black nun's veil over a white wimple that frames the face, a white collar band, and a black robe with thin purple trim, a thin silver cross embroidered down the front, a small cross pendant on a thin cord, and a rope belt (a ghost nun, no witch hat), robe, pumpkin basket, crosses, size, scale, and feet baseline. Strict side view facing LEFT; the throw goes toward the LEFT. Draw the full charge frame: the hand gripping the cross is drawn back to the farthest point beside her shoulder at chest height, elbow bent sharply, the grin wide with fangs, the body coiled, black smoke gathering around the fist. She is a hunched, hovering ghost nun; the throw is a chest-level push-throw FROM the chest cross FORWARD (not an underhand lob, not an overhand javelin throw, nothing over the shoulder). One character, one head, full body, same scale as the second reference, the robe hem on the same baseline as the second reference (she hovers just above it; no legs or feet visible). Do not include text, extra limbs, any other character, a red cross, a single cross held up in one hand, a blue cloak, white hair, a hooked-nose pose, or a known cartoon-witch likeness.",
+   "style": "Dark-fantasy 2D cartoon game character. Thick clean near-black contour, thin warm-orange outer glow, flat three-tone cel shading, soft highlights, no airbrush. One full-body character, centred, solid noise-free #FF00FF background, no ground or cast shadow, 10 percent margin.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, copy of charge1, copy of charge2, different face, changed scale, mirrored direction, extra limb, extra hand, extra head, switched throwing hand, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, hood, witch hat, pointed hat, film nun likeness, photographic face, pale white face, apple, any fruit, blue-violet glow, blue aura, blue-purple ambient light, cold blue rim light, glowing mist around the figure, visible legs, visible feet, boots, standing on the ground, shadow on the ground, overhand throw, javelin throw, arm raised over the shoulder, underhand lob from the hip, apples, a cross taken from the basket"
+  },
+  {
+   "id": "hag_release",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_v1_hag1.png",
+   "refs": [
+    "style_wizard_unit",
+    "identity_hag_idle1"
+   ],
+   "prompt": "Use the first reference only for the shared game art style. Use the second reference for the exact owner-selected Ghost Nun identity: same face, a black nun's veil over a white wimple that frames the face, a white collar band, and a black robe with thin purple trim, a thin silver cross embroidered down the front, a small cross pendant on a thin cord, and a rope belt (a ghost nun, no witch hat), robe, pumpkin basket, crosses, size, scale, and feet baseline. Strict side view facing LEFT; the throw goes toward the LEFT. Draw the release: the arm snaps straight FORWARD at chest height, the hand open, and the cross leaves the hand flying forward ahead of it, spinning and trailing black smoke; the other hand keeps the basket at her side; the mouth open in a wail. She is a hunched, hovering ghost nun; the throw is a chest-level push-throw FROM the chest cross FORWARD (not an underhand lob, not an overhand javelin throw, nothing over the shoulder). One character, one head, full body, same scale as the second reference, the robe hem on the same baseline as the second reference (she hovers just above it; no legs or feet visible). Do not include text, extra limbs, any other character, a red cross, a single cross held up in one hand, a blue cloak, white hair, a hooked-nose pose, or a known cartoon-witch likeness.",
+   "style": "Dark-fantasy 2D cartoon game character. Thick clean near-black contour, thin warm-orange outer glow, flat three-tone cel shading, soft highlights, no airbrush. One full-body character, centred, solid noise-free #FF00FF background, no ground or cast shadow, 10 percent margin.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, apple in the hand, switched throwing hand, different face, changed scale, mirrored direction, extra limb, extra hand, extra head, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, hood, witch hat, pointed hat, film nun likeness, photographic face, pale white face, apple, any fruit, blue-violet glow, blue aura, blue-purple ambient light, cold blue rim light, glowing mist around the figure, visible legs, visible feet, boots, standing on the ground, shadow on the ground, overhand throw, javelin throw, arm raised over the shoulder, underhand lob from the hip, apples, a cross taken from the basket"
+  },
+  {
+   "id": "hag_empty",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_v1_hag1.png",
+   "refs": [
+    "style_wizard_unit",
+    "identity_hag_idle1"
+   ],
+   "prompt": "Use the first reference only for the shared game art style. Use the second reference for the exact owner-selected Ghost Nun identity: same face, a black nun's veil over a white wimple that frames the face, a white collar band, and a black robe with thin purple trim, a thin silver cross embroidered down the front, a small cross pendant on a thin cord, and a rope belt (a ghost nun, no witch hat), robe, pumpkin basket, crosses, size, scale, and feet baseline. Strict side view facing LEFT; the throw goes toward the LEFT. Draw the follow-through: the arm stays extended forward at chest height with the hand open and empty, the pendant cord hanging loose and empty at the chest, black smoke trailing from the open hand, the basket held at her side. She is a hunched, hovering ghost nun; the throw is a chest-level push-throw FROM the chest cross FORWARD (not an underhand lob, not an overhand javelin throw, nothing over the shoulder). One character, one head, full body, same scale as the second reference, the robe hem on the same baseline as the second reference (she hovers just above it; no legs or feet visible). Do not include text, extra limbs, any other character, a red cross, a single cross held up in one hand, a blue cloak, white hair, a hooked-nose pose, or a known cartoon-witch likeness.",
+   "style": "Dark-fantasy 2D cartoon game character. Thick clean near-black contour, thin warm-orange outer glow, flat three-tone cel shading, soft highlights, no airbrush. One full-body character, centred, solid noise-free #FF00FF background, no ground or cast shadow, 10 percent margin.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, loose apple, projectile, apple in hand, different face, changed scale, mirrored direction, extra limb, extra hand, extra head, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, hood, witch hat, pointed hat, film nun likeness, photographic face, pale white face, apple, any fruit, blue-violet glow, blue aura, blue-purple ambient light, cold blue rim light, glowing mist around the figure, visible legs, visible feet, boots, standing on the ground, shadow on the ground, overhand throw, javelin throw, arm raised over the shoulder, underhand lob from the hip, apples, a cross taken from the basket"
+  },
+  {
+   "id": "hag_hit",
+   "tier": "Q3",
+   "ref": "out:hag_idle1_v1_hag1.png",
+   "refs": [
+    "style_wizard_unit",
+    "identity_hag_idle1"
+   ],
+   "prompt": "Use the first reference only for the shared game art style. Use the second reference for the exact owner-selected Ghost Nun identity: same face, a black nun's veil over a white wimple that frames the face, a white collar band, and a black robe with thin purple trim, a thin silver cross embroidered down the front, a small cross pendant on a thin cord, and a rope belt (a ghost nun, no witch hat), robe, pumpkin basket, crosses, size, scale, and feet baseline. Strict side view facing LEFT; the throw goes toward the LEFT. Draw the hit reaction: a readable stagger, eyes shut in pain, with simplified arms shielding the head. Keep the basket secure and do not spill crosses. One character, one head, full body, same scale as the second reference, the robe hem on the same baseline as the second reference (she hovers just above it; no legs or feet visible). Do not include text, extra limbs, any other character, a red cross, a single cross held up in one hand, a blue cloak, white hair, a hooked-nose pose, or a known cartoon-witch likeness.",
+   "style": "Dark-fantasy 2D cartoon game character. Thick clean near-black contour, thin warm-orange outer glow, flat three-tone cel shading, soft highlights, no airbrush. One full-body character, centred, solid noise-free #FF00FF background, no ground or cast shadow, 10 percent margin.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, extra character, duplicate subject, spilled apple, different face, changed scale, mirrored direction, extra limb, extra hand, extra head, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, hood, witch hat, pointed hat, film nun likeness, photographic face, pale white face, apple, any fruit, blue-violet glow, blue aura, blue-purple ambient light, cold blue rim light, glowing mist around the figure, visible legs, visible feet, boots, standing on the ground, shadow on the ground"
+  },
+  {
+   "id": "proj_cross",
+   "tier": "Q3",
+   "ref": "style_dart",
+   "refs": [
+    "style_dart"
+   ],
+   "prompt": "Use the first reference only for compact readable game-item style; do NOT copy its dart identity. Draw ONE small plain wooden Latin cross (dark wood, a thin purple band at the crossing) as a thrown weapon, centred, tilted as if spinning, with a short thin black-smoke trail drifting behind it. No hand, face or character. Keep the cross fully inside the image with a clear margin. Do not include text, extra limbs, any other character, a red cross, or a known film or cartoon item.",
+   "style": "Dark-fantasy 2D cartoon game item. Thick clean near-black outline, thin warm-orange outer glow, flat three-tone cel shading with soft highlights. One object, centred, 12 percent empty margin. Flat solid noise-free magenta background #FF00FF, no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, character, hand, fingers, extra limb, duplicate subject, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, apple, any fruit"
+  },
+  {
+   "id": "fx_cross_rain",
+   "tier": "Q3",
+   "ref": "style_poison_bubbles",
+   "refs": [
+    "style_poison_bubbles"
+   ],
+   "prompt": "Use the first reference only for the shared game-effect style; do NOT copy its poison-bubble shapes. Draw ONE compact 2 by 2 effect sprite sheet of four clearly separable cells, each showing several plain shiny small wooden crosses falling downward with small black smoke curls. The crosses have no faces or carvings. Keep every cell fully inside the sheet with no border or frame. Do not include text, extra limbs, any other character, a red cross, a single cross held up in one hand, a blue cloak, white hair, a hooked-nose pose, or a known cartoon-witch likeness.",
+   "style": "Dark-fantasy 2D cartoon game effect. Thick clean near-black contour, thin warm-orange outer glow, flat three-tone cel shading and readable simple shapes. Isolated compact sprite sheet on a solid noise-free #FF00FF background, no ground, cast shadow, text, watermark, border, or frame.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, character, hand, fingers, extra limb, duplicate subject, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, apple, any fruit"
+  },
+  {
+   "id": "fx_cross_rain_heal",
+   "tier": "Q3",
+   "ref": "style_heal_rain_drop",
+   "refs": [
+    "style_heal_rain_drop"
+   ],
+   "prompt": "Use the first reference only for the shared healing-effect style; do NOT copy its raindrop shape. Draw ONE compact 2 by 2 effect sprite sheet of four clearly separable cells, each showing several plain shiny small wooden crosses falling downward with a soft light-green healing glow and absolutely no smoke. The crosses have no faces or carvings. Keep every cell fully inside the sheet with no border or frame. Do not include text, extra limbs, any other character, a red cross, a single cross held up in one hand, a blue cloak, white hair, a hooked-nose pose, or a known cartoon-witch likeness.",
+   "style": "Dark-fantasy 2D cartoon game effect. Thick clean near-black contour, thin warm-orange outer glow, flat three-tone cel shading and readable simple shapes. Isolated compact sprite sheet on a solid noise-free #FF00FF background, no ground, cast shadow, text, watermark, border, or frame.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, smoke, black smoke, character, hand, fingers, extra limb, duplicate subject, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, apple, any fruit"
+  },
+  {
+   "id": "fx_black_smoke",
+   "tier": "Q3",
+   "ref": "style_poison_bubbles",
+   "refs": [
+    "style_poison_bubbles"
+   ],
+   "prompt": "Use the first reference only for compact readable game-effect style. Draw a horizontal sprite sheet of FOUR frames in one row on a flat magenta background, each frame the same size and centred in its own cell: a single wisp of thick BLACK smoke floating upward and curling, the same wisp changing shape a little from frame to frame so the four frames loop as a smooth floating, swaying animation (frame 1 small curl, frame 2 rising and bending left, frame 3 higher and bending right, frame 4 thinning and fading at the tip). Solid black smoke with a thin dark-grey highlight edge and a near-black outline, soft rounded tips, no blue, no purple, no glow. Keep every frame fully inside its cell with a clear margin. Do not include text, any character, hands, fire, or a known film or cartoon item.",
+   "style": "Dark-fantasy 2D cartoon game effect. Thick clean near-black contour, thin warm-orange outer glow, flat three-tone cel shading and readable simple shapes. One centred effect on a solid noise-free #FF00FF background, no ground, cast shadow, text, or watermark.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, character, hand, fingers, extra limb, duplicate subject, apple, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, apple, any fruit, blue smoke, purple smoke, glow, aura, mist, fire, colour other than black and dark grey"
+  },
+  {
+   "id": "ui_cross_curse",
+   "tier": "Q3",
+   "ref": "style_dart",
+   "refs": [
+    "style_dart"
+   ],
+   "prompt": "Use the first reference only for compact readable game-item style; do NOT copy its dart identity. Draw ONE small plain wooden Latin cross status icon with a faint dark-purple curse glow, centred, readable at small size, fully inside the image with a clear margin. Do not include text, extra limbs, any other character, or a known film or cartoon item.",
+   "style": "Dark-fantasy 2D cartoon game item. Thick clean near-black outline, thin warm-orange outer glow, flat three-tone cel shading with soft highlights. One object, centred, 12 percent empty margin. Flat solid noise-free magenta background #FF00FF, no ground, no cast shadow, no text, no watermark.",
+   "negative": "realistic, photo, 3D render, plastic shine, painterly, airbrushed gradient, thin line art, soft outline, text, letters, watermark, ground, cast shadow, character, hand, fingers, extra limb, duplicate subject, red apple, carved apple, jack-o-lantern apple, apple face, single apple held up in one hand, blue cloak, white hair, hooked nose pose, known cartoon witch likeness, magenta or pink inside the subject, apple, any fruit"
+  }
+ ],
+ "style": "Keep the EXACT same character design, outfit, colors, proportions, outline thickness and 2D dark-fantasy cartoon art style as the reference image. Character faces LEFT in strict side view. Flat solid magenta background (#FF00FF), no ground, no cast shadow, no text, no watermark."
+}

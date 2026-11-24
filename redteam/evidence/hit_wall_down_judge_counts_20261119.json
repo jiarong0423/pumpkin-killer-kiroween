@@ -1,0 +1,50 @@
+{
+ "full_natural": {
+  "steps": 52627,
+  "FALSE_HIT": 0,
+  "MISSED_HIT": 0,
+  "area_or_return_steps": 7621,
+  "blocked_steps": 76,
+  "nearest_touched_exempt": 1
+ },
+ "full_down": {
+  "steps": 58192,
+  "FALSE_HIT": 0,
+  "MISSED_HIT": 0,
+  "area_or_return_steps": 8087,
+  "blocked_steps": 2,
+  "nearest_touched_exempt": 0
+ },
+ "full_mid": {
+  "steps": 58250,
+  "FALSE_HIT": 0,
+  "MISSED_HIT": 0,
+  "area_or_return_steps": 7546,
+  "blocked_steps": 26,
+  "nearest_touched_exempt": 2
+ },
+ "plain_down": {
+  "steps": 75445,
+  "FALSE_HIT": 0,
+  "MISSED_HIT": 0,
+  "area_or_return_steps": 8902,
+  "blocked_steps": 0,
+  "nearest_touched_exempt": 1
+ },
+ "ult_down": {
+  "steps": 108552,
+  "FALSE_HIT": 0,
+  "MISSED_HIT": 0,
+  "area_or_return_steps": 20066,
+  "blocked_steps": 0,
+  "nearest_touched_exempt": 2
+ },
+ "ult_break": {
+  "steps": 72795,
+  "FALSE_HIT": 0,
+  "MISSED_HIT": 0,
+  "area_or_return_steps": 10566,
+  "blocked_steps": 229,
+  "nearest_touched_exempt": 1
+ }
+}

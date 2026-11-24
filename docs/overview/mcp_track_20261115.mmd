@@ -1,0 +1,19 @@
+stateDiagram-v2
+  direction LR
+  [*] --> Review
+  state "Opus review done\nRerun tests OK (main line)\ndocs/mcp_architecture_opus_20261115.md" as Review
+  state "K1 seats and per-seat views\nACTIVE (Kiro CLI task 145)\nProof: test_mcp_stdio, test_mcp_seats" as K1
+  state "K2 built-in seat and headless runner\nWAITS for K1" as K2
+  state "K3 turn safety: round+phase, idempotent submit\nWAITS for K1" as K3
+  state "K6 player agent and one recorded Kiro match\nWAITS for K1 to K3" as K6
+  state "K8 level and reason in the HUD (index.html)\nMain line, can run beside K1" as K8
+  state "K4 allowlist and K5 notes hygiene and K7 loopback host\nAfter the above; K7 only after the contest unless K1-K6 verified by 11-27" as Hardening
+  state "Owner questions (7)\nSee section 7 of the review" as Questions
+  Review --> K1
+  K1 --> K2
+  K2 --> K3
+  K3 --> K6
+  K6 --> Hardening
+  Review --> K8
+  Review --> Questions
+  Hardening --> [*]

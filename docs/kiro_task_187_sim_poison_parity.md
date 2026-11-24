@@ -1,0 +1,8 @@
+# Kiro task 187 — simulator parity with the page for poison, then a fresh balance matrix (scripts, tests, docs only)
+
+Read `docs/kiro_181_result.md`, `scripts/sim_balance.js`, `js/class_stats.js`, `scripts/test_sim_balance.js`, `scripts/test_class_stats.js`, `scripts/test_properties.js`, and in `index.html` (read only) `tickPoison`, `tickBleed`, `tickBurn`, `applyPoison`: statuses never kill, they leave 1 hp (`Math.min(DMG, hp - 1)`); poison 2 damage for 2 round starts, bleed 2 x 2, burn 2 x 3; a new application refreshes the duration.
+1. Make the simulator's poison, bleed and burn non-lethal exactly like the page (Kiro 181 modelled lethal poison). Fix the tests that assumed lethal poison; add a test that a status never reduces hp below 1.
+2. Re-run the full matrix with the page numbers (`shared/heroes.json`): `node scripts/sim_balance.js --matches 200 --seed 7 --json` once per weather (clear, rain, storm, snow); write `docs/balance_matrix_20261116.md` and `.json` again (win-rate matrix, hits to kill, first-mover rate, per-hero average); list heroes outside 42 to 58 percent average and pairings outside 40 to 60 percent.
+3. For each flagged hero propose ONE bounded change (at most 10 percent of hp or damage), measure it with the simulator, and give before and after. Do not change the page.
+4. Keep every test green: `for f in scripts/test_*.js; do node "$f"; done`; paste the last line of any failure.
+Touch only: `scripts/sim_balance.js`, `js/class_stats.js`, `scripts/test_sim_balance.js`, `scripts/test_class_stats.js`, `scripts/test_properties.js`, `docs/balance_matrix_20261116.md`, `docs/balance_matrix_20261116.json`, `docs/kiro_187_result.md`. No push.

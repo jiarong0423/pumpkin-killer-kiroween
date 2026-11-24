@@ -1,0 +1,1000 @@
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpxrh3tqga/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmph18ftuiz/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpbd1648mi/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpn5tocd7j/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpmrq9_7s3/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpf4bsld3b/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpz_2r72_u/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpfta6ianp/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpqc7_m01w/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmp1xedpt32/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmptd36g4dr/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpis7atb6n/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpfe_415er/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmppm9raibv/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpz656p01l/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpn03ds4an/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpznw0hs50/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmp00nyavrl/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmptam24fub/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmp0m9s05k2/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpb8vsjd5m/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmp4mt99k0v/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmpb5aqn3cl/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmp3gg2279d/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: /opt/anaconda3/bin/python3 /tmp/claude-501/tmp9yfr2pzw/garbage_server.py --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+FAIL initialize server wrote invalid JSON
+FAIL notifications/initialized previous protocol step failed
+FAIL ping previous protocol step failed
+FAIL tools/list previous protocol step failed
+FAIL get_public_state previous protocol step failed
+FAIL stdin close did not exit within 10s
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close
+command: definitely-not-a-pk-executable --seed 7 --units 3
+working directory: <repo>
+ok config
+ERROR start [Errno 2] No such file or directory: 'definitely-not-a-pk-executable'
+FAIL initialize server was not started
+FAIL notifications/initialized server was not started
+FAIL ping server was not started
+FAIL tools/list server was not started
+FAIL get_public_state server was not started
+FAIL stdin close server was not started
+command: python3 -B scripts/mcp_stdio_server.py --seat white --seed 7 --units 3
+working directory: <repo>
+ok config
+ok start
+ok initialize
+ok notifications/initialized
+ok ping
+ok tools/list
+ok get_public_state
+ok stdin close

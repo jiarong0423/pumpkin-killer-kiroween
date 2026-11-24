@@ -1,0 +1,4 @@
+17:06:34 model gpt-5.6-terra attempt 1
+17:07:44 result ok (exit 0)
+17:07:44 ERROR exit 0 but expected file is missing: docs/kiro_113_result_gpt-5.6-terra.md
+17:07:44 ERROR every model in route 'gpt' failed
