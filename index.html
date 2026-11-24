@@ -89,8 +89,8 @@
     .seat-choice, .room-actions button, #turn-curtain-go { min-height: 44px; padding: 7px 12px; border: 2px solid #5a328c; border-radius: 9px; background: #120a22; color: #a5f3ff; font: inherit; font-weight: 700; cursor: pointer; }
     .seat-choice.selected, .room-actions button { border-color: #ff8a1f; color: #ffd32a; }
     .seat-choice:disabled { opacity: .45; cursor: not-allowed; }
-    #room-details { margin-top: 8px; display: grid; grid-template-columns: auto 112px; align-items: center; justify-content: center; gap: 8px 14px; color: #a5f3ff; }
-    #room-code { color: #ffd32a; letter-spacing: .14em; font-size: 18px; } #room-qr { width: 112px; height: 112px; grid-row: span 2; background: #fff; image-rendering: pixelated; } #room-link { color: #a5f3ff; font-size: 11px; overflow-wrap: anywhere; max-width: 300px; }
+    #room-details { margin-top: 6px; display: grid; grid-template-columns: auto 84px; align-items: center; justify-content: center; gap: 5px 12px; color: #a5f3ff; }
+    #room-code { color: #ffd32a; letter-spacing: .14em; font-size: 16px; } #room-qr { width: 84px; height: 84px; grid-row: span 2; background: #fff; image-rendering: pixelated; } #room-link-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; max-width: 310px; } #room-link { color: #a5f3ff; font-size: 11px; overflow-wrap: anywhere; max-width: 240px; } #room-copy { min-height: 26px; padding: 2px 8px; border: 1.5px solid #a5f3ff; border-radius: 6px; background: rgba(18, 10, 34, .92); color: #ffeaa7; font: 700 11px var(--font-body, sans-serif); cursor: pointer; white-space: nowrap; }
     /* the choose-a-side screen of a private-room invite (owner 2026-11-24): a centred card over everything, big tap targets, fits a landscape phone about 266 px high */
     #side-chooser { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 8px; background: rgba(8,4,16,.88); }
     #side-chooser[hidden] { display: none !important; }
@@ -186,26 +186,30 @@
       #friends-panel { display: none; }
     }
     /* the seats panel is a centred overlay at EVERY window size (owner 2026-11-18: "layout broken": on tall windows it was laid inline over the Start button) */
-    #start-screen.seats-open #friends-panel { display: block; position: fixed; z-index: 60; left: 50%; top: 50%; transform: translate(-50%, -50%); width: clamp(340px, 82vw, 640px); max-height: 86vh; overflow: auto; padding: 10px 44px 10px 10px; border: 1.5px solid rgba(165, 243, 255, .55); border-radius: 12px; background: rgba(20, 12, 38, .82); backdrop-filter: blur(6px); box-shadow: 0 0 0 100vmax rgba(8, 4, 16, .34); }
+    #start-screen.seats-open #friends-panel { display: block; position: fixed; z-index: 60; left: 50%; top: 50%; transform: translate(-50%, -50%); width: clamp(300px, 68vw, 500px); max-height: calc(100dvh - 28px); overflow: auto; padding: 8px 42px 8px 10px; border: 1.5px solid rgba(165, 243, 255, .55); border-radius: 12px; background: rgba(20, 12, 38, .88); backdrop-filter: blur(6px); box-shadow: 0 0 0 100vmax rgba(8, 4, 16, .42); }
     #friends-close { display: none; }
-    #start-screen.seats-open #friends-close { display: flex; align-items: center; justify-content: center; position: absolute; right: 8px; top: 8px; width: 32px; height: 32px; min-width: 32px; min-height: 32px; padding: 0; border: 1.5px solid rgba(165, 243, 255, .55); border-radius: 8px; background: rgba(18, 10, 34, .88); color: #ffeaa7; font: 800 18px/1 var(--font-body, sans-serif); cursor: pointer; z-index: 2; }
-    #start-screen.seats-open #friends-panel #seat-picker, #start-screen.seats-open #friends-panel #room-picker:not([hidden]) { display: block !important; width: 100%; height: auto; padding: 4px 0; border: 0; background: none; overflow: visible; }
-    #start-screen.seats-open #friends-panel .seat-row, #start-screen.seats-open #friends-panel .seat-row + .seat-row { display: flex !important; flex-wrap: wrap; height: auto; gap: 6px; margin: 4px 0; font-size: 13px; }
-    #start-screen.seats-open #friends-panel .room-actions { display: flex; flex-wrap: wrap; gap: 6px; }
-    #start-screen.seats-open #friends-panel .room-actions button { min-height: 44px; min-width: 120px; }
+    #start-screen.seats-open #friends-close { display: flex; align-items: center; justify-content: center; position: absolute; right: 8px; top: 8px; width: 32px; height: 32px; min-width: 32px; min-height: 32px; padding: 0; border: 1.5px solid rgba(165, 243, 255, .55); border-radius: 8px; background: rgba(18, 10, 34, .92); color: #ffeaa7; font: 800 18px/1 var(--font-body, sans-serif); cursor: pointer; z-index: 2; }
+    #start-screen.seats-open #friends-panel #seat-picker, #start-screen.seats-open #friends-panel #room-picker:not([hidden]) { display: block !important; width: 100%; height: auto; padding: 3px 0; border: 0; background: none; overflow: visible; }
+    #start-screen.seats-open #friends-panel .seat-row, #start-screen.seats-open #friends-panel .seat-row + .seat-row { display: flex !important; flex-wrap: wrap; height: auto; gap: 5px; margin: 3px 0; font-size: 12px; }
+    #start-screen.seats-open #friends-panel .seat-choice, #start-screen.seats-open #friends-panel .seat-level { height: 34px; min-height: 34px; min-width: 36px; padding: 3px 8px; font-size: 12px; }
+    #start-screen.seats-open #friends-panel .room-actions { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+    #start-screen.seats-open #friends-panel .room-actions button { min-height: 34px; min-width: 96px; padding: 4px 10px; font-size: 12px; }
+    #room-leave { border-color: #ff6b6b !important; color: #ffb8b8 !important; }
+    #room-leave[hidden] { display: none !important; }
     /* PHONE-7A (owner 2026-11-24): in a short landscape phone the room code, QR and invite link must not sit below an inner scroll. One block: the panel may use the height, tighter padding and row gaps, shorter action buttons, a smaller QR. */
     @media (orientation: landscape) and (max-height: 430px) {
-      #start-screen.seats-open #friends-panel { max-height: calc(100vh - 8px); padding: 6px 10px; }
-      #start-screen.seats-open #friends-panel .seat-row, #start-screen.seats-open #friends-panel .seat-row + .seat-row { margin: 2px 0; }
-      #start-screen.seats-open #friends-panel .room-actions button { min-height: 38px; }
-      #room-details { margin-top: 4px; grid-template-columns: auto 84px; }
-      #room-qr { width: 84px; height: 84px; }
+      #start-screen.seats-open #friends-panel { width: min(92vw, 600px); max-height: calc(100dvh - 10px); padding: 5px 40px 5px 10px; }
+      #start-screen.seats-open #friends-panel .seat-row, #start-screen.seats-open #friends-panel .seat-row + .seat-row { margin: 1px 0; gap: 4px; }
+      #start-screen.seats-open #friends-panel .seat-choice, #start-screen.seats-open #friends-panel .seat-level { height: 28px; min-height: 28px; padding: 2px 7px; font-size: 11px; }
+      #start-screen.seats-open #friends-panel .room-actions button { min-height: 28px; min-width: 82px; padding: 2px 8px; font-size: 11px; }
+      #room-details { margin-top: 2px; gap: 3px 10px; grid-template-columns: auto 70px; }
+      #room-qr { width: 70px; height: 70px; }
     }
     @media (orientation: landscape) and (max-height: 430px) and (max-width: 720px) {   /* the narrow end (667x375 and below): the claim row and the invite row must still sit side by side */
-      #start-screen.seats-open #friends-panel { width: min(94vw, 640px); }
-      #start-screen.seats-open #friends-panel #slot-picker { gap: 2px 10px; }
-      #start-screen.seats-open #friends-panel #slot-picker .seat-row { font-size: 12px; gap: 4px; }
-      #start-screen.seats-open #friends-panel #slot-picker .seat-choice { padding-left: 7px; padding-right: 7px; min-width: 0; }
+      #start-screen.seats-open #friends-panel { width: min(92vw, 560px); }
+      #start-screen.seats-open #friends-panel #slot-picker { gap: 2px 8px; }
+      #start-screen.seats-open #friends-panel #slot-picker .seat-row { font-size: 11px; gap: 4px; }
+      #start-screen.seats-open #friends-panel #slot-picker .seat-choice { padding-left: 6px; padding-right: 6px; min-width: 0; }
     }
     #start-actions { display:grid; grid-template-columns:minmax(0,1fr) minmax(132px,.7fr); grid-template-rows:1fr; gap:8px; min-height:0; } #seat-picker { width:100%; min-height:0; padding:0; border:0; background:none; overflow:hidden; } #seat-picker[hidden], #room-picker, #install-row { display:none !important; }
     #start-actions .seat-row { justify-content:flex-start; gap:4px; flex-wrap:nowrap; height:100%; overflow:hidden; font-size:12px; } #start-actions .seat-row + .seat-row { display:none; } .seat-choice, .seat-level { height:44px; min-height:44px; min-width:44px; padding:4px 8px; font-size:12px; white-space:nowrap; }
@@ -688,7 +692,7 @@
         </section>
         <section id="battlefield-selector" aria-labelledby="start-scene-heading"><h2 id="start-scene-heading" data-i18n="start.pickScene"></h2><div id="pick-scenes"></div></section>
       </main>
-      <footer id="start-actions"><div id="team-size" role="group" data-i18n-attr="aria-label:start.teamSize"><button type="button" data-n="1" data-i18n="start.team1"></button><button type="button" data-n="2" data-i18n="start.team2"></button><button type="button" data-n="3" data-i18n="start.team3"></button></div><button id="daily-btn" type="button" data-i18n="start.daily"></button><button id="friends-btn" type="button" aria-expanded="false" data-i18n="start.friends"></button><div id="friends-panel"><button id="friends-close" type="button" aria-label="Close">×</button><section id="seat-picker" aria-live="polite"></section><section id="room-picker" hidden aria-live="polite"><div class="room-actions"><button id="room-create" type="button" data-i18n="room.create"></button><button id="room-join" type="button" data-i18n="room.join"></button><button id="slot-fill-ai" type="button" data-i18n="slot.fillAi" hidden></button></div><div id="slot-picker" hidden><div class="seat-row" id="slot-claim" role="group" data-i18n-attr="aria-label:slot.claim"><span data-i18n="slot.claim"></span><button type="button" class="seat-choice" data-claim="1">1</button><button type="button" class="seat-choice" data-claim="2">2</button><button type="button" class="seat-choice" data-claim="3">3</button></div><div class="seat-row" id="slot-invite" role="group" data-i18n-attr="aria-label:slot.invite" hidden><span data-i18n="slot.invite"></span><button type="button" class="seat-choice" data-seat="" data-i18n="slot.pick"></button><button type="button" class="seat-choice" data-seat="red" data-i18n="slot.red"></button><button type="button" class="seat-choice" data-seat="white" data-i18n="slot.white"></button></div><p id="slot-vacancy" class="room-status" aria-live="polite" hidden></p></div><p id="room-status" class="room-status" aria-live="polite" hidden></p><div id="room-details" hidden><b id="room-code"></b><canvas id="room-qr" width="1" height="1" aria-label=""></canvas><a id="room-link" href=""></a></div></section></div><button id="start-go" type="button" data-i18n="start.go"></button></footer>
+      <footer id="start-actions"><div id="team-size" role="group" data-i18n-attr="aria-label:start.teamSize"><button type="button" data-n="1" data-i18n="start.team1"></button><button type="button" data-n="2" data-i18n="start.team2"></button><button type="button" data-n="3" data-i18n="start.team3"></button></div><button id="daily-btn" type="button" data-i18n="start.daily"></button><button id="friends-btn" type="button" aria-expanded="false" data-i18n="start.friends"></button><div id="friends-panel"><button id="friends-close" type="button" aria-label="Close">×</button><section id="seat-picker" aria-live="polite"></section><section id="room-picker" hidden aria-live="polite"><div class="room-actions"><button id="room-create" type="button" data-i18n="room.create"></button><button id="room-join" type="button" data-i18n="room.join"></button><button id="slot-fill-ai" type="button" data-i18n="slot.fillAi" hidden></button><button id="room-leave" type="button" data-i18n="room.leave" hidden></button></div><div id="slot-picker" hidden><div class="seat-row" id="slot-claim" role="group" data-i18n-attr="aria-label:slot.claim"><span data-i18n="slot.claim"></span><button type="button" class="seat-choice" data-claim="1">1</button><button type="button" class="seat-choice" data-claim="2">2</button><button type="button" class="seat-choice" data-claim="3">3</button></div><div class="seat-row" id="slot-invite" role="group" data-i18n-attr="aria-label:slot.invite" hidden><span data-i18n="slot.invite"></span><button type="button" class="seat-choice" data-seat="" data-i18n="slot.pick"></button><button type="button" class="seat-choice" data-seat="red" data-i18n="slot.red"></button><button type="button" class="seat-choice" data-seat="white" data-i18n="slot.white"></button></div><p id="slot-vacancy" class="room-status" aria-live="polite" hidden></p></div><p id="room-status" class="room-status" aria-live="polite" hidden></p><div id="room-details" hidden><b id="room-code"></b><canvas id="room-qr" width="1" height="1" aria-label=""></canvas><div id="room-link-row"><a id="room-link" href=""></a><button id="room-copy" type="button" data-i18n="room.copy"></button></div></div></section></div><button id="start-go" type="button" data-i18n="start.go"></button></footer>
     </div>
     <div id="side-chooser" hidden role="dialog" aria-modal="true" aria-labelledby="side-chooser-title">
       <div class="side-card">
@@ -1315,7 +1319,27 @@
       const agentCode = document.getElementById("agent-room-code"), agentQr = document.getElementById("agent-room-qr");
       if (agentCode) agentCode.textContent = code;
       if (typeof QrCode !== "undefined") { QrCode.draw(qr, url, { margin: 2 }); if (agentQr) { agentQr.width = 240; agentQr.height = 240; QrCode.draw(agentQr, url, { margin: 2 }); } }
+      refreshLeaveRoomButton();
       updateStartGate();
+    }
+    function refreshLeaveRoomButton() {
+      const btn = document.getElementById("room-leave"); if (!btn) return;
+      const inRoom = !!(relayRoomCode || relayCreateSent || (relayClient && relayClient.state().status !== "closed"));
+      btn.hidden = !inRoom;
+    }
+    function leaveRoomNow() {
+      closeRelayFillers();
+      if (relayClient) { try { relayClient.close(); } catch (_) {} relayClient = null; }
+      relayRoomCode = ""; relayRoomConfirmed = false; relayCreateSent = false; relayIsHost = false;
+      relaySeats = []; relaySeatId = ""; relayPlaying = false; relayLeft = true;
+      if (relaySeatBackup) relayUndoSeats(); else { setLocalPerspective("left"); buildSeatRows(); }
+      const details = document.getElementById("room-details"), codeEl = document.getElementById("room-code"), link = document.getElementById("room-link");
+      if (details) details.hidden = true;
+      if (codeEl) codeEl.textContent = "";
+      if (link) { link.href = ""; link.textContent = ""; }
+      setRoomStatus(null);
+      try { const u = new URL(location.href); if (u.searchParams.has("room")) { u.searchParams.delete("room"); u.searchParams.delete("choose"); u.searchParams.delete("seat"); history.replaceState(null, "", u.toString()); } } catch (_) {}
+      refreshSlotPicker(); refreshLeaveRoomButton(); updateStartGate();
     }
     // Room status on the start screen (owner 2026-11-18: 'the MCP functions are not connected'): pressing Create room with no room server did nothing and said nothing. The relay client reports its status; show it in the panel.
     // Create / Join change the seats and the perspective BEFORE the relay has answered; a refusal must give them back, otherwise Start Battle runs a local human-vs-human match from the right side (red-team R8B-1).
@@ -1507,6 +1531,19 @@
         setRoomStatus("room.connecting"); let client = null; try { client = connectRelay(); } catch (e) { client = null; } if (client) { relayCreateSent = true; relayIsHost = true; if (seats.right === "ai") { seats.right = "human"; buildSeatRows(); } try { client.createRoom(Object.assign({ scene: pickedScene }, TEAM_N > 1 ? { teamSize: TEAM_N, units: relayUnitHeroes() } : {})); } catch (e) { relayCreateSent = false; setRoomStatus("room.unreachable"); } } else setRoomStatus("room.unreachable"); };   // a room is for a friend or an agent: the right seat is never the built-in computer
       document.getElementById("room-join").onclick = () => { if (relayIsHost) return;   /* the host of a room has nothing to join (a press flipped their perspective) */ const code = joinRoomCode || relayRoomCode; if (code) relayRoomCode = code; relayRememberSeats(); setLocalPerspective(relayJoinSeat); if (code) setRoomStatus("room.connecting"); let client = null; try { client = connectRelay(); } catch (e) { client = null; } if (client && code) { if (relayJoinSeat === "white") seats.right = "human"; buildSeatRows(); try { client.join(code, relayJoinSeat); } catch (e) { setRoomStatus("room.unreachable"); } } };
       { const fillBtn = document.getElementById("slot-fill-ai"); if (fillBtn) fillBtn.onclick = e => { e.stopPropagation(); fillOpenSlotsWithAi(); }; }
+      { const leaveBtn = document.getElementById("room-leave"); if (leaveBtn) leaveBtn.onclick = e => { e.stopPropagation(); leaveRoomNow(); }; }
+      { const copyBtn = document.getElementById("room-copy"), linkEl = document.getElementById("room-link");
+        const doCopy = e => {
+          e.preventDefault(); e.stopPropagation();
+          const url = (linkEl && linkEl.href) || "";
+          if (!url) return;
+          const done = () => { if (!copyBtn) return; copyBtn.textContent = T("room.copied"); clearTimeout(copyBtn._t); copyBtn._t = setTimeout(() => { copyBtn.textContent = T("room.copy"); }, 1600); };
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, () => { try { const ta = document.createElement("textarea"); ta.value = url; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); done(); } catch (_) {} });
+          else { try { const ta = document.createElement("textarea"); ta.value = url; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); done(); } catch (_) {} }
+        };
+        if (copyBtn) copyBtn.onclick = doCopy;
+        if (linkEl) linkEl.onclick = doCopy; }
+      refreshLeaveRoomButton();
       if (joinRoomCode && !relayLeft && !relayAutoJoined) { if (sideChoiceWanted()) showSideChooser(); else joinRoomNow(); }
     }
     const SHOW_COMING_SOON = false;   // true brings back the grey "in production" cards (heroes and battlefields)
