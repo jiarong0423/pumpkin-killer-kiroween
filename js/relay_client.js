@@ -24,8 +24,50 @@
   }
 
   /* Optional room fields shared by create_room, join and ready. Nothing is added for a one-versus-one room, so its wire stays what it was. */
+  // ROOM-FLOW R7: seat names. The same rule as clean_name in scripts/pk_relay.py; scripts/name_vectors.json pins both. A name is only ever shown as plain text.
+  var NAME_WIDTH = 10, NAME_INPUT = 64;   // display units (a CJK or full-width character is 2) and code points looked at
+  var EMOJI_RANGES = [[0x1F000, 0x1FAFF], [0x2600, 0x27BF], [0x2B00, 0x2BFF], [0x2300, 0x23FF]];
+  var WIDE_RANGES = [[0x1100, 0x115F], [0x2E80, 0x303E], [0x3041, 0x33FF], [0x3400, 0x4DBF], [0x4E00, 0x9FFF], [0xA000, 0xA4CF], [0xA960, 0xA97F],
+    [0xAC00, 0xD7A3], [0xF900, 0xFAFF], [0xFE10, 0xFE19], [0xFE30, 0xFE6F], [0xFF00, 0xFF60], [0xFFE0, 0xFFE6], [0x20000, 0x2FFFD], [0x30000, 0x3FFFD]];
+  var BLANK_LETTERS = [0x115F, 0x1160, 0x2800, 0x3164, 0xFFA0];   // drawn as nothing: an invisible name
+  var DROPPED = /[\p{C}\p{Mn}\p{Me}\p{Zl}\p{Zp}]/u, SPACE = /\p{Zs}/u;
+  function inRanges(point, ranges) { return ranges.some(function (r) { return point >= r[0] && point <= r[1]; }); }
+  function cleanName(value) {   // repeats until stable: dropping a character can put two letters side by side that NFC then joins (Hangul jamo)
+    if (typeof value !== 'string') return '';
+    for (var result = cleanNameOnce(value), again = cleanNameOnce(result); again !== result; again = cleanNameOnce(result)) result = again;
+    return result;
+  }
+  function cleanNameOnce(value) {
+    var text = Array.from(Array.from(value).slice(0, NAME_INPUT * 2).join('').normalize('NFC')).slice(0, NAME_INPUT);
+    var out = [], width = 0, full = false, haveEmoji = false, attach = '';
+    text.forEach(function (ch) {
+      var point = ch.codePointAt(0);
+      if (inRanges(point, EMOJI_RANGES)) {
+        var tone = point >= 0x1F3FB && point <= 0x1F3FF, flag = point >= 0x1F1E6 && point <= 0x1F1FF;
+        if (!haveEmoji && !tone) { haveEmoji = true; attach = flag ? 'flag' : 'base'; out.push(ch); }
+        else if ((tone && attach.indexOf('base') >= 0) || (flag && attach === 'flag')) { out.push(ch); attach = tone ? attach.replace('base', '') : ''; }
+        else attach = '';
+        return;
+      }
+      if (point === 0xFE0F && attach.indexOf('base') >= 0 && out[out.length - 1] !== ch) { out.push(ch); return; }
+      attach = '';
+      if (BLANK_LETTERS.indexOf(point) >= 0 || DROPPED.test(ch)) return;
+      if (SPACE.test(ch)) { if (!out.length || out[out.length - 1] === ' ') return; ch = ' '; point = 32; }
+      var size = inRanges(point, WIDE_RANGES) ? 2 : 1;
+      if (full || width + size > NAME_WIDTH) { full = true; return; }
+      out.push(ch); width += size;
+    });
+    return out.join('').replace(/^ +| +$/g, '');
+  }
+
   function addRoomOptions(message, options) {
     if (!options) return message;
+    if (options.name !== undefined) message.name = cleanName(options.name);
+    if (options.lobby === true) message.lobby = true;   // ROOM-FLOW R12: a lobby room starts on the host's `begin`
+    if (options.claim !== undefined) {
+      if (!(Number.isInteger(options.claim) && options.claim >= 1 && options.claim <= MAX_TEAM_SIZE)) throw new RangeError('claim must be an integer from 1 to ' + MAX_TEAM_SIZE);
+      message.claim = options.claim;
+    }
     if (options.teamSize !== undefined && options.teamSize !== 1) {
       if (!validTeamSize(options.teamSize)) throw new RangeError('teamSize must be an integer from 1 to ' + MAX_TEAM_SIZE);
       message.team_size = options.teamSize;
@@ -201,6 +243,7 @@
       match.teamSize = validTeamSize(message.team_size) ? message.team_size : 1;
       if (typeof message.round === 'number') match.round = message.round;
       if (typeof message.phase === 'string') match.phase = message.phase;
+      if (match.status === 'out_of_sync' && message.started) return;   // a snapshot does not clear a detected desync (external review); a reset (started false) does
       if (message.started || typeof message.seed === 'number') setStatus('playing');
       else setStatus('waiting');   // a room_state also ends 'reconnecting' (R5A-3)
     }
@@ -249,6 +292,11 @@
         match.teamSize = validTeamSize(message.team_size) ? message.team_size : 1;
         applyTeams(message);
         setStatus('playing');
+      } else if (message.type === 'seat_left' && message.ai && message.owners && match.owners) {   // ROOM-FLOW R9: a lost AI seat's units have new owners (world frame, like `start`)
+        match.owners = {};
+        Object.keys(message.owners).forEach(function (worldUnit) {
+          match.owners[perspective ? perspective.unitId(worldUnit) : worldUnit] = message.owners[worldUnit];
+        });
       } else if (message.type === 'end_turn') {
         if (typeof message.next_round === 'number') match.round = message.next_round;
         if (typeof message.next_phase === 'string') match.phase = message.next_phase;
@@ -259,6 +307,10 @@
         if (values.some(function (hash) { return hash !== values[0]; })) setStatus('out_of_sync');
       } else if (message.type === 'out_of_sync') {
         setStatus('out_of_sync');
+      } else if (message.type === 'lobby_reset') {   // R6b: back to the lobby of the same room: the match is over, the next `start` begins a new one
+        match.round = null; match.phase = null; match.seed = null; match.heroes = null; match.owners = null; match.log = [];
+        hashesByRound = Object.create(null); unacked = []; resendAt = null;
+        setStatus('waiting');
       }
       notifyMessage(message);
     }
@@ -270,8 +322,17 @@
       if (!message || typeof message !== 'object') return;
       message = mapRelayMessage(message, perspective, false);
       if (typeof message.seat_token === 'string' && message.seat_token) { seatToken = message.seat_token; }   // with a token the bootstrap message is never replayed again (a reconnect resumes instead)
+      if (message.type === 'kicked') {   // cross-check: the relay removed this seat and closes the socket; reconnecting would only resume a dead token
+        deliberateClose = true; outbox = []; bootstrapMsg = null; unacked = []; resendAt = null;
+        notifyMessage(message);
+        try { if (socket && typeof socket.close === 'function') socket.close(); } catch (e) { /* closing already */ }
+        setStatus('closed');
+        return;
+      }
       if (message.type === 'room_state' && typeof message.seq !== 'number') {
+        if (Number.isInteger(message.first_seq) && message.first_seq > expectedSeq) { expectedSeq = message.first_seq; lastSeq = message.first_seq - 1; Object.keys(buffered).forEach(function (k) { if (+k < expectedSeq) delete buffered[k]; }); }   // R6b, red team A2: the room went back to the lobby and its log starts here; what came before is gone (a joiner, or a resume across the reset)
         if (typeof message.seat_id === 'string') mySeatId = message.seat_id;
+        if (awaitingAnswer && seatToken && typeof message.last_seq !== 'number' && typeof message.seat_token !== 'string') { notifyMessage(message); updateFromRoomState(message); return; }   // a broadcast that overtook the resume answer (no token, no last_seq): not the answer (external review)
         if (awaitingAnswer && seatToken) resendAt = typeof message.last_seq === 'number' ? message.last_seq : lastSeq;   // resend what is still unacknowledged once the replay up to here is applied
         awaitingAnswer = false;
       }
@@ -346,11 +407,11 @@
       nextSocket.onopen = function () {
         if (socket !== nextSocket) return;
         try {
-          if (isReconnect && seatToken) {            // seated: resume FIRST, the outbox follows
+          if (seatToken && (isReconnect || !bootstrapMsg)) {   // seated: resume FIRST, the outbox follows (also a page that reloaded with its stored seat token, red team B4)
             awaitingAnswer = true;
             nextSocket.send(JSON.stringify({ type: 'resume', seat_token: seatToken, last_seq: lastSeq }));
           } else if (bootstrapMsg) {                 // not seated yet: the first message again (initial or reconnect socket)
-            if (isReconnect) awaitingAnswer = true;
+            awaitingAnswer = true;   // the first socket too: an error answer to create/join is handled (transient: reconnect, permanent: closed) (external review)
             nextSocket.send(JSON.stringify(bootstrapMsg));
           }
           flushOutbox(nextSocket);
@@ -388,10 +449,26 @@
         match.seat = seat;
         var message = { type: 'join', code: code.trim().toUpperCase(), seat: seat };
         if (options && options.units !== undefined) addRoomOptions(message, { units: options.units });
+        if (options && options.name !== undefined) addRoomOptions(message, { name: options.name });
+        if (options && options.claim !== undefined) addRoomOptions(message, { claim: options.claim });
+        if (options && typeof options.invite === 'string') message.invite = options.invite;
+        if (options && options.aiHostToken) message.ai_host_token = String(options.aiHostToken);   // ROOM-FLOW R9: the host's own AI filler proves itself with the host's seat token
         send(message);
       },
       // Marks this seat ready. options: units (replace this seat's hero list), teamSize and hostSideChoice (the room creator only; others are ignored by the relay).
-      sendReady: function (options) { send(addRoomOptions({ type: 'ready' }, options && { teamSize: options.teamSize, units: options.units, hostSideChoice: options.hostSideChoice })); },
+      sendReady: function (options) { send(addRoomOptions({ type: 'ready' }, options && { teamSize: options.teamSize, units: options.units, hostSideChoice: options.hostSideChoice, name: options.name })); },
+      setName: function (name) { send({ type: 'set_name', name: cleanName(name) }); },
+      // ROOM-FLOW lobby calls (R3, R4, R6, R11, R12, R13); the relay answers with room_state, or an error for a call that is not allowed
+      unready: function () { send({ type: 'unready' }); },
+      move: function (options) { var m = { type: 'move' }; if (options && options.team) m.team = options.team; if (options && options.claim !== undefined) m.claim = options.claim; send(m); },
+      begin: function (on) { send({ type: 'begin', on: on !== false }); },
+      roomOptions: function (options) { var m = { type: 'room_options' }; ['allow_ai', 'allow_mcp'].forEach(function (k) { if (options && typeof options[k] === 'boolean') m[k] = options[k]; }); send(m); },
+      invite: function (note) { send(note ? { type: 'invite', note: String(note) } : { type: 'invite' }); },
+      inviteCancel: function (by) { send(by ? { type: 'invite_cancel', by: by } : { type: 'invite_cancel' }); },
+      kick: function (seatId) { send({ type: 'kick', seat_id: seatId }); },
+      resetLobby: function () { send({ type: 'reset_lobby' }); },
+      ping: function () { try { send({ type: 'ping' }); } catch (e) { /* not open */ } },
+      leave: function () { try { if (isOpen(socket)) socket.send(JSON.stringify({ type: 'leave' })); } catch (e) { /* already gone */ } this.close(); },   // the seat is released at once (close alone keeps it for the grace period)
       sendAction: function (action) {
         if (!action || typeof action !== 'object') throw new TypeError('action is required');
         checkUnit(action.unit, false);
@@ -418,6 +495,7 @@
         return function () { statusListeners = statusListeners.filter(function (item) { return item !== fn; }); };
       },
       state: snapshot,
+      seatToken: function () { return seatToken; },
       setPerspective: function (nextPerspective) { perspective = nextPerspective || null; },
       close: function () {
         deliberateClose = true; outbox = []; bootstrapMsg = null; unacked = []; resendAt = null;
@@ -427,5 +505,5 @@
     };
   }
 
-  return { MAX_TEAM_SIZE: MAX_TEAM_SIZE, createClient: createClient, relaySocketUrl: relaySocketUrl, isTeamUnitId: isTeamUnitId };
+  return { cleanName: cleanName, MAX_TEAM_SIZE: MAX_TEAM_SIZE, createClient: createClient, relaySocketUrl: relaySocketUrl, isTeamUnitId: isTeamUnitId };
 });

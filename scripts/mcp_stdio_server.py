@@ -1218,13 +1218,16 @@ def normalize_relay_url(raw: str) -> str:
     return "%s://%s%s" % (parsed.scheme, parsed.netloc, path)
 
 
+_INVITE_RE = re.compile(r"^(red|white)\.[A-Za-z0-9_-]{4,64}$")
+
+
 def parse_invite(raw: str) -> Dict[str, Any]:
     """Parse a 6-char room code or a full invite URL (?room=CODE&seat=...&team=...&relay=...)."""
     text = _string(raw, "room", max_len=1000).strip()
     if not text:
         raise ToolError("room code or invite URL is required")
     if _ROOM_CODE_RE.match(text.upper()):
-        return {"code": text.upper(), "seat": None, "units": None, "relay": None}
+        return {"code": text.upper(), "seat": None, "units": None, "relay": None, "invite": None}
     parsed = urlparse(text)
     if parsed.scheme not in ("http", "https", "ws", "wss") or not parsed.netloc:
         raise ToolError("room must be a 6-character code or an invite URL with ?room=CODE")
@@ -1242,7 +1245,8 @@ def parse_invite(raw: str) -> Dict[str, Any]:
     relay_url: Optional[str] = None
     if relay_raw:
         relay_url = normalize_relay_url(relay_raw)
-    return {"code": code_raw, "seat": seat, "units": units, "relay": relay_url}
+    invite = (qs.get("invite") or [""])[0].strip() or None
+    return {"code": code_raw, "seat": seat, "units": units, "relay": relay_url, "invite": invite}
 
 
 ROOM_TOOLS: List[Dict[str, Any]] = [
@@ -1270,8 +1274,21 @@ ROOM_TOOLS: List[Dict[str, Any]] = [
                 },
                 "relay": {"type": "string",
                           "description": "Optional ws:// or wss:// relay URL (stdio mode only; hosted HTTP MCP always uses its local relay)"},
+                "invite": {"type": "string", "description": "Invitation from a player in the room (also read from the invite URL ?invite=). "
+                                                            "It decides your team and gives you one unit; pass at most one hero."},
+                "name": {"type": "string", "description": "Name shown above your characters (up to 10 half-width or 5 full-width characters)"},
             },
             "required": ["room"],
+            "additionalProperties": False,
+        },
+    },
+    {
+        "name": "lock_hero",
+        "description": "Choose the hero of your unit and lock it, before the match starts. Use it after joining with an invite and no hero.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {"hero": {"type": "string", "enum": sorted(engine.HERO_TEMPLATES)}},
+            "required": ["hero"],
             "additionalProperties": False,
         },
     },
@@ -1648,14 +1665,17 @@ class ConnectedRelay:
     """
 
     _FATAL_ERRORS = frozenset(("unknown_code", "room_full", "unknown_token", "resume_expired",
-                               "invalid_seat", "invalid_resume", "room_closed"))
+                               "invalid_seat", "invalid_resume", "room_closed", "invalid_invite", "mcp_disabled", "team_full", "invalid_name"))
     _RECONNECT_DELAYS = (0.2, 0.5, 1.0, 2.0, 4.0, 8.0)
     _RECONNECT_LIMIT_SECONDS = 60.0
 
     def __init__(self, session: Session, url: str, code: str, seat: str,
                  *, auto_ready: bool = False, client_addr: Optional[str] = None,
                  gateway_token: Optional[str] = None, explicit_units: bool = True,
-                 claim_heroes: Optional[List[str]] = None) -> None:
+                 claim_heroes: Optional[List[str]] = None, invite: Optional[str] = None, name: Optional[str] = None) -> None:
+        self.invite = invite                    # ROOM-FLOW R11: the ticket a player gave this agent
+        self.name = name
+        self.briefing: Optional[Dict[str, Any]] = None
         self.session = session
         self.url = url
         self.code = code
@@ -1674,6 +1694,7 @@ class ConnectedRelay:
         self.last_seq = 0
         self.ready_sent = False
         self.failure: Optional[str] = None
+        self.relay_owners: Dict[str, str] = {}   # world unit id -> seat id, from `start` and an AI hand-over
         self.seat_token: Optional[str] = None
         self.seat_id: str = ""
         self.started: bool = False
@@ -1872,11 +1893,15 @@ class ConnectedRelay:
                         self.reconnect_count += 1
                     else:
                         join_msg: Dict[str, Any] = {
-                            "type": "join", "code": self.code, "seat": self.seat, "client_version": "mcp-stdio",
+                            "type": "join", "code": self.code, "seat": self.seat, "client_version": "mcp-stdio", "client_kind": "mcp",
                         }
                         units = self.own_heroes() if self.explicit_units else []
                         if units:
                             join_msg["units"] = units
+                        if self.invite:
+                            join_msg["invite"] = self.invite
+                        if self.name:
+                            join_msg["name"] = self.name
                         await socket.send(json.dumps(join_msg, separators=(",", ":")))
                     attempt = 0
                     reconnect_started_at = None
@@ -1914,6 +1939,10 @@ class ConnectedRelay:
                             break
             except Exception as exc:
                 self.ready.clear()
+                closed_with = getattr(exc, "rcvd", None)
+                if closed_with is not None and getattr(closed_with, "code", None) == 1000 and getattr(closed_with, "reason", "") in ("inviter_left", "host_left", "removed_by_host", "ai_off", "agents_off"):
+                    self.failure = "kicked:%s" % closed_with.reason   # the relay removed this seat; a send can fail before the `kicked` message is read
+                    break
                 if self.closed.is_set() or self.deliberate_leave or self.failure in self._FATAL_ERRORS:
                     break
                 now = time.monotonic()
@@ -1941,10 +1970,16 @@ class ConnectedRelay:
         message_type = message.get("type")
         if message_type == "error":
             err_code = str(message.get("code", "relay_error"))
-            if err_code != "duplicate_judge":
+            if err_code != "duplicate_judge" and not str(self.failure or "").startswith("kicked:"):
                 self.failure = err_code
             return
+        if message_type == "kicked":
+            self.failure = "kicked:%s" % message.get("reason", "removed")   # the host removed this seat, or its inviter left
+            self.deliberate_leave = True   # red team A1/A12: the seat is gone; no reconnect (its resume would only overwrite why)
+            return
         if message_type == "room_state":
+            if isinstance(message.get("briefing"), dict):
+                self.briefing = message["briefing"]
             token = message.get("seat_token")
             if isinstance(token, str) and token:
                 self.seat_token = token
@@ -1964,6 +1999,7 @@ class ConnectedRelay:
                 team_size = message.get("team_size", 1)
                 parsed_ts = team_size if isinstance(team_size, int) and not isinstance(team_size, bool) else None
                 self.session.reset_for_relay(seed, scene, parsed_ts, message.get("heroes"))
+                self.relay_owners = dict(message["owners"]) if isinstance(message.get("owners"), dict) else {}
                 if self.claim_heroes is not None:
                     owners = message.get("owners")
                     if not isinstance(owners, dict) or not self.seat_id:
@@ -1998,6 +2034,21 @@ class ConnectedRelay:
         if message_type == "seat_left":
             left_team = message.get("team")
             left_seat = message.get("seat_id")
+            if not self.started:
+                return   # red team A12: before the start a seat that leaves decides nothing (the relay only reports it)
+            if message.get("ai"):
+                # ROOM-FLOW R9: a lost AI filler is nobody's forfeit. A teammate takes its units; with no seat left on its team the match has no result.
+                owners = message.get("owners")
+                if isinstance(owners, dict):
+                    self.relay_owners = dict(owners)
+                if message.get("team_empty") and self.session.phase != "over":
+                    self.session.winner, self.session.winner_reason, self.session.phase = "none", "ai_seat_lost", "over"
+                elif self.claim_heroes is not None and isinstance(owners, dict) and left_team == self.seat:
+                    self.session.seat["units"] = sorted(engine_unit_id(unit) for unit, owner in owners.items() if owner == self.seat_id and isinstance(unit, str))
+                return
+            gone = [engine_unit_id(unit) for unit, owner in self.relay_owners.items() if owner == left_seat and isinstance(unit, str)]
+            if gone and not any(self.session.engine.units.get(unit, {}).get("alive", True) for unit in gone):
+                return   # the same rule as the page (red-team R2A-F1): a seat whose units are all down cannot stall play, so leaving decides nothing
             if left_team in ("red", "white") and left_seat != self.seat_id and self.session.phase != "over":
                 self.session.winner = ("white" if self.seat == "red" else "red") if left_team == self.seat else self.seat
                 self.session.phase = "over"
@@ -2343,7 +2394,7 @@ class McpServer:
         return result
 
     def _tool_join_room(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
-        _reject_unknown(arguments, ("room", "seat", "units", "claim", "heroes", "relay"), "join_room")
+        _reject_unknown(arguments, ("room", "seat", "units", "claim", "heroes", "relay", "invite", "name"), "join_room")
         if self.relay is not None:
             if self.session.phase == "over" or getattr(self.relay, "failure", None) is not None:
                 self.close()
@@ -2362,6 +2413,16 @@ class McpServer:
             claim = _integer(arguments["claim"], "claim", 1, units)
         else:
             claim = units
+        invite = arguments.get("invite") or info.get("invite")
+        if invite is not None:
+            # ROOM-FLOW R11: the ticket starts with its team; it gives exactly one unit.
+            match = _INVITE_RE.match(_string(invite, "invite", max_len=100))
+            if not match:
+                raise ToolError("invite is not an invitation from a room (expected red.… or white.…)")
+            seat, claim = match.group(1), 1
+        name = arguments.get("name")
+        if name is not None:
+            name = _string(name, "name", max_len=64)
         heroes_arg = arguments.get("heroes")
         hero_list: Optional[List[str]] = None
         claim_heroes: Optional[List[str]] = None
@@ -2380,6 +2441,8 @@ class McpServer:
                 hero_list = list(picked)
         elif claim < units:
             claim_heroes = valid[:claim]
+        if invite is not None and claim_heroes is None:
+            claim_heroes, hero_list = (hero_list or valid)[:1], None
         if self.allow_custom_relay:
             raw_relay = arguments.get("relay") or info["relay"] or self.default_relay_url
         else:
@@ -2396,13 +2459,16 @@ class McpServer:
         use_page = self.page_judge_mode == "on" or (
             self.page_judge_mode == "auto" and node_path is not None and os.path.exists(os.path.join(_REPO_ROOT, "index.html"))
         )
+        if invite is not None:
+            use_page = False   # the page judge plays a whole side; an invited agent owns one unit
         if use_page:
             relay: Any = PageJudgeRelay(sess, relay_url, info["code"], seat, speed=self.page_speed, rng=1, node=node_path or "node")
         else:
             explicit_units = bool(arguments.get("units") is not None or info["units"] is not None or hero_list is not None or claim_heroes is not None)
-            relay = ConnectedRelay(sess, relay_url, info["code"], seat, auto_ready=True,
+            relay = ConnectedRelay(sess, relay_url, info["code"], seat, auto_ready=invite is None or heroes_arg is not None,
                                    client_addr=self.client_addr, gateway_token=self.gateway_token,
-                                   explicit_units=explicit_units, claim_heroes=claim_heroes)
+                                   explicit_units=explicit_units and (invite is None or heroes_arg is not None), claim_heroes=claim_heroes,
+                                   invite=invite, name=name)
         relay.start()
         deadline = time.monotonic() + 5.0
         with relay.cond:
@@ -2422,7 +2488,7 @@ class McpServer:
         self.session = sess
         self.seat = sess.seat
         self.relay = relay
-        return {
+        result = {
             "ok": True,
             "code": info["code"],
             "seat": seat,
@@ -2434,6 +2500,31 @@ class McpServer:
             "round": sess.engine.round_num,
             "next": "Call wait_for_turn until status is 'your_turn'.",
         }
+        if invite is not None:
+            briefing = getattr(relay, "briefing", None)
+            if briefing is not None:
+                result["briefing"] = briefing
+            flow = "Then loop: wait_for_turn, get_public_state, submit_action, end_turn."
+            result["next"] = ("Your hero is locked. " + flow) if heroes_arg is not None else (
+                "Call lock_hero with one of briefing.heroes now (within %s seconds, or one is picked for you). " % (briefing or {}).get("pick_within_seconds", 30) + flow)
+        return result
+
+    def _tool_lock_hero(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        _reject_unknown(arguments, ("hero",), "lock_hero")
+        relay = self.relay
+        if relay is None or not isinstance(relay, ConnectedRelay):
+            raise ToolError("not in a room; call join_room first")
+        if relay.failure is not None:
+            raise ToolError("the room connection failed: %s" % relay.failure)
+        if relay.started:
+            raise ToolError("the match has already started")
+        if relay.claim_heroes is None or len(relay.claim_heroes) != 1:
+            raise ToolError("lock_hero is for a seat that owns one unit")
+        hero = _enum(arguments.get("hero"), "hero", tuple(sorted(engine.HERO_TEMPLATES)))
+        relay.claim_heroes = [hero]
+        relay.ready_sent = False
+        relay.request_ready()
+        return {"ok": True, "hero": hero, "next": "Call wait_for_turn until status is 'your_turn'."}
 
     def _tool_leave_room(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         _reject_unknown(arguments, (), "leave_room")
@@ -2500,6 +2591,8 @@ class McpServer:
         try:
             if name == "join_room":
                 payload = self._tool_join_room(arguments)
+            elif name == "lock_hero":
+                payload = self._tool_lock_hero(arguments)
             elif name == "leave_room":
                 payload = self._tool_leave_room(arguments)
             else:

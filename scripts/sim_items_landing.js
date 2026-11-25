@@ -1,7 +1,9 @@
 'use strict';
 // Item (airdrop supply) landing, pickup and use, judged on the REAL inline script of index.html (scripts/page_harness.js, no browser, nothing written).
 // Prints one JSON summary and one RESULT line; exit 1 on any violation.   usage: node scripts/sim_items_landing.js [--seeds 400] [--json out.json]
-// Checks: (1) the crate target x lies inside the canvas margin, never on or past the fence, on the side of the unit it is dropped for;
+// Checks: (0) the crate lies where a unit of that side may STAND (the same limits the dice move clamps to), so it can always be picked up,
+//             and not already under the unit it is dropped for (a crate is walked to, not handed over);
+//         (1) the crate target x lies inside the canvas margin, never on or past the fence, on the side of the unit it is dropped for;
 //         (2) distance from that unit stays reachable (one move is about 286 px, pickup radius 70 px);
 //         (3) after the parachute descent the crate rests exactly at target x and at GROUND_Y - 20;
 //         (4) a unit inside 70 px takes it, a unit outside does not; (5) heal adds 45 and never exceeds max hp, heavy adds one charge,
@@ -16,18 +18,28 @@ const bad = (msg) => { if (violations.length < 40) violations.push(msg); };
 const stats = {};
 
 for (const team of [1, 2, 3]) {
-  const MUTANTS = { '--mutant-far': [['Math.round(210 + dice.offset * 0.575)', 'Math.round(510 + dice.offset * 0.575)']], '--mutant-fence': [['if (dropSide > 0) x = Math.min(x, lo); else x = Math.max(x, hi);', '']] };   // negative controls: each MUST fail
+  const MUTANTS = { '--mutant-band': [['const [lo, hi] = MOVE_ZONE[dropSide > 0 ? "player" : "ai"];', 'const [lo, hi] = dropSide > 0 ? [0, FENCE_X - FENCE_W / 2 - 60] : [FENCE_X + FENCE_W / 2 + 60, CANVAS_W];']], '--mutant-far': [['Math.round(210 + dice.offset * 0.575)', 'Math.round(510 + dice.offset * 0.575)']], '--mutant-fence': [['x = Math.max(lo, Math.min(hi, x));', '']] };   // negative controls: each MUST fail
   const mut = Object.keys(MUTANTS).find(k => argv.includes(k));
   const P = loadPage(mut ? { team, mutate: MUTANTS[mut] } : { team });
   const W = P.get('CANVAS_W'), FX = P.get('FENCE_X'), FW = P.get('FENCE_W'), GY = P.get('GROUND_Y');
   const lo = FX - FW / 2 - 60, hi = FX + FW / 2 + 60;
-  const s = stats['team' + team] = { drops: 0, heal: 0, heavy: 0, sideLeft: 0, sideRight: 0, maxDist: 0, minDist: 1e9, beyondReach: 0, restX: 0, alternationBreaks: 0, xMin: 1e9, xMax: -1e9 };
+  // the zone is measured on the real page: roll the largest die both ways from the middle of each side and read where the unit stops
+  const ZONE = {};
+  for (const [side, owner] of [['left', 'player'], ['right', 'ai']]) {
+    ZONE[side] = [1, -1].map(dir => {
+      P.eval('resetGame(); TEAM_N > 1 && unitsOf("' + side + '").slice(1).forEach(u => { u.hp = 0; }); diceRoll = null;');
+      P.place(side, [side === 'left' ? 400 : W - 400]);
+      for (let i = 0; i < 12; i++) P.eval('startDiceRoll("' + owner + '", ' + dir + ', function () {}); diceRoll.final = 6; for (let k = 0; k < 300 && diceRoll; k++) stepDice(1/60); unitOf("' + side + '").x = unitOf("' + side + '").targetX;');
+      return P.eval('unitOf("' + side + '").targetX');
+    }).sort((a, b) => a - b);
+  }
+  const s = stats['team' + team] = { zoneLeft: ZONE.left.join('..'), zoneRight: ZONE.right.join('..'), outOfZone: 0, underUnit: 0, drops: 0, heal: 0, heavy: 0, sideLeft: 0, sideRight: 0, maxDist: 0, minDist: 1e9, beyondReach: 0, restX: 0, alternationBreaks: 0, xMin: 1e9, xMax: -1e9 };
   for (let seed = 1; seed <= SEEDS; seed++) {
     P.eval('resetGame(); matchSeed = ' + seed + '; carrier = null; drops = []; dropSide = -1; dropCount = 0; supply.player = null; supply.ai = null; cratesTaken.player = 0; cratesTaken.ai = 0;');
     let lastSide = 0;
     for (let round = 2; round <= 24; round += 2) {
       // unit positions: a spread across each side's legal half so clamps and the fence margin are exercised
-      const lx = 160 + ((seed * 53 + round * 31) % 600), rx = W - 160 - ((seed * 71 + round * 17) % 600);
+      const lx = ZONE.left[0] + ((seed * 53 + round * 31) % (ZONE.left[1] - ZONE.left[0] + 1)), rx = ZONE.right[1] - ((seed * 71 + round * 17) % (ZONE.right[1] - ZONE.right[0] + 1));
       P.place('left', [lx]); P.place('right', [rx]);
       P.eval('roundNum = ' + round + '; carrier = null; drops = [];');
       P.eval('scheduleAirdrop()');
@@ -39,6 +51,9 @@ for (const team of [1, 2, 3]) {
       if (lastSide && side === lastSide && team === 1) s.alternationBreaks++;
       lastSide = side;
       s.xMin = Math.min(s.xMin, x); s.xMax = Math.max(s.xMax, x);
+      const zone = side > 0 ? ZONE.left : ZONE.right;
+      if (x < zone[0] || x > zone[1]) { s.outOfZone++; if (s.outOfZone <= 3) bad('team' + team + ' seed' + seed + ' round' + round + ': crate x ' + x + ' where no unit of that side may stand (' + zone.join('..') + ')'); }
+      if (Math.abs(x - unitX) <= PICKUP) { s.underUnit++; if (s.underUnit <= 3) bad('team' + team + ' seed' + seed + ' round' + round + ': crate ' + Math.round(Math.abs(x - unitX)) + ' px from its unit, taken without a move'); }
       if (!(x >= 300 && x <= W - 300)) bad('team' + team + ' seed' + seed + ': crate x ' + x + ' outside 300..' + (W - 300));
       if (x > lo && x < hi) bad('team' + team + ' seed' + seed + ': crate x ' + x + ' on the fence band ' + lo + '..' + hi);
       if (side > 0 && x > lo) bad('team' + team + ' seed' + seed + ': left-side crate past the fence ' + x);

@@ -224,4 +224,62 @@ check('(c2) team room with a seat_id absent from owners: falls back to previous 
   assert.strictEqual(C.get('gameOver'), 'player', 'unlisted opponent seat keeps old win rule');
 });
 
+// ROOM-FLOW R9b: a departure can arrive while this page is still playing out the last throw (the leaver finished first, or a resume replays the log),
+// so it is judged only after the screen has been still for 3 s (six 500 ms looks).
+function tick(P, times) {
+  for (let i = 0; i < times; i++) P.timers.splice(0).filter(x => !/^function updateStartGate/.test(String(x.fn))).forEach(x => x.fn());
+}
+const leftNow = { type: 'seat_left', seat_id: 'white-1', team: 'white', reason: 'left' };
+
+check('(d1) a leave that arrives before the last throw has landed does not flip the result', () => {
+  const { hub, R } = makePair1v1();
+  tick(R, 3); R.eval('relayIncoming = 1');
+  hub.broadcast(leftNow); hub.flush();
+  assert.strictEqual(R.get('gameOver'), null, 'not judged on arrival');
+  tick(R, 100);
+  assert.strictEqual(R.get('gameOver'), null, 'not judged while the throw is in the air');
+  R.eval('relayIncoming = 0; gameOver = "ai"; turn = "over"');   // the throw lands and the leaver has won
+  tick(R, 20);
+  assert.strictEqual(R.get('gameOver'), 'ai', 'the landed throw decides, not the departure');
+});
+
+check('(d2) on a still screen the leave rule applies after the quiet time, not at once', () => {
+  const { hub, R } = makePair1v1();
+  tick(R, 3);
+  hub.broadcast(leftNow); hub.flush();
+  tick(R, 5);
+  assert.strictEqual(R.get('gameOver'), null, 'five quiet looks are not enough');
+  tick(R, 1);
+  assert.strictEqual(R.get('gameOver'), 'player'); assert.strictEqual(R.get('turn'), 'over');
+});
+
+check('(d3) movement restarts the quiet time', () => {
+  const { hub, R } = makePair1v1();
+  tick(R, 3);
+  hub.broadcast(leftNow); hub.flush(); tick(R, 4);
+  R.eval('relayIncoming = 1'); tick(R, 1); R.eval('relayIncoming = 0'); tick(R, 5);
+  assert.strictEqual(R.get('gameOver'), null);
+  tick(R, 1);
+  assert.strictEqual(R.get('gameOver'), 'player');
+});
+
+check('(d4) a queued message that never gets its turn cannot hold the departure back for ever', () => {
+  const { hub, A, C } = makeRedSplit();
+  tick(C, 3); C.eval('relayInbox.push({ type: "action", seq: 100000, seat_id: "red-2", round: 99, phase: "red" })');
+  hub.broadcast({ type: 'seat_left', seat_id: 'red-2', team: 'red', reason: 'left' }); hub.flush();
+  tick(C, 39);
+  assert.strictEqual(C.get('gameOver'), null);
+  tick(C, 1);
+  assert.strictEqual(C.get('gameOver'), 'player');
+  void A;
+});
+
+check('(d5) a second match or a closed room drops a departure that was still waiting', () => {
+  const { hub, R } = makePair1v1();
+  tick(R, 3);
+  hub.broadcast(leftNow); hub.flush();
+  R.eval('endRelayRoom()'); tick(R, 20);
+  assert.strictEqual(R.get('gameOver'), null);
+});
+
 console.log('test_seat_leave_dead: ' + passed + ' passed' + (process.exitCode ? ', FAILED' : ''));

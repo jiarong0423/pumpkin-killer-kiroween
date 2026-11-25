@@ -48,15 +48,6 @@
   },
   {
    "file": "index.html",
-   "before": "relayRoomConfirmed = false; relayCreateSent = false; // a cl",
-   "needle": "relayClient = RelayClient.createClient({ socketFactory: () => new WebSocket(RelayClient.relaySocketUrl(relayAd",
-   "count": 1,
-   "class": "net",
-   "status": "reviewed",
-   "why": "relay client clock for reconnect timing, not a simulation input"
-  },
-  {
-   "file": "index.html",
    "before": "let dailyCode = 0; // yyyymmdd of the daily match being play",
    "needle": "function dailySeedOf(date) { const d = date || new Date(); return d.getUTCFullYear() * 10000 + (d.getUTCMonth(",
    "count": 1,
@@ -837,6 +828,24 @@
    "class": "net",
    "status": "reviewed",
    "why": "lobby AI filler WebSocket client passes Date.now() to RelayClient for network heartbeat/reconnect timing only"
+  },
+  {
+   "file": "index.html",
+   "before": "const k = document.createElement(\"button\"); k.type = \"button",
+   "needle": "k.onclick = e => { e.stopPropagation(); const now = Date.now(); // two taps within 3 s (DESIGN-1: one tap remo",
+   "count": 1,
+   "class": "ui_input",
+   "status": "reviewed",
+   "why": "lobby kick needs a second tap within 3 s on this device (DESIGN-1); not a simulation input"
+  },
+  {
+   "file": "index.html",
+   "before": "relayRoomConfirmed = false; relayCreateSent = false; // a cl",
+   "needle": "relayClient = RelayClient.createClient(Object.assign({ socketFactory: () => new WebSocket(RelayClient.relaySoc",
+   "count": 1,
+   "class": "net",
+   "status": "reviewed",
+   "why": "relay client clock for reconnect timing, not a simulation input (the lobby may pass a stored seat token, red team B4)"
   }
  ]
 }

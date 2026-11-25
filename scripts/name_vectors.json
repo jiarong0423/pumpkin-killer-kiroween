@@ -1,0 +1,162 @@
+[
+ {
+  "case": "empty",
+  "in": "",
+  "out": ""
+ },
+ {
+  "case": "trim",
+  "in": "  \u5c0f\u660e  ",
+  "out": "\u5c0f\u660e"
+ },
+ {
+  "case": "five_cjk",
+  "in": "\u5357\u74dc\u6bba\u624b\u738b\u4e94\u516d",
+  "out": "\u5357\u74dc\u6bba\u624b\u738b"
+ },
+ {
+  "case": "ten_latin",
+  "in": "abcdefghijkl",
+  "out": "abcdefghij"
+ },
+ {
+  "case": "mixed_width",
+  "in": "\u5c0f\u660eabcdefgh",
+  "out": "\u5c0f\u660eabcdef"
+ },
+ {
+  "case": "stop_at_first_overflow",
+  "in": "\u5c0f\u660e\u5c0f\u660ea\u5c0fb",
+  "out": "\u5c0f\u660e\u5c0f\u660ea"
+ },
+ {
+  "case": "wide_then_full",
+  "in": "abc\u5c0f\u660e\u5c0f\u660e",
+  "out": "abc\u5c0f\u660e\u5c0f"
+ },
+ {
+  "case": "fullwidth",
+  "in": "\uff21\uff22\uff23\uff24\uff25\uff26",
+  "out": "\uff21\uff22\uff23\uff24\uff25"
+ },
+ {
+  "case": "zero_width",
+  "in": "ab\u200bcd\ufeff",
+  "out": "abcd"
+ },
+ {
+  "case": "bidi",
+  "in": "a\u202eb\u2066c",
+  "out": "abc"
+ },
+ {
+  "case": "controls",
+  "in": "a\nb\tc\u0000",
+  "out": "abc"
+ },
+ {
+  "case": "line_separator",
+  "in": "a\u2028b\u2029c",
+  "out": "abc"
+ },
+ {
+  "case": "wide_space",
+  "in": "a\u3000b",
+  "out": "a b"
+ },
+ {
+  "case": "spaces_collapse",
+  "in": "a    b \u200b c",
+  "out": "a b c"
+ },
+ {
+  "case": "nfc",
+  "in": "e\u0301\u0301",
+  "out": "\u00e9"
+ },
+ {
+  "case": "zalgo",
+  "in": "q\u0334\u0332q\u0338",
+  "out": "qq"
+ },
+ {
+  "case": "blank_fillers",
+  "in": "\u3164\u115f\u1160\uffa0\u2800",
+  "out": ""
+ },
+ {
+  "case": "surrogate_and_private",
+  "in": "\ud800\ue000a",
+  "out": "a"
+ },
+ {
+  "case": "one_emoji",
+  "in": "\u5c0f\u660e\ud83d\ude00",
+  "out": "\u5c0f\u660e\ud83d\ude00"
+ },
+ {
+  "case": "second_emoji_dropped",
+  "in": "\ud83d\ude00\ud83d\ude03\u5c0f\u660e",
+  "out": "\ud83d\ude00\u5c0f\u660e"
+ },
+ {
+  "case": "emoji_beyond_width",
+  "in": "abcdefghij\ud83d\ude00",
+  "out": "abcdefghij\ud83d\ude00"
+ },
+ {
+  "case": "emoji_after_overflow",
+  "in": "abcdefghijkl\ud83d\ude00",
+  "out": "abcdefghij\ud83d\ude00"
+ },
+ {
+  "case": "variation_selector",
+  "in": "\u2764\ufe0f\u738b",
+  "out": "\u2764\ufe0f\u738b"
+ },
+ {
+  "case": "skin_tone",
+  "in": "\ud83d\udc4d\ud83c\udffdok",
+  "out": "\ud83d\udc4d\ud83c\udffdok"
+ },
+ {
+  "case": "joined_family",
+  "in": "\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67\u5bb6",
+  "out": "\ud83d\udc68\u5bb6"
+ },
+ {
+  "case": "flag",
+  "in": "\ud83c\uddf9\ud83c\uddfc\u963f",
+  "out": "\ud83c\uddf9\ud83c\uddfc\u963f"
+ },
+ {
+  "case": "second_flag_dropped",
+  "in": "\ud83c\uddf9\ud83c\uddfc\ud83c\uddef\ud83c\uddf5",
+  "out": "\ud83c\uddf9\ud83c\uddfc"
+ },
+ {
+  "case": "lone_modifiers",
+  "in": "\ud83c\udffd\ufe0fa",
+  "out": "a"
+ },
+ {
+  "case": "markup_is_text",
+  "in": "<b>x</b>",
+  "out": "<b>x</b>"
+ },
+ {
+  "case": "trailing_space_after_cut",
+  "in": "abcdefghi jk",
+  "out": "abcdefghi"
+ },
+ {
+  "case": "only_emoji",
+  "in": "\ud83c\udf83",
+  "out": "\ud83c\udf83"
+ },
+ {
+  "case": "long_input",
+  "in": "\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200bab",
+  "out": ""
+ }
+]

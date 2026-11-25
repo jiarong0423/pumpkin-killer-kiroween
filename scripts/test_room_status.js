@@ -84,12 +84,18 @@ check('a client that gave up is replaced: Create room after "closed" opens a new
 });
 
 check('the relay refuses the create (server_busy): the status says so, the button works again and sends a second create_room', () => {
-  const { sockets, status, press } = setup();
+  const { P, sockets, status, press } = setup();
   press('room-create'); sockets[0].open();
   sockets[0].message({ type: 'error', code: 'server_busy' });
   assert.strictEqual(status(), 'room.refused');
   press('room-create');
-  assert.deepStrictEqual(sockets[0].sent.map(m => m.type), ['create_room', 'create_room']);
+  // 2026-11-26 (external review): an error answer to the first create is handled by the client: a busy relay is retried on a fresh socket, and the
+  // second press is what that socket sends, once (it used to go out on the refused socket)
+  P.timers.splice(0).forEach(x => x.fn());
+  assert.ok(sockets.length >= 2, 'a new socket for the retry');
+  sockets[sockets.length - 1].open();
+  assert.deepStrictEqual(sockets[0].sent.map(m => m.type), ['create_room']);
+  assert.deepStrictEqual(sockets[sockets.length - 1].sent.map(m => m.type), ['create_room']);
   assert.strictEqual(status(), 'room.connecting');
 });
 

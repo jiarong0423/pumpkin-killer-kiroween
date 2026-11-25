@@ -99,10 +99,11 @@ async def run(url: str) -> None:
         assert bootstrap["seat_token"] == token
 
         resumed_log = list(red_log)
-        # Disconnect state, then the resume presence update, are the only missing events.
-        await receive_until_type(resumed, resumed_log, "room_state")
+        # Red team A4/B5 (2026-11-26): room states are unsequenced snapshots, not logged events. The bootstrap above is the current state; the presence
+        # update of the resume reaches both seats as a snapshot; the ordered logs must still be identical.
         await receive_until_type(resumed, resumed_log, "room_state")
         await receive_until_type(white, white_log, "room_state")
+        assert not any(m.get("type") == "room_state" for m in white_log), "room states are not in the ordered log"
         assert resumed_log == white_log
 
         # Complete two more relay rounds after red resumes.

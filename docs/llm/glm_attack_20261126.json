@@ -1,0 +1,848 @@
+{
+ "model": "zai-org/GLM-5.3",
+ "cases": [
+  {
+   "id": "claim-capped-at-team-size",
+   "why": "A seat must not reserve more places than its team has room for.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 3
+     }
+    }
+   ],
+   "expect": "The relay seats A without error but caps its claim at 2, so the room_state shows A holding exactly 2 places of the red team."
+  },
+  {
+   "id": "join-claim-when-team-full",
+   "why": "A team whose every place is held must refuse another seat.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 2
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "red",
+      "claim": 1
+     }
+    }
+   ],
+   "expect": "B gets a team_full error and is not seated, red keeping exactly its two places held by A."
+  },
+  {
+   "id": "begin-while-host-away",
+   "why": "While the host's seat is only disconnected (in its grace period) nobody else becomes host, so there cannot be two hosts.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "auto"
+     }
+    },
+    {
+     "client": "A",
+     "close": true
+    },
+    {
+     "sleep": 0.1
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "begin",
+      "on": true
+     }
+    }
+   ],
+   "expect": "B receives host_only and the room_state still names A's seat as the single host_seat_id."
+  },
+  {
+   "id": "leave-reassigns-host",
+   "why": "When the host leaves for good the earliest remaining player seat becomes the host at once.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "auto"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "leave"
+     }
+    }
+   ],
+   "expect": "The relay broadcasts seat_left for A and the next room_state names B's seat as host_seat_id with begin cleared."
+  },
+  {
+   "id": "ai-follower-not-host",
+   "why": "An AI filler lives in the host's browser: when the host's seat expires the AI seat is evicted and never inherits the host role.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white",
+      "ai_host_token": "$TOKEN:A"
+     }
+    },
+    {
+     "client": "A",
+     "close": true
+    },
+    {
+     "expire": "A"
+    },
+    {
+     "sleep": 0.2
+    }
+   ],
+   "expect": "When A's grace period ends the AI seat is removed with a kicked/seat_left message of reason host_left, is never made host, and the now-empty room is deleted."
+  },
+  {
+   "id": "agent-follows-inviter-out",
+   "why": "An invited agent goes with the player who invited it, so it cannot be left behind as host.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite",
+      "note": "help me"
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A"
+     }
+    },
+    {
+     "client": "A",
+     "close": true
+    },
+    {
+     "expire": "A"
+    },
+    {
+     "sleep": 0.2
+    }
+   ],
+   "expect": "When the inviter's seat expires the agent seat is evicted with reason inviter_left and host_seat_id never points at the agent."
+  },
+  {
+   "id": "act-after-kick",
+   "why": "A removed seat's socket must not be able to act for any seat afterwards.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "kick",
+      "seat_id": "white-1"
+     }
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "ready",
+      "units": [
+       "wizard"
+      ]
+     }
+    }
+   ],
+   "expect": "B receives kicked and its following ready is refused (join_required) with no room_state change caused by B."
+  },
+  {
+   "id": "begin-with-unlocked-place",
+   "why": "A lobby room must not start or even begin its countdown while any place is unlocked.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white",
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "ready",
+      "units": [
+       "skeleton"
+      ]
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "begin",
+      "on": true
+     }
+    },
+    {
+     "sleep": 1
+    }
+   ],
+   "expect": "The relay records begin=true but sends no countdown and no start message because B's place is still unlocked."
+  },
+  {
+   "id": "countdown-cancelled-by-unlock",
+   "why": "An unlock during a running countdown must cancel it so the match cannot start.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "auto"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "ready",
+      "units": [
+       "skeleton"
+      ]
+     }
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "ready",
+      "units": [
+       "wizard"
+      ]
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "begin",
+      "on": true
+     }
+    },
+    {
+     "sleep": 0.2
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "unready"
+     }
+    },
+    {
+     "sleep": 1
+    }
+   ],
+   "expect": "The relay broadcasts a countdown with seconds null after the unready and no start message is ever sent."
+  },
+  {
+   "id": "invite-single-use",
+   "why": "An invite ticket is one-use: a second join with the same ticket must fail.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite",
+      "note": "one agent"
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A",
+      "name": "AgentOne"
+     }
+    },
+    {
+     "client": "C",
+     "connect": true
+    },
+    {
+     "client": "C",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A"
+     }
+    }
+   ],
+   "expect": "B joins as an agent on red while C gets invalid_invite for reusing the consumed ticket."
+  },
+  {
+   "id": "invite-decides-team",
+   "why": "A ticket fixes the team: the joining agent's own seat field must be ignored.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite",
+      "note": "join us"
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white",
+      "invite": "$INVITE:A"
+     }
+    }
+   ],
+   "expect": "B is seated on the red team (the inviter's team) as an agent holding exactly one place, not on white."
+  },
+  {
+   "id": "cancelled-invite-unusable",
+   "why": "A cancelled invite must no longer admit anyone.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite",
+      "note": "scratch that"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite_cancel"
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A"
+     }
+    }
+   ],
+   "expect": "B gets invalid_invite and the room_state shows no open invite and no agent seat."
+  },
+  {
+   "id": "inviter-move-withdraws-invite",
+   "why": "An agent plays on its inviter's team, so when the inviter changes side the open invite must be withdrawn.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite",
+      "note": "come"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "move",
+      "team": "white"
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A"
+     }
+    }
+   ],
+   "expect": "A's move to white succeeds and B's join with the old ticket is refused with invalid_invite."
+  },
+  {
+   "id": "claim-race-last-place",
+   "why": "Two seats racing for the last free place of a team: only one can hold it.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "red",
+      "claim": 1
+     }
+    },
+    {
+     "client": "C",
+     "connect": true
+    },
+    {
+     "client": "C",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "red",
+      "claim": 1
+     }
+    }
+   ],
+   "expect": "A and B hold red's two places and C is refused with team_full, the totals never exceeding the team size."
+  },
+  {
+   "id": "reset-lobby-host-only",
+   "why": "Only the host can reopen the lobby after a match, and the reset clears ready flags and match state.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "auto"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "ready",
+      "units": [
+       "skeleton"
+      ]
+     }
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "ready",
+      "units": [
+       "wizard"
+      ]
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "begin",
+      "on": true
+     }
+    },
+    {
+     "sleep": 1
+    },
+    {
+     "sleep": 1
+    },
+    {
+     "sleep": 1
+    },
+    {
+     "sleep": 0.5
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "reset_lobby"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "reset_lobby"
+     }
+    }
+   ],
+   "expect": "B's reset_lobby gets host_only while A's is accepted: a lobby_reset is broadcast and the room_state shows started=false with every seat ready=false and no heroes."
+  },
+  {
+   "id": "resume-after-grace",
+   "why": "A seat whose grace period has run out cannot be resumed, and the host role it left stays with the remaining player.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "auto"
+     }
+    },
+    {
+     "client": "A",
+     "close": true
+    },
+    {
+     "expire": "A"
+    },
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "resume",
+      "seat_token": "$TOKEN:A",
+      "last_seq": 0
+     }
+    }
+   ],
+   "expect": "A gets resume_expired (or unknown_token), B is the sole host, and A's old seat is gone from the room_state."
+  },
+  {
+   "id": "malformed-then-recover",
+   "why": "Badly formed messages must be answered with errors without killing the socket or blocking a later valid room.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "ready"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "join",
+      "code": "ZZZZZZ"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "scene": "mars"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "purple"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    }
+   ],
+   "expect": "Each bad message gets its specific error (join_required, unknown_code, invalid_scene, invalid_seat) and the final create_room still succeeds with a seat token."
+  }
+ ],
+ "note": "salvaged case by case from a truncated answer"
+}

@@ -12,7 +12,7 @@ function fetchPreferWebp(request) {
   if (!alt || !accepts) return fetch(request);
   return fetch(alt).then((response) => (response.ok ? response : fetch(request))).catch(() => fetch(request));
 }
-const CACHE_NAME = "pk-df5c6d8fd0";
+const CACHE_NAME = "pk-437cf0b413";
 const PRECACHE_URLS = [
 // PWA-PRECACHE-BEGIN
   "index.html",
@@ -38,6 +38,7 @@ const PRECACHE_URLS = [
   "js/i18n.js",
   "js/knight_ult.js",
   "js/knockback.js",
+  "js/lobby_model.js",
   "js/nun_ult.js",
   "js/particles.js",
   "js/particles_draw.js",

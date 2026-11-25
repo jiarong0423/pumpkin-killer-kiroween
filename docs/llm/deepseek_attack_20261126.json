@@ -1,0 +1,1369 @@
+{
+ "model": "deepseek-ai/DeepSeek-V4-Pro-0813",
+ "cases": [
+  {
+   "id": "overfill-team-3v3",
+   "why": "A team must never hold more places than team_size.",
+   "team_size": 3,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 3,
+      "claim": 3
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "red",
+      "claim": 3
+     }
+    },
+    {
+     "client": "C",
+     "connect": true
+    },
+    {
+     "client": "C",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "red",
+      "claim": 1
+     }
+    }
+   ],
+   "expect": "The third red join must be refused with team_full because red already holds 3 places."
+  },
+  {
+   "id": "two-hosts",
+   "why": "Only one seat may be host_seat_id at a time.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white"
+     }
+    },
+    {
+     "client": "A",
+     "close": true
+    },
+    {
+     "client": "C",
+     "connect": true
+    },
+    {
+     "client": "C",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "red"
+     }
+    }
+   ],
+   "expect": "After A leaves, exactly one remaining player seat is host and room_state shows that seat_id."
+  },
+  {
+   "id": "ai-as-host",
+   "why": "An AI filler must never become host.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white",
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "red",
+      "ai_host_token": "$TOKEN:A",
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "close": true
+    },
+    {
+     "sleep": 0.05
+    }
+   ],
+   "expect": "After the host leaves, the AI seat is evicted and host_seat_id is not an AI seat."
+  },
+  {
+   "id": "agent-as-host",
+   "why": "An invited agent must never become host.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite"
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A"
+     }
+    },
+    {
+     "client": "A",
+     "close": true
+    },
+    {
+     "sleep": 0.05
+    }
+   ],
+   "expect": "The agent is evicted with inviter_left and host_seat_id is not the agent seat."
+  },
+  {
+   "id": "removed-seat-acts",
+   "why": "A kicked or expired seat must not be able to send room actions.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "kick",
+      "seat_id": "$SEAT:B"
+     }
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "ready",
+      "units": [
+       "skeleton"
+      ]
+     }
+    }
+   ],
+   "expect": "B's ready after being kicked must be refused with join_required or the socket is already closed."
+  },
+  {
+   "id": "start-unlocked",
+   "why": "A lobby room must not start before every place is locked.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 2
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white",
+      "claim": 2
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "ready",
+      "units": [
+       "skeleton",
+       "wizard"
+      ]
+     }
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "ready",
+      "units": [
+       "bat"
+      ]
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "begin",
+      "on": true
+     }
+    },
+    {
+     "sleep": 0.1
+    }
+   ],
+   "expect": "No start message is emitted because white has only one locked hero for two places."
+  },
+  {
+   "id": "countdown-cancel-on-unready",
+   "why": "A running countdown must stop when a seat unlocks.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "ready",
+      "units": [
+       "skeleton"
+      ]
+     }
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "ready",
+      "units": [
+       "bat"
+      ]
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "begin",
+      "on": true
+     }
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "unready"
+     }
+    },
+    {
+     "sleep": 0.1
+    }
+   ],
+   "expect": "After B unready, a countdown with seconds null is broadcast and no start occurs."
+  },
+  {
+   "id": "invite-reuse",
+   "why": "A one-use invite ticket must not seat two agents.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite"
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A"
+     }
+    },
+    {
+     "client": "C",
+     "connect": true
+    },
+    {
+     "client": "C",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A"
+     }
+    }
+   ],
+   "expect": "The second join with the same invite must be refused with invalid_invite."
+  },
+  {
+   "id": "invite-wrong-team",
+   "why": "An invite ticket is bound to the inviter's team.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite"
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A",
+      "seat": "white"
+     }
+    }
+   ],
+   "expect": "The join must place B on red, ignoring the requested white seat."
+  },
+  {
+   "id": "invite-cancel-then-join",
+   "why": "A cancelled invite must no longer be usable.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite_cancel"
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A"
+     }
+    }
+   ],
+   "expect": "The join after cancel must be refused with invalid_invite."
+  },
+  {
+   "id": "inviter-move-releases-agent",
+   "why": "An agent follows its inviter's team and is released when the inviter switches sides.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite"
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "move",
+      "team": "white"
+     }
+    }
+   ],
+   "expect": "The agent is evicted with inviter_left and A is now on white."
+  },
+  {
+   "id": "move-claim-race",
+   "why": "Two seats racing for the last free place must not both get it.",
+   "team_size": 3,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 3,
+      "claim": 2
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "red",
+      "claim": 1
+     }
+    },
+    {
+     "client": "C",
+     "connect": true
+    },
+    {
+     "client": "C",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "red",
+      "claim": 1
+     }
+    }
+   ],
+   "expect": "Only one of B or C can claim the last red place; the other gets team_full."
+  },
+  {
+   "id": "reset-lobby-not-started",
+   "why": "reset_lobby must be refused before a match starts.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "reset_lobby"
+     }
+    }
+   ],
+   "expect": "The relay answers invalid_state because the match has not started."
+  },
+  {
+   "id": "resume-after-reset",
+   "why": "A seat token must survive a lobby reset and resume with the new log start.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "ready",
+      "units": [
+       "skeleton"
+      ]
+     }
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "ready",
+      "units": [
+       "bat"
+      ]
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "begin",
+      "on": true
+     }
+    },
+    {
+     "sleep": 0.1
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "reset_lobby"
+     }
+    },
+    {
+     "client": "A",
+     "close": true
+    },
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "resume",
+      "seat_token": "$TOKEN:A",
+      "last_seq": 0
+     }
+    }
+   ],
+   "expect": "A resumes successfully and receives a room_state with first_seq matching the post-reset log."
+  },
+  {
+   "id": "malformed-json",
+   "why": "Malformed JSON must not crash the relay or seat the client.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white"
+     }
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "ready",
+      "units": [
+       "skeleton"
+      ]
+     }
+    }
+   ],
+   "expect": "The relay remains responsive and later valid messages still work."
+  },
+  {
+   "id": "oversized-message",
+   "why": "A message larger than 16 KiB must be rejected with message_too_large.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "set_name",
+      "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+     }
+    }
+   ],
+   "expect": "The relay answers message_too_large and does not change the name."
+  },
+  {
+   "id": "1v1-lobby-one-per-side",
+   "why": "A 1v1 lobby room allows only one player seat per side.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "red"
+     }
+    }
+   ],
+   "expect": "The second red join must be refused with team_full."
+  },
+  {
+   "id": "rate-limit-per-socket",
+   "why": "More than 10 messages per second on one socket must be rate_limited.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "set_name",
+      "name": "a"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "set_name",
+      "name": "b"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "set_name",
+      "name": "c"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "set_name",
+      "name": "d"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "set_name",
+      "name": "e"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "set_name",
+      "name": "f"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "set_name",
+      "name": "g"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "set_name",
+      "name": "h"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "set_name",
+      "name": "i"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "set_name",
+      "name": "j"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "set_name",
+      "name": "k"
+     }
+    }
+   ],
+   "expect": "At least one of the rapid set_name messages is answered with rate_limited."
+  },
+  {
+   "id": "host-begin-not-full-ai-off",
+   "why": "With AI off, begin must fail when places are free.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "room_options",
+      "allow_ai": false
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "begin",
+      "on": true
+     }
+    }
+   ],
+   "expect": "The relay answers not_full and no countdown starts."
+  },
+  {
+   "id": "spectator-cannot-host",
+   "why": "A spectator must never be host_seat_id.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "spectator",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "red"
+     }
+    }
+   ],
+   "expect": "The first player seat that joins becomes host, not the spectator."
+  },
+  {
+   "id": "claim-too-many-units",
+   "why": "A seat cannot list more units than its claim or team_size.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "ready",
+      "units": [
+       "skeleton",
+       "wizard"
+      ]
+     }
+    }
+   ],
+   "expect": "The relay answers invalid_units and A does not become ready."
+  },
+  {
+   "id": "move-while-started",
+   "why": "move must be refused after the match starts.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "ready",
+      "units": [
+       "skeleton"
+      ]
+     }
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "ready",
+      "units": [
+       "bat"
+      ]
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "begin",
+      "on": true
+     }
+    },
+    {
+     "sleep": 0.1
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "move",
+      "team": "white"
+     }
+    }
+   ],
+   "expect": "The relay answers room_started and A stays on red."
+  },
+  {
+   "id": "invite-expiry",
+   "why": "An expired invite must not be accepted.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite"
+     }
+    },
+    {
+     "sleep": 0.05
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A"
+     }
+    }
+   ],
+   "expect": "The relay answers invalid_invite because the ticket has expired."
+  },
+  {
+   "id": "agent-pick-timeout",
+   "why": "An agent that does not ready in time is auto-locked with a hero.",
+   "team_size": 2,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 2,
+      "claim": 1
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "invite"
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "invite": "$INVITE:A"
+     }
+    },
+    {
+     "sleep": 0.05
+    }
+   ],
+   "expect": "The agent seat becomes ready with one hero after the pick timeout."
+  },
+  {
+   "id": "kick-host-reassign",
+   "why": "Kicking the host before start reassigns host to the earliest remaining player.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "kick",
+      "seat_id": "$SEAT:A"
+     }
+    }
+   ],
+   "expect": "The relay refuses invalid_target because the host cannot kick itself."
+  },
+  {
+   "id": "double-ready-team-size-change",
+   "why": "Changing team_size after seats hold more places must be refused.",
+   "team_size": 3,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true,
+      "team_size": 3,
+      "claim": 3
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "ready",
+      "units": [
+       "skeleton",
+       "wizard",
+       "bat"
+      ],
+      "team_size": 1
+     }
+    }
+   ],
+   "expect": "The relay answers invalid_team_size and team_size remains 3."
+  },
+  {
+   "id": "unknown-type",
+   "why": "An unknown message type must be answered with unknown_type.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "not_a_real_type"
+     }
+    }
+   ],
+   "expect": "The relay answers unknown_type and the room remains usable."
+  },
+  {
+   "id": "join-after-start",
+   "why": "A new player seat must not join after the match starts.",
+   "team_size": 1,
+   "lobby": true,
+   "steps": [
+    {
+     "client": "A",
+     "connect": true
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "create_room",
+      "seat": "red",
+      "lobby": true
+     }
+    },
+    {
+     "client": "B",
+     "connect": true
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "white"
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "ready",
+      "units": [
+       "skeleton"
+      ]
+     }
+    },
+    {
+     "client": "B",
+     "send": {
+      "type": "ready",
+      "units": [
+       "bat"
+      ]
+     }
+    },
+    {
+     "client": "A",
+     "send": {
+      "type": "begin",
+      "on": true
+     }
+    },
+    {
+     "sleep": 0.1
+    },
+    {
+     "client": "C",
+     "connect": true
+    },
+    {
+     "client": "C",
+     "send": {
+      "type": "join",
+      "code": "$CODE",
+      "seat": "red"
+     }
+    }
+   ],
+   "expect": "C's join is refused with room_started."
+  }
+ ]
+}

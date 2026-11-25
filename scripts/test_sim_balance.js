@@ -40,7 +40,7 @@ test('constants equal index.html and shared/constants.json', () => {
   assert.ok(/wallHp = Math\.max\(0, wallHp - WALL_HIT_DMG\);/.test(INDEX_HTML) && /const WALL_HIT_DMG = 8;/.test(INDEX_HTML), 'fence damage');
   assert.ok(/let wallHp = 100;/.test(INDEX_HTML), 'fence HP');
   assert.ok(/\(Math\.random\(\) - 0\.5\) \* 8\.0\)\.toFixed\(1\)/.test(INDEX_HTML), 'wind reroll');
-  assert.ok(/const lo = d\.owner === "player" \? 110 : 1280, hi = d\.owner === "player" \? 640 : 1810;/.test(INDEX_HTML), 'move range');
+  assert.ok(/const MOVE_ZONE = Object\.freeze\(\{ player: \[110, 640\], ai: \[1280, 1810\] \}\);/.test(INDEX_HTML) && /const \[lo, hi\] = MOVE_ZONE\[d\.owner === "player" \? "player" : "ai"\];/.test(INDEX_HTML), 'move range');
   assert.ok(/const newPlayerX = Determinism\.startX\(matchSeed, 0, 0\);/.test(INDEX_HTML) && /const newAiX = Determinism\.startX\(matchSeed, 1, 0\);/.test(INDEX_HTML));
   // the knight's bounce numbers
   assert.ok(/p\.vx = Math\.max\(-400, Math\.min\(400, \(opp\.x - p\.x\) \/ 0\.62\)\); p\.vy = -330;/.test(INDEX_HTML), 'hop back');

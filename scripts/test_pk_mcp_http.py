@@ -191,8 +191,8 @@ class StreamableHttpMcpTests(unittest.TestCase):
         )
         self.assertEqual(st, 200)
         names = {t["name"] for t in listing["result"]["tools"]}
-        self.assertEqual(len(names), 10)
-        self.assertTrue({"join_room", "leave_room", "wait_for_turn"}.issubset(names))
+        self.assertEqual(len(names), 11)
+        self.assertTrue({"join_room", "lock_hero", "leave_room", "wait_for_turn"}.issubset(names))
 
         # Join via bare code and via invite link (with bogus external relay -> SSRF pinned to local relay)
         err, r_join = self._call(sid_r, 3, "join_room", {"room": "HTTP01", "seat": "red", "units": 1})

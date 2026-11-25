@@ -1,8 +1,8 @@
 {
   "charset_base": 379,
   "charset_margin": 2000,
-  "charset_screen": 494,
-  "charset_total": 2598,
+  "charset_screen": 543,
+  "charset_total": 2616,
   "cinzel_source_sha256": "e854e68a388aa50d742a4415c1ae5c17a617ef7956c95a70021d0a4a44f20518",
   "features": {
     "CinzelDecorative-Bold.ttf": [],
@@ -41,16 +41,16 @@
       "sha256": "e854e68a388aa50d742a4415c1ae5c17a617ef7956c95a70021d0a4a44f20518"
     },
     "pk-body-400.woff2": {
-      "bytes": 323896,
-      "sha256": "92ef7aab44f0da20ff1116044871748f70c71c04d7eee9f97a7f140824821ebb"
+      "bytes": 327524,
+      "sha256": "9dd3b56b5b82a561bb37ba47c9cd6e986f3646a8ae6f163fb3b7255011ed591c"
     },
     "pk-body-700.woff2": {
-      "bytes": 331224,
-      "sha256": "68eb4c1842213c03106bb9348b2f5196ff2078249e7092e6505da5569b05056f"
+      "bytes": 335256,
+      "sha256": "b007e7bcf7cd5bfd5ff06557dce8ba7b1279186b3dca945d5e123d37cd72894f"
     },
     "pk-display-cjk-900.woff2": {
-      "bytes": 417168,
-      "sha256": "dcbf03ff4a200598ce9bc750cbcfe37ad11d1972ba0c7c4aaf66e9c8f4c07e42"
+      "bytes": 421964,
+      "sha256": "f8e1818a6f1ef8b6453f112b0fa9a419c5e76648128cab351121690a7dd7e355"
     }
   },
   "flavor": "woff2",
@@ -84,5 +84,5 @@
     ],
     "serif": []
   },
-  "total_bytes": 1134588
+  "total_bytes": 1147044
 }

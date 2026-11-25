@@ -651,6 +651,53 @@
     #settings-sheet .settings-row { min-height: 48px; }
     #settings-sheet input[type="range"] { flex: 1 1 auto; min-width: 48px; width: auto; }
     #settings-sheet .settings-control output, #settings-sheet .settings-value { font-size: 13px; min-width: 38px; text-align: right; }
+    /* ROOM-FLOW lobby (the second page) and the name dialog */
+    #lobby { position:fixed; inset:0; z-index:70; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto auto auto; gap:6px; padding:max(6px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background:radial-gradient(ellipse at 50% 0%, #2a1650 0%, #120a22 70%); color:#f1eaff; font-family:var(--font-body, system-ui, sans-serif); overflow:auto; }
+    #lobby[hidden], #name-dialog[hidden], #lobby-qr[hidden], #lobby-invite-box[hidden], #lobby-toast[hidden], #lobby-countdown[hidden], #lobby-wait[hidden] { display:none !important; }
+    #lobby button { min-height:40px; padding:4px 12px; border-radius:10px; border:1.5px solid #7158e2; background:#1d1238; color:#f1eaff; font:inherit; font-size:14px; cursor:pointer; }
+    #lobby button:disabled { opacity:.42; cursor:not-allowed; }
+    #lobby-invite-box button, #lobby-bar button, #lobby-mine button, #lobby-start { flex:0 0 auto; white-space:nowrap; }   /* a label never breaks into one character per line (red team B9, Chinese) */
+    #lobby .host-locked { opacity:.5; }
+    #lobby-bar { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+    #lobby-title { margin:0 6px 0 0; font-size:16px; color:#a5f3ff; }
+    #lobby-code { font-size:20px !important; font-weight:800; letter-spacing:2px; color:#ffd32a !important; border-color:#ffd32a !important; }
+    #lobby-count { margin-left:auto; font-weight:700; color:#a5f3ff; }
+    #lobby-teams { display:grid; grid-template-columns:1fr 1fr; gap:12px; min-height:0; }
+    .lobby-team { min-width:0; border-radius:12px; padding:6px 8px; background:rgba(20,10,40,.72); border:1.5px solid rgba(255,82,82,.55); overflow:auto; }
+    .lobby-team[data-team="white"] { border-color:rgba(0,206,201,.6); }
+    .lobby-team h3 { margin:0 0 4px; font-size:14px; color:#ffb3b3; } .lobby-team[data-team="white"] h3 { color:#a5f3ff; }
+    .lobby-cells { list-style:none; margin:0; padding:0; display:grid; gap:5px; }
+    .lobby-cell { display:grid; grid-template-columns:14px minmax(0,1fr) auto auto; grid-template-rows:auto auto; column-gap:8px; align-items:center; min-height:44px; padding:3px 6px; border-radius:9px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); }
+    .lobby-cell .chip { grid-row:1 / span 2; width:14px; height:30px; border-radius:4px; background:#ff5252; } .lobby-team[data-team="white"] .chip { background:#00cec9; }
+    .lobby-cell.free .chip, .lobby-cell.invite .chip { opacity:.25; } .lobby-cell.ai .chip { background:#8e7cc3 !important; }
+    .lobby-cell .who { grid-column:2; grid-row:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:700; } .lobby-cell small { grid-column:2; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#c9b8ff; font-size:12px; }
+    .lobby-cell.mine { border-color:#ffd32a; } .lobby-cell.locked { background:rgba(255,211,42,.08); }
+    .lobby-cell .cell-act { grid-column:3; } .lobby-cell .cell-act, .lobby-cell .cell-kick { grid-row:1 / span 2; min-height:36px !important; padding:2px 10px !important; font-size:13px !important; }
+    .lobby-cell .cell-kick { grid-column:4; border-color:#ff7675 !important; color:#ff7675 !important; }
+    #lobby-mine, #lobby-foot { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+    #lobby-me { max-width:12em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#ffd32a; }
+    #lobby-heroes { display:flex; flex-wrap:wrap; gap:6px; }
+    #lobby-lock.on { border-color:#ffd32a; background:#3a2a05; } #lobby-lock.due { border-color:#ff8a1f; background:#ff8a1f; color:#2a1400; font-weight:800; }
+    #lobby-foot label { display:flex; align-items:center; gap:6px; min-height:40px; font-size:14px; } #lobby-foot input { width:20px; height:20px; }
+    #lobby-start { margin-left:auto; min-width:150px; font-weight:800; background:#ff8a1f !important; color:#2a1400 !important; border-color:#ffd32a !important; }
+    #lobby-wait { flex-basis:100%; margin:0; font-size:13px; color:#ffe9a8; }
+    #lobby-invite-box { display:flex; flex-wrap:wrap; align-items:center; gap:8px; padding:6px 8px; border-radius:10px; background:rgba(113,88,226,.18); }
+    #lobby-invite-text { flex:1 1 60%; margin:0; font-size:12px; word-break:break-all; user-select:text; }
+    #lobby-countdown { position:fixed; left:50%; top:45%; transform:translate(-50%,-50%); z-index:72; font-size:96px; font-weight:900; color:#ffd32a; text-shadow:0 4px 18px #000; pointer-events:none; }
+    #lobby-toast { position:fixed; left:50%; top:max(6px, env(safe-area-inset-top)); transform:translateX(-50%); z-index:73; margin:0; padding:8px 16px; border-radius:12px; background:rgba(20,10,40,.94); border:1.5px solid #ffd32a; color:#fff; font-weight:700; max-width:calc(100vw - 32px); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; pointer-events:none; }
+    #lobby-qr { position:fixed; inset:0; z-index:74; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; background:rgba(8,4,16,.86); }
+    #lobby-qr canvas { width:min(240px, 60vh); height:min(240px, 60vh); background:#fff; border-radius:8px; } #lobby-qr b { font-size:28px; letter-spacing:3px; color:#ffd32a; }
+    #name-dialog { position:fixed; inset:0; z-index:80; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(8,4,16,.8); }
+    #name-dialog .name-card { width:min(420px, 100%); padding:16px; border-radius:14px; background:#1d1238; border:2px solid #7158e2; color:#f1eaff; }
+    #name-dialog h2 { margin:0 0 10px; font-size:18px; color:#a5f3ff; } #name-input { width:100%; box-sizing:border-box; min-height:44px; padding:6px 10px; font-size:18px; border-radius:10px; border:1.5px solid #7158e2; background:#120a22; color:#fff; }
+    #name-dialog .name-hint { margin:8px 0; font-size:13px; color:#c9b8ff; } #name-error { color:#ff7675; margin:4px 0; font-size:13px; }
+    #name-dialog .name-actions { display:flex; justify-content:flex-end; gap:10px; } #name-dialog button { min-height:44px; min-width:90px; border-radius:10px; border:1.5px solid #7158e2; background:#2a1a50; color:#fff; font-size:15px; } #name-ok { background:#ff8a1f !important; color:#2a1400 !important; border-color:#ffd32a !important; }
+    @media (max-height: 430px) { #lobby { gap:4px; } #lobby button { min-height:36px; font-size:13px; padding:2px 10px; } #lobby-code { font-size:17px !important; }
+      .lobby-team { padding:3px 6px; } .lobby-team h3 { margin:0 0 2px; font-size:12px; line-height:1.2; } .lobby-cells { gap:3px; }
+      .lobby-cell { min-height:0; padding:2px 6px; line-height:1.15; } .lobby-cell .who { font-size:13px; } .lobby-cell small { font-size:11px; line-height:1.1; } .lobby-cell .chip { height:24px; }
+      .lobby-cell .cell-act, .lobby-cell .cell-kick { min-height:30px !important; padding:0 8px !important; font-size:12px !important; }
+      #lobby-wait { font-size:12px; line-height:1.2; }
+      #lobby-invite-box { flex-wrap:nowrap; padding:3px 6px; } #lobby-invite-text { flex:1 1 auto; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }   /* one line on a short screen; Copy copies all of it (red team B9) */ }
   </style>
   <!-- PRELOAD-BEGIN -->
   <link rel="preload" as="image" href="assets/env/bg_graveyard.webp">
@@ -694,6 +741,17 @@
       </main>
       <footer id="start-actions"><div id="team-size" role="group" data-i18n-attr="aria-label:start.teamSize"><button type="button" data-n="1" data-i18n="start.team1"></button><button type="button" data-n="2" data-i18n="start.team2"></button><button type="button" data-n="3" data-i18n="start.team3"></button></div><button id="daily-btn" type="button" data-i18n="start.daily"></button><button id="friends-btn" type="button" aria-expanded="false" data-i18n="start.friends"></button><div id="friends-panel"><button id="friends-close" type="button" aria-label="Close">×</button><section id="seat-picker" aria-live="polite"></section><section id="room-picker" hidden aria-live="polite"><div class="room-actions"><button id="room-create" type="button" data-i18n="room.create"></button><button id="room-join" type="button" data-i18n="room.join"></button><button id="slot-fill-ai" type="button" data-i18n="slot.fillAi" hidden></button><button id="room-leave" type="button" data-i18n="room.leave" hidden></button></div><div id="slot-picker" hidden><div class="seat-row" id="slot-claim" role="group" data-i18n-attr="aria-label:slot.claim"><span data-i18n="slot.claim"></span><button type="button" class="seat-choice" data-claim="1">1</button><button type="button" class="seat-choice" data-claim="2">2</button><button type="button" class="seat-choice" data-claim="3">3</button></div><div class="seat-row" id="slot-invite" role="group" data-i18n-attr="aria-label:slot.invite" hidden><span data-i18n="slot.invite"></span><button type="button" class="seat-choice" data-seat="" data-i18n="slot.pick"></button><button type="button" class="seat-choice" data-seat="red" data-i18n="slot.red"></button><button type="button" class="seat-choice" data-seat="white" data-i18n="slot.white"></button></div><p id="slot-vacancy" class="room-status" aria-live="polite" hidden></p></div><p id="room-status" class="room-status" aria-live="polite" hidden></p><div id="room-details" hidden><b id="room-code"></b><canvas id="room-qr" width="1" height="1" aria-label=""></canvas><div id="room-link-row"><a id="room-link" href=""></a><button id="room-copy" type="button" data-i18n="room.copy"></button></div></div></section></div><button id="start-go" type="button" data-i18n="start.go"></button></footer>
     </div>
+    <section id="lobby" hidden aria-labelledby="lobby-title">
+      <header id="lobby-bar"><h2 id="lobby-title" data-i18n="lobby.title"></h2><button id="lobby-code" type="button" data-i18n-attr="title:lobby.showQr"></button><button id="lobby-copy" type="button" data-i18n="lobby.copy"></button><button id="lobby-refresh" type="button" data-i18n-attr="aria-label:lobby.refresh"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M20 12a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M20 3v6h-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span id="lobby-count" aria-live="polite"></span><button id="lobby-leave" type="button" data-i18n="lobby.leave"></button></header>
+      <div id="lobby-teams"><section class="lobby-team" data-team="red"><h3 data-i18n="slot.red"></h3><ol class="lobby-cells" id="lobby-cells-red"></ol></section><section class="lobby-team" data-team="white"><h3 data-i18n="slot.white"></h3><ol class="lobby-cells" id="lobby-cells-white"></ol></section></div>
+      <div id="lobby-mine"><b id="lobby-me"></b><button id="lobby-rename" type="button" data-i18n="lobby.rename"></button><span id="lobby-heroes"></span><button id="lobby-lock" type="button"></button><button id="lobby-invite" type="button" data-i18n="lobby.invite" hidden></button></div>
+      <div id="lobby-invite-box" hidden><p id="lobby-invite-text"></p><button id="lobby-invite-copy" type="button" data-i18n="lobby.copy"></button><button id="lobby-invite-cancel" type="button" data-i18n="lobby.inviteCancel"></button></div>
+      <footer id="lobby-foot"><label><input type="checkbox" id="lobby-allow-ai"><span data-i18n="lobby.allowAi"></span></label><label><input type="checkbox" id="lobby-allow-agent"><span data-i18n="lobby.allowAgent"></span></label><button id="lobby-start" type="button"></button><p id="lobby-wait" aria-live="polite" hidden></p></footer>
+      <b id="lobby-countdown" hidden aria-live="assertive"></b>
+      <p id="lobby-toast" hidden aria-live="polite"></p>
+      <div id="lobby-qr" hidden role="dialog" aria-modal="true" aria-labelledby="lobby-qr-code"><canvas id="lobby-qr-canvas" width="240" height="240"></canvas><b id="lobby-qr-code"></b><button id="lobby-qr-close" type="button" data-i18n="lobby.close"></button></div>
+    </section>
+    <div id="name-dialog" hidden role="dialog" aria-modal="true" aria-labelledby="name-title"><div class="name-card"><h2 id="name-title" data-i18n="name.title"></h2><input id="name-input" type="text" maxlength="40" autocomplete="nickname" data-i18n-attr="placeholder:name.placeholder;aria-label:name.title"><p class="name-hint"><span data-i18n="name.hint"></span> <b id="name-preview"></b></p><p id="name-error" hidden data-i18n="name.empty"></p><div class="name-actions"><button id="name-cancel" type="button" data-i18n="name.cancel"></button><button id="name-ok" type="button" data-i18n="name.ok"></button></div></div></div>
     <div id="side-chooser" hidden role="dialog" aria-modal="true" aria-labelledby="side-chooser-title">
       <div class="side-card">
         <h2 id="side-chooser-title" data-i18n="side.title"></h2>
@@ -811,6 +869,7 @@
   <script src="js/smart_candidates.js"></script>
   <script src="js/round_hash.js"></script>
   <script src="js/relay_client.js"></script>
+  <script src="js/lobby_model.js"></script>
   <script src="js/qr_code.js"></script>
   <script src="relay-config.js"></script>
   <script>
@@ -1346,7 +1405,7 @@
     function relayRememberSeats() { if (!relaySeatBackup) relaySeatBackup = { left: seats.left, right: seats.right }; }
     function relayUndoSeats() { if (!relaySeatBackup) return; seats.left = relaySeatBackup.left; seats.right = relaySeatBackup.right; relaySeatBackup = null; setLocalPerspective("left"); buildSeatRows(); }
     function setRoomStatus(key, params) { const el = document.getElementById("room-status"); if (!el) return; if (!key) { el.hidden = true; el.textContent = ""; return; } el.textContent = T(key, params); el.hidden = false;
-      if (joinRoomCode && !matchStarted && !relayPanelShown && (key === "room.unreachable" || key === "room.refused" || key === "room.started")) { relayPanelShown = true; const ss = document.getElementById("start-screen"); if (ss) ss.classList.add("seats-open"); }   // a ?room= guest never opened the friends panel, so a refusal would be invisible: open it ONCE, only for the guest of a link, only before a match (red-team R5B-1, R6B-1)
+      if (joinRoomCode && !lobbyMode && !matchStarted && !relayPanelShown && (key === "room.unreachable" || key === "room.refused" || key === "room.started")) { relayPanelShown = true; const ss = document.getElementById("start-screen"); if (ss) ss.classList.add("seats-open"); }   // a ?room= guest never opened the friends panel, so a refusal would be invisible: open it ONCE, only for the guest of a link, only before a match (red-team R5B-1, R6B-1)
     }
     function roomStatusFromRelay(status) {
       if (relayRoomConfirmed) { setRoomStatus(status === "closed" ? "room.unreachable" : null); return; }   // a room that exists: only a final loss is an error; a reconnect is not
@@ -1356,7 +1415,8 @@
       if (!relayAddress || typeof RelayClient === "undefined") return null;
       if (relayClient && relayClient.state().status !== "closed") return relayClient;
       relayRoomConfirmed = false; relayCreateSent = false;   // a client that gave up (closed) is replaced by a fresh one, otherwise Create / Join would throw until a reload (red-team R4B-2)
-      relayClient = RelayClient.createClient({ socketFactory: () => new WebSocket(RelayClient.relaySocketUrl(relayAddress)), now: () => Date.now(), setTimeoutFn: (fn, ms) => setTimeout(fn, ms), perspective: localPerspective });
+      relayClient = RelayClient.createClient(Object.assign({ socketFactory: () => new WebSocket(RelayClient.relaySocketUrl(relayAddress)), now: () => Date.now(), setTimeoutFn: (fn, ms) => setTimeout(fn, ms), perspective: localPerspective }, resumeSeat ? { seatToken: resumeSeat } : {}));
+      resumeSeat = "";
       { const mine = relayClient; if (typeof mine.onStatus === "function") mine.onStatus(status => { if (relayClient === mine) roomStatusFromRelay(status); }); }   // a client the page has dropped (room ended) must not write the status line (red-team R6B-1)
       const owner = relayClient;
       relayClient.onMessage(message => {
@@ -1364,6 +1424,8 @@
         if (message.type === "room_state" && (message.team_size || 1) !== TEAM_N) {   // the creator's team size wins: adopt it and reload (docs/relay_team_page_hooks.md item 1)
           const n = message.team_size || 1;
           try { localStorage.setItem("pk_team_n", "" + n); } catch (e) { /* the URL still carries it */ }
+          try { relayClient.leave(); } catch (_) { /* gone already */ }   // red team B3: release the seat at once, the reloaded page joins again
+          try { sessionStorage.removeItem(LOBBY_SEAT_KEY); } catch (_) { /* nothing stored */ }
           const u = new URL(location.href); u.searchParams.set("team", "" + n); if (message.code) u.searchParams.set("room", message.code); location.href = u.toString();
           return;
         }
@@ -1374,13 +1436,16 @@
           if (typeof message.seat_id === "string") relaySeatId = message.seat_id;
           if (Array.isArray(message.seats)) relaySeats = message.seats;
           refreshSlotPicker();
+          if (lobbyMode) lobbyOnState(message);
         }
         if (message.type === "start" && Number.isInteger(message.seed) && message.seed >= 0) {
+          if (lobbyMode && !matchStarted && !relayPlaying && relayRoomCode) lobbyEnterMatch();   // a lobby room: the relay decided (host's start, all locked, countdown)
           matchSeed = message.seed >>> 0; weatherCache.round = -1; weatherFxKey = "";
           wind = seedWind(); randomizePositions(false);
           if (!relayPlaying && matchStarted && relayRoomCode) beginRelayMatch(message);   // a replayed `start` after a reconnect must not restart the match
         }
         if (relayLive()) relayOnMessage(message);
+        if (lobbyMode) lobbyOnMessage(message);
         if (message.type === "error" && message.code) {
           console.warn("relay", message.code, message.message || ""); relayNote("relay.error", { code: message.code });
           if (!relayRoomConfirmed) { relayCreateSent = false; relayRoomCode = ""; relayUndoSeats(); setRoomStatus(message.code === "room_started" ? "room.started" : "room.refused"); }   // the relay refused the create / join (unknown_code, server_busy, already_joined ...): say so, and let the button work again
@@ -1439,33 +1504,36 @@
       btn.hidden = !canFill;
       btn.disabled = !canFill;
     }
-    function fillOpenSlotsWithAi() {
-      if (!relayIsHost || !relayRoomCode || relayPlaying || relayFillers.length) return;
-      const v = slotVacancies(), total = v.red + v.white;
+    function fillOpenSlotsWithAi(given) {   // given: free places per team from the lobby (claims and invites counted); without it, from the named units as before
+      if (!relayIsHost || !relayRoomCode || relayPlaying || (!given && relayFillers.length)) return;   // the lobby may add fillers for places freed later (red team B2)
+      const v = given || slotVacancies(), total = v.red + v.white;
       if (total <= 0) return;
       const pool = Object.keys(HERO_PROFILES);
       let seed = 0; for (let i = 0; i < relayRoomCode.length; i++) seed = (seed * 31 + relayRoomCode.charCodeAt(i)) >>> 0;
-      const pickHeroes = count => {
+      const pickHeroes = (count, avoid) => {   // a hero a teammate already named is skipped, and no hero twice
         const out = [];
-        for (let i = 0; i < count; i++) { out.push(pool[(seed + i * 3) % pool.length]); }
+        for (let i = 0; out.length < count && i < pool.length * 3; i++) { const h = pool[(seed + i * 3) % pool.length]; if ((avoid || []).indexOf(h) < 0 && out.indexOf(h) < 0) out.push(h); }
+        for (let i = 0; out.length < count; i++) out.push(pool[i % pool.length]);
         seed += 7;
         return out;
       };
       ["red", "white"].forEach(team => {
         const need = v[team]; if (need <= 0) return;
-        const heroes = pickHeroes(need);
+        const heroes = pickHeroes(need, [].concat(...relaySeats.filter(x => x.team === team).map(x => x.units || [])));
         const filler = { team, heroes, seatId: "", readySent: false, timer: null, lastActedKey: "", client: null };
         filler.client = RelayClient.createClient({ socketFactory: () => new WebSocket(RelayClient.relaySocketUrl(relayAddress)), now: () => Date.now(), setTimeoutFn: (fn, ms) => setTimeout(fn, ms) });
         filler.client.onMessage(m => {
-          if (m.type === "room_state") {
-            if (m.seat_id) filler.seatId = m.seat_id;
-            if (!filler.readySent) {
-              filler.readySent = true;
-              try { filler.client.sendReady(TEAM_N > 1 ? { units: heroes } : {}); } catch (_) {}
-            }
+          if (m.type === "room_state" && m.seat_id && !filler.seatId) filler.seatId = m.seat_id;
+          if (m.type === "room_state" && filler.seatId && !filler.readySent) {   // lock with as many heroes as places the relay really gave it (red team B1: it may have trimmed the claim)
+            const own = (m.seats || []).find(s => s.seat_id === filler.seatId), places = own && Number.isInteger(own.claim) && own.claim > 0 ? own.claim : heroes.length;   // a relay that does not report claims: all of them
+            filler.readySent = true;
+            try { filler.client.sendReady(TEAM_N > 1 ? { units: heroes.slice(0, places) } : {}); } catch (_) {}
           }
+          if (m.type === "error" && !filler.seatId) { try { filler.client.close(); } catch (_) {} relayFillers = relayFillers.filter(f => f !== filler); }   // refused (the place was taken meanwhile)
+          if (m.type === "kicked") { clearTimeout(filler.timer); relayFillers = relayFillers.filter(f => f !== filler); }   // evicted (options off, kicked, host left): a new filler may get the same seat id (cross-check B NEW-1)
         });
-        filler.client.join(relayRoomCode, team, TEAM_N > 1 ? { units: heroes } : {});
+        const proof = { aiHostToken: relayClient.seatToken() };
+        filler.client.join(relayRoomCode, team, TEAM_N > 1 ? Object.assign({ units: heroes }, proof) : proof);
         relayFillers.push(filler);
       });
       refreshFillAiButton();
@@ -1477,7 +1545,7 @@
       const side = st.phase === "red" ? "left" : "right";
       const u = unitOf(side); if (!u || u.hp <= 0) return;
       const ownerId = owners[u.id];
-      const filler = relayFillers.find(f => f.team === st.phase && (ownerId ? f.seatId === ownerId : f.team === st.phase));
+      const filler = relayFillers.find(f => f.team === st.phase && f.client.state().status !== "closed" && (ownerId ? f.seatId === ownerId : f.team === st.phase));
       if (!filler) return;
       const key = st.round + ":" + st.phase + ":" + u.id;
       if (filler.lastActedKey === key) return;
@@ -1544,7 +1612,236 @@
         if (copyBtn) copyBtn.onclick = doCopy;
         if (linkEl) linkEl.onclick = doCopy; }
       refreshLeaveRoomButton();
+      { const q = new URLSearchParams(location.search);
+        if (joinRoomCode && q.get("lobby") === "1" && !relayLeft && !relayAutoJoined) { relayAutoJoined = true; askName(name => lobbyStart(name, { code: joinRoomCode.trim().toUpperCase(), invite: q.get("invite") || "" })); return; } }   // a lobby link (ROOM-FLOW F1/F12): straight into the lobby
       if (joinRoomCode && !relayLeft && !relayAutoJoined) { if (sideChoiceWanted()) showSideChooser(); else joinRoomNow(); }
+    }
+    // ---- ROOM-FLOW lobby, the second page (docs/room_flow_gap_table_20261125.md F1 to F12): "Play with friends" creates a room and opens it; an invite link opens it too.
+    // What the lobby shows and allows comes from LobbyModel (js/lobby_model.js) and one relay room_state; every action is one relay call, the relay enforces the rules
+    // (host only, free places, start conditions). Names are only ever set with textContent. The old friends panel is no longer opened (F11; its DOM stays for old ?room= links and tests).
+    let lobbyKickArm = null, lobbyMode = false, lobbyState = null, lobbyPicks = [], lobbyToastT = null, lobbyCountT = null, lobbyInvite = "", lobbyNameMem = "", lobbyFillAsked = false;
+    const LOBBY_NAME_KEY = "pk_name", LOBBY_SEAT_KEY = "pk_lobby_seat";   // the seat token of this tab's lobby room, so a refresh keeps the seat (red team B4); per tab, gone with it
+    let resumeSeat = "", lobbyResumeTried = false;
+    function lobbyRememberSeat(code, token) { try { if (code && token) sessionStorage.setItem(LOBBY_SEAT_KEY, JSON.stringify({ code, token })); else sessionStorage.removeItem(LOBBY_SEAT_KEY); } catch (_) { /* storage blocked: a refresh joins afresh */ } }
+    function lobbyStoredSeat(code) { try { const s = JSON.parse(sessionStorage.getItem(LOBBY_SEAT_KEY) || "null"); return s && s.code === code ? s.token : ""; } catch (_) { return ""; } }
+    const LOBBY_ERRORS = { team_full: "lobby.err.teamFull", not_full: "lobby.err.notFull", host_only: "lobby.err.hostOnly", unknown_code: "lobby.err.unknownCode", invalid_invite: "lobby.err.invalidInvite",
+      mcp_disabled: "lobby.err.mcpDisabled", room_started: "lobby.err.roomStarted", invite_limit: "lobby.err.inviteLimit", ai_disabled: "lobby.err.aiDisabled", invalid_name: "lobby.err.invalidName", rate_limited: "lobby.err.rateLimited" };
+    const LOBBY_ACTIONS = { take: "lobby.take", switch: "lobby.switch", release: "lobby.release" };
+    function lobbyName() { let v = ""; try { v = localStorage.getItem(LOBBY_NAME_KEY) || ""; } catch (_) { v = lobbyNameMem; } return RelayClient.cleanName(v || lobbyNameMem); }
+    function askName(then, force) {   // F2: the first time (or from Rename) a small dialog: type, see how it will show, confirm
+      const box = document.getElementById("name-dialog"), input = document.getElementById("name-input"), ok = document.getElementById("name-ok"), cancel = document.getElementById("name-cancel"), err = document.getElementById("name-error"), shown = document.getElementById("name-preview");
+      const have = lobbyName();
+      if (have && !force) { then(have); return; }
+      if (!box || !input || !ok) { then(have); return; }
+      input.value = have; err.hidden = true; box.hidden = false;
+      const preview = () => { shown.textContent = RelayClient.cleanName(input.value); };
+      input.oninput = preview; preview();
+      ok.onclick = () => { const clean = RelayClient.cleanName(input.value); if (!clean) { err.hidden = false; return; } lobbyNameMem = clean; try { localStorage.setItem(LOBBY_NAME_KEY, clean); } catch (_) { /* kept in memory */ } box.hidden = true; then(clean); };
+      input.onkeydown = e => { if (e.isComposing || e.keyCode === 229) return;   /* Enter that picks an input-method candidate is not a confirm */ if (e.key === "Enter") { e.preventDefault(); ok.onclick(); } else if (e.key === "Escape") cancel.onclick(); };
+      cancel.onclick = () => { box.hidden = true; };
+      try { input.focus(); } catch (_) { /* focus is optional */ }
+    }
+    function lobbyLink(code, invite) { const u = new URL(location.href); ["room", "seat", "claim", "choose", "invite", "lobby", "team"].forEach(k => u.searchParams.delete(k)); u.searchParams.set("room", code); u.searchParams.set("team", "" + TEAM_N); u.searchParams.set("lobby", "1");   /* team=1 too: otherwise a stored team size wins (red team B3) */ if (invite) u.searchParams.set("invite", invite); return u.toString(); }
+    function lobbyMcpUrl() { return /^https?:$/.test(location.protocol) ? location.origin + "/mcp" : "/mcp"; }
+    function copyText(text, btn, doneKey, backKey) {
+      const done = () => { if (!btn) return; btn.textContent = T(doneKey); clearTimeout(btn._t); btn._t = setTimeout(() => { btn.textContent = T(backKey); }, 1600); };
+      const fallback = () => { try { const ta = document.createElement("textarea"); ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); done(); } catch (_) { /* nothing to copy with */ } };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+    }
+    function lobbyShow(on) {
+      const box = document.getElementById("lobby"); if (!box) return;
+      box.hidden = !on; document.documentElement.classList.toggle("in-lobby", !!on);
+      if (on) lobbyRender();
+    }
+    function lobbyToast(text) {
+      const el = document.getElementById("lobby-toast"); if (!el || !text) return;
+      el.textContent = text; el.hidden = false; clearTimeout(lobbyToastT); lobbyToastT = setTimeout(() => { el.hidden = true; }, 3000);   // F8: about 3 s, no close button
+    }
+    function lobbyStart(name, how) {   // how: { create: true } or { code, invite }
+      if (!relayAddress || typeof RelayClient === "undefined" || typeof LobbyModel === "undefined") { lobbyMode = true; lobbyState = null; lobbyShow(true); lobbyToast(T("lobby.noServer")); return; }
+      lobbyMode = true; lobbyState = null; lobbyInvite = ""; relayLeft = false; relaySeatId = ""; relaySeats = [];
+      if (!how.create && !lobbyResumeTried) { lobbyResumeTried = true; const token = lobbyStoredSeat(how.code); if (token) { resumeSeat = token; how = Object.assign({}, how, { resume: true }); } }
+      let client = null; try { client = connectRelay(); } catch (_) { client = null; }
+      if (!client) { lobbyToast(T("lobby.noServer")); lobbyShow(true); return; }
+      try {
+        if (how.create) { relayIsHost = true; relayCreateSent = true; client.createRoom(Object.assign({ scene: pickedScene, lobby: true, name }, TEAM_N > 1 ? { teamSize: TEAM_N, claim: 1 } : {})); }
+        else if (how.resume) { relayRoomCode = how.code; }   // the client resumes the stored seat by itself (seatToken)
+        else { relayRoomCode = how.code; client.join(how.code, "auto", Object.assign({ name }, how.invite ? { invite: how.invite } : TEAM_N > 1 ? { claim: 1 } : {})); }
+      } catch (_) { lobbyToast(T("lobby.err.generic")); }
+      lobbyShow(true);
+    }
+    function lobbyOpenFromStart() { askName(name => lobbyStart(name, { create: true })); }   // F1: one press: a room with its code, no "create room" button
+    function lobbyLeave(toStart) {   // leave the room for good (the seat is released at once) and go back to the first page
+      closeRelayFillers();
+      if (relayClient) { try { relayClient.leave(); } catch (_) { /* already closed */ } }
+      lobbyMode = false; lobbyState = null; lobbyInvite = ""; lobbyFillAsked = false; lobbyRememberSeat("", "");
+      leaveRoomNow();
+      try { const u = new URL(location.href); ["lobby", "invite", "team"].forEach(k => u.searchParams.delete(k)); history.replaceState(null, "", u.toString()); } catch (_) { /* the URL is cosmetic */ }
+      lobbyShow(false);
+      if (toStart) { resetGame(); showStartScreen(); }
+    }
+    function lobbyOnState(m) {
+      const prev = lobbyState;
+      lobbyState = Object.assign({}, m, { code: m.code || (prev && prev.code) || relayRoomCode });
+      if (lobbyState.code) relayRoomCode = lobbyState.code;
+      relayIsHost = !!relaySeatId && m.host_seat_id === relaySeatId;
+      if (m.seat_token && lobbyState.code) {   // the private bootstrap: remember the seat for a refresh, and make the address a lobby link so a refresh comes back here
+        lobbyRememberSeat(lobbyState.code, m.seat_token);
+        try { history.replaceState(null, "", lobbyLink(lobbyState.code)); } catch (_) { /* cosmetic */ }
+        if (m.started && !matchStarted) { lobbyToast(T("lobby.err.roomStarted")); setTimeout(() => lobbyLeave(true), 1200); return; }   // refreshed in the middle of a match: this page cannot rejoin it
+      }
+      if (m.started) return;
+      (LobbyModel.welcome(prev, lobbyState, relaySeatId) || []).slice(-1).forEach(w => lobbyToast(w.kind === "self" ? T("lobby.welcomeSelf", { code: w.code }) : T("lobby.welcomeHost", { name: w.name || T("lobby.unnamed") })));
+      const v = LobbyModel.view(lobbyState, relaySeatId), mine = (lobbyState.seats || []).find(s => s.seat_id === relaySeatId);
+      const taken = LobbyModel.takenByMates(lobbyState, relaySeatId), all = availableHeroIds();
+      const want = Math.max(1, v.myClaim || 1);
+      if (mine && mine.ready && Array.isArray(mine.units) && mine.units.length) lobbyPicks = mine.units.slice();
+      lobbyPicks = lobbyPicks.slice(0, want);
+      if (!lobbyPicks.length) lobbyPicks.push(pickedHero);
+      while (lobbyPicks.length < want) lobbyPicks.push(LobbyModel.nextHero(all, lobbyPicks[lobbyPicks.length - 1], taken, lobbyPicks));
+      lobbyPicks = lobbyPicks.map((h, i) => taken.indexOf(h) < 0 ? h : LobbyModel.nextHero(all, h, taken, lobbyPicks.filter((_, k) => k !== i)));
+      if (lobbyInvite && !v.myInvite) { lobbyInvite = ""; }   // used, expired or cancelled
+      if (lobbyFillAsked && v.free.red === 0 && v.free.white === 0) lobbyFillAsked = false;
+      if (relayIsHost && v.start.pressed && v.start.fillsWithAi) lobbyFillAi(v);   // start pressed and a place opened (someone left or gave one up): fill it (red team B2)
+      lobbyRender();
+    }
+    function lobbyOnMessage(m) {
+      if (m.type === "countdown") {
+        const el = document.getElementById("lobby-countdown"); clearInterval(lobbyCountT);
+        if (!el) return;
+        if (typeof m.seconds !== "number") { el.hidden = true; return; }
+        let left = Math.ceil(m.seconds); el.textContent = String(left); el.hidden = false;
+        lobbyCountT = setInterval(() => { left -= 1; if (left <= 0) { clearInterval(lobbyCountT); el.hidden = true; } else el.textContent = String(left); }, 1000);
+      } else if (m.type === "invite_created" && typeof m.invite === "string") { lobbyInvite = m.invite; lobbyRender(); }
+      else if (m.type === "lobby_reset") lobbyBack();
+      else if (m.type === "kicked") { lobbyToast(T(m.reason === "inviter_left" ? "lobby.err.inviterLeft" : "lobby.err.kicked")); setTimeout(() => lobbyLeave(true), 1500); }
+      else if (m.type === "error" && (m.code === "unknown_token" || m.code === "resume_expired" || m.code === "seat_in_use") && lobbyState === null && relayRoomCode) {   // the stored seat is gone, or another tab holds it (a duplicated tab copies sessionStorage): join afresh
+        lobbyRememberSeat("", ""); const code = relayRoomCode, old = relayClient; relayClient = null; try { if (old) old.close(); } catch (_) { /* closing */ }
+        setTimeout(() => lobbyStart(lobbyName(), { code }), 0); }
+      else if (m.type === "error" && m.code) lobbyToast(T(LOBBY_ERRORS[m.code] || "lobby.err.generic"));
+    }
+    function lobbyEnterMatch() {   // the relay's `start` of a lobby room: the page sets up the match from the lobby picks, then the usual relay start runs
+      const el = document.getElementById("lobby-countdown"); if (el) el.hidden = true; clearInterval(lobbyCountT);
+      const v = LobbyModel.view(lobbyState || {}, relaySeatId);
+      relayClaimCount = v.myClaim >= TEAM_N ? null : Math.max(1, v.myClaim);
+      if (lobbyPicks.length) { pickedHero = lobbyPicks[0]; teamPick = lobbyPicks.slice(); }
+      lobbyShow(false);
+      startMatch(true);
+    }
+    function lobbyBack() {   // F9: back to the lobby of the same room: same people, seats and names; heroes unlocked
+      if (relayIsHost) relayFillers.forEach(f => { if (f.seatId) { try { relayClient.kick(f.seatId); } catch (_) { /* gone already */ } } });   // the fillers live in this browser: their seats go, the host fills again at the next start
+      closeRelayFillers();
+      relayPlaying = false; relayWait = null; relayQueueMode = false; relayInbox.length = 0; relayMateOpen = false; relayMateFlight = false; relayLastSeq = 0; relayIncoming = 0; relayRemoteOpen = false; relayJudge = null; relayJudgesIn = [];
+      gameOver = null; lobbyFillAsked = false; resetGame(); showStartScreen(); lobbyShow(true);
+    }
+    function lobbyHostGone() { const st = lobbyState || {}; return !!st.host_seat_id === false || !relaySeats.some(s => s.seat_id === st.host_seat_id); }
+    function lobbyAfterMatch(again) {   // the two result buttons of a lobby room
+      if (!again) { lobbyLeave(true); return; }
+      if (relayIsHost || lobbyHostGone()) { try { relayClient.resetLobby(); } catch (_) { /* the reset comes back as lobby_reset */ } }   // the host left after the match: any player reopens it (red team B7, DESIGN-1)
+      else floatTexts.push({ x: CANVAS_W / 2, y: CANVAS_H / 2 + 160, text: T("lobby.waitHost"), color: "#ffd32a", alpha: 1.0 });
+    }
+    function lobbyCellNode(c, v, pick) {   // pick: for my own unlocked place, the hero I am about to lock (shown dimmed)
+      const li = document.createElement("li"); li.className = "lobby-cell " + c.kind + (c.mine ? " mine" : "") + (c.locked ? " locked" : "") + (c.ai ? " ai" : "") + (c.agent ? " agent" : "");
+      const chip = document.createElement("i"); chip.className = "chip"; li.appendChild(chip);
+      const main = document.createElement("span"); main.className = "who"; const sub = document.createElement("small");
+      if (c.kind === "seat") {
+        main.textContent = c.ai ? T("lobby.ai") : (c.name || T("lobby.unnamed")) + (c.host && c.first ? " 👑" : "");
+        const bits = [];
+        if (c.agent) bits.push(T("lobby.agentOf", { name: c.invitedByName || T("lobby.unnamed") }));
+        bits.push(c.hero ? T("hero." + c.hero + ".tab") : pick ? T("hero." + pick + ".tab") + "?" : "—");
+        if (c.locked) bits.push("🔒");
+        sub.textContent = bits.join(" · ");
+      } else if (c.kind === "invite") { main.textContent = T("lobby.waitAgent", { name: c.byName || T("lobby.unnamed") }); sub.textContent = "…"; }
+      else { main.textContent = T("lobby.free"); }
+      li.appendChild(main); if (sub.textContent) li.appendChild(sub);
+      if (c.action) {
+        const b = document.createElement("button"); b.type = "button"; b.className = "cell-act"; b.textContent = T(LOBBY_ACTIONS[c.action]);
+        b.onclick = e => { e.stopPropagation(); lobbyCellAction(c, v); }; li.appendChild(b);
+      }
+      if (v.amHost && c.kind === "seat" && !c.mine && c.first && !v.started) {
+        const k = document.createElement("button"); k.type = "button"; k.className = "cell-kick"; k.textContent = "✕"; k.title = T("lobby.kick"); k.setAttribute("aria-label", T("lobby.kick"));
+        k.onclick = e => { e.stopPropagation(); const now = Date.now();   // two taps within 3 s (DESIGN-1: one tap removed a friend)
+          if (!(lobbyKickArm && lobbyKickArm.id === c.seatId && now - lobbyKickArm.at < 3000)) { lobbyKickArm = { id: c.seatId, at: now }; lobbyToast(T("lobby.kickAgain", { name: c.name || T("lobby.unnamed") })); return; }
+          lobbyKickArm = null; try { relayClient.kick(c.seatId); } catch (_) { /* refused by the relay */ } }; li.appendChild(k);
+      }
+      return li;
+    }
+    function lobbyCellAction(c, v) {
+      if (!relayClient) return;
+      try {
+        if (c.action === "take") relayClient.move({ claim: v.myClaim + 1 });
+        else if (c.action === "release") relayClient.move({ claim: Math.max(1, v.myClaim - 1) });
+        else if (c.action === "switch") relayClient.move({ team: c.team });
+      } catch (_) { /* the relay answers with an error */ }
+    }
+    function lobbyFillAi(v) {   // F6: the host's start fills every open place with the browser's own AI seats (they lock at once); again for a place freed later
+      if (relayFillers.some(f => !f.seatId) || (v.free.red <= 0 && v.free.white <= 0)) return;   // one round at a time: a filler still joining counts as not yet there
+      lobbyFillAsked = true;
+      fillOpenSlotsWithAi({ red: v.free.red, white: v.free.white });
+    }
+    function lobbyRender() {
+      const box = document.getElementById("lobby"); if (!box || box.hidden) return;
+      const st = lobbyState || { seats: [], code: relayRoomCode }, v = LobbyModel.view(st, relaySeatId), hostTip = T("lobby.hostOnly");
+      const set = (id, fn) => { const el = document.getElementById(id); if (el) fn(el); };
+      set("lobby-code", el => { el.textContent = v.code || "……"; el.disabled = !v.code; });
+      set("lobby-count", el => { el.textContent = T("lobby.count", { n: v.count.seated, total: v.count.total }); });
+      set("lobby-refresh", el => { el.disabled = !v.refresh.enabled; el.title = v.amHost ? T("lobby.refresh") : hostTip; });
+      set("lobby-copy", el => { el.disabled = !v.code; });
+      let myIndex = 0;
+      ["red", "white"].forEach(team => set("lobby-cells-" + team, ol => { ol.textContent = ""; (v.teams[team] || []).forEach(c => ol.appendChild(lobbyCellNode(c, v, c.mine && !c.hero ? lobbyPicks[myIndex++] : (c.mine ? (myIndex++, null) : null)))); }));
+      set("lobby-me", el => { el.textContent = lobbyName() || T("lobby.unnamed"); });
+      set("lobby-heroes", el => {
+        el.textContent = "";
+        lobbyPicks.forEach((h, i) => { const b = document.createElement("button"); b.type = "button"; b.className = "hero-pick"; b.textContent = T("hero." + h + ".tab") + " ▶"; b.disabled = v.myLocked || v.started || !v.myTeam;
+          b.onclick = () => { const taken = LobbyModel.takenByMates(lobbyState || {}, relaySeatId); lobbyPicks[i] = LobbyModel.nextHero(availableHeroIds(), h, taken, lobbyPicks.filter((_, k) => k !== i)); lobbyRender(); }; el.appendChild(b); });
+      });
+      set("lobby-lock", el => { el.textContent = T(v.myLocked ? "lobby.unlock" : "lobby.lock"); el.disabled = !v.myTeam || v.started; el.classList.toggle("on", v.myLocked); el.classList.toggle("due", !v.myLocked && !!v.myTeam && v.waiting.length > 0); });
+      set("lobby-invite", el => { el.hidden = !v.options.allowAgents; el.disabled = !v.canInvite; });
+      set("lobby-invite-box", el => {
+        el.hidden = !(lobbyInvite && v.myInvite);
+        const text = document.getElementById("lobby-invite-text");
+        if (text && lobbyInvite) text.textContent = T("lobby.inviteText", { link: lobbyLink(v.code, lobbyInvite), mcp: lobbyMcpUrl(), code: v.code, invite: lobbyInvite });
+      });
+      [["lobby-allow-ai", "allowAi"], ["lobby-allow-agent", "allowAgents"]].forEach(([id, key]) => set(id, el => { el.checked = !!v.options[key]; el.disabled = !v.options.enabled; const lab = el.closest("label"); if (lab) { lab.title = v.amHost ? "" : hostTip; lab.classList.toggle("host-locked", !v.amHost); } }));
+      set("lobby-start", el => {
+        el.textContent = T(v.start.pressed ? "lobby.startCancel" : v.start.fillsWithAi ? "lobby.startFill" : "lobby.start");
+        el.disabled = !(v.start.enabled || (v.amHost && v.start.pressed)); el.title = v.amHost ? (v.start.reason === "not_full" ? T("lobby.err.notFull") : "") : hostTip; el.classList.toggle("host-locked", !v.amHost);
+      });
+      set("lobby-wait", el => {
+        const parts = v.waiting.map(w => w.kind === "unlocked" ? T("lobby.waitLock", { name: w.seatId === relaySeatId ? T("lobby.you") : w.ai ? T("lobby.ai") : (w.name || T("lobby.unnamed")) }) : w.kind === "invite" ? T("lobby.waitInvite", { name: w.name || T("lobby.unnamed") }) : T("lobby.waitFree", { team: T(w.team === "red" ? "slot.red" : "slot.white"), n: w.n }));
+        el.textContent = parts.length ? T("lobby.waiting", { list: parts.join(T("lobby.sep")) }) : ""; el.hidden = !parts.length;
+      });
+    }
+    function lobbyWire() {   // the buttons of the lobby and of the name dialog (once, at start-up)
+      setInterval(() => { if (lobbyMode && relayClient && !relayPlaying && typeof relayClient.ping === "function") relayClient.ping(); }, 240000);   // the relay closes a room silent for 30 min; people waiting in a lobby are not silent (external review)
+      const on = (id, fn) => { const el = document.getElementById(id); if (el) el.onclick = fn; };
+      on("lobby-code", () => { const code = (lobbyState && lobbyState.code) || relayRoomCode; const dlg = document.getElementById("lobby-qr"); if (!code || !dlg) return; document.getElementById("lobby-qr-code").textContent = code; if (typeof QrCode !== "undefined") QrCode.draw(document.getElementById("lobby-qr-canvas"), lobbyLink(code), { margin: 2 }); dlg.hidden = false; });
+      on("lobby-qr-close", () => { const dlg = document.getElementById("lobby-qr"); if (dlg) dlg.hidden = true; });
+      on("lobby-copy", e => { const code = (lobbyState && lobbyState.code) || relayRoomCode; if (code) copyText(lobbyLink(code), e.currentTarget, "lobby.copied", "lobby.copy"); });
+      on("lobby-refresh", () => { const v = LobbyModel.view(lobbyState || {}, relaySeatId); if (!v.refresh.enabled) return; const name = lobbyName(); lobbyLeave(false); lobbyStart(name, { create: true }); });   // a new room and code; locked once someone else sits
+      on("lobby-leave", () => lobbyLeave(true));
+      on("lobby-rename", () => askName(name => { try { relayClient.setName(name); } catch (_) { /* not in a room */ } lobbyRender(); }, true));
+      on("lobby-lock", () => {
+        const v = LobbyModel.view(lobbyState || {}, relaySeatId); if (!relayClient || !v.myTeam) return;
+        try {
+          if (v.myLocked) relayClient.unready();
+          else { pickedHero = lobbyPicks[0] || pickedHero; relayClient.sendReady(Object.assign({ units: lobbyPicks.slice(0, Math.max(1, v.myClaim)), name: lobbyName() }, v.amHost && TEAM_N > 1 ? { teamSize: TEAM_N } : {})); }
+        } catch (_) { /* refused */ }
+      });
+      on("lobby-invite", () => { try { relayClient.invite(); } catch (_) { /* refused */ } });
+      on("lobby-invite-copy", e => { const t = (document.getElementById("lobby-invite-text") || {}).textContent || ""; if (t) copyText(t, e.currentTarget, "lobby.copied", "lobby.copy"); });
+      on("lobby-invite-cancel", () => { try { relayClient.inviteCancel(); } catch (_) { /* nothing open */ } lobbyInvite = ""; lobbyRender(); });
+      on("lobby-start", () => {
+        const v = LobbyModel.view(lobbyState || {}, relaySeatId); if (!v.amHost || !relayClient) return;
+        try {
+          if (v.start.pressed) { relayClient.begin(false); return; }
+          if (!v.start.enabled) return;
+          if (!v.myLocked && v.myTeam) { pickedHero = lobbyPicks[0] || pickedHero; relayClient.sendReady(Object.assign({ units: lobbyPicks.slice(0, Math.max(1, v.myClaim)), name: lobbyName() }, TEAM_N > 1 ? { teamSize: TEAM_N } : {})); }   // the host's Start also locks the host's own hero (DESIGN-1)
+          if (v.start.fillsWithAi) lobbyFillAi(v);
+          relayClient.begin(true);
+        } catch (_) { /* refused */ }
+      });
+      [["lobby-allow-ai", "allow_ai"], ["lobby-allow-agent", "allow_mcp"]].forEach(([id, key]) => { const el = document.getElementById(id); if (el) el.onchange = () => { try { relayClient.roomOptions({ [key]: el.checked }); } catch (_) { /* refused */ } }; });
     }
     const SHOW_COMING_SOON = false;   // true brings back the grey "in production" cards (heroes and battlefields)
     function showFirstHint() {
@@ -1772,9 +2069,22 @@
       };
     }
     function relayOpponentLeft(m) {   // a seat that stays away past the grace period has left (MOBA / card-game rule). If it still has a living unit, its team loses (red-team R1 A2); if every unit it owns is already dead (hp <= 0), its departure cannot stall play so the match continues (red-team R2A-F1)
-      const st = relayClient && relaySnap(), mine = st && st.seat;
       if (!m || m.team === "spectator" || m.seat_id === relaySeatId || gameOver || !relayPlaying) return;
-      const owners = st && st.owners;
+      if (m.ai && !m.team_empty) { relayAiSeatLeft(m); return; }   // ROOM-FLOW R9: a teammate takes a lost AI filler's units at once
+      relayJudgeDeparture(m, relayClient, 0);
+    }
+    // ROOM-FLOW R9b: a departure can arrive while this page is still playing out the last throw (the leaver finished first, or a resume replays the log), and
+    // judging it then would overturn the result. It waits for six quiet 500 ms looks; a queued message that never gets its turn holds it back for forty at most.
+    function relayJudgeDeparture(m, room, quiet) {
+      setTimeout(() => {
+        if (gameOver || !relayPlaying || relayClient !== room) return;
+        const looks = !projectiles.length && !diceRoll && relayIncoming === 0 ? quiet + 1 : 0;
+        if (looks < (relayInbox.length ? 40 : 6)) relayJudgeDeparture(m, room, looks); else relayDepartureVerdict(m);
+      }, 500);
+    }
+    function relayDepartureVerdict(m) {
+      if (m.ai) { relayAiSeatLeft(m); return; }   // its team has no seat left: no result
+      const st = relayClient && relaySnap(), mine = st && st.seat, owners = st && st.owners;
       if (owners && m.seat_id) {
         const ownedIds = Object.keys(owners).filter(id => owners[id] === m.seat_id);
         if (ownedIds.length) {
@@ -1784,6 +2094,12 @@
       }
       const mateLeft = m.team === mine;
       relayNote(mateLeft ? "relay.teammateLeft" : "relay.opponentLeft"); gameOver = mateLeft ? "ai" : "player"; turn = "over"; sfx.hit("ko"); if (gameAudio) gameAudio.playMusic(mateLeft ? "defeat" : "victory");
+    }
+    function relayAiSeatLeft(m) {   // its team still has a seat: that seat plays its units (new owners are already in relaySnap()); no seat left: the match ends with no result
+      if (m.team_empty) { relayNote("relay.aiLeft"); gameOver = "none"; turn = "over"; return; }
+      relayNote("relay.aiTakenOver");
+      if (turn === "busy" && relayMateOpen && !relayMateFlight && !projectiles.length && !relayInbox.length && relayMyTurn(roundNum) && relayMyUnitActive()) { relayMateOpen = false; turn = "player"; turnTimer = TURN_SECONDS; }
+      maybeTriggerFillerTurn();
     }
     // Ordered handling (only in a room where a team has two or more seats): another seat can finish its turn while this page is still showing the previous one, so the relay is already in a later
     // round when this page gets there. Actions and end_turn are queued and handled one at a time, in the relay's order, each only when this page has finished the turn before it and is waiting for exactly it.
@@ -1831,7 +2147,16 @@
       const other = relaySeats.find(x => x.team !== st.seat && x.team !== "spectator" && x.units && x.units.length);
       return other ? other.units.slice() : [];
     }
+    const heroKnown = h => typeof h === "string" && Object.prototype.hasOwnProperty.call(HERO_PROFILES, h);   // red team A14: a hero id from the network is looked up as an own key only ("constructor" is not a hero)
     const relayUnitHeroes = () => TEAM_N > 1 ? fillTeamPick().slice(0, relayClaimCount === null ? TEAM_N : Math.max(1, Math.min(TEAM_N, relayClaimCount))) : [currentHero];   // this seat's hero list for the relay: one hero per unit
+    function unitNameLabel(u) {   // the name of the seat that plays this unit (an AI seat: "Computer"); empty outside a room
+      const st = relayClient && relaySnap(); if (!st || (st.seat !== "red" && st.seat !== "white") || !relaySeats.length) return "";
+      const team = sideOfUnit(u) === "left" ? st.seat : (st.seat === "red" ? "white" : "red");
+      let id = st.owners && st.owners[u.id];
+      if (!id) { const mates = relaySeats.filter(x => x.team === team); if (mates.length === 1) id = mates[0].seat_id; }
+      const s = relaySeats.find(x => x.seat_id === id);
+      return !s ? "" : s.ai ? T("lobby.ai") : (s.name || "");
+    }
     function relayOpponentHero() {
       const list = relayOpponentHeroes();
       return list[0] || "";
@@ -1852,11 +2177,11 @@
       firstOpener = st.seat === "red" ? "player" : "ai";   // first_team is red in relay v0; the opener then alternates every round (openerOfRound)
       if (typeof m.scene === "string" && SCENES.some(sc => sc.id === m.scene) && m.scene !== pickedScene) { pickedScene = m.scene; requestScene(pickedScene); weatherCache.round = -1; weatherFxKey = ""; }   // the weather depends on the scene: both devices use the room's
       const hero = relayOpponentHero();
-      if (HERO_PROFILES[hero]) {
+      if (heroKnown(hero)) {
         aiClass = hero;
-        rightHeroes = TEAM_N > 1 ? relayOpponentHeroes().filter(h => HERO_PROFILES[h]).slice(0, TEAM_N) : [];
+        rightHeroes = TEAM_N > 1 ? relayOpponentHeroes().filter(heroKnown).slice(0, TEAM_N) : [];
         unitsOf("right").forEach((u, i) => { u.profile = rightHeroes[i] || aiClass; requestImage(HERO_PROFILES[u.profile].imgKey); });
-        if (TEAM_N > 1) { const own = fillTeamPick(), listed = (st.heroes && st.heroes.left) || [], mine = leftHeroes = own.map((h, i) => (HERO_PROFILES[listed[i]] ? listed[i] : h)).slice(0, TEAM_N); unitsOf("left").forEach((u, i) => { u.profile = mine[i]; requestImage(HERO_PROFILES[u.profile].imgKey); }); currentHero = unitOf("left").profile; }
+        if (TEAM_N > 1) { const own = fillTeamPick(), listed = (st.heroes && st.heroes.left) || [], mine = leftHeroes = own.map((h, i) => (heroKnown(listed[i]) ? listed[i] : h)).slice(0, TEAM_N); unitsOf("left").forEach((u, i) => { u.profile = mine[i]; requestImage(HERO_PROFILES[u.profile].imgKey); }); currentHero = unitOf("left").profile; }
         applyClassStats();
       }
       const curtain = document.getElementById("turn-curtain"); if (curtain) curtain.hidden = true;
@@ -1938,7 +2263,7 @@
       startMatch();
     }
     function syncDailyButton() { const b = document.getElementById("daily-btn"); if (b) b.disabled = !!(relayRoomCode || joinRoomCode || seats.left !== "human" || seats.right !== "ai"); }
-    function startMatch() {
+    function startMatch(fromLobby) {   // fromLobby === true: a lobby room's start (lobbyEnterMatch); the relay's `start` handling follows at once
       enterPhoneFullscreen();
       const sc = SCENES.find(x => x.id === pickedScene) || SCENES[0];
       if (!relayAddress) buildSeatRows();
@@ -1961,6 +2286,7 @@
       loadRestInBackground();
       ensureGameAudio();   // the click on the start button is the user gesture the browser needs for sound
       if (ambientSfx) ambientSfx.setMood("battle_calm"); if (gameAudio) { gameAudio.playMusic("battle_calm"); musicMood = "battle_calm"; }
+      if (fromLobby === true) return;
       if (relayClient && relayRoomCode && (seats.right === "human" || seats.right === "agent" || relayJoinSeat === "red")) startRelayMatch();   // a room: the relay decides when and who opens
       else if (!relayRoomCode && !joinRoomCode && seats.right !== "human" && seats.right !== "agent") askCoinCall(); else showCoinToss(Determinism.coinToss(matchSeed));
     }
@@ -1972,7 +2298,7 @@
       { const fb = document.getElementById("friends-btn"), sc = document.getElementById("start-screen"), fp = document.getElementById("friends-panel"), fc = document.getElementById("friends-close");
         if (fb && sc) {
           const setOpen = open => { sc.classList.toggle("seats-open", open); fb.setAttribute("aria-expanded", open ? "true" : "false"); };
-          fb.onclick = e => { e.stopPropagation(); setOpen(!sc.classList.contains("seats-open")); };
+          fb.onclick = e => { e.stopPropagation(); setOpen(false); lobbyOpenFromStart(); };   // ROOM-FLOW F1: "Play with friends" opens the lobby (the old panel is not opened any more, F11)
           if (fc) fc.onclick = e => { e.stopPropagation(); setOpen(false); };
           document.addEventListener("keydown", e => { if (e.key === "Escape") setOpen(false); });
           document.addEventListener("click", e => {
@@ -1982,6 +2308,7 @@
             setOpen(false);
           });
         } }
+      lobbyWire();
       beginStartupAssets();
     }
 
@@ -2356,7 +2683,7 @@
     let fireGone = { player: false, ai: false };
     const ULT_BUILT = ["bat", "skeleton", "wizard", "reaper", "bride", "hunchback", "hag", "knight"];   // classes whose ultimate really exists; the button stays visible for the others but says it is still being made (owner 2026-11-09: do not hide it)
     const RESULT_PANEL = { w: 640, h: 270, pad: 40 };   // roomy: the buttons sit 40 px inside the panel on the sides and 36 px above its bottom edge (owner 2026-11-16: it was crowded)
-    const RESULT_BUTTONS = () => { const by = CANVAS_H / 2 - 135 - 40, bx = CANVAS_W / 2 - RESULT_PANEL.w / 2, bw = (RESULT_PANEL.w - RESULT_PANEL.pad * 2 - 24) / 2; return [{ again: true, key: "ui.playAgain", x: bx + RESULT_PANEL.pad, y: by + RESULT_PANEL.h - 36 - 64, w: bw, h: 64 }, { again: false, key: "ui.backToPick", x: bx + RESULT_PANEL.pad + bw + 24, y: by + RESULT_PANEL.h - 36 - 64, w: bw, h: 64 }]; };
+    const RESULT_BUTTONS = () => { const by = CANVAS_H / 2 - 135 - 40, bx = CANVAS_W / 2 - RESULT_PANEL.w / 2, bw = (RESULT_PANEL.w - RESULT_PANEL.pad * 2 - 24) / 2; const inLobby = lobbyMode && !!relayRoomCode; return [{ again: true, key: inLobby ? (relayIsHost || lobbyHostGone() ? "lobby.backToLobby" : "lobby.waitHostBtn") : "ui.playAgain", x: bx + RESULT_PANEL.pad, y: by + RESULT_PANEL.h - 36 - 64, w: bw, h: 64 }, { again: false, key: inLobby ? "lobby.leaveRoom" : "ui.backToPick", x: bx + RESULT_PANEL.pad + bw + 24, y: by + RESULT_PANEL.h - 36 - 64, w: bw, h: 64 }]; };
     let gameOverSeenAt = 0, gameOverWas = false;   // when the match ended, so a late click cannot dismiss the result at once
     // ---- Knight ultimate (owner 2026-11-16): press it and tap 1, 2, 3 ANYWHERE on the arc track (the player chooses the coordinates freely; a remembered enemy path crossing the track only pulls a tap
     // toward it when it is close). The three points cost no turn and cover the enemy's next three attack rounds: a shot that comes within 70 px of a stored point is stopped there, the coffin comes out
@@ -2542,13 +2869,14 @@
     });
     // Anti mis-tap: the main buttons ignore a second tap within 350 ms of the last accepted one (a double tap or a finger that lands twice would start, restart or reload twice); a long press opens no context menu.
     (function () {
-      const GUARDED = "#start-go, #daily-btn, #team-size button, #friends-btn, #settings-btn, #reset-btn, #room-create, #room-join";
+      const GUARDED = "#start-go, #daily-btn, #team-size button, #friends-btn, #settings-btn, #reset-btn, #room-create, #room-join, #lobby-start, #lobby-lock";   // the two lobby toggles too (red team B6: a double tap undid itself)
       const lastTap = new WeakMap();
       document.addEventListener("click", e => {
         const hit = e.target && e.target.closest ? e.target.closest(GUARDED) : null;
         if (!hit) return;
         const now = performance.now();
-        if (now - (lastTap.get(hit) || 0) < 350) { e.stopImmediatePropagation(); e.preventDefault(); return; }
+        const last = lastTap.get(hit);
+        if (last !== undefined && now - last < 350) { e.stopImmediatePropagation(); e.preventDefault(); return; }   // no earlier tap is not a tap at time 0: the first tap in the first 0.35 s after a fast load counts (TAP-GUARD-1)
         lastTap.set(hit, now);
       }, true);
       document.addEventListener("contextmenu", e => { if (e.target && e.target.closest && e.target.closest("#game-container, #bottom-dock, #start-screen, #top-controls")) e.preventDefault(); });
@@ -2852,6 +3180,7 @@
     // MOVE action: roll a die; 1-3 = back 1-3 steps, 4-6 = forward 1-3 steps (40 px per step)
     // =========================================================================
     const DICE_STEP_PX = 36; // bigger steps (owner): a d6 moves 36..216 px
+    const MOVE_ZONE = Object.freeze({ player: [110, 640], ai: [1280, 1810] });   // where a unit of each side may stand: the dice move clamps to it and a supply crate lands only inside it (owner 2026-11-26: a crate could land where nobody could pick it up)
     let diceRoll = null; // { owner, t, final, shown, applied, afterT }
 
     function diceOutcome(n) { return { steps: n }; } // the owner chooses the direction, the die only decides how far
@@ -2925,7 +3254,7 @@
         const u = d.owner === "player" ? player : ai;
         // "forward" means toward the enemy: +x for the player, -x for the AI
         const towardEnemy = d.owner === "player" ? 1 : -1;
-        const lo = d.owner === "player" ? 110 : 1280, hi = d.owner === "player" ? 640 : 1810;   // movement zones: the forward limits are 640 / 1280 since 2026-11-18 (they were 680 / 1240; the fence collision grew to the drawn gate, 841..1079, and with the old limits some pairs at wind +-4..5 could no longer be hit: scripts/test_wind_reach.js), the retreat limits go back to the edge (110 / 1810: the 220 px figure then just touches the world edge) (owner 2026-11-17: "the characters can move over a bigger range"); the most distant pair is now 1700 px (110 to 1810); against a headwind of -4 the longest shot LANDS at absolute x 1595-1642 when the shooter stands at x 110 (scripts/reach_in_headwind.py: no role can touch a target in the corner x 1810 from wind -4 on; at -3 only 0 to 3 of the 8 target roles for most roles, all 8 for the bride and the hunchback), so the far corner can be out of reach in strong headwind (owner decision H15 in docs/GAP_QUEUE_OPEN_20261119.md); start positions remain unchanged
+        const [lo, hi] = MOVE_ZONE[d.owner === "player" ? "player" : "ai"];   // movement zones: the forward limits are 640 / 1280 since 2026-11-18 (they were 680 / 1240; the fence collision grew to the drawn gate, 841..1079, and with the old limits some pairs at wind +-4..5 could no longer be hit: scripts/test_wind_reach.js), the retreat limits go back to the edge (110 / 1810: the 220 px figure then just touches the world edge) (owner 2026-11-17: "the characters can move over a bigger range"); the most distant pair is now 1700 px (110 to 1810); against a headwind of -4 the longest shot LANDS at absolute x 1595-1642 when the shooter stands at x 110 (scripts/reach_in_headwind.py: no role can touch a target in the corner x 1810 from wind -4 on; at -3 only 0 to 3 of the 8 target roles for most roles, all 8 for the bride and the hunchback), so the far corner can be out of reach in strong headwind (owner decision H15 in docs/GAP_QUEUE_OPEN_20261119.md); start positions remain unchanged
         const moveDist = (typeof Weather !== "undefined") ? Weather.applyMove(currentWeather(), o.steps * DICE_STEP_PX) : o.steps * DICE_STEP_PX;   // snow halves the dice move
         let nx = Math.max(lo, Math.min(hi, u.targetX + towardEnemy * o.dir * moveDist));
         if (TEAM_N > 1) {   // a unit never stops within 120 px of a living teammate (units must not overlap or swap places): step back toward where it stood until the spot is free
@@ -3406,6 +3735,7 @@
         if (performance.now() - gameOverSeenAt < 800) return;
         const rc = canvas.getBoundingClientRect(), gx = (e.clientX - rc.left) * (VIEW_W / rc.width) - PAD, gy = (e.clientY - rc.top) * (CANVAS_H / rc.height);
         const hit = RESULT_BUTTONS().find(bt => gx >= bt.x && gx <= bt.x + bt.w && gy >= bt.y && gy <= bt.y + bt.h);
+        if (hit && lobbyMode && relayRoomCode) { lobbyAfterMatch(hit.again); return; }   // ROOM-FLOW F9: a lobby room goes back to its lobby
         if (hit) { resetGame(); if (hit.again) startMatch(); else showStartScreen(); }
         return;
       }   // the result panel stays at least 0.8 s (Kiro 58 C9)
@@ -4031,8 +4361,9 @@
       const dice = (typeof Determinism !== "undefined" && Determinism.supplyDrop) ? Determinism.supplyDrop(matchSeed >>> 0, roundNum) : null;
       const dist = dice ? Math.round(210 + dice.offset * 0.575) : 140 + ((dropCount * 53) % 140);   // 141..279 px from the unit: reachable in one turn (best single move is about 286 px)
       let x = u.targetX + dir * dist;
-      const lo = FENCE_X - FENCE_W / 2 - 60, hi = FENCE_X + FENCE_W / 2 + 60;
-      if (dropSide > 0) x = Math.min(x, lo); else x = Math.max(x, hi);   // never on the fence or on the other side of it (D1)
+      const [lo, hi] = MOVE_ZONE[dropSide > 0 ? "player" : "ai"];
+      x = Math.max(lo, Math.min(hi, x));
+      if (Math.abs(x - u.targetX) < 141) x = Math.max(lo, Math.min(hi, u.targetX - dir * dist));   // the unit stands at the front limit: the crate goes behind it, to be walked to
       carrier = { x: -160, y: 170, targetX: Math.max(300, Math.min(CANVAS_W - 300, x)), released: false, item: dice ? SUPPLY_KEYS[dice.item % SUPPLY_KEYS.length] : SUPPLY_KEYS[dropCount % SUPPLY_KEYS.length], t: 0 };
     }
     function useSupply() {
@@ -5300,7 +5631,8 @@
       ctx.fillStyle = "rgba(14,9,24,0.78)";
       ctx.fillRect(hpBarX, hpBarY, hpBarWidth, hpBarHeight);
       const hpWidth = Math.max(0, (u.hp / u.maxHp) * hpBarWidth);
-      ctx.fillStyle = team === "red" ? "#ff5252" : "#00cec9";
+      const shownTeam = relayClient && relayRoomCode && relaySnap().seat === "white" ? (team === "red" ? "white" : "red") : team;   // a room: colours follow the real team, not the screen side (DESIGN-1)
+      ctx.fillStyle = shownTeam === "red" ? "#ff5252" : "#00cec9";
       ctx.fillRect(hpBarX, hpBarY, hpWidth, hpBarHeight);
       ctx.strokeStyle = "rgba(255,255,255,0.7)"; ctx.lineWidth = Math.max(1.5, uiScale()); ctx.strokeRect(hpBarX, hpBarY, hpBarWidth, hpBarHeight);
       // no HP number above the bar (owner 2026-11-10: 'no 100/100 needed'): the bar alone shows the health
@@ -5338,6 +5670,8 @@
       if (u.shock || u.shockNow) drawShockArcs(ctx, -112 - BODY_LIFT);   // shocked: electric arcs crackle over the body until its shocked turn is played
       // three pips above the head: the ultimate energy (each lit pip = one successful hit)
       const en = energy[team === "red" ? "player" : "ai"], armed = ultArmed[team === "red" ? "player" : "ai"], full = en >= 3, pulse = full ? 0.6 + 0.4 * Math.sin(performance.now() / 160) : 1;
+      { const label = relayLive() ? unitNameLabel(u) : "";   // ROOM-FLOW F10: the player's name above the pips (stun stars sit lower, near the head; hit numbers rise from about -200)
+        if (label) { ctx.font = "bold " + Math.round(22 * uiScale()) + "px" + FONT_BODY; ctx.textAlign = "center"; ctx.lineJoin = "round"; ctx.lineWidth = 5; ctx.strokeStyle = "rgba(10,5,20,0.88)"; ctx.strokeText(label, 0, -258, 170); ctx.fillStyle = shownTeam === "red" ? "#ffc2c2" : "#bff7ff"; ctx.fillText(label, 0, -258, 170);   /* at most 170 px: units stand 180 px apart (red team B8) */ } }
       for (let k = 0; k < 3; k++) {
         const cx = (k - 1) * 22, cy = -232, lit = k < en;
         ctx.beginPath(); ctx.arc(cx, cy, 8, 0, Math.PI * 2);
@@ -6175,8 +6509,7 @@
         ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 22); ctx.fill(); ctx.stroke();
         ctx.font = "bold 44px " + FONT_DISPLAY; ctx.textAlign = "center";
         ctx.fillStyle = gameOver === "player" ? "#ffd32a" : "#ff9f9f";
-        const resultKey = seats.left === "human" && seats.right === "human" ? (gameOver === "player" ? "gameover.leftWin" : "gameover.rightWin") : (gameOver === "player" ? "gameover.win" : "gameover.lose");
-        ctx.fillText(T(resultKey), CANVAS_W / 2, by + 84);
+        ctx.fillText(T(resultTextKey()), CANVAS_W / 2, by + 84);
         if (dailyCode) { ctx.font = "bold 26px " + FONT_BODY; ctx.fillStyle = "#a5f3ff"; ctx.fillText(T("daily.code", { code: dailyCode }), CANVAS_W / 2, by + 132); }   // the daily match shows its date code under the result
         const btns = RESULT_BUTTONS();
         btns.forEach(bt => {
@@ -6186,6 +6519,12 @@
         });
       }
       ctx.restore();
+    }
+
+    function resultTextKey() {   // gameOver is "player", "ai" or, after a lost AI team (ROOM-FLOW R9), "none"
+      if (gameOver === "none") return "gameover.noContest";
+      if (seats.left === "human" && seats.right === "human" && !relayRoomCode) return gameOver === "player" ? "gameover.leftWin" : "gameover.rightWin";   // a room: every phone shows its own team on the left, so it says you won / you lost (DESIGN-1)
+      return gameOver === "player" ? "gameover.win" : "gameover.lose";
     }
 
     const PHYSICS_STEP = 1 / 60;
