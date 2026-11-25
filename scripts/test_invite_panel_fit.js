@@ -11,7 +11,7 @@ const CHROME = ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', 
 if (!CHROME) { console.error('test_invite_panel_fit: no Chrome found'); process.exit(2); }
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.png': 'image/png', '.webp': 'image/webp', '.ogg': 'audio/ogg', '.woff2': 'font/woff2', '.svg': 'image/svg+xml' };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const VIEWS = [[667, 375], [740, 360], [800, 360], [812, 375], [844, 390], [873, 392], [923, 415]];
+const VIEWS = [[667, 375], [740, 360], [800, 360], [812, 375], [844, 390], [873, 392], [923, 415], [1280, 720], [1366, 768], [1920, 1080]];   // phones (no inner scroll allowed) and desktops (the panel may scroll inside, but every button must be reachable)
 const freePort = () => new Promise((resolve, reject) => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => resolve(p)); }); s.on('error', reject); });
 (async () => {
   const server = http.createServer((req, res) => { const p = path.join(ROOT, decodeURIComponent(req.url.split('?')[0]).replace(/^\/$/, '/index.html')); fs.readFile(p, (e, d) => { if (e) { res.writeHead(404); res.end(); } else { res.writeHead(200, { 'Content-Type': types[path.extname(p)] || 'application/octet-stream' }); res.end(d); } }); });
@@ -37,10 +37,14 @@ const freePort = () => new Promise((resolve, reject) => { const s = net.createSe
         if (!m.panel || !m.code_r || !m.qr || !m.link) throw new Error(name + ': panel, code, QR or link is not visible');
         const inside = (o, box, what) => { if (o.l < box.l - 0.5 || o.t < box.t - 0.5 || o.r > box.r + 0.5 || o.b > box.b + 0.5) throw new Error(name + ': ' + what + ' is not fully inside ' + (box === m.panel ? 'the panel' : 'the viewport') + ' ' + JSON.stringify({ o: [o.l, o.t, o.r, o.b].map(Math.round), box: [box.l, box.t, box.r, box.b].map(Math.round) })); };
         const view = { l: 0, t: 0, r: m.vw, b: m.vh };
-        for (const [what, o] of [['room code', m.code_r], ['QR', m.qr], ['invite link', m.link]]) { inside(o, m.panel, what); inside(o, view, what); }
-        if (m.scrollH > m.clientH + 1) throw new Error(name + ': the panel scrolls inside (content ' + m.scrollH + ' > box ' + m.clientH + ')');
+        if (h <= 430) for (const [what, o] of [['room code', m.code_r], ['QR', m.qr], ['invite link', m.link]]) { inside(o, m.panel, what); inside(o, view, what); }   // phones: all visible at once; desktops: reachable (below)
+        if (h <= 430 && m.scrollH > m.clientH + 1) throw new Error(name + ': the panel scrolls inside (content ' + m.scrollH + ' > box ' + m.clientH + ')');
         if (m.scrollW > m.vw + 1) throw new Error(name + ': sideways scroll (' + m.scrollW + ' > ' + m.vw + ')');
-        console.log('ok   - ' + name + ': code, QR and link fully visible, panel ' + Math.round(m.panel.r - m.panel.l) + 'x' + Math.round(m.panel.b - m.panel.t) + ', no inner scroll');
+        // UI-CLIP-1 (owner 2026-11-25, "some buttons do nothing"): rectangles are not enough: a finger hits whatever is on top. After scrolling the panel
+        // so the element is in view (only the panel itself scrolls, like a person's wheel), the element at its centre must be the element itself (not the page behind a clipped panel).
+        const hits = JSON.parse(await ev("(async () => { const out = {}; for (const id of ['room-leave', 'room-copy', 'room-link', 'room-qr']) { const el = document.getElementById(id); if (!el) { out[id] = 'missing'; continue; } const pn = document.getElementById('friends-panel'); if (pn) { const pr = pn.getBoundingClientRect(), q = el.getBoundingClientRect(); if (q.bottom > pr.bottom) pn.scrollTop += q.bottom - pr.bottom + 4; if (q.top < pr.top) pn.scrollTop -= pr.top - q.top + 4; }   /* only the panel scrolls: a person cannot scroll the overflow:hidden ancestors, scrollIntoView would hide the defect */ await new Promise(r => setTimeout(r, 60)); const r = el.getBoundingClientRect(); if (!(r.width > 0 && r.height > 0)) { out[id] = 'hidden'; continue; } const cx = r.left + r.width / 2, cy = r.top + r.height / 2; const t = (cx >= 0 && cy >= 0 && cx < innerWidth && cy < innerHeight) ? document.elementFromPoint(cx, cy) : null; out[id] = t && (t === el || el.contains(t)) ? 'ok' : 'covered by ' + (t ? (t.id || t.className || t.tagName) : 'nothing (outside the window)'); } const rc = id => { const e = document.getElementById(id); if (!e) return null; const q = e.getBoundingClientRect(); return [q.left, q.top, q.right, q.bottom].map(Math.round); }; out._geo = { startScreen: rc('start-screen'), gameContainer: rc('game-container'), panel: rc('friends-panel'), copy: rc('room-copy'), vp: [innerWidth, innerHeight] }; return JSON.stringify(out); })()"));
+        for (const [id, v] of Object.entries(hits)) if (id !== '_geo' && v !== 'ok') throw new Error(name + ': #' + id + ' cannot be clicked (' + v + ') ' + JSON.stringify(hits._geo));
+        console.log('ok   - ' + name + ': code, QR and link visible, leave/copy/link/QR clickable, panel ' + Math.round(m.panel.r - m.panel.l) + 'x' + Math.round(m.panel.b - m.panel.t));
       } catch (e) { failed = true; console.error('FAIL - ' + e.message); }
     }
     ws.close();

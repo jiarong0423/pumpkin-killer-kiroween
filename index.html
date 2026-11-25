@@ -186,7 +186,7 @@
       #friends-panel { display: none; }
     }
     /* the seats panel is a centred overlay at EVERY window size (owner 2026-11-18: "layout broken": on tall windows it was laid inline over the Start button) */
-    #start-screen.seats-open #friends-panel { display: block; position: fixed; z-index: 60; left: 50%; top: 50%; transform: translate(-50%, -50%); width: clamp(300px, 68vw, 500px); max-height: calc(100dvh - 28px); overflow: auto; padding: 8px 42px 8px 10px; border: 1.5px solid rgba(165, 243, 255, .55); border-radius: 12px; background: rgba(20, 12, 38, .88); backdrop-filter: blur(6px); box-shadow: 0 0 0 100vmax rgba(8, 4, 16, .42); }
+    #start-screen.seats-open #friends-panel { display: block; position: fixed; z-index: 60; left: 50%; top: 50%; transform: translate(-50%, -50%); width: clamp(300px, 68vw, 500px); max-height: calc(100% - 12px); overflow: auto; padding: 8px 42px 8px 10px; border: 1.5px solid rgba(165, 243, 255, .55); border-radius: 12px; background: rgba(20, 12, 38, .88); backdrop-filter: blur(6px); box-shadow: 0 0 0 100vmax rgba(8, 4, 16, .42); }
     #friends-close { display: none; }
     #start-screen.seats-open #friends-close { display: flex; align-items: center; justify-content: center; position: absolute; right: 8px; top: 8px; width: 32px; height: 32px; min-width: 32px; min-height: 32px; padding: 0; border: 1.5px solid rgba(165, 243, 255, .55); border-radius: 8px; background: rgba(18, 10, 34, .92); color: #ffeaa7; font: 800 18px/1 var(--font-body, sans-serif); cursor: pointer; z-index: 2; }
     #start-screen.seats-open #friends-panel #seat-picker, #start-screen.seats-open #friends-panel #room-picker:not([hidden]) { display: block !important; width: 100%; height: auto; padding: 3px 0; border: 0; background: none; overflow: visible; }
@@ -198,7 +198,7 @@
     #room-leave[hidden] { display: none !important; }
     /* PHONE-7A (owner 2026-11-24): in a short landscape phone the room code, QR and invite link must not sit below an inner scroll. One block: the panel may use the height, tighter padding and row gaps, shorter action buttons, a smaller QR. */
     @media (orientation: landscape) and (max-height: 430px) {
-      #start-screen.seats-open #friends-panel { width: min(92vw, 600px); max-height: calc(100dvh - 10px); padding: 5px 40px 5px 10px; }
+      #start-screen.seats-open #friends-panel { width: min(92vw, 600px); max-height: calc(100% - 8px); padding: 5px 40px 5px 10px; }
       #start-screen.seats-open #friends-panel .seat-row, #start-screen.seats-open #friends-panel .seat-row + .seat-row { margin: 1px 0; gap: 4px; }
       #start-screen.seats-open #friends-panel .seat-choice, #start-screen.seats-open #friends-panel .seat-level { height: 28px; min-height: 28px; padding: 2px 7px; font-size: 11px; }
       #start-screen.seats-open #friends-panel .room-actions button { min-height: 28px; min-width: 82px; padding: 2px 8px; font-size: 11px; }
