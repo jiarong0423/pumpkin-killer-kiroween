@@ -1075,23 +1075,14 @@
   PRESETS.cross_spin_trail = function (B, x, y, o) {
     var s = o.scale;
     var d = o.dirX;
-    // Two zero-velocity streaks share a rotating centre and read as a cross.
-    B.add({
-      x: x, y: y, size: 34 * s, sizeEnd: 24 * s, life: 0.34,
-      color: '#ffd27a', colorEnd: '#c2410c', alpha: 0.95, angle: 0, spin: 18,
-      lineWidth: 4 * s, shape: 'streak', layer: LAYERS.GLOW
-    });
-    B.add({
-      x: x, y: y, size: 26 * s, sizeEnd: 18 * s, life: 0.34,
-      color: '#fff3d6', colorEnd: '#7c2d12', alpha: 0.9, angle: Math.PI / 2, spin: 18,
-      lineWidth: 4 * s, shape: 'streak', layer: LAYERS.GLOW
-    });
+    // The thrown cross is a picture now (assets/fx/sprites/fx_cross_silver.png). The two rotating streaks that used to read as
+    // a code-drawn cross are gone: left on the path they were a second, cross-shaped afterimage. A per-step glow was tried and smeared into a haze, so only the smoke puffs remain.
     for (var i = 0; i < 4; i++) {
       B.add({
         x: x - d * B.range(8, 28) * s, y: y + B.range(-12, 12) * s,
         vx: -d * B.range(25, 70) * s, vy: -B.range(10, 55) * s,
         size: B.range(10, 18) * s, sizeEnd: B.range(24, 36) * s, life: B.range(0.35, 0.6),
-        color: '#3f271e', colorEnd: '#09090b', alpha: 0.55, gravity: -15, drag: 1.5,
+        color: '#3f271e', colorEnd: '#09090b', alpha: 0.25, gravity: -15, drag: 1.5,
         shape: 'glow', layer: LAYERS.BODY
       });
     }

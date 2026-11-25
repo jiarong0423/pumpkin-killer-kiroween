@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin, urlsplit, urlunsplit
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 TITLE_RE = re.compile(rb"<title[^>]*>\s*Pumpkin Killer\s*</title>", re.IGNORECASE)
 IMAGE_PATH = "assets/avatars/avatar_skeleton.png"
@@ -24,6 +24,9 @@ MAX_FRAME_BYTES = 16 * 1024
 
 class WebSocketError(RuntimeError):
     """The relay did not complete the small smoke-test exchange."""
+
+# Cloudflare blocks the default Python-urllib agent and a missing one (403, error 1010).
+USER_AGENT = "Mozilla/5.0 (compatible; PumpkinKillerSmoke/1.0)"
 
 
 class WebSocketClient:
@@ -56,6 +59,7 @@ class WebSocketClient:
         request = (
             f"GET {path} HTTP/1.1\r\nHost: {host}\r\nUpgrade: websocket\r\n"
             "Connection: Upgrade\r\nSec-WebSocket-Version: 13\r\n"
+            f"User-Agent: {USER_AGENT}\r\n"
             f"Sec-WebSocket-Key: {key}\r\n\r\n"
         ).encode("ascii")
         self._send_raw(request)
@@ -166,7 +170,7 @@ class WebSocketClient:
 
 def fetch(url: str, timeout: float) -> tuple[str, bytes]:
     try:
-        with urlopen(url, timeout=timeout) as response:  # nosec B310: the owner supplies the target URL
+        with urlopen(Request(url, headers={"User-Agent": USER_AGENT}), timeout=timeout) as response:  # nosec B310: the owner supplies the target URL
             return str(response.status), response.read()
     except HTTPError as error:
         return str(error.code), error.read()

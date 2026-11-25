@@ -5388,6 +5388,19 @@
         ctx.restore();
       }
     }
+    let crossSharpCacheSrc = null, crossSharpCacheOut = null;
+    function crossSharp(pic) {   // owner 2026-11-25 ("rotate, but do not let it blur"): the 512 px cross is drawn at about 70 px; one big step aliases it. Halve it stepwise (each step at most 2x) down to 128 px ONCE and draw that copy.
+      if (crossSharpCacheSrc === pic && crossSharpCacheOut) return crossSharpCacheOut;
+      let cur = pic, w = pic.naturalWidth || pic.width;
+      try {
+        while (w / 2 >= 128) {
+          w = Math.max(128, Math.floor(w / 2));
+          const c = document.createElement("canvas"); c.width = c.height = w;
+          const g = c.getContext("2d"); g.imageSmoothingQuality = "high"; g.drawImage(cur, 0, 0, w, w); cur = c;
+        }
+      } catch (e) { cur = pic; }
+      crossSharpCacheSrc = pic; crossSharpCacheOut = cur; return cur;
+    }
     const knTintCache = new Map();
     function knTinted(key, col) {   // a white CC0 picture turned into the role colour once (offscreen 256 px canvas); null while the picture is not loaded or no canvas exists
       const k = key + "|" + col; if (knTintCache.has(k)) return knTintCache.get(k);
@@ -5768,7 +5781,7 @@
         // flared kite-shaped ends, a lit bevel along the shaft and the bar, a thin dark outline; it turns three times a second. (A painted sprite from the Colab pipeline is specified in docs/COLAB_SPEC_CROSS_20261118.md and replaces this when it exists.)
         ctx.rotate((performance.now() / 1000) * 6 * Math.PI * (p.vx >= 0 ? 1 : -1));
         const crossPic = images.fx_cross_silver;
-        if (crossPic && crossPic.complete && crossPic.naturalWidth) { const cs = p.wLen * 0.44; ctx.drawImage(crossPic, -cs / 2, -cs / 2, cs, cs); } else {
+        if (crossPic && crossPic.complete && crossPic.naturalWidth) { const cs = p.wLen * 0.44; ctx.drawImage(crossSharp(crossPic), -cs / 2, -cs / 2, cs, cs); } else {
         const L = p.wLen * 0.44, Wd = L * 0.085, A = L * 0.64, ay = -L * 0.5 + L * 0.3, kite = (cx, cy, hx, hy) => { const e = Wd * 0.95; ctx.moveTo(cx + hx * L * 0.075, cy + hy * L * 0.075); ctx.lineTo(cx - hy * e, cy + hx * e); ctx.lineTo(cx - hx * L * 0.06, cy - hy * L * 0.06); ctx.lineTo(cx + hy * e, cy - hx * e); ctx.closePath(); };
         const shapes = (part) => { ctx.beginPath(); if (part !== "h") { ctx.rect(-Wd / 2, -L / 2, Wd, L); kite(0, -L / 2, 0, -1); kite(0, L / 2, 0, 1); } if (part !== "v") { ctx.rect(-A / 2, ay - Wd / 2, A, Wd); kite(-A / 2, ay, -1, 0); kite(A / 2, ay, 1, 0); } };
         const mg = ctx.createLinearGradient(-Wd * 1.2, 0, Wd * 1.2, 0); mg.addColorStop(0, "#58627a"); mg.addColorStop(0.3, "#e9eef8"); mg.addColorStop(0.5, "#ffffff"); mg.addColorStop(0.75, "#9aa6bb"); mg.addColorStop(1, "#4d576b");

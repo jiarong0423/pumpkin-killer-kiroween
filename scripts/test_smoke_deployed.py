@@ -20,11 +20,13 @@ ROOT = Path(__file__).resolve().parent.parent
 
 class FakeDeployment(http.server.BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
+    seen_user_agents: list[str] = []
 
     def log_message(self, format: str, *args: object) -> None:
         pass
 
     def do_GET(self) -> None:
+        FakeDeployment.seen_user_agents.append(self.headers.get("User-Agent", ""))
         if self.path == "/relay" and self.headers.get("Upgrade", "").lower() == "websocket":
             self._websocket()
             return
@@ -102,6 +104,15 @@ class SmokeDeployedTests(unittest.TestCase):
 
     def test_fake_deployment_passes_every_http_and_websocket_check(self) -> None:
         self.assertEqual(check(self.url, 2), 0)
+
+    def test_every_request_carries_a_real_user_agent(self) -> None:
+        FakeDeployment.seen_user_agents.clear()
+        self.assertEqual(check(self.url, 2), 0)
+        agents = FakeDeployment.seen_user_agents
+        self.assertGreaterEqual(len(agents), 6)
+        for agent in agents:
+            self.assertTrue(agent, "empty User-Agent (Cloudflare blocks it)")
+            self.assertFalse(agent.startswith("Python-urllib"), agent)
 
     def test_rejects_a_proxy_config_without_upgrade_headers(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

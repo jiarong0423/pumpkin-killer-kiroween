@@ -327,6 +327,23 @@ property('dart_rain x positions lie inside [x - width/2, x + width/2]', () => {
   }
 });
 
+property('cross_spin_trail draws no crossing streaks (the thrown cross is a picture; streaks left a cross-shaped afterimage)', () => {
+  for (let i = 0; i < 50; i++) {
+    const sys = Particles.createSystem({ seed: i });
+    const n = sys.emit('cross_spin_trail', 100, 100, { dirX: i % 2 ? 1 : -1, scale: 1 });
+    assert.ok(n >= 1, 'the trail still emits something');
+    for (const p of sys.particles) assert.notStrictEqual(p.shape, 'streak', 'a streak particle reads as a second cross');
+  }
+});
+
+property('cross_spin_trail smoke is semi-transparent (alpha at most 0.3) so it does not blot out the picture', () => {
+  for (let i = 0; i < 50; i++) {
+    const sys = Particles.createSystem({ seed: i });
+    sys.emit('cross_spin_trail', 100, 100, { dirX: 1, scale: 1 });
+    for (const p of sys.particles) assert.ok(p.alpha <= 0.3 + 1e-9, 'alpha ' + p.alpha);
+  }
+});
+
 property('update(dt) in many small steps matches 1/60 steps within tolerance', () => {
   const r = Particles.mulberry32(707);
   const TOL = 1e-6;
