@@ -46,7 +46,7 @@ class RoomStressTests(unittest.TestCase):
             os.unlink(path)
 
     def test_a_host_that_is_never_handed_over_is_caught(self):
-        path = mutant('room.host_seat_id = min(players, key=lambda seat: seat.get("joined", 0))["seat_id"] if players else None', "pass")
+        path = mutant('room.host_seat_id = min(players, key=lambda seat: (not seat.get("connected"), seat.get("joined", 0)))["seat_id"] if players else None', "pass")
         try:
             self.assert_caught(path)
         finally:

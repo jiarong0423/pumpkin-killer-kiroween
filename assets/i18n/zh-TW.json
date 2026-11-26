@@ -374,5 +374,12 @@
   "lobby.sep": "、",
   "lobby.you": "你",
   "lobby.kickAgain": "再按一次請 {name} 離開",
-  "lobby.waitHostBtn": "等房主…"
+  "lobby.waitHostBtn": "等房主…",
+  "lobby.joinCode": "加入房間",
+  "lobby.joinCodeTitle": "加入房間",
+  "lobby.joinCodePlaceholder": "輸入 6 碼房間",
+  "lobby.joinCodeErr": "請輸入 6 碼房間",
+  "lobby.err.invalidUnits": "那個角色隊友已經選了，請換一個",
+  "lobby.joinCodeSame": "你已經在這個房間了",
+  "lobby.joinCodeOld": "那是舊式房間，請用連結加入"
 }

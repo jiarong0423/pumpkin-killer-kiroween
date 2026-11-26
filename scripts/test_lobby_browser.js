@@ -103,7 +103,9 @@ async function flowInvite(dbg, base, alt, relayUrl) {   // F12: a player invites
     const shown = await host.ev("[...document.querySelectorAll('#lobby-cells-red .lobby-cell.agent small')].map(e => e.textContent).join('|')");
     if (!/Inviter/.test(shown)) throw new Error('the agent place does not say who invited it: ' + shown);
     await host.until("document.getElementById('lobby-invite-box').hidden", 'invite box closes once the ticket is used');
-    await agent.ev(click('lobby-lock')); await host.ev(click('lobby-lock'));
+    await agent.ev(click('lobby-lock'));
+    await host.until("__lv().teams.red.some(c => c.agent && c.locked)", 'agent locked');
+    await host.ev(click('lobby-lock'));
     await host.until("__lv().myLocked", 'host locked');
     await host.ev(click('lobby-start'));
     for (const p of [host, agent]) await p.until("relayPlaying && matchStarted", 'match with the invited agent', 15000);

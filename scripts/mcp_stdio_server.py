@@ -1676,6 +1676,7 @@ class ConnectedRelay:
         self.invite = invite                    # ROOM-FLOW R11: the ticket a player gave this agent
         self.name = name
         self.briefing: Optional[Dict[str, Any]] = None
+        self.pick_again: Optional[str] = None   # the relay refused this seat's heroes before the start (a teammate holds one)
         self.session = session
         self.url = url
         self.code = code
@@ -1970,6 +1971,9 @@ class ConnectedRelay:
         message_type = message.get("type")
         if message_type == "error":
             err_code = str(message.get("code", "relay_error"))
+            if err_code == "invalid_units" and not self.started:
+                self.pick_again = str(message.get("message") or err_code)   # red team (polish) P2: a refused pick before the start is not the end; lock_hero may try again
+                return
             if err_code != "duplicate_judge" and not str(self.failure or "").startswith("kicked:"):
                 self.failure = err_code
             return
@@ -2522,6 +2526,7 @@ class McpServer:
             raise ToolError("lock_hero is for a seat that owns one unit")
         hero = _enum(arguments.get("hero"), "hero", tuple(sorted(engine.HERO_TEMPLATES)))
         relay.claim_heroes = [hero]
+        relay.pick_again = None
         relay.ready_sent = False
         relay.request_ready()
         return {"ok": True, "hero": hero, "next": "Call wait_for_turn until status is 'your_turn'."}
@@ -2545,6 +2550,8 @@ class McpServer:
             relay = self.relay
             if relay is not None and relay.failure is not None:
                 return {"status": "error", "error": relay.failure, "state": self.session.call("get_public_state", {}, self.seat)}
+            if relay is not None and getattr(relay, "pick_again", None) and not getattr(relay, "started", False):
+                return {"status": "pick_again", "error": relay.pick_again, "next": "Call lock_hero with another hero: a teammate already holds that one."}
             if self.session.phase == "over":
                 return {"status": "game_over", "winner": self.session.winner, "state": self.session.call("get_public_state", {}, self.seat)}
             started = True if relay is None else bool(getattr(relay, "started", False))

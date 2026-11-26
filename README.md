@@ -2,6 +2,8 @@
 
 **A Flash-era artillery duel, resurrected for the modern browser — phone, computer, and AI agents at one table.** Up to three heroes per side throw across a haunted fence while wind and weather shift every shot. Built for **Kiroween 2026 (Resurrection)** with Kiro specs, steering, hooks, custom agents, a Kiro Power (`play` skill), and a standard MCP server (`.kiro/`).
 
+**Play now:** https://pumpkin.jace0423.com (phone in landscape, or any desktop browser).
+
 - **8 heroes** (Skeleton Spearman, Pumpkin Wizard, Bat-cat Assassin, Necromancer, Silver Cross Sister, Ghost Bride, Bell Tower Hunchback, Heavy Pumpkin Guard), each with a distinct weapon arc, status effects, and ultimate.
 - **4 battlefields** and **5 weather states** (clear, rain, storm, snow, fog) with shifting wind every round.
 - **1 v 1, 2 v 2, and 3 v 3** team matches across desktop browsers, mobile phones (landscape PWA), built-in AI, and external MCP agents.
@@ -72,15 +74,15 @@ Open `http://127.0.0.1:8080/`. The `--with-relay` flag starts the local WebSocke
 
 ### 2. Play on Phone or Against a Friend
 - **Phone**: Open the hosted URL from the Devpost page in landscape (`16:9` recommended) and optionally install it to your home screen as a full-screen PWA.
-- **Multiplayer Room**: Choose **1 v 1**, **2 v 2**, or **3 v 3** on the start screen and press **Create room**. The relay issues a 6-character code, shareable link, and QR code — your friend joins in any browser with zero install. Right-seat players see a mapped perspective so every player always aims from the left, facing right.
+- **Multiplayer Room**: Choose **1 v 1**, **2 v 2**, or **3 v 3** on the start screen and press **Play with friends**. After a one-time name, a lobby opens with a 6-character room code, copy-link button and QR code; friends join by link, QR, or **Join code**. Players take places on the red or white team, lock their heroes (no hero twice on one team), and the host presses **Start**; a 3-second countdown begins once every place is locked. After the match everyone returns to the same lobby for a rematch.
 
 ### 3. Play with AI or Bring Your Own Agent (MCP)
 - **Built-in Computer Opponent**: In single-player matches, empty seats are played by the built-in AI (**Easy**, **Normal**, **Hard**, or **Smart (online)** when the server AI gateway is enabled).
-- **Lobby AI Fill (Multiplayer)**: In any multiplayer room, the host can click **Fill open slots (AI)** directly in the lobby (runs in the host's browser at zero server cost), or fill slots from the terminal via `python3 -B scripts/fill_room.py`.
+- **Lobby AI Fill (Multiplayer)**: With **Computer fills open places** ticked, the host's **Start** fills every empty place with a computer seat that runs in the host's browser at zero server cost (or fill from the terminal with `python3 -B scripts/fill_room.py`).
 - **External AI Agent (MCP)**: Set a seat to **Agent (MCP)** on the start screen to display the room code, QR code, and join command (`python3 -B scripts/make_agent_join_config.py`; full walkthrough in [`docs/HOST_AGENT_HOWTO.md`](docs/HOST_AGENT_HOWTO.md)).
   - Runs on the player's own machine with their own model account (zero LLM cost to the game host).
   - Supports joining as a whole team or claiming a subset of units (`join_room(..., claim=1..units)` or `python3 -B scripts/mcp_stdio_server.py --connect <relay> --code <code>`).
-  - Sees only public player information through **7 game tools** (`get_public_state`, `get_roster`, `get_history`, `submit_action`, `end_turn`, `set_notes`, `get_notes`) and **3 room tools** (`join_room`, `leave_room`, `wait_for_turn`).
+  - Sees only public player information through **7 game tools** (`get_public_state`, `get_roster`, `get_history`, `submit_action`, `end_turn`, `set_notes`, `get_notes`) and **4 room tools** (`join_room`, `lock_hero`, `leave_room`, `wait_for_turn`). With **Allow agents** ticked, any seated player can **Invite an agent**: a one-use ticket seats it on the inviter's team with a briefing, and it picks its hero and plays on its own.
 
 ### 4. How a Turn Works
 A coin toss decides who goes first. On each unit's turn: pick a skill or item, set your angle (`25°–80°`), read the wind, hold to charge power, and release to throw — or spend your turn rolling a die to move. Direct hits charge your ultimate meter, and breaking the center fence opens lower trajectories.
@@ -113,7 +115,7 @@ flowchart LR
 | **Property-Based Testing** | Seeded property runner checking non-negative damage, determinism, round hashes, weather bounds, flight termination, and hero balance bands | `scripts/test_properties.js` |
 | **Kiro Surfaces** | **Kiro CLI** (`kiro-cli chat` via `scripts/kiro_route.py` and ACP via `scripts/kiro_acp_route.py`) wrote the Python engine, initial relay, MCP server, and early tests; **Kiro IDE** ran a save-triggered hook; **Kiro Crew 0.12.2** ran a read-only doc audit (`docs/crew_audit_usage_doc_result.md`) | `scripts/kiro_route.py`, `scripts/kiro_acp_route.py` |
 
-Additional AI coding assistants handled later page wiring, team-battle integration, lobby AI fill, hosted MCP, and red-team fixes under the owner's direction; the owner decided every game rule and public text. Kiro results were independently re-run before acceptance (`docs/kiro_verified.json` records 38 audited verdicts across 112 result reports).
+Additional AI coding assistants handled later page wiring, team-battle integration, lobby AI fill, hosted MCP, and red-team fixes under the owner's direction; the owner decided every game rule and public text. Kiro results were independently re-run before acceptance (`docs/kiro_verified.json` records 38 audited verdicts across 112 result reports). An external review by GLM-5.3 and DeepSeek V4 Pro (Nebius Token Factory) wrote break-it cases and review notes; every claim was checked in the code and re-run before any change ([`docs/llm/llm_findings_verdict_20261126.md`](docs/llm/llm_findings_verdict_20261126.md)).
 
 - Full honest account (including what worked and what did not): [`docs/KIRO_USAGE_20261116.md`](docs/KIRO_USAGE_20261116.md)
 - Reviewer & judge evidence index: [`JUDGES.md`](JUDGES.md)

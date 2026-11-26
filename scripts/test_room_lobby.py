@@ -73,7 +73,7 @@ class LobbyTests(Base):
         stop = await self.until(guest, is_type("countdown", "start"))
         self.assertEqual((stop["type"], stop["seconds"]), ("countdown", None), stop)
         await self.nothing_starts(guest)
-        await self.send(guest, type="ready")
+        await self.send(guest, type="ready", units=HEROES[:2])   # an unlock released the heroes (red team polish P7): the lock names them again, as the page does
         await self.until(guest, is_type("start"))
 
     async def test_begin_needs_a_full_room_unless_ai_may_fill_it(self):
@@ -287,6 +287,50 @@ class LobbyTests(Base):
         self.assertEqual((await self.until(agent, is_type("kicked")))["reason"], "inviter_left")
         state = await self.state_where(host, lambda m: [x["seat_id"] for x in m["seats"]] == ["white-1"])
         self.assertEqual(state["invites"], [])
+
+    async def test_an_unlock_in_a_lobby_releases_the_heroes(self):   # red team (polish) page P7: an unlocked pick blocked a teammate
+        host, st = await self.room(3, claim=1)
+        mate, _ = await self.join(st["code"], seat="red", claim=1)
+        await self.send(host, type="ready", units=["knight"])
+        await self.state_where(mate, lambda m: self.seat(m, "red-1")["units"] == ["knight"])
+        await self.send(host, type="unready")
+        await self.state_where(mate, lambda m: self.seat(m, "red-1")["units"] == [])
+        await self.send(mate, type="ready", units=["knight"])
+        await self.state_where(mate, lambda m: self.seat(m, "red-2")["ready"])
+
+    async def test_host_handover_prefers_connected_seat_over_disconnected_earlier_seat(self):
+        host, st = await self.room(3)
+        g1, _ = await self.join(st["code"], seat="white", claim=1)
+        g2, _ = await self.join(st["code"], seat="white", claim=1)
+        await g1.close()
+        await asyncio.sleep(0.05)
+        await self.send(host, type="leave")
+        state = await self.state_where(g2, lambda m: m.get("host_seat_id") != "red-1")
+        self.assertEqual(state["host_seat_id"], "white-2")
+
+    async def test_lobby_refuses_duplicate_heroes_on_same_team_and_clears_units_on_side_switch(self):
+        host, st = await self.room(2, claim=1)
+        mate, _ = await self.join(st["code"], seat="red", claim=1)
+        # Self-duplicate on a 2-unit claim is refused
+        await self.send(mate, type="leave")
+        await self.send(host, type="move", claim=2)
+        await self.state_where(host, lambda m: self.seat(m, "red-1")["claim"] == 2)
+        await self.send(host, type="ready", units=["wizard", "wizard"])
+        self.assertEqual(await self.error_of(host), "invalid_units")
+        # Teammate duplicate is refused
+        await self.send(host, type="move", claim=1)
+        await self.state_where(host, lambda m: self.seat(m, "red-1")["claim"] == 1)
+        mate2, _ = await self.join(st["code"], seat="red", claim=1)
+        await self.send(host, type="ready", units=["wizard"])
+        await self.state_where(host, lambda m: self.seat(m, "red-1")["ready"])
+        await self.send(mate2, type="ready", units=["wizard"])
+        self.assertEqual(await self.error_of(mate2), "invalid_units")
+        await self.send(mate2, type="ready", units=["skeleton"])
+        await self.state_where(mate2, lambda m: self.seat(m, "red-2")["ready"])
+        # Side switch clears units so no stale hero carries over to the new team
+        await self.send(mate2, type="move", team="white")
+        moved = await self.until(mate2, lambda m: m.get("type") == "room_state" and m.get("seat_id") == "white-1")
+        self.assertEqual(self.seat(moved, "white-1")["units"], [])
 
 
 if __name__ == "__main__":

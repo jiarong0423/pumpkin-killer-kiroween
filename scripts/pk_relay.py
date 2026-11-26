@@ -608,7 +608,7 @@ class RelayServer:
 
     @staticmethod
     def _check_team_units(room: Room, entry: Dict[str, Any], units: list) -> None:
-        """Team matches only: a seat may not list more units than the team has room for."""
+        """Team matches only: a seat may not list more units than the team has room for, nor repeat a hero already named on its team in a lobby room."""
         if entry.get("agent") and len(units) > 1:
             raise ValueError("too_many_units")   # red team A6: an invited agent plays the one place of its ticket
         if not room.team_match:
@@ -616,6 +616,12 @@ class RelayServer:
         others = sum(max(seat.get("claim", 0), len(seat["units"])) for seat in room.team_seats(entry["team"]) if seat is not entry) + room.invited_places(entry["team"])
         if len(units) + others > room.team_size:
             raise ValueError("too_many_units")
+        if room.lobby:
+            if len(set(units)) != len(units):
+                raise ValueError("duplicate_hero")
+            taken = {hero for seat in room.team_seats(entry["team"]) if seat is not entry for hero in seat["units"]}
+            if any(hero in taken for hero in units):
+                raise ValueError("duplicate_hero")
 
     async def _handle_socket(self, websocket: Any, path: Optional[str] = None) -> None:
         room: Optional[Room] = None
@@ -869,6 +875,8 @@ class RelayServer:
                 await self._error(websocket, "room_started", "the match has already started")
                 return room, entry
             entry["ready"] = False
+            if room.lobby and room.team_match:
+                entry["units"] = []   # red team (polish) page P7: an unlocked pick no longer holds a hero a teammate may want (the page sends its picks again at the next lock)
             await self._broadcast_state(room)
             await self._start_if_ready(room)   # R12: an unlock stops a running countdown
             return room, entry
@@ -953,8 +961,8 @@ class RelayServer:
                     try:
                         units = self._parse_units(message["units"])
                         self._check_team_units(room, entry, units)
-                    except ValueError:
-                        await self._error(websocket, "invalid_units")
+                    except ValueError as exc:
+                        await self._error(websocket, "invalid_units", "that hero is already on your team" if str(exc) == "duplicate_hero" else "too many heroes for your places")   # red team (polish) P7: say why
                         return room, entry
                     entry["units"] = units
                 if room.lobby and room.team_match and entry["team"] in ("red", "white") and len(entry["units"]) < max(1, entry.get("claim", 0)):
@@ -1045,7 +1053,8 @@ class RelayServer:
             # `resume` of an existing seat and spectators are unchanged.
             await self._error(websocket, "room_started", "the match has already started; ask the host for a new room")
             return None
-        if team != "spectator" and (room.team_count(team) >= MAX_TEAM_SEATS or (room.lobby and not room.team_match and room.team_count(team) >= 1)):   # red team A3: one seat per side in a 1v1 lobby room (old rooms keep their several devices per side)
+        if team != "spectator" and (room.team_count(team) + max(0, room.invited_places(team) - (1 if ticket is not None else 0)) >= MAX_TEAM_SEATS   # red team (polish) P6: open invites hold seats too
+                                    or (room.lobby and not room.team_match and room.team_count(team) >= 1)):   # red team A3: one seat per side in a 1v1 lobby room (old rooms keep their several devices per side)
             await self._error(websocket, "team_full")
             return None
         if team == "spectator" and sum(1 for seat in room.sessions.values() if seat.get("team") == "spectator") >= self.max_spectators:
@@ -1076,6 +1085,9 @@ class RelayServer:
                 return None
             claim = min(max(raw or 0, len(units)), free)   # no claim sent = nothing reserved (old clients and the slot filler's placeholders list their units at ready)
             units = units[:claim]
+            if room.lobby:   # red team (polish) P1: no hero twice on a team, at join too; a repeated or taken hero is dropped (the seat still sits and picks again at ready)
+                taken = {hero for mate in room.team_seats(team) for hero in mate["units"]}
+                units = [hero for i, hero in enumerate(units) if hero not in taken and hero not in units[:i]]
         room.join_seq += 1
         entry = {"seat_id": self._allocate_seat(room, team), "team": team, "units": units, "claim": claim, "joined": room.join_seq,
                  "ready": False, "client_version": message.get("client_version", ""), "ai": is_ai, "name": clean_name(message.get("name")),
@@ -1275,7 +1287,7 @@ class RelayServer:
             return
         room.begin = False   # the next host decides when to start
         players = [seat for seat in room.sessions.values() if seat["team"] != "spectator" and not seat.get("ai") and not seat.get("agent")]
-        room.host_seat_id = min(players, key=lambda seat: seat.get("joined", 0))["seat_id"] if players else None
+        room.host_seat_id = min(players, key=lambda seat: (not seat.get("connected"), seat.get("joined", 0)))["seat_id"] if players else None
 
     async def _evict(self, room: Room, seat: Dict[str, Any], reason: str) -> None:
         """Take a seat out of the room for good: its session and socket go, the socket is told why and closed (red team A1: a removed socket must not keep acting)."""
@@ -1325,8 +1337,8 @@ class RelayServer:
             for seat in list(room.sessions.values()):
                 if not seat.get("agent") or seat["ready"] or self.agent_pick_seconds <= 0 or now - seat.get("joined_at", now) < self.agent_pick_seconds:
                     continue
-                if not seat["units"]:   # external review: a 1v1 agent got none
-                    named = {hero for mate in room.team_seats(seat["team"]) for hero in mate["units"]}
+                named = {hero for mate in room.team_seats(seat["team"]) if mate is not seat for hero in mate["units"]}
+                if not seat["units"] or (room.lobby and any(hero in named for hero in seat["units"])):   # external review: a 1v1 agent got none; red team (polish) P7: or one a teammate holds
                     seat["units"] = [next((hero for hero in HERO_IDS if hero not in named), HERO_IDS[0])]
                 seat["ready"] = True
                 changed = True
@@ -1364,7 +1376,7 @@ class RelayServer:
         mine = max(entry.get("claim", 0), len(entry["units"]))
         if room.team_match:
             free = room.team_size - room.held_places(team) + (0 if switching else mine)
-            if free <= 0 or (switching and room.team_count(team) >= MAX_TEAM_SEATS):
+            if free <= 0 or (switching and room.team_count(team) + room.invited_places(team) >= MAX_TEAM_SEATS):
                 await self._error(websocket, "team_full", "that team has no free place")
                 return
             want = min(claim or mine or 1, free)
@@ -1380,7 +1392,7 @@ class RelayServer:
                 entry["seat_id"], entry["team"] = self._allocate_seat(room, team), team
                 if room.host_seat_id == old:
                     room.host_seat_id = entry["seat_id"]
-            entry["claim"], entry["units"], entry["ready"] = want, entry["units"][:want], False
+            entry["claim"], entry["units"], entry["ready"] = want, ([] if switching else entry["units"][:want]), False
         await self._send_state(room, websocket, entry, include_code=True)   # the mover learns its seat id
         await self._broadcast_state(room)
         await self._start_if_ready(room)

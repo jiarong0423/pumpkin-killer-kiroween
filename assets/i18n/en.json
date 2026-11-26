@@ -374,5 +374,12 @@
   "lobby.sep": ", ",
   "lobby.you": "you",
   "lobby.kickAgain": "Tap again to remove {name}",
-  "lobby.waitHostBtn": "Waiting for the host…"
+  "lobby.waitHostBtn": "Waiting for the host…",
+  "lobby.joinCode": "Join code",
+  "lobby.joinCodeTitle": "Join a room",
+  "lobby.joinCodePlaceholder": "6-character room code",
+  "lobby.joinCodeErr": "Enter a 6-character room code",
+  "lobby.err.invalidUnits": "A teammate already has that hero: pick another",
+  "lobby.joinCodeSame": "That is the room you are in",
+  "lobby.joinCodeOld": "That is an old-style room: open its link instead"
 }

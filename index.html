@@ -653,7 +653,7 @@
     #settings-sheet .settings-control output, #settings-sheet .settings-value { font-size: 13px; min-width: 38px; text-align: right; }
     /* ROOM-FLOW lobby (the second page) and the name dialog */
     #lobby { position:fixed; inset:0; z-index:70; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto auto auto; gap:6px; padding:max(6px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background:radial-gradient(ellipse at 50% 0%, #2a1650 0%, #120a22 70%); color:#f1eaff; font-family:var(--font-body, system-ui, sans-serif); overflow:auto; }
-    #lobby[hidden], #name-dialog[hidden], #lobby-qr[hidden], #lobby-invite-box[hidden], #lobby-toast[hidden], #lobby-countdown[hidden], #lobby-wait[hidden] { display:none !important; }
+    #lobby[hidden], #name-dialog[hidden], #join-code-dialog[hidden], #lobby-qr[hidden], #lobby-invite-box[hidden], #lobby-toast[hidden], #lobby-countdown[hidden], #lobby-wait[hidden] { display:none !important; }
     #lobby button { min-height:40px; padding:4px 12px; border-radius:10px; border:1.5px solid #7158e2; background:#1d1238; color:#f1eaff; font:inherit; font-size:14px; cursor:pointer; }
     #lobby button:disabled { opacity:.42; cursor:not-allowed; }
     #lobby-invite-box button, #lobby-bar button, #lobby-mine button, #lobby-start { flex:0 0 auto; white-space:nowrap; }   /* a label never breaks into one character per line (red team B9, Chinese) */
@@ -677,6 +677,8 @@
     #lobby-mine, #lobby-foot { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
     #lobby-me { max-width:12em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#ffd32a; }
     #lobby-heroes { display:flex; flex-wrap:wrap; gap:6px; }
+    #lobby-heroes .hero-pick { display:inline-flex; align-items:center; gap:6px; padding-left:6px; }
+    #lobby-heroes .hero-pick-ico { width:24px; height:24px; border-radius:6px; object-fit:cover; flex:0 0 auto; pointer-events:none; }
     #lobby-lock.on { border-color:#ffd32a; background:#3a2a05; } #lobby-lock.due { border-color:#ff8a1f; background:#ff8a1f; color:#2a1400; font-weight:800; }
     #lobby-foot label { display:flex; align-items:center; gap:6px; min-height:40px; font-size:14px; } #lobby-foot input { width:20px; height:20px; }
     #lobby-start { margin-left:auto; min-width:150px; font-weight:800; background:#ff8a1f !important; color:#2a1400 !important; border-color:#ffd32a !important; }
@@ -687,12 +689,12 @@
     #lobby-toast { position:fixed; left:50%; top:max(6px, env(safe-area-inset-top)); transform:translateX(-50%); z-index:73; margin:0; padding:8px 16px; border-radius:12px; background:rgba(20,10,40,.94); border:1.5px solid #ffd32a; color:#fff; font-weight:700; max-width:calc(100vw - 32px); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; pointer-events:none; }
     #lobby-qr { position:fixed; inset:0; z-index:74; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; background:rgba(8,4,16,.86); }
     #lobby-qr canvas { width:min(240px, 60vh); height:min(240px, 60vh); background:#fff; border-radius:8px; } #lobby-qr b { font-size:28px; letter-spacing:3px; color:#ffd32a; }
-    #name-dialog { position:fixed; inset:0; z-index:80; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(8,4,16,.8); }
-    #name-dialog .name-card { width:min(420px, 100%); padding:16px; border-radius:14px; background:#1d1238; border:2px solid #7158e2; color:#f1eaff; }
-    #name-dialog h2 { margin:0 0 10px; font-size:18px; color:#a5f3ff; } #name-input { width:100%; box-sizing:border-box; min-height:44px; padding:6px 10px; font-size:18px; border-radius:10px; border:1.5px solid #7158e2; background:#120a22; color:#fff; }
-    #name-dialog .name-hint { margin:8px 0; font-size:13px; color:#c9b8ff; } #name-error { color:#ff7675; margin:4px 0; font-size:13px; }
-    #name-dialog .name-actions { display:flex; justify-content:flex-end; gap:10px; } #name-dialog button { min-height:44px; min-width:90px; border-radius:10px; border:1.5px solid #7158e2; background:#2a1a50; color:#fff; font-size:15px; } #name-ok { background:#ff8a1f !important; color:#2a1400 !important; border-color:#ffd32a !important; }
-    @media (max-height: 430px) { #lobby { gap:4px; } #lobby button { min-height:36px; font-size:13px; padding:2px 10px; } #lobby-code { font-size:17px !important; }
+    #name-dialog, #join-code-dialog { position:fixed; inset:0; z-index:80; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(8,4,16,.8); }
+    #name-dialog .name-card, #join-code-dialog .name-card { width:min(420px, 100%); padding:16px; border-radius:14px; background:#1d1238; border:2px solid #7158e2; color:#f1eaff; }
+    #name-dialog h2, #join-code-dialog h2 { margin:0 0 10px; font-size:18px; color:#a5f3ff; } #name-input, #join-code-input { width:100%; box-sizing:border-box; min-height:44px; padding:6px 10px; font-size:18px; border-radius:10px; border:1.5px solid #7158e2; background:#120a22; color:#fff; } #join-code-input { text-transform:uppercase; letter-spacing:2px; }
+    #name-dialog .name-hint { margin:8px 0; font-size:13px; color:#c9b8ff; } #name-error, #join-code-error { color:#ff7675; margin:4px 0; font-size:13px; }
+    #name-dialog .name-actions, #join-code-dialog .name-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:10px; } #name-dialog button, #join-code-dialog button { min-height:44px; min-width:90px; border-radius:10px; border:1.5px solid #7158e2; background:#2a1a50; color:#fff; font-size:15px; cursor:pointer; } #name-ok, #join-code-ok { background:#ff8a1f !important; color:#2a1400 !important; border-color:#ffd32a !important; }
+    @media (max-height: 430px) { #lobby { gap:4px; } #lobby button { min-height:36px; font-size:13px; padding:2px 10px; } #lobby-code { font-size:17px !important; } #lobby-heroes .hero-pick-ico { width:20px; height:20px; }
       .lobby-team { padding:3px 6px; } .lobby-team h3 { margin:0 0 2px; font-size:12px; line-height:1.2; } .lobby-cells { gap:3px; }
       .lobby-cell { min-height:0; padding:2px 6px; line-height:1.15; } .lobby-cell .who { font-size:13px; } .lobby-cell small { font-size:11px; line-height:1.1; } .lobby-cell .chip { height:24px; }
       .lobby-cell .cell-act, .lobby-cell .cell-kick { min-height:30px !important; padding:0 8px !important; font-size:12px !important; }
@@ -742,7 +744,7 @@
       <footer id="start-actions"><div id="team-size" role="group" data-i18n-attr="aria-label:start.teamSize"><button type="button" data-n="1" data-i18n="start.team1"></button><button type="button" data-n="2" data-i18n="start.team2"></button><button type="button" data-n="3" data-i18n="start.team3"></button></div><button id="daily-btn" type="button" data-i18n="start.daily"></button><button id="friends-btn" type="button" aria-expanded="false" data-i18n="start.friends"></button><div id="friends-panel"><button id="friends-close" type="button" aria-label="Close">×</button><section id="seat-picker" aria-live="polite"></section><section id="room-picker" hidden aria-live="polite"><div class="room-actions"><button id="room-create" type="button" data-i18n="room.create"></button><button id="room-join" type="button" data-i18n="room.join"></button><button id="slot-fill-ai" type="button" data-i18n="slot.fillAi" hidden></button><button id="room-leave" type="button" data-i18n="room.leave" hidden></button></div><div id="slot-picker" hidden><div class="seat-row" id="slot-claim" role="group" data-i18n-attr="aria-label:slot.claim"><span data-i18n="slot.claim"></span><button type="button" class="seat-choice" data-claim="1">1</button><button type="button" class="seat-choice" data-claim="2">2</button><button type="button" class="seat-choice" data-claim="3">3</button></div><div class="seat-row" id="slot-invite" role="group" data-i18n-attr="aria-label:slot.invite" hidden><span data-i18n="slot.invite"></span><button type="button" class="seat-choice" data-seat="" data-i18n="slot.pick"></button><button type="button" class="seat-choice" data-seat="red" data-i18n="slot.red"></button><button type="button" class="seat-choice" data-seat="white" data-i18n="slot.white"></button></div><p id="slot-vacancy" class="room-status" aria-live="polite" hidden></p></div><p id="room-status" class="room-status" aria-live="polite" hidden></p><div id="room-details" hidden><b id="room-code"></b><canvas id="room-qr" width="1" height="1" aria-label=""></canvas><div id="room-link-row"><a id="room-link" href=""></a><button id="room-copy" type="button" data-i18n="room.copy"></button></div></div></section></div><button id="start-go" type="button" data-i18n="start.go"></button></footer>
     </div>
     <section id="lobby" hidden aria-labelledby="lobby-title">
-      <header id="lobby-bar"><h2 id="lobby-title" data-i18n="lobby.title"></h2><button id="lobby-code" type="button" data-i18n-attr="title:lobby.showQr"></button><button id="lobby-copy" type="button" data-i18n="lobby.copy"></button><button id="lobby-refresh" type="button" data-i18n-attr="aria-label:lobby.refresh"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M20 12a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M20 3v6h-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span id="lobby-count" aria-live="polite"></span><button id="lobby-leave" type="button" data-i18n="lobby.leave"></button></header>
+      <header id="lobby-bar"><h2 id="lobby-title" data-i18n="lobby.title"></h2><button id="lobby-code" type="button" data-i18n-attr="title:lobby.showQr"></button><button id="lobby-copy" type="button" data-i18n="lobby.copy"></button><button id="lobby-refresh" type="button" data-i18n-attr="aria-label:lobby.refresh"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M20 12a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M20 3v6h-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button id="lobby-join-code" type="button" data-i18n="lobby.joinCode"></button><span id="lobby-count" aria-live="polite"></span><button id="lobby-leave" type="button" data-i18n="lobby.leave"></button></header>
       <div id="lobby-teams"><section class="lobby-team" data-team="red"><h3 data-i18n="slot.red"></h3><ol class="lobby-cells" id="lobby-cells-red"></ol></section><section class="lobby-team" data-team="white"><h3 data-i18n="slot.white"></h3><ol class="lobby-cells" id="lobby-cells-white"></ol></section></div>
       <div id="lobby-mine"><b id="lobby-me"></b><button id="lobby-rename" type="button" data-i18n="lobby.rename"></button><span id="lobby-heroes"></span><button id="lobby-lock" type="button"></button><button id="lobby-invite" type="button" data-i18n="lobby.invite" hidden></button></div>
       <div id="lobby-invite-box" hidden><p id="lobby-invite-text"></p><button id="lobby-invite-copy" type="button" data-i18n="lobby.copy"></button><button id="lobby-invite-cancel" type="button" data-i18n="lobby.inviteCancel"></button></div>
@@ -752,6 +754,7 @@
       <div id="lobby-qr" hidden role="dialog" aria-modal="true" aria-labelledby="lobby-qr-code"><canvas id="lobby-qr-canvas" width="240" height="240"></canvas><b id="lobby-qr-code"></b><button id="lobby-qr-close" type="button" data-i18n="lobby.close"></button></div>
     </section>
     <div id="name-dialog" hidden role="dialog" aria-modal="true" aria-labelledby="name-title"><div class="name-card"><h2 id="name-title" data-i18n="name.title"></h2><input id="name-input" type="text" maxlength="40" autocomplete="nickname" data-i18n-attr="placeholder:name.placeholder;aria-label:name.title"><p class="name-hint"><span data-i18n="name.hint"></span> <b id="name-preview"></b></p><p id="name-error" hidden data-i18n="name.empty"></p><div class="name-actions"><button id="name-cancel" type="button" data-i18n="name.cancel"></button><button id="name-ok" type="button" data-i18n="name.ok"></button></div></div></div>
+    <div id="join-code-dialog" hidden role="dialog" aria-modal="true" aria-labelledby="join-code-title"><div class="name-card"><h2 id="join-code-title" data-i18n="lobby.joinCodeTitle"></h2><input id="join-code-input" type="text" maxlength="300" autocomplete="off" spellcheck="false" data-i18n-attr="placeholder:lobby.joinCodePlaceholder;aria-label:lobby.joinCodeTitle"><p id="join-code-error" hidden data-i18n="lobby.joinCodeErr"></p><div class="name-actions"><button id="join-code-cancel" type="button" data-i18n="name.cancel"></button><button id="join-code-ok" type="button" data-i18n="name.ok"></button></div></div></div>
     <div id="side-chooser" hidden role="dialog" aria-modal="true" aria-labelledby="side-chooser-title">
       <div class="side-card">
         <h2 id="side-chooser-title" data-i18n="side.title"></h2>
@@ -1524,11 +1527,17 @@
         filler.client = RelayClient.createClient({ socketFactory: () => new WebSocket(RelayClient.relaySocketUrl(relayAddress)), now: () => Date.now(), setTimeoutFn: (fn, ms) => setTimeout(fn, ms) });
         filler.client.onMessage(m => {
           if (m.type === "room_state" && m.seat_id && !filler.seatId) filler.seatId = m.seat_id;
-          if (m.type === "room_state" && filler.seatId && !filler.readySent) {   // lock with as many heroes as places the relay really gave it (red team B1: it may have trimmed the claim)
-            const own = (m.seats || []).find(s => s.seat_id === filler.seatId), places = own && Number.isInteger(own.claim) && own.claim > 0 ? own.claim : heroes.length;   // a relay that does not report claims: all of them
+          if (m.type === "room_state") filler.seatsNow = m.seats || filler.seatsNow || [];
+          const readyNow = () => {   // lock with as many heroes as places the relay really gave it (red team B1), none a teammate holds (red team polish P2)
+            const seatsNow = filler.seatsNow || [], own = seatsNow.find(s => s.seat_id === filler.seatId), places = own && Number.isInteger(own.claim) && own.claim > 0 ? own.claim : heroes.length;   // a relay that does not report claims: all of them
+            const named = [].concat(...seatsNow.filter(s => s.team === team && s.seat_id !== filler.seatId).map(s => s.units || []));
+            const pick = heroes.filter(h => named.indexOf(h) < 0).slice(0, places);
+            pool.forEach(h => { if (pick.length < places && named.indexOf(h) < 0 && pick.indexOf(h) < 0) pick.push(h); });
             filler.readySent = true;
-            try { filler.client.sendReady(TEAM_N > 1 ? { units: heroes.slice(0, places) } : {}); } catch (_) {}
-          }
+            try { filler.client.sendReady(TEAM_N > 1 ? { units: pick } : {}); } catch (_) {}
+          };
+          if (m.type === "room_state" && filler.seatId && !filler.readySent) readyNow();
+          if (m.type === "error" && filler.seatId && filler.readySent && (filler.retries || 0) < 3) { filler.retries = (filler.retries || 0) + 1; setTimeout(readyNow, 150); }   // the ready was refused (a teammate locked that hero meanwhile): pick again from the latest seats
           if (m.type === "error" && !filler.seatId) { try { filler.client.close(); } catch (_) {} relayFillers = relayFillers.filter(f => f !== filler); }   // refused (the place was taken meanwhile)
           if (m.type === "kicked") { clearTimeout(filler.timer); relayFillers = relayFillers.filter(f => f !== filler); }   // evicted (options off, kicked, host left): a new filler may get the same seat id (cross-check B NEW-1)
         });
@@ -1625,7 +1634,7 @@
     function lobbyRememberSeat(code, token) { try { if (code && token) sessionStorage.setItem(LOBBY_SEAT_KEY, JSON.stringify({ code, token })); else sessionStorage.removeItem(LOBBY_SEAT_KEY); } catch (_) { /* storage blocked: a refresh joins afresh */ } }
     function lobbyStoredSeat(code) { try { const s = JSON.parse(sessionStorage.getItem(LOBBY_SEAT_KEY) || "null"); return s && s.code === code ? s.token : ""; } catch (_) { return ""; } }
     const LOBBY_ERRORS = { team_full: "lobby.err.teamFull", not_full: "lobby.err.notFull", host_only: "lobby.err.hostOnly", unknown_code: "lobby.err.unknownCode", invalid_invite: "lobby.err.invalidInvite",
-      mcp_disabled: "lobby.err.mcpDisabled", room_started: "lobby.err.roomStarted", invite_limit: "lobby.err.inviteLimit", ai_disabled: "lobby.err.aiDisabled", invalid_name: "lobby.err.invalidName", rate_limited: "lobby.err.rateLimited" };
+      mcp_disabled: "lobby.err.mcpDisabled", room_started: "lobby.err.roomStarted", invite_limit: "lobby.err.inviteLimit", ai_disabled: "lobby.err.aiDisabled", invalid_units: "lobby.err.invalidUnits", invalid_name: "lobby.err.invalidName", rate_limited: "lobby.err.rateLimited" };
     const LOBBY_ACTIONS = { take: "lobby.take", switch: "lobby.switch", release: "lobby.release" };
     function lobbyName() { let v = ""; try { v = localStorage.getItem(LOBBY_NAME_KEY) || ""; } catch (_) { v = lobbyNameMem; } return RelayClient.cleanName(v || lobbyNameMem); }
     function askName(then, force) {   // F2: the first time (or from Rename) a small dialog: type, see how it will show, confirm
@@ -1792,8 +1801,15 @@
       set("lobby-me", el => { el.textContent = lobbyName() || T("lobby.unnamed"); });
       set("lobby-heroes", el => {
         el.textContent = "";
-        lobbyPicks.forEach((h, i) => { const b = document.createElement("button"); b.type = "button"; b.className = "hero-pick"; b.textContent = T("hero." + h + ".tab") + " ▶"; b.disabled = v.myLocked || v.started || !v.myTeam;
-          b.onclick = () => { const taken = LobbyModel.takenByMates(lobbyState || {}, relaySeatId); lobbyPicks[i] = LobbyModel.nextHero(availableHeroIds(), h, taken, lobbyPicks.filter((_, k) => k !== i)); lobbyRender(); }; el.appendChild(b); });
+        lobbyPicks.forEach((h, i) => {
+          const b = document.createElement("button"); b.type = "button"; b.className = "hero-pick";
+          const img = document.createElement("img"); img.className = "hero-pick-ico"; img.alt = ""; img.src = "assets/avatars/avatar_" + h + ".png";
+          const sp = document.createElement("span"); sp.textContent = T("hero." + h + ".tab") + " ▶";
+          b.appendChild(img); b.appendChild(sp);
+          b.disabled = v.myLocked || v.started || !v.myTeam;
+          b.onclick = () => { const taken = LobbyModel.takenByMates(lobbyState || {}, relaySeatId); lobbyPicks[i] = LobbyModel.nextHero(availableHeroIds(), h, taken, lobbyPicks.filter((_, k) => k !== i)); lobbyRender(); };
+          el.appendChild(b);
+        });
       });
       set("lobby-lock", el => { el.textContent = T(v.myLocked ? "lobby.unlock" : "lobby.lock"); el.disabled = !v.myTeam || v.started; el.classList.toggle("on", v.myLocked); el.classList.toggle("due", !v.myLocked && !!v.myTeam && v.waiting.length > 0); });
       set("lobby-invite", el => { el.hidden = !v.options.allowAgents; el.disabled = !v.canInvite; });
@@ -1819,6 +1835,49 @@
       on("lobby-qr-close", () => { const dlg = document.getElementById("lobby-qr"); if (dlg) dlg.hidden = true; });
       on("lobby-copy", e => { const code = (lobbyState && lobbyState.code) || relayRoomCode; if (code) copyText(lobbyLink(code), e.currentTarget, "lobby.copied", "lobby.copy"); });
       on("lobby-refresh", () => { const v = LobbyModel.view(lobbyState || {}, relaySeatId); if (!v.refresh.enabled) return; const name = lobbyName(); lobbyLeave(false); lobbyStart(name, { create: true }); });   // a new room and code; locked once someone else sits
+      on("lobby-join-code", () => {
+        const dlg = document.getElementById("join-code-dialog"), inp = document.getElementById("join-code-input"), err = document.getElementById("join-code-error");
+        if (!dlg || !inp) return;
+        inp.value = ""; if (err) err.hidden = true; dlg.hidden = false; inp.focus();
+      });
+      { const dlg = document.getElementById("join-code-dialog"), inp = document.getElementById("join-code-input"), err = document.getElementById("join-code-error");
+        const codeFrom = text => {   // a code typed with spaces or in lower case, or a whole invite link pasted (red team polish P5)
+          const raw = String(text || "").trim(); let fromLink = "";
+          try { fromLink = new URL(raw).searchParams.get("room") || ""; } catch (_) { /* not a link */ }
+          const code = (fromLink || raw).replace(/[^A-Za-z0-9]/g, "").toUpperCase();
+          return /^[A-Z0-9]{6}$/.test(code) ? code : "";
+        };
+        let probing = false;
+        const submitCode = () => {   // red team polish P1/P2: look at the room first (as a spectator), and only then leave this one; go there as a lobby link with its own team size
+          const code = codeFrom(inp && inp.value);
+          if (!code) { if (err) err.hidden = false; return; }
+          if (code === ((lobbyState && lobbyState.code) || relayRoomCode)) { if (dlg) dlg.hidden = true; lobbyToast(T("lobby.joinCodeSame")); return; }
+          if (probing || typeof RelayClient === "undefined" || !relayAddress) return;
+          probing = true;
+          let done = false;
+          const probe = RelayClient.createClient({ socketFactory: () => new WebSocket(RelayClient.relaySocketUrl(relayAddress)), now: () => Date.now(), setTimeoutFn: (fn, ms) => setTimeout(fn, ms) });
+          const finish = (key, state) => {
+            if (done) return; done = true; probing = false;
+            try { probe.leave(); } catch (_) { /* gone */ }
+            if (key) { lobbyToast(T(key)); return; }
+            if (dlg) dlg.hidden = true;
+            const n = state && Number.isInteger(state.team_size) ? state.team_size : 1;
+            lobbyLeave(false);
+            const u = new URL(location.href); ["room", "seat", "claim", "choose", "invite", "lobby", "team"].forEach(k => u.searchParams.delete(k));
+            u.searchParams.set("room", code); u.searchParams.set("team", "" + n); u.searchParams.set("lobby", "1");
+            location.href = u.toString();
+          };
+          probe.onMessage(m => {
+            if (m.type === "room_state" && m.seat_token) finish(m.started ? "lobby.err.roomStarted" : (!m.lobby ? "lobby.joinCodeOld" : ""), m);
+            else if (m.type === "error") finish(LOBBY_ERRORS[m.code] || "lobby.err.generic");
+          });
+          setTimeout(() => finish("lobby.err.generic"), 6000);
+          try { probe.join(code, "spectator"); } catch (_) { finish("lobby.err.generic"); }
+        };
+        on("join-code-ok", submitCode);
+        on("join-code-cancel", () => { if (dlg) dlg.hidden = true; });
+        if (inp) inp.onkeydown = e => { if (e.isComposing || e.keyCode === 229) return;   /* Enter that picks an input-method candidate (Safari sends 229) is not a submit */ if (e.key === "Enter") submitCode(); else if (e.key === "Escape" && dlg) dlg.hidden = true; };
+      }
       on("lobby-leave", () => lobbyLeave(true));
       on("lobby-rename", () => askName(name => { try { relayClient.setName(name); } catch (_) { /* not in a room */ } lobbyRender(); }, true));
       on("lobby-lock", () => {
@@ -1844,6 +1903,9 @@
       [["lobby-allow-ai", "allow_ai"], ["lobby-allow-agent", "allow_mcp"]].forEach(([id, key]) => { const el = document.getElementById(id); if (el) el.onchange = () => { try { relayClient.roomOptions({ [key]: el.checked }); } catch (_) { /* refused */ } }; });
     }
     const SHOW_COMING_SOON = false;   // true brings back the grey "in production" cards (heroes and battlefields)
+    function firstHintOpen() {
+      const el = document.getElementById("first-hint"); return !!(el && !el.hidden);
+    }
     function showFirstHint() {
       const el = document.getElementById("first-hint"); if (!el) return;
       try { if (localStorage.getItem("pk_hint_seen") === "1") return; } catch (_) {}
@@ -1911,9 +1973,9 @@
     }
     function showCoinToss(firstSide, opts) {
       const overlay = document.getElementById("coin-toss"), coin = document.getElementById("coin-toss-coin"), result = document.getElementById("coin-toss-result"), skip = document.getElementById("coin-toss-skip");
-      if (!overlay || !coin || !result) { beginOpeningTurn(firstSide); return; }
+      if (!overlay || !coin || !result) { beginOpeningTurn(firstSide); showFirstHint(); return; }
       let finished = false;
-      const finish = () => { if (finished) return; finished = true; clearTimeout(showCoinToss.timer); overlay.hidden = true; coin.classList.remove("flipping"); beginOpeningTurn(firstSide); };
+      const finish = () => { if (finished) return; finished = true; clearTimeout(showCoinToss.timer); overlay.hidden = true; coin.classList.remove("flipping"); beginOpeningTurn(firstSide); showFirstHint(); };
       const face = opts && opts.face !== undefined ? opts.face : firstSide;   // which face the coin lands on (0 head, 1 tail); with a call it is the seeded toss, not the opening side
       result.textContent = opts && opts.win !== undefined ? T(opts.win ? "coin.youFirst" : "coin.oppFirst") : T(firstSide === 0 ? "coin.leftFirst" : "coin.rightFirst");
       coin.style.setProperty("--coin-end", face === 0 ? "1800deg" : "1980deg");
@@ -2169,6 +2231,7 @@
       try { relayClient.sendReady(relayIsHost ? { teamSize: TEAM_N, units } : { units }); } catch (_) { relayNote("relay.error", { code: "ready" }); }
     }
     function beginRelayMatch(m) {   // the relay's `start` (seed already applied): positions, the opponent's hero, the opener from the relay's phase
+      showFirstHint();   // a room match shows the first-turn hint too (red team polish P4); shown at most once per device
       relayQueueMode = ["red", "white"].some(t => relaySeats.filter(x => x.team === t).length > 1); relayInbox.length = 0; relayLastSeq = 0; relayCursor = { round: m.round || 1, phase: m.phase || "red" };   // ordered handling only where a team has two or more seats
       relayMateOpen = false; relayMateFlight = false;   // red-team R1 A1: flags of a previous room must not leak into this one
       relayPlaying = true; relayLeft = false; relayIncoming = 0; relayRemoteOpen = false; relayWait = null; relayJudge = null; relayJudgesIn = [];
@@ -2280,7 +2343,7 @@
       resetKnightUlt();
       applyClassStats();
       if (TEAM_N > 1) randomizePositions(false);   // N > 1: spaced start slots for every unit (N = 1 keeps its default start)
-      matchStarted = true; wind = seedWind(); lastWeatherNotice = "clear"; showFirstHint();
+      matchStarted = true; wind = seedWind(); lastWeatherNotice = "clear"; if (fromLobby === true) showFirstHint();
       turn = "busy";
       document.getElementById("start-screen").classList.add("hidden");
       loadRestInBackground();
@@ -4535,7 +4598,7 @@
       }
       if (hitStop > 0) { hitStop -= dt; return; }
       // A human seat receives the same 12-second timer on either side.
-      if (isHumanTurn() && !isCharging && matchStarted && !projectiles.length) {   // the clock stops while the own throw is in the air: a stun or shock leaves 3 s, and a flight of 2 to 3 s ran it out, so the turn was passed twice (found by the hybrid room run, 2026-11-17)
+      if (isHumanTurn() && !isCharging && matchStarted && !projectiles.length && !(firstHintOpen() && !relayLive())) {   /* the first-turn hint pauses the clock only in local play: in a room the other side would wait (red team polish P3) */   // the clock stops while the own throw is in the air or the first-turn hint is shown
         turnTimer -= dt;
         if (turnTimer <= 0) {
           if (defendMode) cancelDefendMode();
