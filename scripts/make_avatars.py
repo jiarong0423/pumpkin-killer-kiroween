@@ -14,7 +14,7 @@ SIZE = 256
 SRC = {
     "skeleton":  ("assets/portraits/skeleton_front.png", (0.05, 0.00, 0.95, 0.45)),
     "wizard":    ("assets/portraits/wizard_front.png",   (0.08, 0.00, 0.92, 0.55)),
-    "bat":       ("assets/ui/portrait_bat.png",          (0.18, 0.00, 1.00, 0.46)),
+    "bat":       ("assets/portraits/bat_front.png",      (0.04, 0.00, 0.96, 0.76)),
     "knight":    ("assets/portraits/knight_front.png",   (0.12, 0.00, 0.88, 0.50)),
     "reaper":    ("assets/portraits/reaper_front.png",   (0.12, 0.00, 0.88, 0.52)),
     "bride":     ("assets/portraits/bride_front.png",    (0.22, 0.00, 0.78, 0.30)),

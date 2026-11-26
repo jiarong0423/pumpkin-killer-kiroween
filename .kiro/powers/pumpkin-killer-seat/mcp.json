@@ -4,12 +4,15 @@
       "command": "python3",
       "args": [
         "-B",
-        "scripts/mcp_stdio_server.py"
+        "scripts/mcp_stdio_server.py",
+        "--room-tools"
       ],
       "autoApprove": [
         "get_public_state",
+        "get_roster",
         "get_history",
-        "get_notes"
+        "get_notes",
+        "wait_for_turn"
       ],
       "disabled": false
     }

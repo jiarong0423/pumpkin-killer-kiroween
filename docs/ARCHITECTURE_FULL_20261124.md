@@ -72,13 +72,13 @@ flowchart TB
 
 | Part | File | What it does | State |
 |---|---|---|---|
-| Game page | `index.html`, `js/`, `css/`, `shared/` | Whole game on a 1920x1080 canvas; fixed 1/60 s physics; start screen with the room lobby | built, tested |
-| Relay | `scripts/pk_relay.py` | Creates rooms with a random 6-character code, assigns seats, sends the same seed to every seat, forwards only allowlisted actions, checks size (16 KiB), rate (10 messages per second), seat and phase, keeps a numbered log for replay | built, tested |
-| MCP stdio bridge | `scripts/mcp_stdio_server.py` | 7 game tools and 3 room tools for one agent on the same machine | built, tested with scripted clients |
-| MCP over HTTP | `scripts/pk_mcp_http.py` | The same tools at `/mcp` for remote agents; Origin allowlist, locked to the local relay, per-client session cap | built, tested; **NOT deployed, NOT VERIFIED with Claude Code or Kiro** |
-| Computer seat | `scripts/hybrid_seat_headless.js`, `scripts/fill_room.py`, `scripts/run_slot_room.py`, `scripts/host_room.py`, lobby `#slot-fill-ai` | Host-browser AI fills open slots directly from the lobby (`#slot-fill-ai`, zero server cost); headless Chrome scripts also work from a terminal | built, tested (updated 2026-11-25) |
-| AI gateway | `scripts/pk_ai_gateway.py` | Optional text generation backend | built; copied into the image since 2026-11-24; whether it is switched on for the contest build is the owner's decision |
-| Deploy | `deploy/Dockerfile.coolify`, `deploy/entrypoint.sh`, `deploy/nginx.conf` | One container: nginx plus the Python processes | built; see section 9 |
+| Game page | `index.html`, `js/`, `css/`, `shared/` | Whole game on a 1920x1080 canvas; fixed 1/60 s physics; full-screen Lobby (`js/lobby_model.js`) | built, tested, live |
+| Relay | `scripts/pk_relay.py` | Creates rooms with a random 6-character code, assigns seats and one-use invite tickets, sends the same seed, forwards only allowlisted actions (1 unit per team turn), checks size (16 KiB), rate (10 msgs/s), seat and phase | built, tested, live |
+| MCP stdio bridge | `scripts/mcp_stdio_server.py` | 7 game tools and 4 room tools (`join_room`, `lock_hero`, `leave_room`, `wait_for_turn`) + **`PageJudgeRelay`** (`scripts/page_judge_seat.js` running `index.html` on Node.js 22) | built, tested with real pages |
+| MCP over HTTP | `scripts/pk_mcp_http.py` | The same 11 tools + `PageJudgeRelay` at `/mcp` (`PK_MCP_PAGE_JUDGE=auto`, `PK_MCP_MAX_PAGE_JUDGES=10`) for remote agents; Origin allowlist, locked to the local relay, per-client session cap | built, tested, live (`https://pumpkin.jace0423.com/mcp`) |
+| Computer seat | `scripts/hybrid_seat_core.js`, `scripts/fill_room.py`, `scripts/run_slot_room.py`, `scripts/host_room.py`, `#lobby-allow-ai` | With **Computer fills open places** ticked in the lobby, host **Start** fills open places in the host's browser (zero server cost); headless scripts also work from CLI | built, tested |
+| AI gateway | `scripts/pk_ai_gateway.py` | Optional text generation backend | built; copied into image |
+| Deploy | `deploy/Dockerfile.coolify`, `deploy/entrypoint.sh`, `deploy/nginx.conf` | One container: `python:3.12-alpine` + `nginx` + `nodejs` (for `PageJudgeRelay`) | built, deployed (`pk-release-kiroween-20261125-v3`) |
 
 State lives in memory: restarting the container ends every room.
 
@@ -114,7 +114,7 @@ sequenceDiagram
   R-->>H: result
 ```
 
-- **Invite**: the lobby shows the room code, a link and a QR code. The link carries `choose=1`, so a friend sees a red or white card first and joins after choosing. An older link without it joins straight in.
+- **Invite**: the lobby shows the 6-char code, shareable link, and QR code. Standard lobby links carry `room=CODE&team=N&lobby=1` (legacy `?room=CODE` links keep the legacy panel). An invited MCP agent receives a one-use ticket `?room=CODE&team=N&lobby=1&invite=<ticket>`.
 - **Started room**: a new red or white seat in a room whose match has started is refused with `room_started` (2026-11-24, `scripts/test_relay_late_join.py`, `scripts/test_late_join_page.js`); before that fix the seat was created and the page stayed silent. Spectators and a `resume` of an existing seat are unchanged.
 - **Reconnect**: each seat has a secret `seat_token`. A dropped connection is held for 60 seconds and `resume` replays the missed numbered messages. After 60 seconds the seat is removed and the other seats are told.
 - **Seat leaves**: a seat that leaves a started match makes its team lose (a decision the owner may overturn). A seat whose units are all dead is ignored (red-team R2A-F1).
@@ -155,11 +155,11 @@ flowchart LR
   Agent --> Gate --> REL["Relay seat"]
 ```
 
-- **Tools**: 7 game tools (`get_public_state`, `get_roster`, `get_history`, `submit_action`, `end_turn`, `set_notes`, `get_notes`) and 3 room tools (`join_room`, `leave_room`, `wait_for_turn`). There is deliberately no tool that creates a room: people open rooms, agents join them.
-- **Public view only**: an agent sees what a player sees. The seed, the pending actions and the opponent's aim are not in the view (`public_throw()` in `scripts/mcp_stdio_server.py`).
-- **Hosted limits**: the gateway reports the real client address to the relay only with a one-time random token (`PK_RELAY_GATEWAY_TOKEN`, made at container start and never written to a file), so the relay's per-address connection cap counts each remote client, not one proxy. Each client may hold 8 sessions (`PK_MCP_MAX_SESSIONS_PER_IP`); the ninth gets HTTP 429. Tests: `scripts/test_mcp_risk_ab.py`, `scripts/test_pk_mcp_http.py`, `scripts/test_mcp_room_tools.py`.
-- **Full-team or partial-unit claim (updated 2026-11-25).** An MCP agent can join as a whole team or claim a subset of units on a shared team via `join_room(..., claim=1..units)` with 3-way `round_hash` parity (`scripts/test_mcp_claim.py`).
-- **NOT VERIFIED**: no run with a real MCP client (Claude Code, Kiro) is recorded, and `/mcp` is not deployed yet. The recorded Kiro IDE attempt failed because that session had no Pumpkin Killer tool (`docs/kiro_evidence/raw/ide_mcp_attempt_20261115.txt`). A multi-client end-to-end run is the open task in `(not published)`.
+- **Tools**: **11 MCP tools** = 7 game tools (`get_public_state`, `get_roster`, `get_history`, `submit_action`, `end_turn`, `set_notes`, `get_notes`) and **4 room tools** (`join_room`, `lock_hero`, `leave_room`, `wait_for_turn`). People open rooms; agents join by code or one-use invite ticket.
+- **Public view only**: an agent sees what a player sees. The seed, pending actions, Shield Wall hidden points, and opponent's aim are not in the view (`public_throw()` in `scripts/mcp_stdio_server.py`).
+- **Hosted limits**: the gateway reports the real client address to the relay only with a one-time random token (`PK_RELAY_GATEWAY_TOKEN`, made at container start), so the relay's per-address connection cap counts each remote client. Each client may hold 8 `/mcp` sessions (`PK_MCP_MAX_SESSIONS_PER_IP`); the ninth gets HTTP 429.
+- **Partial claim & `PageJudgeRelay`**: an agent can claim a whole team or a subset (`join_room(..., claim=1..units)`) or accept a single-slot invite (`invite=` + `lock_hero`). Connected rooms default to **`PageJudgeRelay`** (`PK_MCP_PAGE_JUDGE=auto`, `scripts/page_judge_seat.js` on Node.js 22), running `index.html` cleanly in a separate VM (~65 MB RSS/process; capped at `PK_MCP_MAX_PAGE_JUDGES=10`).
+- **Verified locally**: 2 consecutive mixed 3v3 matches (2 browsers + 2 HTTP `/mcp` `PageJudgeRelay` agents + AI fill) ran to completion with `0 out_of_sync` and rematch via `reset_lobby` (`(not published)`). Hosted V4 real-phone + `/mcp` match verification follows Coolify deploy.
 
 ## 5. Filling empty seats (unit slot fill)
 
@@ -174,7 +174,7 @@ flowchart TB
   HOLD -- "failure" --> KEEP["placeholders kept; they expire after the 60 s grace and the room starts without a fill, and the log says so"]
 ```
 
-State (updated 2026-11-25): works both directly in the lobby (**Fill open slots (AI)** via `#slot-fill-ai`, running in the host's browser at zero server cost; verified E2E in 1 v 1, 2 v 2, and 3 v 3) and from a terminal (`python3 -B scripts/fill_room.py`, `scripts/run_slot_room.py`). External MCP agents can also claim partial units via `join_room(..., claim=1..units)`. Design choices are in `docs/ADR_unit_slot_fill_20261124.md`.
+State (updated 2026-11-26): works both directly in the full-screen **Lobby** (**Computer fills open places** checkbox `#lobby-allow-ai`, filling open spots in the host's browser on **Start** at zero server cost) and from a terminal (`python3 -B scripts/fill_room.py`, `scripts/run_slot_room.py`). External MCP agents can join via `invite=` + `lock_hero` or `claim=1..units`. Design choices are in `docs/ADR_unit_slot_fill_20261124.md`.
 
 ## 6. Deployment
 
@@ -188,7 +188,7 @@ flowchart LR
   MH --> RL
 ```
 
-`deploy/entrypoint.sh` starts the Python processes, then nginx, with a trap for stop signals. Only nginx faces outside. Environment variables the owner sets: `PK_ALLOWED_ORIGINS`, `PK_RELAY_TRUST_PROXY`, `PK_RELAY_MAX_PER_ADDR`; the gateway token is made at start. Without `PK_RELAY_TRUST_PROXY` every player behind the proxy looks like one address. Not deployed yet (nothing is live).
+`deploy/entrypoint.sh` starts the Python relay, MCP HTTP gateway (with `PK_MCP_PAGE_JUDGE=auto`, `PK_MCP_MAX_PAGE_JUDGES=10`, and Node.js 22 installed), optional AI gateway, and nginx, with a trap for stop signals. Only nginx faces outside. Environment variables in Coolify: `PK_ALLOWED_ORIGINS`, `PK_RELAY_TRUST_PROXY=1`, `PK_RELAY_MAX_PER_ADDR=16`; the gateway token is generated per start. Live at `https://pumpkin.jace0423.com/`.
 
 ## 7. How Kiro was used
 
@@ -211,7 +211,7 @@ flowchart TB
 
 | Kiro feature | Used? | Evidence |
 |---|---|---|
-| CLI | Yes, the main route | `scripts/kiro_route.py`; 197 task briefs `docs/kiro_task_*.md`; 112 result files `docs/kiro_*_result*.md` |
+| CLI | Yes, the main route | `scripts/kiro_route.py`; 195 task briefs `docs/kiro_task_*.md`; 109 result files `docs/kiro_*_result*.md` |
 | Specs | Yes | 32 folders in `.kiro/specs/` (requirements, design, tasks) |
 | Steering | Yes | 11 files in `.kiro/steering/` (for example `structure.md` makes `index.html` a one-writer file) |
 | Custom agents | Defined, one recorded run | 8 files in `.kiro/agents/`; `pk-player` played one recorded match through the public tools (`docs/kiro_162_result_gpt-5.6-terra.md`, not counted as verified); the other agents have definitions only |
@@ -237,22 +237,22 @@ flowchart TB
 
 Rule that kept this honest: **a Kiro result is a report, not verification.** The main line re-runs the tests; `docs/kiro_verified.json` lists only tasks with a recorded verdict.
 
-## 8. Tests and evidence (updated 2026-11-25)
+## 8. Tests and evidence (2026-11-26)
 
 | Item | Result | How to re-run |
 |---|---|---|
-| Whole suite | 184 `test_*` scripts (`97 JS + 1 MJS + 86 Python`) + `sim_team_headless.py`; `zsh scripts/run_full_suite.sh` passes with 0 failures (178 run in batch; 6 local-socket tests skipped there and verified separately alongside relay, MCP claim, MCP risk, and deploy checks) | `zsh scripts/run_full_suite.sh`, `redteam/evidence/recheck_full_suite_v3_20261125.txt`, `redteam/evidence/recheck_socket_v3_20261125.txt` |
+| Whole suite + sockets | **206 `test_*` scripts (`108 JS + 1 MJS + 97 Python`) + `sim_team_headless.py`**: `run_full_suite.sh` passes (`193 PASS, 0 FAIL, 13 SKIP`); all **13/13** local-socket scripts pass outside sandbox; **14/14** `PageJudgeRelay` unit tests OK | `zsh scripts/run_full_suite.sh`, `python3 -B -m unittest scripts/test_mcp_invite_page.py scripts/test_page_judge_relay.py` |
+| Mixed 3v3 E2E (2 matches) | 2 headless browsers + 2 HTTP `/mcp` `PageJudgeRelay` agents + AI fill across lobby rematch: `0 out_of_sync` | `PK_PAGE_JUDGE=on zsh redteam/live_mix_20261126/run_local.sh` |
 | Room late join | relay 4 tests, page 17 checks, real Chrome 1 test; each failed before the fix | `python3 -B scripts/test_relay_late_join.py`, `node scripts/test_room_status.js`, `node scripts/test_late_join_page.js` |
-| Phone landscape invite panel | 7 viewport sizes pass | `node scripts/test_invite_panel_fit.js` |
+| Phone landscape invite panel | 10 viewport sizes pass hit-testing | `node scripts/test_invite_panel_fit.js` |
 | MCP risk A and B | 10 tests | `python3 -B scripts/test_mcp_risk_ab.py` |
 
 ## 9. Known limits and open items
 
 | Item | State |
 |---|---|
-| Hosted URL, hosted `/mcp` | NOT DONE (nothing deployed) |
-| MCP with a real client (Claude Code, Kiro) | NOT VERIFIED |
-| Lobby button for computer fill | DONE (2026-11-25): `#slot-fill-ai` in lobby fills all open red/white slots using host-browser AI (zero server cost); verified E2E in 1v1, 2v2, and 3v3 |
+| Hosted URL (`https://pumpkin.jace0423.com/`), `/relay`, `/mcp/health` | LIVE; deploying updated `PageJudgeRelay` + `nodejs` container (`LIVE-3V3-4`), then V4 live verification |
+| Lobby computer fill (`#lobby-allow-ai`) | DONE: fills empty seats in the host's browser on **Start** (zero server cost); verified E2E in 1v1, 2v2, and 3v3 |
 | AI (MCP) fill of part of a team | DONE (2026-11-25): `join_room(..., claim=1..units)` allows an MCP agent to claim 1 or more units on a shared team with 3-way `round_hash` parity (`scripts/test_mcp_claim.py`) |
 | Container image | Fixed 2026-11-24 and checked in a real container: the AI gateway is copied, the nginx `types` block that real nginx rejected is repaired, a watcher stops the container if the relay or MCP process dies (`scripts/check_coolify_deploy.py`, `redteam/evidence/prepush_docker_*_20261124.txt`). Still open: the `/ai` origin check, `PK_RELAY_TRUST_PROXY`, the Coolify variables only the owner can set. Details: `(not published)` |
 | Room state | in memory; a restart ends every room; one container, no horizontal scaling |

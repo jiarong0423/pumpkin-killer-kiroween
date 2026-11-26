@@ -1460,6 +1460,17 @@ class BuiltinPracticeSeat:
         self.last_view = self.client.call("get_public_state", {})
 
 
+_PAGE_JUDGE_LOCK = threading.Lock()
+_PAGE_JUDGE_ACTIVE = 0
+
+
+def _max_page_judges() -> int:
+    try:
+        return max(1, int(os.environ.get("PK_MCP_MAX_PAGE_JUDGES", "10")))
+    except ValueError:
+        return 10
+
+
 class PageJudgeRelay:
     """A room seat whose judge is the REAL page.
 
@@ -1470,7 +1481,10 @@ class PageJudgeRelay:
     tools only: no flight formula, no calibration constant and no judge reaches it. Plain throws only (the relay carries nothing else yet)."""
 
     def __init__(self, session: Session, url: str, code: str, seat: str, *, speed: float = 1.0, rng: int = 1,
-                 auto_ready: bool = True, node: str = "node") -> None:
+                 auto_ready: bool = True, node: str = "node", invite: Optional[str] = None,
+                 name: Optional[str] = None, units: Optional[int] = None,
+                 claim_heroes: Optional[List[str]] = None, turn_cap_seconds: float = 0.0,
+                 max_old_space_mb: int = 96) -> None:
         self.session = session
         self.url = url
         self.code = code
@@ -1479,7 +1493,21 @@ class PageJudgeRelay:
         self.rng = rng
         self.node = node
         self.auto_ready = auto_ready
-        self.ready_sent = True
+        self.invite = invite
+        self.name = name
+        self.units = units
+        self.claim_heroes = list(claim_heroes) if claim_heroes is not None else None
+        self.turn_cap_seconds = float(turn_cap_seconds)
+        self.max_old_space_mb = max(48, int(max_old_space_mb))
+        self.ready_sent = invite is None
+        self.seat_id: str = ""
+        self.briefing: Optional[Dict[str, Any]] = None
+        self.pick_again: Optional[str] = None
+        self.match_no: int = 0
+        self.page_my_turn: bool = False
+        self._acted_turn: Optional[tuple] = None
+        self._last_ended: Optional[tuple] = None
+        self._slot_held = False
         self.lock = threading.RLock()
         self.cond = threading.Condition(self.lock)
         self.closed = threading.Event()
@@ -1493,16 +1521,51 @@ class PageJudgeRelay:
         self.outbound: Dict[int, Dict[str, Any]] = {}
         self.received_actions: List[int] = []
 
+    def _release_slot(self) -> None:
+        global _PAGE_JUDGE_ACTIVE
+        with _PAGE_JUDGE_LOCK:
+            if self._slot_held:
+                self._slot_held = False
+                _PAGE_JUDGE_ACTIVE = max(0, _PAGE_JUDGE_ACTIVE - 1)
+
     # ---- process
     def start(self) -> None:
+        global _PAGE_JUDGE_ACTIVE
+        with _PAGE_JUDGE_LOCK:
+            if _PAGE_JUDGE_ACTIVE >= _max_page_judges():
+                self.failure = "server_busy: page-judge limit reached"
+                return
+            _PAGE_JUDGE_ACTIVE += 1
+            self._slot_held = True
         session = self.session
         session.weather_enabled = True
         session.sync = {"status": "pending", "round": session.engine.round_num}
         own = session.engine.hero_red if self.seat == "red" else session.engine.hero_white
-        heroes = list(own) if isinstance(own, (list, tuple)) else [own]
-        command = [self.node, os.path.join(_HERE, "page_judge_seat.js"), "--relay", self.url.rsplit("/ws", 1)[0], "--code", self.code, "--team", self.seat,
-                   "--heroes", ",".join(heroes), "--rng", str(self.rng), "--speed", str(self.speed)]
-        self.proc = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, bufsize=1, cwd=_REPO_ROOT)
+        heroes = list(own) if isinstance(own, (list, tuple)) else ([own] if own else [])
+        command = [
+            self.node,
+            "--max-old-space-size=%d" % self.max_old_space_mb,
+            os.path.join(_HERE, "page_judge_seat.js"),
+            "--relay", self.url.rsplit("/ws", 1)[0],
+            "--code", self.code,
+            "--team", self.seat,
+            "--rng", str(self.rng),
+            "--speed", str(self.speed),
+        ]
+        if self.invite:
+            command.extend(["--invite", self.invite, "--units", str(self.units or session.engine.units_per_side)])
+            if self.name:
+                command.extend(["--name", self.name])
+            if self.turn_cap_seconds > 0:
+                command.extend(["--turn-cap", str(self.turn_cap_seconds)])
+        else:
+            command.extend(["--heroes", ",".join(heroes)])
+        try:
+            self.proc = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, bufsize=1, cwd=_REPO_ROOT)
+        except Exception as exc:
+            self._release_slot()
+            self.failure = type(exc).__name__
+            return
         self.thread = threading.Thread(target=self._read, name="pk-page-judge", daemon=True)
         self.thread.start()
 
@@ -1517,20 +1580,37 @@ class PageJudgeRelay:
             pass
         try:
             if self.proc and self.proc.poll() is None:
-                self.proc.kill()
+                self.proc.terminate()
+                try:
+                    self.proc.wait(timeout=1)
+                except Exception:
+                    self.proc.kill()
+                    self.proc.wait(timeout=2)
             if self.proc:
                 for pipe in (self.proc.stdin, self.proc.stdout):
                     if pipe:
                         pipe.close()
         except Exception:
             pass
+        self._release_slot()
         with self.cond:
             self.cond.notify_all()
 
     def request_ready(self) -> None:
-        """The page seat sends its own `ready` as soon as the room code is known."""
+        """The page seat sends its own `ready` (or `lock` in lobby invite mode)."""
+        if self.invite and self.claim_heroes:
+            self.lock_hero(self.claim_heroes[0])
+
+    def lock_hero(self, hero: str) -> None:
+        with self.lock:
+            self.claim_heroes = [hero]
+            self.pick_again = None
+            self.ready_sent = True
+            self._send({"cmd": "lock", "hero": hero})
 
     def _send(self, message: Dict[str, Any]) -> None:
+        if self.proc is None or self.proc.poll() is not None or self.proc.stdin is None:
+            return
         self.proc.stdin.write(json.dumps(message) + "\n")
         self.proc.stdin.flush()
 
@@ -1546,11 +1626,16 @@ class PageJudgeRelay:
                         self._apply(event["state"], event.get("records", []))
                         self.cond.notify_all()
                 elif event.get("event") == "error":
-                    self.failure = str(event.get("message", "page error"))[:200]
+                    with self.cond:
+                        self.failure = str(event.get("message", "page error"))[:200]
+                        self.cond.notify_all()
         except Exception as exc:
-            self.failure = type(exc).__name__
+            with self.cond:
+                self.failure = type(exc).__name__
+                self.cond.notify_all()
         finally:
             self.ready.clear()
+            self._release_slot()
             with self.cond:
                 self.cond.notify_all()
 
@@ -1563,7 +1648,51 @@ class PageJudgeRelay:
     def _apply(self, st: Dict[str, Any], records: List[Dict[str, Any]]) -> None:
         sess = self.session
         self.state = st
-        if not self.started:
+        self.page_my_turn = bool(st.get("myTurn"))
+        lb = st.get("lobby")
+        if isinstance(lb, dict):
+            if lb.get("joinError"):
+                self.failure = str(lb["joinError"])
+                return
+            if lb.get("kicked"):
+                self.failure = str(lb["kicked"])
+                return
+            if lb.get("seatId"):
+                self.seat_id = str(lb["seatId"])
+            if isinstance(lb.get("briefing"), dict):
+                self.briefing = lb["briefing"]
+            if lb.get("inLobby"):
+                if self.started:
+                    self.started = False
+                    self.page_my_turn = False
+                    self.ready.clear()
+                    self._acted_turn = None
+                    self._last_ended = None
+                    self.pick_again = "lobby_reset"
+                    sess.winner = None
+                    sess.winner_reason = None
+                    sess.phase = "human"
+                elif lb.get("pickAgain"):
+                    self.pick_again = str(lb["pickAgain"])
+                return
+            match_no = int(lb.get("matchNo") or 0)
+            if not self.started or (match_no and match_no != self.match_no):
+                if not (st.get("started") and st.get("seed")):
+                    return
+                heroes = {"left": [u["hero"] for u in st["units"] if u["id"].startswith("left")],
+                          "right": [u["hero"] for u in st["units"] if u["id"].startswith("right")]}
+                sess.reset_for_relay(st["seed"], st.get("scene") or "graveyard", len(heroes["left"]), heroes)
+                sess.weather_enabled = True
+                self.match_no = match_no or (self.match_no + 1)
+                self.pick_again = None
+                self._acted_turn = None
+                self._last_ended = None
+                self.started = True
+                self.ready.set()
+            mine_ids = lb.get("mine")
+            if isinstance(mine_ids, list) and mine_ids:
+                sess.seat["units"] = [self._engine_id(wid) for wid in mine_ids]
+        elif not self.started:
             if not (st.get("started") and st.get("seed")):
                 return
             heroes = {"left": [u["hero"] for u in st["units"] if u["id"].startswith("left")],
@@ -1748,6 +1877,13 @@ class ConnectedRelay:
         if eng.units_per_side <= 1:
             return []
         return [unit["hero"] for uid, unit in sorted(eng.units.items()) if unit["team"] == self.seat]
+
+    def owns_wire_unit(self, wire_unit: str) -> bool:
+        """True when the relay's owner list names this seat for the unit; without an owner list (1 vs 1, or a seat that holds its whole team) every own unit is this seat's."""
+        owners = getattr(self, "relay_owners", None) or {}
+        if not owners or not self.seat_id or wire_unit not in owners:
+            return True
+        return owners[wire_unit] == self.seat_id
 
     def wire_unit(self, unit_id: str) -> str:
         """The unit id as it goes on the wire: engine ids at N = 1 (as before), world ids left_i / right_i in team matches."""
@@ -2142,6 +2278,8 @@ class ConnectedRelay:
             impact = hit_pair[1]
             self.session.engine.weather = self.session.weather()
             outcome = self.session.engine._apply_hit(attacker, target, impact["x"], impact["y"])
+        if target is not None and not self.owns_wire_unit(self.wire_unit(target["id"])):
+            return   # LIVE-3V3-2: a teammate's unit was hit; its owner judges it (the relay refuses unit_not_yours). The hit is applied here as well.
         if self.session.engine.units_per_side > 1 and target is None:
             # team rooms: a miss names no unit (the relay refuses a unit that is not one of the sender's own, and `unit: null` is not a unit id)
             self.outgoing.put({"type": "judge", "ref": message["seq"], "hit": False})
@@ -2319,6 +2457,8 @@ class McpServer:
             raise ToolError("action must be an object with a type")
         if "round" in arguments and _integer(arguments["round"], "round", 1, 10 ** 6) != sess.engine.round_num:
             raise ToolError("stale round: current round is %d" % sess.engine.round_num)
+        if not getattr(self.relay, "started", False):
+            raise ToolError("the match has not started")
         if sess.phase == "over":
             raise ToolError("the match is over")
         unit = sess.engine.units.get(unit_id)
@@ -2351,6 +2491,7 @@ class McpServer:
             if sess.ultimates_used[team] >= MAX_ULTIMATES_PER_MATCH:
                 raise ToolError("no_ultimates_left: %s has used both ultimates" % team)
         sess.acted[unit_id] = atype
+        self.relay._acted_turn = (sess.engine.round_num, sess.phase)
         self.relay.send_action({"unit": unit_id, "action": {"type": atype, "angle": angle, "power": power}})
         return {"ok": True, "unit": unit_id, "action": atype, "angle": angle, "power": power}
 
@@ -2361,13 +2502,22 @@ class McpServer:
             for name in ("round", "phase"):
                 if name not in arguments:
                     raise ToolError("end_turn requires round and phase for seat %s" % self.seat["seat_id"])
-            if _integer(arguments["round"], "round", 1, 10 ** 6) != sess.engine.round_num:
+            req_round = _integer(arguments["round"], "round", 1, 10 ** 6)
+            req_phase = _enum(arguments["phase"], "phase", ("human", "agent"))
+            # Idempotent: the page ends its own turn right after the throw lands, so an agent calling end_turn after landing (or a second time) succeeds.
+            if (req_round, req_phase) == getattr(relay, "_last_ended", None) or (
+                (req_round, req_phase) == getattr(relay, "_acted_turn", None)
+                and (sess.engine.round_num != req_round or sess.phase != req_phase)
+            ):
+                relay._last_ended = (req_round, req_phase)
+                return {"ended": req_phase, "phase": sess.phase, "round": sess.engine.round_num}
+            if req_round != sess.engine.round_num:
                 raise ToolError("stale round: current round is %d" % sess.engine.round_num)
             if sess.phase == "over":
                 raise ToolError("the match is over")
             if not sess._seat_controls_phase(self.seat):
                 raise ToolError("seat %s does not control the %s phase" % (self.seat["seat_id"], sess.phase))
-            if _enum(arguments["phase"], "phase", ("human", "agent")) != sess.phase:
+            if req_phase != sess.phase:
                 raise ToolError("current phase is %s, not %s" % (sess.phase, arguments["phase"]))
             ended, round_number, acted = sess.phase, sess.engine.round_num, bool(sess.acted)
         if not acted:
@@ -2375,13 +2525,25 @@ class McpServer:
         if not relay.wait_turn_over(ended, round_number):
             raise ToolError("the page did not finish the turn in time")
         with relay.lock:
+            relay._last_ended = (round_number, ended)
             return {"ended": ended, "phase": sess.phase, "round": sess.engine.round_num}
+
+    def _hint_end_turn(self, payload: Dict[str, Any], arguments: Dict[str, Any]) -> None:
+        """LIVE-3V3-1 (live room XTA54P, 2026-11-26): in a room an attack does not end the turn and an agent that waits instead of calling end_turn holds
+        its whole team (a live agent did exactly that). After an attack the result names the end_turn call that finishes the turn; a move keeps the turn open."""
+        action = arguments.get("action") if isinstance(arguments.get("action"), dict) else {}
+        if action.get("type") == "move" or not isinstance(payload, dict) or self.session.phase == "over":
+            return
+        args = {"round": self.session.engine.round_num, "phase": self.session.phase}
+        payload["end_turn_args"] = args
+        payload["next"] = "Your unit has used its attack. Call end_turn %s now to finish your turn; your team waits until you do." % json.dumps(args)
 
     def _call_tool_page(self, name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
         try:
             if name == "submit_action":
                 with self.relay.lock:
                     payload = self._page_submit(arguments)
+                    self._hint_end_turn(payload, arguments)
             elif name == "end_turn":
                 payload = self._page_end_turn(arguments)
             else:
@@ -2463,10 +2625,11 @@ class McpServer:
         use_page = self.page_judge_mode == "on" or (
             self.page_judge_mode == "auto" and node_path is not None and os.path.exists(os.path.join(_REPO_ROOT, "index.html"))
         )
-        if invite is not None:
-            use_page = False   # the page judge plays a whole side; an invited agent owns one unit
         if use_page:
-            relay: Any = PageJudgeRelay(sess, relay_url, info["code"], seat, speed=self.page_speed, rng=1, node=node_path or "node")
+            relay: Any = PageJudgeRelay(
+                sess, relay_url, info["code"], seat, speed=self.page_speed, rng=1, node=node_path or "node",
+                invite=invite, name=name, units=units, claim_heroes=claim_heroes,
+            )
         else:
             explicit_units = bool(arguments.get("units") is not None or info["units"] is not None or hero_list is not None or claim_heroes is not None)
             relay = ConnectedRelay(sess, relay_url, info["code"], seat, auto_ready=invite is None or heroes_arg is not None,
@@ -2474,21 +2637,25 @@ class McpServer:
                                    explicit_units=explicit_units and (invite is None or heroes_arg is not None), claim_heroes=claim_heroes,
                                    invite=invite, name=name)
         relay.start()
-        deadline = time.monotonic() + 5.0
+        deadline = time.monotonic() + (8.0 if use_page else 5.0)
+        def _joined_ready() -> bool:
+            if invite is not None and isinstance(relay, PageJudgeRelay):
+                return bool(relay.seat_id)
+            return bool(getattr(relay, "seat_token", None) or getattr(relay, "started", False) or getattr(relay, "state", None) is not None)
         with relay.cond:
             while time.monotonic() < deadline:
-                if relay.failure is not None:
-                    break
-                if getattr(relay, "seat_token", None) or getattr(relay, "started", False) or getattr(relay, "state", None) is not None:
+                if relay.failure is not None or _joined_ready():
                     break
                 relay.cond.wait(0.1)
         if relay.failure is not None:
             err_code = relay.failure
             relay.close()
             raise ToolError("failed to join room %s: %s" % (info["code"], err_code))
-        if not (getattr(relay, "seat_token", None) or getattr(relay, "started", False) or getattr(relay, "state", None) is not None):
+        if not _joined_ready():
             relay.close()
             raise ToolError("timed out joining room %s on %s" % (info["code"], relay_url))
+        if invite is not None and isinstance(relay, PageJudgeRelay) and heroes_arg is not None and claim_heroes:
+            relay.lock_hero(claim_heroes[0])
         self.session = sess
         self.seat = sess.seat
         self.relay = relay
@@ -2516,7 +2683,7 @@ class McpServer:
     def _tool_lock_hero(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         _reject_unknown(arguments, ("hero",), "lock_hero")
         relay = self.relay
-        if relay is None or not isinstance(relay, ConnectedRelay):
+        if relay is None or not isinstance(relay, (ConnectedRelay, PageJudgeRelay)):
             raise ToolError("not in a room; call join_room first")
         if relay.failure is not None:
             raise ToolError("the room connection failed: %s" % relay.failure)
@@ -2525,10 +2692,13 @@ class McpServer:
         if relay.claim_heroes is None or len(relay.claim_heroes) != 1:
             raise ToolError("lock_hero is for a seat that owns one unit")
         hero = _enum(arguments.get("hero"), "hero", tuple(sorted(engine.HERO_TEMPLATES)))
-        relay.claim_heroes = [hero]
-        relay.pick_again = None
-        relay.ready_sent = False
-        relay.request_ready()
+        if isinstance(relay, PageJudgeRelay):
+            relay.lock_hero(hero)
+        else:
+            relay.claim_heroes = [hero]
+            relay.pick_again = None
+            relay.ready_sent = False
+            relay.request_ready()
         return {"ok": True, "hero": hero, "next": "Call wait_for_turn until status is 'your_turn'."}
 
     def _tool_leave_room(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
@@ -2555,7 +2725,8 @@ class McpServer:
             if self.session.phase == "over":
                 return {"status": "game_over", "winner": self.session.winner, "state": self.session.call("get_public_state", {}, self.seat)}
             started = True if relay is None else bool(getattr(relay, "started", False))
-            if started and self.session._seat_controls_phase(self.seat):
+            page_ready = (not isinstance(relay, PageJudgeRelay)) or relay.page_my_turn
+            if started and page_ready and self.session._seat_controls_phase(self.seat):
                 pub = self.session.call("get_public_state", {}, self.seat)
                 active_team = self.session._active_team()
                 active_unit = self.session._active_unit(active_team) if active_team else pub.get("active_unit")
@@ -2629,6 +2800,7 @@ class McpServer:
             if self.relay is not None and not payload.get("duplicate"):
                 if name == "submit_action":
                     self.relay.send_action(arguments)
+                    self._hint_end_turn(payload, arguments)
                 elif name == "end_turn":
                     self.relay.send_end_turn(arguments, round_before)
             result = {"content": [{"type": "text", "text": json.dumps(payload, ensure_ascii=False)}],

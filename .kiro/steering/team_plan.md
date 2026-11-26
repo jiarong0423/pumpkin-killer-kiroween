@@ -3,6 +3,8 @@ inclusion: always
 ---
 # Team plan: who does what, when, and which rules every task obeys
 
+> **Historical planning note (mid-November 2026):** Work blocks B01–B19 below reflect an earlier build plan; `4 vs 4` was permanently excluded in favor of **1v1–3v3** (`Resurrection`). See `README.md`, `JUDGES.md`, and `(not published)` for current shipped status.
+
 Kiro sessions from the CLI, the IDE and Kiro Web all load this file. Check the five files in section 5 before you trust it, because they change faster than this summary.
 
 ## 1. Three parties

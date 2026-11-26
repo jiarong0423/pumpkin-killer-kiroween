@@ -522,6 +522,32 @@ class RelayTeamLogicTests(unittest.IsolatedAsyncioTestCase):
         await red.say(type="action", round=2, phase="red", unit="left_0", kind="throw", angle=54, power=30)
         self.assertEqual(red.error_codes(), ["unit_changed_in_turn", "action_already_submitted"])
 
+    async def test_one_unit_acts_per_team_turn_across_seats(self):
+        # LIVE-3V3-1 (2026-11-26, live room XTA54P): an agent seat threw for left_1 and, before it sent end_turn, the computer seat of the same team threw
+        # for left_2 in the same round and phase; the relay forwarded both and the two devices then disagreed on whose turn it was (the match stalled).
+        red = Peer(self.relay)
+        await red.say(type="create_room", seat="red", team_size=2, claim=1, units=["skeleton"], client_version="test")
+        code = red.last("room_state")["code"]
+        mate, white = Peer(self.relay), Peer(self.relay)
+        await mate.say(type="join", code=code, seat="red", claim=1, units=["wizard"], client_version="test")
+        await white.say(type="join", code=code, seat="white", units=["hag", "reaper"], client_version="test")
+        for peer in (red, mate, white):
+            await peer.say(type="ready")
+        self.assertIsNotNone(red.last("start"))
+        owners = red.last("start").get("owners") or {}
+        first, second = ("left_0", "left_1") if owners.get("left_0") == red.entry["seat_id"] else ("left_1", "left_0")
+        await red.say(**self.act(first, "throw", angle=54, power=30))
+        self.assertEqual(red.error_codes(), [])
+        await mate.say(**self.act(second, "throw", angle=54, power=30))
+        self.assertEqual(mate.error_codes(), ["unit_changed_in_turn"])
+        self.assertEqual([m["unit"] for m in white.of_type("action")], [first])
+        # the team's next turn may use the other unit
+        await red.say(type="end_turn", round=1, phase="red")
+        await white.say(**self.act("right_0", "throw", phase="white", angle=54, power=30))
+        await white.say(type="end_turn", round=1, phase="white")
+        await mate.say(type="action", round=2, phase="red", unit=second, kind="throw", angle=54, power=30)
+        self.assertEqual(mate.error_codes(), ["unit_changed_in_turn"])
+
     async def test_judge_names_a_unit_of_its_own_side_once(self):
         red, white = await self.room_of(2)
         await red.say(**self.act("left_0", "throw", angle=54, power=30))

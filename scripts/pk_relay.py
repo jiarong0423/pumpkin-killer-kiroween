@@ -1153,7 +1153,7 @@ class RelayServer:
             return
         if room.team_match:
             # One active unit per team: its move and its attack in one turn come from the same unit.
-            unit_key = (entry["seat_id"], room.round, room.phase)
+            unit_key = (entry["team"], room.round, room.phase)   # per team, not per seat: a teammate's seat cannot act for another unit in the same turn (LIVE-3V3-1)
             if room.turn_unit.setdefault(unit_key, message["unit"]) != message["unit"]:
                 await self._error(websocket, "unit_changed_in_turn")
                 return

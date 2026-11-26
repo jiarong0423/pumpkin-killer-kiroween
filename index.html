@@ -1548,22 +1548,39 @@
       refreshFillAiButton();
       setRoomStatus("slot.filledAi", { count: total });
     }
+    function relayPhaseTaken(st) {   // some seat already sent an action in the relay's current round and phase (only actions of the current match: the log starts at its `start`)
+      const log = st.log || []; let from = 0;
+      for (let i = log.length - 1; i >= 0; i--) if (log[i].type === "start") { from = i; break; }
+      for (let i = from; i < log.length; i++) { const m = log[i]; if (m.type === "action" && m.round === st.round && m.phase === st.phase) return true; }
+      return false;
+    }
     function maybeTriggerFillerTurn() {
       if (!relayLive() || gameOver || !relayFillers.length) return;
+      if (projectiles.length || diceRoll || relayIncoming > 0 || relayMateFlight || relayInbox.length || relayWait) return;
       const st = relaySnap(), owners = st.owners || {};
-      const side = st.phase === "red" ? "left" : "right";
+      if (!st.round || !st.phase || roundNum !== st.round || relayCursor.round !== st.round || relayCursor.phase !== st.phase) return;
+      const myTeam = st.seat || "red";
+      const turnOpen = st.phase === myTeam ? relayMateOpen : relayRemoteOpen;
+      if (!turnOpen) return;
+      if (relayPhaseTaken(st)) return;   // LIVE-3V3-1: a teammate (an agent that ends its turn seconds after its throw) already acted in this turn; this page has already rotated to the next unit, which is due next time, not now
+      const side = st.phase === myTeam ? "left" : "right";
       const u = unitOf(side); if (!u || u.hp <= 0) return;
-      const ownerId = owners[u.id];
+      const worldId = localPerspective.worldUnitId(u.id);
+      const ownerId = owners[u.id] || owners[worldId];
       const filler = relayFillers.find(f => f.team === st.phase && f.client.state().status !== "closed" && (ownerId ? f.seatId === ownerId : f.team === st.phase));
       if (!filler) return;
       const key = st.round + ":" + st.phase + ":" + u.id;
-      if (filler.lastActedKey === key) return;
-      filler.lastActedKey = key;
+      if (filler.lastActedKey === key || filler.pendingKey === key) return;
+      filler.pendingKey = key;
       clearTimeout(filler.timer);
       filler.timer = setTimeout(() => {
+        filler.pendingKey = "";
         if (!relayLive() || gameOver) return;
+        if (projectiles.length || diceRoll || relayIncoming > 0 || relayMateFlight || relayInbox.length || relayWait) return;
         const cur = relaySnap();
-        if (cur.phase !== filler.team || cur.round !== st.round) return;
+        const curOpen = cur.phase === (cur.seat || "red") ? relayMateOpen : relayRemoteOpen;
+        if (!curOpen || roundNum !== cur.round || cur.phase !== filler.team || cur.round !== st.round || relayPhaseTaken(cur)) return;
+        filler.lastActedKey = key;
         const prof = HERO_PROFILES[u.profile] || HERO_PROFILES.skeleton;
         const dirX = filler.team === "red" ? 1 : -1;
         const oppSide = filler.team === "red" ? "right" : "left";
@@ -1575,7 +1592,7 @@
         const fwd = prof.weapon === "cannonball" ? WIZARD_MUZZLE.fwd : (prof.weapon === "proj_shield" ? 51 : 58);
         const up = prof.weapon === "cannonball" ? WIZARD_MUZZLE.up : (prof.weapon === "proj_shield" ? 73 : 110);
         const start = { x: round1(u.x + dirX * fwd), y: round1(u.y - up) };
-        const worldUnit = TEAM_N > 1 ? u.id : (filler.team === "red" ? "red_1" : "white_1");
+        const worldUnit = TEAM_N > 1 ? worldId : (filler.team === "red" ? "red_1" : "white_1");
         try {
           filler.client.sendAction({ round: cur.round, phase: filler.team, unit: worldUnit, kind: "throw", angle, power, start, dirX, claimed_landing: { x: tgt ? round1(tgt.x) : 960, y: 860 } });
           filler.client.endTurn(cur.round, filler.team);
@@ -2045,7 +2062,7 @@
       if (r.stun) { r.stun = false; r.stunLast = true; } else r.stunLast = false;
       if (r.slowUsed) { r.slow = 0; r.slowUsed = false; } if (r.slow > 0) r.slowUsed = true;
     }
-    function relayWaitRemote() { turn = "busy"; relayRemoteOpen = true; relayRemoteStatuses(); relayNote("relay.waitTurn"); }
+    function relayWaitRemote() { turn = "busy"; relayRemoteOpen = true; relayRemoteStatuses(); relayNote("relay.waitTurn"); setTimeout(maybeTriggerFillerTurn, 120); }
     function relayAfterTurn(team, rotated, quiet) {   // a turn is used up: mine ("player": throw, timeout, skip) or the remote's throw that has landed here ("ai"); the relay's order says who is next
       if (!rotated) rotateAfterTurn(team);
       if (team === "player") { if (!quiet) relayEndTurn(); relayMateOpen = false; } else relayRemoteOpen = false;
@@ -2166,6 +2183,7 @@
     // Ordered handling (only in a room where a team has two or more seats): another seat can finish its turn while this page is still showing the previous one, so the relay is already in a later
     // round when this page gets there. Actions and end_turn are queued and handled one at a time, in the relay's order, each only when this page has finished the turn before it and is waiting for exactly it.
     function relayOnMessage(m) {
+      if (m.type === "end_turn") setTimeout(maybeTriggerFillerTurn, 120);   // LIVE-3V3-3: an agent ends its turn seconds after its throw landed; the relay's turn moves only now, so a computer seat that is due next starts here
       if (relayQueueMode && (m.type === "action" || m.type === "end_turn")) {
         if (typeof m.seq === "number" && m.seq <= relayLastSeq) return;   // a replay after a reconnect
         relayInbox.push(m); relayDrain(); return;
@@ -2523,7 +2541,7 @@
       pose_hag_charge: "assets/poses/hag_charge3.png",
       pose_hag_release: "assets/poses/hag_release.png",
       pose_hag_hit: "assets/poses/hag_hit.png",
-      proj_cross: "assets/fx/sprites/item_cross_silver_plain.png",   // the nun's thrown silver cross
+      proj_cross: "assets/fx/sprites/fx_cross_silver.png",   // the nun's thrown silver cross
       pose_bride_windup: "assets/poses/bride_windup.png",
       pose_bride_charge: "assets/poses/bride_charge3.png",   // late charge: the mouth opens wide before the scream (owner 2026-11-16: the bride's attack had no expression)
       pose_bride_release: "assets/poses/bride_release_new.png",
@@ -4536,7 +4554,7 @@
     }
 
     // Bottom dock readouts (public state only): portrait, name, HP, angle, power, ammo, lock button.
-    const DOCK_PORTRAIT = { wizard: "assets/ui/portrait_wizard.png", skeleton: "assets/ui/portrait_skeleton.png", bat: "assets/portraits/bat_front.png", knight: "assets/ui/portrait_knight.png", reaper: "assets/portraits/reaper_front.png", bride: "assets/portraits/bride_front.png", hunchback: "assets/portraits/hunchback_front.png", hag: "assets/portraits/hag_front.png" };   // files appear as Colab finishes them; until then the emoji shows
+    const DOCK_PORTRAIT = { wizard: "assets/portraits/wizard_front.png", skeleton: "assets/portraits/skeleton_front.png", bat: "assets/portraits/bat_front.png", knight: "assets/portraits/knight_front.png", reaper: "assets/portraits/reaper_front.png", bride: "assets/portraits/bride_front.png", hunchback: "assets/portraits/hunchback_front.png", hag: "assets/portraits/hag_front.png" };
     const portraitOk = {}, portraitImg = {};
     Object.keys(DOCK_PORTRAIT).forEach(k => { const im = new Image(); portraitImg[k] = im; im.onload = () => { portraitOk[k] = true; }; im.onerror = () => { if (/\.webp$/.test(im.src) && !im.__pngTried) { im.__pngTried = true; im.src = DOCK_PORTRAIT[k]; } }; im.src = assetUrl(DOCK_PORTRAIT[k]); });
     const DOCK_GLYPH = { skeleton: "💀", wizard: "🎃", bat: "🦇", knight: "🛡️", reaper: "🔥", bride: "👰", hunchback: "🔔", hag: "✝️" };

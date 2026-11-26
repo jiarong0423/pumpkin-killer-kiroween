@@ -118,11 +118,42 @@ TASK: a careful code review in Markdown, at most 60 lines:
 Do not report the known open items as new defects. Say "none" where you have nothing. Cite real function names from the code; do not invent APIs."""
 
 
+FIXREVIEW = CONTEXT + """
+
+INCIDENT (live 3v3 room, 2026-11-26): red team = a browser player (red-1, the host; its page also drives the computer seats), an MCP agent (red-2, over the
+hosted MCP bridge in mcp_stdio_server.py) and a computer seat (red-3); white the same with a phone browser. One unit acts per team turn; units rotate in id order.
+1. The agent threw for left_1 and called end_turn only seconds later. 120 ms after the throw landed, the host page's computer-seat driver
+   (maybeTriggerFillerTurn) acted for its local next unit left_2 in the SAME relay turn and ended it; the relay accepted a second unit's throw because its
+   one-unit rule was keyed per seat. Host and phone then disagreed on whose turn it was: the match stalled.
+2. The agent's bridge judged an enemy hit on a teammate's unit (owned by another seat) and named it; the relay refused (unit_not_yours) and the bridge's
+   failure flag ended the agent's play.
+3. After fixing 1, the computer seat was never started when the agent's end_turn arrived later (it was only triggered 120 ms after a throw landed).
+The diff below is the fix (relay: one-unit rule per team; page: relayPhaseTaken guard + a filler check on every end_turn; bridge: judge only owned units,
+and submit_action names the end_turn call).
+
+TASK: review THIS FIX in Markdown, at most 50 lines. 1) Defects in the fix you are confident about: P0/P1/P2, function, a concrete sequence of messages
+or player actions that still stalls or desyncs a match (agents slow, timeouts, a seat that left, an AI hand-over, a double shot, a move then a throw,
+dead units skipped in rotation, the second match after reset_lobby, reconnect/resume replay), and the smallest change. 2) Cases the fix does not cover yet
+that a mixed room (browser players + agents + computer seats) will hit. 3) Say "none" where you have nothing. Cite real function names only."""
+
+
+def fix_package():
+    import subprocess
+    diff = subprocess.run(["git", "diff", "-U60", "--", "scripts/pk_relay.py", "index.html", "scripts/mcp_stdio_server.py"], cwd=ROOT,
+                          capture_output=True, text=True, check=True).stdout
+    html = read("index.html")
+    for name in ("function relayDispatch(", "function relayInboxReady(", "function relayAfterTurn("):
+        at = html.find(name)
+        if at >= 0 and name not in diff:
+            diff += "\n=== context: index.html %s ===\n%s" % (name, html[at:at + 2500])
+    return "=== GIT DIFF (the fix, with context) ===\n" + diff
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--match", default="glm", help="substring of the model id (glm, deepseek)")
     ap.add_argument("--model", default="", help="exact model id (overrides --match)")
-    ap.add_argument("--task", choices=("attack", "review"), default="review")
+    ap.add_argument("--task", choices=("attack", "review", "fixreview"), default="review")
     ap.add_argument("--out", default="")
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--from-raw", default="", help="attack: parse a saved raw answer instead of calling the model")
@@ -143,7 +174,7 @@ def main():
         print("ERROR models HTTP %s" % exc.code); log("ERROR models HTTP %s" % exc.code); return 1
     except (urllib.error.URLError, OSError) as exc:
         print("ERROR models %s" % type(exc).__name__); log("ERROR models %s" % type(exc).__name__); return 1
-    prompt = (ATTACK if args.task == "attack" else REVIEW) + "\n\n" + package()
+    prompt = FIXREVIEW + "\n\n" + fix_package() if args.task == "fixreview" else (ATTACK if args.task == "attack" else REVIEW) + "\n\n" + package()
     body = {"model": model, "temperature": 0.2, "max_tokens": args.max_tokens, "messages": [{"role": "user", "content": prompt}]}
     if args.think == "off":
         body["chat_template_kwargs"] = {"thinking": False, "enable_thinking": False}

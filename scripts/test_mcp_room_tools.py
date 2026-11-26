@@ -201,8 +201,11 @@ class ReconnectAndRoomToolsTests(unittest.TestCase):
         t.start()
         time.sleep(0.08)
 
-        err, _ = tool_json(red_srv, "submit_action", {"unit": "red_1", "round": 1, "action": {"type": "throw", "angle": 54, "power": 45}})
+        err, sub = tool_json(red_srv, "submit_action", {"unit": "red_1", "round": 1, "action": {"type": "throw", "angle": 54, "power": 45}})
         self.assertFalse(err)
+        # LIVE-3V3-1: in a room the attack does not end the turn; the result says which end_turn call finishes it (a live agent did not call it and its team stalled)
+        self.assertEqual(sub.get("end_turn_args"), {"round": 1, "phase": "human"}, sub)
+        self.assertIn("end_turn", sub.get("next", ""))
         err, _ = tool_json(red_srv, "end_turn", {"round": 1, "phase": "human"})
         self.assertFalse(err)
         t.join(timeout=4.0)

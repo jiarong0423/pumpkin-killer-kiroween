@@ -1,6 +1,6 @@
 # Credits
 
-The game uses no code library. It is plain JavaScript and the Python standard library.
+The browser game itself uses no third-party frontend library or bundler (vanilla HTML5 Canvas and ES JavaScript). The container backend uses Python 3.12 with `websockets==15.0.1` (`requirements.txt`, plus `boto3==1.34.162` in `deploy/relay/requirements.txt` if Bedrock is enabled) and **Node.js 22** (running `scripts/page_judge_seat.js` / `PageJudgeRelay`).
 
 This page lists every third-party asset and its licence. Where the repository does not record a source, the entry says "provenance not recorded". Nothing is guessed.
 
@@ -74,54 +74,50 @@ Sources and sizes are in `assets/fonts/README.md`. The subsets are built by `scr
 
 ## Pictures
 
-`docs/ASSET_PROVENANCE.md` states that no third-party picture is used and that Kiro generated no images. It records the tool for some folders and "unknown" for the rest. The record is repeated here without additions.
+`docs/ASSET_PROVENANCE.md` records both first-party/generated art and third-party CC0 particle sprites (`assets/fx/kenney/`), noting known tools where recorded and "unknown" where unlogged. Kiro generated no images.
 
-Made with an image model, tool recorded:
+Made with an image model or third-party CC0 pack, tool/source recorded:
 
-| Folder | What | Tool | Notes |
+| Folder / Files | What | Tool / Source | Notes |
 |---|---|---|---|
-| `assets/poses/` | Skeleton action poses | Qwen-Image-Edit-2509 on Colab | keyed from a flat background by `scripts/key_skeleton_poses.py`; HuggingFace model card shows Apache-2.0 (checked 2026-11-16, see `docs/ASSET_PROVENANCE.md`) |
-| `assets/weapons/` | Small shield, dart, dart bag, spear | Qwen-Image-Edit-2509 on Colab | keyed by `scripts/key_magenta_items.py`; HuggingFace model card shows Apache-2.0 (checked 2026-11-16, see `docs/ASSET_PROVENANCE.md`) |
-| `assets/ui/shield_slab_blue.png`, `assets/ui/shield_slab_purple.png` | Floating shield slabs | Qwen-Image-Edit-2509 on Colab | keyed by `scripts/key_magenta_items.py`; HuggingFace model card shows Apache-2.0 (checked 2026-11-16, see `docs/ASSET_PROVENANCE.md`) |
+| `assets/poses/` | Skeleton action poses + `wizard_release_new`, `hunchback_release_new` | Qwen-Image-Edit-2509 on Colab; Flow AI (`hunchback_release_new`) | keyed from flat background (`scripts/key_skeleton_poses.py`); Apache-2.0 model card (`docs/ASSET_PROVENANCE.md`) |
+| `assets/weapons/` | Small shield, dart, dart bag, spear | Qwen-Image-Edit-2509 on Colab | keyed by `scripts/key_magenta_items.py`; Apache-2.0 model card |
+| `assets/ui/shield_slab_blue.png`, `assets/ui/shield_slab_purple.png` | Floating shield slabs | Qwen-Image-Edit-2509 on Colab | keyed by `scripts/key_magenta_items.py` |
+| `assets/fx/kenney/*` (6 sprites) | Particle Pack 1.1 (`circle_03/05`, `light_01`, `star_06`, `twirl_02/03`) | Kenney (`kenney.nl`) | **CC0** (`assets/fx/kenney/License.txt`) |
+| `assets/fx/sprites/fx_cross_silver.*`, `fx_slash_arc.*`, `fx_arcane_circle.*`, `fx_star_ring.*`, `fx_fire_tongue.*` | Silver cross (`2026-11-25` upright replacement) and attack/magic FX sprites | Gemini / Flow AI (owner-supplied) | Commercial terms follow owner statement in `docs/ASSET_PROVENANCE.md` |
+| `assets/portraits/hag_front.*`, `assets/portraits/bat_front.*` | Silver Cross Sister & Bat-cat Assassin front portraits | Qwen-Image-Edit-2511 (`hag_front`), Flow AI (`bat_front`) | Remaining 6 front portraits (`skeleton`, `wizard`, `knight`, `reaper`, `bride`, `hunchback`) pre-date 2026-11-09 |
+| `assets/avatars/avatar_*.png` | Hero selection & lobby avatars (256×256) | `scripts/make_avatars.py` / `scripts/install_avatars.py` (Pillow) | Cropped from `assets/portraits/*_front.png` (`avatar_bat.png` regenerated from `bat_front.png` on 2026-11-26) |
 
-Derived by script from other pictures (they follow the status of their source): `assets/units/unit_bat_unarmed.png` and `assets/units/unit_skeleton_unarmed.png` (made by `scripts/make_unarmed_bat.py` and `scripts/make_unarmed_skeleton.py`), the baked sprites (made by `scripts/bake_sprites.py`; they are not in the public repository) and `assets/fx/` (made by `scripts/bake_fx.py`).
+Derived by script from other pictures (they follow the status of their source): `assets/units/unit_bat_unarmed.png` and `assets/units/unit_skeleton_unarmed.png` (`scripts/make_unarmed_bat.py`, `scripts/make_unarmed_skeleton.py`), the baked sprites (`scripts/bake_sprites.py`), WebP siblings (`scripts/make_webp_assets.py`), and `assets/fx/` sheets (`scripts/bake_fx.py`).
 
 ### Provenance not recorded
 
-The repository does not state the tool, date or licence for these. They will be filled in only from a recorded source.
+The repository does not record the exact generation prompt or tool for these older files:
 
-- `assets/units/` original unit art (bat, knight, skeleton and wizard, with their raw files) and the bride, hunchback and reaper pictures. `docs/ASSET_PROVENANCE.md` calls the first four placeholder AI-generated art with the tool unknown.
-- `assets/env/` (background, ground, platforms, fence, crates, projectiles, effect pictures).
-- `assets/ui/` apart from the two shield slabs (plates, icons, frames, banners, wind plate, portraits).
-- `assets/portraits/`.
-- The Colab input picture ref_bar_from_video.png (not in the public repository): source and licence unknown.
-- Pictures from later image-model runs. `docs/PROMPT_LOG.md` records the experiments and the model version used, but it does not say which final files in `assets/` came from which run.
+- `assets/units/` original unit art (bat, knight, skeleton and wizard, with their raw files) and the bride, hunchback and reaper unit pictures (`docs/ASSET_PROVENANCE.md` notes the owner's statement that initial unit pictures came from unprompt-logged Gemini generation).
+- `assets/env/` (background, ground, platforms, fence, crates, older projectile/effect sheets).
+- `assets/ui/` apart from the two shield slabs (plates, icons, frames, banners, wind plate).
+- `assets/portraits/{skeleton,wizard,knight,reaper,bride,hunchback}_front.png` (tool/prompt not logged in repo).
+- Pictures from later image-model runs. `docs/PROMPT_LOG.md` records experiments, without mapping every file by name.
+- *(Note: temporary Colab input `ref_bar_from_video.png` and its sketch video were deleted on 2026-11-24 and never shipped; `docs/ASSET_PROVENANCE.md:33`.)*
 
 ## Tools used
 
-Only what a file in the repository records.
-
 | Tool | Used for | Where it is recorded |
 |---|---|---|
-| Kiro (CLI, and the IDE for a hook run) | Scripts, tests, specs and drafts, run from one brief per task | `docs/KIRO_LEDGER.md`, `scripts/kiro_route.py`, `docs/kiro_evidence/raw/ide_hook_run_20261115.txt` |
-| Models named in the Kiro ledger: `gpt-5.6-terra` and `claude-sonnet-5.5` | The model that ran each routed task | `docs/KIRO_LEDGER.md` |
-| Claude Code (the "main line") | The game page, the built-in AI, art generation runs and re-running Kiro's checks | `.kiro/steering/team_plan.md` |
-| Qwen-Image-Edit-2509 on Colab | Pictures in `assets/poses/`, `assets/weapons/`, and the two shield slabs in `assets/ui/` | `docs/ASSET_PROVENANCE.md` (model licence terms not checked) |
-| Qwen-Image-Edit-2511 on Colab | Art experiments. The log does not say which final files came from them | `docs/PROMPT_LOG.md` |
+| Kiro (CLI, ACP, IDE, Crew 0.12.2) | Specs, steering, hooks, scripts, Python engine, initial relay & MCP stdio server, doc audit | `docs/KIRO_LEDGER.md`, `scripts/kiro_route.py`, `docs/kiro_evidence/raw/ide_hook_run_20261115.txt`, `docs/crew_audit_usage_doc_result.md` |
+| Models named in Kiro ledger (`gpt-5.6-terra`, `claude-sonnet-5.5`) | Routed Kiro task execution | `docs/KIRO_LEDGER.md` |
+| Claude Code & Gemini | Page integration, 3v3 lobby, Streamable HTTP `/mcp`, `PageJudgeRelay`, red-team & fixes | `.kiro/steering/team_plan.md`, `docs/KIRO_USAGE_20261116.md` |
+| GLM-5.3 & DeepSeek V4 Pro (Nebius Token Factory API) | External adversarial review & brute-force relay audit (`LLM-REVIEW-1`) | `docs/llm/llm_findings_verdict_20261126.md`, `scripts/llm_review.py` |
+| Qwen-Image-Edit-2509 / 2511 & Gemini / Flow AI | Poses, weapons, shield slabs, portraits (`hag_front`, `bat_front`), FX sprites, SFX | `docs/ASSET_PROVENANCE.md`, `docs/PROMPT_LOG.md` |
 
 ## Disclosure of pre-existing work (contest rule "New Projects Only")
 
-Written 2026-11-15 from the files named here. The Submission Period began on 2026-10-30. Where a fact is not in a file, this section says "not recorded".
+Updated 2026-11-26 from repository records (Submission Period began 2026-10-30).
 
-- **Start date.** First development commit: 2026-10-31 (within the Submission Period beginning 2026-10-30). No file in the repository names code or art that existed before 2026-10-30. The provenance record says the original unit art was made before the Kiro credits were approved (2026-11-04) and gives no earlier date (`docs/ASSET_PROVENANCE.md`).
-- **Code libraries in the game.** None. The game is plain JavaScript in `index.html` and `js/`, with no framework, bundler or build step.
-- **Runtimes and tools.** Node.js and Python 3 run the tests and scripts. Some scripts need optional Python packages (fontTools, numpy, Pillow, OpenCV); the game does not. The Colab picture job installs `transformers`, `diffusers`, `accelerate`, `sentencepiece`, `protobuf` and `bitsandbytes` (`colab/pumpkin_assets_job.py`). None of them is shipped in the game.
-- **Fonts.** Three SIL OFL fonts, listed above with their licence files.
-- **Sounds and music.** Files from Kenney, OpenGameArt authors and BigSoundBank, all CC0, listed above. Sounds no file covers are made in code.
-- **Pictures.** Made with image models on Colab (Qwen-Image-Edit-2509 and 2511) from reference pictures the owner supplied (sources not recorded). `docs/ASSET_PROVENANCE.md` states that no third-party picture is used. The model licence terms are not checked, and the tool for several folders is not recorded (see "Provenance not recorded").
-- **Reference inputs.** A concept mockup and a bar reference picture were used as Colab inputs. They are not in the public repository, and their source is not recorded.
-- **Generated code and text.** Kiro and Claude Code wrote code, tests and documents; the briefs, results and ledger are in `docs/` (`docs/KIRO_LEDGER.md`).
-
-Not recorded:
-- The local language model planned for a local agent (`docs/WORK_QUEUE_20261115.md`, block B20). No file names the model or its licence, and no result from it exists. It is not credited as used.
-- Any image tool for `assets/units/`, `assets/env/`, `assets/portraits/` and most of `assets/ui/` (see "Provenance not recorded" above).
+- **Start date.** First development commit: 2026-10-31 (within the Submission Period beginning 2026-10-30). No shipped code or art predates 2026-10-30.
+- **Code libraries.** Browser game: none (plain HTML5 Canvas + JS/CSS). Container runtime: Python 3.12 (`websockets==15.0.1`, optional `boto3==1.34.162`) and Node.js 22 (`PageJudgeRelay`).
+- **Fonts.** Three SIL OFL fonts (`Cinzel Decorative`, `Noto Sans TC`, `Noto Serif TC`), listed above with licence files.
+- **Sounds and music.** CC0 audio from Kenney, OpenGameArt, and BigSoundBank, plus 4 Pixabay Content License status sounds and 22 owner-supplied Gemini SFX files (`assets/audio/CREDITS.md`; unsampled sounds synthesized in `js/audio.js`).
+- **Pictures.** Third-party CC0 particle sprites from Kenney (`assets/fx/kenney/`), plus owner-pipelined Qwen-Image-Edit, Gemini, and Flow AI artwork (`docs/ASSET_PROVENANCE.md`). Temporary sketch `ref_bar_from_video.png` was deleted and never shipped.
+- **Generated code and text.** Kiro and AI coding/review assistants wrote code, tests, and docs under owner direction and verification (`docs/KIRO_USAGE_20261116.md`).

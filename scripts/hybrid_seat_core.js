@@ -24,6 +24,10 @@ function installHybridSeat(config) {
   var armedKey = null, fireAt = Infinity, realStart = realDateNow(), simSteps = 0, gameOverSeen = null;
   var cap = 0, maxIterMs = 0, msgLog = [];
   var heldTimer = 12, manual = !!config.manual, manualShot = null, passRequested = false, launched = [], records = [];   // manual: an MCP agent decides the shots (scripts/page_judge_seat.js); the page keeps judging, hashing and ending turns itself
+  // lobby (LIVE-3V3-4): the seat of an INVITED agent. It joins a lobby room with its ticket through the page's own lobby code, holds one place, locks a hero when told to, plays that one unit
+  // in every match of the room and goes back to the lobby with everybody else. config.lobby = { code, invite, name }. The fake clock then follows the real one all the time (see loop).
+  var lobby = config.lobby || null, matchNo = 0, briefing = null, pickAgain = null, kicked = null, joinError = null, lockSeq = 0, heldSince = 0, budget = 0, lastReal = realStart;
+  var turnCapMs = Number(config.turnCapSeconds) > 0 ? Number(config.turnCapSeconds) * 1000 : 0;   // real time an agent may hold its unit's turn before the page passes for it (0 = no limit)
 
   function note(message) { if (errors.length < 20) errors.push(String(message)); }
   function hook(name, make) { if (typeof G[name] !== "function") return false; G[name] = make(G[name]); return true; }
@@ -57,6 +61,11 @@ function installHybridSeat(config) {
   hook("beginLeftTurnMidRound", function (orig) { return function () { var r = orig.apply(this, arguments); try { turnLog.push([roundNum, "begin_mid", false, turn, Math.round(turnTimer * 10) / 10, unitOf("left").stun ? 1 : 0, Math.round(fakeNow)]); } catch (e) { /* diagnostics only */ } return r; }; });
   hook("resolveRound", function (orig) { return function () { var r = orig.apply(this, arguments); try { turnLog.push([roundNum, "resolve", false, turn, Math.round(turnTimer * 10) / 10, unitOf("left").stun ? 1 : 0, Math.round(fakeNow)]); } catch (e) { /* diagnostics only */ } return r; }; });
 
+  if (lobby) hook("lobbyEnterMatch", function (orig) { return function () {   // every match of the room starts here (the relay's `start`): nothing of the match before may leak into it
+    matchNo++; started = true; records.length = 0; launched.length = 0; armedKey = null; fireAt = Infinity; manualShot = null; passRequested = false; gameOverSeen = null; outOfSync.length = 0; hashDumps = {}; throwLog.length = 0; turnLog.length = 0; pickAgain = null;
+    return orig.apply(this, arguments); }; });
+  if (lobby) hook("buildStartScreen", function () { return function () {}; });   // lobbyBack -> showStartScreen -> buildStartScreen touches DOM cloneNode not present in the headless vm
+
   function runDueTimers() {   // the timers due now, in time then creation order; a timer that re-arms itself with 0 ms runs in the NEXT step, never in a loop of its own
     var due = timers.filter(function (t) { return t.t <= fakeNow; });
     if (!due.length) return;
@@ -67,11 +76,12 @@ function installHybridSeat(config) {
 
   // The computer plays the local team: one plain throw per turn, 1.9 s after the turn opened (the page's own charge animation takes 0.9 s).
   function autoplay() {
-    if (gameOver || !relayLive() || turn !== "player") { if (turn !== "player") armedKey = null; return; }
+    if (gameOver || !relayLive() || turn !== "player") { if (turn !== "player") { armedKey = null; if (lobby && !projectiles.length && (gameOver || turn === "ai" || turn === "over" || !relayMyUnitActive())) { manualShot = null; passRequested = false; } } return; }   // lobby: a shot sent for another unit or after turn end is dropped, while a brief transition/diceRoll for this unit keeps it
     if (projectiles.length || diceRoll) return;
     var key = roundNum + ":" + unitOf("left").id;
     if (manual) {   // the agent's shot (or a pass) goes out 0.4 s after the turn opened; until then the page just waits
-      if (armedKey !== key) { armedKey = key; fireAt = fakeNow + 400; heldTimer = turnTimer; return; }
+      if (armedKey !== key) { armedKey = key; fireAt = fakeNow + 400; heldTimer = turnTimer; heldSince = realDateNow(); return; }
+      if (!manualShot && !passRequested && turnCapMs && realDateNow() - heldSince > turnCapMs) passRequested = true;   // the agent went silent: its unit passes, the room goes on
       if (!manualShot && !passRequested) { turnTimer = heldTimer; return; }   // the agent's own clock (the bridge) decides how long it may take; the page's 12 s must not run while it thinks
       if (fakeNow < fireAt) return;
       if (manualShot) { var ms = manualShot; manualShot = null; fireAt = Infinity; if (ms.ult) ultArmed.player = true; executeThrow("player", ms.power, ms.angle); }
@@ -114,6 +124,15 @@ function installHybridSeat(config) {
     var realNow = realDateNow(), idle = true;
     var iterStart = realNow;
     try {
+      if (lobby) {
+        // An invited seat sits among real browsers: its clock must be the real one (times `speed`), in a match and in the lobby alike, so the page's own waits (a judge, a turn, a reconnect)
+        // take as long here as on a person's device. A stall of this process is not caught up in a burst (at most half a second of steps).
+        budget = Math.min(budget + (realNow - lastReal) * (speed > 0 ? speed : 1) / 1000 / STEP, 30); lastReal = realNow;
+        for (; budget >= 1; budget -= 1) {
+          if (relayPlaying) step(); else { fakeNow += STEP * 1000; simSteps++; runDueTimers(); }
+        }
+        idle = !(relayPlaying && busy());
+      } else {
       if (joined && !started && relayRoomCode) { started = true; startMatch(); }
       if (started) {
         cap = typeof TeamTuning !== "undefined" ? TeamTuning.roundCap(TEAM_N) : 0;
@@ -126,6 +145,7 @@ function installHybridSeat(config) {
           if (gameOver) { if (gameOverSeen === null) gameOverSeen = fakeNow; if (!manual && fakeNow - gameOverSeen > 4000 && !(G.__pacedPending > 0)) { finish("game_over"); return; } }
         }
         if (!busy() && !gameOver) { fakeNow += STEP * 1000; runDueTimers(); updatePhysics(STEP); simSteps++; }   // one idle tick keeps the page's own timers (end_turn waits, round timers) moving
+      }
       }
     } catch (e) {
       note("exception: " + String(e && e.stack ? String(e.stack).split("\n").slice(0, 3).join(" | ") : e));
@@ -154,6 +174,29 @@ function installHybridSeat(config) {
       joined = true;
       realSetTimeout(loop, 0);
     },
+    joinLobby: function () {   // lobby: the page's own lobby join with the invite ticket (index.html lobbyStart), one place on the inviter's team
+      if (!lobby) throw new Error("no lobby configured");
+      try { if (lobby.name) localStorage.setItem("pk_name", lobby.name); } catch (e) { /* the name then stays the relay's default */ }
+      seats.left = "human"; seats.right = "human"; seats.level = { left: config.level, right: config.level };
+      lobbyStart(lobby.name || "", { code: lobby.code, invite: lobby.invite });
+      var client = relayClient;
+      if (!client) throw new Error("no relay client (missing ?relay=)");
+      client.onMessage(function (m) {
+        if (m.type !== "room_state" && m.type !== "round_hash") { msgLog.push([m.type, m.seq === undefined ? null : m.seq, m.unit === undefined ? null : m.unit, m.round === undefined ? null : m.round, m.phase || m.next_phase || null, m.kind || null, m.hit === undefined ? null : m.hit, m.hp_after === undefined ? null : m.hp_after, Math.round(fakeNow)]); if (msgLog.length > 60) msgLog.shift(); }
+        if (m.type === "error") {
+          relayErrors.push(m.code || "error"); if (relayErrors.length > 40) relayErrors.shift();
+          if (!relaySeatId) joinError = m.code || "error";                                        // refused before it sat down (a used or wrong ticket, agents switched off, a full team)
+          else if (m.code === "invalid_units" && !relayPlaying) pickAgain = String(m.message || m.code);   // a teammate holds that hero: lock another one
+        }
+        else if (m.type === "out_of_sync") outOfSync.push(m.round);
+        else if (m.type === "room_state" && m.briefing && typeof m.briefing === "object") briefing = m.briefing;
+        else if (m.type === "kicked") kicked = String(m.reason || "removed");
+      });
+      joined = true;
+      realSetTimeout(loop, 0);
+    },
+    lock: function (hero) { lockSeq++; pickAgain = null; lobbyPicks = [hero]; pickedHero = hero; var o = { units: [hero] }, nm = lobbyName(); if (nm) o.name = nm; relayClient.sendReady(o); },   // what the lobby's Lock button sends for a seat with one place
+    leave: function () { try { if (relayClient) relayClient.leave(); } catch (e) { /* closed already */ } },
     status: function () { return { joined: joined, started: started, done: done, round: roundNum, turn: turn, gameOver: gameOver || null, relayLive: relayLive(), errors: errors.length, relayErrors: relayErrors.length, fakeSeconds: Math.round(fakeNow / 100) / 10, maxIterMs: maxIterMs, timers: timers.length, projectiles: projectiles.length, floatTexts: floatTexts.length, history: historyTrajectories.length }; },
     abort: function (reason) { finish(reason || "aborted"); },
     submit: function (angle, power, ult) { manualShot = { angle: Math.round(angle), power: power, ult: !!ult }; passRequested = false; },
@@ -162,6 +205,12 @@ function installHybridSeat(config) {
     snapshot: function () {   // the whole match as the page sees it, in world frame, for the MCP bridge's public view (scripts/mcp_stdio_server.py PageJudgeRelay)
       var st = relayClient ? relayClient.state() : null;
       return {
+        lobby: lobby ? (function () {
+          var mine = ((lobbyState && lobbyState.seats) || []).filter(function (s) { return s.seat_id === relaySeatId; })[0] || null, owners = relayPlaying ? (relaySnap().owners || {}) : {};
+          return { inLobby: !relayPlaying, seatId: relaySeatId || "", matchNo: matchNo, lockSeq: lockSeq, locked: !!(mine && mine.ready), hero: mine && mine.units && mine.units.length ? mine.units[0] : null,
+            briefing: briefing, pickAgain: pickAgain, kicked: kicked, joinError: joinError, teamSize: TEAM_N,
+            mine: allUnits().filter(function (u) { return owners[u.id] === relaySeatId; }).map(function (u) { return localPerspective.worldUnitId(u.id); }) };
+        })() : null,
         started: started, joined: joined, live: relayLive(), round: roundNum, gameOver: gameOver || null, seed: matchSeed, scene: typeof pickedScene === "string" ? pickedScene : null,
         relay: st ? { status: st.status, round: st.round, phase: st.phase, seat: st.seat } : null, myTurn: turn === "player" && !projectiles.length && !diceRoll, turn: turn, projectiles: projectiles.length,
         wallHp: wallHp, wind: localPerspective.wind(wind), activeOwn: localPerspective.worldUnitId(unitOf("left").id), activeFoe: localPerspective.worldUnitId(unitOf("right").id),
@@ -189,7 +238,16 @@ function pacedSocketInstall(gapMs, NativeWS, scope, now, realSetTimeout) {
       if (queue.length) timer = realSetTimeout(pump, gapMs);
     }
     return new Proxy(ws, {
-      get: function (t, k) { if (k === "send") return function (d) { queue.push(d); scope.__pacedPending++; if (!timer) pump(); }; var v = t[k]; return typeof v === "function" ? v.bind(t) : v; },
+      get: function (t, k) {
+        if (k === "send") return function (d) { queue.push(d); scope.__pacedPending++; if (!timer) pump(); };
+        if (k === "close") return function () {
+          var args = arguments;
+          if (!queue.length) return t.close.apply(t, args);
+          if (t.readyState === 1) { while (queue.length) { t.send(queue.shift()); scope.__pacedPending--; } }
+          return realSetTimeout(function () { try { t.close.apply(t, args); } catch (_) {} }, 50);
+        };
+        var v = t[k]; return typeof v === "function" ? v.bind(t) : v;
+      },
       set: function (t, k, v) { t[k] = v; return true; }
     });
   };

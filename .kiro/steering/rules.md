@@ -6,6 +6,8 @@ updated-by: Kiro task 18, to match docs/game_mode.md and the repo today
 
 # Game rules (constraints)
 
+> **Historical note (2026-11-08 baseline):** The `4 vs 4` draft below was later cut by the owner; the shipped **Resurrection** build supports **1v1, 2v2, and 3v3** with eight heroes, lobby invites, and `PageJudgeRelay`. See `README.md`, `JUDGES.md`, and `shared/heroes.json` for current shipped rules.
+
 Restated from `docs/game_mode.md` (confirmed by the owner, 2026-11-08). Do not
 change any of these without asking the owner first. If code disagrees with a
 rule, report it; do not change the rule to match the code.

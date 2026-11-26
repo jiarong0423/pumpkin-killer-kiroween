@@ -5,9 +5,9 @@ recorded use from configuration that has no recorded run.
 
 ## Update (2026-11-26 — pre-freeze addendum)
 
-The inventory below was first measured on 2026-11-16 (`333` commits, `103` test files). Between 2026-11-17 and 2026-11-26 the repository grew to **524+ non-merge commits** and **200+ `(not published)` files**, adding 1v1/2v2/3v3 team battles, Streamable HTTP `/mcp` (`scripts/pk_mcp_http.py`), the Play with Friends lobby (`js/lobby_model.js`, `R1–R14`, `F1–F12`), and 3-round adversarial red-team testing (`scripts/redteam_probes/`):
+The inventory below was first measured on 2026-11-16 (`333` commits, `103` test files). Between 2026-11-17 and 2026-11-26 the repository grew to **528+ non-merge commits** and **206 `test_*` scripts** (`108 JS + 1 MJS + 97 Python` plus `sim_team_headless.py`), adding 1v1/2v2/3v3 team battles, Streamable HTTP `/mcp` (`scripts/pk_mcp_http.py`), the Play with Friends lobby (`js/lobby_model.js`, `R1–R14`, `F1–F12`), `PageJudgeRelay` (`scripts/page_judge_seat.js` + Node.js 22 VM running `index.html`), and 3-round adversarial red-team testing (`scripts/redteam_probes/`):
 
-- **MCP tools (11 total):** 7 game tools (`get_public_state`, `get_roster`, `get_history`, `submit_action`, `end_turn`, `set_notes`, `get_notes`) and 4 room tools (`join_room` with `invite=` / `claim=`, `lock_hero`, `leave_room`, `wait_for_turn`), exposed over both stdio and Streamable HTTP `/mcp`. Live hosted `/mcp` end-to-end match verification is scheduled for V4 (2026-12-01); prior live checks verified `/mcp` initialize `200` and browser-driven matches.
+- **MCP tools (11 total):** 7 game tools (`get_public_state`, `get_roster`, `get_history`, `submit_action`, `end_turn`, `set_notes`, `get_notes`) and 4 room tools (`join_room` with `invite=` / `claim=`, `lock_hero`, `leave_room`, `wait_for_turn`), exposed over both stdio and Streamable HTTP `/mcp`. With `PK_MCP_PAGE_JUDGE=auto` and Node.js 22 inside `deploy/Dockerfile.coolify`, invited room agents judge turns on the real `index.html` page (`PageJudgeRelay`) — verified locally across 2 consecutive mixed 3v3 matches (`0 out_of_sync`, `14/14` unit tests OK) alongside `193 PASS / 13 SKIP` batch + `13/13` socket suites; live hosted V4 end-to-end verification follows deployment.
 - **Role & external-model disclosure:** Kiro (CLI, ACP, IDE, Crew, 32 Specs, 11 Steering docs, 7 `PostFileSave` hooks, 8 custom agents, and the `pumpkin-killer-seat` Power) built the core Python engine, determinism/golden vectors, initial WebSocket relay, MCP stdio server, and foundational tests. Subsequent lobby/UI integration, red-team fixes, and verification were completed by the main-line AI coding assistants under the owner's direction using spec-first and failing-test-first discipline (lowering Kiro's raw commit share as integration work accumulated). In `LLM-REVIEW-1` (`4ca44af9`), external models **GLM-5.3** and **DeepSeek V4 Pro** (via Nebius Token Factory API) generated 45 adversarial relay cases (0 breaks) and surfaced 9 findings verified and fixed with tests (`docs/llm/llm_findings_verdict_20261126.md`).
 
 ## Kiro interfaces
@@ -78,13 +78,13 @@ All current hooks use `PostFileSave` and are configured in `.kiro/hooks/`.
 - `test-rig-on-save` is configured but is a no-op until `(not published)`
   exists. No recorded catch exists.
 
-## MCP and the seat power
+## MCP and the seat power (original 2026-11-16 section; see Update above for 11 total tools & PageJudgeRelay)
 
-`scripts/mcp_stdio_server.py` provides `get_public_state`, `get_history`,
-`submit_action`, `end_turn`, `set_notes`, and `get_notes`. Its comments and
+`scripts/mcp_stdio_server.py` originally provided `get_public_state`, `get_history`,
+`submit_action`, `end_turn`, `set_notes`, and `get_notes` (later expanded to 7 game + 4 room tools). Its comments and
 `public_throw()` omit seeds, pending actions, dice streams, and opponent aim.
 `.kiro/settings/mcp.json` configures the white seat. The `pk-player` agent and
-`.kiro/powers/pumpkin-killer-seat/plugin.json` restrict a match player to the
+`.kiro/powers/pumpkin-killer-seat/` (`mcp.json` and `skills/play/SKILL.md`) restrict a match player to the
 public game view. The recorded IDE MCP attempt failed, while the main-line
 verified player record above proves one CLI-routed match.
 

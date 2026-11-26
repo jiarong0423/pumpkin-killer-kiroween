@@ -242,14 +242,14 @@
       "reason": "screen recording may show the owner's screen; mockup has no provenance line"
     },
     {
-      "match": "docs/gifs/all_heroes_idle_quad.gif",
+      "match": "docs/gifs/all_heroes_20261126.gif",
       "decision": "INCLUDE",
-      "reason": "one of the two gifs the README may use"
+      "reason": "8-hero showcase GIF shipped for README"
     },
     {
-      "match": "docs/gifs/svg_scene_gameplay_showcase.gif",
+      "match": "docs/gifs/gameplay_20261126.gif",
       "decision": "INCLUDE",
-      "reason": "one of the two gifs the README may use"
+      "reason": "live Silver Cross Sister 3v3 throw GIF shipped for gallery/README"
     },
     {
       "match": "docs/gifs/",

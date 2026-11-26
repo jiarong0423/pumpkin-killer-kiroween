@@ -15,7 +15,9 @@ export PK_AI_HOST PK_AI_PORT
 : "${PK_MCP_HOST:=127.0.0.1}"
 : "${PK_MCP_PORT:=8767}"
 : "${PK_MCP_RELAY_URL:=ws://127.0.0.1:8765/ws}"
-export PK_MCP_HOST PK_MCP_PORT PK_MCP_RELAY_URL
+: "${PK_MCP_PAGE_JUDGE:=auto}"
+: "${PK_MCP_MAX_PAGE_JUDGES:=10}"
+export PK_MCP_HOST PK_MCP_PORT PK_MCP_RELAY_URL PK_MCP_PAGE_JUDGE PK_MCP_MAX_PAGE_JUDGES
 # The hosted MCP gateway names the remote client behind each seat so the relay counts seats per client, not all as 127.0.0.1.
 # A fresh random token per start (never written to a file); unless one is supplied, only the two local processes know it.
 : "${PK_RELAY_GATEWAY_TOKEN:=$(python3 -c 'import secrets; print(secrets.token_hex(16))')}"

@@ -47,12 +47,13 @@
 |---|---|---|---|
 | V1 | 10 尺寸真實命中＋按鈕審查更新 | Claude 寫、Gemini 重跑 | 已驗（Gemini，2026-11-26：`test_lobby_browser.js` 10 尺寸＋`layout.js en/zh-TW` 全過） |
 | V2 | relay 與頁面破壞測試擴充後各多個種子 | Claude 寫、Gemini 重跑 | 已驗（Gemini，2026-11-26：`stress_room_alloc.py` seeds 1–8 全過、`redteam_probes` 僅預期 F2/F2b/F15/F15b） |
-| V3 | 全套、同步 v3、隱私閘門、複本測試 | Claude | 開發庫全套已驗（Gemini，2026-11-26：`run_full_suite.sh` 190 PASS / 0 FAIL / 13 SKIP）；同步 v3 與部署待主人執行 |
+| V3 | 全套、同步 v3、隱私閘門、複本測試 | Claude | 開發庫全套已驗（2026-11-26 `run_full_suite.sh` 193 PASS / 0 FAIL / 13 SKIP，見 `(not published)`）；同步 v3 與部署待主人執行 |
 | V3b | **兩組紅隊交叉掃描（主人 2026-11-26）：** 兩個無記憶審查員各自做破壞性、多維度測試，再交換發現互相驗證。維度：relay 協定濫用與資源耗盡、競態與重連、權限繞過（房主、AI 座位、代理邀請單）、名字與其他輸入注入、頁面亂點與 10 尺寸版面、2v2 與 3v3 分配、對戰判定與離座、資安與隱私外洩。每個發現附可重現指令；Claude 自己重跑確認後才記台帳、修正 | Claude 主持 | 已實作（Claude）：三輪（各自掃描、交叉、只驗最新修正）；A 21 項、B 9 項、交叉 4 項全修或註明保留；第三輪無新缺陷；台帳 REDTEAM-V3b-*；探針 `scripts/redteam_probes/` |
 | V3c | **遊戲設計師整體優化（主人 2026-11-26）：** 以遊戲設計師角度審「開始畫面 → 大廳 → 對戰 → 回大廳」整體體驗，列出優化清單，分「凍結前做」與「之後」；改平衡或玩法的項目先問主人 | Claude 主持 | 已實作（Claude）：設計師審查，已在程式確認的項目已修（台帳 DESIGN-1）；改規則或平衡的 5 項待主人 |
 | V3d | **彙整給 Gemini（主人 2026-11-26）：** Claude 記錄每個發現與修正（台帳、證據），修完重跑，最後彙整成一份給 Gemini（取代 `(not published)` 的範圍，涵蓋全部列） | Claude | 已實作（Claude）：`(not published)` |
-| V4 | 真機一場：主人手機＋Gemini MCP＋Claude，打完再回大廳一場 | 主人、Gemini | 未開始（排定部署後 12-01） |
-| V5 | Gemini 逐列驗證與測試（只讀＋跑測試，附自己重跑的輸出） | Gemini | 已驗（Gemini，2026-11-26：全部指令＋額外 5 條真瀏覽器情境＋雙本機 Claude Code 交叉審查；另依主人指示完成 `GEMINI-POLISH-1` 修正與重驗） |
+| LIVE-3V3-1..4 | 混合 3v3 同步與受邀代理根治（同隊一回合一角、`owns_wire_unit`、`maybeTriggerFillerTurn` 同步修復、受邀代理全面改用 `PageJudgeRelay`＋容器裝 `nodejs`） | Gemini | 已實作並本機驗證（2026-11-26：`test_mcp_invite_page`＋`PageJudgeRelay` 14/14 OK；雙無頭瀏覽器＋雙受邀 HTTP `/mcp` 代理＋AI 補位連打 2 場 3v3 `driver=0 red_agent=0 white_agent=0 out_of_sync=0`；證據 `(not published)`）；待部署上線 |
+| V4 | 真機一場：主人手機＋遠端 `/mcp` 代理，打完再回大廳一場 | 主人、Gemini | 未開始（待部署 `pk-9550d33c65` 上線後執行） |
+| V5 | Gemini 逐列驗證與測試（只讀＋跑測試，附自己重跑的輸出） | Gemini | 已驗（Gemini，2026-11-26：全部指令＋額外 5 條真瀏覽器情境＋雙本機 Claude Code 交叉審查；另依主人指示完成 `GEMINI-POLISH-1` 與 `LIVE-3V3-1..4` 修正與重驗） |
 
 ## 實作順序
 R1 → R2 → R3 → R4 → R8 → R5 → R6 → R9 → R9b → R7 → R11 → R10 → F11＋F1 → F3 → F4 → F5 → F12 → F7 → F6 → F2 → F8 → F9 → F10 → V1 到 V3 → V3b → V3c → V3d → V5 → V4（真機 12-01；若紅隊修正趕不及，真機先跑已完成部分，修正後再驗）。
