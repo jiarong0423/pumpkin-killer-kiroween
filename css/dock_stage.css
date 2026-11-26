@@ -1,11 +1,11 @@
 /* The dock's ONE owner of size and place (owner 2026-11-17: 'objects decoupled, recompute everything').
    Design space: the dock is a 52 px high bar, children at the sizes below, drawn for a stage 390 px high (scripts/dock_fit_mask.py: with the real figures, rings and shadows as binary masks, 390 is the smallest reference that never touches them at any stage height from 300 to 800 px). It is placed inside the stage and scaled as one picture by --dock-scale = stage height / 390
-   (set by fitVisibleViewport, never above 3; the JS value and the container-query value differ by the 3 px border at most). Its design width is 84 percent of the stage width divided by that scale (88 percent left no room for the 44 px gear beside it at 640 px: measure_phone_layout flagged dock / settings-btn), so it is about 780 px wide at every size.
+   (set by fitVisibleViewport, never above 3; the JS value and the container-query value differ by the 3 px border at most). Its design width is 84 percent of the stage width (never closer than 52 px to each edge, so the 44 px gear stays beside it on a very short 16:9 stage, 2026-11-26) divided by that scale (88 percent left no room for the 44 px gear beside it at 640 px: measure_phone_layout flagged dock / settings-btn), so it is about 780 px wide at every size.
    No media query: a phone, a tablet and a desktop get the same bar. Loaded after css/dock.css and css/dock_art.css, so it wins over their size rules. */
 html #bottom-dock {
   position: absolute !important; left: 50% !important; bottom: calc(6px * var(--dock-scale, 1)) !important;
   transform: translateX(-50%) scale(var(--dock-scale, 1)) !important; transform-origin: 50% 100% !important;
-  width: calc(var(--stage-w, 820px) * 0.84 / var(--dock-scale, 1)) !important; height: 52px !important; min-height: 52px !important; max-width: none !important;
+  width: calc(min(var(--stage-w, 820px) * 0.84, var(--stage-w, 820px) - 104px) / var(--dock-scale, 1)) !important; height: 52px !important; min-height: 52px !important; max-width: none !important;
   --dock-h: 52px; --dock-bottom: 0px; --tile-w: 44px; --tile-h: 44px; --gap: 4px; --pad: 4px; z-index: 20;
 }
 html #bottom-dock .skill-btn { width: 44px !important; height: 44px !important; min-width: 44px !important; min-height: 44px !important; }
@@ -21,7 +21,7 @@ html #bottom-dock .power-meter { height: 12px !important; }
    Older browsers keep the --dock-scale and --stage-w that fitVisibleViewport sets (same numbers). */
 #game-container { container-type: size; container-name: stage; }
 @supports (scale: calc(10px / 1px)) {
-  html #bottom-dock { --dock-scale: min(3, calc(100cqh / 390px)); width: calc(84cqw / var(--dock-scale)) !important; }
+  html #bottom-dock { --dock-scale: min(3, calc(100cqh / 390px)); width: calc(min(84cqw, 100cqw - 104px) / var(--dock-scale)) !important; }
 }
 
 /* Touch area (Apple 44 pt, Google 48 dp): the drawn button stays proportional, the invisible touch area is 8 px bigger all round, so a button at a scale of 0.8 still has a 43 px target. */

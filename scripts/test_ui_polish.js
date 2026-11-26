@@ -33,7 +33,7 @@ function heroProfiles() {
 
 test("R1: canvas text and unit HP bars use display-scale helpers", () => {
   assert.match(page, /function uiScale\(\) \{ return Math\.max\(1, 0\.55 \/ displayScale\(\)\); \}/);
-  assert.match(page, /function fs\(px\) \{ return Math\.max\(px, 11 \/ displayScale\(\)\); \}/);
+  assert.match(page, /function fs\(px\) \{ return Math\.max\(px, \(typeof pictureOn === "boolean" && pictureOn \? 14 : 11\) \/ displayScale\(\)\); \}/);   // 2026-11-26: larger small text in the single picture
   assert.match(page, /function drawUiText\(/);
   assert.match(page, /ctx\.font = "bold " \+ fs\(px\) \+ "px " \+ FONT_BODY/);
   assert.match(page, /const full = 150 \* uiScale\(\);/);   // the unit bar width is 150 display units (hpBarWidthFor)

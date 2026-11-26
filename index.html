@@ -460,7 +460,7 @@
     /* The box alone sets the width of the whole element, so the left and right boxes mirror each other; the label floats centred above it. */
     html .top-supply { width:44px; min-height:44px; justify-content:center; align-items:center; }   /* the touch area stays 44 px; the drawn box inside is smaller (owner: supply smaller) */
     html .top-supply .ts-label { position:absolute; left:50%; bottom:100%; transform:translateX(-50%); white-space:nowrap; margin-bottom:2px; }
-    :root { --max-aspect: 2.4; }
+    :root { --max-aspect: calc(16 / 9); }   /* LOCKED (owner 2026-11-26, MOBILE-RATIO-1): the stage is 16:9 on every screen; spare width shows the backdrop. Pinned by scripts/test_phone_viewport.js */
     /* Overlays that sit at the edges of the 16:9 core keep their place when the canvas is widened (--pad-frac = side area share of the width). */
     html .top-supply.left { left:calc(var(--pad-frac, 0) * 100% + (1 - 2 * var(--pad-frac, 0)) * 1.2%) !important; }
     html .top-supply.right { right:calc(var(--pad-frac, 0) * 100% + (1 - 2 * var(--pad-frac, 0)) * 1.2%) !important; }
@@ -626,7 +626,7 @@
     @media (max-height:540px) and (orientation:landscape) {
       body { justify-content:flex-start; padding-left:max(env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px)); padding-right:max(env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px)); }   /* 2026-11-24 (owner, option 1): keep the camera-hole inset clear on BOTH sides so the stage is centred; with no inset nothing changes (scripts/test_safe_area_center.js) */
       /* 2026-11-17 (owner: 'the bottom part used to be INSIDE the frame, like the desktop shot'): on a landscape phone the stage takes the full visible height and the dock sits INSIDE it, 6 px above the bottom edge, as wide as 94 percent of the stage (at most 640 px). Everything is a proportion of the stage, so it follows any viewport; layoutReport() and scripts/measure_phone_layout.mjs check the coordinates. */
-      #game-container { width:min(100%, calc((var(--visible-viewport-height) - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * var(--max-aspect, 2.4))); height:min(calc(var(--visible-viewport-height) - env(safe-area-inset-top) - env(safe-area-inset-bottom)), calc((var(--visible-viewport-width) - env(safe-area-inset-left) - env(safe-area-inset-right)) * 9 / 16)); aspect-ratio:auto; border-radius:0; }
+      #game-container { width:min(100%, calc((var(--visible-viewport-height) - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * var(--max-aspect, 1.7778))); height:min(calc(var(--visible-viewport-height) - env(safe-area-inset-top) - env(safe-area-inset-bottom)), calc((var(--visible-viewport-width) - env(safe-area-inset-left) - env(safe-area-inset-right)) * 9 / 16)); aspect-ratio:auto; border-radius:0; }
       /* the dock's size, place and children now live in css/dock_stage.css (one owner, no media query) */
       #top-controls { position:absolute; top:12% !important; right:8px !important; left:auto !important; transform:none !important; }
       .top-supply.left, .top-supply.right { top:34% !important; }   /* both supply boxes at the same height (owner: the heights differed: the right one sat at 40 percent while the left one sat at 20) */
@@ -652,7 +652,51 @@
     #settings-sheet input[type="range"] { flex: 1 1 auto; min-width: 48px; width: auto; }
     #settings-sheet .settings-control output, #settings-sheet .settings-value { font-size: 13px; min-width: 38px; text-align: right; }
     /* ROOM-FLOW lobby (the second page) and the name dialog */
-    #lobby { position:fixed; inset:0; z-index:70; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto auto auto; gap:6px; padding:max(6px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background:radial-gradient(ellipse at 50% 0%, #2a1650 0%, #120a22 70%); color:#f1eaff; font-family:var(--font-body, system-ui, sans-serif); overflow:auto; }
+    #lobby { position:fixed; left:50%; top:50%; width:1024px; height:576px; transform:translate(-50%,-50%) scale(var(--lobby-fit,1)); transform-origin:center; border:3px solid #5a328c; border-radius:14px; box-shadow:0 0 0 100vmax rgba(5,2,10,.9); box-sizing:border-box; z-index:70; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto auto auto; gap:6px; padding:max(6px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background:radial-gradient(ellipse at 50% 0%, #2a1650 0%, #120a22 70%); color:#f1eaff; font-family:var(--font-body, system-ui, sans-serif); overflow:auto; }
+    /* MOBILE-RATIO-1: the lobby is ONE 1024 x 576 picture scaled to the screen, so a phone and a computer show exactly the same thing */
+    @media (orientation:portrait) { #lobby { left:0; top:0; width:100vw; height:var(--visible-viewport-height, 100vh); transform:none; border-width:0; border-radius:0; } }
+    /* ONE PICTURE (MOBILE-RATIO-1): see pictureFit() in the script */
+    html.one-picture #game-container { position:fixed !important; left:50% !important; top:50% !important; width:var(--pic-w) !important; height:var(--pic-h) !important; max-width:none !important; max-height:none !important; aspect-ratio:auto !important; transform:translate(-50%,-50%) scale(var(--pic-scale)) !important; transform-origin:center center; }
+    html.one-picture #bottom-dock { width:calc(min(84cqw, 1111px) / var(--dock-scale, 1)) !important; }   /* 84 percent of the 1323 px core, not of the widened stage */
+    html.one-picture #settings-sheet { width:720px !important; max-width:720px !important; max-height:632px !important; }
+    html.one-picture #coin-toss-coin { width:260px; }
+    html.one-picture #lobby-qr canvas { width:240px; height:240px; }
+    html.in-lobby #start-screen, html.in-lobby #top-controls { visibility:hidden !important; }   /* the 16:9 lobby does not cover the whole screen: nothing behind it may take a tap (red team L01-L03) */
+    /* the old ?room= friends panel keeps its compact sizes inside the single picture, so the code, QR and link stay visible without scrolling */
+    html.one-picture #start-screen.seats-open #friends-panel { width:600px !important; max-height:352px !important; padding:5px 40px 5px 10px !important; }
+    html.one-picture #start-screen.seats-open #friends-panel .seat-row, html.one-picture #start-screen.seats-open #friends-panel .seat-row + .seat-row { margin:1px 0; gap:4px; }
+    html.one-picture #start-screen.seats-open #friends-panel .seat-choice, html.one-picture #start-screen.seats-open #friends-panel .seat-level { height:28px; min-height:28px; padding:2px 7px; font-size:11px; }
+    html.one-picture #start-screen.seats-open #friends-panel .room-actions button { min-height:28px; min-width:82px; padding:2px 8px; font-size:11px; }
+    html.one-picture #room-details { margin-top:2px; gap:3px 10px; grid-template-columns:auto 70px; } html.one-picture #room-qr { width:70px; height:70px; }
+    html.one-picture #side-chooser .side-card { width:900px; max-height:none; gap:16px; } html.one-picture #side-chooser h2 { font-size:34px; } html.one-picture #side-chooser .side-code { font-size:40px; }
+    html.one-picture #side-chooser .side-btn { min-height:140px; font-size:36px; } html.one-picture #side-chooser .seat-choice { min-height:140px; min-width:140px; font-size:28px; }
+    /* BIGGER CONTROLS (owner 2026-11-26): the same enlargement on every device, inside the 744 px picture, so nothing leaves it. Checked by the overflow audit. */
+    html.one-picture #lobby { width:820px; height:461px; }
+    /* friend battle (owner 2026-11-26: "bigger, so the others can read it"): seats, names, room code */
+    html.one-picture #lobby { padding-top:4px; padding-bottom:4px; gap:5px; }
+    html.one-picture #lobby-code { font-size:28px !important; } html.one-picture #lobby-title, html.one-picture #lobby-count { font-size:20px; } html.one-picture #lobby-bar button { font-size:16px; }
+    html.one-picture .lobby-team h3 { font-size:19px; margin-bottom:3px; } html.one-picture .lobby-cells { gap:4px; }
+    html.one-picture .lobby-cell { min-height:52px; padding-top:0; padding-bottom:0; line-height:1.2; } html.one-picture .lobby-cell .who { font-size:22px; font-weight:800; } html.one-picture .lobby-cell small { font-size:15px; }
+    html.one-picture .lobby-cell .chip { width:16px; height:36px; } html.one-picture .lobby-cell .cell-act, html.one-picture .lobby-cell .cell-kick { font-size:16px !important; min-height:40px !important; font-weight:700; }
+    html.one-picture #lobby-foot label { font-size:17px; } html.one-picture #lobby-foot input { width:24px; height:24px; } html.one-picture #lobby-start { font-size:18px; min-height:46px; } html.one-picture #lobby-wait { font-size:15px; }
+    /* hero choice (owner 2026-11-26: too small): its own centred row under the teams, large portrait, large Lock button beside it */
+    html.one-picture #lobby-mine { justify-content:center; gap:14px; padding:4px 0; }
+    html.one-picture #lobby-heroes { gap:10px; } html.one-picture #lobby-heroes .hero-pick { min-height:84px; gap:10px; padding:4px 14px 4px 6px; font-size:20px; font-weight:800; border-width:2px; border-color:#ffd32a; }
+    html.one-picture #lobby-heroes .hero-pick-ico { width:72px; height:72px; border-radius:10px; }
+    html.one-picture #lobby-lock { min-height:68px; min-width:130px; font-size:22px; font-weight:800; }
+    html.one-picture #lobby-rename { min-height:48px; } html.one-picture #lobby-me { font-size:18px; }
+    html.one-picture #lobby:has(#lobby-invite-box:not([hidden])) .lobby-cell { min-height:0; padding-top:0; padding-bottom:0; line-height:1.05; }   /* the invite box takes a row: the three cells of a team close up instead of scrolling */
+    html.one-picture #lobby:has(#lobby-invite-box:not([hidden])) .lobby-cell .cell-act, html.one-picture #lobby:has(#lobby-invite-box:not([hidden])) .cell-kick { min-height:30px !important; }
+    html.one-picture #lobby:has(#lobby-invite-box:not([hidden])) .lobby-cell .who { font-size:18px; } html.one-picture #lobby:has(#lobby-invite-box:not([hidden])) .lobby-cell small { font-size:12px; } html.one-picture #lobby:has(#lobby-invite-box:not([hidden])) .lobby-cell .chip { height:28px; }
+    html.one-picture #lobby:has(#lobby-invite-box:not([hidden])) #lobby-invite-box { flex-wrap:nowrap; } html.one-picture #lobby:has(#lobby-invite-box:not([hidden])) #lobby-invite-text { flex:1 1 auto; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    html.one-picture #settings-sheet { scale:1.35; }
+    html.one-picture #first-hint { scale:1.2; }
+    html.one-picture #name-dialog .name-card, html.one-picture #join-code-dialog .name-card { scale:1.45; }
+    html.one-picture #coin-call button { min-width:180px; min-height:68px; font-size:26px; }
+    html.one-picture #coin-call { font-size:28px; }
+    html.one-picture #coin-toss-coin { width:300px; }
+    html.one-picture:not(.pk-a):not(.pk-b) #top-controls { width:calc(44px * var(--dock-scale, 1)) !important; height:calc(44px * var(--dock-scale, 1)) !important; right:calc(var(--pad-frac, 0) * 100% + 8px) !important; }
+    html.one-picture:not(.pk-a):not(.pk-b) #top-controls #settings-btn > span { font-size:calc(34px * var(--dock-scale, 1)) !important; }
     #lobby[hidden], #name-dialog[hidden], #join-code-dialog[hidden], #lobby-qr[hidden], #lobby-invite-box[hidden], #lobby-toast[hidden], #lobby-countdown[hidden], #lobby-wait[hidden] { display:none !important; }
     #lobby button { min-height:40px; padding:4px 12px; border-radius:10px; border:1.5px solid #7158e2; background:#1d1238; color:#f1eaff; font:inherit; font-size:14px; cursor:pointer; }
     #lobby button:disabled { opacity:.42; cursor:not-allowed; }
@@ -918,6 +962,36 @@
       return { viewport: vv, stage: stage, dock: dockVisible ? dock : null, feetY: feetY, stageInside: stageInside, dockInStage: dockInStage, feetClear: feetClear, dockMissing: dockMissing, ok: stageInside && dockInStage && feetClear && !dockMissing };
     }
     window.layoutReport = layoutReport;
+    // ONE PICTURE (owner 2026-11-26, MOBILE-RATIO-1: "every device shows the same thing; fill left and right"; foldables excepted). On a landscape screen the whole game is drawn at ONE design size, 744 px high, with the same
+    // desktop style rules everywhere, and CSS scales that picture to the screen. The 16:9 core (menu, lobby, HUD, dock) is identical on all devices; a wider screen only gets more scenery at the sides, up to 2.4 : 1.
+    // It uses no viewport setting, so it also works in Android full screen (which ignores the meta viewport). Portrait screens and two-segment (folding) screens keep the responsive layout.
+    const PIC_H = 744, PIC_MIN_W = 1323, PIC_MAX_ASPECT = 2.4;
+    let pictureScale = 1, pictureOn = false;   // screen css px per picture px; is the single picture shown
+    function pictureFit(w, h, coarse) {   // pure: w, h = the free screen area in css px. null = no single picture (portrait)
+      const margin = coarse ? 0 : 24, aw = w - margin, ah = h - margin;
+      if (!(w > h) || !(aw > 0) || !(ah > 0)) return null;
+      const picW = Math.max(PIC_MIN_W, Math.min(Math.round(PIC_H * PIC_MAX_ASPECT), Math.round(PIC_H * aw / ah)));
+      return { w: picW, h: PIC_H, scale: Math.round(Math.min(ah / PIC_H, aw / picW) * 10000) / 10000 };
+    }
+    const mutedRules = new Map();   // screen-size style rules switched off while the single picture is shown (their original condition text)
+    function muteSizeRules(on) {
+      if (!on) { mutedRules.forEach((text, rule) => { rule.media.mediaText = text; }); mutedRules.clear(); return; }
+      const walk = rules => { for (const rule of Array.from(rules || [])) {
+        if (rule.media && !mutedRules.has(rule) && /(max|min)-(width|height)|orientation|hover: *none/.test(rule.media.mediaText)) { mutedRules.set(rule, rule.media.mediaText); rule.media.mediaText = "not all"; }
+        else if (rule.cssRules && !rule.selectorText) walk(rule.cssRules);
+      } };
+      for (const sheet of Array.from(document.styleSheets || [])) { try { walk(sheet.cssRules); } catch (e) { /* a sheet of another origin */ } }
+    }
+    function applyPicture(width, height, folding) {   // returns the picture, or null
+      const root = document.documentElement, style = document.body ? getComputedStyle(document.body) : null;
+      const inset = style ? (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0) : 0;
+      const pic = folding ? null : pictureFit(width - inset, height, typeof matchMedia === "function" && matchMedia("(pointer:coarse)").matches);
+      root.classList.toggle("one-picture", !!pic);
+      muteSizeRules(!!pic);
+      pictureScale = pic ? pic.scale : 1; pictureOn = !!pic;
+      if (pic) { root.style.setProperty("--pic-w", pic.w + "px"); root.style.setProperty("--pic-h", pic.h + "px"); root.style.setProperty("--pic-scale", String(pic.scale)); }
+      return pic;
+    }
     function fitVisibleViewport() {
       const viewport = window.visualViewport;
       const seg = pickViewportSegment();
@@ -930,9 +1004,11 @@
       root.style.setProperty("--visible-viewport-height", height + "px");
       // The start screen is laid out for at least 340 px of height; a shorter window (browser bars showing) scales it down evenly.
       root.style.setProperty("--start-scale", String(Math.min(1, Math.round(height / 340 * 1000) / 1000 || 1)));
-      const compactStart = width < 800 || height < 360;
+      const pic = applyPicture(width, height, !!seg);
+      const compactStart = !pic && (width < 800 || height < 360);
       root.classList.toggle("start-compact", compactStart);
-      root.style.setProperty("--start-fit", compactStart ? "1" : String(Math.round(Math.min(width / 800, height / 360) * 1000) / 1000 || 1));   // scale only when >= 800 x 360; smaller viewports use responsive start-compact layout at 1:1
+      root.style.setProperty("--start-fit", compactStart ? "1" : String(Math.round(Math.min(Math.min(pic ? pic.w : width, (pic ? pic.h : height) * 16 / 9) / 800, (pic ? pic.h : height) / 360) * 1000) / 1000 || 1));   // scale only when >= 800 x 360; smaller viewports use responsive start-compact layout at 1:1
+      root.style.setProperty("--lobby-fit", String(Math.round(Math.min(pic ? PIC_MIN_W / 838 : width / 1056, pic ? pic.h / 473 : height / 594) * 1000) / 1000 || 1));   // 16 px / 9 px of margin around the 1024 x 576 lobby
       const applyStage = () => {
         const fullHeightStageWidth = Math.min(width, height * 16 / 9);
         const sideMargin = Math.max(0, (width - fullHeightStageWidth) / 2);
@@ -940,7 +1016,7 @@
         root.classList.toggle("has-side-margin", false);   // the stage now fills the width; no side columns
         try { if (canvas && canvas.clientHeight > 0) setViewWidth(canvas.clientWidth / canvas.clientHeight); } catch (e) { /* canvas not ready yet */ }   // setViewWidth also re-applies the render scale
         const gc = document.getElementById("game-container");
-        if (gc) { const r = gc.getBoundingClientRect(); root.style.setProperty("--stage-w", r.width + "px"); root.style.setProperty("--stage-h", r.height + "px");
+        if (gc) { const r = gc.getBoundingClientRect(); root.style.setProperty("--stage-w", (gc.offsetWidth || r.width) + "px"); root.style.setProperty("--stage-h", (gc.offsetHeight || r.height) + "px");
           // the dock is designed for a stage 390 px high (scale 1, 52 px bar, 6 px gap; the reference comes from scripts/dock_fit_mask.py, binary masks of figures, rings and shadows) and scales as ONE picture with the stage height: scale = stage height / 390, never above 3. No per-size tuning; layoutReport measures the real feet line.
           root.style.setProperty("--dock-scale", String(Math.min(3, Math.round((gc.clientHeight || r.height) / 390 * 1000) / 1000))); }
       };
@@ -1410,7 +1486,9 @@
     function setRoomStatus(key, params) { const el = document.getElementById("room-status"); if (!el) return; if (!key) { el.hidden = true; el.textContent = ""; return; } el.textContent = T(key, params); el.hidden = false;
       if (joinRoomCode && !lobbyMode && !matchStarted && !relayPanelShown && (key === "room.unreachable" || key === "room.refused" || key === "room.started")) { relayPanelShown = true; const ss = document.getElementById("start-screen"); if (ss) ss.classList.add("seats-open"); }   // a ?room= guest never opened the friends panel, so a refusal would be invisible: open it ONCE, only for the guest of a link, only before a match (red-team R5B-1, R6B-1)
     }
+    let lobbyNet = "connecting";   // last relay status; the lobby has no room code until the room server answers, and must say why
     function roomStatusFromRelay(status) {
+      lobbyNet = status; if (lobbyMode && !relayRoomConfirmed) lobbyRender();
       if (relayRoomConfirmed) { setRoomStatus(status === "closed" ? "room.unreachable" : null); return; }   // a room that exists: only a final loss is an error; a reconnect is not
       if (status === "connecting") setRoomStatus("room.connecting"); else if (status === "reconnecting" || status === "closed") setRoomStatus("room.unreachable"); else setRoomStatus(null);
     }
@@ -1594,7 +1672,8 @@
         const start = { x: round1(u.x + dirX * fwd), y: round1(u.y - up) };
         const worldUnit = TEAM_N > 1 ? worldId : (filler.team === "red" ? "red_1" : "white_1");
         try {
-          filler.client.sendAction({ round: cur.round, phase: filler.team, unit: worldUnit, kind: "throw", angle, power, start, dirX, claimed_landing: { x: tgt ? round1(tgt.x) : 960, y: 860 } });
+          const land = relayFlightLanding(start.x, start.y, power, angle, dirX, prof.weapon === "proj_soundwave");   // the real landing: a made-up one (the target) raised "out of sync" on every computer throw
+          filler.client.sendAction({ round: cur.round, phase: filler.team, unit: worldUnit, kind: "throw", angle, power, start, dirX, claimed_landing: { x: Math.round(land.x), y: Math.round(land.y) } });
           filler.client.endTurn(cur.round, filler.team);
         } catch (_) {}
       }, 650);
@@ -1685,7 +1764,7 @@
     }
     function lobbyStart(name, how) {   // how: { create: true } or { code, invite }
       if (!relayAddress || typeof RelayClient === "undefined" || typeof LobbyModel === "undefined") { lobbyMode = true; lobbyState = null; lobbyShow(true); lobbyToast(T("lobby.noServer")); return; }
-      lobbyMode = true; lobbyState = null; lobbyInvite = ""; relayLeft = false; relaySeatId = ""; relaySeats = [];
+      lobbyMode = true; lobbyState = null; lobbyInvite = ""; relayLeft = false; relaySeatId = ""; relaySeats = []; lobbyNet = "connecting";   // never show the last room's failure on a new attempt (red team L04)
       if (!how.create && !lobbyResumeTried) { lobbyResumeTried = true; const token = lobbyStoredSeat(how.code); if (token) { resumeSeat = token; how = Object.assign({}, how, { resume: true }); } }
       let client = null; try { client = connectRelay(); } catch (_) { client = null; }
       if (!client) { lobbyToast(T("lobby.noServer")); lobbyShow(true); return; }
@@ -1842,6 +1921,7 @@
       });
       set("lobby-wait", el => {
         const parts = v.waiting.map(w => w.kind === "unlocked" ? T("lobby.waitLock", { name: w.seatId === relaySeatId ? T("lobby.you") : w.ai ? T("lobby.ai") : (w.name || T("lobby.unnamed")) }) : w.kind === "invite" ? T("lobby.waitInvite", { name: w.name || T("lobby.unnamed") }) : T("lobby.waitFree", { team: T(w.team === "red" ? "slot.red" : "slot.white"), n: w.n }));
+        if (!v.code) { el.textContent = T(lobbyNet === "reconnecting" || lobbyNet === "closed" ? "room.unreachable" : "room.connecting"); el.hidden = false; return; }
         el.textContent = parts.length ? T("lobby.waiting", { list: parts.join(T("lobby.sep")) }) : ""; el.hidden = !parts.length;
       });
     }
@@ -2050,7 +2130,7 @@
       return !ids.length || ids[0] === relaySeatId;
     }
     const relayWhenMyTurn = (round, fn) => { if (relayMyTurn(round)) fn(); else relayWait = { round, fn }; };   // the relay's phase is the single truth for whose turn it is: wait until it says mine
-    const relayNote = (key, params) => floatTexts.push({ x: CANVAS_W / 2, y: 230, text: T(key, params), color: "#a5f3ff", alpha: 1.0, age: 0, ttl: 2.5, fontSize: 18 });
+    const relayNote = (key, params) => floatTexts.push({ x: CANVAS_W / 2, y: 345, text: T(key, params), color: "#a5f3ff", alpha: 1.0, age: 0, ttl: 2.5, fontSize: 18 });
     const round1 = x => Math.round(x * 10) / 10;
     function relayStream(k) {   // a seeded random stream for one throw: the same numbers on every device (shock, lifesteal, bounce count, shuriken spread)
       let st = (matchSeed ^ Math.imul(k + 1, 0x9e3779b1)) >>> 0;
@@ -2320,8 +2400,9 @@
         if (done && done.then) done.then(lock, () => {}); else lock();
       } catch (e) { /* unsupported: stay in the browser */ }
     }
-    document.getElementById("start-screen").addEventListener("pointerup", enterPhoneFullscreen, { passive: true });
-    // (a touch pointerdown is not a user activation; the listener above waits for pointerup)
+    // A browser cannot force full screen: it needs the player's own tap, and the player can always leave. So EVERY tap anywhere puts a touch device back into full screen (owner 2026-11-26); typing fields are left alone (the keyboard).
+    // It listens to CLICK, not pointerup: the tap has already picked its button, so the resize cannot move another control under the finger.
+    document.addEventListener("click", e => { const t = e.target; if (!(t && t.closest && t.closest("input:not([type=checkbox]):not([type=range]), textarea, #name-dialog, #join-code-dialog"))) enterPhoneFullscreen(); }, { capture: true });
     document.addEventListener("fullscreenchange", () => { fitVisibleViewport(); setTimeout(fitVisibleViewport, 300); });
     // ?dbg=1 shows the viewport numbers on screen (real-phone diagnosis only; nothing is shown without the flag).
     if (/[?&]dbg=1/.test(location.search)) {
@@ -2426,7 +2507,7 @@
     // physics number is unchanged; only the size of the backing store changes. On a touch screen the canvas is drawn at about the number of device pixels the stage really covers, with at most 2 device pixels per css
     // pixel and never below half the world size: a 756 x 360 phone at devicePixelRatio 3 went from about 2.5 million pixels per frame to about 1.1 million. Mouse screens keep the full size.
     let RENDER_SCALE = 1;
-    function renderScaleFor(cssH = canvas.clientHeight, ratio = window.devicePixelRatio, coarse = typeof matchMedia === "function" && matchMedia("(pointer:coarse)").matches) {   // arguments: a test passes a faked screen
+    function renderScaleFor(cssH = canvas.clientHeight * (typeof pictureScale === "number" ? pictureScale : 1), ratio = window.devicePixelRatio, coarse = typeof matchMedia === "function" && matchMedia("(pointer:coarse)").matches) {   // arguments: a test passes a faked screen
       if (!coarse) return 1;
       const h = cssH || 360, dpr = Math.min(ratio || 1, 2);
       return Math.max(0.5, Math.min(1, Math.round(h * dpr / CANVAS_H * 20) / 20));
@@ -2439,7 +2520,7 @@
     // Drawn height of a unit's art frame (back to the original 220 on 2026-11-17, owner: restore the original spec; size_frozen.json pins it; the frame is square for 1024x1024 art). Overlays above the head follow BODY_LIFT; hit boxes, launch points and physics are separate constants and did not change.
     const BODY_PX = 220, BODY_LIFT = BODY_PX - 220;
     // Canvas coordinates stay logical; these helpers preserve readable screen sizes on small displays.
-    function displayScale() { const box = canvas.getBoundingClientRect(); return box.width > 0 ? box.width / VIEW_W : 1; }
+    function displayScale() { const w = canvas.clientWidth || canvas.getBoundingClientRect().width; return w > 0 ? w / VIEW_W : 1; }   // picture px per world px: the same on every device (not the shrunk screen size)
     function uiScale() { return Math.max(1, 0.55 / displayScale()); }
     // The hp bar over a head: 150 screen units wide, but in a team match its neighbours stand 120 to 180 world px away and the bars used to overlap into one strip (owner 2026-11-17: 'the boxes above the heads have shifted'): the bar never gets wider than 85 percent of the gap to the nearest living teammate. One unit per team: exactly the old width.
     function hpBarWidthFor(u) {
@@ -2449,7 +2530,7 @@
       unitsOf(sideOfUnit(u)).forEach(t => { if (t !== u && t.hp > 0) gap = Math.min(gap, Math.abs(t.x - u.x)); });
       return Math.min(full, Math.max(24, 0.85 * gap));
     }
-    function fs(px) { return Math.max(px, 11 / displayScale()); }
+    function fs(px) { return Math.max(px, (typeof pictureOn === "boolean" && pictureOn ? 14 : 11) / displayScale()); }   // small canvas text is larger in the single picture
     function drawUiText(text, x, y, px, color, align) {
       ctx.font = "bold " + fs(px) + "px " + FONT_BODY;
       ctx.fillStyle = color;
@@ -3765,7 +3846,7 @@
     }
     function slingMove(e) {
       if (!sling) return;
-      const r = slingFrom(e.clientX - sling.ax, e.clientY - sling.ay), rc = canvas.getBoundingClientRect();
+      const r = slingFrom((e.clientX - sling.ax) / pictureScale, (e.clientY - sling.ay) / pictureScale), rc = canvas.getBoundingClientRect();
       if (r.pull > SLING_DEAD_PX && isFinite(r.angle)) setActiveAngle(r.angle);   // inside the dead zone, or pulling the wrong way, the angle stays where it was
       sling.tx = (e.clientX - rc.left) * (VIEW_W / rc.width) - PAD; sling.ty = (e.clientY - rc.top) * (CANVAS_H / rc.height);
     }

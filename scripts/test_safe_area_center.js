@@ -2,6 +2,7 @@
 'use strict';
 // Owner 2026-11-24 (option 1, symmetric): on a landscape phone the screen's safe area (camera hole) was only kept clear on ONE side, so the stage was left-aligned and a strip of background showed on the other side
 // (real phone: safe-area-inset-right 36 px, stage 764 px wide at left 0, right gap 39 px against 3 px on the left). Now the same inset is kept clear on both sides and the stage is centred.
+// 2026-11-26 (owner, MOBILE-RATIO-1): the stage is locked to 16:9, and later the same day drawn as one scaled picture filling left and right (up to 2.4 : 1), so the no-inset numbers below were re-pinned on purpose.
 // A real Chrome (DevTools Protocol, Emulation.setSafeAreaInsetsOverride) loads the page, starts a match and measures the stage. The cases WITHOUT an inset are pinned to the numbers measured before the change (they must not move).
 // Needs a local socket and Chrome: not for the Claude sandbox.
 const { spawn } = require('child_process'), fs = require('fs'), http = require('http'), os = require('os'), path = require('path');
@@ -12,10 +13,10 @@ const types = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'applic
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 // [viewport w, h, insets {top,right,bottom,left}, expected canvas rect or null (null = only check that the two side gaps are equal)]
 const CASES = [
-  { name: 'no inset 800x360 (unchanged)', w: 800, h: 360, ins: { top: 0, right: 0, bottom: 0, left: 0 }, canvas: [3, 3, 794, 354] },
-  { name: 'no inset 923x415 (unchanged)', w: 923, h: 415, ins: { top: 0, right: 0, bottom: 0, left: 0 }, canvas: [3, 3, 917, 409] },
-  { name: 'no inset 873x392 (unchanged)', w: 873, h: 392, ins: { top: 0, right: 0, bottom: 0, left: 0 }, canvas: [3, 3, 867, 386] },
-  { name: 'no inset 720x266 (unchanged)', w: 720, h: 266, ins: { top: 0, right: 0, bottom: 0, left: 0 }, canvas: [44, 3, 632, 260] },
+  { name: 'no inset 800x360 (one picture)', w: 800, h: 360, ins: { top: 0, right: 0, bottom: 0, left: 0 }, canvas: [2, 1, 797, 357] },
+  { name: 'no inset 923x415 (one picture)', w: 923, h: 415, ins: { top: 0, right: 0, bottom: 0, left: 0 }, canvas: [2, 2, 920, 412] },
+  { name: 'no inset 873x392 (one picture)', w: 873, h: 392, ins: { top: 0, right: 0, bottom: 0, left: 0 }, canvas: [2, 2, 870, 389] },
+  { name: 'no inset 720x266 (one picture)', w: 720, h: 266, ins: { top: 0, right: 0, bottom: 0, left: 0 }, canvas: [42, 1, 636, 264] },
   { name: 'camera hole on the right, 800x360, inset 36 (the owner\'s phone)', w: 800, h: 360, ins: { top: 0, right: 36, bottom: 0, left: 0 }, canvas: null },
   { name: 'camera hole on the left, 800x360, inset 36', w: 800, h: 360, ins: { top: 0, right: 0, bottom: 0, left: 36 }, canvas: null },
   { name: 'both sides 24, 873x392', w: 873, h: 392, ins: { top: 0, right: 24, bottom: 0, left: 24 }, canvas: null },
@@ -34,6 +35,7 @@ const CASES = [
     const ev = async x => (await send('Runtime.evaluate', { expression: x, returnByValue: true })).result.result.value;
     for (const c of CASES) {
       await send('Emulation.setDeviceMetricsOverride', { width: c.w, height: c.h, deviceScaleFactor: 3, mobile: false });
+      await send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 }); await send('Emulation.setEmulatedMedia', { features: [{ name: 'pointer', value: 'coarse' }, { name: 'hover', value: 'none' }] });   // these are phone cases
       const so = await send('Emulation.setSafeAreaInsetsOverride', { insets: c.ins });
       if (so.error) { supported = false; console.error('FAIL - ' + c.name + ': this Chrome cannot override the safe area (' + so.error.message + ')'); failed = true; continue; }
       await send('Page.navigate', { url: 'http://127.0.0.1:' + port + '/index.html?team=3' }); await sleep(3000);

@@ -71,7 +71,7 @@ class DocNumbers(unittest.TestCase):
         self.assertEqual(len(pairs), 15)
         self.assertEqual((min(int(w) for w, h in pairs), min(int(h) for w, h in pairs), max(int(w) for w, h in pairs), max(int(h) for w, h in pairs)), (640, 300, 960, 540))
         page = read(os.path.join(ROOT, "index.html"))   # the design constants the ask file states
-        self.assertIn("Math.min(width / 800, height / 360)", page)
+        self.assertIn("Math.min(Math.min(pic ? pic.w : width, (pic ? pic.h : height) * 16 / 9) / 800, (pic ? pic.h : height) / 360)", page)   # 2026-11-26: sized from the 16:9 core of the single picture; the ask file keeps its historical numbers
         self.assertIn("min(width / 800, height / 360)", ask)
         self.assertIn("left:20px; top:8px; transform:none; z-index:58;", page)   # the Friends button in the top-left corner, as the ask file says
         for (w, h), shown in (((667, 300), "36.7 px at 667 x 300"), ((873, 330), "40 px at 873 x 330")):
