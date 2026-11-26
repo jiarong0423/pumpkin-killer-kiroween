@@ -7,9 +7,9 @@ const { loadPage } = require('./page_harness');
 let passed = 0;
 function check(name, fn) { try { fn(); passed++; console.log('ok   - ' + name); } catch (e) { process.exitCode = 1; console.error('FAIL - ' + name + '\n       ' + String(e && e.stack ? e.stack.split('\n').slice(0, 3).join('\n       ') : e)); } }
 function rule(name, scenario, mutants) {
-  check(name, () => scenario(loadPage({ team: 3 })));
+  check(name, () => scenario(loadPage({ bigHitOff: true, team: 3 })));
   for (const [label, edits] of (mutants || [])) check(name + ' [negative: ' + label + ']', () => {
-    const M = loadPage({ team: 3, mutate: edits }); let caught = null;
+    const M = loadPage({ bigHitOff: true, team: 3, mutate: edits }); let caught = null;
     try { scenario(M); } catch (e) { caught = e; }
     assert.ok(caught instanceof assert.AssertionError, 'mutant must die with an assertion: ' + caught);
   });

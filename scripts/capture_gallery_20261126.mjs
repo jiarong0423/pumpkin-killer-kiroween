@@ -205,7 +205,7 @@ async function run() {
     console.log('Saved 04_heroes_and_battlefields_20261126.png');
 
     // 3. Start Screen (3v3, EN, new avatar_bat + Play with friends + Join code)
-    const startTab = await openTab(dbgPort, `${base1}/index.html?lang=en&team=3`);
+    const startTab = await openTab(dbgPort, `${base1}/index.html?lang=en&team=3`, 1600, 900);   // 16:9 = the game picture itself, no backdrop bands (MOBILE-RATIO-1)
     await startTab.until("document.readyState === 'complete' && !document.getElementById('start-screen').hidden", 'start screen ready');
     await startTab.ev("localStorage.setItem('pk_lang','en'); if (typeof setLang==='function') setLang('en'); const t3=document.querySelector('[data-team=\"3\"]'); if(t3) t3.click(); true");
     await sleep(600);
@@ -214,7 +214,7 @@ async function run() {
     console.log('Saved 01_start_screen_3v3.png');
 
     // 4. Full-screen Multiplayer Lobby + Guest + Invite Ticket + Live 3v3 Battle + Throw GIF
-    const host = await openTab(dbgPort, `${base1}/index.html?lang=en&relay=${encodeURIComponent(relayUrl)}&team=3`);
+    const host = await openTab(dbgPort, `${base1}/index.html?lang=en&relay=${encodeURIComponent(relayUrl)}&team=3`, 1600, 900);
     const guest = await openTab(dbgPort, `${base2}/index.html?lang=en&relay=${encodeURIComponent(relayUrl)}&team=3`);
     for (const [p, nm] of [[host, 'Alice'], [guest, 'Bob']]) {
       await p.until("document.readyState === 'complete' && typeof lobbyOpenFromStart === 'function' && !!document.getElementById('friends-btn').onclick", 'page ready');
@@ -230,9 +230,9 @@ async function run() {
     await host.ev("if (!document.getElementById('lobby-allow-ai').checked) document.getElementById('lobby-allow-ai').click(); true");
     await host.ev("if (!document.getElementById('lobby-allow-agent').checked) document.getElementById('lobby-allow-agent').click(); true");
     await sleep(250);
-    // Open #lobby-heroes selector if collapsed, pick 'bat' for host and 'hag' for guest
-    await host.ev("(() => { const h = document.getElementById('lobby-heroes'); const btns = [...h.querySelectorAll('button')]; if (btns.length === 1) btns[0].click(); const pick = [...h.querySelectorAll('button')].find(x => (x.dataset.hero === 'bat') || /Bat/i.test(x.textContent)); if (pick) pick.click(); return true; })()");
-    await guest.ev("(() => { const h = document.getElementById('lobby-heroes'); const btns = [...h.querySelectorAll('button')]; if (btns.length === 1) btns[0].click(); const pick = [...h.querySelectorAll('button')].find(x => (x.dataset.hero === 'hag') || /Silver/i.test(x.textContent)); if (pick) pick.click(); return true; })()");
+    // pick the heroes through the lobby's own state, then redraw (the picker button cycles, so clicking once picked whatever came next)
+    await host.ev("lobbyPicks = ['bat']; lobbyRender(); true");
+    await guest.ev("lobbyPicks = ['hag']; lobbyRender(); true");
     await sleep(250);
     await host.ev("document.getElementById('lobby-lock').click(), true");
     await guest.ev("document.getElementById('lobby-lock').click(), true");
@@ -240,6 +240,7 @@ async function run() {
     await host.ev("const ib = document.getElementById('lobby-invite'); if (ib && !ib.hidden && !ib.disabled) ib.click(); true");
     await host.until("!document.getElementById('lobby-invite-box').hidden", 'invite box visible');
     await sleep(350);
+    await host.until("document.getElementById('lobby-toast').hidden", 'welcome toast gone', 8000);
     await host.snap(path.join(GALLERY, '03_multiplayer_lobby_qr_mcp.png'));
     console.log('Saved 03_multiplayer_lobby_qr_mcp.png');
 
@@ -260,12 +261,18 @@ async function run() {
     await guest.close();
 
     // 5. Capture live Silver Cross Sister + 3v3 gameplay throw GIF frames in clean solo 3v3 match
-    const gifTab = await openTab(dbgPort, `${base1}/index.html?lang=en&team=3`);
+    const gifTab = await openTab(dbgPort, `${base1}/index.html?lang=en&team=3`, 1600, 900);
     await gifTab.until("document.readyState === 'complete' && !document.getElementById('start-screen').hidden", 'gifTab ready');
     await gifTab.ev("localStorage.setItem('pk_lang','en'); localStorage.setItem('pk_hint_seen','1'); if (typeof setLang==='function') setLang('en'); const t3=document.querySelector('[data-n=\"3\"]'); if(t3) t3.click(); selectTeamSlot(0); selectPickedHero('hag'); true");
     await sleep(300);
     await gifTab.ev("document.getElementById('start-go').click(); true");
     await gifTab.until("matchStarted && (typeof coinActive==='undefined' || !coinActive)", 'solo 3v3 started', 10000);
+    await gifTab.until("!!document.getElementById('coin-call-heads') && !document.getElementById('coin-toss').hidden", 'coin call', 15000);
+    await gifTab.ev("document.getElementById('coin-call-heads').click(); true");
+    await gifTab.until("document.getElementById('coin-toss').hidden", 'coin gone', 20000);
+    await sleep(900);
+    await gifTab.ev("if (firstHintOpen()) document.getElementById('first-hint').click(); turn = 'player'; turnTimer = 12; true");
+    await sleep(500);
     await gifTab.ev("const fh=document.getElementById('first-hint'); if(fh) fh.hidden=true; setAngleOf('left', 56); executeThrow('player', 74, 56, player); true");
     for (let i = 0; i < 24; i++) {
       await gifTab.snap(path.join(frameDir, `f_${String(i).padStart(2, '0')}.png`));
@@ -281,7 +288,7 @@ from PIL import Image, ImageDraw, ImageFont
 frame_dir = ${JSON.stringify(frameDir)}
 gallery_gif = ${JSON.stringify(path.join(GALLERY, '08_live_gameplay_20261126.gif'))}
 docs_gif = ${JSON.stringify(path.join(GIFS, 'gameplay_20261126.gif'))}
-frames = [Image.open(p).convert('RGB').resize((900, 600), Image.Resampling.LANCZOS) for p in sorted(glob.glob(os.path.join(frame_dir, 'f_*.png')))]
+frames = [Image.open(p).convert('RGB').resize((960, 540), Image.Resampling.LANCZOS) for p in sorted(glob.glob(os.path.join(frame_dir, 'f_*.png')))]
 frames[0].save(gallery_gif, save_all=True, append_images=frames[1:], duration=110, loop=0, optimize=True)
 frames[0].save(docs_gif, save_all=True, append_images=frames[1:], duration=110, loop=0, optimize=True)
 print('Saved', gallery_gif, 'and', docs_gif, 'frames=', len(frames))

@@ -17,10 +17,10 @@ function check(name, fn) {
 }
 // rule(name, scenario(P), mutations): positive on the real page, negative on each mutant (every one must make the scenario throw an AssertionError).
 function rule(name, scenario, mutants) {
-  check(name, () => scenario(loadPage({ team: 3 })));
+  check(name, () => scenario(loadPage({ bigHitOff: true, team: 3 })));
   for (const [label, edits] of (mutants || [])) {
     check(name + ' [negative: ' + label + ' must be caught]', () => {
-      const M = loadPage({ team: 3, mutate: edits });          // a missing mutation target throws here (outside assert.throws): a refactor cannot fake a pass
+      const M = loadPage({ bigHitOff: true, team: 3, mutate: edits });          // a missing mutation target throws here (outside assert.throws): a refactor cannot fake a pass
       let caught = null;
       try { scenario(M); } catch (e) { caught = e; }
       assert.ok(caught, 'mutant survived: the scenario passed although the rule is broken (' + label + ')');
@@ -33,7 +33,7 @@ const GY = 860;
 
 // ---------------------------------------------------------------- the load itself
 check('the real inline script and every js/*.js load in a vm; ?team=3 builds three units per side', () => {
-  const P = loadPage({ team: 3 });
+  const P = loadPage({ bigHitOff: true, team: 3 });
   assert.strictEqual(P.eval('TEAM_N'), 3);
   assert.deepStrictEqual(P.units('left').map(u => u.id), ['left_0', 'left_1', 'left_2']);
   assert.deepStrictEqual(P.units('right').map(u => u.id), ['right_0', 'right_1', 'right_2']);
@@ -206,7 +206,20 @@ rule('bride ultimate bat swarm: ANY hit of the armed wave (also at 60 px from it
   [a, b, c] = P.units('right'); assert.strictEqual(a.hp, a.maxHp, 'a miss: no swarm'); assert.strictEqual(b.hp, b.maxHp); assert.strictEqual(c.hp, c.maxHp);
 }, [['the swarm only hits the unit that took the wave', [['unitsOf(p.team === "player" ? "right" : "left").forEach(v => {', '[opp].forEach(v => {']]],
     ['the 55 px precision window comes back', [['if (p.ultSwarm && opp.hp > 0) {', 'if (p.ultSwarm && Math.abs(p.x - opp.x) < 55 && opp.hp > 0) {']]],
-    ['dead units are swarmed', [['if (v.hp <= 0) return;\n                v.hp = hpAfter(v.hp, swarm);', 'v.hp = hpAfter(v.hp, swarm);']]]]);
+    ['dead units are swarmed', [['if (v.hp <= 0) return;\n                const swarmHit', 'const swarmHit']]]]);
+
+// ---------------------------------------------------------------- rare big hits on the page's own damage sites
+check('big-hit rule: a normal throw (wave + swarm) takes at most half of a full bar from each unit; a passing throw is not limited', () => {
+  for (const passes of [false, true]) {
+    const P = loadPage({ team: 3 });
+    P.eval('Determinism = Object.assign({}, Determinism, { bigHitPass: function () { return ' + passes + '; } });');
+    P.reset(); P.place('right', [1560, 1100, 1900]); P.clearWeather();
+    P.launch(P.projectile({ team: 'player', hero: 'bride', x: 1500, y: GY - 20, extra: { ultThrow: true, ultSwarm: true } })); P.run(5);
+    const u = P.units('right')[0], lost = u.maxHp - u.hp;
+    if (passes) assert.ok(lost > u.maxHp / 2, 'passing throw: ' + lost + ' of ' + u.maxHp);
+    else assert.ok(lost > 0 && lost <= u.maxHp / 2 + 0.05, 'limited throw: ' + lost + ' of ' + u.maxHp);
+  }
+});
 
 // ---------------------------------------------------------------- AI target and report target
 rule('aiTarget: the nearest LIVING enemy unit to the AI; with one living unit that unit', P => {
@@ -279,7 +292,7 @@ rule('physics step: every unit (benched ones too) eases toward its targetX and c
 
 // ---------------------------------------------------------------- one end-to-end: the page's own executeThrow builds the shot
 check('end to end: the real executeThrow builds p, the real physics lands it, the thrower team rotates (no projectile hand-built)', () => {
-  const P = loadPage({ team: 3 });
+  const P = loadPage({ bigHitOff: true, team: 3 });
   P.place('left', [300, 450, 600]); P.place('right', [1300, 1450, 1600]);
   P.eval('wind = 0'); P.eval('turn = "player"; matchStarted = true;');
   P.eval('executeThrow("player", 60, 54)');
@@ -298,13 +311,13 @@ const expHp = (hp, dmg, n) => n === 1 ? hp : Math.round(Math.max(hp * TUNE.hp_sc
 const expRamp = (round, n) => (n === 1 || round < TUNE.ramp.start_round) ? 1 : Math.round((1 + TUNE.ramp.per_round * (round - (TUNE.ramp.start_round - 1))) * 1e6) / 1e6;
 // rule2: like rule(), but the scenario builds its own pages: scenario(mk) with mk(opts) = loadPage({team: 3, ...opts, mutate}).
 function rule2(name, scenario, mutants) {
-  check(name, () => scenario(o => loadPage(Object.assign({ team: 3 }, o))));
+  check(name, () => scenario(o => loadPage(Object.assign({ bigHitOff: true, team: 3 }, o))));
   for (const [label, edits] of (mutants || [])) {
     check(name + ' [negative: ' + label + ' must be caught]', () => {
       const mut = Array.isArray(edits) ? { mutate: edits } : { mutate: edits.page || [], mutateFiles: edits.files || {} };   // edits: [[from,to]] for the page script, or { page: [...], files: { 'js/x.js': [...] } }
-      loadPage(Object.assign({ team: 3 }, mut));                  // a missing target throws here, outside the expectation
+      loadPage(Object.assign({ bigHitOff: true, team: 3 }, mut));                  // a missing target throws here, outside the expectation
       let caught = null;
-      try { scenario(o => loadPage(Object.assign({ team: 3 }, o, mut))); } catch (e) { caught = e; }
+      try { scenario(o => loadPage(Object.assign({ bigHitOff: true, team: 3 }, o, mut))); } catch (e) { caught = e; }
       assert.ok(caught, 'mutant survived: ' + label);
       assert.ok(caught instanceof assert.AssertionError, 'mutant died for the wrong reason (not an assertion): ' + caught);
     });

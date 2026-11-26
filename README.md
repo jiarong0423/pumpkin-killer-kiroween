@@ -61,7 +61,7 @@ Full architecture diagrams, match sequence flows, deployment details, and known 
 | **Backend & Relay** | Python 3.12, `websockets==15.0.1` | Minimal runtime footprint (`requirements.txt`); in-memory WebSocket relay (`scripts/pk_relay.py`) with 6-char room codes, invite tickets, reconnect grace, and rate/size guards. |
 | **AI Agent Interface** | Model Context Protocol (MCP) — stdio & Streamable HTTP | **11 tools** (7 game + 4 room: `join_room`, `lock_hero`, `leave_room`, `wait_for_turn`) via `scripts/mcp_stdio_server.py`, `scripts/pk_mcp_http.py`, and **`PageJudgeRelay`** (`scripts/page_judge_seat.js` running real `index.html` in Node.js 22); strict public-information isolation (`public_throw()`). |
 | **Cross-Runtime Determinism** | Shared JSON + Node.js 22 & Python parity | Shared constants, hit masks, and golden vectors (`shared/*.json`) verified identically in JS (`js/determinism.js`) and Python (`scripts/determinism_py.py`), checked live via `round_hash`. |
-| **Testing & Simulation** | Node.js, Python `unittest`, Headless Chrome | **206 `test_*` scripts** (`108 JS + 1 MJS + 97 Python`) + `sim_team_headless.py`, seeded property-based tests (`scripts/test_properties.js`), mixed 3v3 E2E (`0 out_of_sync`). |
+| **Testing & Simulation** | Node.js, Python `unittest`, Headless Chrome | **209 `test_*` scripts** (`109 JS + 1 MJS + 99 Python`) + `sim_team_headless.py`, seeded property-based tests (`scripts/test_properties.js`), mixed 3v3 E2E (`0 out_of_sync`). |
 | **Deployment** | Docker (`python:3.12-alpine` + `nginx` + `nodejs`), Coolify | Single-container image (`deploy/Dockerfile.coolify`); Nginx on port 80 proxies loopback-only Python/Node services with container healthchecks. |
 
 ---
@@ -76,8 +76,8 @@ python3 -B scripts/dev_server.py 8080 --with-relay
 Open `http://127.0.0.1:8080/`. The `--with-relay` flag starts the local WebSocket room relay (requires `websockets`); without it, single-player mode works out of the box.
 
 ### 2. Play on Phone or Against a Friend
-- **Phone**: Open https://pumpkin.jace0423.com in landscape (`16:9` recommended) and optionally install it to your home screen as a full-screen PWA.
-- **Multiplayer Room**: Choose **1 v 1**, **2 v 2**, or **3 v 3** on the start screen and press **Play with friends**. After a one-time display name, a full-screen **Lobby** opens with a 6-character code, copy-link button, **Join code**, and QR code — friends join in any browser with zero install. Players take red/white places, lock distinct heroes (no duplicate hero on a team), and return to the same lobby for rematches.
+- **Phone**: Open https://pumpkin.jace0423.com in landscape (every device draws the same screen layout; wider screens are filled at the sides) and optionally install it to your home screen as a full-screen PWA.
+- **Multiplayer Room**: Choose **1 v 1**, **2 v 2**, or **3 v 3** on the start screen and press **Play with friends**. After a one-time display name, the **Lobby** opens with a 6-character code, copy-link button, **Join code**, and QR code — friends join in any browser with zero install. Players take red/white places, lock distinct heroes (no duplicate hero on a team), and return to the same lobby for rematches.
 
 ### 3. Play with AI or Bring Your Own Agent (MCP)
 - **Built-in Computer Opponent**: In single-player matches, empty seats are played by the built-in AI (**Easy**, **Normal**, **Hard**, or **Smart (online)** when the server AI gateway is enabled).
@@ -88,7 +88,7 @@ Open `http://127.0.0.1:8080/`. The `--with-relay` flag starts the local WebSocke
   - Sees only public player information through **7 game tools** (`get_public_state`, `get_roster`, `get_history`, `submit_action`, `end_turn`, `set_notes`, `get_notes`) and **4 room tools** (`join_room`, `lock_hero`, `leave_room`, `wait_for_turn`).
 
 ### 4. How a Turn Works
-A coin toss decides who goes first. On each unit's turn: pick a skill or item, set your angle (`25°–80°`), read the wind, hold to charge power, and release to throw — or spend your turn rolling a die to move. Direct hits charge your ultimate meter, and breaking the center fence opens lower trajectories.
+A coin toss decides who goes first. On each unit's turn: pick a skill or item, set your angle (`25°–80°`), read the wind, hold to charge power, and release to throw — or spend your turn rolling a die to move. Direct hits charge your ultimate meter, and breaking the center fence opens lower trajectories. One throw takes at most half of a full health bar from a unit, except one throw in ten (decided from the match seed, the same on every device), so a one-hit knock-out stays possible but rare.
 
 ---
 
@@ -133,7 +133,7 @@ Additional AI coding assistants handled later page wiring, team-battle integrati
 | **JS page vs Python engine flight parity** (both directions, wind & weather) | 67,456 shots each way, 0 mismatches | `docs/rear_rear_weather_wind_20261119.json` |
 | **Team engine simulation** | 6,667 matches at each of 1, 2, and 3 units per side, 20 rule checks, 0 failures | `redteam/evidence/sim_team_full_run2_20261122_summary.txt` |
 | **Built-in AI hit rates** (hits per throw) | Easy `0.141`, Normal `0.332`, Hard `0.462` | `node scripts/test_page_ai_hit_rates.js` |
-| **Full test suite** | **206 `test_*` scripts (`108 JS + 1 MJS + 97 Python`) + `sim_team_headless.py`**: `zsh scripts/run_full_suite.sh` passes (`193 PASS, 0 FAIL, 13 SKIP` in sandbox); **13/13** local-socket scripts + **14/14** `PageJudgeRelay` unit tests + 2-match mixed 3v3 E2E (`0 out_of_sync`) pass outside sandbox | `zsh scripts/run_full_suite.sh` |
+| **Full test suite** | **209 `test_*` scripts (`109 JS + 1 MJS + 99 Python`) + `sim_team_headless.py`**: `zsh scripts/run_full_suite.sh` gives `195 PASS, 1 FAIL, 13 SKIP` (the one failure: `test_start_screen_fit.js` reports secondary start-screen controls under 44 px on the smallest landscape phones, a trade-off for showing the same picture on every screen); **13/13** local-socket scripts + **8/8** `PageJudgeRelay` unit tests + 2-match mixed 3v3 E2E (`0 out_of_sync`) pass outside sandbox | `zsh scripts/run_full_suite.sh` |
 | **Deployed container E2E** | Built and verified locally: page, relay, `/mcp` (`PageJudgeRelay` + Node.js 22), and health checks respond through nginx; late join into a started room is refused; foreign origins are blocked | `redteam/evidence/prepush_docker_e2e_20261124.txt` |
 
 Run the test suite:

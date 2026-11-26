@@ -724,7 +724,7 @@
   {
    "file": "index.html",
    "before": "const idle = 1 + Math.floor(performance.now() / 600) % 6;",
-   "needle": "drawDie(player.x, player.y - MOVE_ROW_DY + Math.sin(performance.now() / 300) * 3, idle, 56);",
+   "needle": "drawDie(moveRowX(), player.y - MOVE_ROW_DY + Math.sin(performance.now() / 300) * 3, idle, 56);",
    "count": 1,
    "class": "draw",
    "status": "reviewed",

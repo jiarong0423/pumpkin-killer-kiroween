@@ -26,7 +26,7 @@ Every Kiro result is a report, not proof. A human-supervised main line re-ran re
 | Page flights equal the engine's flights, both directions, with wind and weather | 67,456 shots per direction, 0 mismatches | `docs/rear_rear_weather_wind_20261119.json` |
 | Team rules at 1, 2 and 3 units per side | 6,667 matches per size, 20 rule checks, 0 failures. A first run of the same simulation showed 4 failures in one check; all four were a rounding difference at the third decimal in the test's own reference (it summed differently from the engine and the page), and the four seeds pass after the reference was changed to sum the same way | `redteam/evidence/sim_team_full_run2_20261122_summary.txt` |
 | Computer opponent levels, hits per throw | easy 0.141, normal 0.332, hard 0.462 | `node scripts/test_page_ai_hit_rates.js` |
-| Everything | **206 `test_*` scripts (`108 JS + 1 MJS + 97 Python`) + `sim_team_headless.py`**: `zsh scripts/run_full_suite.sh` passes (`193 PASS, 0 FAIL, 13 SKIP` in sandbox); all **13/13** local-socket scripts pass outside sandbox; **14/14** `PageJudgeRelay` unit tests OK; 2-match mixed 3v3 E2E (2 browsers + 2 HTTP `/mcp` `PageJudgeRelay` agents + AI fill) finishes with `0 out_of_sync`; container (`deploy/Dockerfile.coolify` with `nginx` + `nodejs` + Python) built and checked | `zsh scripts/run_full_suite.sh`, `python3 -B -m unittest scripts/test_mcp_invite_page.py scripts/test_page_judge_relay.py` |
+| Everything | **209 `test_*` scripts (`109 JS + 1 MJS + 99 Python`) + `sim_team_headless.py`**: `zsh scripts/run_full_suite.sh` gives `195 PASS, 1 FAIL, 13 SKIP` (the one failure: `test_start_screen_fit.js` reports secondary start-screen controls under 44 px on the smallest landscape phones, a trade-off for showing the same picture on every screen); all **13/13** local-socket scripts pass outside sandbox; **8/8** `PageJudgeRelay` unit tests OK; 2-match mixed 3v3 E2E (2 browsers + 2 HTTP `/mcp` `PageJudgeRelay` agents + AI fill) finishes with `0 out_of_sync`; container (`deploy/Dockerfile.coolify` with `nginx` + `nodejs` + Python) built and checked | `zsh scripts/run_full_suite.sh`, `python3 -B -m unittest scripts/test_mcp_invite_page.py scripts/test_page_judge_relay.py` |
 
 ## What was decided by people
 
@@ -38,7 +38,7 @@ The owner decided the game rules, the eight heroes, the one-direction rule (the 
 |---|---|
 | Potential impact | A game people can start in seconds from a QR code on phone or computer, 1 to 3 heroes a side, with an optional agent seat; `README.md` |
 | Technical implementation | The Kiro table above, the measured table, `docs/KIRO_USAGE_20261116.md`, `.kiro/`, the tests (`scripts/test_*.js`, `scripts/test_*.py`) |
-| Design | The start screen, the battle screen and the phone layout; numbers in `docs/ui_review_20261116.md` |
+| Design | The start screen, the battle screen and the one-picture layout shared by phones and computers (`scripts/test_phone_viewport.js`); `docs/ui_review_20261116.md` is the earlier layout review |
 | Innovation | Deterministic shared rules with a round hash over every unit so every device agrees; a relay that never simulates a match; an MCP seat that gets public information only; an optional online opponent that chooses among options the program computed |
 | Presentation | The demo video and the Devpost page; the README |
 

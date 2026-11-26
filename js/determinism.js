@@ -22,7 +22,8 @@
     supplyDrop: 0x51a0d00d,
     bounceCount: 0xb00ce001,
     nunStunPick: 0x57a70001,
-    sideDraw: 0x51de0001
+    sideDraw: 0x51de0001,
+    bigHit: 0xb16d0001
   };
 
   function uint32(value, name) {
@@ -88,6 +89,12 @@
     return hash(seed, DOMAIN.nunStunPick, positiveValue(round, 'round'), uint32(throwId, 'throwId')) % positiveValue(n, 'n');
   }
 
+  // Big hits (owner 2026-11-27): one throw in BIG_HIT_ONE_IN may take more than half of a unit's health bar (so a one-hit knock-out stays possible, only rare).
+  var BIG_HIT_ONE_IN = 10;
+  function bigHitPass(seed, round, throwId) {
+    return hash(seed, DOMAIN.bigHit, positiveValue(round, 'round'), uint32(throwId, 'throwId')) % BIG_HIT_ONE_IN === 0;
+  }
+
   function sideDraw(seed) {
     return hash(seed, DOMAIN.sideDraw, 0, 0) & 1;
   }
@@ -104,6 +111,7 @@
     bounceCount: bounceCount,
     nunStunPick: nunStunPick,
     sideDraw: sideDraw,
+    bigHitPass: bigHitPass,
     coinToss: coinToss
   };
 });

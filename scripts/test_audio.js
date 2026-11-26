@@ -515,6 +515,19 @@ test('synthesized music runs for ten seconds without errors or runaway nodes', a
   assert.strictEqual(audio.getState().errors, 0);
 });
 
+test('a long track that finishes decoding after its mood started takes over from the stand-in', async () => {
+  const bedFile = GameAudio.DEFAULT_EVENT_MAP.music.layers.bed.file;
+  let finish;
+  const { audio } = setup({ loader: (f) => (f === bedFile ? new Promise((r) => { finish = r; }) : Promise.resolve(null)) });
+  await audio.unlock();
+  audio.playMusic('title');
+  assert.strictEqual(layerState(audio, 'bed').mode, 'synth');
+  finish({ duration: 170 });
+  await audio.ready();
+  assert.strictEqual(layerState(audio, 'bed').mode, 'file');
+  assert.strictEqual(audio.getState().errors, 0);
+});
+
 test('a loaded music file replaces the synthesized bed', async () => {
   const bedFile = GameAudio.DEFAULT_EVENT_MAP.music.layers.bed.file;
   const { audio, ctx } = await ready({ loader: (f) => Promise.resolve(f === bedFile ? { duration: 30 } : null) });
@@ -568,7 +581,7 @@ test('event map file parses and every entry is valid', () => {
     const l = m.layers[layer];
     assert.ok(l, 'music layer ' + layer);
     assert.strictEqual(l.synth, 'music_' + layer);
-    assert.ok(l.file === null || /^assets\/audio\/music\/[a-z0-9_]+\.ogg$/.test(l.file));
+    assert.ok(l.file === null || /^assets\/audio\/music\/[a-z0-9_]+\.(ogg|m4a)$/.test(l.file));
     assert.ok((l.file === null) === (l.source === 'synth-only'));
     if (l.source !== 'synth-only') assert.ok(sources.indexOf(l.source) >= 0, 'music source ' + l.source + ' documented');
   }

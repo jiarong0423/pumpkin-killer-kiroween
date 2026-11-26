@@ -82,6 +82,24 @@ function harness(token) {
   assert.strictEqual(h.client.state().phase, 'white');
 })();
 
+(function testResumeSnapshotAheadOfTheLogKeepsTheMissedRound() {
+  var h = harness('seat-token');
+  h.sockets[0].open();
+  var applied = [];
+  h.client.onMessage(function (message) { if (message.seq) applied.push(message.seq); });
+  h.sockets[0].message({ type: 'start', seq: 1, seed: 1, scene: 'graveyard', round: 4, phase: 'red' });
+  h.sockets[0].close();
+  var timer = h.runNext(); h.advance(1000); timer.fn(); h.sockets[1].open();
+  h.sockets[1].message({ type: 'room_state', seat: 'white', started: true, seed: 1, round: 5, phase: 'white', first_seq: 1, last_seq: 4 });
+  h.sockets[1].message({ type: 'room_state', seat: 'white', started: true, seed: 1, round: 5, phase: 'white' });   // a broadcast during the replay
+  h.sockets[1].message({ type: 'action', seq: 2, round: 4, phase: 'white' });
+  h.sockets[1].message({ type: 'end_turn', seq: 3, round: 4, phase: 'white', next_round: 5, next_phase: 'red' });
+  h.sockets[1].message({ type: 'end_turn', seq: 4, round: 5, phase: 'red', next_round: 5, next_phase: 'white' });
+  assert.deepStrictEqual(applied, [1, 2, 3, 4]);
+  assert.strictEqual(h.client.state().round, 5);
+  assert.strictEqual(h.client.state().phase, 'white');
+})();
+
 (function testReconnectGivesUpAfterSixtySeconds() {
   var h = harness('token');
   h.sockets[0].open();

@@ -54,6 +54,14 @@ test('only direct non-fatal unit hits are eligible; fatal and non-unit contacts 
   }
 });
 
+test('a push stops 120 px short of a living teammate in its way and never goes backwards', () => {
+  assert.strictEqual(Knockback.clearOfMates(300, 250, [150]), 270);   // pushed left toward a mate at 150
+  assert.strictEqual(Knockback.clearOfMates(1500, 1550, [1650]), 1530);
+  assert.strictEqual(Knockback.clearOfMates(1500, 1550, [1560]), 1500);   // already closer than 120: stay
+  assert.strictEqual(Knockback.clearOfMates(300, 250, [450]), 250);   // the mate is behind
+  assert.strictEqual(Knockback.clearOfMates(300, 250, []), 250);
+});
+
 let failed = 0;
 for (const current of tests) {
   try {

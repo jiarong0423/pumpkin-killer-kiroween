@@ -60,13 +60,13 @@
       "trimDb": -12,
       "layers": {
         "bed": {
-          "file": "assets/audio/music/bed_artifact_room.ogg",
-          "source": "oga-artifact-room-fupi",
+          "file": "assets/audio/music/bgm_title_phantom_v1.m4a",
+          "source": "flow-phantom-trajectory",
           "synth": "music_bed"
         },
         "rhythm": {
-          "file": "assets/audio/music/rhythm_percussion_loop.ogg",
-          "source": "oga-cinematic-percussion-loop",
+          "file": "assets/audio/music/bgm_battle_ghoul_v1.m4a",
+          "source": "flow-artillery-ghoul",
           "synth": "music_rhythm"
         },
         "tension": {
@@ -96,23 +96,23 @@
         },
         "battle_calm": {
           "battle": true,
-          "bed": 1,
-          "rhythm": 0.6,
+          "bed": 0.01,
+          "rhythm": 1,
           "tension": 0,
           "victory": 0,
           "defeat": 0
         },
         "battle_tense": {
           "battle": true,
-          "bed": 0.9,
+          "bed": 0.01,
           "rhythm": 1,
-          "tension": 0.8,
+          "tension": 0.35,
           "victory": 0,
           "defeat": 0
         },
         "victory": {
           "battle": false,
-          "bed": 0.4,
+          "bed": 0.3,
           "rhythm": 0,
           "tension": 0,
           "victory": 1,
@@ -120,7 +120,7 @@
         },
         "defeat": {
           "battle": false,
-          "bed": 0.3,
+          "bed": 0.25,
           "rhythm": 0,
           "tension": 0,
           "victory": 0,
@@ -2049,6 +2049,7 @@
       });
       readyPromise = Promise.all(jobs).then(function () {
         if (missing) warnOnce('missing-files', missing + ' of ' + files.length + ' audio files not loaded, using synthesized sounds');
+        upgradeLayers();
       });
       return readyPromise;
     }
@@ -2276,6 +2277,16 @@
         L.nodes = [];
         if (M[name] && M[name].start) M[name].start(musicEnv(L, now + 0.02, true), L);
       }
+    }
+
+    function upgradeLayers() {   // a long track may still be decoding when its mood starts: swap the stand-in synth for the file as soon as it is there
+      if (!built || !unlocked) return;
+      var swapped = false;
+      LAYER_NAMES.forEach(function (name) {
+        var L = layers[name], def = map.music.layers[name] || {};
+        if (L.active && L.mode === 'synth' && usableBuffer(def.file)) { deactivateLayer(L); swapped = true; }
+      });
+      if (swapped) applyMusic(map.music.crossfadeSeconds);
     }
 
     function deactivateLayer(L) {

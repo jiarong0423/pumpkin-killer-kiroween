@@ -50,9 +50,25 @@
     return clamp(victimX + direction * px, bounds.min, bounds.max);
   }
 
+  // A push stops `gap` px short of the first living teammate in its way: never past it, never backwards
+  // (twin of clamp_knockback in scripts/mcp_game_server.py).
+  var MATE_GAP = 120;
+  function clearOfMates(start, wanted, mates) {
+    if (wanted === start || !mates) return wanted;
+    var direction = wanted > start ? 1 : -1;
+    for (var i = 0; i < mates.length; i++) {
+      if ((mates[i] - start) * direction > 0) {
+        var limit = mates[i] - direction * MATE_GAP;
+        wanted = direction > 0 ? Math.min(wanted, limit) : Math.max(wanted, limit);
+      }
+    }
+    return direction > 0 ? Math.max(wanted, start) : Math.min(wanted, start);
+  }
+
   return {
     ZONES: ZONES,
     eligible: eligible,
-    apply: apply
+    apply: apply,
+    clearOfMates: clearOfMates
   };
 });

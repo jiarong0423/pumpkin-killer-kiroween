@@ -10,7 +10,9 @@ from typing import Any, Dict, List, Optional
 
 import comeback_py as comeback
 import team_tuning_py as tuning
-from determinism_py import nun_stun_pick, start_x
+from determinism_py import big_hit_pass, nun_stun_pick, start_x
+
+BIG_HIT_SHARE = 0.5   # twin of index.html limitHit
 
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 with open(os.path.join(_ROOT, "shared", "constants.json"), encoding="utf-8") as handle:
@@ -198,6 +200,7 @@ class GameState:
         self.central_wall_hp = 100
         self.history: List[Dict[str, Any]] = []
         self.throw_seq = 0
+        self.big_hits: Dict[Any, Dict[str, Any]] = {}   # (throw id, unit id) -> what this throw has already taken from it
         # Comeback pack (team matches only, shared/comeback.json): per-team count of throws since the last direct hit.
         self.pity: Dict[str, int] = {"red": 0, "white": 0}
         self._pity_now = 0   # the attacking team's count at the start of the throw being resolved
@@ -484,9 +487,23 @@ class GameState:
         multiplier = self.weather.get("attackMult", 1) if isinstance(self.weather, dict) else 1
         return max(1.0, _round_tenth(damage * float(multiplier)))
 
+    def _limit_hit(self, throw_id: int, victim: Dict[str, Any], raw: float) -> float:
+        """One throw takes at most half of a unit's full health, except one throw in ten (owner 2026-11-27; twin of index.html limitHit)."""
+        if raw <= 0:
+            return raw
+        entry = self.big_hits.get((throw_id, victim["id"]))
+        if entry is None:
+            entry = {"pass": big_hit_pass(int(self.seed) & 0xFFFFFFFF, max(1, self.round_num), throw_id), "given": 0.0}
+            self.big_hits[(throw_id, victim["id"])] = entry
+        if entry["pass"]:
+            return raw
+        deal = min(raw, max(0.0, round(victim["max_hp"] * BIG_HIT_SHARE - entry["given"], 1)))
+        entry["given"] = round(entry["given"] + deal, 1)
+        return deal
+
     def _apply_hit(self, attacker: Dict[str, Any], target: Dict[str, Any], x: float, y: float,
                    weak_active: Optional[bool] = None, damage_scale: float = 1.0,
-                   no_crit: bool = False, apply_status: bool = True) -> Dict[str, Any]:
+                   no_crit: bool = False, apply_status: bool = True, throw_id: Optional[int] = None) -> Dict[str, Any]:
         if weak_active is None:
             weak_active = bool(attacker["statuses"].get("weak", 0))
             if weak_active:
@@ -511,6 +528,8 @@ class GameState:
         if bounce:
             collisions = self.rng.randint(int(bounce["min"]), int(bounce["max"]))
             damage = _round_tenth(damage / collisions) * collisions
+        if throw_id is not None:
+            damage = self._limit_hit(throw_id, target, damage)
         target_hp_after = max(0.0, round(target["hp"] - damage, 6))   # no floating-point residue such as 1.4e-14: that unit counted as alive with 0 hp (twin of index.html hpAfter, ledger N7)
         survives = target_hp_after > 0
         if survives and apply_status:
@@ -565,7 +584,7 @@ class GameState:
         def apply(target: Dict[str, Any], scale: float = 1.0, no_crit: bool = False,
                   apply_status: bool = True) -> Dict[str, Any]:
             return self._apply_hit(unit, target, cur_x, cur_y, weak_active, scale * throw.get("damage_scale", 1.0),
-                                   no_crit, apply_status)
+                                   no_crit, apply_status, throw_id=throw_id)
 
         def blast_victims() -> List[Dict[str, Any]]:
             """Living enemy units inside the wizard blast, nearest to the impact point first (page rule, 234 px)."""

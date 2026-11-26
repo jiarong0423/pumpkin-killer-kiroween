@@ -49,5 +49,16 @@ check('a computer seat claims the landing its own throw really has', () => {
   assert.match(html, /const land = relayFlightLanding\(start\.x, start\.y, power, angle, dirX, prof\.weapon === "proj_soundwave"\);/);
   assert.ok(!/claimed_landing: \{ x: tgt \?/.test(html));
 });
+check('the keyboard does not shrink the picture while typing', () => {
+  assert.match(html, /classList\.toggle\("typing", typing\);\n\s+if \(typing && window\.innerWidth === lastFitWidth\) return;/);
+  assert.match(html, /html\.typing #name-dialog, html\.typing #join-code-dialog \{ align-items:flex-start; \}/);
+});
+check('full screen is asked after the tapped button ran; copy, share and links keep their tap', () => {
+  assert.match(html, /textarea, #name-dialog, #join-code-dialog, a\[href\], \[id\*=copy\], \[id\*=share\]"\)\)\) setTimeout\(enterPhoneFullscreen, 0\);/);
+});
+check('a computer seat that stays unlocked keeps trying, at most ten times', () => {
+  assert.match(html, /const confirmLock = \(\) => \{/);
+  assert.match(html, /\(filler\.relocks = \(filler\.relocks \|\| 0\) \+ 1\) > 10\) return;\n\s+readyNow\(\);/);
+});
 console.log('test_phone_viewport: ' + ok + ' ok, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

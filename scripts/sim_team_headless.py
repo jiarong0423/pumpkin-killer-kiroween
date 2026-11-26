@@ -77,6 +77,7 @@ try:
     import mcp_game_server as engine  # noqa: E402
     import mcp_stdio_server as server  # noqa: E402
     import team_tuning_py as tuning  # noqa: E402
+    from determinism_py import big_hit_pass  # noqa: E402
 except Exception:  # pragma: no cover - load failure is a hard error
     LOG.error("cannot import the engine\n%s", traceback.format_exc())
     print("ERROR cannot import the engine, see %s" % LOG_PATH)
@@ -290,7 +291,8 @@ class Observer:
                     "target": target["id"], "scale": scale, "damage": result["damage"], "critical": result["critical"],
                     "base": attacker["dmg"], "weak": weak,
                     "bounce": bool(attacker.get("bounce")), "round": eng.round_num,
-                    "own_share": shares[0], "enemy_share": shares[1], "pity": pity_count})
+                    "own_share": shares[0], "enemy_share": shares[1], "pity": pity_count, "max_hp": target["max_hp"],
+                    "passes": big_hit_pass(int(eng.seed) & 0xFFFFFFFF, max(1, eng.round_num), kwargs.get("throw_id"))})
             return result
 
         eng._resolve_throw = resolve_throw
@@ -381,6 +383,7 @@ def verify_event(event, stats, where, units, ref_pity):
     record = event["record"]
     # ramp: every contact hit equals round_tenth(base x weak x scale [x crit] x ramp) (bouncing shields excluded)
     applies = event.get("applies", [])
+    taken = {}   # big-hit rule (owner 2026-11-27): damage this throw has already done to each unit
     first = applies[0] if applies else None   # the page fixes the shares and the pity charge at the FIRST damage of a projectile; every later hit of it (blast, wave splash, swarm) uses them (index.html cbBegin; red-team R11B-2)
     for hit in applies:
         if first is not None:
@@ -391,8 +394,11 @@ def verify_event(event, stats, where, units, ref_pity):
         if hit["critical"]:
             value = round_tenth(value * CRIT_MULT_CHECK)
         ramp = expected_ramp(hit["round"], units)
+        room = float("inf")
+        if not hit["passes"]:   # half of a full health bar per throw and unit, except the rare passing throw
+            room = max(0.0, round_tenth(hit["max_hp"] * 0.5 - taken.get(hit["target"], 0.0)))
         if units > 1:
-            bare = round_tenth(value * ramp)
+            bare = min(round_tenth(value * ramp), room)
             underdog = underdog_ref(hit["own_share"], hit["enemy_share"])
             value = round_tenth(value * ramp * min(CB["max_total_multiplier"], underdog * (1 + pity_ref(hit["pity"]))))
             stats["capped_stack_hits"] += 1 if underdog * (1 + pity_ref(hit["pity"])) > CB["max_total_multiplier"] else 0
@@ -402,6 +408,10 @@ def verify_event(event, stats, where, units, ref_pity):
             stats["underdog_hits"] += 1 if underdog > 1.0 else 0
             stats["pity_hits"] += 1 if hit["pity"] > 0 else 0
             stats["pity_cap_hits"] += 1 if hit["pity"] * CB["pity"]["per_miss"] >= CB["pity"]["cap"] else 0
+        else:
+            value = round_tenth(value * ramp)
+        value = min(value, room)
+        taken[hit["target"]] = taken.get(hit["target"], 0.0) + hit["damage"]
         CHECKS.ok("ramp", abs(hit["damage"] - value) < 0.051,
                   "%s %s round %s: damage %s expected %s (ramp %s, scale %s, own %.3f enemy %.3f pity %s)" % (
                       where, event["unit"], hit["round"], hit["damage"], round(value, 3), ramp, hit["scale"],

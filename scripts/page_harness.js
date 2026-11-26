@@ -126,6 +126,8 @@ function loadPage(opts) {
     }
     vm.runInContext(code, context, { filename: s });
   }
+  // opts.bigHitOff: every throw passes the rare-big-hit rule, so tests of other damage rules see the uncapped numbers (scripts/test_big_hit.py covers the cap).
+  if (opts.bigHitOff) vm.runInContext('Determinism = Object.assign({}, Determinism, { bigHitPass: function () { return true; } });', context);
   // The page script itself, optionally mutated (negative checks).
   const src = pageScript(opts.mutate);
   vm.runInContext(src, context, { filename: 'index.html#inline' });

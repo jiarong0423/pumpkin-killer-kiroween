@@ -91,12 +91,15 @@ check("combat and HP labels reject invalid or unbounded numeric output", () => {
   const formatCombatNumber = new Function(source + "; return formatCombatNumber;")();
   assert.strictEqual(formatCombatNumber(20), "20");
   assert.strictEqual(formatCombatNumber(20.0000000004), "20");
-  assert.strictEqual(formatCombatNumber(3.3333333333), "3.3");
+  assert.strictEqual(formatCombatNumber(3.3333333333), "3");   // owner 2026-11-27: whole numbers on screen
+  assert.strictEqual(formatCombatNumber(46.9), "47");
+  assert.strictEqual(formatCombatNumber(0.4), "1");
+  assert.strictEqual(formatCombatNumber(0), "0");
   assert.strictEqual(formatCombatNumber(Infinity), "0");
   assert.strictEqual(formatCombatNumber("not-a-number"), "0");
   assert.match(page, /toast\.directHit", \{ dmg: formatCombatNumber\(dmgNow\) \}/);
   assert.match(page, /const safeHeroName = truncateCanvasText\(/);
-  assert.match(page, /const hpLabel = formatCombatNumber\(hp\) \+ "\/" \+ formatCombatNumber\(maxHp\)/);
+  assert.match(page, /const hpLabel = formatCombatNumber\(Math\.ceil\(hp\)\) \+ "\/" \+ formatCombatNumber\(maxHp\)/);
 });
 
 check("canvas HUD exposes separate round/weather and countdown rectangles", () => {

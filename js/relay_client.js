@@ -135,6 +135,7 @@
     var deliberateClose = false;
     var expectedSeq = 1;
     var lastSeq = 0;
+    var replayUntil = 0;   // the newest sequence number the relay says exists: below it this client is still catching up
     var buffered = Object.create(null);
     var listeners = [];
     var statusListeners = [];
@@ -241,8 +242,14 @@
       if (typeof message.scene === 'string') match.scene = message.scene;
       // The relay writes team_size only for team matches; its absence means one unit per side.
       match.teamSize = validTeamSize(message.team_size) ? message.team_size : 1;
-      if (typeof message.round === 'number') match.round = message.round;
-      if (typeof message.phase === 'string') match.phase = message.phase;
+      // A snapshot that is ahead of the ordered log (resume: the room state arrives first, the missed messages follow) must not move the round on,
+      // or the replayed actions of the missed round would be dropped as old and the page would wait for them for ever. The replayed end_turns move it.
+      if (typeof message.last_seq === 'number') replayUntil = Math.max(replayUntil, message.last_seq);
+      var catchingUp = match.round !== null && message.started && (awaitingAnswer || replayUntil > lastSeq);
+      if (!catchingUp) {
+        if (typeof message.round === 'number') match.round = message.round;
+        if (typeof message.phase === 'string') match.phase = message.phase;
+      }
       if (match.status === 'out_of_sync' && message.started) return;   // a snapshot does not clear a detected desync (external review); a reset (started false) does
       if (message.started || typeof message.seed === 'number') setStatus('playing');
       else setStatus('waiting');   // a room_state also ends 'reconnecting' (R5A-3)

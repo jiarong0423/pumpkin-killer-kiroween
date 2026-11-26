@@ -7,6 +7,7 @@ import unittest
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
+from determinism_py import big_hit_pass
 import mcp_game_server as engine  # noqa: E402
 import mcp_stdio_server as srv  # noqa: E402
 import team_tuning_py  # noqa: E402
@@ -102,6 +103,9 @@ class UltimateTest(unittest.TestCase):
                 result = game.resolve_round()["results"][0]
                 self.assertTrue(result["ultimate"])
                 self.assertEqual(result["hit_type"], "hero")
+                # one throw takes at most half of a full health bar unless it is one of the rare passing throws (owner 2026-11-27)
+                if not big_hit_pass(19, 1, game.throw_seq):
+                    damage = min(damage, game.units["white_1"]["max_hp"] * engine.BIG_HIT_SHARE)
                 self.assertAlmostEqual(result["damage_dealt"], damage)
 
     def test_necromancer_skips_the_target_without_consuming_its_action(self):

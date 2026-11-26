@@ -14,6 +14,7 @@ DOMAIN = {
     "bounceCount": 0xB00CE001,
     "nunStunPick": 0x57A70001,
     "sideDraw": 0x51DE0001,
+    "bigHit": 0xB16D0001,
 }
 
 
@@ -79,6 +80,13 @@ def bounce_count(seed, round_number, throw_id):
 
 def nun_stun_pick(seed, round_number, throw_id, n):
     return _hash(seed, DOMAIN["nunStunPick"], _positive(round_number, "round"), _uint32(throw_id, "throwId")) % _positive(n, "n")
+
+
+BIG_HIT_ONE_IN = 10   # twin of js/determinism.js: one throw in ten may take more than half of a unit's health bar
+
+
+def big_hit_pass(seed, round_number, throw_id):
+    return _hash(seed, DOMAIN["bigHit"], _positive(round_number, "round"), _uint32(throw_id, "throwId")) % BIG_HIT_ONE_IN == 0
 
 
 def side_draw(seed):

@@ -39,6 +39,9 @@ def _env_number(name: str, default: Any, cast: Any = int) -> Any:
 
 MAX_MESSAGE_BYTES = 16 * 1024
 MAX_MESSAGES_PER_SECOND = 10
+SEND_TIMEOUT_SECONDS = 2.0   # red team 2026-11-26 (F16/F03): a client that does not read must not stall the room, the sweep of every room, or a kick; it is cut off
+CLOSE_TIMEOUT_SECONDS = 2.0
+MAX_JUDGES_PER_ATTACK = 8    # red team F06/R07: one judge per unit per attack, and never more than this
 MAX_WRONG_CODES_PER_MINUTE = 5
 MAX_TEAM_SEATS = 4
 MAX_UNITS_PER_TEAM = 3
@@ -80,7 +83,18 @@ def make_code() -> str:
 
 
 def json_bytes(message: Dict[str, Any]) -> str:
-    return json.dumps(message, separators=(",", ":"), ensure_ascii=False)
+    return json.dumps(message, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+
+
+def parse_message(raw: str) -> Any:
+    """Parse one frame and refuse what the relay could never send on (red team 2026-11-26, D02/D06-D10): NaN and infinity (the browser cannot parse them back), lone surrogates (cannot be encoded;
+    they left a room that was never removed) and absurdly long numbers. Raises ValueError."""
+    try:
+        message = json.loads(raw)
+        json_bytes(message).encode("utf-8")
+    except (RecursionError, UnicodeError) as exc:
+        raise ValueError("not sendable") from exc
+    return message
 
 
 VALID_SCENES = ("graveyard", "church", "school", "belltower")
@@ -302,6 +316,7 @@ class RelayServer:
     """A single-process room relay that retains state only while clients connect."""
     def __init__(self, host: str = "127.0.0.1", port: int = 8765,
                  origin_allowlist: Optional[str] = None, **limits: Any) -> None:
+        self._closing: set = set()
         self.host = host
         self.port = int(port)
         self.max_rooms = int(limits.get("max_rooms", MAX_ROOMS))
@@ -344,7 +359,7 @@ class RelayServer:
 
     async def start(self) -> None:
         self._server = await websocket_serve(
-            self._handle_socket, self.host, self.port, max_size=MAX_MESSAGE_BYTES,
+            self._handle_socket, self.host, self.port, max_size=MAX_MESSAGE_BYTES, close_timeout=CLOSE_TIMEOUT_SECONDS,
             process_request=self._process_request,
         )
         if any(value > 0 for value in (self.room_idle_seconds, self.seat_grace_seconds, self.invite_seconds, self.agent_pick_seconds)):
@@ -505,11 +520,42 @@ class RelayServer:
         host = re.match(r"^https?://([^/:]+)(:\d+)?$", normalized)   # external review: the old prefix test let http://localhost.evil.com in
         return bool(host) and normalized.startswith("http://") and host.group(1) in ("localhost", "127.0.0.1")
 
+    def _close_later(self, websocket: Any, reason: str) -> None:
+        """Close a removed socket without making the caller wait for the close handshake (red team F14: a socket that never answers held the host for seconds)."""
+        async def close() -> None:
+            try:
+                await websocket.close(code=1000, reason=reason)
+            except Exception:  # noqa: BLE001 - a socket that is already gone is fine
+                pass
+
+        task = asyncio.ensure_future(close())
+        self._closing.add(task)
+        task.add_done_callback(self._closing.discard)
+
     async def _send(self, websocket: Any, message: Dict[str, Any]) -> None:
+        """Send one message, one at a time per socket, and cut off a socket that does not take it in SEND_TIMEOUT_SECONDS: nothing in the relay may wait for a slow reader."""
+        data = json_bytes(message)
+        lock = getattr(websocket, "_pk_send_lock", None)
+        if lock is None:
+            lock = asyncio.Lock()
+            try:
+                websocket._pk_send_lock = lock
+            except AttributeError:
+                pass
+
+        async def locked() -> None:
+            async with lock:
+                await websocket.send(data)
+
         try:
-            await websocket.send(json_bytes(message))
+            await asyncio.wait_for(locked(), SEND_TIMEOUT_SECONDS)
         except ConnectionClosed:
             pass
+        except asyncio.TimeoutError:
+            LOG.warning("relay: a client stopped reading and was cut off")
+            transport = getattr(websocket, "transport", None)
+            if transport is not None:
+                transport.abort()
 
     async def _error(self, websocket: Any, code: str, message: Optional[str] = None) -> None:
         now = time.monotonic()
@@ -602,7 +648,7 @@ class RelayServer:
     def _parse_units(self, value: Any) -> list:
         if value is None:
             return []
-        if not isinstance(value, list) or len(value) > MAX_UNITS_PER_TEAM or any(not isinstance(unit, str) or not UNIT_ID.match(unit) for unit in value):
+        if not isinstance(value, list) or len(value) > MAX_UNITS_PER_TEAM or any(not isinstance(unit, str) or not UNIT_ID.fullmatch(unit) for unit in value):
             raise ValueError
         return list(value)
 
@@ -654,8 +700,8 @@ class RelayServer:
                     continue
                 timestamps.append(now)
                 try:
-                    message = json.loads(raw)
-                except json.JSONDecodeError:
+                    message = parse_message(raw)
+                except ValueError:
                     await self._error(websocket, "invalid_json")
                     continue
                 if not isinstance(message, dict) or not isinstance(message.get("type"), str):
@@ -859,10 +905,7 @@ class RelayServer:
             if target_socket is not None:
                 await self._send(target_socket, {"type": "kicked", "reason": "removed_by_host"})
                 await self._remove_client(room, target_socket, release=True)
-                try:
-                    await target_socket.close(code=1000, reason="removed_by_host")   # red team A1
-                except Exception:  # noqa: BLE001 - already gone
-                    pass
+                self._close_later(target_socket, "removed_by_host")   # red team A1
             else:
                 room.sessions.pop(target["seat_token"], None)   # red team A8: a seat in its grace period gets the same releases and start check
                 await self._release_invited(room, target)
@@ -1118,7 +1161,7 @@ class RelayServer:
         on the side of the team that owns it (red is left, white is right), and, when the start message named
         the owners, owned by that seat. The relay cannot cheaply know whose turn it is or who is alive (the
         rotation rule is the devices' business and a fallen unit is the judge's report), so it checks no more."""
-        match = WORLD_UNIT.match(unit) if isinstance(unit, str) else None
+        match = WORLD_UNIT.fullmatch(unit) if isinstance(unit, str) else None
         if match is None or int(match.group(2)) >= room.team_size:
             return "invalid_unit"
         if match.group(1) != SIDE_OF_TEAM.get(team):
@@ -1184,11 +1227,15 @@ class RelayServer:
                 if unit_error is not None:
                     await self._error(websocket, unit_error, "the judge names one of its own units")
                     return
-            judged_key = (ref, message.get("unit"))
-            if judged_key in room.judged:
-                await self._error(websocket, "duplicate_judge")
-                return
-            room.judged.add(judged_key)
+        unit_key = message.get("unit")
+        judged_key = (ref, unit_key if isinstance(unit_key, str) else None)
+        if judged_key in room.judged:
+            await self._error(websocket, "duplicate_judge")
+            return
+        if sum(1 for seen_ref, _ in room.judged if seen_ref == ref) >= MAX_JUDGES_PER_ATTACK:
+            await self._error(websocket, "invalid_judge")
+            return
+        room.judged.add(judged_key)
         outbound = {key: message[key] for key in ("type", "ref", "hit", "unit", "damage", "hp_after", "statuses", "knockback") if key in message}
         outbound["seat_id"] = entry["seat_id"]
         await self._broadcast(room, outbound)
@@ -1218,7 +1265,7 @@ class RelayServer:
         if not room.started or entry["team"] not in ("red", "white") or not isinstance(round_number, int) or not isinstance(digest, str) or not digest:
             await self._error(websocket, "invalid_round_hash")   # external review: a spectator's hash could put every page out of sync
             return
-        if room.team_match and not ROUND_HASH_FORMAT.match(digest):
+        if room.team_match and not ROUND_HASH_FORMAT.fullmatch(digest):
             await self._error(websocket, "invalid_round_hash", "hash must be 8 lowercase hex characters")
             return
         hashes = room.round_hashes.setdefault(round_number, {})
@@ -1297,10 +1344,7 @@ class RelayServer:
             return
         room.clients.pop(socket, None)
         await self._send(socket, {"type": "kicked", "reason": reason})
-        try:
-            await socket.close(code=1000, reason=reason)
-        except Exception:  # noqa: BLE001 - a socket that is already gone is fine
-            pass
+        self._close_later(socket, reason)
 
     async def _release_host_fillers(self, room: Room, gone: Dict[str, Any]) -> None:
         """ROOM-FLOW R9: the AI fillers live in the host's browser. A host who leaves before the start takes them along, so the next host does not

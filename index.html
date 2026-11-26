@@ -649,6 +649,7 @@
     #settings-sheet #help-btn, #settings-sheet #reset-btn, #settings-sheet #lang-btn { min-width: 96px !important; }
     #settings-sheet { top: calc(50% + 22px) !important; }   /* the menu button that opens the sheet stays uncovered */
     #settings-sheet .settings-row { min-height: 48px; }
+    #settings-sheet .settings-row[hidden] { display: none !important; }   /* the grid rule above must not show a hidden row (the friends row during a match) */
     #settings-sheet input[type="range"] { flex: 1 1 auto; min-width: 48px; width: auto; }
     #settings-sheet .settings-control output, #settings-sheet .settings-value { font-size: 13px; min-width: 38px; text-align: right; }
     /* ROOM-FLOW lobby (the second page) and the name dialog */
@@ -692,6 +693,8 @@
     html.one-picture #settings-sheet { scale:1.35; }
     html.one-picture #first-hint { scale:1.2; }
     html.one-picture #name-dialog .name-card, html.one-picture #join-code-dialog .name-card { scale:1.45; }
+    html.one-picture.typing #game-container { top:0 !important; transform:translate(-50%,0) scale(var(--pic-scale)) !important; transform-origin:top center; }   /* the shrunken window shows the top of the picture */
+    html.typing #name-dialog, html.typing #join-code-dialog { align-items:flex-start; } html.typing #name-dialog .name-card, html.typing #join-code-dialog .name-card { transform-origin:top center; }
     html.one-picture #coin-call button { min-width:180px; min-height:68px; font-size:26px; }
     html.one-picture #coin-call { font-size:28px; }
     html.one-picture #coin-toss-coin { width:300px; }
@@ -992,7 +995,14 @@
       if (pic) { root.style.setProperty("--pic-w", pic.w + "px"); root.style.setProperty("--pic-h", pic.h + "px"); root.style.setProperty("--pic-scale", String(pic.scale)); }
       return pic;
     }
+    function typingNow() { const a = document.activeElement; return !!a && (a.tagName === "TEXTAREA" || (a.tagName === "INPUT" && !/^(range|checkbox|radio|button)$/.test(a.type))); }
+    let lastFitWidth = 0;
     function fitVisibleViewport() {
+      // An on-screen keyboard shrinks the window while a name or a code is typed: keep the picture as it was (it would shrink to unreadable) and lift the dialog above the keyboard.
+      const typing = typingNow() && document.documentElement.classList.contains("one-picture") && typeof matchMedia === "function" && matchMedia("(pointer:coarse)").matches;
+      document.documentElement.classList.toggle("typing", typing);
+      if (typing && window.innerWidth === lastFitWidth) return;   // the keyboard changes the height only; a new width (rotation, a resized window) is laid out again
+      lastFitWidth = window.innerWidth;
       const viewport = window.visualViewport;
       const seg = pickViewportSegment();
       const width = seg ? seg.width : Math.round(viewport ? viewport.width : window.innerWidth);
@@ -1023,6 +1033,7 @@
       if (window.__fitSync) applyStage(); else requestAnimationFrame(applyStage);   // a seat page has no animation frames: its core sets __fitSync
     }
     window.addEventListener("resize", fitVisibleViewport, { passive: true });
+    document.addEventListener("focusout", () => setTimeout(fitVisibleViewport, 350), { passive: true });   // the keyboard is gone: lay out again
     window.addEventListener("orientationchange", fitVisibleViewport, { passive: true });
     if (window.visualViewport) {
       window.visualViewport.addEventListener("resize", fitVisibleViewport, { passive: true });
@@ -1613,8 +1624,20 @@
             pool.forEach(h => { if (pick.length < places && named.indexOf(h) < 0 && pick.indexOf(h) < 0) pick.push(h); });
             filler.readySent = true;
             try { filler.client.sendReady(TEAM_N > 1 ? { units: pick } : {}); } catch (_) {}
+            confirmLock();
           };
+          const confirmLock = () => {   // a computer seat that stays unlocked blocks Start ("still waiting for: Computer to lock", seen after a rematch): check again until the relay shows it locked, at most ten times
+            if (filler.lockTimer) return;
+            filler.lockTimer = setTimeout(() => {
+              filler.lockTimer = null;
+              const own = (filler.seatsNow || []).find(s => s.seat_id === filler.seatId);
+              if (relayPlaying || relayFillers.indexOf(filler) < 0 || (own && own.ready) || (filler.relocks = (filler.relocks || 0) + 1) > 10) return;
+              readyNow();
+            }, 1200);
+          };
+          if (m.type === "room_state" && filler.seatId && (filler.seatsNow || []).some(s => s.seat_id === filler.seatId && s.ready)) { filler.relocks = 0; filler.retries = 0; }   // locked: the next round (a rematch) gets the full number of tries again
           if (m.type === "room_state" && filler.seatId && !filler.readySent) readyNow();
+          else if (m.type === "room_state" && filler.readySent && !m.started && (filler.seatsNow || []).some(s => s.seat_id === filler.seatId && !s.ready)) confirmLock();
           if (m.type === "error" && filler.seatId && filler.readySent && (filler.retries || 0) < 3) { filler.retries = (filler.retries || 0) + 1; setTimeout(readyNow, 150); }   // the ready was refused (a teammate locked that hero meanwhile): pick again from the latest seats
           if (m.type === "error" && !filler.seatId) { try { filler.client.close(); } catch (_) {} relayFillers = relayFillers.filter(f => f !== filler); }   // refused (the place was taken meanwhile)
           if (m.type === "kicked") { clearTimeout(filler.timer); relayFillers = relayFillers.filter(f => f !== filler); }   // evicted (options off, kicked, host left): a new filler may get the same seat id (cross-check B NEW-1)
@@ -2098,7 +2121,9 @@
       if (team === "ai") lastActedRight = ai;   // the unit that just acted is the one whose slow ends this round
       if (!gameOver) { rotateTeam(team === "player" ? "left" : "right"); ensureLivingActive(team === "player" ? "right" : "left"); }   // the other team's due unit may have fallen
     }
+    let lateHits = 0, lateAdvance = null, matchGen = 0;   // a hit that lands a moment after the last projectile is gone: the turn waits for it
     function advanceAfterAttack(team) {
+      if (lateHits > 0) { lateAdvance = team; return; }
       if (relayLive()) { relayAfterAttack(team); return; }   // in a room the relay's order decides who is next
       broadcastCurrentRoundHash();
       rotateAfterTurn(team);
@@ -2109,6 +2134,7 @@
     // ---- Rooms over the relay (docs/relay_protocol_20261115.md, docs/relay_team_page_hooks.md items 1, 5, 7): a friend or an agent plays the right side through scripts/pk_relay.py.
     // Everything here runs only while relayLive() (the relay sent `start` and this page is a human seat); play against the computer and hot-seat play never reach it.
     // Every device simulates every throw from the numbers in the action (same fixed-step flight, seeded randomness), the victim's device answers with `judge`, `round_hash` once per round, `end_turn` after each turn.
+    let relayLanded = {};   // the other side's health when this page's last throw had landed
     let relayPlaying = false, relayLeft = false, relayIsHost = false, relaySeatId = "", relaySeats = [], relayWait = null, relayIncoming = 0, relayRemoteOpen = false, relayJudge = null, relayJudgesIn = [], remoteApplying = false, relayForcedStart = null;
     const NATIVE_RANDOM = Math.random;   // a throw or hit that stops half way must never leave the seeded stream installed (loop() puts the real one back)
     const relayLive = () => relayPlaying && !!(relayClient && relayRoomCode);
@@ -2158,7 +2184,7 @@
     }
     function relayAfterAttack(team) {   // advanceAfterAttack in a room: the last projectile of a throw has landed on this device
       if (team === "ai") { relayIncoming = Math.max(0, relayIncoming - 1); relaySendJudges(); }
-      else relayJudgesIn.splice(0).forEach(relayCompareJudge);
+      else { relayLanded = {}; unitsOf("right").forEach(u => { relayLanded[u.id] = u.hp; }); relayJudgesIn.splice(0).forEach(relayCompareJudge); }
       const quiet = team === "player" && relayMateFlight; if (quiet) relayMateFlight = false;   // a teammate's throw: the teammate sends the end_turn, not this page
       relayAfterTurn(team, false, quiet);
     }
@@ -2178,7 +2204,9 @@
     function relayCompareJudge(m) {   // the attacker compares the victim's answer with its own simulation: a difference is shown, never hidden (protocol section 6)
       if (m.hit !== true) return;
       const v = unitsOf("right").find(x => x.id === m.unit);
-      if (v && Math.abs(round1(v.hp) - m.hp_after) > 0.11) { console.warn("relay judge differs", m.unit, round1(v.hp), m.hp_after); relayNote("relay.outOfSync"); }
+      if (!v) return;
+      const mine = relayLanded[m.unit] !== undefined ? relayLanded[m.unit] : v.hp;   // health as the throw left it: a late answer (reconnect) must not be compared after a poison or bleed tick
+      if (Math.abs(round1(mine) - m.hp_after) > 0.11) { console.warn("relay judge differs", m.unit, round1(mine), m.hp_after); relayNote("relay.outOfSync"); }
     }
     function relayFlightLanding(startX, startY, power, angleDeg, dirX, wave) {   // twin of ConnectedRelay / flight_py.simulate: stops on standing fence (wallHp > 0) and cuts bride wave at GROUND_Y
       const rad = angleDeg * Math.PI / 180, v0 = power * 13.8, w = effWind(), dt = 1 / 60, wAx = windAccelFor(w, dirX);
@@ -2209,7 +2237,7 @@
         const land = relayFlightLanding(m.start.x, m.start.y, m.power, m.angle, m.dirX, remoteWave);
         if (Math.abs(land.x - m.claimed_landing.x) > 4) { console.warn("relay claimed landing differs", land.x, m.claimed_landing.x); relayNote("relay.outOfSync"); }
       }
-      if (mate) { relayMateFlight = true; setActiveUnit("left", u); }   // a teammate's throw: this page only simulates it, the victim's page judges, the teammate ends the turn
+      if (mate) { relayLanded = {}; relayMateFlight = true; setActiveUnit("left", u); }   // a teammate's throw: this page only simulates it, the victim's page judges, the teammate ends the turn
       else {
         relayIncoming++;
         if (u !== ai) setActiveUnit("right", u);
@@ -2268,12 +2296,14 @@
         if (typeof m.seq === "number" && m.seq <= relayLastSeq) return;   // a replay after a reconnect
         relayInbox.push(m); relayDrain(); return;
       }
+      if (relayQueueMode && m.type === "judge" && (relayInbox.length || relayIncoming > 0 || relayMateFlight)) { relayInbox.push(m); relayDrain(); return; }   // an answer waits for the throw it answers: that throw may still be queued or flying here
       relayDispatch(m);
     }
     function relayInboxReady(m) {
       if (m.seat_id === relaySeatId) return true;   // the echo of this page's own message
       const st = relaySnap(), mine = st.seat, opp = mine === "red" ? "white" : "red", mate = relayIsTeammate(m.seat_id), idle = !projectiles.length && !diceRoll && relayIncoming === 0 && !relayMateFlight;
       if (m.type === "action") return idle && (mate ? (relayMateOpen && m.round === roundNum && m.phase === mine) : (relayRemoteOpen && m.round === roundNum && m.phase === opp));
+      if (m.type === "judge") return idle;
       if (m.type === "end_turn") {
         if (!idle) return false;
         if (mate) return !relayMateOpen || (m.round === roundNum && m.phase === mine);   // a teammate's throw that landed here already closed this page's turn: the end_turn after it only moves the cursor; without a throw (timeout) it closes the turn
@@ -2332,7 +2362,7 @@
       showFirstHint();   // a room match shows the first-turn hint too (red team polish P4); shown at most once per device
       relayQueueMode = ["red", "white"].some(t => relaySeats.filter(x => x.team === t).length > 1); relayInbox.length = 0; relayLastSeq = 0; relayCursor = { round: m.round || 1, phase: m.phase || "red" };   // ordered handling only where a team has two or more seats
       relayMateOpen = false; relayMateFlight = false;   // red-team R1 A1: flags of a previous room must not leak into this one
-      relayPlaying = true; relayLeft = false; relayIncoming = 0; relayRemoteOpen = false; relayWait = null; relayJudge = null; relayJudgesIn = [];
+      relayPlaying = true; relayLeft = false; relayLanded = {}; relayIncoming = 0; relayRemoteOpen = false; relayWait = null; relayJudge = null; relayJudgesIn = [];
       seats.left = "human"; if (seats.right === "ai") seats.right = "human";
       const st = relaySnap();
       firstOpener = st.seat === "red" ? "player" : "ai";   // first_team is red in relay v0; the opener then alternates every round (openerOfRound)
@@ -2401,8 +2431,9 @@
       } catch (e) { /* unsupported: stay in the browser */ }
     }
     // A browser cannot force full screen: it needs the player's own tap, and the player can always leave. So EVERY tap anywhere puts a touch device back into full screen (owner 2026-11-26); typing fields are left alone (the keyboard).
-    // It listens to CLICK, not pointerup: the tap has already picked its button, so the resize cannot move another control under the finger.
-    document.addEventListener("click", e => { const t = e.target; if (!(t && t.closest && t.closest("input:not([type=checkbox]):not([type=range]), textarea, #name-dialog, #join-code-dialog"))) enterPhoneFullscreen(); }, { capture: true });
+    // It listens to CLICK and asks AFTER the button's own handler (a zero timeout keeps the tap's activation): asking first used the activation up, so "Copy link" said copied without copying. Buttons that need the
+    // activation themselves (copy, share, links) never switch the screen.
+    document.addEventListener("click", e => { const t = e.target; if (!(t && t.closest && t.closest("input:not([type=checkbox]):not([type=range]), textarea, #name-dialog, #join-code-dialog, a[href], [id*=copy], [id*=share]"))) setTimeout(enterPhoneFullscreen, 0); }, { capture: true });
     document.addEventListener("fullscreenchange", () => { fitVisibleViewport(); setTimeout(fitVisibleViewport, 300); });
     // ?dbg=1 shows the viewport numbers on screen (real-phone diagnosis only; nothing is shown without the flag).
     if (/[?&]dbg=1/.test(location.search)) {
@@ -2542,8 +2573,8 @@
     function formatCombatNumber(value) {
       const number = Number(value);
       if (!Number.isFinite(number)) return "0";
-      const rounded = Math.round(number * 10) / 10;
-      return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+      // owner 2026-11-27: whole numbers on screen (health and damage). Only the text changes; the game and the room messages keep one decimal. Something above zero never reads 0.
+      return String(number > 0 && number < 1 ? 1 : Math.round(number));
     }
     function truncateCanvasText(text, maxWidth) {
       const source = String(text), ellipsis = "…";
@@ -3078,6 +3109,19 @@
       return live.reduce((a, b) => Math.abs(a.x - ai.x) <= Math.abs(b.x - ai.x) ? a : b);
     }
     const teamDown = side => unitsOf(side).every(u => u.hp <= 0);
+    // BIG HITS (owner 2026-11-27: "keep the one-hit knock-out, only make it rare"): one throw takes at most half of a unit's full health, counting all its contacts, blasts and swarms, except one throw in ten
+    // (Determinism.bigHitPass: the same throw passes on every device). Burn, bleed and poison are not throws and are not limited. Python twin: scripts/mcp_game_server.py _limit_hit.
+    const BIG_HIT_SHARE = 0.5, bigHits = new Map();
+    function limitHit(p, victim, raw) {
+      if (!(raw > 0)) return raw;
+      const key = p.throwId + ":" + victim.id;
+      let e = bigHits.get(key);
+      if (!e) { e = { pass: Determinism.bigHitPass(matchSeed >>> 0, Math.max(1, roundNum | 0), (p.throwId | 0) >>> 0), given: 0 }; bigHits.set(key, e); }
+      if (e.pass) return raw;
+      const deal = Math.min(raw, Math.max(0, Math.round((victim.maxHp * BIG_HIT_SHARE - e.given) * 10) / 10));
+      e.given = Math.round((e.given + deal) * 10) / 10;
+      return deal;
+    }
     const hpAfter = (hp, d) => Math.max(0, Math.round((hp - d) * 1e6) / 1e6);   // hit points never keep a floating-point residue such as 1.4e-14: such a unit counted as ALIVE with 0 hp (no KO, the next hit on it only played a sound; ledger N7, 20,000-match audit)
     const unitStartHp = prof => TEAM_N > 1 ? TeamTuning.teamMaxHp(prof.hp, prof.dmg, TEAM_N) : prof.hp;   // team matches: scaled hp (docs/agent_reports_20261117/review_round2_designer.md A1); one unit per team: the hero table value
     const rampDmg = x => TEAM_N > 1 ? Math.round(x * TeamTuning.rampMultiplier(roundNum, TEAM_N) * 10) / 10 : x;   // late-round damage ramp, team matches only (A2)   // the match ends only when a whole team has fallen (R2.2); with one unit this is the old "hp <= 0"
@@ -3369,11 +3413,14 @@
       const mx = (e.clientX - rc.left) * (VIEW_W / rc.width) - PAD;
       movePoint.val = Math.max(-1, Math.min(1, (mx - player.x) / 170));
     }
+    const rowCenterX = half => Math.max(half - PAD, Math.min(VIEW_W - PAD - half, player.x));   // a button row over a unit near an edge slides inward
+    const moveRowX = () => rowCenterX(MOVE_BTN_DX + 56);
     function actionMenuItems() {
       const items = [{ id: "move", label: T("menu.move"), col: "#ffd32a" }, { id: "attack", label: T("menu.attack"), col: "#ff7675" }];
       if (canControlShield()) items.push({ id: "defend", label: T("menu.defend"), col: "#4deeea" });
       const w = 108, gap = 10, total = items.length * w + (items.length - 1) * gap;
-      return items.map((it, i) => ({ ...it, x: player.x - total / 2 + w / 2 + i * (w + gap), y: player.y - MOVE_ROW_DY, w, h: 52 }));
+      const cx = rowCenterX(total / 2 + 16);
+      return items.map((it, i) => ({ ...it, x: cx - total / 2 + w / 2 + i * (w + gap), y: player.y - MOVE_ROW_DY, w, h: 52 }));
     }
     function chooseMenuItem(id) {
       actionMenu = false;
@@ -3657,8 +3704,8 @@
       const localSide = isPlayer ? "left" : "right";
       if (relayClient && relayRoomCode && seats[localSide] === "human" && !remoteApplying) {
         const claimed = relayLive() ? relayFlightLanding(startX, launchY, power, launchAngleDeg, dirX, profile.weapon === "proj_soundwave") : null;   // the cheap cross-check of protocol section 5
-        const ultKind = relayLive() && ultArmed[shooter] && energy[shooter] >= 3 && ultUsed[shooter] < 2;
-        broadcastLocalAction(Object.assign({ unit: u.id, kind: ultKind ? "ultimate" : "throw", angle: launchAngleDeg, power, start: { x: startX, y: launchY }, dirX }, claimed ? { claimed_landing: { x: Math.round(claimed.x), y: Math.round(claimed.y) } } : {}));
+        const ultKind = relayLive() && ultArmed[shooter] && energy[shooter] >= 3 && ultUsed[shooter] < 2 && profile.weapon !== "proj_flame";
+        relayLanded = {}; broadcastLocalAction(Object.assign({ unit: u.id, kind: ultKind ? "ultimate" : "throw", angle: launchAngleDeg, power, start: { x: startX, y: launchY }, dirX }, claimed ? { claimed_landing: { x: Math.round(claimed.x), y: Math.round(claimed.y) } } : {}));
       }
       const isHeavyShot = selectedSkill === "heavy";
       const usingDouble = selectedSkill === "double";
@@ -3763,7 +3810,7 @@
         }
         // NECROMANCER ultimate (owner 2026-11-15): the finger points forward and three ghost flames fly out one after another; they hit for 1.1, 1.3 and 1.5 x the normal damage (each a normal hit, no crit bonus);
         // any flame that hits leaves the target in hallucination (it loses its next turn); the three fires circling the caster are used up.
-        if (pj.weapon === "proj_flame" && !pj.isHeavy && energy[who] >= 3 && ultUsed[who] < 2 && (ultArmed[who] || (who === "ai" && aiUltimateCandidate)) && typeof UltimateFx !== "undefined") {
+        if (pj.weapon === "proj_flame" && !relayLive() && !pj.isHeavy && energy[who] >= 3 && ultUsed[who] < 2 && (ultArmed[who] || (who === "ai" && aiUltimateCandidate)) && typeof UltimateFx !== "undefined") {
           energy[who] = 0; ultUsed[who]++; ultArmed[who] = false;
           const volley = UltimateFx.necroVolleyDamage(pj.dmg);
           pj.dmg = volley[0]; pj.ultThrow = true; pj.hallu = true; pj.noCrit = true; pj.delay = 0; pj.ultReaperGroup = { hits: 0 };
@@ -3917,8 +3964,8 @@
       }
       // Check Airborne Floating Shield Dragging (in the sky!)
       if (moveMode) {
-        if (Math.abs(my - (player.y - MOVE_ROW_DY)) <= 34 && Math.abs(mx - (player.x - MOVE_BTN_DX)) <= 56) { chooseMoveDir(-1); return; }
-        if (Math.abs(my - (player.y - MOVE_ROW_DY)) <= 34 && Math.abs(mx - (player.x + MOVE_BTN_DX)) <= 56) { chooseMoveDir(+1); return; }
+        if (Math.abs(my - (player.y - MOVE_ROW_DY)) <= 34 && Math.abs(mx - (moveRowX() - MOVE_BTN_DX)) <= 56) { chooseMoveDir(-1); return; }
+        if (Math.abs(my - (player.y - MOVE_ROW_DY)) <= 34 && Math.abs(mx - (moveRowX() + MOVE_BTN_DX)) <= 56) { chooseMoveDir(+1); return; }
         movePoint = { val: 0 }; updateMovePoint(e); return;     // press anywhere else: start pointing
       }
       if (knightPlacing && defendMode) { knightPlaceAt(mx, my); return; }
@@ -4006,6 +4053,7 @@
       trapSettingsFocus(e);
       if (!matchStarted && !document.getElementById("settings-sheet").hidden && (e.code === "ArrowLeft" || e.code === "ArrowRight")) return;
       if (!matchStarted && !e.repeat && (e.code === "ArrowLeft" || e.code === "ArrowRight")) { e.preventDefault(); cyclePickedHero(e.code === "ArrowRight" ? 1 : -1); return; }
+      if (e.code === "Space" && !document.getElementById("settings-sheet").hidden) return;   // an open settings panel keeps Space for its own buttons: no throw behind it
       if (e.code === "Space") { e.preventDefault(); if (!matchStarted) return; }   // Space must not throw behind the start screen (Kiro 58 C4)
       if (e.code === "Space" && !e.repeat) {
         startCharging();
@@ -4434,11 +4482,12 @@
       matchSeed = (Math.random() * 4294967296) >>> 0; weatherCache.round = -1; weatherFxKey = "";
       aiCals.left = aiCals.right = 1; aiModelBy.left = aiModelBy.right = null; aiAimPending = null; aiAimPendingLeft = null; smartUnavailableStreak = 0; smartRequestSequence++; roundThrowNumbers = [];   // each match the AI starts from the rule of thumb again
       resetKnightUlt();
+      matchGen++; lateHits = 0; lateAdvance = null;
       defendMode = false; moveMode = false; movedThisTurn = false; diceRoll = null;
       [shields.player, shields.ai].forEach(x => { x.actions = 4; x.preview = false; x.isDragging = false; });
       setActiveUnit("left", teams.left[0]); setActiveUnit("right", teams.right[0]);
       gameOver = null; turnTimer = TURN_SECONDS; setAngleOf("left", 54); setAngleOf("right", 54); drops = []; carrier = null; supply.player = null; supply.ai = null; dropCount = 0; dropSide = -1; cratesTaken.player = 0; cratesTaken.ai = 0;
-      dailyCode = 0; pityMisses.player = 0; pityMisses.ai = 0; throwHadHit.clear();   // the comeback pack starts clean every match (team matches)
+      dailyCode = 0; pityMisses.player = 0; pityMisses.ai = 0; throwHadHit.clear(); bigHits.clear(); throwSeq = 0; countedThrows.clear();   // the comeback pack starts clean every match (team matches); the throw number seeds the shared dice, so it starts at the same value on every device
       player.stun = player.stunNow = player.stunLast = false; ai.stun = ai.stunLast = ai.stunNow = false; player.poison = 0; ai.poison = 0; player.bleed = 0; ai.bleed = 0; player.burn = 0; ai.burn = 0; player.shock = ai.shock = player.shockNow = false; player.slow = 0; ai.slow = 0; player.slowUsed = false; ai.slowUsed = false; ammo.player = 300; ammo.ai = 300; ultArmed.player = false; ultArmed.ai = false; energy.player = 0; energy.ai = 0; ultUsed.player = 0; ultUsed.ai = 0; fireGone.player = false; fireGone.ai = false; if (typeof Hallucination !== "undefined") { Hallucination.clear(player); Hallucination.clear(ai); } countedThrows.clear(); player.weak = 0; ai.weak = 0; player.armed = true; ai.armed = true; player.recoil = 0; ai.recoil = 0; fxList = [];
       allUnits().forEach(u => { if (u === player || u === ai) return; u.stun = u.stunNow = u.stunLast = false; u.poison = 0; u.bleed = 0; u.burn = 0; u.shock = u.shockNow = false; u.slow = 0; u.slowUsed = false; u.weak = 0; u.armed = true; u.animState = "idle"; u.animProgress = 0; u.onRelease = null; u.angle = 54; if (typeof Hallucination !== "undefined") Hallucination.clear(u); });   // the other units of a team start clean too
       fadeTrails.length = 0;
@@ -4676,8 +4725,10 @@
       { const ai_it = supply.ai && SUPPLY_ITEMS[supply.ai]; const e2 = document.getElementById("special-icon-ai"); if (e2) { e2.textContent = ai_it ? ((seats.right === "human" && activeSide() === "right") ? ai_it.icon : "?") : ""; document.getElementById("supply-slot-ai").classList.toggle("is-full", !!ai_it); } }   // each player sees only their own item slot (owner 2026-11-16): the other side shows a question mark when it holds something
     }
 
+    let fillerLook = 0;
     function updatePhysics(dt) {
       if (relayQueueMode && relayInbox.length) relayDrain();   // a queued relay message whose turn has come
+      if (relayFillers.length && (fillerLook += dt) > 1) { fillerLook = 0; maybeTriggerFillerTurn(); }   // a computer seat whose one trigger came while this page was busy is asked again (it acts once per turn)
       syncWeatherFx(); if (weatherFx) weatherFx.update(dt, effWind());
       if (windField) { windField.setWind(wind); windField.update(dt); }
       if (shields.ai.revealT > 0) shields.ai.revealT -= dt;
@@ -4703,6 +4754,7 @@
           if (defendMode) cancelDefendMode();
           if (moveMode) moveMode = false;
           const side = activeSide(), unit = unitOf(side); turn = "busy";
+          ultArmed[side === "left" ? "player" : "ai"] = false;   // the flag belongs to the team: a forfeited turn must not hand it to the next unit
           rotateAfterTurn(side === "left" ? "player" : "ai");   // the timed-out unit forfeits its turn; the next one is due next time
           floatTexts.push({ x: unit.x, y: unit.y - 200, text: T("toast.timeout"), color: "#ff7675", alpha: 1.0 });
           if (relayLive()) relayAfterTurn("player", true);
@@ -4763,8 +4815,9 @@
           if (vic && vic.hp > 0 && !gameOver) {
             let dmgR = Math.round(Weather.applyAttack(currentWeather(), Boomerang.RETURN_DAMAGE) * 10) / 10;
             if (TEAM_N > 1) dmgR = cbDmg(rampDmg(dmgR), p);   // team matches: the return hit is a direct hit too (late ramp, underdog, pity)
+            dmgR = limitHit(p, vic, dmgR);
             vic.hp = hpAfter(vic.hp, dmgR);
-            floatTexts.push({ x: vic.x, y: vic.y - 215, text: "-" + formatCombatNumber(dmgR), color: "#ff9f43", alpha: 1.0 });
+            if (dmgR > 0) floatTexts.push({ x: vic.x, y: vic.y - 215, text: "-" + formatCombatNumber(dmgR), color: "#ff9f43", alpha: 1.0 });
             fxEmit("impact_burst", p.boomFirst.x, p.boomFirst.y, { dirX: 1, scale: 1.3 }); fxEmit("hit_sparks", p.boomFirst.x, p.boomFirst.y, { dirX: 1, scale: 1.2 });
             fxEmit("sprite_slash_arc", p.boomFirst.x, p.boomFirst.y - 40, { dirX: p.team === "player" ? -1 : 1, scale: 1.35, color: "#ffd27a", colorEnd: "#ef4444" });
             vic.animState = "hit"; vic.animProgress = 0; vic.onRelease = null; hitStop = ANIM.hitStopSec; setScreenShake(0.2);
@@ -4899,6 +4952,7 @@
             if (p.ultReaperGroup) { p.ultReaperGroup.hits++; if (p.ultReaperGroup.hits === 1) snd("ult_reaper_hit"); }
             if (p.ultBoom && !p.ultBoomHitSnd) { p.ultBoomHitSnd = true; snd("ult_hunchback_hit"); }
             if (p.ultNun && !p.ultNunHitSnd) { p.ultNunHitSnd = true; snd("ult_hag_hit"); }
+            dmgNow = limitHit(p, opp, dmgNow);   // after every multiplier, before the status checks and the health
             const bleeds = (p.weapon === "proj_spear" || p.weapon === "proj_axe");   // bleeding weapons: javelin, axe (the skull is gone: the necromancer burns instead; owner 2026-11-10)
             if (p.weapon === "proj_flame" && opp.hp - dmgNow > 0) { applyBurn(opp, BURN_TURNS); fxEmit("sprite_fire_tongue", opp.x, opp.y - 70, { scale: 1.15, color: "#f5d0fe", colorEnd: "#9333ea" }); }   // the purple flame burns
             if (p.weapon === "proj_cross" && !p.ultNun && !opp.shock && opp.hp - dmgNow > 0 && Math.random() < SHOCK_CHANCE) { opp.shock = true; snd("status_shock"); fxEmit("spark_electric", opp.x, opp.y - 120, { scale: 1.2 }); floatTexts.push({ x: opp.x, y: opp.y - 255, text: T("status.shock"), color: "#ffe66d", alpha: 1.0 }); }   // electric paralysis: the next turn loses 4 seconds
@@ -4909,7 +4963,8 @@
             if (p.weapon === "proj_shield" && Math.random() < LIFESTEAL_CHANCE) { const src = p.team === "player" ? player : ai, gain = Math.round(dmgNow * LIFESTEAL_SHARE * 10) / 10; if (gain > 0 && src.hp > 0) { src.hp = Math.min(src.maxHp, src.hp + gain); floatTexts.push({ x: src.x, y: src.y - 215, text: "+" + formatCombatNumber(gain), color: "#ff7a9c", alpha: 1.0 }); } }   // the guard's shield drinks 5 percent of the damage it deals, now and then
             if (rngKeep) Math.random = rngKeep;
             if (p.weapon === "proj_axe" && Knockback.eligible({ fatal: opp.hp <= 0, hitKind: "unit" })) {   // the giant axe pushes the survivor back 50 px, kept inside its own zone
-              const kx = Knockback.apply(opp.x, p.team === "player" ? player.x : ai.x, 50, opp.x < CANVAS_W / 2 ? "left" : "right");
+              const kx = Knockback.clearOfMates(opp.x, Knockback.apply(opp.x, p.team === "player" ? player.x : ai.x, 50, opp.x < CANVAS_W / 2 ? "left" : "right"),
+                unitsOf(sideOfUnit(opp)).filter(m => m !== opp && m.hp > 0).map(m => m.targetX));
               if (kx !== opp.x) { fxEmit("landing_ring_dust", opp.x, GROUND_Y, { dirX: kx > opp.x ? 1 : -1, scale: 0.9 }); opp.x = kx; opp.targetX = kx;   /* the push stays: x alone glided back to targetX within a second (all sizes, owner 2026-11-17) */ floatTexts.push({ x: opp.x, y: opp.y - 260, text: T("status.knockback"), color: "#ffd32a", alpha: 1.0 }); }
             }
             if (nunRes && nunRes.hits.length && !p.nunDone) {   // the cross touches the enemy a second time a moment later; one touched enemy is stunned (here the only one)
@@ -4918,14 +4973,18 @@
               if (TEAM_N > 1 && second > 0) second = cbDmg(rampDmg(second), p);   // team matches: the second contact takes the late ramp and the comeback numbers fixed at the first contact
               const victim = opp;
               fxEmit("spark_electric", opp.x, opp.y - 120, { scale: 1.3 });
+              const gen = matchGen; lateHits++;
               setTimeout(() => {
+                if (gen !== matchGen) return;
                 if (second > 0 && victim.hp > 0 && !gameOver) {
+                  second = limitHit(p, victim, second);
                   victim.hp = hpAfter(victim.hp, second);
-                  floatTexts.push({ x: victim.x, y: victim.y - 215, text: "-" + second, color: "#dfe8f2", alpha: 1.0 });
+                  if (second > 0) floatTexts.push({ x: victim.x, y: victim.y - 215, text: "-" + formatCombatNumber(second), color: "#dfe8f2", alpha: 1.0 });
                   fxEmit("spark_electric", victim.x, victim.y - 110, { scale: 1.5 }); fxEmit("hit_sparks", victim.x, victim.y - 110, { dirX: 1, scale: 1.1 });
                   if (teamDown(sideOfUnit(victim)) && !gameOver) { gameOver = p.team; turn = "over"; sfx.hit("ko"); } else if (victim.hp <= 0 && !gameOver) sfx.hit("impact_unit_heavy"); else if (!gameOver) sfx.hit(second >= 24 ? "impact_unit_heavy" : "impact_unit");   // a unit down while its team stands: a short kill cue (arbitration 2026-11-19); non-fatal second strike plays its impact sound
                 }
                 if (TEAM_N === 1 && victim.hp > 0 && nunRes.stunned !== undefined && !victim.stunLast && !victim.stun) { ElectricStun.apply(victim); victim.stun = true; snd("status_stun"); floatTexts.push({ x: victim.x, y: victim.y - 285, text: T("status.stun"), color: "#ffe66d", alpha: 1.0 }); }
+                if (--lateHits === 0 && lateAdvance !== null) { const team = lateAdvance; lateAdvance = null; advanceAfterAttack(team); }
               }, 380);
             }
             if (p.weapon === "proj_soundwave" && !p.splashDone) {   // the wave is an area effect: every OTHER living enemy unit inside 105 px of the wave centre takes the stepped damage of its own distance (owner 2026-11-17: area effects hit the whole team in range)
@@ -4937,9 +4996,10 @@
                 if (typeof Weather !== "undefined") dw = Weather.applyAttack(currentWeather(), dw);
                 dw = rampDmg(dw);
                 if (TEAM_N > 1) dw = cbDmg(dw, p);
+                dw = limitHit(p, u, dw);
                 if (u.hp - dw > 0) applyPoison(u, 2);
                 u.hp = hpAfter(u.hp, dw);
-                floatTexts.push({ x: u.x, y: u.y - 215, text: "-" + formatCombatNumber(dw), color: "#dfe8f2", alpha: 1.0 });
+                if (dw > 0) floatTexts.push({ x: u.x, y: u.y - 215, text: "-" + formatCombatNumber(dw), color: "#dfe8f2", alpha: 1.0 });
                 u.animState = "hit"; u.animProgress = 0; u.onRelease = null;
               });
             }
@@ -4950,9 +5010,10 @@
               const swarmExtra = Math.round((swarmFinal - swarm) * 10) / 10;   // 0 with one unit per team; never negative (both factors are at least 1)
               unitsOf(p.team === "player" ? "right" : "left").forEach(v => {
                 if (v.hp <= 0) return;
-                v.hp = hpAfter(v.hp, swarm);
-                if (swarmExtra > 0) v.hp = hpAfter(v.hp, swarmExtra);
-                floatTexts.push({ x: v.x, y: v.y - 230, text: "-" + swarmFinal, color: "#9bf6ff", alpha: 1.0 });
+                const swarmHit = limitHit(p, v, swarm), extraHit = swarmExtra > 0 ? limitHit(p, v, swarmExtra) : 0;
+                v.hp = hpAfter(v.hp, swarmHit);
+                if (extraHit > 0) v.hp = hpAfter(v.hp, extraHit);
+                if (swarmHit + extraHit > 0) floatTexts.push({ x: v.x, y: v.y - 230, text: "-" + formatCombatNumber(swarmHit + extraHit), color: "#9bf6ff", alpha: 1.0 });
                 fxList.push({ img: "fx_bat_swarm", x: v.x, y: v.y - 100, dirX: 1, t: 0, dur: 0.9, size: 360, center: true });
                 fxEmit("sprite_impact_flash", v.x, v.y - 100, { scale: 1.3 });
               });
@@ -5039,9 +5100,10 @@
               if (!blastHitSound) { blastHitSound = true; snd("ult_wizard_hit"); }
               const blastDmg = rampDmg(p.ultBlast);
               const blastFinal = TEAM_N > 1 ? cbDmg(blastDmg, p) : blastDmg;   // team matches: underdog and pity; a blast that burns at least one unit counts as a hit for the pity counter
-              vic.hp = hpAfter(vic.hp, blastFinal);
+              const blastHit = limitHit(p, vic, blastFinal);
+              vic.hp = hpAfter(vic.hp, blastHit);
               vic.animState = "hit"; vic.animProgress = 0; vic.onRelease = null;
-              floatTexts.push({ x: vic.x, y: vic.y - 220, text: T("ult.blast", { dmg: blastFinal }), color: "#ff9f43", alpha: 1.0 });
+              if (blastHit > 0) floatTexts.push({ x: vic.x, y: vic.y - 220, text: T("ult.blast", { dmg: formatCombatNumber(blastHit) }), color: "#ff9f43", alpha: 1.0 });
               if (teamDown(sideOfUnit(vic))) { gameOver = p.team; turn = "over"; sfx.hit("ko"); } else if (vic.hp <= 0) sfx.hit("impact_unit_heavy");   // a unit down while its team stands: a short kill cue (arbitration 2026-11-19). No bleed from the wizard blast (owner 2026-11-10: remove it; bleed belongs to the spear, the axe and, per the log, the hunchback and skeleton)
             }
           });
@@ -6337,7 +6399,7 @@
       // unit.hp + "/" + unit.maxHp is normalized before it crosses the canvas text boundary.
       const maxHp = Number.isFinite(Number(unit.maxHp)) ? Math.max(0, Number(unit.maxHp)) : 0;
       const hp = Number.isFinite(Number(unit.hp)) ? Math.max(0, Math.min(maxHp, Number(unit.hp))) : 0;
-      const hpLabel = formatCombatNumber(hp) + "/" + formatCombatNumber(maxHp);
+      const hpLabel = formatCombatNumber(Math.ceil(hp)) + "/" + formatCombatNumber(maxHp);   // health rounds up, as in the dock
       ctx.font = "bold " + fs(18) + "px " + FONT_BODY;
       const hpWidth = ctx.measureText(hpLabel).width;
       const nameRoom = Math.max(12, barWidth - hpWidth - 16);
@@ -6614,9 +6676,9 @@
       // direction AND rolls in one click. While it rolls, the chosen arrow stays lit beside the die and the result shows as "▶ 3".
       if (moveMode) {
         const idle = 1 + Math.floor(performance.now() / 600) % 6;
-        drawDie(player.x, player.y - MOVE_ROW_DY + Math.sin(performance.now() / 300) * 3, idle, 56);
+        drawDie(moveRowX(), player.y - MOVE_ROW_DY + Math.sin(performance.now() / 300) * 3, idle, 56);
         for (const [dx, label, col] of [[-MOVE_BTN_DX, T("move.backBtn"), "#74b9ff"], [MOVE_BTN_DX, T("move.fwdBtn"), "#ffd32a"]]) {
-          const x = player.x + dx, y = player.y - MOVE_ROW_DY;
+          const x = moveRowX() + dx, y = player.y - MOVE_ROW_DY;
           const lit = movePoint && Math.abs(movePoint.val) >= 0.18 && (movePoint.val > 0) === (dx > 0);
           ctx.fillStyle = lit ? "rgba(60,40,6,0.95)" : "rgba(12,6,24,0.88)"; ctx.strokeStyle = col; ctx.lineWidth = lit ? 6 : 3;
           ctx.beginPath(); ctx.roundRect(x - 52, y - 24, 104, 48, 14); ctx.fill(); ctx.stroke();
