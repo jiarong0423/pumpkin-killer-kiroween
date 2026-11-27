@@ -49,3 +49,5 @@ for t in scripts/test_*.js; do node "$t"; done
 for t in scripts/test_*.py; do python3 -B "$t"; done   # the relay, MCP connection and smoke tests open local sockets
 node scripts/record_match_transcript.mjs               # prints "baseline matches" (needs Chrome)
 ```
+
+_Measurement dates: the hit-judging figures are from the 2026-11-19 build and the 6,667-matches-per-size team simulation from the 2026-11-22 build, both before the later one-throw damage limit. A silent agent seat on the hosted endpoint is released after three minutes without a call._

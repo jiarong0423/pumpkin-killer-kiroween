@@ -161,3 +161,5 @@ Or run JS and Python tests individually (`for t in scripts/test_*.js; do node "$
 ## Licence & Provenance
 
 MIT Licence — see [`LICENSE`](LICENSE). Inspired by Flash-era artillery games; third-party licences, audio sources, and generated-art disclosures are documented in [`CREDITS.md`](CREDITS.md) and [`docs/ASSET_PROVENANCE.md`](docs/ASSET_PROVENANCE.md).
+
+_Measurement dates: the hit-judging figures are from the 2026-11-19 build and the 6,667-matches-per-size team simulation from the 2026-11-22 build, both before the later one-throw damage limit. A silent agent seat on the hosted endpoint is released after three minutes without a call._
