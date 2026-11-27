@@ -7,7 +7,7 @@ mkdir -p logs_local
 LOG=logs_local/full_suite.log
 : > "$LOG"
 FAILED=0
-SOCKET_TESTS=(test_relay_reconnect_block.py test_relay_late_join.py test_fill_room_selftest.py test_relay_reconnect.py test_relay_seat_grace.py test_phone_room_check.py e2e_local.py test_mcp_stdio.py test_relay_fuzz.py test_room_alloc.py test_room_stress.py test_room_invite.py test_mcp_invite.py test_room_lobby.py test_lobby_browser.js test_relay_client_review.js)
+SOCKET_TESTS=(test_relay_reconnect_block.py test_relay_late_join.py test_fill_room_selftest.py test_relay_reconnect.py test_relay_seat_grace.py test_phone_room_check.py e2e_local.py test_mcp_stdio.py test_relay_fuzz.py test_room_alloc.py test_room_stress.py test_room_invite.py test_mcp_invite.py test_room_lobby.py test_lobby_browser.js test_relay_client_review.js test_mcp_http_deep.py)
 for f in scripts/test_*.js; do
   if [[ " ${PK_SKIP:-} " == *" ${f:t} "* ]]; then echo "SKIP $f | PK_SKIP (owner 2026-11-18: no rendering runs)" >> "$LOG"; continue; fi
   out=$(node "$f" 2>&1); rc=$?

@@ -61,7 +61,7 @@ Full architecture diagrams, match sequence flows, deployment details, and known 
 | **Backend & Relay** | Python 3.12, `websockets==15.0.1` | Minimal runtime footprint (`requirements.txt`); in-memory WebSocket relay (`scripts/pk_relay.py`) with 6-char room codes, invite tickets, reconnect grace, and rate/size guards. |
 | **AI Agent Interface** | Model Context Protocol (MCP) — stdio & Streamable HTTP | **11 tools** (7 game + 4 room: `join_room`, `lock_hero`, `leave_room`, `wait_for_turn`) via `scripts/mcp_stdio_server.py`, `scripts/pk_mcp_http.py`, and **`PageJudgeRelay`** (`scripts/page_judge_seat.js` running real `index.html` in Node.js 22); strict public-information isolation (`public_throw()`). |
 | **Cross-Runtime Determinism** | Shared JSON + Node.js 22 & Python parity | Shared constants, hit masks, and golden vectors (`shared/*.json`) verified identically in JS (`js/determinism.js`) and Python (`scripts/determinism_py.py`), checked live via `round_hash`. |
-| **Testing & Simulation** | Node.js, Python `unittest`, Headless Chrome | **209 `test_*` scripts** (`109 JS + 1 MJS + 99 Python`) + `sim_team_headless.py`, seeded property-based tests (`scripts/test_properties.js`), mixed 3v3 E2E (`0 out_of_sync`). |
+| **Testing & Simulation** | Node.js, Python `unittest`, Headless Chrome | **216 `test_*` scripts** (`112 JS + 1 MJS + 103 Python`) + `sim_team_headless.py`, seeded property-based tests (`scripts/test_properties.js`), mixed 3v3 E2E (`0 out_of_sync`). |
 | **Deployment** | Docker (`python:3.12-alpine` + `nginx` + `nodejs`), Coolify | Single-container image (`deploy/Dockerfile.coolify`); Nginx on port 80 proxies loopback-only Python/Node services with container healthchecks. |
 
 ---
@@ -84,7 +84,7 @@ Open `http://127.0.0.1:8080/`. The `--with-relay` flag starts the local WebSocke
 - **Lobby AI Fill (Multiplayer)**: With **Computer fills open places** ticked in the lobby, the host's **Start** fills open places with computer seats running in the host's browser at zero server cost (or fill from the terminal via `python3 -B scripts/fill_room.py`).
 - **External AI Agent (MCP)**: In the lobby, tick **Allow agents** so any seated player can click **Invite an agent** to generate a one-use ticket with URL, room code, and hosted `/mcp` instructions (full walkthrough in [`docs/HOST_AGENT_HOWTO.md`](docs/HOST_AGENT_HOWTO.md), or connect locally with `python3 -B scripts/make_agent_join_config.py`).
   - Runs with the player's own model account (zero LLM cost to the game host) over Streamable HTTP `/mcp` or local stdio.
-  - Supports one-use `invite=` + `lock_hero`, full-team seats, or partial-unit `claim=1..units`; `PageJudgeRelay` judges room turns on the real `index.html` page via Node.js 22 (`PK_MCP_PAGE_JUDGE=auto`).
+  - Supports one-use `invite=` + `lock_hero`, full-team seats, or partial-unit `claim=1..units`; `PageJudgeRelay` judges room turns on the real `index.html` page via Node.js 22. This is the only judging path for agent seats (room play needs Node 22 or newer). The hosted endpoint seats up to 10 agents at once; further joins wait briefly in order and are then told to try again.
   - Sees only public player information through **7 game tools** (`get_public_state`, `get_roster`, `get_history`, `submit_action`, `end_turn`, `set_notes`, `get_notes`) and **4 room tools** (`join_room`, `lock_hero`, `leave_room`, `wait_for_turn`).
 
 ### 4. How a Turn Works
@@ -133,7 +133,7 @@ Additional AI coding assistants handled later page wiring, team-battle integrati
 | **JS page vs Python engine flight parity** (both directions, wind & weather) | 67,456 shots each way, 0 mismatches | `docs/rear_rear_weather_wind_20261119.json` |
 | **Team engine simulation** | 6,667 matches at each of 1, 2, and 3 units per side, 20 rule checks, 0 failures | `redteam/evidence/sim_team_full_run2_20261122_summary.txt` |
 | **Built-in AI hit rates** (hits per throw) | Easy `0.141`, Normal `0.332`, Hard `0.462` | `node scripts/test_page_ai_hit_rates.js` |
-| **Full test suite** | **209 `test_*` scripts (`109 JS + 1 MJS + 99 Python`) + `sim_team_headless.py`**: `zsh scripts/run_full_suite.sh` gives `195 PASS, 1 FAIL, 13 SKIP` (the one failure: `test_start_screen_fit.js` reports secondary start-screen controls under 44 px on the smallest landscape phones, a trade-off for showing the same picture on every screen); **13/13** local-socket scripts + **8/8** `PageJudgeRelay` unit tests + 2-match mixed 3v3 E2E (`0 out_of_sync`) pass outside sandbox | `zsh scripts/run_full_suite.sh` |
+| **Full test suite** | **216 `test_*` scripts (`112 JS + 1 MJS + 103 Python`) + `sim_team_headless.py`**: `zsh scripts/run_full_suite.sh` gives `201 PASS, 1 FAIL, 14 SKIP` (the one failure: `test_start_screen_fit.js` reports secondary start-screen controls under 44 px on the smallest landscape phones, a trade-off for showing the same picture on every screen); the local-socket scripts and the `PageJudgeRelay` tests + 2-match mixed 3v3 E2E (`0 out_of_sync`) pass outside sandbox | `zsh scripts/run_full_suite.sh` |
 | **Deployed container E2E** | Built and verified locally: page, relay, `/mcp` (`PageJudgeRelay` + Node.js 22), and health checks respond through nginx; late join into a started room is refused; foreign origins are blocked | `redteam/evidence/prepush_docker_e2e_20261124.txt` |
 
 Run the test suite:

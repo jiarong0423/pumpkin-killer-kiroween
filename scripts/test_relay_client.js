@@ -100,6 +100,24 @@ function harness(token) {
   assert.strictEqual(h.client.state().phase, 'white');
 })();
 
+(function testResumeAcrossRematchDoesNotDropNewMatchStart() {
+  var h = harness('seat-token');
+  h.sockets[0].open();
+  var starts = [];
+  h.client.onMessage(function (message) { if (message.type === 'start') starts.push(message.seed); });
+  h.sockets[0].message({ type: 'start', seq: 1, seed: 111, scene: 'graveyard', round: 1, phase: 'red' });
+  h.sockets[0].message({ type: 'end_turn', seq: 2, round: 1, phase: 'red', next_round: 4, next_phase: 'red' });
+  assert.strictEqual(h.client.state().round, 4);
+  h.sockets[0].close();
+  var timer = h.runNext(); h.advance(1000); timer.fn(); h.sockets[1].open();
+  // While disconnected, match 1 ended, lobby reset, and match 2 started at round 1 (old log pruned to first_seq=12).
+  h.sockets[1].message({ type: 'room_state', seat: 'red', started: true, seed: 222, round: 1, phase: 'red', first_seq: 12, last_seq: 12 });
+  h.sockets[1].message({ type: 'start', seq: 12, seed: 222, scene: 'graveyard', round: 1, phase: 'red' });
+  assert.deepStrictEqual(starts, [111, 222]);
+  assert.strictEqual(h.client.state().round, 1);
+  assert.strictEqual(h.client.state().seed, 222);
+})();
+
 (function testReconnectGivesUpAfterSixtySeconds() {
   var h = harness('token');
   h.sockets[0].open();

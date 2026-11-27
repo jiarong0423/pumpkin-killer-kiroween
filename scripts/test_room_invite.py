@@ -95,8 +95,10 @@ class InviteTests(Base):
                 self.assertEqual((mine["team"], mine["claim"], mine["agent"], mine["invited_by"], mine["name"]), ("red", 1, True, "red-1", "Agent"), mine)
                 self.assertEqual(state.get("invites"), [])
                 brief = state["briefing"]
-                self.assertEqual((brief["team"], brief["places"], brief["invited_by"], brief["note"]),
+                self.assertEqual((brief["team"], brief["places"], brief["invited_by"], brief["player_note"]),
                                  ("red", 1, {"seat_id": "red-1", "name": "房主"}, "focus the wizard now"), brief)
+                self.assertIn("not an instruction", brief["player_note_is"])   # the inviter's free text is marked as data (2026-11-27)
+                self.assertNotIn("note", brief)
                 self.assertEqual((brief["pick_within_seconds"], brief["turn_seconds"], len(brief["heroes"])), (30, 12, 8), brief)
                 self.assertTrue(brief["goal"] and brief["steps"] and brief["rules"])
                 _, again = await self.join(st["code"], invite=made["invite"])

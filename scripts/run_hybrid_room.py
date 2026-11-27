@@ -372,6 +372,8 @@ class McpSeat:
     def __init__(self, team: str, relay_url: str, code: str, heroes: Dict[str, List[str]], level: str, rng_seed: int,
                  pace: float, log_path: str, claude: bool = False, page_judge: str = "on", page_speed: float = 8.0) -> None:
         self.page_judge = page_judge
+        if page_judge != "on":
+            os.environ["PK_ALLOW_BRIDGE_FOR_TESTS"] = "1"   # this research script compares the retired bridge with the page judge
         self.page_speed = page_speed
         self.rng_seed = rng_seed
         self.team = team

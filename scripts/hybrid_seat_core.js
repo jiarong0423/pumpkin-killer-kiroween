@@ -144,7 +144,9 @@ function installHybridSeat(config) {
           idle = idle && !busy();
           if (gameOver) { if (gameOverSeen === null) gameOverSeen = fakeNow; if (!manual && fakeNow - gameOverSeen > 4000 && !(G.__pacedPending > 0)) { finish("game_over"); return; } }
         }
-        if (!busy() && !gameOver) { fakeNow += STEP * 1000; runDueTimers(); updatePhysics(STEP); simSteps++; }   // one idle tick keeps the page's own timers (end_turn waits, round timers) moving
+        // one idle tick keeps the page's own timers (end_turn waits, round timers) moving. It never runs ahead of the paced clock: steps taken while waiting
+        // used to count against the next throw, and the seat then stood still for about 50 s until real time caught up (Q02, 2026-11-27). speed 0 = unpaced.
+        if (!busy() && !gameOver && (!(speed > 0) || (realNow - realStart) * speed / 1000 / STEP > simSteps)) { fakeNow += STEP * 1000; runDueTimers(); updatePhysics(STEP); simSteps++; }
       }
       }
     } catch (e) {

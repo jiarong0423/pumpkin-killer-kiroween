@@ -1478,6 +1478,8 @@
     }
     function leaveRoomNow() {
       closeRelayFillers();
+      matchGen++; lateHits = 0; lateAdvance = null;
+      relayQueueMode = false; relayInbox.length = 0; relayWait = null; relayJudge = null; relayJudgesIn = []; relayMateOpen = false; relayMateFlight = false; relayIncoming = 0; relayRemoteOpen = false;   // nothing of the left room may be handled later
       if (relayClient) { try { relayClient.close(); } catch (_) {} relayClient = null; }
       relayRoomCode = ""; relayRoomConfirmed = false; relayCreateSent = false; relayIsHost = false;
       relaySeats = []; relaySeatId = ""; relayPlaying = false; relayLeft = true;
@@ -1816,7 +1818,10 @@
       if (m.seat_token && lobbyState.code) {   // the private bootstrap: remember the seat for a refresh, and make the address a lobby link so a refresh comes back here
         lobbyRememberSeat(lobbyState.code, m.seat_token);
         try { history.replaceState(null, "", lobbyLink(lobbyState.code)); } catch (_) { /* cosmetic */ }
-        if (m.started && !matchStarted) { lobbyToast(T("lobby.err.roomStarted")); setTimeout(() => lobbyLeave(true), 1200); return; }   // refreshed in the middle of a match: this page cannot rejoin it
+        if (m.started && !matchStarted) {   // refreshed in the middle of a match: this page cannot rejoin it
+          const old = relayClient; relayClient = null; try { if (old) old.leave(); } catch (_) { /* gone already */ }   // release the seat and drop the client at once: the replay of that match must not reach this page (S03, 2026-11-27)
+          lobbyToast(T("lobby.err.roomStarted")); setTimeout(() => lobbyLeave(true), 1200); return;
+        }
       }
       if (m.started) return;
       (LobbyModel.welcome(prev, lobbyState, relaySeatId) || []).slice(-1).forEach(w => lobbyToast(w.kind === "self" ? T("lobby.welcomeSelf", { code: w.code }) : T("lobby.welcomeHost", { name: w.name || T("lobby.unnamed") })));
@@ -1859,7 +1864,7 @@
     function lobbyBack() {   // F9: back to the lobby of the same room: same people, seats and names; heroes unlocked
       if (relayIsHost) relayFillers.forEach(f => { if (f.seatId) { try { relayClient.kick(f.seatId); } catch (_) { /* gone already */ } } });   // the fillers live in this browser: their seats go, the host fills again at the next start
       closeRelayFillers();
-      relayPlaying = false; relayWait = null; relayQueueMode = false; relayInbox.length = 0; relayMateOpen = false; relayMateFlight = false; relayLastSeq = 0; relayIncoming = 0; relayRemoteOpen = false; relayJudge = null; relayJudgesIn = [];
+      relayPlaying = false; relayWait = null; relayQueueMode = false; relayInbox.length = 0; relayMateOpen = false; relayMateFlight = false; relayLastSeq = 0; relayLanded = {}; relayLastOwnRef = 0; relayIncoming = 0; relayRemoteOpen = false; relayJudge = null; relayJudgesIn = [];
       gameOver = null; lobbyFillAsked = false; resetGame(); showStartScreen(); lobbyShow(true);
     }
     function lobbyHostGone() { const st = lobbyState || {}; return !!st.host_seat_id === false || !relaySeats.some(s => s.seat_id === st.host_seat_id); }
@@ -2134,7 +2139,7 @@
     // ---- Rooms over the relay (docs/relay_protocol_20261115.md, docs/relay_team_page_hooks.md items 1, 5, 7): a friend or an agent plays the right side through scripts/pk_relay.py.
     // Everything here runs only while relayLive() (the relay sent `start` and this page is a human seat); play against the computer and hot-seat play never reach it.
     // Every device simulates every throw from the numbers in the action (same fixed-step flight, seeded randomness), the victim's device answers with `judge`, `round_hash` once per round, `end_turn` after each turn.
-    let relayLanded = {};   // the other side's health when this page's last throw had landed
+    let relayLanded = {}, relayLastOwnRef = 0;   // the other side's health when this page's last throw had landed, and that throw's relay seq
     let relayPlaying = false, relayLeft = false, relayIsHost = false, relaySeatId = "", relaySeats = [], relayWait = null, relayIncoming = 0, relayRemoteOpen = false, relayJudge = null, relayJudgesIn = [], remoteApplying = false, relayForcedStart = null;
     const NATIVE_RANDOM = Math.random;   // a throw or hit that stops half way must never leave the seeded stream installed (loop() puts the real one back)
     const relayLive = () => relayPlaying && !!(relayClient && relayRoomCode);
@@ -2184,7 +2189,7 @@
     }
     function relayAfterAttack(team) {   // advanceAfterAttack in a room: the last projectile of a throw has landed on this device
       if (team === "ai") { relayIncoming = Math.max(0, relayIncoming - 1); relaySendJudges(); }
-      else { relayLanded = {}; unitsOf("right").forEach(u => { relayLanded[u.id] = u.hp; }); relayJudgesIn.splice(0).forEach(relayCompareJudge); }
+      else { relayLanded = { ref: relayLastOwnRef }; unitsOf("right").forEach(u => { relayLanded[u.id] = u.hp; }); relayJudgesIn.splice(0).forEach(relayCompareJudge); }
       const quiet = team === "player" && relayMateFlight; if (quiet) relayMateFlight = false;   // a teammate's throw: the teammate sends the end_turn, not this page
       relayAfterTurn(team, false, quiet);
     }
@@ -2203,6 +2208,7 @@
     }
     function relayCompareJudge(m) {   // the attacker compares the victim's answer with its own simulation: a difference is shown, never hidden (protocol section 6)
       if (m.hit !== true) return;
+      if (typeof m.ref === "number" && relayLanded.ref && m.ref < relayLanded.ref) return;   // a late judge from an earlier throw must not be compared against a newer throw's snapshot
       const v = unitsOf("right").find(x => x.id === m.unit);
       if (!v) return;
       const mine = relayLanded[m.unit] !== undefined ? relayLanded[m.unit] : v.hp;   // health as the throw left it: a late answer (reconnect) must not be compared after a poison or bleed tick
@@ -2222,6 +2228,8 @@
       }
       return { x, y };
     }
+    // Both left the field on the same side: the exact x of the first step outside says nothing (the throw touches nobody) and may differ by a few px.
+    const relayLandingAgrees = (own, claimed) => Math.abs(own - claimed) <= 4 || (own < 0 && claimed < 0) || (own > CANVAS_W && claimed > CANVAS_W);
     function relayApplyAction(m) {   // a remote action (already in this page's frame): run the same simulation from its numbers
       if (m.seat_id === relaySeatId) return;
       const mate = relayIsTeammate(m.seat_id), side = mate ? "left" : "right", who = mate ? "player" : "ai";   // P2: a teammate plays one of MY team's units
@@ -2235,7 +2243,7 @@
         const remoteProfile = u.profile || (u === player ? currentHero : ai.profile);
         const remoteWave = !!(HERO_PROFILES[remoteProfile] && HERO_PROFILES[remoteProfile].weapon === "proj_soundwave");
         const land = relayFlightLanding(m.start.x, m.start.y, m.power, m.angle, m.dirX, remoteWave);
-        if (Math.abs(land.x - m.claimed_landing.x) > 4) { console.warn("relay claimed landing differs", land.x, m.claimed_landing.x); relayNote("relay.outOfSync"); }
+        if (!relayLandingAgrees(land.x, m.claimed_landing.x)) { console.warn("relay claimed landing differs", land.x, m.claimed_landing.x); relayNote("relay.outOfSync"); }
       }
       if (mate) { relayLanded = {}; relayMateFlight = true; setActiveUnit("left", u); }   // a teammate's throw: this page only simulates it, the victim's page judges, the teammate ends the turn
       else {
@@ -2301,7 +2309,7 @@
     }
     function relayInboxReady(m) {
       if (m.seat_id === relaySeatId) return true;   // the echo of this page's own message
-      const st = relaySnap(), mine = st.seat, opp = mine === "red" ? "white" : "red", mate = relayIsTeammate(m.seat_id), idle = !projectiles.length && !diceRoll && relayIncoming === 0 && !relayMateFlight;
+      const st = relaySnap(), mine = st.seat, opp = mine === "red" ? "white" : "red", mate = relayIsTeammate(m.seat_id), idle = !projectiles.length && !diceRoll && relayIncoming === 0 && !relayMateFlight && lateHits === 0;
       if (m.type === "action") return idle && (mate ? (relayMateOpen && m.round === roundNum && m.phase === mine) : (relayRemoteOpen && m.round === roundNum && m.phase === opp));
       if (m.type === "judge") return idle;
       if (m.type === "end_turn") {
@@ -2322,8 +2330,8 @@
       }
     }
     function relayDispatch(m) {   // action, judge and end_turn from the ordered log (the relay sends them to every seat, the sender included)
-      if (m.type === "action") relayApplyAction(m);
-      else if (m.type === "judge") { if (m.seat_id !== relaySeatId) { if (projectiles.length) relayJudgesIn.push(m); else relayCompareJudge(m); } }
+      if (m.type === "action") { if ((m.seat_id === relaySeatId || relayIsTeammate(m.seat_id)) && typeof m.seq === "number") relayLastOwnRef = m.seq; relayApplyAction(m); }
+      else if (m.type === "judge") { if (m.seat_id !== relaySeatId) { if (projectiles.length || lateHits > 0) relayJudgesIn.push(m); else relayCompareJudge(m); } }
       else if (m.type === "seat_left") relayOpponentLeft(m);   // the relay held the seat for its grace period and the player never came back
       else if (m.type === "end_turn") {
         if (relayWait && relayMyTurn(relayWait.round)) { const w = relayWait; relayWait = null; w.fn(); return; }
@@ -2362,7 +2370,7 @@
       showFirstHint();   // a room match shows the first-turn hint too (red team polish P4); shown at most once per device
       relayQueueMode = ["red", "white"].some(t => relaySeats.filter(x => x.team === t).length > 1); relayInbox.length = 0; relayLastSeq = 0; relayCursor = { round: m.round || 1, phase: m.phase || "red" };   // ordered handling only where a team has two or more seats
       relayMateOpen = false; relayMateFlight = false;   // red-team R1 A1: flags of a previous room must not leak into this one
-      relayPlaying = true; relayLeft = false; relayLanded = {}; relayIncoming = 0; relayRemoteOpen = false; relayWait = null; relayJudge = null; relayJudgesIn = [];
+      relayPlaying = true; relayLeft = false; relayLanded = {}; relayLastOwnRef = 0; relayIncoming = 0; relayRemoteOpen = false; relayWait = null; relayJudge = null; relayJudgesIn = [];
       seats.left = "human"; if (seats.right === "ai") seats.right = "human";
       const st = relaySnap();
       firstOpener = st.seat === "red" ? "player" : "ai";   // first_team is red in relay v0; the opener then alternates every round (openerOfRound)
@@ -4727,7 +4735,7 @@
 
     let fillerLook = 0;
     function updatePhysics(dt) {
-      if (relayQueueMode && relayInbox.length) relayDrain();   // a queued relay message whose turn has come
+      if (relayLive() && relayQueueMode && relayInbox.length) relayDrain();   // a queued relay message whose turn has come (never after the room is gone)
       if (relayFillers.length && (fillerLook += dt) > 1) { fillerLook = 0; maybeTriggerFillerTurn(); }   // a computer seat whose one trigger came while this page was busy is asked again (it acts once per turn)
       syncWeatherFx(); if (weatherFx) weatherFx.update(dt, effWind());
       if (windField) { windField.setWind(wind); windField.update(dt); }

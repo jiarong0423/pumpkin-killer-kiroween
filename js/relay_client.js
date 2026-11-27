@@ -288,7 +288,7 @@
 
     function applyMessage(message) {
       match.log.push(message);
-      if (isOldRound(message)) return;
+      if (message.type !== 'start' && isOldRound(message)) return;
       if (message.type === 'room_state') {
         updateFromRoomState(message);
       } else if (message.type === 'start') {
@@ -316,7 +316,7 @@
         setStatus('out_of_sync');
       } else if (message.type === 'lobby_reset') {   // R6b: back to the lobby of the same room: the match is over, the next `start` begins a new one
         match.round = null; match.phase = null; match.seed = null; match.heroes = null; match.owners = null; match.log = [];
-        hashesByRound = Object.create(null); unacked = []; resendAt = null;
+        hashesByRound = Object.create(null); unacked = []; resendAt = null; replayUntil = lastSeq;
         setStatus('waiting');
       }
       notifyMessage(message);
@@ -337,7 +337,12 @@
         return;
       }
       if (message.type === 'room_state' && typeof message.seq !== 'number') {
-        if (Number.isInteger(message.first_seq) && message.first_seq > expectedSeq) { expectedSeq = message.first_seq; lastSeq = message.first_seq - 1; Object.keys(buffered).forEach(function (k) { if (+k < expectedSeq) delete buffered[k]; }); }   // R6b, red team A2: the room went back to the lobby and its log starts here; what came before is gone (a joiner, or a resume across the reset)
+        if (Number.isInteger(message.first_seq) && message.first_seq > expectedSeq) {
+          expectedSeq = message.first_seq; lastSeq = message.first_seq - 1;
+          Object.keys(buffered).forEach(function (k) { if (+k < expectedSeq) delete buffered[k]; });
+          match.round = null; match.phase = null; match.seed = null; match.heroes = null; match.owners = null; match.log = [];
+          hashesByRound = Object.create(null);
+        }   // R6b, red team A2: the room went back to the lobby and its log starts here; what came before is gone (a joiner, or a resume across the reset)
         if (typeof message.seat_id === 'string') mySeatId = message.seat_id;
         if (awaitingAnswer && seatToken && typeof message.last_seq !== 'number' && typeof message.seat_token !== 'string') { notifyMessage(message); updateFromRoomState(message); return; }   // a broadcast that overtook the resume answer (no token, no last_seq): not the answer (external review)
         if (awaitingAnswer && seatToken) resendAt = typeof message.last_seq === 'number' ? message.last_seq : lastSeq;   // resend what is still unacknowledged once the replay up to here is applied

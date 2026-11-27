@@ -39,6 +39,7 @@ DEFAULT_PORT = 8767
 DEFAULT_RELAY_URL = "ws://127.0.0.1:8765/ws"
 DEFAULT_MAX_SESSIONS = 64
 DEFAULT_IDLE_SECONDS = 1800.0
+DEFAULT_SEAT_IDLE_SECONDS = 180.0   # an agent seat that holds a page judge and has made no call for this long leaves its room, so the place is free again
 DEFAULT_MAX_SESSIONS_PER_IP = 8
 
 
@@ -159,6 +160,29 @@ class McpHttpServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
                 entry.server.close()
             except Exception:
                 pass
+        self._release_idle_seats()
+
+    def _release_idle_seats(self) -> None:
+        """Take a silent agent out of its room (the MCP session stays; it may join again). A request in progress is never interrupted."""
+        try:
+            seat_idle = float(os.environ.get("PK_MCP_SEAT_IDLE_SECONDS", str(DEFAULT_SEAT_IDLE_SECONDS)))
+        except ValueError:
+            seat_idle = DEFAULT_SEAT_IDLE_SECONDS
+        if seat_idle <= 0:
+            return
+        cutoff = time.monotonic() - seat_idle
+        with self._sessions_lock:
+            silent = [e for e in self._sessions.values() if e.last_used < cutoff and getattr(getattr(e.server, "relay", None), "_slot_held", False)]
+        for entry in silent:
+            if not entry.lock.acquire(blocking=False):
+                continue
+            try:
+                if entry.last_used < cutoff:
+                    entry.server._tool_leave_room({})
+            except Exception as exc:
+                sys.stderr.write("idle seat release failed: %r\n" % (exc,))
+            finally:
+                entry.lock.release()
 
     def _reap_loop(self) -> None:
         while not self._stop_reaper.wait(30.0):
@@ -291,7 +315,7 @@ class McpHttpHandler(http.server.BaseHTTPRequestHandler):
         raw = self.rfile.read(length)
         try:
             payload = json.loads(raw.decode("utf-8"))
-        except (UnicodeDecodeError, ValueError):
+        except (UnicodeDecodeError, ValueError, RecursionError):   # RecursionError: arrays nested thousands deep inside the size limit
             self._send_json(400, mcp._rpc_error(None, -32700, "Parse error"))
             return
 
@@ -380,9 +404,12 @@ def main() -> int:
     parser.add_argument("--allowed-origins", default=os.environ.get("PK_ALLOWED_ORIGINS", ""))
     parser.add_argument("--max-sessions", type=int, default=int(os.environ.get("PK_MCP_MAX_SESSIONS", str(DEFAULT_MAX_SESSIONS))))
     parser.add_argument("--idle-seconds", type=float, default=float(os.environ.get("PK_MCP_IDLE_SECONDS", str(DEFAULT_IDLE_SECONDS))))
-    parser.add_argument("--page-judge", default=os.environ.get("PK_MCP_PAGE_JUDGE", "off"), choices=["off", "auto", "on"])
+    parser.add_argument("--page-judge", default=os.environ.get("PK_MCP_PAGE_JUDGE", "on"), choices=["off", "auto", "on"])
     parser.add_argument("--max-sessions-per-ip", type=int, default=int(os.environ.get("PK_MCP_MAX_SESSIONS_PER_IP", str(DEFAULT_MAX_SESSIONS_PER_IP))))
     args = parser.parse_args()
+    retired = mcp.retired_judge_path(args.page_judge, True)
+    if retired:
+        parser.error(retired)
 
     srv = create_server(
         host=args.host,

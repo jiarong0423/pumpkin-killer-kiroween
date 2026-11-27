@@ -1462,6 +1462,51 @@ class BuiltinPracticeSeat:
 
 _PAGE_JUDGE_LOCK = threading.Lock()
 _PAGE_JUDGE_ACTIVE = 0
+_PAGE_JUDGE_FREED = threading.Condition(_PAGE_JUDGE_LOCK)
+_PAGE_JUDGE_QUEUE: List[object] = []   # joins waiting for a free judge, first come first served
+PAGE_JUDGE_RETRY_SECONDS = 30
+
+
+def retired_judge_path(mode: str, rooms: bool) -> str:
+    """One way to judge a room for every product entry point: the real page (owner 2026-11-27). The old engine approximation stays only
+    for its own tests (PK_ALLOW_BRIDGE_FOR_TESTS=1). Returns the reason to refuse to start, or an empty string."""
+    if os.environ.get("PK_ALLOW_BRIDGE_FOR_TESTS") == "1":
+        return ""
+    if mode != "on":
+        return "--page-judge %s is retired: rooms are judged by the real page only" % mode
+    if rooms and shutil.which("node") is None:
+        return "playing in a room needs Node 22 or newer (the real page judges it); install Node and start again"
+    return ""
+
+
+def _env_count(name: str, default: float) -> float:
+    try:
+        return max(0.0, float(os.environ.get(name, str(default))))
+    except ValueError:
+        return default
+
+
+def _take_judge_slot() -> bool:
+    """One of the page-judge places. When all are used a join waits its turn in a short queue (PK_MCP_JUDGE_QUEUE places, 10;
+    at most PK_MCP_JUDGE_WAIT seconds, 20); a full queue or a wait that runs out refuses the join."""
+    global _PAGE_JUDGE_ACTIVE
+    with _PAGE_JUDGE_LOCK:
+        if not _PAGE_JUDGE_QUEUE and _PAGE_JUDGE_ACTIVE < _max_page_judges():
+            _PAGE_JUDGE_ACTIVE += 1
+            return True
+        if len(_PAGE_JUDGE_QUEUE) >= int(_env_count("PK_MCP_JUDGE_QUEUE", 10)):
+            return False
+        ticket = object()
+        _PAGE_JUDGE_QUEUE.append(ticket)
+        try:
+            free = _PAGE_JUDGE_FREED.wait_for(lambda: _PAGE_JUDGE_QUEUE[0] is ticket and _PAGE_JUDGE_ACTIVE < _max_page_judges(),
+                                              timeout=_env_count("PK_MCP_JUDGE_WAIT", 20))
+            if free:
+                _PAGE_JUDGE_ACTIVE += 1
+            return bool(free)
+        finally:
+            _PAGE_JUDGE_QUEUE.remove(ticket)
+            _PAGE_JUDGE_FREED.notify_all()
 
 
 def _max_page_judges() -> int:
@@ -1527,16 +1572,14 @@ class PageJudgeRelay:
             if self._slot_held:
                 self._slot_held = False
                 _PAGE_JUDGE_ACTIVE = max(0, _PAGE_JUDGE_ACTIVE - 1)
+                _PAGE_JUDGE_FREED.notify_all()
 
     # ---- process
     def start(self) -> None:
-        global _PAGE_JUDGE_ACTIVE
-        with _PAGE_JUDGE_LOCK:
-            if _PAGE_JUDGE_ACTIVE >= _max_page_judges():
-                self.failure = "server_busy: page-judge limit reached"
-                return
-            _PAGE_JUDGE_ACTIVE += 1
-            self._slot_held = True
+        if not _take_judge_slot():
+            self.failure = "server_busy: all %d agent seats are in use; call join_room again in %d seconds" % (_max_page_judges(), PAGE_JUDGE_RETRY_SECONDS)
+            return
+        self._slot_held = True
         session = self.session
         session.weather_enabled = True
         session.sync = {"status": "pending", "round": session.engine.round_num}
@@ -1835,6 +1878,7 @@ class ConnectedRelay:
         self.unacked: List[Dict[str, Any]] = []
         self.judged_refs: set = set()
         self.received_actions: List[int] = []
+        self.room_throws = 0   # throws of the current match in relay order; the page counts the same ones (rare-big-hit dice)
         self.last_sent_action: Optional[Dict[str, Any]] = None
         self.last_sent_engine_unit: Optional[str] = None
 
@@ -2139,6 +2183,7 @@ class ConnectedRelay:
                 team_size = message.get("team_size", 1)
                 parsed_ts = team_size if isinstance(team_size, int) and not isinstance(team_size, bool) else None
                 self.session.reset_for_relay(seed, scene, parsed_ts, message.get("heroes"))
+                self.room_throws = 0
                 self.relay_owners = dict(message["owners"]) if isinstance(message.get("owners"), dict) else {}
                 if self.claim_heroes is not None:
                     owners = message.get("owners")
@@ -2211,6 +2256,8 @@ class ConnectedRelay:
         team = seat_id.split("-", 1)[0]
         if team not in ("red", "white"):
             return
+        if message.get("kind", "throw") in ("throw", "ultimate"):
+            self.room_throws += 1   # the page numbers EVERY throw of the match (own, teammate, opponent); the number seeds the rare-big-hit dice
         if seat_id == self.seat_id or (team == self.seat and self.claim_heroes is None):
             return
         action = {"type": "throw", "angle": message.get("angle"), "power": message.get("power")}
@@ -2274,10 +2321,11 @@ class ConnectedRelay:
         if target is None and wall_at is not None:
             self.hit_wall()   # the throw ended on the fence
         outcome = {"damage": 0, "statuses": [], "knockback": 0}
+        throw_id = self.room_throws
         if target is not None:
             impact = hit_pair[1]
             self.session.engine.weather = self.session.weather()
-            outcome = self.session.engine._apply_hit(attacker, target, impact["x"], impact["y"])
+            outcome = self.session.engine._apply_hit(attacker, target, impact["x"], impact["y"], throw_id=throw_id)
         if target is not None and not self.owns_wire_unit(self.wire_unit(target["id"])):
             return   # LIVE-3V3-2: a teammate's unit was hit; its owner judges it (the relay refuses unit_not_yours). The hit is applied here as well.
         if self.session.engine.units_per_side > 1 and target is None:
@@ -2298,6 +2346,16 @@ class ConnectedRelay:
             # of letting message timing leave its pending throw in the hash.
             details = {"unit": self.last_sent_engine_unit}
         if details is None:
+            # A teammate's throw or a teammate getting hit: still sync authoritative hp/alive/statuses so team turn rotation stays aligned with the page.
+            unit_id = self.engine_unit(message.get("unit"))
+            if isinstance(unit_id, str) and unit_id in self.session.engine.units:
+                unit = self.session.engine.units[unit_id]
+                hp_after = message.get("hp_after")
+                if isinstance(hp_after, (int, float)):
+                    unit["hp"] = max(0, float(hp_after))
+                    unit["alive"] = unit["hp"] > 0
+                if "statuses" in message:
+                    engine.set_status_words(unit, message.get("statuses", []))
             return
         source_id = details.get("unit")
         source = self.session.engine.units.get(source_id) if isinstance(source_id, str) else None
@@ -2871,8 +2929,8 @@ def main(argv: Optional[List[str]] = None) -> int:
                         help="invitation code used only to join --connect")
     parser.add_argument("--auto-ready", action="store_true",
                         help="send ready after joining a relay room")
-    parser.add_argument("--page-judge", default="auto", choices=["auto", "on", "off"],
-                        help="room play: judge with the real page (scripts/page_judge_seat.js, needs Node 22+) instead of the engine's approximation; auto = on when Node is found")
+    parser.add_argument("--page-judge", default="on", choices=["auto", "on", "off"],
+                        help="room play is judged by the real page (scripts/page_judge_seat.js, needs Node 22+); auto and off are retired (tests only)")
     parser.add_argument("--page-speed", type=float, default=1.0,
                         help="page judge: fake seconds per real second; 1 is real time (use the same rate as the opposing page)")
     parser.add_argument("--room-tools", action="store_true",
@@ -2880,6 +2938,9 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--relay", default=None,
                         help="default relay WebSocket URL for join_room (implies --room-tools)")
     args = parser.parse_args(argv)
+    retired = retired_judge_path(args.page_judge, bool(args.connect or args.room_tools or args.relay))
+    if retired:
+        parser.error(retired)
     if bool(args.connect) != bool(args.code):
         parser.error("--connect and --code must be provided together")
     if args.connect and args.seat not in ("red", "white"):
