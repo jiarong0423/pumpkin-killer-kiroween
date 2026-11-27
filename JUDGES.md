@@ -1,6 +1,6 @@
 # Judges' guide
 
-Every claim here has a path and a command; run commands from the repository root. The game is described in `README.md`; the full, honest account of how Kiro was used is `docs/KIRO_USAGE_20261116.md` (read that first). Note: the public repository is a privacy-cleaned snapshot of the development repository (528+ non-merge development commits, 115+ naming Kiro tasks); all published task briefs, result reports, and `.kiro/` artefacts are preserved here. Numbers below were recounted on 2026-11-26.
+Every claim here has a path and a command; run commands from the repository root. The game is described in `README.md`; the full, honest account of how Kiro was used is `docs/KIRO_USAGE_20261116.md` (read that first). Note: the public repository is a privacy-cleaned snapshot of the development repository (528+ non-merge development commits, 115+ naming Kiro tasks); all published task briefs, result reports, and `.kiro/` artefacts are preserved here. Numbers below were recounted on 2026-11-26; the test counts on 2026-11-27.
 
 ## The Kiro material at a glance
 

@@ -125,6 +125,6 @@ Updated 2026-11-26 from repository records (Submission Period began 2026-10-30).
 - **Start date.** First development commit: 2026-10-31 (within the Submission Period beginning 2026-10-30). No shipped code or art predates 2026-10-30.
 - **Code libraries.** Browser game: none (plain HTML5 Canvas + JS/CSS). Container runtime: Python 3.12 (`websockets==15.0.1`, optional `boto3==1.34.162`) and Node.js 22 (`PageJudgeRelay`).
 - **Fonts.** Three SIL OFL fonts (`Cinzel Decorative`, `Noto Sans TC`, `Noto Serif TC`), listed above with licence files.
-- **Sounds and music.** CC0 audio from Kenney, OpenGameArt, and BigSoundBank, plus 4 Pixabay Content License status sounds and 22 owner-supplied Gemini SFX files (`assets/audio/CREDITS.md`; unsampled sounds synthesized in `js/audio.js`).
+- **Sounds and music.** CC0 audio from Kenney, OpenGameArt, and BigSoundBank, plus 4 Pixabay Content License status sounds, 22 owner-supplied Gemini SFX files and 2 background-music tracks the owner generated with Google Flow Music (`assets/audio/CREDITS.md`; unsampled sounds synthesized in `js/audio.js`).
 - **Pictures.** Third-party CC0 particle sprites from Kenney (`assets/fx/kenney/`), plus owner-pipelined Qwen-Image-Edit, Gemini, and Flow AI artwork (`docs/ASSET_PROVENANCE.md`). Temporary sketch `ref_bar_from_video.png` was deleted and never shipped.
 - **Generated code and text.** Kiro and AI coding/review assistants wrote code, tests, and docs under owner direction and verification (`docs/KIRO_USAGE_20261116.md`).

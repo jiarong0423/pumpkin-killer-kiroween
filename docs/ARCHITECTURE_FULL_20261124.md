@@ -75,7 +75,7 @@ flowchart TB
 | Game page | `index.html`, `js/`, `css/`, `shared/` | Whole game on a 1920x1080 canvas; fixed 1/60 s physics; full-screen Lobby (`js/lobby_model.js`) | built, tested, live |
 | Relay | `scripts/pk_relay.py` | Creates rooms with a random 6-character code, assigns seats and one-use invite tickets, sends the same seed, forwards only allowlisted actions (1 unit per team turn), checks size (16 KiB), rate (10 msgs/s), seat and phase | built, tested, live |
 | MCP stdio bridge | `scripts/mcp_stdio_server.py` | 7 game tools and 4 room tools (`join_room`, `lock_hero`, `leave_room`, `wait_for_turn`) + **`PageJudgeRelay`** (`scripts/page_judge_seat.js` running `index.html` on Node.js 22) | built, tested with real pages |
-| MCP over HTTP | `scripts/pk_mcp_http.py` | The same 11 tools + `PageJudgeRelay` at `/mcp` (`PK_MCP_PAGE_JUDGE=auto`, `PK_MCP_MAX_PAGE_JUDGES=10`) for remote agents; Origin allowlist, locked to the local relay, per-client session cap | built, tested, live (`https://pumpkin.jace0423.com/mcp`) |
+| MCP over HTTP | `scripts/pk_mcp_http.py` | The same 11 tools + `PageJudgeRelay` at `/mcp` (`PK_MCP_PAGE_JUDGE=on`, the only path since 2026-11-27; `PK_MCP_MAX_PAGE_JUDGES=10`) for remote agents; Origin allowlist, locked to the local relay, per-client session cap | built, tested, live (`https://pumpkin.jace0423.com/mcp`) |
 | Computer seat | `scripts/hybrid_seat_core.js`, `scripts/fill_room.py`, `scripts/run_slot_room.py`, `scripts/host_room.py`, `#lobby-allow-ai` | With **Computer fills open places** ticked in the lobby, host **Start** fills open places in the host's browser (zero server cost); headless scripts also work from CLI | built, tested |
 | AI gateway | `scripts/pk_ai_gateway.py` | Optional text generation backend | built; copied into image |
 | Deploy | `deploy/Dockerfile.coolify`, `deploy/entrypoint.sh`, `deploy/nginx.conf` | One container: `python:3.12-alpine` + `nginx` + `nodejs` (for `PageJudgeRelay`) | built, deployed (`pk-release-kiroween-20261125-v3`) |
@@ -158,7 +158,7 @@ flowchart LR
 - **Tools**: **11 MCP tools** = 7 game tools (`get_public_state`, `get_roster`, `get_history`, `submit_action`, `end_turn`, `set_notes`, `get_notes`) and **4 room tools** (`join_room`, `lock_hero`, `leave_room`, `wait_for_turn`). People open rooms; agents join by code or one-use invite ticket.
 - **Public view only**: an agent sees what a player sees. The seed, pending actions, Shield Wall hidden points, and opponent's aim are not in the view (`public_throw()` in `scripts/mcp_stdio_server.py`).
 - **Hosted limits**: the gateway reports the real client address to the relay only with a one-time random token (`PK_RELAY_GATEWAY_TOKEN`, made at container start), so the relay's per-address connection cap counts each remote client. Each client may hold 8 `/mcp` sessions (`PK_MCP_MAX_SESSIONS_PER_IP`); the ninth gets HTTP 429.
-- **Partial claim & `PageJudgeRelay`**: an agent can claim a whole team or a subset (`join_room(..., claim=1..units)`) or accept a single-slot invite (`invite=` + `lock_hero`). Connected rooms default to **`PageJudgeRelay`** (`PK_MCP_PAGE_JUDGE=auto`, `scripts/page_judge_seat.js` on Node.js 22), running `index.html` cleanly in a separate VM (~65 MB RSS/process; capped at `PK_MCP_MAX_PAGE_JUDGES=10`).
+- **Partial claim & `PageJudgeRelay`**: an agent can claim a whole team or a subset (`join_room(..., claim=1..units)`) or accept a single-slot invite (`invite=` + `lock_hero`). Connected rooms are judged by **`PageJudgeRelay`** (`PK_MCP_PAGE_JUDGE=on`, the only path since 2026-11-27; `scripts/page_judge_seat.js` on Node.js 22), running `index.html` cleanly in a separate VM (~65 MB RSS/process; capped at `PK_MCP_MAX_PAGE_JUDGES=10`).
 - **Verified locally**: 2 consecutive mixed 3v3 matches (2 browsers + 2 HTTP `/mcp` `PageJudgeRelay` agents + AI fill) ran to completion with `0 out_of_sync` and rematch via `reset_lobby` (`(not published)`). Hosted V4 real-phone + `/mcp` match verification follows Coolify deploy.
 
 ## 5. Filling empty seats (unit slot fill)
@@ -188,7 +188,7 @@ flowchart LR
   MH --> RL
 ```
 
-`deploy/entrypoint.sh` starts the Python relay, MCP HTTP gateway (with `PK_MCP_PAGE_JUDGE=auto`, `PK_MCP_MAX_PAGE_JUDGES=10`, and Node.js 22 installed), optional AI gateway, and nginx, with a trap for stop signals. Only nginx faces outside. Environment variables in Coolify: `PK_ALLOWED_ORIGINS`, `PK_RELAY_TRUST_PROXY=1`, `PK_RELAY_MAX_PER_ADDR=16`; the gateway token is generated per start. Live at `https://pumpkin.jace0423.com/`.
+`deploy/entrypoint.sh` starts the Python relay, MCP HTTP gateway (with `PK_MCP_PAGE_JUDGE=on`, the only path since 2026-11-27, `PK_MCP_MAX_PAGE_JUDGES=10`, and Node.js 22 installed), optional AI gateway, and nginx, with a trap for stop signals. Only nginx faces outside. Environment variables in Coolify: `PK_ALLOWED_ORIGINS`, `PK_RELAY_TRUST_PROXY=1`, `PK_RELAY_MAX_PER_ADDR=16`; the gateway token is generated per start. Live at `https://pumpkin.jace0423.com/`.
 
 ## 7. How Kiro was used
 

@@ -19,7 +19,7 @@ Options: `--mode human_vs_agent|agent_vs_agent|random_assignment`, `--seed N` (t
 ## Rules the server enforces
 
 - One action per unit per turn (`1` unit acts per team turn across seats in team rooms). A second submit is rejected.
-- `PageJudgeRelay` room mode (default `PK_MCP_PAGE_JUDGE=auto`, `scripts/page_judge_seat.js` on Node.js 22): accepts `throw` and throwable `ultimate`; `move`, `defend`, `skill`, Knight's ultimate, and Necromancer's ultimate are refused in rooms (`scripts/mcp_stdio_server.py`).
+- `PageJudgeRelay` room mode (`PK_MCP_PAGE_JUDGE=on`, the only path since 2026-11-27; `scripts/page_judge_seat.js` on Node.js 22): accepts `throw` and throwable `ultimate`; `move`, `defend`, `skill`, Knight's ultimate, and Necromancer's ultimate are refused in rooms (`scripts/mcp_stdio_server.py`).
 - Offline Python-engine mode: `move` rolls the die (1–6) and moves 36 px per pip before an attack; `defend` (Knight) takes two `throw_id`s from `remembered_enemy_paths`; phases time out after 12 s.
 - A room judged by the page ends turns when the page finishes resolution rather than on the offline 12 s timer. Use `wait_for_turn` in room mode or poll `get_public_state` offline.
 - Failed calls return `isError: true` and do not use up the unit's action.
@@ -59,4 +59,4 @@ Additional room-lifecycle tools (4 room tools; **11 MCP tools total**) exposed o
 Hosted limits (MCP-RISK-A, MCP-RISK-B, and `LIVE-3V3-4`):
 - One client may hold `PK_MCP_MAX_SESSIONS_PER_IP` (default 8) sessions on `/mcp`; the next `initialize` answers HTTP 429 with `Retry-After`. The whole server holds at most `PK_MCP_MAX_SESSIONS` (default 64), then 503. The client is `CF-Connecting-IP` when `PK_RELAY_TRUST_PROXY=1`, otherwise the `X-Real-IP` that nginx sets.
 - The relay counts hosted seats per remote client (`PK_RELAY_MAX_PER_ADDR`, set to 16 in Coolify). The gateway proves itself with `PK_RELAY_GATEWAY_TOKEN`, which `deploy/entrypoint.sh` generates at start.
-- **Page-judge mode is enabled by default in the container (`PK_MCP_PAGE_JUDGE=auto`, `PK_MCP_MAX_PAGE_JUDGES=10`, `nodejs` 22 in `deploy/Dockerfile.coolify`)**: invited MCP agents spawn a `--max-old-space-size=96` `scripts/page_judge_seat.js` child (~65 MB RSS per active process) judged on the real `index.html` VM and cleaned up on room exit or cap.
+- **The container always judges agent rooms with the page (`PK_MCP_PAGE_JUDGE=on`, the only path since 2026-11-27; `PK_MCP_MAX_PAGE_JUDGES=10`, `nodejs` 22 in `deploy/Dockerfile.coolify`)**: invited MCP agents spawn a `--max-old-space-size=96` `scripts/page_judge_seat.js` child (~65 MB RSS per active process) judged on the real `index.html` VM and cleaned up on room exit or cap.

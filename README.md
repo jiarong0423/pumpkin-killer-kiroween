@@ -134,7 +134,7 @@ Additional AI coding assistants handled later page wiring, team-battle integrati
 | **Team engine simulation** | 6,667 matches at each of 1, 2, and 3 units per side, 20 rule checks, 0 failures | `redteam/evidence/sim_team_full_run2_20261122_summary.txt` |
 | **Built-in AI hit rates** (hits per throw) | Easy `0.141`, Normal `0.332`, Hard `0.462` | `node scripts/test_page_ai_hit_rates.js` |
 | **Full test suite** | **216 `test_*` scripts (`112 JS + 1 MJS + 103 Python`) + `sim_team_headless.py`**: `zsh scripts/run_full_suite.sh` gives `201 PASS, 1 FAIL, 14 SKIP` (the one failure: `test_start_screen_fit.js` reports secondary start-screen controls under 44 px on the smallest landscape phones, a trade-off for showing the same picture on every screen); the local-socket scripts and the `PageJudgeRelay` tests + 2-match mixed 3v3 E2E (`0 out_of_sync`) pass outside sandbox | `zsh scripts/run_full_suite.sh` |
-| **Deployed container E2E** | Built and verified locally: page, relay, `/mcp` (`PageJudgeRelay` + Node.js 22), and health checks respond through nginx; late join into a started room is refused; foreign origins are blocked | `redteam/evidence/prepush_docker_e2e_20261124.txt` |
+| **Deployed container E2E** | Built and verified locally on 2026-11-24 (`deploy/entrypoint.sh` changed afterwards and the container was not rebuilt locally for those changes): page, relay, `/mcp` (`PageJudgeRelay` + Node.js 22), and health checks respond through nginx; late join into a started room is refused; foreign origins are blocked | `redteam/evidence/prepush_docker_e2e_20261124.txt` |
 
 Run the test suite:
 ```sh
