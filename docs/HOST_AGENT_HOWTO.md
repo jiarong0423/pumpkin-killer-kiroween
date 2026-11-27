@@ -35,7 +35,7 @@ Each agent calls `join_room(room=<code or invite URL>, invite=<ticket>, name=<ag
 ## 3. Tell the agent how to play
 A short instruction is enough:
 
-> Join the room with `join_room` and pick a hero with `lock_hero`. Loop `wait_for_turn`, read `get_public_state`, `get_roster`, and `get_history`, submit one action (`throw` `{angle 25–80, power 0–115}` or a throwable `ultimate`), and call `end_turn` as instructed by the tool reply. Use `set_notes` to remember what worked. You only see what a human sees: positions, hp, wind and weather as shown.
+> Join the room with `join_room` and pick a hero with `lock_hero`. Loop `wait_for_turn`, read `get_public_state`, `get_roster`, and `get_history`, submit one action as `{"unit": "<active_unit>", "action": {"type": "throw", "angle": 50, "power": 75}}` (angle 25–80, power 0–115; or `"type": "ultimate"` for a throwable ultimate), and call `end_turn` as instructed by the tool reply. Use `set_notes` to remember what worked. You only see what a human sees: positions, hp, wind and weather as shown.
 
 11 MCP tools: 7 game tools (`get_public_state`, `get_roster`, `get_history`, `submit_action`, `end_turn`, `set_notes`, `get_notes`) and 4 room tools (`join_room`, `lock_hero`, `wait_for_turn`, `leave_room`).
 

@@ -595,6 +595,22 @@
     #pick-scenes .scene-card { cursor:pointer !important; }
     #hero-thumbnails { grid-template-columns:repeat(4,44px) !important; grid-template-rows:repeat(2,44px); gap:4px; align-content:start; }
     #pick-scenes { grid-template-rows:repeat(2,minmax(44px,1fr)); flex:1 1 auto; min-height:0; } #battlefield-selector { height:100%; min-height:0; display:flex; flex-direction:column; } #pick-scenes .scene-card { display:block; } #pick-scenes .scene-card .th { display:block; width:100%; height:100%; background-size:cover; background-position:center; } #pick-scenes .scene-card .nm { white-space:normal; line-height:1.15; font-size:12px; text-align:center; min-height:30px; display:flex; align-items:center; justify-content:center; padding:2px 4px; }   /* the four scene tiles fill the column height (they were 44 px tall slivers with cut names) */
+    /* 2026-11-28 (owner: enlarge the small buttons): the 800 x 360 picture shrinks to 0.666 on the shortest landscape screens (667 x 300), so every pressed control is 67 px in the picture (44 px on screen). One picture for every screen; to fit it, the team size buttons share the bottom row with Start and Daily and the two side cards are 224 px squares. */
+    html:not(.start-compact) #start-screen { grid-template-rows:66px 224px 66px !important; padding:2px 20px !important; gap:0 !important; }
+    html:not(.start-compact) .start-main { grid-template-columns:224px minmax(0,1fr) 224px !important; grid-template-rows:minmax(0,1fr) 12px !important; gap:0 8px !important; }
+    html:not(.start-compact) #hero-carousel, html:not(.start-compact) #battlefield-selector, html:not(.start-compact) #pick-scenes { width:224px !important; height:224px !important; }
+    html:not(.start-compact) #hero-thumbnails { grid-template-columns:repeat(4,67px) !important; grid-template-rows:repeat(2,67px) !important; grid-auto-rows:67px; gap:2px 4px !important; justify-content:center; padding-bottom:0; }
+    html:not(.start-compact) #hero-thumbnails .hero-thumb { width:67px !important; height:67px !important; min-width:67px !important; min-height:67px !important; }
+    html:not(.start-compact) #hero-lock-note { grid-row:2; margin:0; }
+    html:not(.start-compact) #hero-slots .slot-chip { width:67px; height:67px; }
+    html:not(.start-compact) #team-size { left:124px; top:293px; transform:none; gap:4px; } html:not(.start-compact) #team-size button { width:68px; min-width:68px; height:67px; padding:0 4px; }
+    html:not(.start-compact) #start-go { left:352px; top:293px; width:176px !important; height:67px !important; min-height:67px !important; }
+    html:not(.start-compact) #daily-btn { left:538px !important; top:293px; width:138px !important; height:67px; min-height:67px; }
+    html:not(.start-compact) #friends-btn { top:0; height:67px !important; min-height:67px !important; }
+    html:not(.start-compact) .scene-nav { width:67px; height:67px; }
+    html:not(.start-compact) #hero-carousel .pick-card { height:224px !important; box-sizing:border-box !important; overflow:hidden; padding:6px 10px !important; row-gap:2px !important; }
+    html:not(.start-compact) #hero-carousel .pick-card .art { width:86px !important; height:86px !important; } html:not(.start-compact) #hero-carousel .pick-card .art img { width:82px !important; height:82px !important; }
+    html.one-picture.on-start:not(.start-compact):not(.pk-a):not(.pk-b) #top-controls, html.one-picture.on-start:not(.start-compact):not(.pk-a):not(.pk-b) #top-controls #settings-btn { width:calc(67px * var(--start-fit, 1)) !important; height:calc(67px * var(--start-fit, 1)) !important; }
     /* Option B responsive start screen for viewports < 800 px wide or < 360 px tall: native 1:1 grid/flex flow, zero transform shrink below 1, every pressed control >= 44 px. */
     html.start-compact #start-screen { left:var(--seg-left,0px); top:var(--seg-top,0px); width:var(--visible-viewport-width,100vw); height:var(--visible-viewport-height,100dvh); transform:none; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:44px minmax(0,1fr) 44px !important; gap:clamp(2px,1vh,6px); padding:clamp(2px,.8vh,8px) clamp(8px,2vw,18px) clamp(4px,1vh,8px) !important; overflow:hidden; }
     html.start-compact #start-screen > .start-topbar, html.start-compact #start-screen > .start-main, html.start-compact #start-screen > #start-actions { width:100%; }
@@ -2266,15 +2282,17 @@
     function relayOpponentLeft(m) {   // a seat that stays away past the grace period has left (MOBA / card-game rule). If it still has a living unit, its team loses (red-team R1 A2); if every unit it owns is already dead (hp <= 0), its departure cannot stall play so the match continues (red-team R2A-F1)
       if (!m || m.team === "spectator" || m.seat_id === relaySeatId || gameOver || !relayPlaying) return;
       if (m.ai && !m.team_empty) { relayAiSeatLeft(m); return; }   // ROOM-FLOW R9: a teammate takes a lost AI filler's units at once
-      relayJudgeDeparture(m, relayClient, 0);
+      relayJudgeDeparture(m, relayClient, 0, matchGen);
     }
     // ROOM-FLOW R9b: a departure can arrive while this page is still playing out the last throw (the leaver finished first, or a resume replays the log), and
     // judging it then would overturn the result. It waits for six quiet 500 ms looks; a queued message that never gets its turn holds it back for forty at most.
-    function relayJudgeDeparture(m, room, quiet) {
+    function relayJudgeDeparture(m, room, quiet, gen) {
+      const expectedGen = gen === undefined ? matchGen : gen;
       setTimeout(() => {
-        if (gameOver || !relayPlaying || relayClient !== room) return;
+        if (gameOver || !relayPlaying || relayClient !== room || expectedGen !== matchGen) return;
+        if (typeof document !== "undefined" && document.hidden === true) { relayJudgeDeparture(m, room, 0, expectedGen); return; }   // a hidden tab throttles rAF so the final throw may not have finished playing out yet
         const looks = !projectiles.length && !diceRoll && relayIncoming === 0 ? quiet + 1 : 0;
-        if (looks < (relayInbox.length ? 40 : 6)) relayJudgeDeparture(m, room, looks); else relayDepartureVerdict(m);
+        if (looks < (relayInbox.length ? 40 : 6)) relayJudgeDeparture(m, room, looks, expectedGen); else relayDepartureVerdict(m);
       }, 500);
     }
     function relayDepartureVerdict(m) {

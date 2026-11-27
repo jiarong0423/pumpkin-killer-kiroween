@@ -40,6 +40,7 @@ DEFAULT_RELAY_URL = "ws://127.0.0.1:8765/ws"
 DEFAULT_MAX_SESSIONS = 64
 DEFAULT_IDLE_SECONDS = 1800.0
 DEFAULT_SEAT_IDLE_SECONDS = 180.0   # an agent seat that holds a page judge and has made no call for this long leaves its room, so the place is free again
+DEFAULT_EMPTY_SESSION_RECLAIM_SECONDS = 60.0   # when one IP hits its cap, an idle session not in any room older than this is reclaimed instead of returning 429
 DEFAULT_MAX_SESSIONS_PER_IP = 8
 
 
@@ -58,6 +59,7 @@ class SessionEntry:
         self.client_ip = client_ip
         self.lock = threading.Lock()
         self.last_used = time.monotonic()
+        self.closed = False
 
 
 class McpHttpServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
@@ -95,29 +97,67 @@ class McpHttpServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
         with self._sessions_lock:
             return len(self._sessions)
 
+    def _reclaim_empty_session_locked(self, client_ip: str) -> Optional[SessionEntry]:
+        """Evict the oldest idle, room-free session for `client_ip` past the reclaim age so scripts that forget DELETE /mcp do not lock themselves out for 30 min."""
+        try:
+            reclaim_after = float(os.environ.get("PK_MCP_EMPTY_SESSION_RECLAIM_SECONDS", str(DEFAULT_EMPTY_SESSION_RECLAIM_SECONDS)))
+        except ValueError:
+            reclaim_after = DEFAULT_EMPTY_SESSION_RECLAIM_SECONDS
+        if reclaim_after != reclaim_after or reclaim_after == float("inf") or reclaim_after == float("-inf"):
+            reclaim_after = DEFAULT_EMPTY_SESSION_RECLAIM_SECONDS
+        if reclaim_after <= 0:
+            return None
+        cutoff = time.monotonic() - reclaim_after
+        candidates = sorted(
+            (e for e in self._sessions.values()
+             if e.client_ip == client_ip and e.last_used < cutoff and getattr(e.server, "relay", None) is None),
+            key=lambda e: e.last_used,
+        )
+        for victim in candidates:
+            if not victim.lock.acquire(blocking=False):
+                continue
+            try:
+                if victim.session_id in self._sessions and not victim.closed and getattr(victim.server, "relay", None) is None:
+                    victim.closed = True
+                    return self._sessions.pop(victim.session_id)
+            finally:
+                victim.lock.release()
+        return None
+
     def create_session(self, client_ip: str = "") -> Optional[SessionEntry]:
         """None = the table is full (503); raises ClientLimit when this client already holds its share (429)."""
         self._reap_expired()
-        with self._sessions_lock:
-            if len(self._sessions) >= self.max_sessions:
-                return None
-            if client_ip and sum(1 for e in self._sessions.values() if e.client_ip == client_ip) >= self.max_sessions_per_ip:
-                raise ClientLimit(client_ip)
-            sid = secrets.token_hex(16)
-            game_session = mcp.Session(seed=1, seat="white", turn_seconds=0, human_turn_seconds=0)
-            rpc_server = mcp.McpServer(
-                game_session,
-                enable_room_tools=True,
-                default_relay_url=self.relay_url,
-                allow_custom_relay=False,
-                page_judge_mode=self.page_judge_mode,
-                page_speed=self.page_speed,
-                client_addr=client_ip or None,
-                gateway_token=self.gateway_token or None,
-            )
-            entry = SessionEntry(sid, rpc_server, client_ip)
-            self._sessions[sid] = entry
-            return entry
+        evicted: Optional[SessionEntry] = None
+        try:
+            with self._sessions_lock:
+                if client_ip and sum(1 for e in self._sessions.values() if e.client_ip == client_ip) >= self.max_sessions_per_ip:
+                    evicted = self._reclaim_empty_session_locked(client_ip)
+                    if evicted is None:
+                        raise ClientLimit(client_ip)
+                if len(self._sessions) >= self.max_sessions:
+                    return None
+                sid = secrets.token_hex(16)
+                game_session = mcp.Session(seed=1, seat="white", turn_seconds=0, human_turn_seconds=0)
+                rpc_server = mcp.McpServer(
+                    game_session,
+                    enable_room_tools=True,
+                    default_relay_url=self.relay_url,
+                    allow_custom_relay=False,
+                    page_judge_mode=self.page_judge_mode,
+                    page_speed=self.page_speed,
+                    client_addr=client_ip or None,
+                    gateway_token=self.gateway_token or None,
+                )
+                entry = SessionEntry(sid, rpc_server, client_ip)
+                self._sessions[sid] = entry
+                return entry
+        finally:
+            if evicted is not None:
+                with evicted.lock:
+                    try:
+                        evicted.server.close()
+                    except Exception:
+                        pass
 
     def get_session(self, session_id: str) -> Optional[SessionEntry]:
         with self._sessions_lock:
@@ -358,6 +398,12 @@ class McpHttpHandler(http.server.BaseHTTPRequestHandler):
 
         responses = []
         with entry.lock:
+            if entry.closed:
+                self._send_json(404, mcp._rpc_error(
+                    payload.get("id") if isinstance(payload, dict) else None,
+                    -32001, "Unknown or expired Mcp-Session-Id; re-initialize",
+                ))
+                return
             entry.last_used = time.monotonic()
             for msg in messages:
                 resp = entry.server.handle_message(msg)

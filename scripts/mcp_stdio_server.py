@@ -206,10 +206,14 @@ def public_throw(rec: Dict[str, Any], include_path: bool = True,
 
 
 # ------------------------------------------------------------------ argument validation
+THROW_EXAMPLE = '{"unit": "<active_unit>", "action": {"type": "throw", "angle": 50, "power": 75}}'
+
+
 def _reject_unknown(args: Dict[str, Any], allowed: Tuple[str, ...], where: str) -> None:
     extra = sorted(set(args) - set(allowed))
     if extra:
-        raise ToolError(f"unknown argument(s) in {where}: {', '.join(extra)}")
+        shape = ". Expected shape: " + THROW_EXAMPLE if where in ("submit_action", "action") else ""
+        raise ToolError(f"unknown argument(s) in {where}: {', '.join(extra)}{shape}")
 
 
 def _number(value: Any, name: str, lo: float, hi: float) -> float:
@@ -246,6 +250,16 @@ def _enum(value: Any, name: str, options: Tuple[str, ...]) -> str:
     if value not in options:
         raise ToolError(f"{name} must be one of: {', '.join(options)}")
     return value
+
+
+_PHASE_ALIASES = {"human": "human", "agent": "agent", "red": "human", "white": "agent"}
+
+
+def _normalize_phase(value: Any) -> str:
+    """Accept team names ('red'/'white') as aliases for ('human'/'agent') so room agents never trip over internal phase names."""
+    if isinstance(value, str) and value in _PHASE_ALIASES:
+        return _PHASE_ALIASES[value]
+    return _enum(value, "phase", ("human", "agent"))
 
 
 # ------------------------------------------------------------------ staging on disk
@@ -1000,8 +1014,8 @@ class Session:
         if not self._seat_controls_phase(seat):
             raise ToolError("seat %s does not control the %s phase" % (seat["seat_id"], self.phase))
         if "phase" in args:
-            _enum(args["phase"], "phase", ("human", "agent"))
-            if args["phase"] != self.phase:
+            req_phase = _normalize_phase(args["phase"])
+            if req_phase != self.phase:
                 raise ToolError("current phase is %s, not %s" % (self.phase, args["phase"]))
         ended = self.phase
         if self.weather_enabled:
@@ -1087,7 +1101,7 @@ TOOLS: List[Dict[str, Any]] = [
     },
     {
         "name": "submit_action",
-        "description": "Per unit per turn: one optional move, then one attack. Attack = throw {angle 25-80, power 0-115}, "
+        "description": "In a live room only a throw, or an ultimate when your side has three direct-hit pips (not knight or reaper), works; send exactly {\"unit\": \"<active_unit>\", \"action\": {\"type\": \"throw\", \"angle\": 50, \"power\": 75}}, then call end_turn with the end_turn_args of the reply. Offline, per unit per turn: one optional move, then one attack. Attack = throw {angle 25-80, power 0-115}, "
                        "ultimate {angle, power} when the side has three direct-hit pips (knight: {points:[three x/y points]}, no turn cost), "
                        "or defend {path1, path2} (knight only; two different throw_ids from "
                        "remembered_enemy_paths). Skill {skill: heal|double|heavy}: each side has one of each; heal restores "
@@ -1167,11 +1181,12 @@ TOOLS: List[Dict[str, Any]] = [
         "description": "End the current phase. Ending the human phase starts the agent phase "
                        "(separate human and agent timers); ending the agent phase resolves the round. "
                        "Non-referee seats must pass both the current round and phase so a retry "
-                       "cannot end a later phase.",
+                       "cannot end a later phase. In a live room copy them from submit_action's end_turn_args "
+                       "(phase human is red's turn, agent is white's).",
         "inputSchema": {
             "type": "object",
             "properties": {
-                "phase": {"type": "string", "enum": ["human", "agent"]},
+                "phase": {"type": "string", "enum": ["human", "agent", "red", "white"]},
                 "round": {"type": "integer", "minimum": 1},
             },
             "additionalProperties": False,
@@ -1219,6 +1234,14 @@ def normalize_relay_url(raw: str) -> str:
 
 
 _INVITE_RE = re.compile(r"^(red|white)\.[A-Za-z0-9_-]{4,64}$")
+_INVITE_SIZE_RE = re.compile(r"^(?:red|white)\.n([123])-")
+
+
+def invite_team_size(ticket: str) -> Optional[int]:
+    """Units per side written into an invitation ticket by the relay (None: an older ticket without it)."""
+    match = _INVITE_SIZE_RE.match(ticket)
+    return int(match.group(1)) if match else None
+
 
 
 def parse_invite(raw: str) -> Dict[str, Any]:
@@ -1254,7 +1277,9 @@ ROOM_TOOLS: List[Dict[str, Any]] = [
         "name": "join_room",
         "description": "Join a live Pumpkin Killer room by 6-character room code or invite URL "
                        "(e.g. https://<host>/index.html?room=ABC234&team=3). Automatically readies "
-                       "your seat and waits briefly for room confirmation. Call leave_room before joining another room.",
+                       "your seat and waits briefly for room confirmation. Invited by a player: pass the invite link as room, or the room code plus "
+                       "invite; the invitation decides your side, the team size and your one unit (leave seat and units out), then call lock_hero. "
+                       "Call leave_room before joining another room.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -2476,7 +2501,8 @@ class McpServer:
             version = requested if requested in SUPPORTED_PROTOCOLS else SUPPORTED_PROTOCOLS[0]
             instructions = (
                 "Pumpkin Killer. Call join_room with a 6-character code or invite URL, then loop: "
-                "wait_for_turn -> get_history -> submit_action per unit -> end_turn. "
+                "wait_for_turn until status is your_turn -> submit_action (see its description; get_history shows earlier throws) -> end_turn with the "
+                "end_turn_args it returned. After an invite call lock_hero right after join_room. Follow each reply's next field. "
                 "Call leave_room before joining another room."
                 if self.enable_room_tools else
                 "Pumpkin Killer. Poll get_public_state until phase is 'agent', "
@@ -2536,7 +2562,7 @@ class McpServer:
         if atype not in ("throw", "ultimate") or (atype == "ultimate" and unit["hero"] in ("knight", "reaper")):
             # the page refuses these two ultimates in a room as well (index.html toggleUltimate): the knight places hidden points, the reaper's flames start on an orbit read from the clock,
             # so two pages simulate different volleys (gap N10, redteam/evidence/n10_diagnosis_20261123.md)
-            raise ToolError("a room judged by the page carries plain throws and thrown ultimates only for now (the knight's and the necromancer's ultimates are not in rooms yet)")
+            raise ToolError("a room judged by the page carries plain throws and thrown ultimates only for now (the knight's and the necromancer's ultimates are not in rooms yet). Send " + THROW_EXAMPLE)
         _reject_unknown(action, ("type", "angle", "power"), "action")
         angle = _number(action.get("angle"), "angle", ANGLE_MIN, ANGLE_MAX)
         power = _number(action.get("power"), "power", POWER_MIN, POWER_MAX)
@@ -2561,7 +2587,7 @@ class McpServer:
                 if name not in arguments:
                     raise ToolError("end_turn requires round and phase for seat %s" % self.seat["seat_id"])
             req_round = _integer(arguments["round"], "round", 1, 10 ** 6)
-            req_phase = _enum(arguments["phase"], "phase", ("human", "agent"))
+            req_phase = _normalize_phase(arguments["phase"])
             # Idempotent: the page ends its own turn right after the throw lands, so an agent calling end_turn after landing (or a second time) succeeds.
             if (req_round, req_phase) == getattr(relay, "_last_ended", None) or (
                 (req_round, req_phase) == getattr(relay, "_acted_turn", None)
@@ -2644,6 +2670,7 @@ class McpServer:
             if not match:
                 raise ToolError("invite is not an invitation from a room (expected red.… or white.…)")
             seat, claim = match.group(1), 1
+            units = invite_team_size(invite) or units   # the room decides its size: a guessed or default one made the page leave the room and waste the ticket
         name = arguments.get("name")
         if name is not None:
             name = _string(name, "name", max_len=64)
@@ -2733,7 +2760,8 @@ class McpServer:
             briefing = getattr(relay, "briefing", None)
             if briefing is not None:
                 result["briefing"] = briefing
-            flow = "Then loop: wait_for_turn, get_public_state, submit_action, end_turn."
+            flow = ("Then call wait_for_turn until status is 'your_turn'; call submit_action " + THROW_EXAMPLE + "; call end_turn with the end_turn_args "
+                    "it returns; repeat until game_over.")
             result["next"] = ("Your hero is locked. " + flow) if heroes_arg is not None else (
                 "Call lock_hero with one of briefing.heroes now (within %s seconds, or one is picked for you). " % (briefing or {}).get("pick_within_seconds", 30) + flow)
         return result
@@ -2779,22 +2807,31 @@ class McpServer:
             if relay is not None and relay.failure is not None:
                 return {"status": "error", "error": relay.failure, "state": self.session.call("get_public_state", {}, self.seat)}
             if relay is not None and getattr(relay, "pick_again", None) and not getattr(relay, "started", False):
-                return {"status": "pick_again", "error": relay.pick_again, "next": "Call lock_hero with another hero: a teammate already holds that one."}
+                why = "the room is back in the lobby for another match" if relay.pick_again == "lobby_reset" else "a teammate already holds that one"
+                return {"status": "pick_again", "error": relay.pick_again, "next": "Call lock_hero with a hero (%s), then wait_for_turn." % why}
             if self.session.phase == "over":
-                return {"status": "game_over", "winner": self.session.winner, "state": self.session.call("get_public_state", {}, self.seat)}
+                over = {"status": "game_over", "winner": self.session.winner, "state": self.session.call("get_public_state", {}, self.seat)}
+                if relay is not None:
+                    over["next"] = ("The match is over. For another match keep calling wait_for_turn. To stop, wait about 10 seconds "
+                                    "(other screens may still be showing the last throw), then call leave_room.")
+                return over
             started = True if relay is None else bool(getattr(relay, "started", False))
             page_ready = (not isinstance(relay, PageJudgeRelay)) or relay.page_my_turn
             if started and page_ready and self.session._seat_controls_phase(self.seat):
                 pub = self.session.call("get_public_state", {}, self.seat)
                 active_team = self.session._active_team()
                 active_unit = self.session._active_unit(active_team) if active_team else pub.get("active_unit")
-                return {
+                turn = {
                     "status": "your_turn",
                     "round": pub["round"],
                     "phase": pub["phase"],
+                    "active_team": active_team,
                     "active_unit": active_unit,
                     "state": pub,
                 }
+                if relay is not None:
+                    turn["next"] = "Call submit_action %s, then end_turn with the end_turn_args it returns." % THROW_EXAMPLE.replace("<active_unit>", str(active_unit))
+                return turn
             return None
 
         relay = self.relay
@@ -2816,6 +2853,7 @@ class McpServer:
                     pub = self.session.call("get_public_state", {}, self.seat)
                     return {
                         "status": "waiting",
+                        "next": "Not your turn yet: call wait_for_turn again.",
                         "started": bool(getattr(relay, "started", False)),
                         "round": pub["round"],
                         "phase": pub["phase"],

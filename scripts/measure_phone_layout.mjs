@@ -281,6 +281,8 @@ try {
   for (const viewport of viewports) {
     const { width, height, dpr } = viewport;
     await cdp.call("Emulation.setDeviceMetricsOverride", { width, height, deviceScaleFactor: dpr, mobile: true, screenWidth: width, screenHeight: height });
+      // a phone has a finger, not a mouse: without this the page takes the phone sizes for a small desktop window (24 px margin, smaller picture); 1440 is the desktop reference
+      await cdp.call("Emulation.setTouchEmulationEnabled", { enabled: width !== 1440, maxTouchPoints: width !== 1440 ? 5 : 1 });
     const isPhone = width !== 1440;
     await cdp.call("Emulation.setEmulatedMedia", { features: [{ name: "hover", value: isPhone ? "none" : "hover" }, { name: "pointer", value: isPhone ? "coarse" : "fine" }] });
     await cdp.call("Page.navigate", { url: `http://127.0.0.1:${port}/index.html?phone-layout-test=${width}x${height}` });

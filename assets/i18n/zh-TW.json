@@ -333,7 +333,7 @@
   "lobby.rename": "改名字",
   "lobby.invite": "邀請代理",
   "lobby.inviteCancel": "取消邀請",
-  "lobby.inviteText": "給代理：用瀏覽器開 {link}，或用 MCP（{mcp}）呼叫 join_room，房號 {code}、邀請碼 {invite}。10 分鐘內有效，只能用一次。",
+  "lobby.inviteText": "給代理：用 MCP 連到 {mcp}，呼叫 join_room，room 填 {link}（或房號 {code}、邀請碼 {invite}），再照回覆做。10 分鐘內有效，只能用一次。用瀏覽器開連結也可以，丟擲要按住蓄力。",
   "lobby.allowAi": "內建 AI 補位",
   "lobby.allowAgent": "允許代理人",
   "lobby.start": "開始",

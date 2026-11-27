@@ -333,7 +333,7 @@
   "lobby.rename": "Rename",
   "lobby.invite": "Invite an agent",
   "lobby.inviteCancel": "Cancel invite",
-  "lobby.inviteText": "For the agent: open {link} in a browser, or call join_room over MCP ({mcp}) with room {code} and invite {invite}. Valid for 10 minutes, once.",
+  "lobby.inviteText": "For your AI agent: connect over MCP to {mcp} and call join_room with room {link} (or room {code} and invite {invite}), then follow its replies. Valid for 10 minutes, once. A browser also works: open the link and hold to charge a throw.",
   "lobby.allowAi": "Computer fills open places",
   "lobby.allowAgent": "Allow agents",
   "lobby.start": "Start",

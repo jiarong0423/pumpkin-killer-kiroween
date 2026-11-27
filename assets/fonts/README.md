@@ -17,11 +17,11 @@ records in their name tables. Cinzel keeps its Reserved Font Name, so it is copi
 
 ## Character set
 
-The exact text file used for the subsets is `charset.txt` in this folder (2616 characters).
+The exact text file used for the subsets is `charset.txt` in this folder (2619 characters).
 
 | Part | Count | How it is computed |
 |---|---|---|
-| On-screen text | 543 non-ASCII characters | Scan of index.html, js/*.js, css/*.css, assets/i18n/*.json, the d1 string table in docs/ui_reskin_plan.md and docs/fonts_sample.html. Comments dropped, emoji dropped. |
+| On-screen text | 548 non-ASCII characters | Scan of index.html, js/*.js, css/*.css, assets/i18n/*.json, the d1 string table in docs/ui_reskin_plan.md and docs/fonts_sample.html. Comments dropped, emoji dropped. |
 | Base | 379 | ASCII, Latin-1, U+2010-2027, arrows, two triangles, CJK punctuation, fullwidth ASCII |
 | Margin | 2000 | Big5 Level 1 (Python `big5` codec, stroke-count order), setting `2000` |
 
@@ -32,11 +32,11 @@ Characters that a source font does not contain are listed per font in `build_inf
 | File | Bytes | SHA-256 |
 |---|---|---|
 | `CinzelDecorative-Bold.ttf` | 62300 (60.8 KB) | `e854e68a388aa50d742a4415c1ae5c17a617ef7956c95a70021d0a4a44f20518` |
-| `pk-body-400.woff2` | 327524 (319.8 KB) | `9dd3b56b5b82a561bb37ba47c9cd6e986f3646a8ae6f163fb3b7255011ed591c` |
-| `pk-body-700.woff2` | 335256 (327.4 KB) | `b007e7bcf7cd5bfd5ff06557dce8ba7b1279186b3dca945d5e123d37cd72894f` |
-| `pk-display-cjk-900.woff2` | 421964 (412.1 KB) | `f8e1818a6f1ef8b6453f112b0fa9a419c5e76648128cab351121690a7dd7e355` |
+| `pk-body-400.woff2` | 327732 (320.1 KB) | `38eaf96939b9e261db7df6c0e7e89a8198be5987ad26d30104ba5fd21604ba2f` |
+| `pk-body-700.woff2` | 335756 (327.9 KB) | `c48c096a41309dee3c3d10b5a5e0d1af074e7cfd3a8c57e6180144df6bc47329` |
+| `pk-display-cjk-900.woff2` | 422584 (412.7 KB) | `ee690db8c4b9ceca59683ca97169493b7a64c321916e6cb6b0bf80a466fde4d5` |
 
-Total: 1147044 bytes (1.09 MB).
+Total: 1148372 bytes (1.10 MB).
 
 ## Tabular figures
 

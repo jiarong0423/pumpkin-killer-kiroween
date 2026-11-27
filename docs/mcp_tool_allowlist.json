@@ -40,12 +40,12 @@
     {
       "name": "submit_action",
       "readOnly": false,
-      "descriptionSha256": "65be3cc5f9e0e0025b97f143db81baa4fcfbbb04db753306732c30851410e9c1"
+      "descriptionSha256": "6d3b197c5947fb4da078f4a13c2809461cf40b3b7fad2aa2134ac70bedfcb8ce"
     },
     {
       "name": "end_turn",
       "readOnly": false,
-      "descriptionSha256": "453b731d01f89432e74f143881a761bb0832b2935e61f8ec9978aebc31ade13b"
+      "descriptionSha256": "93de34fcf0260aa372d23415b3d6eb3cd677feba35aec737d59557c851d84e43"
     },
     {
       "name": "set_notes",
