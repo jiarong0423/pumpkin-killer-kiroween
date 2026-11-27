@@ -2,7 +2,9 @@
 
 **A Flash-era artillery duel, resurrected for the modern browser — phone, computer, and AI agents at one table.** Up to three heroes per side throw across a haunted fence while wind and weather shift every shot. Built for **Kiroween 2026 (Resurrection)** with Kiro specs, steering, hooks, custom agents, a Kiro Power (`play` skill), and a standard MCP server (`.kiro/`).
 
-**Play now:** https://pumpkin.jace0423.com (phone in landscape, or any desktop browser).
+**[▶ Play now: pumpkin.jace0423.com](https://pumpkin.jace0423.com)** (phone in landscape, or any desktop browser)
+
+**Why it matters.** Adobe ended Flash Player at the end of 2020, and the easy way to play Flash-era artillery duels went with it. Pumpkin Killer brings that duel back to the browser on phone and computer, and adds a seat an AI agent can take fairly: it gets only the public game state, with no random seed and no ballistic simulator ([protocol](docs/mcp_agent_protocol.md)).
 
 ![Pumpkin Killer 8 Playable Heroes](docs/gifs/all_heroes_20261126.gif)
 
