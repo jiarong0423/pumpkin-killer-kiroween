@@ -28,26 +28,26 @@ rule('B1 near miss is OFF (owner 2026-11-18): a ground landing 60 px from the ne
   fresh(P); ground(P, 800); assert.strictEqual(lost(P, 0), 0); assert.strictEqual(P.eval('pityMisses.player'), 1);
 }, [['the near miss switched on again damages the unit', [['if (!Comeback.CONSTANTS.NEAR_ENABLED) return;', 'if (false) return;']]]]);
 
-rule('B3 pity: two misses make the next direct hit 24 x 1.8; the hit resets the counter; the strength stays hidden (no pity text)', P => {
+rule('B3 pity: two misses make the next direct hit 29 x 1.8; the hit resets the counter; the strength stays hidden (no pity text)', P => {
   fresh(P); ground(P, 800); ground(P, 800);
   assert.strictEqual(P.eval('pityMisses.player'), 2);
   assert.ok(!Array.from(P.get('floatTexts')).some(f => /team\.(pity|comeback)|%/.test(f.text)), 'no strength text after misses');
-  direct(P); assert.strictEqual(lost(P, 0), 43.2); assert.strictEqual(P.eval('pityMisses.player'), 0);
-  direct(P); assert.strictEqual(lost(P, 0), 43.2 + 24, 'the charge is used once');
+  direct(P); assert.strictEqual(lost(P, 0), 52.2); assert.strictEqual(P.eval('pityMisses.player'), 0);
+  direct(P); assert.strictEqual(lost(P, 0), 52.2 + 29, 'the charge is used once');
 }, [['no reset after a hit', [['pityMisses[p.team] = 0; throwHadHit.add(p.throwId);', 'throwHadHit.add(p.throwId);']]]]);
 
 rule('B2 underdog and the 2.3 cap: half hp share doubles the hit, with pity 2 the stack is capped at 2.3', P => {
   fresh(P); P.units('left').forEach(u => { u.hp = u.maxHp / 2; });
-  direct(P); assert.strictEqual(lost(P, 0), 48);
+  direct(P); assert.strictEqual(lost(P, 0), 58);
   fresh(P); P.units('left').forEach(u => { u.hp = u.maxHp / 2; }); P.eval('pityMisses.player = 2');
-  direct(P); assert.strictEqual(lost(P, 0), P.eval('Comeback.finalDamage(24, 0.5, 1, 2)')); assert.strictEqual(lost(P, 0), 55.2);
+  direct(P); assert.strictEqual(lost(P, 0), P.eval('Comeback.finalDamage(29, 0.5, 1, 2)')); assert.strictEqual(lost(P, 0), 66.7);
   assert.ok(!Array.from(P.get('floatTexts')).some(f => /team\.(pity|comeback)|%/.test(f.text)), 'owner: the comeback strength is never shown as text');
 }, [['the hit ignores the underdog bonus', [['if (TEAM_N > 1) dmgNow = cbDmg(dmgNow, p);', '']]]]);
 
 rule('one unit per team never reads the comeback pack: no near miss, no pity, plain hit', () => {
   const P = loadPage({ team: 1 }); P.reset(); P.place('left', [300]); P.place('right', [1500]);
   ground(P, 1300); assert.strictEqual(lost(P, 0), 0); assert.strictEqual(P.eval('pityMisses.player'), 0);
-  P.units('left')[0].hp = 10; direct(P); assert.strictEqual(lost(P, 0), 24);
+  P.units('left')[0].hp = 10; direct(P); assert.strictEqual(lost(P, 0), 29);
 });
 
 rule('D fixed opener (team matches, owner 2026-11-17): the coin side opens EVERY round, so nobody attacks twice in a row; who follows is routed accordingly', P => {

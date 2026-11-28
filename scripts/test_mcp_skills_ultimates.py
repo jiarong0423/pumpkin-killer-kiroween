@@ -92,9 +92,9 @@ class UltimateTest(unittest.TestCase):
         # These probes pin real contact damage, rather than accepting a no-op
         # ultimate that merely returns a non-negative number.
         expected = {
-            "skeleton": 36.0, "bat": 43.5, "hag": 27.6,   # 2026-11-18 roles: skeleton 24 x 1.5 = 36 (22 x 1.5 = 33), reaper 22 (41.0 x 22 / 21 = 42.95, seeded contact 42.9), bride 40 (46.8 + 27 became 52 + 30 = 82.0), wizard 36 x 2.6 = 93.6
-            "hunchback": 47.5, "reaper": 42.9, "bride": 82.0,
-            "wizard": 93.6,   # balance of 2026-11-17: bat 29, bride 36, reaper 21 (evening), wizard 33, hunchback 19; 82.5 before the binary hit masks (the seeded shot used to count on an empty corner of the box and now flies on and hits the head: +3.3 = 10 percent crit of one 33 hit)
+            "skeleton": 43.5, "bat": 52.5, "hag": 33.3,   # 2026-11-28 global x1.2: skeleton 29x1.5=43.5, bat 35x1.5=52.5, hag 29x0.575x2=33.3, hunchback 23x2.5=57.5, reaper 26x1.95=50.7, bride 48, wizard 43
+            "hunchback": 57.5, "reaper": 50.7, "bride": 98.4,
+            "wizard": 111.8,
         }
         for hero, damage in expected.items():
             with self.subTest(hero=hero):

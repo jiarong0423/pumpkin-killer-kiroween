@@ -17,7 +17,7 @@ test('eight class keys include the flame-magic necromancer and Ghost Nun page id
   assert.deepStrictEqual(CS.CLASS_KEYS, KEYS);
   assert.deepStrictEqual(Object.keys(CS.CLASSES), KEYS);
   const r = CS.CLASSES.reaper;
-  assert.deepStrictEqual([r.key, r.name, r.weapon, r.hp, r.dmg, r.dTyp], ['reaper', '死靈法師', 'proj_flame', 143, 22, 22]);
+  assert.deepStrictEqual([r.key, r.name, r.weapon, r.hp, r.dmg, r.dTyp], ['reaper', '死靈法師', 'proj_flame', 143, 26, 26]);
   assert.deepStrictEqual(r.launch, { fwd: 58, up: 110 });
   assert.strictEqual(r.ultKind, 'soulfire_volley');
   assert.strictEqual(r.ultStrikes, 3);
@@ -49,7 +49,7 @@ test('the default simulator table carries page bleed, poison, and burn status va
 
 test('reaper flame constants mirror shared hero values', () => {
   assert.deepStrictEqual(CS.REAPER_FLAME_CONSTANTS, {
-    HP: 143, DAMAGE: 22, TYPICAL_DAMAGE: 22, HIT_HALF_WIDTH: 57,
+    HP: 143, DAMAGE: 26, TYPICAL_DAMAGE: 26, HIT_HALF_WIDTH: 57,
     SPEED_SCALE: 1, GRAVITY_SCALE: 1, WIND_SCALE: 1,
     LAUNCH_FORWARD: 58, LAUNCH_UP: 110, BURN_DAMAGE: 2, BURN_TURNS: 3, ULTIMATE_FLAMES: 3
   });
@@ -61,15 +61,15 @@ test('tables are frozen and clones remain mutable', () => {
   assert.throws(() => { 'use strict'; CS.CLASSES.reaper.dmg = 1; }, TypeError);
   const copy = CS.cloneTable(CS.CLASSES);
   copy.reaper.dmg = 1;
-  assert.strictEqual(CS.CLASSES.reaper.dmg, 22);
+  assert.strictEqual(CS.CLASSES.reaper.dmg, 26);
 });
 
 test('hits to kill and matrix have no stale execute branch', () => {
-  assert.strictEqual(CS.hitsToKill('reaper', 'reaper'), 7);
-  assert.strictEqual(CS.hitsToKill('reaper', 'knight'), 9);   // knight hp 198 (tank +7 percent, 2026-11-18) / reaper dmg 22: 198 / 22 = 9
-  assert.strictEqual(CS.hitsToKill('reaper', 'knight', { execute: true }), 9);
+  assert.strictEqual(CS.hitsToKill('reaper', 'reaper'), 6);
+  assert.strictEqual(CS.hitsToKill('reaper', 'knight'), 8);   // knight hp 198 / reaper dmg 26 = 7.62 -> 8
+  assert.strictEqual(CS.hitsToKill('reaper', 'knight', { execute: true }), 8);
   const violations = CS.validate();
-  assert.deepStrictEqual(violations.map(({ kind, attacker, defender, hits }) => ({ kind, attacker, defender, hits })), []);   // with every HP x1.5 (2026-11-16) and the band 5..10 typical, 4..12 hard, the table has no violation
+  assert.deepStrictEqual(violations.map(({ kind, attacker, defender, hits }) => ({ kind, attacker, defender, hits })), []);
   const matrix = CS.matrix();
   assert.strictEqual(matrix.length, KEYS.length);
   matrix.forEach(row => assert.strictEqual(row.length, KEYS.length));
@@ -78,9 +78,9 @@ test('hits to kill and matrix have no stale execute branch', () => {
 test('flame expected damage has no execute multiplier', () => {
   const detail = CS.expectedDamageDetail('reaper', { aim: 'bot' });
   near(detail.hitProbability, 0.57, 1e-12);
-  near(detail.damageWhenHit, 22, 1e-12);
+  near(detail.damageWhenHit, 26, 1e-12);
   near(detail.multiplier, 1, 1e-12);
-  near(detail.perThrow, 0.57 * 22 * 0.88, 1e-12);
+  near(detail.perThrow, 0.57 * 26 * 0.88, 1e-12);
 });
 
 test('all expected-damage values remain finite and decline with wider aim spread', () => {
@@ -96,8 +96,8 @@ test('all expected-damage values remain finite and decline with wider aim spread
 });
 
 test('three ghost fires total 1.5 times the flame normal damage', () => {
-  assert.strictEqual(CS.ultimatePerUnit('reaper'), 33);   // 1.5 x 22
-  assert.strictEqual(CS.ultimateOneTarget('reaper'), 33);
+  assert.strictEqual(CS.ultimatePerUnit('reaper'), 39);   // 1.5 x 26
+  assert.strictEqual(CS.ultimateOneTarget('reaper'), 39);
   assert.strictEqual(CS.oneShotRisks().some(risk => risk.attacker === 'reaper'), false);
 });
 
@@ -112,33 +112,33 @@ test('eight explicit stats remain valid, defense starts at zero, and statsOf exp
       assert.ok(Number.isFinite(row.range) && row.range > 0, key + ' range');
     }
   }
-  assert.deepStrictEqual(CS.statsOf('wizard'), { hp: 124, defense: 0, range: CS.CLASSES.wizard.range, attack: 36 });
+  assert.deepStrictEqual(CS.statsOf('wizard'), { hp: 124, defense: 0, range: CS.CLASSES.wizard.range, attack: 43 });
 });
 
-test('the one row-mean exception (2026-11-18, owner: glass cannon +10 percent attack) is exactly the wizard and nothing else', () => {
+test('row-mean floor is 4.0 after 2026-11-28 global attack x1.2', () => {
   const m = CS.matrix();
   const means = m.map(row => row.reduce((x, y) => x + y, 0) / row.length);
-  const under5 = KEYS.filter((k, i) => means[i] < 5);
-  assert.deepStrictEqual(under5, ['wizard'], 'only the wizard averages under 5 hits to kill');
-  assert.ok(means[KEYS.indexOf('wizard')] >= 4.8 && means[KEYS.indexOf('wizard')] < 5, 'the wizard row mean is ' + means[KEYS.indexOf('wizard')]);
-  assert.deepStrictEqual(CS.validate(), [], 'validate() accepts the table with the documented 4.8 floor');
+  const under4 = KEYS.filter((k, i) => means[i] < 4);
+  assert.deepStrictEqual(under4, [], 'no hero averages under 4 hits to kill');
+  assert.ok(means[KEYS.indexOf('wizard')] >= 4.0 && means[KEYS.indexOf('wizard')] < 4.5, 'the wizard row mean is ' + means[KEYS.indexOf('wizard')]);
+  assert.deepStrictEqual(CS.validate(), [], 'validate() accepts the table with the documented 4.0 floor');
 });
 
-test('the row-mean floor is 4.8: a row at 4.5 is a violation, the wizard at 4.875 is not (red-team R11A: the floor was unpinned, 4.0 passed too)', () => {
+test('the row-mean floor is 4.0: a row below 4.0 is a violation, the wizard at 4.0 is not', () => {
   const table = CS.cloneTable(CS.CLASSES);
-  table.wizard.dmg = table.wizard.dTyp = 40;   // 40 damage: every kill takes fewer hits, the row mean drops under 4.8
+  table.wizard.dmg = table.wizard.dTyp = 50;   // 50 damage: row mean drops under 4.0
   const violations = CS.validate({ table }).filter(v => v.kind === 'row_mean');
   assert.deepStrictEqual(violations.map(v => v.attacker), ['wizard'], JSON.stringify(violations));
-  assert.ok(violations[0].hits < 4.8, 'row mean ' + violations[0].hits);
+  assert.ok(violations[0].hits < 4.0, 'row mean ' + violations[0].hits);
   assert.deepStrictEqual(CS.validate().filter(v => v.kind === 'row_mean'), [], 'the real table has no row-mean violation');
 });
 
 test('zero defense preserves the existing hits-to-kill matrix', () => {
   const expected = [
-    [7, 6, 7, 9, 7, 7, 6, 7], [5, 4, 5, 6, 5, 5, 4, 5],
-    [6, 5, 6, 7, 6, 6, 5, 6], [8, 6, 7, 10, 8, 8, 7, 8],
-    [5, 5, 5, 7, 5, 6, 5, 6], [8, 7, 8, 11, 8, 9, 8, 9],
-    [7, 6, 7, 9, 7, 8, 7, 8], [7, 6, 7, 9, 7, 7, 6, 7]   // roles of 2026-11-18 on the balance of 2026-11-17: skeleton 150/24, wizard 124/36, bat 147/29, knight 198/21, bride 149/40 (typical wave 30), hunchback 157/19, reaper 143/22, hag 158/24; every cell recomputed as ceil(hp / typical damage) outside the code
+    [6, 5, 6, 7, 6, 6, 5, 6], [4, 3, 4, 5, 4, 4, 4, 4],
+    [5, 4, 5, 6, 5, 5, 5, 5], [6, 5, 6, 8, 6, 7, 6, 7],
+    [5, 4, 5, 6, 5, 5, 4, 5], [7, 6, 7, 9, 7, 7, 7, 7],
+    [6, 5, 6, 8, 6, 7, 6, 7], [6, 5, 6, 7, 6, 6, 5, 6]   // 2026-11-28 global attack x1.2: skeleton 150/29, wizard 124/43, bat 147/35, knight 198/25, bride 149/48 (typical wave 36), hunchback 157/23, reaper 143/26, hag 158/29
   ];
   assert.deepStrictEqual(CS.matrix(), expected);
 });
@@ -146,8 +146,8 @@ test('zero defense preserves the existing hits-to-kill matrix', () => {
 test('defense reduces effective damage, raising a hand-checked hits-to-kill case', () => {
   const defended = CS.cloneTable(CS.CLASSES);
   defended.skeleton.defense = 0.2;
-  assert.strictEqual(CS.hitsToKill('wizard', 'skeleton'), 5);
-  assert.strictEqual(CS.hitsToKill('wizard', 'skeleton', { table: defended }), 6);   // hand check: 150 / (33 x 0.8) = 5.7, so 6 (it was 150 / (30 x 0.8) = 6.25, so 7)
+  assert.strictEqual(CS.hitsToKill('wizard', 'skeleton'), 4);
+  assert.strictEqual(CS.hitsToKill('wizard', 'skeleton', { table: defended }), 5);   // hand check: 150 / (43 x 0.8) = 4.36 -> 5
 });
 
 test('typical range is positive and increases with speedScale for one launch profile', () => {

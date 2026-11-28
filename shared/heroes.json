@@ -1,7 +1,7 @@
 {
   "skeleton": {
     "hp": 150,
-    "dmg": 24,
+    "dmg": 29,
     "weapon": "proj_spear",
     "launch": {
       "fwd": 58,
@@ -29,7 +29,7 @@
   },
   "wizard": {
     "hp": 124,
-    "dmg": 36,
+    "dmg": 43,
     "weapon": "cannonball",
     "launch": {
       "fwd": 70,
@@ -53,7 +53,7 @@
   },
   "bat": {
     "hp": 147,
-    "dmg": 29,
+    "dmg": 35,
     "weapon": "proj_shuriken",
     "launch": {
       "fwd": 58,
@@ -76,7 +76,7 @@
   },
   "knight": {
     "hp": 198,
-    "dmg": 21,
+    "dmg": 25,
     "weapon": "proj_shield",
     "launch": {
       "fwd": 51,
@@ -103,7 +103,7 @@
   },
   "reaper": {
     "hp": 143,
-    "dmg": 22,
+    "dmg": 26,
     "weapon": "proj_flame",
     "launch": {
       "fwd": 58,
@@ -132,7 +132,7 @@
   },
   "bride": {
     "hp": 149,
-    "dmg": 40,
+    "dmg": 48,
     "weapon": "proj_soundwave",
     "launch": {
       "fwd": 58,
@@ -160,7 +160,7 @@
   },
   "hunchback": {
     "hp": 157,
-    "dmg": 19,
+    "dmg": 23,
     "weapon": "proj_axe",
     "launch": {
       "fwd": 58,
@@ -187,7 +187,7 @@
   },
   "hag": {
     "hp": 158,
-    "dmg": 24,
+    "dmg": 29,
     "weapon": "proj_cross",
     "launch": {
       "fwd": 58,

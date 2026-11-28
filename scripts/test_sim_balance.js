@@ -153,8 +153,8 @@ function play(s, thrower, foe, projectiles) {
 test('a point weapon deals its damage once, adds one pip, and a miss on the ground deals nothing', () => {
   const s = scene('wizard', 'skeleton');
   const r = play(s, s.a, s.b, [drop(s, s.a, s.b.x + 30, 760)]);
-  assert.strictEqual(s.b.hp, 150 - 36);   // wizard dmg 36 since 2026-11-18 (glass cannon +10 percent; 33 on 2026-11-17, 30 before)
-  assert.strictEqual(r.dealt, 36);
+  assert.strictEqual(s.b.hp, 150 - 43);   // wizard dmg 43 since 2026-11-28 (global x1.2; was 36)
+  assert.strictEqual(r.dealt, 43);
   assert.strictEqual(s.m.ledger.getState('a').ult_pips, 1);
   const s2 = scene('wizard', 'skeleton');
   const r2 = play(s2, s2.a, s2.b, [drop(s2, s2.a, s2.b.x + 71, 760)]);   // just outside the 70 px half width
@@ -214,12 +214,12 @@ test('reaper flame applies normal damage and refreshes a non-lethal burn for thr
   const s = scene('reaper', 'wizard');
   s.m.stats = { a: { damage: 0, burnDamage: 0 }, b: { damage: 0, burnDamage: 0 } };
   play(s, s.a, s.b, [drop(s, s.a, s.b.x, 760)]);
-  assert.strictEqual(s.b.hp, 124 - 22);   // wizard hp 124 since 2026-11-17 (was 113); reaper dmg 22 since 2026-11-18 (balanced role +7 percent; 21 since the evening of 2026-11-17)
+  assert.strictEqual(s.b.hp, 124 - 26);   // reaper dmg 26 since 2026-11-28 (global x1.2; was 22)
   assert.strictEqual(s.b.burn, 3);
   assert.strictEqual(s.b.burnDamage, 2);
   assert.strictEqual(s.b.burnOwner, 'a');
   I.tickBurns(s.m, { a: s.a, b: s.b });
-  assert.strictEqual(s.b.hp, 100);   // 124 - 22 - 2
+  assert.strictEqual(s.b.hp, 96);   // 124 - 26 - 2
   assert.strictEqual(s.b.burn, 2);
   assert.strictEqual(s.m.stats.a.burnDamage, 2);
   play(s, s.a, s.b, [drop(s, s.a, s.b.x, 760)]);
@@ -234,10 +234,10 @@ test('wizard and bride poison refreshes for two round starts and cannot finish a
   const s = scene('wizard', 'skeleton');
   s.m.stats = { a: { damage: 0, burnDamage: 0 }, b: { damage: 0, burnDamage: 0 } };
   play(s, s.a, s.b, [drop(s, s.a, s.b.x, 760)]);
-  assert.strictEqual(s.b.hp, 114);   // 150 - the wizard's 36 since 2026-11-18 (33 on 2026-11-17, 30 before)
+  assert.strictEqual(s.b.hp, 107);   // 150 - the wizard's 43 since 2026-11-28 (global x1.2; was 36)
   assert.strictEqual(s.b.poison, 2);
   I.tickPoisons(s.m, { a: s.a, b: s.b });
-  assert.strictEqual(s.b.hp, 112);   // 114 - 2
+  assert.strictEqual(s.b.hp, 105);   // 107 - 2
   assert.strictEqual(s.b.poison, 1);
   play(s, s.a, s.b, [drop(s, s.a, s.b.x, 760)]);
   assert.strictEqual(s.b.poison, 2, 'a later hit refreshes instead of stacking');
@@ -293,13 +293,13 @@ test('bride wave: 100% to 35 px, 75% to 70 px, 50% to 105 px (cells of 35 px, ow
     const r = play(s, s.a, s.b, [drop(s, s.a, s.b.x + dx, 760)]);
     return { dealt: r.dealt, hp: s.b.hp };
   };
-  assert.strictEqual(dmgAt(0).dealt, 40);   // bride dmg 40 since 2026-11-18 (glass cannon +10 percent; 36 on the evening of 2026-11-17): 100, 75 and 50 percent
-  assert.strictEqual(dmgAt(35).dealt, 40);
-  assert.strictEqual(dmgAt(35.1).dealt, 30);
-  assert.strictEqual(dmgAt(70).dealt, 30);
-  assert.strictEqual(dmgAt(70.1).dealt, 20);
-  assert.strictEqual(dmgAt(105).dealt, 20);
-  assert.strictEqual(dmgAt(-105).dealt, 20);
+  assert.strictEqual(dmgAt(0).dealt, 48);   // bride dmg 48 since 2026-11-28 (global x1.2; was 40): 100, 75 and 50 percent
+  assert.strictEqual(dmgAt(35).dealt, 48);
+  assert.strictEqual(dmgAt(35.1).dealt, 36);
+  assert.strictEqual(dmgAt(70).dealt, 36);
+  assert.strictEqual(dmgAt(70.1).dealt, 24);
+  assert.strictEqual(dmgAt(105).dealt, 24);
+  assert.strictEqual(dmgAt(-105).dealt, 24);
   assert.strictEqual(dmgAt(106).dealt, 0, 'outside the wave');
   assert.strictEqual(dmgAt(80).dealt, dmgAt(90).dealt, 'outer band stays at 50%');
 });

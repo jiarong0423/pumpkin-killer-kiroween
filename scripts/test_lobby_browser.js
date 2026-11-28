@@ -38,7 +38,7 @@ async function flow(dbg, base, alt, relayUrl, n) {
   const host = await tab(dbg, base + '/index.html?relay=' + relayUrl + '&team=' + n);
   const guest = await tab(dbg, alt + '/index.html?relay=' + relayUrl + '&team=' + n);
   try {
-    for (const [p, nm] of [[host, '房主' + n], [guest, 'Guest' + n]]) { await p.until("document.readyState === 'complete' && typeof lobbyOpenFromStart === 'function' && !!document.getElementById('friends-btn').onclick", 'page ready'); await p.ev("localStorage.setItem('pk_name', '" + nm + "'), true"); }
+    for (const [p, nm] of [[host, 'Host' + n], [guest, 'Guest' + n]]) { await p.until("document.readyState === 'complete' && typeof lobbyOpenFromStart === 'function' && !!document.getElementById('friends-btn').onclick", 'page ready'); await p.ev("localStorage.setItem('pk_name', '" + nm + "'), true"); }
     await host.ev("document.getElementById('friends-btn').click(), true");
     try { await host.until("!document.getElementById('lobby').hidden && /^[A-Z0-9]{6}$/.test(document.getElementById('lobby-code').textContent)", 'host lobby with a code'); }
     catch (e) { throw new Error(e.message + ' | ' + await host.ev("JSON.stringify({ lobbyMode, hidden: document.getElementById('lobby').hidden, code: document.getElementById('lobby-code').textContent, nameDialog: !document.getElementById('name-dialog').hidden, team: TEAM_N, url: location.search, status: relayClient && relayClient.state().status, toast: document.getElementById('lobby-toast').textContent })") + ' errors ' + host.errors.join(' | ')); }
@@ -64,7 +64,7 @@ async function flow(dbg, base, alt, relayUrl, n) {
     await host.until("!document.getElementById('lobby-countdown').hidden || relayPlaying", 'countdown shown', 15000);
     for (const p of [host, guest]) await p.until("relayPlaying && matchStarted && document.getElementById('lobby').hidden", 'match started from the lobby', 15000);
     const labels = await host.ev("JSON.stringify(allUnits().map(u => unitNameLabel(u)))");
-    if (!labels.includes('房主' + n) || !labels.includes('Guest' + n) || (n * 2 - seated > 0 && !/Computer|電腦/.test(labels))) throw new Error('names above the heads: ' + labels);
+    if (!labels.includes('Host' + n) || !labels.includes('Guest' + n) || (n * 2 - seated > 0 && !/Computer|電腦/.test(labels))) throw new Error('names above the heads: ' + labels);
     ok(name + ': one-press room ' + code + ', guest welcomed both ways, host-only controls locked for the guest, ' + (n === 3 ? 'second place taken, ' : '') + 'locks, computer fill, countdown, match started; names ' + labels);
     // back to the lobby and a second match
     await host.ev("gameOver = 'player', turn = 'over', lobbyAfterMatch(true), true");
@@ -122,8 +122,7 @@ async function layout(dbg, base, relayUrl) {
       await p.send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 2, mobile: false });
       await p.send('Page.navigate', { url: base + '/index.html?relay=' + relayUrl + '&team=3' });
       await p.until("document.readyState === 'complete' && typeof lobbyOpenFromStart === 'function' && !!document.getElementById('friends-btn').onclick", 'page ready');
-      await p.ev("localStorage.setItem('pk_name', '南瓜殺手王😀'), true");
-      await p.ev("document.getElementById('friends-btn').click(), true");
+      await p.ev("lobbyStart('南瓜殺手王😀', { create: true }), true");   // the longest name another seat may still bring (an agent's): the layout must hold it
       await p.until("/^[A-Z0-9]{6}$/.test(document.getElementById('lobby-code').textContent)", 'lobby code');
       await p.ev("(() => { const el = document.getElementById('lobby-allow-agent'); if (!el.checked) el.click(); return true; })()");
       await p.until("!document.getElementById('lobby-invite').hidden", 'invite button shown');
@@ -174,7 +173,7 @@ async function layout(dbg, base, relayUrl) {
       const out = process.argv[3] || 'lobby_shot.png';
       const host = await tab(dbg, base + '/index.html?relay=' + relayUrl + '&team=3'), guest = await tab(dbg, alt + '/index.html?relay=' + relayUrl + '&team=3');
       await host.send('Emulation.setDeviceMetricsOverride', { width: 812, height: 375, deviceScaleFactor: 2, mobile: false });
-      for (const [pg, nm] of [[host, '南瓜王😀'], [guest, '小白']]) { await pg.until("document.readyState === 'complete' && !!document.getElementById('friends-btn').onclick", 'ready'); await pg.ev("localStorage.setItem('pk_name', '" + nm + "'); localStorage.setItem('pk_lang', 'zh-TW'); I18N.setLang('zh-TW'); I18N.apply(document); true"); }
+      for (const [pg, nm] of [[host, 'Pumpkin'], [guest, 'Bai']]) { await pg.until("document.readyState === 'complete' && !!document.getElementById('friends-btn').onclick", 'ready'); await pg.ev("localStorage.setItem('pk_name', '" + nm + "'); localStorage.setItem('pk_lang', 'zh-TW'); I18N.setLang('zh-TW'); I18N.apply(document); true"); }
       await host.ev("document.getElementById('friends-btn').click(), true");
       await host.until("/^[A-Z0-9]{6}$/.test(document.getElementById('lobby-code').textContent)", 'code');
       const code = await host.ev("document.getElementById('lobby-code').textContent");

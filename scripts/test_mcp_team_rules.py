@@ -67,14 +67,14 @@ class Ramp(unittest.TestCase):
 
     def test_ramp_starts_at_the_tuned_round_and_only_in_team_matches(self):
         start, per = tuning.RAMP_START, tuning.RAMP_PER_ROUND     # values come from shared/team_tuning.json
-        def ramped(round_number):                                 # independent formula: 24 x (1 + per x (round - start + 1)) (24 = skeleton since the 2026-11-18 balanced role, 22 before)
-            return round(24 * (1 + per * (round_number - start + 1)) * 10 + 1e-9) / 10
-        self.assertEqual(self.hit(2, start - 1), 24.0)
+        def ramped(round_number):                                 # independent formula: 29 x (1 + per x (round - start + 1)) (29 = skeleton since 2026-11-28 global x1.2)
+            return round(29 * (1 + per * (round_number - start + 1)) * 10 + 1e-9) / 10
+        self.assertEqual(self.hit(2, start - 1), 29.0)
         self.assertEqual(self.hit(2, start), ramped(start))
-        self.assertGreater(self.hit(2, start), 24.0)
+        self.assertGreater(self.hit(2, start), 29.0)
         self.assertEqual(self.hit(3, start + 3), ramped(start + 3))
-        self.assertEqual(self.hit(1, start + 3), 24.0)            # one unit per team: neutral
-        self.assertEqual(self.hit(1, 40), 24.0)
+        self.assertEqual(self.hit(1, start + 3), 29.0)            # one unit per team: neutral
+        self.assertEqual(self.hit(1, 40), 29.0)
 
 
 class RoundCap(unittest.TestCase):
@@ -173,14 +173,14 @@ class BrideWave(unittest.TestCase):
         before = {uid: u["hp"] for uid, u in g.units.items()}
         record = shoot(g, "red_1", 45, 54)
         self.assertEqual(record["landing_x"], xc)
-        self.assertEqual(hp_drop(g, before), {"white_1": 42.0, "white_2": 22.0})   # bride dmg 40 (36 before the 2026-11-18 role +10 percent): 40 + 2 poison, 20 + 2
+        self.assertEqual(hp_drop(g, before), {"white_1": 50.0, "white_2": 26.0})   # bride dmg 48 (2026-11-28 global x1.2): 48 + 2 poison, 24 + 2
         self.assertEqual(record["hit_target"], "white_1")
         self.assertEqual(g.units["white_2"]["statuses"].get("poison"), 1)
         # 60 px: 75 percent; 120 px away: outside the wave
         g = game(["bride", "knight"], self.WHITE, white_x=(xc + 60.0, xc - 120.0))
         before = {uid: u["hp"] for uid, u in g.units.items()}
         shoot(g, "red_1", 45, 54)
-        self.assertEqual(hp_drop(g, before), {"white_1": 32.0})
+        self.assertEqual(hp_drop(g, before), {"white_1": 38.0})
 
     def test_the_wave_falloff_is_counted_in_cells_of_35_px(self):
         """Owner 2026-11-18: falloff by grid cell: 100 / 75 / 50 percent to 35 / 70 / 105 px (they were the invented 40 / 75 / 105)."""
@@ -192,9 +192,9 @@ class BrideWave(unittest.TestCase):
             self.assertEqual(record["hit_target"], "white_1")
             return hp_drop(g, before).get("white_2")
         # the exact wave centre is a few hundredths of a px beyond the rounded landing_x: the probes stay a px or more away from the cell edges
-        for offset, want in ((30.0, 42.0), (34.0, 42.0), (37.0, 32.0), (69.0, 32.0), (72.0, 22.0), (104.0, 22.0), (-30.0, 42.0), (-72.0, 22.0)):
+        for offset, want in ((30.0, 50.0), (34.0, 50.0), (37.0, 38.0), (69.0, 38.0), (72.0, 26.0), (104.0, 26.0), (-30.0, 50.0), (-72.0, 26.0)):
             with self.subTest(offset=offset):
-                self.assertEqual(other_unit(offset), want)   # 40 x (1 | 0.75 | 0.5) plus the 2 poison tick of the white turn start
+                self.assertEqual(other_unit(offset), want)   # 48 x (1 | 0.75 | 0.5) plus the 2 poison tick of the white turn start
         self.assertIsNone(other_unit(107.0))
         self.assertIsNone(other_unit(-107.0))
 
@@ -209,7 +209,7 @@ class BrideWave(unittest.TestCase):
         shoot(g, "red_1", 45, 54)
         drop = hp_drop(g, before)
         self.assertEqual(drop["white_1"], drop["white_2"], drop)   # equal cells, equal damage (the first hit lowers the white share; a recompute would give the second victim less)
-        self.assertGreater(drop["white_1"], 42.0, drop)            # and the underdog bonus is really in it
+        self.assertGreater(drop["white_1"], 50.0, drop)            # and the underdog bonus is really in it
 
     def test_nearest_to_the_wave_centre_is_the_touched_unit_and_dead_units_are_skipped(self):
         xc = wave_centre(self.WHITE)
@@ -217,27 +217,27 @@ class BrideWave(unittest.TestCase):
         before = {uid: u["hp"] for uid, u in g.units.items()}
         record = shoot(g, "red_1", 45, 54)
         self.assertEqual(record["hit_target"], "white_2")
-        self.assertEqual(hp_drop(g, before), {"white_2": 42.0, "white_1": 22.0})
+        self.assertEqual(hp_drop(g, before), {"white_2": 50.0, "white_1": 26.0})
         g = game(["bride", "knight"], self.WHITE, white_x=(xc + 90.0, xc - 20.0))
         g.units["white_1"].update({"alive": False, "hp": 0.0})
         before = {uid: u["hp"] for uid, u in g.units.items()}
         shoot(g, "red_1", 45, 54)
-        self.assertEqual(hp_drop(g, before), {"white_2": 42.0})
+        self.assertEqual(hp_drop(g, before), {"white_2": 50.0})
 
     def test_swarm_hits_every_living_enemy_after_any_hit_of_the_armed_wave(self):
         xc = wave_centre(self.WHITE, "bride")
-        # precise (30 px < 55): touched 40 (+2 poison tick), then the swarm 52.0 (40 x 1.3) on EVERY living enemy, far or near; the swarm poisons nobody
+        # precise (30 px < 55): touched 48 (+2 poison tick), then the swarm 62.4 (48 x 1.3) on EVERY living enemy, far or near; the swarm poisons nobody
         g = game(["bride", "knight"], self.WHITE, white_x=(xc + 30.0, xc + 400.0))
         before = {uid: u["hp"] for uid, u in g.units.items()}
         record = shoot(g, "red_1", 45, 54, "bride")
-        self.assertEqual(hp_drop(g, before), {"white_1": round(40.0 + 52.0 + 2.0, 1), "white_2": 52.0})
-        self.assertEqual(record["damage_dealt"], round(40.0 + 52.0 + 52.0, 1))
+        self.assertEqual(hp_drop(g, before), {"white_1": round(48.0 + 62.4 + 2.0, 1), "white_2": 62.4})
+        self.assertEqual(record["damage_dealt"], round(48.0 + 62.4 + 62.4, 1))
         self.assertNotIn("poison", g.units["white_2"]["statuses"])
-        # 60 px: touched at 75 percent (30 + 2 poison) and, since 2026-11-18 (owner: the bat swarm comes with the ultimate and only when it hits), the swarm on everybody too
+        # 60 px: touched at 75 percent (36 + 2 poison) and, since 2026-11-18 (owner: the bat swarm comes with the ultimate and only when it hits), the swarm on everybody too
         g = game(["bride", "knight"], self.WHITE, white_x=(xc + 60.0, xc + 400.0))
         before = {uid: u["hp"] for uid, u in g.units.items()}
         shoot(g, "red_1", 45, 54, "bride")
-        self.assertEqual(hp_drop(g, before), {"white_1": round(30.0 + 52.0 + 2.0, 1), "white_2": 52.0})
+        self.assertEqual(hp_drop(g, before), {"white_1": round(36.0 + 62.4 + 2.0, 1), "white_2": 62.4})
         # a wave that touches nobody (300 px away): no damage, no swarm
         g = game(["bride", "knight"], self.WHITE, white_x=(xc + 300.0, xc + 600.0))
         before = {uid: u["hp"] for uid, u in g.units.items()}
@@ -275,10 +275,10 @@ class WizardBlast(unittest.TestCase):
         before = {uid: u["hp"] for uid, u in g.units.items()}
         record = shoot(g, "red_1", 45, 50, "wizard")
         self.assertEqual(record["hit_type"], "hero")
-        # 36 x 1.5 = 54.0 flat at 233.9 px and at 100 px alike (no distance steps); 234.5 px is outside; no poison
-        self.assertEqual(hp_drop(g, before), {"white_1": 54.0, "white_3": 54.0})
+        # 43 x 1.5 = 64.5 flat at 233.9 px and at 100 px alike (no distance steps); 234.5 px is outside; no poison
+        self.assertEqual(hp_drop(g, before), {"white_1": 64.5, "white_3": 64.5})
         self.assertEqual(record["hit_target"], "white_3,white_1")     # nearest to the impact first
-        self.assertEqual(record["damage_dealt"], 108.0)
+        self.assertEqual(record["damage_dealt"], 129.0)
         self.assertEqual(g.units["white_1"]["statuses"], {})
 
     def test_dead_units_are_not_listed_or_hit(self):
@@ -295,7 +295,7 @@ class WizardBlast(unittest.TestCase):
         g.round_num = tuning.RAMP_START + 1                # ramp factor 1 + per_round x 2, from shared/team_tuning.json
         before = {uid: u["hp"] for uid, u in g.units.items()}
         shoot(g, "red_1", 45, 50, "wizard")
-        want = round(36 * 1.5 * (1 + tuning.RAMP_PER_ROUND * 2) * 10 + 1e-9) / 10
+        want = round(43 * 1.5 * (1 + tuning.RAMP_PER_ROUND * 2) * 10 + 1e-9) / 10
         self.assertEqual(hp_drop(g, before), {"white_1": want, "white_2": want})
 
     def test_shell_hit_adds_the_flat_blast_for_everyone_in_range(self):
@@ -307,8 +307,8 @@ class WizardBlast(unittest.TestCase):
         before = {uid: u["hp"] for uid, u in g.units.items()}
         record = shoot(g, "red_1", 45, 54, "wizard")
         self.assertEqual(record["landing_x"], centre)
-        # white_1: shell 36 + blast 54.0 + 2 poison tick; white_2: blast only; white_3 at 400 px: outside
-        self.assertEqual(hp_drop(g, before), {"white_1": round(36.0 + 54.0 + 2.0, 1), "white_2": 54.0})
+        # white_1: shell 43 + blast 64.5 + 2 poison tick; white_2: blast only; white_3 at 400 px: outside
+        self.assertEqual(hp_drop(g, before), {"white_1": round(43.0 + 64.5 + 2.0, 1), "white_2": 64.5})
 
     def test_blast_also_fires_when_the_shell_stops_on_a_floating_shield(self):
         shield = {"active": True, "x": 900.0, "y": 560.0, "width": 80.0, "height": 800.0}
@@ -322,7 +322,7 @@ class WizardBlast(unittest.TestCase):
         before = {uid: u["hp"] for uid, u in g.units.items()}
         record = shoot(g, "red_1", 45, 50, "wizard")
         self.assertEqual(record["hit_type"], "shield_blocked")
-        self.assertEqual(hp_drop(g, before), {"white_1": 54.0})
+        self.assertEqual(hp_drop(g, before), {"white_1": 64.5})
 
 
 def session3():
@@ -449,7 +449,7 @@ class Comeback(unittest.TestCase):
             record = shoot(g, "red_1", 45, 50)
         finally:
             engine.comeback.NEAR_ENABLED = old
-        self.assertEqual(record["near_miss"], {"target": "white_1", "damage": 10.8, "edge": 60.0})
+        self.assertEqual(record["near_miss"], {"target": "white_1", "damage": 13.0, "edge": 60.0})
 
     def test_no_near_miss_on_a_direct_hit(self):
         g = game(["skeleton", "knight"], ["knight", "knight"], white_x=(hit_x(), hit_x() + 150.0))
@@ -466,9 +466,9 @@ class Comeback(unittest.TestCase):
         g.units["white_1"]["x"] = x
         record = shoot(g, "red_1", 45, 54)
         self.assertEqual(record["hit_type"], "hero")
-        self.assertEqual(record["damage_dealt"], 43.2)                          # 24 x (1 + 0.4 x 2)
+        self.assertEqual(record["damage_dealt"], 52.2)                          # 29 x (1 + 0.4 x 2)
         self.assertEqual(g.pity["red"], 0)
-        self.assertEqual(shoot(g, "red_1", 45, 54)["damage_dealt"], 24.0)       # the charge was used up
+        self.assertEqual(shoot(g, "red_1", 45, 54)["damage_dealt"], 29.0)       # the charge was used up
 
     def test_pity_bonus_is_capped_at_plus_160_percent_and_teams_count_separately(self):
         x = hit_x()
@@ -477,7 +477,7 @@ class Comeback(unittest.TestCase):
             shoot(g, "red_1", 45, 50)
         self.assertEqual(g.pity, {"red": 7, "white": 0})
         g.units["white_1"]["x"] = x
-        self.assertEqual(shoot(g, "red_1", 45, 54)["damage_dealt"], 55.2)       # 24 x min(2.3, 1 + 1.6): the owner's cap
+        self.assertEqual(shoot(g, "red_1", 45, 54)["damage_dealt"], 66.7)       # 29 x min(2.3, 1 + 1.6): the owner's cap
 
     def test_a_blocked_throw_counts_as_a_miss(self):
         g = game(["skeleton", "knight"], ["knight", "knight"], white_x=(1300.0, 1500.0), wall=True)
@@ -496,15 +496,15 @@ class Comeback(unittest.TestCase):
             return g._apply_hit(attacker, target, target["x"], target["y"] - 100, False, 1.0, True)["damage"]
         self.assertEqual(g.underdog_bonus("white"), 0.8)             # deficit 0.4 / 0.5 = +80 percent
         self.assertEqual(g.underdog_bonus("red"), 0.0)
-        self.assertEqual(hit(), 43.2)                                # 24 x 1.8
+        self.assertEqual(hit(), 52.2)                                # 29 x 1.8
         target["hp"] = 500.0
         attacker2, target2 = g.units["red_1"], g.units["white_1"]
         g._cb_lock = None
-        self.assertEqual(g._apply_hit(attacker2, target2, target2["x"], target2["y"] - 100, False, 1.0, True)["damage"], 24.0)
+        self.assertEqual(g._apply_hit(attacker2, target2, target2["x"], target2["y"] - 100, False, 1.0, True)["damage"], 29.0)
         for unit in g.units.values():
             if unit["team"] == "white":
                 unit["hp"] = 50.0                                    # share 0.1: capped at +100 percent
-        self.assertEqual(hit(), 48.0)
+        self.assertEqual(hit(), 58.0)
 
     def test_area_effects_take_the_same_factors(self):
         gx = landing_x("wizard")
@@ -513,10 +513,8 @@ class Comeback(unittest.TestCase):
         g.units["red_1"]["hp"] = g.units["red_2"]["hp"] = 400.0         # red share 0.8 against 1.0: underdog +40 percent
         before = {uid: u["hp"] for uid, u in g.units.items()}
         shoot(g, "red_1", 45, 50, "wizard")
-        # nearest first: white_2 takes 54.0 x min(2.3, 1.4 x 1.8 = 2.52) = 124.2; shares are read at the moment of each hit, so white_1
-        # white_1 (hit second) takes the same 124.2: the page fixes the shares and the pity charge at the projectile's first damage (cbBegin), and since red-team R11B-2 the engine does too
-        # (the 111.9 pinned here on 2026-11-18 was the engine's per-hit recompute, not the page's number)
-        self.assertEqual(hp_drop(g, before), {"white_2": 124.2, "white_1": 124.2})
+        # nearest first: white_2 takes 64.5 x min(2.3, 1.4 x 1.8 = 2.52) = 148.4 (rounded 0.1)
+        self.assertEqual(hp_drop(g, before), {"white_2": 148.4, "white_1": 148.4})
 
     def test_one_unit_per_team_has_no_comeback_pack(self):
         g = srv.TrackedGameState(seed=5, units=1, hero_red="skeleton", hero_white="knight")

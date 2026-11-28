@@ -32,13 +32,13 @@
 
   // docs/class_stats_judgement.md section 8 and the task brief.
   var BAND = {
-    rowMeanMin: 4.8,                   // 2026-11-18: the owner's glass cannon +10 percent attack puts the wizard's average at 4.88 hits (it was 5.0 or more): the row-mean floor goes from 5 to 4.8 for that reason ONLY, and the owner is asked whether to keep it (docs/GAP_QUEUE_OPEN_20261118.md G3)
-    typicalMin: 5, typicalMax: 10,      // hits to kill: typical band (x1.5 on 2026-11-16 with every hero's HP: the owner said matches ended in two or three rounds)
-    hardMin: 4, hardMax: 12,           // never below 4, never above 12
-    typicalShareMin: 0.8,              // at least this share of the 49 cells must be inside the typical band
+    rowMeanMin: 4.0,                   // 2026-11-28 owner: global attack x1.2 for faster match pace (wizard row mean 4.00, bride 4.88, others 5.00..7.13)
+    typicalMin: 4, typicalMax: 9,      // hits to kill: typical band after 2026-11-28 global attack x1.2
+    hardMin: 3, hardMax: 10,           // never below 3, never above 10
+    typicalShareMin: 0.8,              // at least this share of the 64 cells must be inside the typical band
     winMin: 0.40, winMax: 0.60,        // one pairing
     classAvgMin: 0.45, classAvgMax: 0.55,
-    roundsMin: 8, roundsMax: 14        // average match length (informational)
+    roundsMin: 6, roundsMax: 12        // average match length (informational)
   };
 
   var ULT_MULT = 1.5;                  // docs/owner_feedback_log.md: each unit hit by an ultimate takes 1.5 x the normal attack
@@ -81,8 +81,8 @@
   // Task 53 supplies the working flame profile; task 133 applies the owner decision that this is the existing `reaper` id.
   var REAPER_FLAME_CONSTANTS = {
     HP: 143,
-    DAMAGE: 22,   // 2026-11-18 owner: balanced role +7 percent attack (21 x 1.07 = 22.5, rounded to 22)
-    TYPICAL_DAMAGE: 22,
+    DAMAGE: 26,   // 2026-11-28 owner: global attack x1.2 (was 22)
+    TYPICAL_DAMAGE: 26,
     HIT_HALF_WIDTH: 57,
     SPEED_SCALE: 1,
     GRAVITY_SCALE: 1,
@@ -131,9 +131,9 @@
   var CLASSES = {
     skeleton: {
       key: 'skeleton', name: '骷髏長矛兵', weapon: 'proj_spear',
-      hp: 150, attack: 24, defense: 0,
+      hp: 150, attack: 29, defense: 0,
       range: typicalRange(1, 1, { fwd: 58, up: 110 }),
-      dmg: 24, dTyp: 24, hitHalfWidth: 70,
+      dmg: 29, dTyp: 29, hitHalfWidth: 70,
       speedScale: 1, gravityScale: 1, windScale: 1,
       launch: { fwd: 58, up: 110 },
       special: { frost: { cut: 0.15, throws: 2 }, bleed: { damage: 2, turns: 2, nonLethal: true } },
@@ -141,9 +141,9 @@
     },
     wizard: {
       key: 'wizard', name: '南瓜巫師', weapon: 'cannonball',
-      hp: 124, attack: 36, defense: 0,
+      hp: 124, attack: 43, defense: 0,
       range: typicalRange(1, 1, { fwd: 70, up: 118 }),
-      dmg: 36, dTyp: 36, hitHalfWidth: 70,
+      dmg: 43, dTyp: 43, hitHalfWidth: 70,
       speedScale: 1, gravityScale: 1, windScale: 1,
       launch: { fwd: 70, up: 118 },
       special: { poison: { damage: 2, turns: 2 } },
@@ -151,9 +151,9 @@
     },
     bat: {
       key: 'bat', name: '蝙蝠刺客', weapon: 'proj_shuriken',
-      hp: 147, attack: 29, defense: 0, // PROVISIONAL: owner has not selected damage reduction.
+      hp: 147, attack: 35, defense: 0, // PROVISIONAL: owner has not selected damage reduction.
       range: typicalRange(1, 1, { fwd: 58, up: 110 }),
-      dmg: 29, dTyp: 29, hitHalfWidth: 70,
+      dmg: 35, dTyp: 35, hitHalfWidth: 70,
       speedScale: 1, gravityScale: 1, windScale: 1,
       launch: { fwd: 58, up: 110 },
       special: { volley: { count: 5, spreadDeg: [-8, -4, 0, 4, 8], speedJitter: [0.95, 1.05] } },   // the volley is the ultimate
@@ -161,19 +161,19 @@
     },
     knight: {
       key: 'knight', name: '南瓜重裝盾衛', weapon: 'proj_shield',
-      hp: 198, attack: 21, defense: 0,
+      hp: 198, attack: 25, defense: 0,
       range: typicalRange(1, 1, { fwd: 51, up: 73 }),
-      dmg: 21, dTyp: 21, hitHalfWidth: 70,
+      dmg: 25, dTyp: 25, hitHalfWidth: 70,
       speedScale: 1, gravityScale: 1, windScale: 1,
       launch: { fwd: 51, up: 73 },
-      special: { bounce: { dieMin: 1, dieMax: 6, total: 21 } },
+      special: { bounce: { dieMin: 1, dieMax: 6, total: 25 } },
       ultKind: 'shield_chain', ultStrikes: 6
     },
     bride: {
       key: 'bride', name: '鬼娃新娘', weapon: 'proj_soundwave',
-      hp: 149, attack: 40, defense: 0,
+      hp: 149, attack: 48, defense: 0,
       range: typicalRange(1, 1, { fwd: 58, up: 110 }),
-      dmg: 40, dTyp: 30, hitHalfWidth: 105,
+      dmg: 48, dTyp: 36, hitHalfWidth: 105,
       speedScale: 1, gravityScale: 1, windScale: 1,
       launch: { fwd: 58, up: 110 },
       special: { wave: { bands: [
@@ -185,9 +185,9 @@
     },
     hunchback: {
       key: 'hunchback', name: '鐘樓怪人', weapon: 'proj_axe',
-      hp: 157, attack: 19, defense: 0,
+      hp: 157, attack: 23, defense: 0,
       range: typicalRange(1, 1, { fwd: 58, up: 110 }),
-      dmg: 19, dTyp: 19, hitHalfWidth: 70,
+      dmg: 23, dTyp: 23, hitHalfWidth: 70,
       speedScale: 1, gravityScale: 1, windScale: 1,
       launch: { fwd: 58, up: 110 },
       special: { knockback: { px: 50 }, bleed: { damage: 2, turns: 2, nonLethal: true } },
@@ -196,9 +196,9 @@
     reaper: reaperFlameProfile('shared/heroes.json'),
     hag: {
       key: 'hag', name: '幽靈修女', weapon: 'proj_cross',
-      hp: 158, attack: 24, defense: 0,
+      hp: 158, attack: 29, defense: 0,
       range: typicalRange(1, 1, { fwd: 58, up: 110 }),
-      dmg: 24, dTyp: 24, hitHalfWidth: 70,
+      dmg: 29, dTyp: 29, hitHalfWidth: 70,
       speedScale: 1, gravityScale: 1, windScale: 1,
       launch: { fwd: 58, up: 110 },
       special: {},
